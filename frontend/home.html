@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bhagwat Heritage Swaminarayan Foundation Trust</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<!-- Font Awesome for Social Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script>
+
+// LOGIN CHECK FUNCTION
+function checkLogin(targetRole){
+
+   const role = localStorage.getItem("role");
+
+   // agar login nahi hai
+   if(!role){
+      window.location = "login.html?role=" + targetRole;
+      return;
+   }
+
+   // agar already login hai
+   if(role === targetRole){
+      goDashboard(role);
+   }else{
+      alert("You are logged in as " + role);
+   }
+}
+
+// DASHBOARD REDIRECT
+function goDashboard(role){
+
+   if(role === "admin") window.location = "admin.html";
+   if(role === "donor") window.location = "/frontend/pages/dashboard/donor.html";
+   if(role === "volunteer") window.location = "/frontend/pages/dashboard/volunteer.html";
+}
+
+// AUTO SHOW DASHBOARD BUTTON AFTER LOGIN
+window.onload = () => {
+
+   const role = localStorage.getItem("role");
+
+   if(role){
+
+      const btn = document.createElement("button");
+      btn.innerText = "Open My Panel";
+      btn.style.padding="10px";
+      btn.style.margin="20px";
+      btn.style.cursor="pointer";
+
+      btn.onclick = () => goDashboard(role);
+
+      document.body.appendChild(btn);
+   }
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<marquee behavior="scroll" direction="left" scrollamount="6"
+style="
+background: linear-gradient(90deg,#0f6c8d,#1fa3b8,#f4a825);
+color:white;
+padding:10px;
+font-weight:bold;
+font-size:16px;
+letter-spacing:1px;
+">
+
+🌼 BHAGWAT HERITAGE SERVICE FOUNDATION TRUST 🌼
+
+&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+
+📧 info@bhagwatheritage.org
+
+&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+
+📞 +91 9876543210
+
+&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+
+🙏 Preserving Faith • Culture • Humanity 🙏
+
+</marquee>
+
+<!-- NAVBAR -->
+<header class="navbar">
+ <div class="logo">
+  <img src="images/logo.jpg" alt="Bhagwat Heritage Logo">
+
+  <div class="logo-text">
+    <h2>Bhagwat Heritage</h2>
+    <p class="tagline">Service Foundation Trust</p>
+  </div>
+
+</div>
+
+  <nav>
+    
+<ul class="menu">
+  <a href="home.html"><li class="dropdown" style="color: black;">Home</li></a>
+<li class="dropdown">About
+    <ul class="submenu">
+        <li><a href="pages/about/about.html">SansthaParichay</a></li>
+        <li><a href="/frontend/pages/about/objectives.html">Objectives</a></li>
+        <li><a href="/frontend/pages/about/manish-bhaiji.html">S.S.ManishBhaiJi</a></li>
+    </ul>
+</li>
+
+<li class="dropdown">Our Mission
+    <ul class="submenu">
+        <li><a href="spiritual.html">Spiritual</a></li>
+        <li><a href="social-service.html">Social-Service</a></li>
+        <li><a href="cultural.html"> Cultural</a></li>
+    </ul>
+</li>
+
+<li class="dropdown">Seva
+    <ul class="submenu">
+        <li><a href="jal-ann-seva.html">Jal/Ann-Seva</a></li>
+        <li><a href="education.html">Medicine/Education</a></li>
+        <li><a href="kanyadaan.html">Kanyadaan</a></li>
+        <li><a href="vyasanmukti.html">Vyasanmukti</a></li>
+    </ul>
+</li>
+
+<li class="dropdown">Events & Katha
+    <ul class="submenu">
+        <li><a href="pathshala.html">E-Pathshala</a></li>
+        <li><a href="library.html">E-Library</a></li>
+        <li><a href="estore.html">E-Store</a></li>
+    </ul>
+</li>
+
+<li class="dropdown">Mandir & Teerth
+    <ul class="submenu">
+        <li><a href="mahamandir.html">Mahamandir</a></li>
+        <li><a href="hanuman.html">63-Ft-Hanuman</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+    </ul>
+</li>
+
+<li class="dropdown">Contact
+    <ul class="submenu">
+        <li><a href="contact.html">Get-Involved</a></li>
+        
+    </ul>
+</li>
+ <li><a href="/frontend/pages/dashboard/donor.html" onclick="checkLogin('donor')" class="btn">Donate</a>
+</li>
+</ul>
+</header>
+
+
+<section class="hero">
+  <div class="slider">
+    <div class="slide" style="background-image: url('./images/s3.jpg');"></div>
+    <div class="slide" style="background-image: url('./images/s3.jpg');"></div>
+    <div class="slide" style="background-image: url('./images/s3.jpg');"></div>
+    <div class="slide" style="background-image: url('./images/s3.jpg');"></div>
+  </div>
+
+  <div class="hero-content">
+    <h1>Welcome to Our Website</h1>
+    <p></p>
+  </div>
+</section>
+
+
+<!-- CARDS SECTION -->
+<section class="cards">
+  <div class="card">
+    <h3>Our Mission</h3>
+    <p>Promoting spirituality, culture & service.</p>
+    <a href="about.html" class="btn">Learn More</a>
+
+
+  </div>
+
+  <div class="card">
+    <h3>Upcoming Events</h3>
+    <p>Cultural programs & festivals.</p>
+    <a href="upcommingevents.html" class="btn">Learn More</a>
+
+
+  </div>
+
+  <div class="card">
+    <h3>Temple Activities</h3>
+    <p>Puja, Satsang & Seva.</p>
+    <a href="templeactivities.html" class="btn">Learn More</a>
+
+
+  </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section class="about">
+  <h2>About Our Trust</h2>
+  <p>
+    Dedicated to spiritual enlightenment and preservation of
+    cultural heritage of Swaminarayan tradition.
+  </p>
+ <a href="readmore.html" class="btn">Read more...</a>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+  <h2>Photo Gallery</h2>
+
+  <div class="gallery-top">
+    <a href="gallery1.html"><img src="img1.jpg"></a>
+    <a href="gallery2.html"><img src="img2.jpg"></a>
+    <a href="gallery3.html"><img src="img3.jpg"></a>
+    <a href="gallery4.html"><img src="img4.jpg"></a>
+    <a href="gallery1.html"><img src="img1.jpg"></a>
+    <a href="gallery2.html"><img src="img2.jpg"></a>
+    <a href="gallery3.html"><img src="img3.jpg"></a>
+
+  </div>
+</section>
+
+
+<!-- CTA SECTION -->
+<section class="cta">
+  <div class="volunteer">
+    <h2>Become a Volunteer</h2>
+    <p>Join us in serving the community</p>
+    <a href="/frontend/pages/dashboard/volunteer.html" onclick="checkLogin('volunteer')" class="btn">Join Us</a>
+
+  </div>
+
+  <div class="donation">
+    <h2>Make a Donation</h2>
+    <p>Support our charitable activities</p>
+    <a href="/frontend/pages/dashboard/donor.html" class="btn">Donate</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+  <div class="footer-container">
+
+    <!-- About -->
+    <div class="footer-box">
+      <h3>Bhagwat Heritage</h3>
+      <p>
+        Serving faith, culture and humanity through devotion,
+        seva and spiritual programs.
+      </p>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="footer-box">
+      <h3>Contact Info</h3>
+      <p><i class="fas fa-map-marker-alt"></i>  Swaminarayan Temple Kasturaba Road, ChandraPur, Maharastra, India</p>
+      <p><i class="fas fa-envelope"></i> info@bhagwatheritage.org</p>
+      <p><i class="fas fa-phone"></i> +91 xxxxxxxxxx</p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-box">
+      <h3>Quick Links</h3>
+     <a href="https://www.facebook.com/share/1AtpQtn1SL/" style="color: rgb(17, 105, 194);">Facebook - <i class="fab fa-facebook-f"></i> </a><br>
+        <a href="https://www.instagram.com/bhagwat.heritage?igsh=andmcmxxZjVveTFh" style="color: rgb(136, 15, 145);">Instagram - <i class="fab fa-instagram"></i></a><br>
+        <a href="https://youtube.com/@bhagwatheritage?si=hNwbA1m-VSC8IOUZ" style="color: red;">Youtube - <i class="fab fa-youtube"></i></a><br>
+        <a href="https://wa.me/918668897445"  style="color: green;">Whatsapp - <i class="fab fa-whatsapp"></i></a><br>
+     
+    </div>
+
+    <!-- Opening Hours -->
+    <div class="footer-box">
+      <h3>Temple Timing</h3>
+      <p>Morning: 09:00 AM - 12:00 PM</p>
+      <p>Evening: 04:00 PM - 09:00 PM</p>
+
+      <div class="social-icons">
+      <div style="display:flex; gap:15px;">
+  <a href="gallery.html" class="btn">Gallery</a>
+  <a href="donate.html" class="btn">Donate</a>
+</div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="copyright">
+     Bhagwat Heritage Service Foundation Trust 
+  </div>
+
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>

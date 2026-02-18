@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Donor Form</title>
+<link rel="stylesheet" href="form.css">
+</head>
+
+<body>
+
+<div class="form-box">
+<h2>Donate Now</h2>
+
+<form id="donorForm">
+<input type="text" placeholder="Name" id="name" required>
+<input type="email" placeholder="Email" id="email" required>
+<input type="text" placeholder="Phone" id="phone" required>
+<input type="number" placeholder="Amount" id="amount" required>
+<textarea placeholder="Message" id="message"></textarea>
+
+<button type="submit">Donate</button>
+</form>
+
+<p id="msg"></p>
+
+</div>
+
+<script>document.getElementById("donorForm").addEventListener("submit", async(e)=>{
+
+  e.preventDefault();
+
+  const data = {
+    name: name.value,
+    email: email.value,
+    phone: phone.value,
+    amount: amount.value,
+    message: message.value
+  };
+
+  const res = await fetch("http://localhost:5000/api/donor",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify(data)
+  });
+
+  const result = await res.json();
+  document.getElementById("msg").innerText = result.message;
+});
+</script>
+</body>
+</html>
