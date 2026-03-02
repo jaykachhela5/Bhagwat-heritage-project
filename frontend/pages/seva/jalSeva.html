@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- ================= META SECTION ================= -->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jal Seva Mission | Bhagwat Heritage Service Foundation Trust</title>
+
+<meta name="description" content="Support Jal Seva Mission by Bhagwat Heritage Service Foundation Trust. Donate for clean drinking water seva programs in India.">
+<meta name="keywords" content="Jal Seva, Donate Water, Bhagwat Heritage, Charity, Temple Seva, Water Donation">
+<meta name="author" content="Bhagwat Heritage Service Foundation Trust">
+
+<link rel="stylesheet" href="/frontend/css/jal-seva.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="main-header">
+
+<div class="top-bar">
+<p>💧 Jal Seva Mission | Serving Humanity Through Water | ChandraPur, India</p>
+</div>
+
+<div class="navbar">
+
+    <!-- LEFT SIDE LOGO AREA -->
+    <div class="logo">
+
+        <img src="/frontend/images/logo.jpg" 
+             alt="Bhagwat Heritage Logo" 
+             class="logo-img">
+
+        <div class="logo-text">
+            <h1>Bhagwat Heritage</h1>
+            <span>Service Foundation Trust</span>
+        </div>
+
+    </div>
+
+<nav>
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#impact">Impact</a></li>
+<li><a href="#donate">Donate</a></li>
+<li><a href="#gallery">Gallery</a></li>
+<li><a href="#faq">FAQ</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+
+</div>
+
+</header>
+
+<!-- ================= HERO SECTION ================= -->
+
+<section class="hero">
+
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
+<h2>Jal Seva Mission 2026</h2>
+
+<p>
+Providing Clean Drinking Water During Summer Camps, Temple Seva & Public Events.
+Your Donation = Someone’s Life Saving Water.
+</p>
+
+<div class="hero-buttons">
+<button onclick="scrollToDonate()">Donate Now</button>
+<button onclick="scrollToAbout()">Learn More</button>
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= ABOUT SECTION ================= -->
+
+<section id="about" class="about-section">
+
+<div class="container">
+
+<h2>About Jal Seva</h2>
+
+<p>
+Jal Seva is a sacred initiative by Bhagwat Heritage Service Foundation Trust aimed at providing clean and safe drinking water during extreme summer heat and spiritual gatherings.
+</p>
+
+<p>
+Thousands of devotees and needy individuals benefit every year through our water distribution camps across Maharashtra.
+</p>
+
+<div class="about-grid">
+
+<div class="about-box">
+<h3>🌞 Summer Water Camps</h3>
+<p>Water stalls during peak heat seasons.</p>
+</div>
+
+<div class="about-box">
+<h3>🏛 Temple Seva</h3>
+<p>Continuous drinking water facility for devotees.</p>
+</div>
+
+<div class="about-box">
+<h3>🚰 Rural Support</h3>
+<p>Providing water tanks in underprivileged areas.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= IMPACT SECTION ================= -->
+
+<section id="impact" class="impact-section">
+
+<h2>Our Impact</h2>
+
+<div class="impact-grid">
+
+<div class="impact-card">
+<h3 id="waterLitres">0</h3>
+<p>Litres of Water Distributed</p>
+</div>
+
+<div class="impact-card">
+<h3 id="peopleServed">0</h3>
+<p>People Served</p>
+</div>
+
+<div class="impact-card">
+<h3 id="locationsCovered">0</h3>
+<p>Locations Covered</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= DONATION SECTION ================= -->
+
+<section id="donate" class="donation-section">
+
+<div class="container">
+
+<h2>Support Jal Seva Mission</h2>
+
+<div class="donation-tiers">
+
+<div class="tier">
+<h3>₹101</h3>
+<p>Water for 10 People</p>
+<button onclick="selectAmount(101)">Donate</button>
+</div>
+
+<div class="tier">
+<h3>₹501</h3>
+<p>Water Camp Support</p>
+<button onclick="selectAmount(501)">Donate</button>
+</div>
+
+<div class="tier">
+<h3>₹1100</h3>
+<p>Full Day Water Stall</p>
+<button onclick="selectAmount(1100)">Donate</button>
+</div>
+
+<div class="tier">
+<h3>₹2100</h3>
+<p>Rural Water Tank Support</p>
+<button onclick="selectAmount(2100)">Donate</button>
+</div>
+
+</div>
+
+<!-- ===== Donation Form ===== -->
+
+<form id="donationForm">
+
+<h3>Make a Contribution</h3>
+
+<div class="form-group">
+<label>Full Name</label>
+<input type="text" id="name" required>
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input type="email" id="email" required>
+</div>
+
+<div class="form-group">
+<label>Phone</label>
+<input type="text" id="phone" required>
+</div>
+
+<div class="form-group">
+<label>Amount</label>
+<input type="number" id="amount" required>
+</div>
+
+<div class="form-group">
+<label>Message</label>
+<textarea id="message"></textarea>
+</div>
+
+<button type="submit" class="donate-btn">Proceed to Secure Donation</button>
+
+</form>
+
+</div>
+
+</section>
+
+<!-- ================= GALLERY SECTION ================= -->
+
+<section id="gallery" class="gallery-section">
+
+<h2>Jal Seva Gallery</h2>
+
+<div class="gallery-grid">
+
+<div class="gallery-item"></div>
+<div class="gallery-item"></div>
+<div class="gallery-item"></div>
+<div class="gallery-item"></div>
+<div class="gallery-item"></div>
+<div class="gallery-item"></div>
+
+</div>
+
+</section>
+
+<!-- ================= TESTIMONIAL SECTION ================= -->
+
+<section class="testimonial-section">
+
+<h2>Devotee Testimonials</h2>
+
+<div class="testimonial-grid">
+
+<div class="testimonial">
+<p>"This trust truly serves humanity."</p>
+<h4>- Rajesh Sharma</h4>
+</div>
+
+<div class="testimonial">
+<p>"Water seva during summer is life saving."</p>
+<h4>- Sunita Devi</h4>
+</div>
+
+<div class="testimonial">
+<p>"Blessed to support Jal Seva."</p>
+<h4>- Amit Verma</h4>
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= FAQ SECTION ================= -->
+
+<section id="faq" class="faq-section">
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="faq-item">
+<h4>Where does donation go?</h4>
+<p>Directly towards water distribution initiatives.</p>
+</div>
+
+<div class="faq-item">
+<h4>Is donation secure?</h4>
+<p>Yes, all payments are encrypted and secure.</p>
+</div>
+
+<div class="faq-item">
+<h4>Will I receive receipt?</h4>
+<p>Yes, email confirmation will be sent.</p>
+</div>
+
+</section>
+
+<!-- ================= CTA SECTION ================= -->
+
+<section class="cta-section">
+
+<h2>Be The Reason Someone Gets Water Today 💧</h2>
+<button onclick="scrollToDonate()">Donate Now</button>
+
+</section>
+
+<!-- ================= CONTACT SECTION ================= -->
+
+<section id="contact" class="contact-section">
+
+<h2>Contact Us</h2>
+
+<p>Email: info@bhagwatheritage.org</p>
+<p>Phone: +91-0000000000</p>
+<p>Nagpur, Maharashtra</p>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div class="footer-container">
+
+<div>
+<h4>Bhagwat Heritage</h4>
+<p>Serving Humanity With Devotion</p>
+</div>
+
+<div>
+<h4>Quick Links</h4>
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#donate">Donate</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+</div>
+
+<div>
+<h4>Follow Us</h4>
+<p>Facebook | Instagram | YouTube</p>
+</div>
+
+</div>
+
+<p class="copyright">
+© 2026 Bhagwat Heritage Service Foundation Trust. All Rights Reserved.
+</p>
+
+</footer>
+
+<script src="jal-seva.js"></script>
+
+</body>
+</html>

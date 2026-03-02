@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bhagwat Heritage Ultra Advanced Library Management System</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/frontend/css/library.css">
+</head>
+<body>
+<header>
+<div class="header-container">
+<div class="logo-area">
+<h1>Bhagwat Heritage Library</h1>
+<p>Knowledge • Culture • Discipline • Service</p>
+</div>
+<div class="auth-area">
+<div class="auth-info">
+<span>User Type: Admin</span>
+<span>Username: admin</span>
+</div>
+<div class="auth-buttons">
+<button>Login</button>
+<button>Register</button>
+<button>Logout</button>
+</div>
+</div>
+</div>
+<nav class="sidebar">
+<ul>
+<li><a href="#dashboard">Dashboard</a></li>
+<li><a href="#analytics">Analytics</a></li>
+<li><a href="#books">Books</a></li>
+<li><a href="#members">Members</a></li>
+<li><a href="#staff">Staff</a></li>
+<li><a href="#accounts">Accounts</a></li>
+<li><a href="#issues">Issue</a></li>
+<li><a href="#returns">Return</a></li>
+<li><a href="#reservations">Reservations</a></li>
+<li><a href="#feedback">Feedback</a></li>
+<li><a href="#notifications">Notifications</a></li>
+<li><a href="#logs">System Logs</a></li>
+<li><a href="#reports">Reports</a></li>
+<li><a href="#settings">Settings</a></li>
+</ul>
+</nav>
+</header>
+<main class="main-content">
+<section id="dashboard">
+<h2>Dashboard Overview</h2>
+<div class="dashboard-grid">
+<div class="card"><h3>Total Books</h3><p id="totalBooks">0</p></div>
+<div class="card"><h3>Available Books</h3><p id="availableBooks">0</p></div>
+<div class="card"><h3>Issued Books</h3><p id="issuedBooks">0</p></div>
+<div class="card"><h3>Total Members</h3><p id="totalMembers">0</p></div>
+<div class="card"><h3>Students</h3><p>0</p></div>
+<div class="card"><h3>Staff</h3><p>0</p></div>
+<div class="card"><h3>Pending Returns</h3><p>0</p></div>
+<div class="card"><h3>Fine Collected</h3><p>₹0</p></div>
+</div>
+</section>
+<section id="analytics">
+<h2>Analytics</h2>
+<div class="analytics-grid">
+<div class="chart-box"><h3>Monthly Issues</h3><canvas></canvas></div>
+<div class="chart-box"><h3>Category Distribution</h3><canvas></canvas></div>
+<div class="chart-box"><h3>Fine Collection</h3><canvas></canvas></div>
+<div class="chart-box"><h3>Active Users</h3><canvas></canvas></div>
+</div>
+</section>
+<section id="books">
+<h2>Book Management</h2>
+<div class="controls">
+<input type="text" placeholder="Search by Title">
+<input type="text" placeholder="Search by Author">
+<select>
+<option>All Categories</option>
+<option>Spiritual</option>
+<option>History</option>
+<option>Education</option>
+<option>Science</option>
+<option>Yoga</option>
+<option>Sanskrit</option>
+</select>
+<button>Add Book</button>
+</div>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Title</th>
+<th>Author</th>
+<th>ISBN</th>
+<th>Category</th>
+<th>Publication</th>
+<th>Total</th>
+<th>Available</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>Bhagavad Gita</td><td>Ved Vyasa</td><td>111</td><td>Spiritual</td><td>Gita Press</td><td>10</td><td>8</td><td>Available</td><td><button>Edit</button><button>Delete</button></td></tr>
+<tr><td>2</td><td>Ramayana</td><td>Valmiki</td><td>222</td><td>Spiritual</td><td>Heritage</td><td>15</td><td>12</td><td>Available</td><td><button>Edit</button><button>Delete</button></td></tr>
+<tr><td>3</td><td>Mahabharata</td><td>Ved Vyasa</td><td>333</td><td>History</td><td>Classic</td><td>8</td><td>5</td><td>Limited</td><td><button>Edit</button><button>Delete</button></td></tr>
+<tr><td>4</td><td>Upanishads</td><td>Ancient</td><td>444</td><td>Spiritual</td><td>Vedic</td><td>12</td><td>10</td><td>Available</td><td><button>Edit</button><button>Delete</button></td></tr>
+<tr><td>5</td><td>Yoga Sutra</td><td>Patanjali</td><td>555</td><td>Yoga</td><td>Yogic</td><td>7</td><td>4</td><td>Limited</td><td><button>Edit</button><button>Delete</button></td></tr>
+<tr><td>6</td><td>Science of Mind</td><td>Modern</td><td>666</td><td>Science</td><td>Future</td><td>9</td><td>9</td><td>Available</td><td><button>Edit</button><button>Delete</button></td></tr>
+<tr><td>7</td><td>Indian Culture</td><td>Scholar</td><td>777</td><td>Education</td><td>National</td><td>11</td><td>7</td><td>Available</td><td><button>Edit</button><button>Delete</button></td></tr>
+<tr><td>8</td><td>Sanskrit Grammar</td><td>Panini</td><td>888</td><td>Sanskrit</td><td>Classic</td><td>6</td><td>3</td><td>Limited</td><td><button>Edit</button><button>Delete</button></td></tr>
+<tr><td>9</td><td>History of Bharat</td><td>Author X</td><td>999</td><td>History</td><td>Heritage</td><td>20</td><td>18</td><td>Available</td><td><button>Edit</button><button>Delete</button></td></tr>
+<tr><td>10</td><td>Spiritual India</td><td>Guru</td><td>1010</td><td>Spiritual</td><td>Divine</td><td>5</td><td>5</td><td>Available</td><td><button>Edit</button><button>Delete</button></td></tr>
+</tbody>
+</table>
+</section>
+<section id="members">
+<h2>Member Management</h2>
+<form>
+<input type="text" placeholder="Full Name">
+<input type="email" placeholder="Email">
+<input type="tel" placeholder="Phone">
+<select><option>Student</option><option>Staff</option></select>
+<input type="text" placeholder="Department / Class">
+<button>Register Member</button>
+</form>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Type</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Borrowed</th>
+<th>Fine</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>Rahul</td><td>Student</td><td>rahul@mail.com</td><td>99999</td><td>2</td><td>₹0</td><td><button>View</button><button>Delete</button></td></tr>
+<tr><td>2</td><td>Sita</td><td>Staff</td><td>sita@mail.com</td><td>88888</td><td>1</td><td>₹10</td><td><button>View</button><button>Delete</button></td></tr>
+</tbody>
+</table>
+</section>
+<section id="staff">
+<h2>Staff Directory</h2>
+<table>
+<thead><tr><th>ID</th><th>Name</th><th>Role</th><th>Email</th><th>Phone</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Librarian A</td><td>Head Librarian</td><td>a@library.com</td><td>77777</td></tr>
+<tr><td>2</td><td>Librarian B</td><td>Assistant</td><td>b@library.com</td><td>66666</td></tr>
+</tbody>
+</table>
+</section>
+<section id="accounts">
+<h2>User Accounts</h2>
+<table>
+<thead><tr><th>ID</th><th>Username</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>admin</td><td>Admin</td><td>Active</td><td><button>Disable</button></td></tr>
+<tr><td>2</td><td>librarian</td><td>Librarian</td><td>Active</td><td><button>Disable</button></td></tr>
+</tbody>
+</table>
+</section>
+<section id="issues">
+<h2>Issue Book</h2>
+<form>
+<input type="text" placeholder="Member ID">
+<input type="text" placeholder="Book ID">
+<input type="date">
+<button>Issue Book</button>
+</form>
+</section>
+<section id="returns">
+<h2>Return Book</h2>
+<form>
+<input type="text" placeholder="Issue ID">
+<button>Return Book</button>
+</form>
+</section>
+<section id="reservations">
+<h2>Reservations</h2>
+<form>
+<input type="text" placeholder="Member ID">
+<input type="text" placeholder="Book ID">
+<button>Reserve</button>
+</form>
+</section>
+<section id="feedback">
+<h2>Feedback</h2>
+<form>
+<input type="text" placeholder="Book ID">
+<textarea placeholder="Write Feedback"></textarea>
+<button>Submit</button>
+</form>
+</section>
+<section id="notifications">
+<h2>Notifications</h2>
+<ul>
+<li>New book added successfully</li>
+<li>Member Rahul returned a book</li>
+<li>Fine updated for Member ID 2</li>
+</ul>
+</section>
+<section id="logs">
+<h2>System Logs</h2>
+<table>
+<thead><tr><th>Date</th><th>User</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td>01-03-2026</td><td>Admin</td><td>Added Book</td></tr>
+<tr><td>02-03-2026</td><td>Librarian</td><td>Issued Book</td></tr>
+</tbody>
+</table>
+</section>
+<section id="reports">
+<h2>Reports</h2>
+<div class="report-box">Monthly Report</div>
+<div class="report-box">Fine Report</div>
+<div class="report-box">Inventory Report</div>
+<div class="report-box">Member Activity</div>
+</section>
+<section id="settings">
+<h2>System Settings</h2>
+<form>
+<label>Max Books per Student</label>
+<input type="number" value="3">
+<label>Fine per Day</label>
+<input type="number" value="5">
+<label>Reservation Limit</label>
+<input type="number" value="2">
+<button>Save Settings</button>
+</form>
+</section>
+<footer>
+<div class="footer-content">
+<div>
+<h4>About</h4>
+<p>Bhagwat Heritage Library promotes spiritual and cultural knowledge.</p>
+</div>
+<div>
+<h4>Contact</h4>
+<p>Email: info@bhagwatlibrary.org</p>
+<p>Phone: +91-0000000000</p>
+<p>Nagpur, India</p>
+</div>
+<div>
+<h4>Quick Links</h4>
+<ul>
+<li>Dashboard</li>
+<li>Books</li>
+<li>Members</li>
+<li>Reports</li>
+</ul>
+</div>
+</div>
+<p>© 2026 Bhagwat Heritage Service Foundation Trust</p>
+</footer>
+</main>
+<script src="/frontend/js/library.js"></script>
+</body>
+</html>

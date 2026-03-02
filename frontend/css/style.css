@@ -182,6 +182,9 @@ display:block;
 .hero-content h1 {
   font-size: 3rem;
 }
+.hero-content h3 {
+  font-size: 2rem;
+}
 
 .hero-content p {
   font-size: 1.2rem;

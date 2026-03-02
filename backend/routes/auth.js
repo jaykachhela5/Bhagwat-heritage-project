@@ -31,40 +31,27 @@ router.post("/signup", async (req, res) => {
 });
 
 // LOGIN
-router.post("/login", async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).json({ message: "Invalid Email" });
-    }
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: "Invalid Password" });
-    }
-
-    const token = jwt.sign(
-      { id: user._id, role: user.role },
-      "secretkey",
-      { expiresIn: "1d" }
-    );
-
-    res.json({
-      message: "Login Successful",
-      token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role
-      }
-    });
-
-  } catch (error) {
-    res.status(500).json({ message: "Server Error" });
-  }
-});
 
 module.exports = router;
+document.getElementById("form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const res = await fetch("/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: document.getElementById("email").value,
+      password: document.getElementById("password").value,
+      role: document.getElementById("role").value
+    })
+  });
+
+  const data = await res.json();
+
+  if (data.success) {
+    document.getElementById("msg").innerText = "Login Successful";
+    window.location.href = "dashboard.html";
+  } else {
+    document.getElementById("msg").innerText = "Invalid Login";
+  }
+});

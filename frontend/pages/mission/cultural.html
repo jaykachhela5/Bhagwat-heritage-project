@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cultural Activities - BHSFT</title>
+
+<style>
+body{
+font-family:Arial;
+margin:0;
+background:#f6f1ea;
+}
+
+header{
+background:#5b3a1e;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.hero{
+display:flex;
+padding:50px;
+gap:40px;
+flex-wrap:wrap;
+align-items:center;
+}
+
+.hero-img img{
+width:450px;
+border-radius:10px;
+}
+
+.hero-content{
+max-width:1000px;
+margin:auto;
+}
+
+.services{
+padding:60px;
+text-align:center;
+}
+
+.cards{
+display:flex;
+flex-wrap:wrap;
+gap:30px;
+justify-content:center;
+}
+
+.card{
+background:white;
+width:260px;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,.1);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card img{
+width:70px;
+margin-bottom:15px;
+}
+
+.gallery{
+padding:50px;
+text-align:center;
+}
+
+.gallery-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
+}
+
+.gallery-grid img{
+width:100%;
+border-radius:10px;
+}
+
+@media(max-width:768px){
+.hero{
+flex-direction:column;
+text-align:center;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🎭 Cultural Activities</h1>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-img">
+<img src="https://res.cloudinary.com/der8zinu8/image/upload/v1771829272/1771410109114-sanskriti_maft9c.png">
+</div>
+
+<div class="hero-content">
+<h2>संस्कृति संरक्षण मिशन</h2>
+<p>
+श्री भागवत हेरिटेज सर्विस फाउंडेशन ट्रस्ट भारतीय सनातन संस्कृति, परंपराओं,
+धार्मिक उत्सवों और नैतिक मूल्यों के संरक्षण एवं प्रसार के लिए समर्पित है।
+
+हमारा उद्देश्य समाज में सांस्कृतिक चेतना को जागृत करना, युवाओं को अपनी
+परंपराओं से जोड़ना और आध्यात्मिक संस्कृति को वैश्विक स्तर पर फैलाना है।
+
+संस्था विभिन्न सांस्कृतिक कार्यक्रमों, धार्मिक उत्सवों, कला एवं परंपरा
+संरक्षण अभियानों के माध्यम से समाज में सांस्कृतिक गौरव और एकता की भावना
+को मजबूत बनाने का कार्य कर रही है।
+</p>
+</div>
+</section>
+
+<!-- CULTURAL SERVICES -->
+<section class="services">
+
+<h2>Our Cultural Services</h2>
+
+<div class="cards">
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+<h3>धार्मिक उत्सव आयोजन</h3>
+<p>भारतीय त्योहारों और धार्मिक उत्सवों का भव्य आयोजन।</p>
+</div>
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/4140/4140047.png">
+<h3>संस्कृति जागरण अभियान</h3>
+<p>समाज में सनातन संस्कृति के प्रति जागरूकता बढ़ाना।</p>
+</div>
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/3774/3774299.png">
+<h3>भारतीय कला संरक्षण</h3>
+<p>भारतीय संगीत, नृत्य और कला परंपराओं का संरक्षण।</p>
+</div>
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png">
+<h3>संस्कार शिविर</h3>
+<p>युवाओं और बच्चों के लिए सांस्कृतिक प्रशिक्षण।</p>
+</div>
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png">
+<h3>धार्मिक यात्रा आयोजन</h3>
+<p>तीर्थ यात्राओं और सांस्कृतिक भ्रमण कार्यक्रम।</p>
+</div>
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png">
+<h3>सांस्कृतिक सेमिनार</h3>
+<p>धार्मिक एवं सांस्कृतिक विषयों पर संगोष्ठी।</p>
+</div>
+
+</div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+<h2>Cultural Events Gallery</h2>
+
+<div class="gallery-grid">
+<img src="https://images.unsplash.com/photo-1603574670812-d24560880210">
+<img src="https://images.unsplash.com/photo-1588392382834-a891154bca4d">
+<img src="https://images.unsplash.com/photo-1594387311319-6e3f5c8dcbb8">
+<img src="https://images.unsplash.com/photo-1608889175123-8b90e63c8799">
+</div>
+</section>
+<script src="cultural.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bhagwat Heritage Pathshala</title>
+<link rel="stylesheet" href="/frontend/css/pathshala.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+    
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Sanatan Dharma Gurukul</h1>
+        <p>ज्ञान • संस्कार • सेवा • संस्कृति</p>
+        <button onclick="scrollToAdmission()">Apply Now</button>
+    </div>
+</section>
+
+<section id="about" class="about">
+    <h2>About Pathshala</h2>
+    <p>
+        Bhagwat Heritage Pathshala provides spiritual education, Vedic knowledge,
+        Sanskrit learning, and moral values to young generations.
+    </p>
+</section>
+
+<section id="courses" class="courses">
+    <h2>Our Courses</h2>
+    <div class="course-grid">
+        <div class="course-card">
+            <h3>Sanskrit Learning</h3>
+            <p>Learn basic to advanced Sanskrit grammar and shlokas.</p>
+        </div>
+
+        <div class="course-card">
+            <h3>Bhagavad Gita</h3>
+            <p>Daily Gita path and spiritual explanation classes.</p>
+        </div>
+
+        <div class="course-card">
+            <h3>Vedic Mathematics</h3>
+            <p>Improve calculation speed with ancient techniques.</p>
+        </div>
+
+        <div class="course-card">
+            <h3>Yoga & Meditation</h3>
+            <p>Physical and mental wellness training sessions.</p>
+        </div>
+    </div>
+</section>
+
+<section id="admission" class="admission">
+    <h2>Admission Form</h2>
+
+    <form id="admissionForm">
+        <input type="text" name="name" placeholder="Student Name" required>
+        <input type="number" name="age" placeholder="Age" required>
+        <input type="text" name="parentName" placeholder="Parent Name" required>
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+
+        <select name="course" required>
+            <option value="">Select Course</option>
+            <option>Sanskrit Learning</option>
+            <option>Bhagavad Gita</option>
+            <option>Vedic Mathematics</option>
+            <option>Yoga & Meditation</option>
+        </select>
+
+        <textarea name="message" placeholder="Additional Message"></textarea>
+
+        <button type="submit">Submit Admission</button>
+    </form>
+
+    <div id="responseMessage"></div>
+</section>
+
+<footer>
+    <p>© 2026 Bhagwat Heritage Pathshala | All Rights Reserved</p>
+</footer>
+
+<script src="/frontend/js/pathshala.js"></script>
+</body>
+</html>

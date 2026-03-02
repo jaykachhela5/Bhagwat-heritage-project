@@ -1,117 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Our Objectives | Bhagwat Heritage</title>
-<link rel="stylesheet" href="/frontend/css/objectives.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<title>BHSFT Objectives</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- HERO SECTION -->
+<!-- HERO -->
 <section class="hero">
-  <div class="overlay">
-    <h1>Our Sacred Objectives</h1>
-    <p>Dedicated to Service, Spirituality & Cultural Heritage</p>
-  </div>
-</section>
-
-<!-- INTRO -->
-<section class="intro">
-  <h2>Guided by Faith & Service</h2>
-  <p>
-    For over 35 years, Bhagwat Heritage Service Foundation Trust has worked tirelessly 
-    to preserve spiritual traditions, empower communities, and promote humanitarian service. 
-    Our objectives are rooted in devotion, discipline and dedication.
-  </p>
-</section>
-
-<!-- OBJECTIVES GRID -->
-<section class="objectives">
-
-  <div class="card">
-    <i class="fas fa-om"></i>
-    <h3>Spiritual Upliftment</h3>
-    <p>Conducting satsang, katha, and religious discourses to strengthen devotion.</p>
-    <button onclick="openModal('Spiritual Upliftment')">Read More</button>
-  </div>
-
-  <div class="card">
-    <i class="fas fa-users"></i>
-    <h3>Community Development</h3>
-    <p>Organizing social welfare events and cultural festivals.</p>
-    <button onclick="openModal('Community Development')">Read More</button>
-  </div>
-
-  <div class="card">
-    <i class="fas fa-book"></i>
-    <h3>Educational Support</h3>
-    <p>Providing scholarships and value-based education programs.</p>
-    <button onclick="openModal('Educational Support')">Read More</button>
-  </div>
-
-  <div class="card">
-    <i class="fas fa-hand-holding-heart"></i>
-    <h3>Humanitarian Seva</h3>
-    <p>Food distribution, medical aid and disaster relief activities.</p>
-    <button onclick="openModal('Humanitarian Seva')">Read More</button>
-  </div>
-
-</section>
-
-<!-- PROGRESS SECTION -->
-<section class="progress-section">
-  <h2>Our Impact</h2>
-
-  <div class="progress-box">
-    <span>Spiritual Programs</span>
-    <div class="progress">
-      <div class="progress-bar" data-width="90%"></div>
+    <div class="hero-content">
+        <h1>भगवत हेरिटेज सेवा ट्रस्ट</h1>
+        <p>सेवा • संस्कार • संस्कृति</p>
+        <button>सेवा से जुड़ें</button>
     </div>
-  </div>
-
-  <div class="progress-box">
-    <span>Social Welfare</span>
-    <div class="progress">
-      <div class="progress-bar" data-width="85%"></div>
-    </div>
-  </div>
-
-  <div class="progress-box">
-    <span>Education Initiatives</span>
-    <div class="progress">
-      <div class="progress-bar" data-width="80%"></div>
-    </div>
-  </div>
-
 </section>
-
-<!-- COUNTER -->
-<section class="counter-section">
-  <div class="counter-box">
-    <h3 id="years">0</h3>
-    <p>Years of Service</p>
-  </div>
-  <div class="counter-box">
-    <h3 id="events">0</h3>
-    <p>Events Organized</p>
-  </div>
-</section>
-
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <h3 id="modalTitle"></h3>
+<!-- MAIN OBJECTIVE -->
+<section class="objective">
+    <h1>हमारे उद्देश्य</h1>
     <p>
-      Our trust actively works towards this objective by conducting 
-      programs, engaging volunteers, and ensuring sustainable impact 
-      through long-term planning and community participation.
+        हम श्रीमद्भागवत के आध्यात्मिक, सामाजिक और सांस्कृतिक संदेश को
+        जन-जन तक पहुँचाने के लिए समर्पित हैं।
     </p>
-  </div>
-</div>
+</section>
 
-<script src="/frontend/js/objectives.js"></script>
+<!-- MAIN CARDS -->
+<section class="main-cards">
+
+    <div class="card">
+        <img src="/frontend/images/sanskriti (3).png">
+        <h3>भक्ति</h3>
+        <p>श्रीहरि भक्ति का जागरण</p>
+        <button>और जानें</button>
+    </div>
+
+    <div class="card">
+        <img src="/frontend/images/sa2.png">
+        <h3>सेवा</h3>
+        <p>मानव सेवा का विस्तार</p>
+        <button>और जानें</button>
+    </div>
+
+    <div class="card">
+        <img src="/frontend/images/sa1.png">
+        <h3>संस्कृति</h3>
+        <p>सनातन संस्कृति का संरक्षण</p>
+        <button>और जानें</button>
+    </div>
+
+</section>
+
+<!-- OTHER OBJECTIVES -->
+<section class="other">
+    <h2>अन्य उद्देश्य</h2>
+    <div class="grid" id="data"></div>
+</section>
+
+<script src="script.js"></script>
 </body>
 </html>

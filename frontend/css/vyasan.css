@@ -1,0 +1,365 @@
+/* ===============================
+   ROOT COLOR SYSTEM (Logo Based)
+================================= */
+
+:root{
+
+--deep-blue:#0F6E8C;
+--royal-blue:#1C8DAF;
+
+--leaf-green:#7DBE3C;
+--soft-green:#A8D86E;
+
+--gold:#F4C542;
+--saffron:#F7941D;
+
+--trust-red:#C62828;
+
+--cream:#FFF8E7;
+--white:#ffffff;
+--dark:#1a1a1a;
+
+}
+
+/* ===============================
+   GLOBAL RESET
+================================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:var(--cream);
+color:var(--dark);
+}
+
+/* ===============================
+   HEADER
+================================= */
+
+.top-bar{
+background:linear-gradient(90deg,var(--deep-blue),var(--royal-blue));
+color:var(--white);
+text-align:center;
+padding:8px;
+font-size:14px;
+letter-spacing:1px;
+}
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 8%;
+background:var(--white);
+box-shadow:0 4px 20px rgba(0,0,0,0.08);
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo-img{
+width:60px;
+}
+
+.logo-text h1{
+color:var(--deep-blue);
+font-weight:700;
+}
+
+.logo-text span{
+color:var(--saffron);
+font-size:14px;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:25px;
+}
+
+nav ul li a{
+text-decoration:none;
+color:var(--deep-blue);
+font-weight:500;
+transition:0.3s;
+}
+
+nav ul li a:hover{
+color:var(--trust-red);
+}
+
+/* ===============================
+   HERO SECTION
+================================= */
+
+.hero-section{
+height:90vh;
+background:linear-gradient(135deg,var(--deep-blue),var(--leaf-green));
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+position:relative;
+color:var(--white);
+}
+
+.hero-overlay{
+position:absolute;
+width:100%;
+height:100%;
+background:linear-gradient(to bottom,rgba(0,0,0,0.2),rgba(0,0,0,0.6));
+}
+
+.hero-content{
+position:relative;
+max-width:800px;
+padding:20px;
+}
+
+.hero-content h2{
+font-size:48px;
+margin-bottom:20px;
+}
+
+.hero-buttons button{
+padding:12px 30px;
+margin:10px;
+border:none;
+cursor:pointer;
+border-radius:30px;
+font-weight:600;
+transition:0.4s;
+}
+
+.hero-buttons button:first-child{
+background:var(--gold);
+color:var(--dark);
+}
+
+.hero-buttons button:last-child{
+background:var(--trust-red);
+color:var(--white);
+}
+
+.hero-buttons button:hover{
+transform:translateY(-3px);
+box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* ===============================
+   SECTION COMMON
+================================= */
+
+section{
+padding:80px 10%;
+}
+
+section h2{
+text-align:center;
+margin-bottom:40px;
+font-size:32px;
+color:var(--deep-blue);
+position:relative;
+}
+
+section h2::after{
+content:"";
+width:80px;
+height:4px;
+background:var(--saffron);
+display:block;
+margin:10px auto 0;
+border-radius:10px;
+}
+
+/* ===============================
+   CARDS DESIGN
+================================= */
+
+.type-grid,
+.impact-grid,
+.donation-plans{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.type-card,
+.impact-card,
+.plan,
+.story-card{
+background:var(--white);
+padding:30px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+transition:0.4s;
+}
+
+.type-card:hover,
+.impact-card:hover,
+.plan:hover{
+transform:translateY(-10px);
+background:linear-gradient(135deg,var(--soft-green),var(--leaf-green));
+color:var(--white);
+}
+
+/* ===============================
+   REHAB STEPS
+================================= */
+
+.process-step{
+background:linear-gradient(135deg,var(--royal-blue),var(--deep-blue));
+color:var(--white);
+padding:25px;
+margin:15px 0;
+border-radius:12px;
+}
+
+/* ===============================
+   GALLERY
+================================= */
+
+.gallery-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.gallery-item{
+height:200px;
+background:linear-gradient(135deg,var(--gold),var(--saffron));
+border-radius:15px;
+transition:0.4s;
+}
+
+.gallery-item:hover{
+transform:scale(1.05);
+}
+
+/* ===============================
+   FAQ
+================================= */
+
+.faq-item{
+background:var(--white);
+padding:20px;
+margin-bottom:15px;
+border-left:5px solid var(--saffron);
+border-radius:10px;
+}
+
+/* ===============================
+   DONATION
+================================= */
+
+.plan h3{
+color:var(--deep-blue);
+}
+
+.plan p{
+font-size:24px;
+color:var(--trust-red);
+margin:10px 0;
+}
+
+.plan button{
+background:var(--leaf-green);
+color:var(--white);
+border:none;
+padding:10px 20px;
+border-radius:25px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.plan button:hover{
+background:var(--deep-blue);
+}
+
+/* ===============================
+   CONTACT
+================================= */
+
+.contact-form{
+display:flex;
+flex-direction:column;
+gap:15px;
+max-width:600px;
+margin:auto;
+}
+
+.contact-form input,
+.contact-form textarea{
+padding:12px;
+border:2px solid var(--royal-blue);
+border-radius:8px;
+outline:none;
+}
+
+.contact-form button{
+background:var(--trust-red);
+color:var(--white);
+padding:12px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.contact-form button:hover{
+background:var(--deep-blue);
+}
+
+/* ===============================
+   FOOTER
+================================= */
+
+.main-footer{
+background:linear-gradient(135deg,var(--deep-blue),var(--royal-blue));
+color:var(--white);
+padding:40px 10%;
+}
+
+.footer-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.footer-bottom{
+text-align:center;
+margin-top:20px;
+border-top:1px solid rgba(255,255,255,0.3);
+padding-top:15px;
+}
+
+/* ===============================
+   RESPONSIVE
+================================= */
+
+@media(max-width:768px){
+
+.navbar{
+flex-direction:column;
+gap:15px;
+}
+
+nav ul{
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.hero-content h2{
+font-size:32px;
+}
+
+}
