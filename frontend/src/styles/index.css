@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    @apply text-gray-900 bg-white;
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-block bg-[#0d3b66] text-white px-5 py-2 rounded-md font-semibold hover:bg-[#1a5276] transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply inline-block bg-[#f4a261] text-white px-5 py-2 rounded-md font-semibold hover:bg-[#e08c4c] transition-colors duration-200;
+  }
+
+  .section-title {
+    @apply text-3xl font-bold text-[#0d3b66] text-center mb-8;
+  }
+}
