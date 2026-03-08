@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../app/providers/AuthProvider";
+import { ROUTES } from "../../app/routes/routes";
 
 export default memo(function DashboardPage() {
   const { user } = useAuth();
@@ -8,12 +9,12 @@ export default memo(function DashboardPage() {
   const dashboardLinks =
     user?.role === "admin"
       ? [
-          { label: "Admin Panel", href: "/dashboard/admin", icon: "🛡️" },
-          { label: "Media Upload", href: "/gallery", icon: "🖼️" },
+          { label: "Admin Panel", href: ROUTES.dashboards.admin, icon: "AP" },
+          { label: "Gallery Admin", href: ROUTES.dashboards.galleryAdmin, icon: "GA" },
         ]
       : user?.role === "donor"
-        ? [{ label: "Donor Panel", href: "/dashboard/donor", icon: "💝" }]
-        : [{ label: "Volunteer Panel", href: "/dashboard/volunteer", icon: "🤝" }];
+        ? [{ label: "Donor Panel", href: ROUTES.dashboards.donor, icon: "DP" }]
+        : [{ label: "Volunteer Panel", href: ROUTES.dashboards.volunteer, icon: "VP" }];
 
   return (
     <div className="min-h-screen bg-gray-50 py-16">
@@ -28,7 +29,9 @@ export default memo(function DashboardPage() {
               to={link.href}
               className="bg-white rounded-xl shadow-md p-6 flex items-center gap-4 hover:shadow-xl transition-shadow"
             >
-              <span className="text-4xl">{link.icon}</span>
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#edf3fb] text-[#0d3b66] text-xs font-bold">
+                {link.icon}
+              </span>
               <span className="text-xl font-bold text-[#0d3b66]">{link.label}</span>
             </Link>
           ))}

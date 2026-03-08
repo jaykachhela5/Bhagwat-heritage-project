@@ -1,0 +1,83 @@
+{
+  "brand": {
+    "subtitle": "ಸೇವಾ ಫೌಂಡೇಶನ್ ಟ್ರಸ್ಟ್",
+    "logoAlt": "ಭಗವತ್ ಹೆರಿಟೇಜ್ ಲೋಗೋ"
+  },
+  "languages": {
+    "en": "English",
+    "hi": "हिन्दी",
+    "mr": "मराठी",
+    "gu": "ગુજરાતી",
+    "bn": "বাংলা",
+    "ta": "தமிழ்",
+    "te": "తెలుగు",
+    "kn": "ಕನ್ನಡ",
+    "pa": "ਪੰਜਾਬੀ",
+    "sa": "संस्कृतम्"
+  },
+  "switcher": {
+    "label": "ಭಾಷೆ",
+    "ariaLabel": "ಭಾಷೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ"
+  },
+  "navbar": {
+    "toggleMenu": "ಮೆನು ತೆರೆಯಿರಿ",
+    "myPanel": "ನನ್ನ ಪ್ಯಾನೆಲ್",
+    "logout": "ಲಾಗ್ ಔಟ್",
+    "donate": "ದಾನ ಮಾಡಿ",
+    "items": {
+      "home": "ಮುಖಪುಟ",
+      "about": "ಪರಿಚಯ",
+      "mission": "ಧ್ಯೇಯ",
+      "seva": "ಸೇವೆ",
+      "events": "ಕಾರ್ಯಕ್ರಮಗಳು",
+      "knowledge": "ಜ್ಞಾನ",
+      "mandirTeerth": "ಮಂದಿರ ಮತ್ತು ತೀರ್ಥ",
+      "mediaGallery": "ಮೀಡಿಯಾ ಮತ್ತು ಗ್ಯಾಲರಿ",
+      "digitalServices": "ಡಿಜಿಟಲ್ ಸೇವೆಗಳು",
+      "getInvolved": "ಸೇರಿರಿ",
+      "contact": "ಸಂಪರ್ಕ"
+    }
+  },
+  "footer": {
+    "ctaEyebrow": "ಇಂದು ಒಂದು ಸತ್ಕಾರ್ಯಕ್ಕೆ ಕೈಜೋಡಿಸಿ",
+    "ctaTitle": "ಸೇವೆ ಮತ್ತು ಆಧ್ಯಾತ್ಮಿಕ ಬೆಳವಣಿಗೆಯ ಭಾಗವಾಗಿರಿ",
+    "becomeVolunteer": "ಸ್ವಯಂಸೇವಕರಾಗಿ",
+    "makeDonation": "ದಾನ ಮಾಡಿ",
+    "quickLinks": "ತ್ವರಿತ ಕೊಂಡಿಗಳು",
+    "followUs": "ನಮ್ಮನ್ನು ಅನುಸರಿಸಿ",
+    "openLocation": "ಸ್ಥಳ ತೆರೆಯಿರಿ",
+    "backToTop": "ಮೇಲೆ ಹೋಗಿ"
+  },
+  "home": {
+    "heroTitle": "ಶ್ರೀ ಭಗವತ್ ಹೆರಿಟೇಜ್‌ಗೆ ಸ್ವಾಗತ",
+    "languagePrompt": "ನಿಮ್ಮ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ",
+    "readMore": "ಇನ್ನಷ್ಟು ಓದಿ",
+    "founderEyebrow": "ಸ್ಥಾಪಕರ ಸಂದೇಶ",
+    "viewFounderProfile": "ಸ್ಥಾಪಕರ ವಿವರ ನೋಡಿ",
+    "sevaHighlightsTitle": "ಸೇವೆ ವಿಶೇಷತೆಗಳು",
+    "learnMore": "ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ",
+    "upcomingEventsTitle": "ಬರುವ ಕಾರ್ಯಕ್ರಮಗಳು",
+    "openEvent": "ಕಾರ್ಯಕ್ರಮ ತೆರೆಯಿರಿ",
+    "galleryTitle": "ಗ್ಯಾಲರಿ ಮುನ್ನೋಟ",
+    "volunteerTitle": "ಸ್ವಯಂಸೇವಕರಾಗಿ",
+    "joinUs": "ನಮ್ಮೊಂದಿಗೆ ಸೇರಿ",
+    "donationTitle": "ದಾನ ಮಾಡಿ",
+    "donateNow": "ಈಗ ದಾನ ಮಾಡಿ"
+  },
+  "about": {
+    "heroBadge": "ಭಗವತ್ ಹೆರಿಟೇಜ್ ಸರ್ವಿಸ್ ಫೌಂಡೇಶನ್ ಟ್ರಸ್ಟ್",
+    "heroTitle": "ಭಗವತ್ ಹೆರಿಟೇಜ್ ಸರ್ವಿಸ್ ಫೌಂಡೇಶನ್ ಟ್ರಸ್ಟ್",
+    "heroSubtitle": "ಸೇವೆ • ಸಂಸ್ಕೃತಿ • ಸಂಸ್ಕಾರ",
+    "introTitle": "ಸಂಸ್ಥೆ ಪರಿಚಯ",
+    "readDetail": "ವಿವರವಾಗಿ ಓದಿ",
+    "missionTitle": "ನಮ್ಮ ಧ್ಯೇಯ",
+    "explore": "ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ",
+    "sevaTitle": "ಸೇವೆ ಕಾರ್ಯಕ್ರಮಗಳು",
+    "growthTitle": "ವಿಕಾಸ ಪಯಣ",
+    "leadershipTitle": "ನಮ್ಮ ನಾಯಕತ್ವ",
+    "learnMore": "ಇನ್ನಷ್ಟು ತಿಳಿಯಿರಿ",
+    "ctaTitle": "ಸೇವೆಯಿಂದ ಸಮಾಜ, ಸಂಸ್ಕಾರದಿಂದ ರಾಷ್ಟ್ರ",
+    "volunteerBtn": "ಸ್ವಯಂಸೇವಕರಾಗಿ",
+    "donateBtn": "ಈಗ ದಾನ ಮಾಡಿ"
+  }
+}

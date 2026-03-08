@@ -4,10 +4,11 @@ import { useApi } from "../../hooks/useApi";
 import { mediaApi } from "../../services/api/media";
 import { volunteersApi } from "../../services/api/volunteers";
 import { booksApi } from "../../services/api/books";
+import { kundliRequestsApi } from "../../services/api/kundli";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
-import type { Media, Volunteer, Book } from "../../types";
+import type { Media, Volunteer, Book, KundliRequest } from "../../types";
 
-type Tab = "media" | "volunteers" | "books";
+type Tab = "media" | "volunteers" | "books" | "kundli";
 
 export default memo(function AdminDashboardPage() {
   const { user } = useAuth();
@@ -17,6 +18,8 @@ export default memo(function AdminDashboardPage() {
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [msg, setMsg] = useState("");
+  const [kundliMsg, setKundliMsg] = useState("");
+  const [kundliUploadingId, setKundliUploadingId] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
   const { data: mediaData, loading: mediaLoading, refetch: refetchMedia } = useApi(
@@ -28,6 +31,9 @@ export default memo(function AdminDashboardPage() {
   );
   const { data: books, loading: booksLoading, refetch: refetchBooks } = useApi(
     () => booksApi.getAll()
+  );
+  const { data: kundliRequests, loading: kundliLoading, refetch: refetchKundli } = useApi(
+    () => kundliRequestsApi.getAll()
   );
 
   const handleUpload = useCallback(
@@ -76,6 +82,109 @@ export default memo(function AdminDashboardPage() {
     [refetchBooks]
   );
 
+  const handleKundliStatus = useCallback(
+    async (id: string, orderStatus: KundliRequest["orderStatus"]) => {
+      await kundliRequestsApi.updateStatus(id, { orderStatus });
+      setKundliMsg(`Order marked as ${orderStatus}.`);
+      refetchKundli();
+    },
+    [refetchKundli]
+  );
+
+  const handleKundliReportUpload = useCallback(
+    async (id: string, file: File) => {
+      setKundliUploadingId(id);
+      setKundliMsg("");
+      const fd = new FormData();
+      fd.append("reportPdf", file);
+
+      try {
+        await kundliRequestsApi.uploadReport(id, fd);
+        setKundliMsg("Kundli report uploaded successfully.");
+        refetchKundli();
+      } catch {
+        setKundliMsg("Failed to upload Kundli report.");
+      } finally {
+        setKundliUploadingId("");
+      }
+    },
+    [refetchKundli]
+  );
+
+  const handleExportKundliCsv = useCallback(() => {
+    if (!kundliRequests || kundliRequests.length === 0) return;
+
+    const headers = [
+      "Request ID",
+      "Invoice Number",
+      "Name",
+      "Gender",
+      "Order Date",
+      "Email",
+      "Mobile Number",
+      "Date of Birth",
+      "Time of Birth",
+      "Place of Birth",
+      "District",
+      "State",
+      "Country",
+      "Selected Services",
+      "Preferred Language",
+      "Address",
+      "Total Amount",
+      "Payment Method",
+      "Payment Status",
+      "Payment Reference",
+      "Order Status",
+      "Estimated Delivery",
+      "Report URL",
+      "Created At",
+    ];
+
+    const rows = kundliRequests.map((request) => [
+      request.orderId,
+      request.invoiceNumber,
+      request.fullName,
+      request.gender,
+      request.orderDate,
+      request.email,
+      request.mobileNumber,
+      request.dateOfBirth,
+      request.timeOfBirth,
+      request.placeOfBirth,
+      request.district,
+      request.state,
+      request.country,
+      request.selectedServices.map((service) => `${service.title} (${service.pages}p / INR ${service.price})`).join(" | "),
+      request.preferredLanguage,
+      request.address ?? "",
+      request.totalAmount,
+      request.paymentMethod,
+      request.paymentStatus,
+      request.paymentReference,
+      request.orderStatus,
+      request.estimatedDeliveryTime,
+      request.reportFileUrl ?? "",
+      request.createdAt,
+    ]);
+
+    const csv = [headers, ...rows]
+      .map((row) =>
+        row
+          .map((cell) => `"${String(cell).replace(/"/g, '""')}"`)
+          .join(",")
+      )
+      .join("\n");
+
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "kundli-requests.csv";
+    link.click();
+    URL.revokeObjectURL(url);
+  }, [kundliRequests]);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="bg-[#0d3b66] text-white px-6 py-4 flex items-center justify-between">
@@ -85,7 +194,7 @@ export default memo(function AdminDashboardPage() {
 
       <div className="max-w-7xl mx-auto px-4 py-6">
         <div className="flex gap-2 mb-6 flex-wrap">
-          {(["media", "volunteers", "books"] as Tab[]).map((t) => (
+          {(["media", "volunteers", "kundli", "books"] as Tab[]).map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
@@ -193,6 +302,103 @@ export default memo(function AdminDashboardPage() {
                     ))}
                   </tbody>
                 </table>
+              </div>
+            )}
+          </div>
+        )}
+
+        {tab === "kundli" && (
+          <div>
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h2 className="text-xl font-bold text-[#0d3b66]">Kundli Orders</h2>
+                <p className="text-sm text-gray-500">Review order details, payment confirmation, export records, update status, and upload completed PDFs.</p>
+              </div>
+              <button onClick={handleExportKundliCsv} className="btn-primary">
+                Export Requests CSV
+              </button>
+            </div>
+
+            {kundliMsg && <p className="mb-3 text-sm font-semibold text-green-600">{kundliMsg}</p>}
+
+            {kundliLoading ? <LoadingSpinner size="lg" /> : (
+              <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+                {(kundliRequests ?? []).map((request: KundliRequest) => (
+                  <article key={request._id} className="rounded-2xl bg-white p-5 shadow-md">
+                    <div className="flex flex-wrap items-start justify-between gap-3">
+                      <div>
+                        <p className="text-xs uppercase tracking-wide text-[#7a5634]">{request.orderId}</p>
+                        <h3 className="mt-1 text-xl font-black text-[#0d3b66]">{request.fullName}</h3>
+                        <p className="text-sm text-gray-500">{request.email} | {request.mobileNumber}</p>
+                      </div>
+                      <span className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                        request.orderStatus === "Completed"
+                          ? "bg-green-100 text-green-700"
+                          : request.orderStatus === "Processing"
+                            ? "bg-blue-100 text-blue-700"
+                            : "bg-yellow-100 text-yellow-700"
+                      }`}>
+                        {request.orderStatus}
+                      </span>
+                    </div>
+
+                    <div className="mt-4 grid gap-3 text-sm text-gray-700 md:grid-cols-2">
+                      <p><span className="font-semibold text-[#0d3b66]">Invoice:</span> {request.invoiceNumber}</p>
+                      <p><span className="font-semibold text-[#0d3b66]">Payment:</span> {request.paymentMethod} / {request.paymentStatus}</p>
+                      <p><span className="font-semibold text-[#0d3b66]">DOB:</span> {request.dateOfBirth}</p>
+                      <p><span className="font-semibold text-[#0d3b66]">Birth Time:</span> {request.timeOfBirth}</p>
+                      <p><span className="font-semibold text-[#0d3b66]">Birth Place:</span> {request.placeOfBirth}</p>
+                      <p><span className="font-semibold text-[#0d3b66]">District / State:</span> {request.district}, {request.state}</p>
+                      <p><span className="font-semibold text-[#0d3b66]">Country:</span> {request.country}</p>
+                      <p><span className="font-semibold text-[#0d3b66]">Language:</span> {request.preferredLanguage}</p>
+                      <p><span className="font-semibold text-[#0d3b66]">Amount:</span> INR {request.totalAmount.toLocaleString()}</p>
+                      <p><span className="font-semibold text-[#0d3b66]">Payment Ref:</span> {request.paymentReference}</p>
+                      <p className="md:col-span-2"><span className="font-semibold text-[#0d3b66]">Estimated Delivery:</span> {request.estimatedDeliveryTime}</p>
+                      <p className="md:col-span-2"><span className="font-semibold text-[#0d3b66]">Selected Services:</span> {request.selectedServices.map((service) => `${service.title} (${service.pages}p / INR ${service.price})`).join(", ")}</p>
+                      {request.address ? (
+                        <p className="md:col-span-2"><span className="font-semibold text-[#0d3b66]">Address:</span> {request.address}</p>
+                      ) : null}
+                    </div>
+
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {request.reportFileUrl ? (
+                        <a href={request.reportFileUrl} target="_blank" rel="noreferrer" className="rounded-lg border px-3 py-2 text-sm font-semibold text-[#0d3b66]">
+                          View PDF Report
+                        </a>
+                      ) : null}
+                    </div>
+
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      <button onClick={() => handleKundliStatus(request._id, "Pending")} className="rounded-lg bg-yellow-500 px-3 py-2 text-xs font-semibold text-white">
+                        Pending
+                      </button>
+                      <button onClick={() => handleKundliStatus(request._id, "Processing")} className="rounded-lg bg-blue-600 px-3 py-2 text-xs font-semibold text-white">
+                        Processing
+                      </button>
+                      <button onClick={() => handleKundliStatus(request._id, "Completed")} className="rounded-lg bg-green-600 px-3 py-2 text-xs font-semibold text-white">
+                        Completed
+                      </button>
+                    </div>
+
+                    <div className="mt-4 rounded-xl border border-dashed border-[#d8e4f2] bg-[#f8fbff] p-4">
+                      <label className="block text-sm font-semibold text-[#0d3b66]">
+                        Upload Completed Kundli PDF
+                        <input
+                          type="file"
+                          accept="application/pdf"
+                          className="mt-2 block w-full text-sm"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) handleKundliReportUpload(request._id, file);
+                          }}
+                        />
+                      </label>
+                      {kundliUploadingId === request._id ? (
+                        <p className="mt-2 text-xs text-gray-500">Uploading report...</p>
+                      ) : null}
+                    </div>
+                  </article>
+                ))}
               </div>
             )}
           </div>

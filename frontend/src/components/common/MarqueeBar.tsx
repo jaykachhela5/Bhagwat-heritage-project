@@ -1,15 +1,15 @@
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 
 export const MarqueeBar = memo(function MarqueeBar() {
+  const { t } = useTranslation();
+  const message = t("marquee.message");
+
   return (
     <div className="bg-gradient-to-r from-[#0f6c8d] via-[#1fa3b8] to-[#f4a825] text-white py-2 overflow-hidden">
       <div className="marquee-wrapper">
         <p className="animate-marquee whitespace-nowrap font-bold text-sm tracking-wide inline-block">
-          🌼 BHAGWAT HERITAGE SERVICE FOUNDATION TRUST 🌼 &nbsp;|&nbsp; 📧
-          info@bhagwatheritage.org &nbsp;|&nbsp; 📞 +91 9876543210 &nbsp;|&nbsp; 🙏 Preserving
-          Faith • Culture • Humanity 🙏 &nbsp;&nbsp;&nbsp;&nbsp; 🌼 BHAGWAT HERITAGE SERVICE
-          FOUNDATION TRUST 🌼 &nbsp;|&nbsp; 📧 info@bhagwatheritage.org &nbsp;|&nbsp; 📞 +91
-          9876543210 &nbsp;|&nbsp; 🙏 Preserving Faith • Culture • Humanity 🙏
+          {message} &nbsp;&nbsp;&nbsp;&nbsp; {message}
         </p>
       </div>
       <style>{`

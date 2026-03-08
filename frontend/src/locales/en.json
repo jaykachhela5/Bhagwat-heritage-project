@@ -1,0 +1,562 @@
+{
+  "brand": {
+    "title": "Bhagwat Heritage",
+    "subtitle": "Service Foundation Trust",
+    "logoAlt": "Bhagwat Heritage logo"
+  },
+  "languages": {
+    "en": "English",
+    "hi": "Hindi",
+    "mr": "Marathi",
+    "gu": "Gujarati",
+    "bn": "Bengali",
+    "ta": "Tamil",
+    "te": "Telugu",
+    "kn": "Kannada",
+    "pa": "Punjabi",
+    "sa": "Sanskrit"
+  },
+  "switcher": {
+    "label": "Language",
+    "ariaLabel": "Select language"
+  },
+  "marquee": {
+    "message": "Bhagwat Heritage Service Foundation Trust | info@bhagwatheritage.org | +91 9876543210 | Preserving Faith • Culture • Humanity"
+  },
+  "navbar": {
+    "toggleMenu": "Toggle menu",
+    "myPanel": "My Panel",
+    "logout": "Logout",
+    "donate": "Donate",
+    "items": {
+      "home": "Home",
+      "about": "About",
+      "aboutOverview": "Overview",
+      "trustObjectives": "Trust Objectives",
+      "founder": "Founder - Manish Bhaiji",
+      "awards": "Awards & Recognition",
+      "structure": "Organizational Structure",
+      "activities": "Trust Activities",
+      "mission": "Mission",
+      "spiritualMission": "Spiritual Mission",
+      "socialMission": "Social Service Mission",
+      "culturalRenaissance": "Cultural Renaissance",
+      "globalOutreach": "Global Outreach Vision",
+      "seva": "Seva",
+      "gauSeva": "Gau Seva",
+      "annJalSeva": "Ann/Jal Seva",
+      "medicineDistribution": "Medicine Distribution",
+      "educationSupport": "Education Support",
+      "scholarshipProgram": "Scholarship Program",
+      "kanyadaanSeva": "Kanyadaan Seva",
+      "vyasanmukti": "Vyasanmukti Abhiyan",
+      "disasterRelief": "Disaster Relief",
+      "events": "Events",
+      "bhagwatKatha": "Bhagwat Katha Mahotsav",
+      "spiritualEvents": "Spiritual Events",
+      "festivals": "Festivals & Celebrations",
+      "guruPurnima": "Guru Purnima",
+      "annakut": "Annakut Mahotsav",
+      "youthPrograms": "Youth Programs",
+      "knowledge": "Knowledge",
+      "pathshala": "E-Pathshala",
+      "library": "E-Library",
+      "studyResources": "Bhagwat Study",
+      "childrenLearning": "Children Learning",
+      "dailyQuotes": "Daily Quotes",
+      "mandirTeerth": "Mandir & Teerth",
+      "bhagwatDham": "Bhagwat Dham Project",
+      "mahamandir": "Mahamandir Architecture",
+      "avatars": "24 Avatars Installation",
+      "hanuman": "Hanuman Murti Concept",
+      "construction": "Construction Updates",
+      "pilgrimage": "Pilgrimage Info",
+      "mediaGallery": "Media & Gallery",
+      "photoGallery": "Photo Gallery",
+      "videoGallery": "Video Gallery",
+      "eventHighlights": "Event Highlights",
+      "publications": "Publications",
+      "socialFeed": "Social Feed",
+      "digitalServices": "Digital Services",
+      "estore": "E-Store",
+      "donationSystem": "Donation System",
+      "onlineSatsang": "Online Satsang",
+      "membershipPortal": "Membership Portal",
+      "kundli": "Kundli",
+      "getInvolved": "Get Involved",
+      "involvedOverview": "Overview",
+      "volunteerRegistration": "Volunteer Registration",
+      "becomeDonor": "Become a Donor",
+      "partner": "Partner With Us",
+      "sponsorPrograms": "Sponsor Programs",
+      "contact": "Contact"
+    }
+  },
+  "footer": {
+    "ctaEyebrow": "Support a noble cause today",
+    "ctaTitle": "Be Part of Seva and Spiritual Growth",
+    "becomeVolunteer": "Become Volunteer",
+    "makeDonation": "Make Donation",
+    "aboutTitle": "Bhagwat Heritage",
+    "aboutText": "Serving faith, culture and humanity through devotion, seva and spiritual programs.",
+    "templeTiming": "Temple Timing:",
+    "morning": "Morning 09:00 AM - 12:00 PM",
+    "evening": "Evening 04:00 PM - 09:00 PM",
+    "contactInfo": "Contact Info",
+    "address": "Swaminarayan Temple, Kasturba Road, Chandrapur, Maharashtra",
+    "quickLinks": "Quick Links",
+    "followUs": "Follow Us",
+    "openLocation": "Open Location",
+    "backToTop": "Back to Top",
+    "copyright": "Copyright {{year}} Bhagwat Heritage Service Foundation Trust. All Rights Reserved.",
+    "links": {
+      "about": "About",
+      "mission": "Mission & Philosophy",
+      "seva": "Seva",
+      "events": "Events & Katha",
+      "knowledge": "Knowledge & Learning",
+      "mandir": "Mandir & Teerth",
+      "media": "Media & Gallery",
+      "digital": "Digital Services",
+      "getInvolved": "Get Involved",
+      "contact": "Contact"
+    }
+  },
+  "home": {
+    "meta": {
+      "title": "Home",
+      "description": "Bhagwat Heritage Service Foundation Trust - faith, culture, and seva."
+    },
+    "heroTitle": "Welcome to Shri Bhagwat Heritage",
+    "languagePrompt": "Choose your language",
+    "aboutEyebrow": "About Snapshot",
+    "aboutTitle": "Bhagwat Heritage Service Foundation Trust",
+    "aboutText": "Dedicated to spiritual enlightenment, social service, and preservation of Indian cultural values through katha, satsang, seva, education, and healthcare initiatives.",
+    "readMore": "Read More",
+    "founderEyebrow": "Founder Message",
+    "founderTitle": "Sant Shri Manish Bhaiji Maharaj",
+    "founderQuote": "Our mission is to unite bhakti with seva. When devotion transforms into compassionate action, society receives strength, culture receives continuity, and humanity receives hope.",
+    "viewFounderProfile": "View Founder Profile",
+    "sevaHighlightsTitle": "Seva Highlights",
+    "learnMore": "Learn More",
+    "sevaHighlights": [
+      {
+        "title": "Gau Seva",
+        "desc": "Cow care, shelter support, and sattvik seva initiatives."
+      },
+      {
+        "title": "Ann / Jal Seva",
+        "desc": "Food and water distribution for devotees and communities."
+      },
+      {
+        "title": "Education & Medicine",
+        "desc": "Student and healthcare support through trust-led programs."
+      }
+    ],
+    "upcomingEventsTitle": "Upcoming Events",
+    "openEvent": "Open Event",
+    "upcomingEvents": [
+      {
+        "title": "Bhagwat Katha Mahotsav",
+        "desc": "Multi-day katha and satsang program."
+      },
+      {
+        "title": "Guru Purnima Sabha",
+        "desc": "Special guru bhakti and satsang celebrations."
+      },
+      {
+        "title": "Annakut Mahotsav",
+        "desc": "Devotional offerings and community participation."
+      }
+    ],
+    "impact": {
+      "livesTouched": "Lives Touched",
+      "eventsConducted": "Events Conducted",
+      "volunteers": "Volunteers",
+      "yearsOfService": "Years of Service"
+    },
+    "galleryTitle": "Gallery Preview",
+    "galleryAlts": {
+      "education": "Education seva",
+      "medical": "Medical seva",
+      "jal": "Jal seva",
+      "kanyadaan": "Kanyadaan seva",
+      "vyasanmukti": "Vyasanmukti mission",
+      "katha": "Bhagwat katha"
+    },
+    "volunteerTitle": "Become a Volunteer",
+    "volunteerText": "Join us in serving the community with compassion and commitment.",
+    "joinUs": "Join Us",
+    "donationTitle": "Make a Donation",
+    "donationText": "Support our charitable activities and help us reach more families.",
+    "donateNow": "Donate Now"
+  },
+  "about": {
+    "meta": {
+      "title": "About",
+      "description": "About Bhagwat Heritage Service Foundation Trust."
+    },
+    "heroBadge": "Bhagwat Heritage Service Foundation Trust",
+    "heroTitle": "Bhagwat Heritage Service Foundation Trust",
+    "heroSubtitle": "Seva • Sanskriti • Sanskar",
+    "highlights": [
+      {
+        "label": "Lives Served Annually",
+        "value": "50,000+"
+      },
+      {
+        "label": "Active Seva Programs",
+        "value": "25+"
+      },
+      {
+        "label": "Dedicated Volunteers",
+        "value": "1,200+"
+      },
+      {
+        "label": "Years of Service",
+        "value": "40+"
+      }
+    ],
+    "introTitle": "Sanstha Parichay",
+    "introText": "Bhagwat Heritage Service Foundation Trust is a spiritual and social movement dedicated to values, service, and cultural preservation. Through satsang, katha, education support, healthcare initiatives, and community outreach, the trust works for meaningful transformation in society.",
+    "readDetail": "Read in Detail",
+    "missionTitle": "Our Mission",
+    "missionCards": [
+      {
+        "title": "Bhakti",
+        "desc": "Religious programs, Bhagwat katha, and spiritual upliftment."
+      },
+      {
+        "title": "Seva",
+        "desc": "Selfless service, social support, and community welfare activities."
+      },
+      {
+        "title": "Sanskriti",
+        "desc": "Preservation and promotion of Indian culture and values."
+      }
+    ],
+    "explore": "Explore",
+    "sevaTitle": "Seva Programs",
+    "sevaLabels": [
+      "Ann Seva",
+      "Vastra Daan",
+      "Shiksha Seva",
+      "Chikitsa Seva",
+      "Vyasan Mukti",
+      "Kanyadaan"
+    ],
+    "growthTitle": "Growth Journey",
+    "milestones": [
+      {
+        "year": "1990",
+        "title": "Spiritual Journey Began",
+        "desc": "The trust started with satsang, guidance, and values-driven service."
+      },
+      {
+        "year": "2005",
+        "title": "Community Seva Expanded",
+        "desc": "Education, healthcare, and social welfare initiatives scaled across communities."
+      },
+      {
+        "year": "2016",
+        "title": "Youth & Culture Programs",
+        "desc": "Focused initiatives launched for youth direction and cultural continuity."
+      },
+      {
+        "year": "Today",
+        "title": "Continuing Impact",
+        "desc": "Bhakti, seva, and sanskriti remain the foundation of our growth and outreach."
+      }
+    ],
+    "leadershipTitle": "Our Leadership",
+    "leadershipRoles": [
+      "Spiritual Guide",
+      "Administration",
+      "Community Service"
+    ],
+    "learnMore": "Learn More",
+    "ctaTitle": "Seva Se Samaj, Sanskar Se Rashtra",
+    "ctaDesc": "Become part of this divine journey. Your support helps us deliver service, education, and cultural awakening to more families every year.",
+    "volunteerBtn": "Join as Volunteer",
+    "donateBtn": "Donate Now"
+  },
+  "missionPages": {
+    "common": {
+      "badge": "Bhagwat Heritage Service Foundation Trust",
+      "becomeVolunteer": "Become Volunteer",
+      "explore": "Explore",
+      "updatedOn": "Updated on {{date}} at {{time}}."
+    },
+    "spiritual": {
+      "title": "Spiritual Mission",
+      "subtitle": "Bhakti . Satsang . Scriptural Guidance",
+      "donate": "Donate for Mission",
+      "stats": [
+        { "label": "Katha Programs", "value": "250+" },
+        { "label": "Satsang Reach", "value": "50,000+" },
+        { "label": "Digital Viewers", "value": "24/7" },
+        { "label": "Volunteer Support", "value": "1,200+" }
+      ],
+      "liveFeature": "Live Feature",
+      "monitorTitle": "Satsang Rhythm Monitor",
+      "schedule": [
+        {
+          "title": "Mangala Smaran",
+          "window": "5:00 AM - 7:00 AM",
+          "detail": "Early morning prayer, mantra remembrance, and scriptural reflection."
+        },
+        {
+          "title": "Daytime Satsang Guidance",
+          "window": "11:00 AM - 1:00 PM",
+          "detail": "Pravachan, value-based guidance, and spiritual learning support."
+        },
+        {
+          "title": "Sandhya Bhakti Window",
+          "window": "6:00 PM - 8:00 PM",
+          "detail": "Bhajan, katha, collective prayer, and family satsang alignment."
+        }
+      ],
+      "status": {
+        "liveNow": "Live Now",
+        "nextSession": "Next Session",
+        "scheduled": "Scheduled"
+      },
+      "todayFocus": "Today's Focus",
+      "dailyDirection": "Daily Spiritual Direction",
+      "upgrade": "Mission Upgrade",
+      "deliveryLayers": "Spiritual Delivery Layers",
+      "deliveryItems": [
+        "On-ground katha and satsang guidance",
+        "Daily digital satsang follow-up and replay",
+        "Youth and family spiritual practice pathways"
+      ],
+      "aboutTitle": "About the Spiritual Mission",
+      "aboutText1": "The spiritual mission of Bhagwat Heritage is to connect people with divine wisdom through katha, satsang, prayer, study, and practical dharmic living.",
+      "aboutText2": "This mission also nurtures seva-minded devotion, youth guidance, digital access, and cultural continuity across generations.",
+      "pillars": [
+        {
+          "title": "Bhagwat Katha",
+          "desc": "Structured katha programs that spread devotion, scriptural wisdom, and spiritual reflection."
+        },
+        {
+          "title": "Satsang and Pravachan",
+          "desc": "Regular satsang gatherings that guide families through dharma, discipline, and devotion."
+        },
+        {
+          "title": "Dhyan and Sadhana",
+          "desc": "Meditation, chanting, and inner practice pathways for peace, focus, and spiritual steadiness."
+        },
+        {
+          "title": "Sanskar Formation",
+          "desc": "Value-based learning for children and youth through spiritual exposure and cultural grounding."
+        }
+      ],
+      "dailyFocuses": [
+        "Shravan and attentive listening to katha",
+        "Japa, naam-smaran, and inner steadiness",
+        "Seva through humility and gratitude",
+        "Satsang participation with family discipline",
+        "Scriptural study and reflection",
+        "Bhajan, devotion, and emotional purity",
+        "Silence, self-review, and spiritual reset"
+      ]
+    },
+    "social": {
+      "title": "Social Service Mission",
+      "subtitle": "Compassion in Action . Service with Dignity . Community Impact",
+      "donate": "Donate for Seva",
+      "stats": [
+        { "label": "Families Supported", "value": "50,000+" },
+        { "label": "Meals Distributed", "value": "1,00,000+" },
+        { "label": "Water Support", "value": "850+" },
+        { "label": "Medical Cases", "value": "12,000+" }
+      ],
+      "liveFeature": "Live Feature",
+      "boardTitle": "Seva Operations Board",
+      "snapshot": "Realtime Snapshot",
+      "missionStatus": "Mission Status",
+      "actionLayers": "Action Layers",
+      "actionItems": [
+        "Immediate field support through volunteers and local coordinators",
+        "Sponsor-linked assistance for recurring family needs",
+        "Trust review for medium-term education and health support"
+      ],
+      "aboutTitle": "About the Social Mission",
+      "aboutText1": "The social service mission expresses dharma through practical care. It focuses on food, water, health, education, and dignity-centered service.",
+      "aboutText2": "This mission responds with compassion and discipline while allowing donors, volunteers, and communities to join visible trust-led impact.",
+      "filterTitle": "Mission Filter",
+      "categories": {
+        "all": "All Activities",
+        "food": "Food",
+        "water": "Water",
+        "health": "Health",
+        "education": "Education",
+        "essentials": "Essentials"
+      },
+      "activities": [
+        {
+          "title": "Annadan Seva",
+          "desc": "Daily meal support for children, elderly devotees, and families facing hardship.",
+          "frequency": "Daily",
+          "beneficiaries": "600+ meals / day"
+        },
+        {
+          "title": "Jal Seva",
+          "desc": "Water camps and hydration support in summer-prone and high-need regions.",
+          "frequency": "Seasonal Daily",
+          "beneficiaries": "3,500+ people / week"
+        },
+        {
+          "title": "Chikitsa Support",
+          "desc": "Health camps, medicine assistance, and recurring care support for the vulnerable.",
+          "frequency": "Weekly",
+          "beneficiaries": "400+ patients / camp"
+        },
+        {
+          "title": "Education Assistance",
+          "desc": "Books, kits, and support programs for children and students in need.",
+          "frequency": "Monthly",
+          "beneficiaries": "1,000+ students / year"
+        },
+        {
+          "title": "Vastra and Essentials Seva",
+          "desc": "Seasonal clothes, essentials, and support drives for low-income households.",
+          "frequency": "Seasonal",
+          "beneficiaries": "4,500+ families / year"
+        }
+      ],
+      "operations": [
+        {
+          "title": "Food Seva Line",
+          "activeHours": "7:00 AM - 2:00 PM",
+          "detail": "Meal coordination, packing, and distribution support."
+        },
+        {
+          "title": "Water Support Network",
+          "activeHours": "10:00 AM - 6:00 PM",
+          "detail": "Heat-response hydration camps and water access support."
+        },
+        {
+          "title": "Medical Follow-up Desk",
+          "activeHours": "11:00 AM - 5:00 PM",
+          "detail": "Recurring medicine support and camp follow-up review."
+        },
+        {
+          "title": "Emergency Response Window",
+          "activeHours": "Always on alert",
+          "detail": "Volunteer escalation path for urgent family support needs."
+        }
+      ],
+      "operationStatus": {
+        "operational": "Operational",
+        "queued": "Queued",
+        "fieldActive": "Field Active",
+        "reviewPlanning": "Review and Planning",
+        "standby": "Standby and Escalation"
+      },
+      "buttons": {
+        "donate": "Donate",
+        "join": "Join"
+      },
+      "frequencyPrefix": "Frequency",
+      "beneficiariesPrefix": "Beneficiaries",
+      "planningCards": [
+        {
+          "title": "Needs Mapping",
+          "desc": "Identify families, regions, and categories where support demand is rising."
+        },
+        {
+          "title": "Resource Routing",
+          "desc": "Align donors, volunteers, and supplies with the right seva channel quickly."
+        },
+        {
+          "title": "Impact Review",
+          "desc": "Track where recurring support is needed beyond one-time relief."
+        }
+      ]
+    },
+    "cultural": {
+      "title": "Cultural Renaissance",
+      "subtitle": "Preserving Tradition . Celebrating Heritage . Building Values",
+      "donate": "Donate for Culture",
+      "stats": [
+        { "label": "Festivals Hosted", "value": "120+" },
+        { "label": "Youth Trained", "value": "3,500+" },
+        { "label": "Cultural Workshops", "value": "260+" },
+        { "label": "Pilgrimage Groups", "value": "90+" }
+      ],
+      "liveFeature": "Live Feature",
+      "calendarPulse": "Cultural Calendar Pulse",
+      "seasonalMission": "Seasonal Mission",
+      "missionDirection": "Mission Direction",
+      "directionItems": [
+        "Keep festivals spiritually meaningful, not only ceremonial",
+        "Connect youth with living heritage and devotional identity",
+        "Preserve art, bhajan, rituals, and pilgrimage continuity"
+      ],
+      "aboutTitle": "About Cultural Renaissance",
+      "aboutText1": "Cultural renaissance protects and renews Sanatan values through festivals, youth formation, devotional arts, and value-based public participation.",
+      "aboutText2": "It preserves heritage while making it living, active, and meaningful for modern families, children, and communities.",
+      "programs": [
+        {
+          "title": "Festival Preservation",
+          "desc": "Organizing spiritual festivals and keeping them rooted in devotion, discipline, and meaning."
+        },
+        {
+          "title": "Sanskar Camps",
+          "desc": "Training children and youth through value-based camps, devotional learning, and cultural exposure."
+        },
+        {
+          "title": "Art and Heritage",
+          "desc": "Preserving sacred music, devotional expression, and artistic traditions linked to Sanatan culture."
+        },
+        {
+          "title": "Pilgrimage and Yatra",
+          "desc": "Connecting devotees with sacred spaces, heritage journeys, and spiritually meaningful travel."
+        }
+      ],
+      "calendar": [
+        "Weekly bhajan and devotional music session",
+        "Monthly youth sanskar training circle",
+        "Festival seva and decoration coordination",
+        "Temple heritage and pilgrimage planning"
+      ],
+      "calendarStatus": {
+        "current": "Current Focus",
+        "upcoming": "Upcoming"
+      },
+      "seasons": [
+        {
+          "title": "Devotional Winter Cycle",
+          "desc": "Focused on study gatherings, satsang discipline, and value-based family participation."
+        },
+        {
+          "title": "Festival Preparation Cycle",
+          "desc": "Preparation for camps, cultural gatherings, youth training, and devotional celebrations."
+        },
+        {
+          "title": "Yatra and Community Cycle",
+          "desc": "Spiritual travel, group events, local celebration planning, and outreach movement."
+        },
+        {
+          "title": "Mahotsav and Heritage Cycle",
+          "desc": "Large festivals, public participation, artistic expression, and heritage visibility."
+        }
+      ],
+      "focusCards": [
+        {
+          "title": "Festival Continuity",
+          "desc": "Ensure annual observances stay disciplined, devotional, and community-connected."
+        },
+        {
+          "title": "Youth Identity Formation",
+          "desc": "Make cultural learning experiential through camps, arts, and participation models."
+        },
+        {
+          "title": "Heritage Visibility",
+          "desc": "Present Sanatan values through events, storytelling, music, and public celebration."
+        }
+      ]
+    }
+  }
+}

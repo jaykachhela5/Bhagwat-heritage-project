@@ -1,209 +1,305 @@
-import { useState, memo } from "react";
+import { memo, useState } from "react";
+import type { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../app/providers/AuthProvider";
+import { ROUTES } from "../../app/routes/routes";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
-interface NavItem {
-  label: string;
-  href?: string;
-  children?: { label: string; href: string }[];
+interface NavChildConfig {
+  id: string;
+  labelKey: string;
+  href: string;
 }
 
-const NAV_ITEMS: NavItem[] = [
-  { label: "Home", href: "/" },
+interface NavItemConfig {
+  id: string;
+  labelKey: string;
+  href?: string;
+  children?: NavChildConfig[];
+}
+
+const NAV_ITEMS: NavItemConfig[] = [
+  { id: "home", labelKey: "navbar.items.home", href: ROUTES.home },
   {
-    label: "About",
+    id: "about",
+    labelKey: "navbar.items.about",
     children: [
-      { label: "About Us", href: "/about" },
-      { label: "Objectives", href: "/about/objectives" },
-      { label: "S.S. Manish Bhai Ji", href: "/about/manish-bhaiji" },
+      { id: "about-overview", labelKey: "navbar.items.aboutOverview", href: ROUTES.about.index },
+      { id: "about-objectives", labelKey: "navbar.items.trustObjectives", href: ROUTES.about.objectives },
+      { id: "about-founder", labelKey: "navbar.items.founder", href: ROUTES.about.founder },
+      { id: "about-awards", labelKey: "navbar.items.awards", href: ROUTES.about.awards },
+      { id: "about-structure", labelKey: "navbar.items.structure", href: ROUTES.about.structure },
+      { id: "about-activities", labelKey: "navbar.items.activities", href: ROUTES.about.activities },
     ],
   },
   {
-    label: "Our Mission",
+    id: "mission",
+    labelKey: "navbar.items.mission",
     children: [
-      { label: "Spiritual", href: "/mission/spiritual" },
-      { label: "Social Service", href: "/mission/social" },
-      { label: "Cultural", href: "/mission/cultural" },
+      { id: "mission-spiritual", labelKey: "navbar.items.spiritualMission", href: ROUTES.mission.spiritual },
+      { id: "mission-social", labelKey: "navbar.items.socialMission", href: ROUTES.mission.social },
+      { id: "mission-cultural", labelKey: "navbar.items.culturalRenaissance", href: ROUTES.mission.cultural },
+      { id: "mission-global", labelKey: "navbar.items.globalOutreach", href: ROUTES.mission.global },
     ],
   },
   {
-    label: "Seva",
+    id: "seva",
+    labelKey: "navbar.items.seva",
     children: [
-      { label: "Jal/Ann Seva", href: "/seva/jal-seva" },
-      { label: "Medicine & Education", href: "/seva/education" },
-      { label: "Kanyadaan", href: "/seva/kanya" },
-      { label: "Vyasanmukti", href: "/seva/vyasan" },
+      { id: "seva-gau", labelKey: "navbar.items.gauSeva", href: ROUTES.seva.gau },
+      { id: "seva-ann-jal", labelKey: "navbar.items.annJalSeva", href: ROUTES.seva.annJal },
+      { id: "seva-medicine", labelKey: "navbar.items.medicineDistribution", href: ROUTES.seva.medicine },
+      { id: "seva-education", labelKey: "navbar.items.educationSupport", href: ROUTES.seva.education },
+      { id: "seva-scholarship", labelKey: "navbar.items.scholarshipProgram", href: ROUTES.seva.scholarship },
+      { id: "seva-kanyadaan", labelKey: "navbar.items.kanyadaanSeva", href: ROUTES.seva.kanyadaan },
+      { id: "seva-vyasan", labelKey: "navbar.items.vyasanmukti", href: ROUTES.seva.vyasanmukti },
+      { id: "seva-disaster", labelKey: "navbar.items.disasterRelief", href: ROUTES.seva.disasterRelief },
     ],
   },
   {
-    label: "Events & Katha",
+    id: "events",
+    labelKey: "navbar.items.events",
     children: [
-      { label: "E-Pathshala", href: "/events/pathshala" },
-      { label: "E-Library", href: "/events/library" },
-      { label: "E-Store", href: "/store" },
+      { id: "events-bhagwat-katha", labelKey: "navbar.items.bhagwatKatha", href: ROUTES.eventsKatha.bhagwatKatha },
+      { id: "events-spiritual", labelKey: "navbar.items.spiritualEvents", href: ROUTES.eventsKatha.spiritualEvents },
+      { id: "events-festivals", labelKey: "navbar.items.festivals", href: ROUTES.eventsKatha.festivals },
+      { id: "events-guru-purnima", labelKey: "navbar.items.guruPurnima", href: ROUTES.eventsKatha.guruPurnima },
+      { id: "events-annakut", labelKey: "navbar.items.annakut", href: ROUTES.eventsKatha.annakut },
+      { id: "events-youth", labelKey: "navbar.items.youthPrograms", href: ROUTES.eventsKatha.youthPrograms },
     ],
   },
   {
-    label: "Mandir & Teerth",
+    id: "knowledge",
+    labelKey: "navbar.items.knowledge",
     children: [
-      { label: "63-Ft Hanuman", href: "/mandir" },
-      { label: "Mahamandir", href: "/mandir/ghanshyam" },
-      { label: "Gallery", href: "/mandir/gallery" },
+      { id: "knowledge-pathshala", labelKey: "navbar.items.pathshala", href: ROUTES.knowledge.pathshala },
+      { id: "knowledge-library", labelKey: "navbar.items.library", href: ROUTES.knowledge.library },
+      { id: "knowledge-study", labelKey: "navbar.items.studyResources", href: ROUTES.knowledge.studyResources },
+      { id: "knowledge-children", labelKey: "navbar.items.childrenLearning", href: ROUTES.knowledge.children },
+      { id: "knowledge-quotes", labelKey: "navbar.items.dailyQuotes", href: ROUTES.knowledge.dailyQuotes },
     ],
   },
   {
-    label: "Contact",
-    children: [{ label: "Get Involved", href: "/get-involved" }],
+    id: "mandir",
+    labelKey: "navbar.items.mandirTeerth",
+    children: [
+      { id: "mandir-bhagwat-dham", labelKey: "navbar.items.bhagwatDham", href: ROUTES.mandirTeerth.bhagwatDham },
+      { id: "mandir-mahamandir", labelKey: "navbar.items.mahamandir", href: ROUTES.mandirTeerth.mahamandir },
+      { id: "mandir-avatars", labelKey: "navbar.items.avatars", href: ROUTES.mandirTeerth.avatars },
+      { id: "mandir-hanuman", labelKey: "navbar.items.hanuman", href: ROUTES.mandirTeerth.hanuman },
+      { id: "mandir-construction", labelKey: "navbar.items.construction", href: ROUTES.mandirTeerth.construction },
+      { id: "mandir-pilgrimage", labelKey: "navbar.items.pilgrimage", href: ROUTES.mandirTeerth.pilgrimage },
+    ],
   },
+  {
+    id: "media",
+    labelKey: "navbar.items.mediaGallery",
+    children: [
+      { id: "media-photos", labelKey: "navbar.items.photoGallery", href: ROUTES.media.photos },
+      { id: "media-videos", labelKey: "navbar.items.videoGallery", href: ROUTES.media.videos },
+      { id: "media-highlights", labelKey: "navbar.items.eventHighlights", href: ROUTES.media.highlights },
+      { id: "media-publications", labelKey: "navbar.items.publications", href: ROUTES.media.publications },
+      { id: "media-social-feed", labelKey: "navbar.items.socialFeed", href: ROUTES.media.socialFeed },
+    ],
+  },
+  {
+    id: "digital",
+    labelKey: "navbar.items.digitalServices",
+    children: [
+      { id: "digital-store", labelKey: "navbar.items.estore", href: ROUTES.digital.store },
+      { id: "digital-donation", labelKey: "navbar.items.donationSystem", href: ROUTES.digital.donation },
+      { id: "digital-satsang", labelKey: "navbar.items.onlineSatsang", href: ROUTES.digital.satsang },
+      { id: "digital-membership", labelKey: "navbar.items.membershipPortal", href: ROUTES.digital.membership },
+      { id: "digital-kundli", labelKey: "navbar.items.kundli", href: ROUTES.digital.kundli },
+    ],
+  },
+  {
+    id: "involved",
+    labelKey: "navbar.items.getInvolved",
+    children: [
+      { id: "involved-overview", labelKey: "navbar.items.involvedOverview", href: ROUTES.involved.index },
+      { id: "involved-volunteer", labelKey: "navbar.items.volunteerRegistration", href: ROUTES.involved.volunteer },
+      { id: "involved-donor", labelKey: "navbar.items.becomeDonor", href: ROUTES.involved.donor },
+      { id: "involved-partner", labelKey: "navbar.items.partner", href: ROUTES.involved.partner },
+      { id: "involved-sponsor", labelKey: "navbar.items.sponsorPrograms", href: ROUTES.involved.sponsor },
+    ],
+  },
+  { id: "contact", labelKey: "navbar.items.contact", href: ROUTES.contact },
 ];
 
-const DropdownItem = memo(({ item }: { item: NavItem }) => {
+const DropdownItem = memo(function DropdownItem({ item, t }: { item: NavItemConfig; t: TFunction }) {
   const [open, setOpen] = useState(false);
 
   if (!item.children) {
     return (
       <li>
         <Link
-          to={item.href ?? "/"}
-          className="block px-4 py-2 text-[#0d3b66] font-semibold hover:text-[#f4a261] transition-colors"
+          to={item.href ?? ROUTES.home}
+          className="block whitespace-nowrap rounded-lg px-2.5 2xl:px-3 py-2 text-[13px] 2xl:text-[14px] text-[#0d3b66] font-semibold hover:text-[#f4a261] hover:bg-[#f7fbff] transition-colors"
         >
-          {item.label}
+          {t(item.labelKey)}
         </Link>
       </li>
     );
   }
 
+  const twoColumn = item.children.length > 6;
+
   return (
-    <li
-      className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-    >
-      <button className="flex items-center gap-1 px-4 py-2 text-[#0d3b66] font-semibold hover:text-[#f4a261] transition-colors">
-        {item.label}
+    <li className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+      <button className="flex items-center gap-1 whitespace-nowrap rounded-lg px-2.5 2xl:px-3 py-2 text-[13px] 2xl:text-[14px] text-[#0d3b66] font-semibold hover:text-[#f4a261] hover:bg-[#f7fbff] transition-colors">
+        {t(item.labelKey)}
         <i className="fas fa-chevron-down text-xs mt-0.5" />
       </button>
-      {open && (
-        <ul className="absolute top-full left-0 bg-white shadow-lg rounded-md min-w-[200px] py-2 z-50">
-          {item.children.map((child) => (
-            <li key={child.href}>
-              <Link
-                to={child.href}
-                className="block px-4 py-2 text-[#0d3b66] hover:bg-gray-50 hover:text-[#f4a261] transition-colors text-sm"
-              >
-                {child.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+
+      {open ? (
+        <div className="absolute top-full left-0 z-50 mt-1 w-[350px] rounded-xl border border-[#d8e4f2] bg-white p-2 shadow-xl">
+          <p className="px-3 py-1.5 text-[11px] uppercase tracking-wide text-[#56708a] font-semibold">
+            {t(item.labelKey)}
+          </p>
+          <ul className={`${twoColumn ? "grid grid-cols-2 gap-1" : "space-y-0.5"} max-h-[380px] overflow-y-auto pr-1`}>
+            {item.children.map((child) => (
+              <li key={child.id}>
+                <Link
+                  to={child.href}
+                  className="block rounded-md px-3 py-2 text-[13px] text-[#0d3b66] hover:bg-[#f3f8ff] hover:text-[#f4a261] transition-colors leading-snug"
+                >
+                  {t(child.labelKey)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </li>
   );
 });
-
-DropdownItem.displayName = "DropdownItem";
 
 export const Navbar = memo(function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleLogout = () => {
     logout();
-    navigate("/");
+    navigate(ROUTES.home);
   };
 
   const dashboardPath =
     user?.role === "admin"
-      ? "/dashboard/admin"
+      ? ROUTES.dashboards.admin
       : user?.role === "donor"
-        ? "/dashboard/donor"
-        : "/dashboard/volunteer";
+        ? ROUTES.dashboards.donor
+        : ROUTES.dashboards.volunteer;
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
-        <Link to="/" className="flex items-center gap-3">
-          <img src="/images/logo.jpg" alt="Logo" className="h-12 w-12 object-contain rounded-full" />
-          <div>
-            <h1 className="text-[#0d3b66] font-bold text-lg leading-tight">Bhagwat Heritage</h1>
-            <p className="text-xs text-gray-500">Service Foundation Trust</p>
+      <div className="w-full max-w-[1920px] mx-auto px-4 lg:px-6 2xl:px-8 min-h-[92px] py-3 xl:grid xl:grid-cols-[auto_1fr_auto] xl:items-center xl:gap-3">
+        <Link
+          to={ROUTES.home}
+          className="flex min-w-0 max-w-[340px] items-center gap-3 md:max-w-[410px] md:gap-4 xl:max-w-[430px]"
+        >
+          <div className="flex h-16 w-16 md:h-20 md:w-20 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-[#d8e4f2] bg-[linear-gradient(180deg,#fff8ef_0%,#eef7ff_100%)] p-1 shadow-sm">
+            <img src="/images/logo.jpg" alt={t("brand.logoAlt")} className="h-full w-full object-contain" />
+          </div>
+          <div className="min-w-0 leading-none">
+            <p className="text-[0.98rem] sm:text-[1.08rem] lg:text-[1.22rem] text-[#0d3b66] font-extrabold leading-tight whitespace-normal">
+              <span className="block">{t("brand.title")}</span>
+              <span className="block text-[12px] sm:text-[13px] lg:text-[14px] font-semibold text-[#60758c]">
+                {t("brand.subtitle")}
+              </span>
+            </p>
           </div>
         </Link>
 
-        <nav className="hidden lg:block">
-          <ul className="flex items-center">
+        <nav className="hidden xl:flex xl:min-w-0 xl:justify-center">
+          <ul className="flex items-center justify-center gap-0.5 2xl:gap-1">
             {NAV_ITEMS.map((item) => (
-              <DropdownItem key={item.label} item={item} />
+              <DropdownItem key={item.id} item={item} t={t} />
             ))}
           </ul>
         </nav>
 
-        <div className="hidden lg:flex items-center gap-2">
+        <div className="hidden xl:flex items-center justify-end gap-2 justify-self-end">
           {user ? (
             <>
-              <Link to={dashboardPath} className="btn-primary text-sm">
-                My Panel
+              <Link to={dashboardPath} className="btn-primary text-sm whitespace-nowrap">
+                {t("navbar.myPanel")}
               </Link>
               <button
                 onClick={handleLogout}
-                className="px-4 py-2 text-sm text-[#0d3b66] border border-[#0d3b66] rounded-md hover:bg-gray-50"
+                className="px-4 py-2 text-sm whitespace-nowrap text-[#0d3b66] border border-[#0d3b66] rounded-md hover:bg-gray-50"
               >
-                Logout
+                {t("navbar.logout")}
               </button>
             </>
           ) : (
-            <Link to="/login" className="btn-primary text-sm">
-              Donate
+            <Link to={ROUTES.donate} className="btn-primary text-sm px-5 py-2.5 whitespace-nowrap">
+              {t("navbar.donate")}
             </Link>
           )}
+          <LanguageSwitcher compact />
         </div>
 
         <button
-          className="lg:hidden p-2 text-[#0d3b66]"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
+          className="xl:hidden ml-auto p-2 text-[#0d3b66]"
+          onClick={() => setMobileOpen((prev) => !prev)}
+          aria-label={t("navbar.toggleMenu")}
         >
           <i className={`fas ${mobileOpen ? "fa-times" : "fa-bars"} text-xl`} />
         </button>
       </div>
 
-      {mobileOpen && (
-        <div className="lg:hidden bg-white border-t px-4 py-3 space-y-2">
-          {NAV_ITEMS.flatMap((item) =>
-            item.href
-              ? [
-                  <Link
-                    key={item.href}
-                    to={item.href}
-                    className="block py-2 text-[#0d3b66] font-semibold"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {item.label}
-                  </Link>,
-                ]
-              : (item.children ?? []).map((child) => (
-                  <Link
-                    key={child.href}
-                    to={child.href}
-                    className="block py-1.5 pl-3 text-[#0d3b66] text-sm"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    {child.label}
-                  </Link>
-                ))
+      {mobileOpen ? (
+        <div className="xl:hidden bg-white border-t px-4 py-3 space-y-2 max-h-[75vh] overflow-y-auto">
+          <div className="pb-2">
+            <LanguageSwitcher className="w-full justify-between" />
+          </div>
+
+          {NAV_ITEMS.map((item) =>
+            item.href ? (
+              <Link
+                key={item.id}
+                to={item.href}
+                className="block py-2 text-[#0d3b66] font-semibold"
+                onClick={() => setMobileOpen(false)}
+              >
+                {t(item.labelKey)}
+              </Link>
+            ) : (
+              <div key={item.id} className="rounded-lg border border-[#e4edf7] p-2">
+                <p className="px-1 py-1 text-xs uppercase tracking-wide text-[#56708a] font-semibold">
+                  {t(item.labelKey)}
+                </p>
+                <div className="space-y-0.5">
+                  {(item.children ?? []).map((child) => (
+                    <Link
+                      key={child.id}
+                      to={child.href}
+                      className="block py-1.5 px-2 text-[#0d3b66] text-sm rounded hover:bg-[#f3f8ff]"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {t(child.labelKey)}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )
           )}
+
           {user ? (
             <button onClick={handleLogout} className="block py-2 text-red-600 font-semibold">
-              Logout
+              {t("navbar.logout")}
             </button>
           ) : (
-            <Link to="/login" className="btn-primary block text-center">
-              Login / Donate
+            <Link to={ROUTES.donate} className="btn-primary block text-center" onClick={() => setMobileOpen(false)}>
+              {t("navbar.donate")}
             </Link>
           )}
         </div>
-      )}
+      ) : null}
     </header>
   );
 });

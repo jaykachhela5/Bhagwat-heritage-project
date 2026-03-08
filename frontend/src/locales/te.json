@@ -1,0 +1,83 @@
+{
+  "brand": {
+    "subtitle": "సేవా ఫౌండేషన్ ట్రస్ట్",
+    "logoAlt": "భగవత్ హెరిటేజ్ లోగో"
+  },
+  "languages": {
+    "en": "English",
+    "hi": "हिन्दी",
+    "mr": "मराठी",
+    "gu": "ગુજરાતી",
+    "bn": "বাংলা",
+    "ta": "தமிழ்",
+    "te": "తెలుగు",
+    "kn": "ಕನ್ನಡ",
+    "pa": "ਪੰਜਾਬੀ",
+    "sa": "संस्कृतम्"
+  },
+  "switcher": {
+    "label": "భాష",
+    "ariaLabel": "భాషను ఎంచుకోండి"
+  },
+  "navbar": {
+    "toggleMenu": "మెను తెరవండి",
+    "myPanel": "నా ప్యానెల్",
+    "logout": "లాగౌట్",
+    "donate": "దానం చేయండి",
+    "items": {
+      "home": "హోమ్",
+      "about": "పరిచయం",
+      "mission": "మిషన్",
+      "seva": "సేవ",
+      "events": "కార్యక్రమాలు",
+      "knowledge": "జ్ఞానం",
+      "mandirTeerth": "మందిరం & తీర్థం",
+      "mediaGallery": "మీడియా & గ్యాలరీ",
+      "digitalServices": "డిజిటల్ సేవలు",
+      "getInvolved": "చేరండి",
+      "contact": "సంప్రదించండి"
+    }
+  },
+  "footer": {
+    "ctaEyebrow": "ఈరోజు ఒక శుభకార్యానికి తోడ్పడండి",
+    "ctaTitle": "సేవా మరియు ఆధ్యాత్మిక వికాసంలో భాగం అవ్వండి",
+    "becomeVolunteer": "స్వచ్ఛంద సేవకుడిగా చేరండి",
+    "makeDonation": "దానం చేయండి",
+    "quickLinks": "త్వరిత లింకులు",
+    "followUs": "మమ్మల్ని అనుసరించండి",
+    "openLocation": "స్థానం చూడండి",
+    "backToTop": "పైకి వెళ్లండి"
+  },
+  "home": {
+    "heroTitle": "శ్రీ భగవత్ హెరిటేజ్‌కు స్వాగతం",
+    "languagePrompt": "మీ భాషను ఎంచుకోండి",
+    "readMore": "మరింత చదవండి",
+    "founderEyebrow": "స్థాపకుని సందేశం",
+    "viewFounderProfile": "స్థాపకుని ప్రొఫైల్ చూడండి",
+    "sevaHighlightsTitle": "సేవ ముఖ్యాంశాలు",
+    "learnMore": "మరింత తెలుసుకోండి",
+    "upcomingEventsTitle": "రాబోయే కార్యక్రమాలు",
+    "openEvent": "కార్యక్రమం తెరవండి",
+    "galleryTitle": "గ్యాలరీ ముందుచూపు",
+    "volunteerTitle": "స్వచ్ఛంద సేవకుడిగా చేరండి",
+    "joinUs": "మాతో చేరండి",
+    "donationTitle": "దానం చేయండి",
+    "donateNow": "ఇప్పుడే దానం చేయండి"
+  },
+  "about": {
+    "heroBadge": "భగవత్ హెరిటేజ్ సర్వీస్ ఫౌండేషన్ ట్రస్ట్",
+    "heroTitle": "భగవత్ హెరిటేజ్ సర్వీస్ ఫౌండేషన్ ట్రస్ట్",
+    "heroSubtitle": "సేవ • సంస్కృతి • సంస్కారం",
+    "introTitle": "సంస్థ పరిచయం",
+    "readDetail": "వివరంగా చదవండి",
+    "missionTitle": "మా మిషన్",
+    "explore": "మరింత తెలుసుకోండి",
+    "sevaTitle": "సేవ కార్యక్రమాలు",
+    "growthTitle": "వికాస యాత్ర",
+    "leadershipTitle": "మా నాయకత్వం",
+    "learnMore": "మరింత తెలుసుకోండి",
+    "ctaTitle": "సేవతో సమాజం, సంస్కారంతో దేశం",
+    "volunteerBtn": "స్వచ్ఛంద సేవకుడిగా చేరండి",
+    "donateBtn": "ఇప్పుడే దానం చేయండి"
+  }
+}

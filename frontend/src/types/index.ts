@@ -58,6 +58,41 @@ export interface Volunteer {
   createdAt: string;
 }
 
+export interface KundliRequest {
+  _id: string;
+  orderId: string;
+  invoiceNumber: string;
+  fullName: string;
+  gender: "Male" | "Female";
+  orderDate: string;
+  signature?: string;
+  email: string;
+  mobileNumber: string;
+  dateOfBirth: string;
+  timeOfBirth: string;
+  placeOfBirth: string;
+  district: string;
+  state: string;
+  country: string;
+  selectedServices: Array<{
+    title: string;
+    pages: number;
+    price: number;
+  }>;
+  preferredLanguage: "English" | "Hindi" | "Marathi" | "Gujarati";
+  address?: string;
+  totalAmount: number;
+  paymentMethod: "UPI" | "Razorpay" | "Stripe";
+  paymentStatus: "Pending" | "Paid" | "Failed";
+  paymentReference: string;
+  orderStatus: "Pending" | "Processing" | "Completed";
+  estimatedDeliveryTime: string;
+  reportFileName?: string;
+  reportFileUrl?: string;
+  adminNotes?: string;
+  createdAt: string;
+}
+
 export interface Media {
   _id: string;
   filename: string;

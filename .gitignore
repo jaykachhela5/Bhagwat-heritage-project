@@ -5,10 +5,12 @@
 
 # Dependencies
 node_modules/
+**/node_modules/
 
 # Build outputs
 dist/
 build/
+.temp/
 
 # Lock files (use yarn.lock only)
 package-lock.json

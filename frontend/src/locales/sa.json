@@ -1,0 +1,83 @@
+{
+  "brand": {
+    "subtitle": "सेवा फाउण्डेशन ट्रस्ट",
+    "logoAlt": "भगवत हेरिटेज लोगो"
+  },
+  "languages": {
+    "en": "English",
+    "hi": "हिन्दी",
+    "mr": "मराठी",
+    "gu": "ગુજરાતી",
+    "bn": "বাংলা",
+    "ta": "தமிழ்",
+    "te": "తెలుగు",
+    "kn": "ಕನ್ನಡ",
+    "pa": "ਪੰਜਾਬੀ",
+    "sa": "संस्कृतम्"
+  },
+  "switcher": {
+    "label": "भाषा",
+    "ariaLabel": "भाषां चिनुत"
+  },
+  "navbar": {
+    "toggleMenu": "मेनू उद्घाटयतु",
+    "myPanel": "मम पटलम्",
+    "logout": "निर्गच्छतु",
+    "donate": "दानं कुरुत",
+    "items": {
+      "home": "मुखपृष्ठम्",
+      "about": "परिचयः",
+      "mission": "ध्येयम्",
+      "seva": "सेवा",
+      "events": "कार्यक्रमाः",
+      "knowledge": "ज्ञानम्",
+      "mandirTeerth": "मन्दिरं तीर्थं च",
+      "mediaGallery": "माध्यमं गैलरी च",
+      "digitalServices": "डिजिटल सेवाः",
+      "getInvolved": "संयुज्यताम्",
+      "contact": "सम्पर्कः"
+    }
+  },
+  "footer": {
+    "ctaEyebrow": "अद्य सत्कर्मणि सहाय्यं ददातु",
+    "ctaTitle": "सेवायाः आध्यात्मिकविकासस्य च भागी भवतु",
+    "becomeVolunteer": "स्वयंसेवकः भवतु",
+    "makeDonation": "दानं कुरुत",
+    "quickLinks": "शीघ्रसंबन्धाः",
+    "followUs": "अनुगच्छत",
+    "openLocation": "स्थानं पश्यत",
+    "backToTop": "उपरि गच्छत"
+  },
+  "home": {
+    "heroTitle": "श्रीभगवत हेरिटेजे स्वागतम्",
+    "languagePrompt": "भाषां चिनुत",
+    "readMore": "अधिकं पठत",
+    "founderEyebrow": "संस्थापकस्य संदेशः",
+    "viewFounderProfile": "संस्थापकवृत्तं पश्यत",
+    "sevaHighlightsTitle": "सेवाया विशेषाः",
+    "learnMore": "अधिकं जानातु",
+    "upcomingEventsTitle": "आगामि कार्यक्रमाः",
+    "openEvent": "कार्यक्रमं उद्घाटयतु",
+    "galleryTitle": "चित्रदीर्घाया झलकः",
+    "volunteerTitle": "स्वयंसेवकः भवतु",
+    "joinUs": "अस्माभिः सह युज्यताम्",
+    "donationTitle": "दानं कुरुत",
+    "donateNow": "इदानीं दानं कुरुत"
+  },
+  "about": {
+    "heroBadge": "भगवत हेरिटेज सर्विस फाउण्डेशन ट्रस्ट",
+    "heroTitle": "भगवत हेरिटेज सर्विस फाउण्डेशन ट्रस्ट",
+    "heroSubtitle": "सेवा • संस्कृति • संस्कार",
+    "introTitle": "संस्थायाः परिचयः",
+    "readDetail": "विस्तरेण पठत",
+    "missionTitle": "अस्माकं ध्येयम्",
+    "explore": "अधिकं जानातु",
+    "sevaTitle": "सेवाकार्यक्रमाः",
+    "growthTitle": "विकासयात्रा",
+    "leadershipTitle": "अस्माकं नेतृत्वम्",
+    "learnMore": "अधिकं जानातु",
+    "ctaTitle": "सेवया समाजः, संस्कारेण राष्ट्रम्",
+    "volunteerBtn": "स्वयंसेवकः भवतु",
+    "donateBtn": "इदानीं दानं कुरुत"
+  }
+}

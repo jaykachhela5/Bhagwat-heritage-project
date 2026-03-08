@@ -1,0 +1,83 @@
+{
+  "brand": {
+    "subtitle": "ਸੇਵਾ ਫਾਊਂਡੇਸ਼ਨ ਟਰੱਸਟ",
+    "logoAlt": "ਭਗਵਤ ਹੈਰਿਟੇਜ ਲੋਗੋ"
+  },
+  "languages": {
+    "en": "English",
+    "hi": "हिन्दी",
+    "mr": "मराठी",
+    "gu": "ગુજરાતી",
+    "bn": "বাংলা",
+    "ta": "தமிழ்",
+    "te": "తెలుగు",
+    "kn": "ಕನ್ನಡ",
+    "pa": "ਪੰਜਾਬੀ",
+    "sa": "संस्कृतम्"
+  },
+  "switcher": {
+    "label": "ਭਾਸ਼ਾ",
+    "ariaLabel": "ਭਾਸ਼ਾ ਚੁਣੋ"
+  },
+  "navbar": {
+    "toggleMenu": "ਮੇਨੂ ਖੋਲ੍ਹੋ",
+    "myPanel": "ਮੇਰਾ ਪੈਨਲ",
+    "logout": "ਲਾਗਆਉਟ",
+    "donate": "ਦਾਨ ਕਰੋ",
+    "items": {
+      "home": "ਮੁੱਖ ਪੰਨਾ",
+      "about": "ਪਰਿਚਯ",
+      "mission": "ਮਿਸ਼ਨ",
+      "seva": "ਸੇਵਾ",
+      "events": "ਕਾਰਜਕ੍ਰਮ",
+      "knowledge": "ਗਿਆਨ",
+      "mandirTeerth": "ਮੰਦਰ ਅਤੇ ਤੀਰਥ",
+      "mediaGallery": "ਮੀਡੀਆ ਅਤੇ ਗੈਲਰੀ",
+      "digitalServices": "ਡਿਜ਼ਿਟਲ ਸੇਵਾਵਾਂ",
+      "getInvolved": "ਜੁੜੋ",
+      "contact": "ਸੰਪਰਕ"
+    }
+  },
+  "footer": {
+    "ctaEyebrow": "ਅੱਜ ਇੱਕ ਚੰਗੇ ਕਾਰਜ ਵਿੱਚ ਸਹਿਯੋਗ ਦਿਓ",
+    "ctaTitle": "ਸੇਵਾ ਅਤੇ ਆਧਿਆਤਮਿਕ ਵਿਕਾਸ ਦਾ ਹਿੱਸਾ ਬਣੋ",
+    "becomeVolunteer": "ਸੇਵਾਦਾਰ ਬਣੋ",
+    "makeDonation": "ਦਾਨ ਕਰੋ",
+    "quickLinks": "ਤੁਰੰਤ ਲਿੰਕ",
+    "followUs": "ਸਾਨੂੰ ਫਾਲੋ ਕਰੋ",
+    "openLocation": "ਸਥਾਨ ਵੇਖੋ",
+    "backToTop": "ਉੱਪਰ ਜਾਓ"
+  },
+  "home": {
+    "heroTitle": "ਸ਼੍ਰੀ ਭਗਵਤ ਹੈਰਿਟੇਜ ਵਿੱਚ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ",
+    "languagePrompt": "ਆਪਣੀ ਭਾਸ਼ਾ ਚੁਣੋ",
+    "readMore": "ਹੋਰ ਪੜ੍ਹੋ",
+    "founderEyebrow": "ਸੰਸਥਾਪਕ ਸੰਦੇਸ਼",
+    "viewFounderProfile": "ਸੰਸਥਾਪਕ ਪ੍ਰੋਫ਼ਾਈਲ ਵੇਖੋ",
+    "sevaHighlightsTitle": "ਸੇਵਾ ਝਲਕਾਂ",
+    "learnMore": "ਹੋਰ ਜਾਣੋ",
+    "upcomingEventsTitle": "ਆਉਣ ਵਾਲੇ ਕਾਰਜਕ੍ਰਮ",
+    "openEvent": "ਕਾਰਜਕ੍ਰਮ ਖੋਲ੍ਹੋ",
+    "galleryTitle": "ਗੈਲਰੀ ਝਲਕ",
+    "volunteerTitle": "ਸੇਵਾਦਾਰ ਬਣੋ",
+    "joinUs": "ਸਾਡੇ ਨਾਲ ਜੁੜੋ",
+    "donationTitle": "ਦਾਨ ਕਰੋ",
+    "donateNow": "ਹੁਣੇ ਦਾਨ ਕਰੋ"
+  },
+  "about": {
+    "heroBadge": "ਭਗਵਤ ਹੈਰਿਟੇਜ ਸਰਵਿਸ ਫਾਊਂਡੇਸ਼ਨ ਟਰੱਸਟ",
+    "heroTitle": "ਭਗਵਤ ਹੈਰਿਟੇਜ ਸਰਵਿਸ ਫਾਊਂਡੇਸ਼ਨ ਟਰੱਸਟ",
+    "heroSubtitle": "ਸੇਵਾ • ਸੰਸਕ੍ਰਿਤੀ • ਸੰਸਕਾਰ",
+    "introTitle": "ਸੰਸਥਾ ਪਰਿਚਯ",
+    "readDetail": "ਵਿਸਥਾਰ ਨਾਲ ਪੜ੍ਹੋ",
+    "missionTitle": "ਸਾਡਾ ਮਿਸ਼ਨ",
+    "explore": "ਹੋਰ ਜਾਣੋ",
+    "sevaTitle": "ਸੇਵਾ ਪ੍ਰੋਗਰਾਮ",
+    "growthTitle": "ਵਿਕਾਸ ਯਾਤਰਾ",
+    "leadershipTitle": "ਸਾਡਾ ਨੇਤ੍ਰਿਤਵ",
+    "learnMore": "ਹੋਰ ਜਾਣੋ",
+    "ctaTitle": "ਸੇਵਾ ਨਾਲ ਸਮਾਜ, ਸੰਸਕਾਰ ਨਾਲ ਰਾਸ਼ਟਰ",
+    "volunteerBtn": "ਸੇਵਾਦਾਰ ਬਣੋ",
+    "donateBtn": "ਹੁਣੇ ਦਾਨ ਕਰੋ"
+  }
+}

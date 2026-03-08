@@ -8,6 +8,7 @@ interface CounterItem {
 
 interface ImpactCounterProps {
   items: CounterItem[];
+  theme?: "light" | "dark";
 }
 
 function useCountUp(target: number, duration = 2000) {
@@ -38,25 +39,30 @@ function useCountUp(target: number, duration = 2000) {
   return { count, ref };
 }
 
-const CounterCard = memo(function CounterCard({ item }: { item: CounterItem }) {
+const CounterCard = memo(function CounterCard({ item, theme }: { item: CounterItem; theme: "light" | "dark" }) {
   const { count, ref } = useCountUp(item.target);
   return (
-    <div ref={ref} className="text-center p-6">
-      <h3 className="text-4xl font-bold text-[#0d3b66] mb-2">
+    <div
+      ref={ref}
+      className={`text-center p-6 rounded-2xl ${
+        theme === "dark" ? "border border-white/10 bg-[#153346]" : ""
+      }`}
+    >
+      <h3 className={`text-4xl font-bold mb-2 ${theme === "dark" ? "text-[#ffb06a]" : "text-[#0d3b66]"}`}>
         {count.toLocaleString()}
         {item.suffix ?? "+"}
       </h3>
-      <p className="text-gray-600">{item.label}</p>
+      <p className={theme === "dark" ? "text-[#d4e1e8]" : "text-gray-600"}>{item.label}</p>
     </div>
   );
 });
 
-export const ImpactCounter = memo(function ImpactCounter({ items }: ImpactCounterProps) {
+export const ImpactCounter = memo(function ImpactCounter({ items, theme = "light" }: ImpactCounterProps) {
   return (
-    <section className="bg-gray-50 py-12">
+    <section className={theme === "dark" ? "bg-[#0a2534] py-12" : "bg-gray-50 py-12"}>
       <div className="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4">
         {items.map((item) => (
-          <CounterCard key={item.label} item={item} />
+          <CounterCard key={item.label} item={item} theme={theme} />
         ))}
       </div>
     </section>

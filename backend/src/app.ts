@@ -25,6 +25,7 @@ import bookRoutes from "./routes/bookRoutes";
 import issueRoutes from "./routes/issueRoutes";
 import memberRoutes from "./routes/memberRoutes";
 import pathshalaRoutes from "./routes/pathshalaRoutes";
+import kundliRoutes from "./routes/kundliRoutes";
 
 const app = express();
 
@@ -68,6 +69,7 @@ app.use(morgan(env.NODE_ENV === "production" ? "combined" : "dev"));
 app.use(generalLimiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/uploads", express.static("uploads"));
 
 /* ── API routes ────────────────────────────────────────────────────────────── */
 
@@ -88,6 +90,7 @@ app.use("/api/books", bookRoutes);
 app.use("/api/issue", issueRoutes);
 app.use("/api/members", memberRoutes);
 app.use("/api/pathshala", pathshalaRoutes);
+app.use("/api/kundli-requests", kundliRoutes);
 
 app.use(errorHandler);
 

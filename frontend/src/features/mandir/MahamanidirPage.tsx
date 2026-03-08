@@ -1,36 +1,568 @@
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { HeroSection } from "../../components/ui/HeroSection";
 import { useApi } from "../../hooks/useApi";
 import { mandirApi } from "../../services/api/misc";
 
+const HERO_IMAGES = [
+  "https://res.cloudinary.com/der8zinu8/image/upload/v1771999742/hanuman4_ee6niu.jpg",
+  "https://res.cloudinary.com/der8zinu8/image/upload/v1771999752/hanuman3_wjp9pm.jpg",
+  "https://res.cloudinary.com/der8zinu8/image/upload/v1771999936/hanuman5_yhct8y.jpg",
+  "https://res.cloudinary.com/der8zinu8/image/upload/v1771999742/hanuman2_fg3j9y.jpg",
+];
+
+type SevaFeature = {
+  title: string;
+  desc: string;
+  days: number[];
+  start: string;
+  end: string;
+  place: string;
+  volunteerSlots: number;
+};
+
+const HANUMAN_SEVA_FEATURES: SevaFeature[] = [
+  {
+    title: "Hanuman Chalisa Anushthan",
+    desc: "Daily collective chanting with sankalp for health, focus, and family harmony.",
+    days: [0, 1, 2, 3, 4, 5, 6],
+    start: "06:15",
+    end: "07:00",
+    place: "Main Garbhagriha Hall",
+    volunteerSlots: 8,
+  },
+  {
+    title: "Sankat Mochan Path",
+    desc: "Focused recitation for devotees seeking strength during difficult phases.",
+    days: [2, 6],
+    start: "19:00",
+    end: "20:00",
+    place: "Sabha Mandap",
+    volunteerSlots: 12,
+  },
+  {
+    title: "Mangalwar Maha Seva",
+    desc: "Tuesday special puja with deep daan, tilak seva, and guided parikrama.",
+    days: [2],
+    start: "08:00",
+    end: "10:00",
+    place: "Hanuman Seva Kendra",
+    volunteerSlots: 20,
+  },
+  {
+    title: "Balaji Rudrabhishek",
+    desc: "Vedic jal-abhishek and mantra seva for spiritual cleansing and peace.",
+    days: [0, 4],
+    start: "07:30",
+    end: "09:00",
+    place: "Abhishek Sthal",
+    volunteerSlots: 10,
+  },
+  {
+    title: "Sundarkand Path Sabha",
+    desc: "Weekly Sundarkand recitation with bhajan and collective prarthana.",
+    days: [6],
+    start: "18:30",
+    end: "20:00",
+    place: "Sabha Mandap",
+    volunteerSlots: 16,
+  },
+  {
+    title: "Prasad Vitaran Seva",
+    desc: "Distribution seva for visiting devotees after morning darshan.",
+    days: [0, 1, 2, 3, 4, 5, 6],
+    start: "09:30",
+    end: "11:00",
+    place: "Prasad Counter",
+    volunteerSlots: 14,
+  },
+  {
+    title: "Deep Daan Seva",
+    desc: "Evening diya offering and temple lighting seva before aarti.",
+    days: [0, 1, 2, 3, 4, 5, 6],
+    start: "19:15",
+    end: "19:45",
+    place: "Aarti Chowk",
+    volunteerSlots: 10,
+  },
+  {
+    title: "Bhakt Sahayata Desk",
+    desc: "Help-desk seva for darshan queue support, elderly guidance, and directions.",
+    days: [0, 1, 2, 3, 4, 5, 6],
+    start: "10:00",
+    end: "13:00",
+    place: "Entry Assistance Desk",
+    volunteerSlots: 6,
+  },
+];
+
+const DAY_NAMES = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+function parseTimeToMinutes(time: string): number {
+  const [hour, minute] = time.split(":").map(Number);
+  return hour * 60 + minute;
+}
+
+function to12h(time: string): string {
+  const [h, m] = time.split(":").map(Number);
+  const suffix = h >= 12 ? "PM" : "AM";
+  const hour12 = h % 12 || 12;
+  return `${hour12}:${String(m).padStart(2, "0")} ${suffix}`;
+}
+
+function getSevaStatus(seva: SevaFeature, now: Date): {
+  label: "Live Now" | "Upcoming";
+  detail: string;
+  toneClass: string;
+} {
+  const currentDay = now.getDay();
+  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+  const startMinutes = parseTimeToMinutes(seva.start);
+  const endMinutes = parseTimeToMinutes(seva.end);
+  const isToday = seva.days.includes(currentDay);
+  const isLive = isToday && currentMinutes >= startMinutes && currentMinutes < endMinutes;
+
+  if (isLive) {
+    return {
+      label: "Live Now",
+      detail: `Ends at ${to12h(seva.end)}`,
+      toneClass: "bg-emerald-100 text-emerald-700 border-emerald-200",
+    };
+  }
+
+  for (let offset = 0; offset < 7; offset += 1) {
+    const day = (currentDay + offset) % 7;
+    if (!seva.days.includes(day)) {
+      continue;
+    }
+
+    if (offset === 0 && currentMinutes >= startMinutes) {
+      continue;
+    }
+
+    const dayLabel = offset === 0 ? "Today" : DAY_NAMES[day];
+    return {
+      label: "Upcoming",
+      detail: `${dayLabel}, ${to12h(seva.start)} - ${to12h(seva.end)}`,
+      toneClass: "bg-amber-100 text-amber-700 border-amber-200",
+    };
+  }
+
+  return {
+    label: "Upcoming",
+    detail: `${DAY_NAMES[seva.days[0]]}, ${to12h(seva.start)} - ${to12h(seva.end)}`,
+    toneClass: "bg-amber-100 text-amber-700 border-amber-200",
+  };
+}
+
+const HANUMAN_BLESSINGS = [
+  "Removes fear and negativity through devotion.",
+  "Builds discipline, confidence, and divine focus.",
+  "Strengthens family harmony and spiritual values.",
+  "Encourages seva, humility, and righteous living.",
+];
+
+const HANUMAN_UTSAV = [
+  { name: "Hanuman Jayanti Mahotsav", time: "Annual Grand Celebration" },
+  { name: "Sundarkand Path Sabha", time: "Every Saturday Evening" },
+  { name: "Mangal Aarti Mahaseva", time: "Every Tuesday Morning" },
+  { name: "Shri Ram Bhajan Sandhya", time: "Monthly Devotional Event" },
+];
+
+const MORNING_AARTI_TEXT = `Morning Aarti
+Aarti Kije Hanuman Lala Ki,
+Dusht Dalan Raghunath Kala Ki.
+Bhakta Sankat Haran Mangalkari,
+Jai Bajrang Bali Hitakari.`;
+
+const EVENING_AARTI_TEXT = `Evening Aarti
+Jai Jai Hanuman Gosai,
+Kripa Karahu Gurudev Ki Nai.
+Shri Ram Doot Kripa Nidhana,
+Bhakta Hriday Baso Hanumana.`;
+
+const HANUMAN_CHALISA_TEXT = `॥ हनुमान चालीसा ॥
+दोहा
+
+श्रीगुरु चरण सरोज रज, निज मन मुकुर सुधारि।
+बरनऊँ रघुवर बिमल जसु, जो दायक फल चारि॥
+
+बुद्धिहीन तनु जानिके, सुमिरौं पवन कुमार।
+बल बुद्धि विद्या देहु मोहिं, हरहु कलेश विकार॥
+
+जय हनुमान ज्ञान गुण सागर। जय कपीस तिहुँ लोक उजागर॥1॥
+रामदूत अतुलित बल धामा। अंजनि पुत्र पवनसुत नामा॥2॥
+महाबीर विक्रम बजरंगी। कुमति निवार सुमति के संगी॥3॥
+कंचन वरन विराज सुबेसा। कानन कुण्डल कुंचित केसा॥4॥
+हाथ वज्र औ ध्वजा विराजे। काँधे मूँज जनेऊ साजे॥5॥
+शंकर सुवन केसरी नंदन। तेज प्रताप महा जग वंदन॥6॥
+विद्यावान गुणी अति चातुर। राम काज करिबे को आतुर॥7॥
+प्रभु चरित्र सुनिबे को रसिया। राम लखन सीता मन बसिया॥8॥
+सूक्ष्म रूप धरि सियहिं दिखावा। विकट रूप धरि लंक जरावा॥9॥
+भीम रूप धरि असुर संहारे। रामचंद्र के काज संवारे॥10॥
+लाय सजीवन लखन जियाये। श्रीरघुवीर हरषि उर लाये॥11॥
+रघुपति कीन्ही बहुत बड़ाई। तुम मम प्रिय भरतहि सम भाई॥12॥
+सहस बदन तुम्हरो जस गावैं। अस कहि श्रीपति कंठ लगावैं॥13॥
+सनकादिक ब्रह्मादि मुनीसा। नारद सारद सहित अहीसा॥14॥
+यम कुबेर दिगपाल जहाँ ते। कवि कोविद कहि सके कहाँ ते॥15॥
+तुम उपकार सुग्रीवहिं कीन्हा। राम मिलाय राज पद दीन्हा॥16॥
+तुम्हरो मंत्र विभीषण माना। लंकेश्वर भए सब जग जाना॥17॥
+युग सहस्र योजन पर भानू। लील्यो ताहि मधुर फल जानू॥18॥
+प्रभु मुद्रिका मेलि मुख माहीं। जलधि लांघि गए अचरज नाहीं॥19॥
+दुर्गम काज जगत के जेते। सुगम अनुग्रह तुम्हरे तेते॥20॥
+राम दुआरे तुम रखवारे। होत न आज्ञा बिनु पैसारे॥21॥
+सब सुख लहै तुम्हारी सरना। तुम रक्षक काहू को डरना॥22॥
+आपन तेज सम्हारो आपै। तीनों लोक हाँक ते काँपै॥23॥
+भूत पिशाच निकट नहिं आवै। महाबीर जब नाम सुनावै॥24॥
+नासै रोग हरै सब पीरा। जपत निरंतर हनुमत बीरा॥25॥
+संकट ते हनुमान छुड़ावै। मन क्रम वचन ध्यान जो लावै॥26॥
+सब पर राम तपस्वी राजा। तिन के काज सकल तुम साजा॥27॥
+और मनोरथ जो कोई लावै। सोइ अमित जीवन फल पावै॥28॥
+चारों जुग परताप तुम्हारा। है प्रसिद्ध जगत उजियारा॥29॥
+साधु संत के तुम रखवारे। असुर निकंदन राम दुलारे॥30॥
+अष्ट सिद्धि नौ निधि के दाता। अस बर दीन जानकी माता॥31॥
+राम रसायन तुम्हरे पासा। सदा रहो रघुपति के दासा॥32॥
+तुम्हरे भजन राम को पावै। जनम जनम के दुख बिसरावै॥33॥
+अंत काल रघुबर पुर जाई। जहाँ जन्म हरि भक्त कहाई॥34॥
+और देवता चित्त न धरई। हनुमत सेइ सर्व सुख करई॥35॥
+संकट कटै मिटै सब पीरा। जो सुमिरै हनुमत बलबीरा॥36॥
+जय जय जय हनुमान गोसाईं। कृपा करहु गुरुदेव की नाईं॥37॥
+जो सत बार पाठ कर कोई। छूटहि बंदि महा सुख होई॥38॥
+जो यह पढ़ै हनुमान चालीसा। होय सिद्धि साखी गौरीसा॥39॥
+तुलसीदास सदा हरि चेरा। कीजै नाथ हृदय महँ डेरा॥40॥
+
+दोहा
+पवन तनय संकट हरन, मंगल मूरति रूप।
+राम लखन सीता सहित, हृदय बसहु सुर भूप॥`;
+
+const HANUMAN_AARTI_TEXT = `॥ श्री हनुमान आरती ॥
+
+आरती कीजै हनुमान लला की।
+दुष्ट दलन रघुनाथ कला की॥
+
+जाके बल से गिरिवर काँपे।
+रोग दोष जाके निकट न झाँके॥
+
+अंजनि पुत्र महाबलदायी।
+संतन के प्रभु सदा सहायी॥
+
+दे बीरा रघुनाथ पठाए।
+लंका जारि सिया सुधि लाए॥
+
+लंका सो कोट समुद्र सी खाई।
+जात पवनसुत बार न लाई॥
+
+लंका जारि असुर संहारे।
+सियाराम जी के काज संवारे॥
+
+लक्ष्मण मूर्छित पड़े सकारे।
+आनि सजीवन प्राण उबारे॥
+
+पैठि पाताल तोरि जमकारे।
+अहिरावण की भुजा उखारे॥
+
+बाएँ भुजा असुर दल मारे।
+दाहिने भुजा संतजन तारे॥
+
+सुर नर मुनि आरती उतारें।
+जय जय जय हनुमान उचारें॥
+
+कंचन थार कपूर लौ छाई।
+आरती करत अंजना माई॥
+
+जो हनुमान जी की आरती गावे।
+बसि बैकुंठ परम पद पावे॥
+
+लंका विध्वंस किए रघुराई।
+तुलसीदास स्वामी कीर्ति गाई॥`;
+
 export default memo(function MahamanidirPage() {
   const { data } = useApi(() => mandirApi.get());
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [activePrayer, setActivePrayer] = useState<"chalisa" | "aarti" | null>(null);
+  const [now, setNow] = useState(() => new Date());
+  const [showMorningAarti, setShowMorningAarti] = useState(false);
+  const [showEveningAarti, setShowEveningAarti] = useState(false);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 3500);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const tick = window.setInterval(() => {
+      setNow(new Date());
+    }, 60000);
+    return () => window.clearInterval(tick);
+  }, []);
 
   return (
     <div>
-      <HeroSection title="63-Ft Hanuman Mahamandir" subtitle="Dham Chandrapur, Maharashtra" />
+      <section className="max-w-6xl mx-auto px-4 pt-8 md:pt-10">
+        
+        <div className="relative overflow-hidden rounded-[28px] h-[280px] md:h-[430px] shadow-[0_14px_35px_rgba(13,45,78,0.22)]">
+          {HERO_IMAGES.map((src, index) => (
+            <img
+              key={src}
+              src={src}
+              alt={`Hanuman Ji ${index + 1}`}
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+                activeSlide === index ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          ))}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-transparent" />
 
-      <section className="py-16 max-w-4xl mx-auto px-4">
-        <h2 className="section-title">{data?.title ?? "Kast Bhanjan Hanuman"}</h2>
-        <p className="text-gray-600 text-lg leading-relaxed text-center mb-10">
-          {data?.about ??
-            "Our 63-foot Hanuman idol is a symbol of devotion and strength. The temple serves as a spiritual center for thousands of devotees and is the home of regular pujas, bhajans, and seva programs."}
-        </p>
+          <button
+            type="button"
+            onClick={() => setActiveSlide((prev) => (prev - 1 + HERO_IMAGES.length) % HERO_IMAGES.length)}
+            className="absolute left-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-black/40 text-white hover:bg-black/55"
+            aria-label="Previous slide"
+          >
+            <i className="fas fa-chevron-left" />
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveSlide((prev) => (prev + 1) % HERO_IMAGES.length)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-black/40 text-white hover:bg-black/55"
+            aria-label="Next slide"
+          >
+            <i className="fas fa-chevron-right" />
+          </button>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-xl shadow-md p-6 text-center">
-            <h3 className="font-bold text-[#0d3b66] text-lg mb-2">Morning Darshan</h3>
-            <p className="text-gray-600">{data?.morningTime ?? "09:00 AM – 12:00 PM"}</p>
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2">
+            {HERO_IMAGES.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => setActiveSlide(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+                className={`h-2.5 rounded-full transition-all ${activeSlide === idx ? "w-6 bg-white" : "w-2.5 bg-white/50"}`}
+              />
+            ))}
           </div>
-          <div className="bg-white rounded-xl shadow-md p-6 text-center">
-            <h3 className="font-bold text-[#0d3b66] text-lg mb-2">Afternoon</h3>
-            <p className="text-gray-600">{data?.afternoonTime ?? "01:00 PM – 03:00 PM"}</p>
+        </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-4 pt-6">
+        <div className="mb-4 rounded-2xl border border-[#f0dcc0] bg-[#fff7e8] px-4 py-3 text-center shadow-sm">
+          <p className="text-sm md:text-base font-medium text-[#7a4f1f]">
+            Welcome to the divine abode of Hanuman Ji Maharaj. Experience devotion, strength, and spiritual peace at Mahamandir.
+          </p>
+        </div>
+        <div className="rounded-3xl border border-[#f2ddbc] bg-gradient-to-r from-[#fff7e8] via-[#fff2da] to-[#ffe8c2] p-6 md:p-8 text-center shadow-[0_12px_28px_rgba(122,79,31,0.14)]">
+          <p className="inline-flex rounded-full border border-[#c98e35]/40 bg-white/70 px-4 py-1 text-xs md:text-sm font-semibold text-[#7a4f1f] mb-3">
+            Bhagwat Heritage Service Foundation Trust
+          </p>
+          <h1 className="text-2xl md:text-5xl font-black leading-tight text-[#7a3f00]">
+            Jay Shree Maharudra Kashthbhanjan Hanuman Darshan
+          </h1>
+          <p className="text-sm md:text-xl text-[#8a5720] mt-2">Dham Chandrapur (Chichpalli), Maharashtra</p>
+        </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-4 py-10">
+        <div className="rounded-3xl border border-[#f1ddbf] bg-[#fff8ea] p-5 md:p-7 shadow-sm">
+          <h2 className="text-2xl md:text-3xl font-black text-[#7a4f1f] text-center mb-5">Hanuman Paath</h2>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
+            <button
+              type="button"
+              onClick={() => setActivePrayer((prev) => (prev === "chalisa" ? null : "chalisa"))}
+              className={`rounded-full px-5 py-2.5 font-semibold transition ${
+                activePrayer === "chalisa"
+                  ? "bg-[#c47508] text-white"
+                  : "bg-white text-[#7a4f1f] border border-[#d7b47f] hover:bg-[#fff1d8]"
+              }`}
+            >
+              ॥ श्री हनुमान चालीसा ॥
+            </button>
+            <button
+              type="button"
+              onClick={() => setActivePrayer((prev) => (prev === "aarti" ? null : "aarti"))}
+              className={`rounded-full px-5 py-2.5 font-semibold transition ${
+                activePrayer === "aarti"
+                  ? "bg-[#c47508] text-white"
+                  : "bg-white text-[#7a4f1f] border border-[#d7b47f] hover:bg-[#fff1d8]"
+              }`}
+            >
+              ॥ श्री हनुमान आरती ॥
+            </button>
           </div>
-          <div className="bg-white rounded-xl shadow-md p-6 text-center">
-            <h3 className="font-bold text-[#0d3b66] text-lg mb-2">Evening Aarti</h3>
-            <p className="text-gray-600">{data?.eveningTime ?? "04:00 PM – 09:00 PM"}</p>
+
+          {activePrayer && (
+            <div className="rounded-2xl bg-white border border-[#efd8b4] p-4 md:p-5">
+              <pre className="whitespace-pre-wrap font-sans text-[#503921] leading-8 text-sm md:text-base">
+                {activePrayer === "chalisa" ? HANUMAN_CHALISA_TEXT : HANUMAN_AARTI_TEXT}
+              </pre>
+            </div>
+          )}
+        </div>
+      </section>
+      <section className="py-16 max-w-6xl mx-auto px-4">
+        <div className="rounded-3xl border border-[#dbe8f4] bg-gradient-to-br from-[#f6fbff] via-[#ffffff] to-[#f8fcff] p-6 md:p-8 shadow-[0_14px_35px_rgba(13,59,102,0.08)]">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-4xl font-black text-[#123753]">{data?.title ?? "Kast Bhanjan Hanuman"}</h2>
+            <p className="text-[#4d5d68] text-base md:text-lg leading-relaxed max-w-4xl mx-auto mt-3">
+              {data?.about ??
+                "Our 63-foot Hanuman idol is a symbol of devotion and strength. The temple serves as a spiritual center for thousands of devotees and is the home of regular pujas, bhajans, and seva programs."}
+            </p>
           </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <article className="rounded-2xl border border-[#d6e5f4] bg-white p-5 shadow-sm">
+              <h3 className="font-black text-[#0d3b66] text-lg mb-2">Morning Darshan</h3>
+              <p className="text-[#4d5d68] mb-3">{data?.morningTime ?? "09:00 AM - 12:00 PM"}</p>
+              <button
+                type="button"
+                onClick={() => setShowMorningAarti((prev) => !prev)}
+                className="rounded-lg bg-[#0d3b66] text-white text-sm font-semibold px-4 py-2 hover:bg-[#124d84] transition"
+              >
+                Morning Aarti
+              </button>
+              {showMorningAarti && (
+                <pre className="mt-3 whitespace-pre-wrap rounded-xl border border-[#d8e5f3] bg-[#f6fbff] p-3 text-sm text-[#20415f] leading-7 font-sans">
+                  {MORNING_AARTI_TEXT}
+                </pre>
+              )}
+            </article>
+
+            <article className="rounded-2xl border border-[#efe0c6] bg-gradient-to-b from-[#fff8ea] to-[#fff3dd] p-5 shadow-sm">
+              <h3 className="font-black text-[#7a4f1f] text-lg mb-2">Afternoon Vishram</h3>
+              <p className="text-[#7b6244]">{data?.afternoonTime ?? "01:00 PM - 03:00 PM Vishram Time"}</p>
+              <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
+                <span className="rounded-lg border border-[#efdcb9] bg-white px-2 py-1 text-[#8a6b41] text-center">Mandir Silence</span>
+                <span className="rounded-lg border border-[#efdcb9] bg-white px-2 py-1 text-[#8a6b41] text-center">Maintenance</span>
+                <span className="rounded-lg border border-[#efdcb9] bg-white px-2 py-1 text-[#8a6b41] text-center">Deep Sajja</span>
+                <span className="rounded-lg border border-[#efdcb9] bg-white px-2 py-1 text-[#8a6b41] text-center">Prasad Prep</span>
+              </div>
+            </article>
+
+            <article className="rounded-2xl border border-[#d6e5f4] bg-white p-5 shadow-sm">
+              <h3 className="font-black text-[#0d3b66] text-lg mb-2">Evening Darshan</h3>
+              <p className="text-[#4d5d68] mb-3">{data?.eveningTime ?? "04:00 PM - 09:00 PM"}</p>
+              <button
+                type="button"
+                onClick={() => setShowEveningAarti((prev) => !prev)}
+                className="rounded-lg bg-[#c47508] text-white text-sm font-semibold px-4 py-2 hover:bg-[#a96305] transition"
+              >
+                Evening Aarti
+              </button>
+              {showEveningAarti && (
+                <pre className="mt-3 whitespace-pre-wrap rounded-xl border border-[#f0dcbf] bg-[#fff9ef] p-3 text-sm text-[#7a4f1f] leading-7 font-sans">
+                  {EVENING_AARTI_TEXT}
+                </pre>
+              )}
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-4 pb-12">
+        <div className="rounded-3xl border border-[#dfe7ef] bg-gradient-to-br from-[#f8fbff] via-[#ffffff] to-[#f3f8ff] p-6 md:p-8 shadow-[0_14px_35px_rgba(13,59,102,0.08)]">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-6">
+            <div>
+              <p className="text-xs font-semibold tracking-wider text-[#1f5b88] uppercase">Live Dashboard</p>
+              <h2 className="text-2xl md:text-4xl font-black text-[#123753]">Hanuman Ji Seva Schedule</h2>
+            </div>
+            <p className="text-sm text-[#4d5d68]">
+              Updated at{" "}
+              <span className="font-semibold text-[#123753]">
+                {now.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
+              </span>
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {HANUMAN_SEVA_FEATURES.map((item) => {
+              const status = getSevaStatus(item, now);
+              return (
+                <article
+                  key={item.title}
+                  className="rounded-2xl border border-[#dfe7ef] bg-white p-5 shadow-[0_8px_24px_rgba(13,59,102,0.06)]"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="text-lg md:text-xl font-bold text-[#0d3b66]">{item.title}</h3>
+                    <span className={`shrink-0 rounded-full border px-3 py-1 text-xs font-bold ${status.toneClass}`}>
+                      {status.label}
+                    </span>
+                  </div>
+                  <p className="text-[#4d5d68] mt-2">{item.desc}</p>
+                  <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                    <div className="rounded-lg bg-[#f7fbff] border border-[#e5eef7] px-3 py-2">
+                      <p className="text-[#5a6c79]">Time</p>
+                      <p className="font-semibold text-[#123753]">
+                        {to12h(item.start)} - {to12h(item.end)}
+                      </p>
+                    </div>
+                    <div className="rounded-lg bg-[#f7fbff] border border-[#e5eef7] px-3 py-2">
+                      <p className="text-[#5a6c79]">Volunteer Slots</p>
+                      <p className="font-semibold text-[#123753]">{item.volunteerSlots} active slots</p>
+                    </div>
+                    <div className="rounded-lg bg-[#f7fbff] border border-[#e5eef7] px-3 py-2 sm:col-span-2">
+                      <p className="text-[#5a6c79]">Location</p>
+                      <p className="font-semibold text-[#123753]">{item.place}</p>
+                    </div>
+                    <div className="rounded-lg bg-[#fff9ef] border border-[#f0e1c2] px-3 py-2 sm:col-span-2">
+                      <p className="text-[#7a5a24]">Next Window</p>
+                      <p className="font-semibold text-[#7a4f1f]">{status.detail}</p>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                    <Link
+                      to="/get-involved"
+                      className="inline-flex items-center justify-center rounded-lg bg-[#0d3b66] px-4 py-2 text-sm font-semibold text-white hover:bg-[#124d84] transition"
+                    >
+                      Join Seva
+                    </Link>
+                    <Link
+                      to="/donate"
+                      className="inline-flex items-center justify-center rounded-lg border border-[#c47508] bg-[#fff4df] px-4 py-2 text-sm font-semibold text-[#a96305] hover:bg-[#ffeac6] transition"
+                    >
+                      Donate
+                    </Link>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-4 pb-12">
+        <div className="rounded-3xl bg-gradient-to-r from-[#133a5a] to-[#1b5f7a] text-white p-6 md:p-8">
+          <h2 className="text-2xl md:text-4xl font-black mb-5 text-center">Blessings of Hanuman Bhakti</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {HANUMAN_BLESSINGS.map((point) => (
+              <div key={point} className="rounded-xl border border-white/25 bg-white/10 p-4">
+                {point}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-4 pb-12">
+        <h2 className="text-2xl md:text-4xl font-black text-[#1d2f3a] text-center mb-6">Hanuman Utsav & Programs</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {HANUMAN_UTSAV.map((item) => (
+            <article key={item.name} className="rounded-2xl bg-white border border-[#e3e9ef] p-5 shadow-sm">
+              <h3 className="text-lg md:text-xl font-bold text-[#0d3b66]">{item.name}</h3>
+              <p className="text-[#c47508] font-semibold mt-2">{item.time}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-4 pb-12">
+        <div className="rounded-3xl bg-[#fff6e8] border border-[#f2ddbc] p-6 md:p-8 text-center">
+          <h2 className="text-2xl md:text-4xl font-black text-[#7a4f1f] mb-3">Daily Hanuman Sadhana</h2>
+          <p className="text-[#7a4f1f]/90 max-w-3xl mx-auto">
+            Begin with "Om Hanumate Namah", recite Hanuman Chalisa with devotion, and conclude with deep daan and seva sankalp.
+            Consistent sadhana brings peace, protection, and divine energy in life.
+          </p>
         </div>
       </section>
 
@@ -41,3 +573,4 @@ export default memo(function MahamanidirPage() {
     </div>
   );
 });
+
