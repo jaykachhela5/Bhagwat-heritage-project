@@ -83,7 +83,7 @@ export const Footer = memo(function Footer() {
             </a>
           </div>
 
-          <div>
+          {/* <div>
             <h3 className="text-lg font-bold mb-3 text-[#ffd08a]">{t("footer.quickLinks")}</h3>
             <ul className="space-y-2 text-sm">
               {QUICK_LINKS.map((item) => (
@@ -94,7 +94,7 @@ export const Footer = memo(function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           <div>
             <h3 className="text-lg font-bold mb-3 text-[#ffd08a]">{t("footer.followUs")}</h3>

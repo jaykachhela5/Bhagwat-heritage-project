@@ -275,10 +275,97 @@ const HANUMAN_AARTI_TEXT = `॥ श्री हनुमान आरती ॥
 लंका विध्वंस किए रघुराई।
 तुलसीदास स्वामी कीर्ति गाई॥`;
 
+const JAY_KAPI_TEXT = `॥ जय कपि बलवंता ॥
+
+जय कपि बलवंता,
+प्रभु जय कपि बलवंता,
+सुर नर मुनिजन वंदित,
+सुर नर मुनिजन वंदित,
+पदरज हनुमंता,
+जय कपि बळवंता,
+प्रभु जय कपि बलवंता।।
+
+प्रौढ़ प्रताप पवनसुत,
+त्रिभुवन जयकारी,
+प्रभु त्रिभुवन जयकारी,
+असुर रिपु मद गंजन,
+असुर रिपु मद गंजन,
+भय संकट हारी,
+जय कपि बळवंता,
+प्रभु जय कपि बलवंता।।
+
+भूत पिशाच विकट ग्रह,
+पीड़त नही जम्पे,
+प्रभु पीड़त नही जम्पे,
+हनुमंत हाक सुनीने,
+हनुमंत हाक सुनीने,
+थर थर थर कंपे,
+प्रभु थर थर थर कंपे,
+जय कपि बळवंता,
+प्रभु जय कपि बलवंता।।
+
+रघुवीर सहाय ओढंग्यो,
+सागर आती भारी,
+प्रभु सागर आती भारी,
+सीता सोध ले आए,
+सीता सोध ले आए,
+कपि लंका जारी,
+जय कपि बळवंता,
+प्रभु जय कपि बलवंता।।
+
+राम चरण रतिदायक,
+शरणागत त्राता,
+प्रभु शरणागत त्राता,
+प्रेमानंद कहे हनुमत,
+प्रेमानंद कहे हनुमंत,
+वांछित फल दाता,
+जय कपि बळवंता,
+प्रभु जय कपि बलवंता।।
+
+जय कपि बळवंता,
+प्रभु जय कपि बळवंता,
+सुर नर मुनिजन वंदित,
+सुर नर मुनिजन वंदित,
+पदरज हनुमंता,
+जय कपि बळवंता,
+प्रभु जय कपि बलवंता।।`;
+
+const NITI_STOTRAM_TEXT = `॥ नीति प्रवीण स्तोत्रम ॥
+
+१.
+नीतिप्रवीण निगमागमशास्त्रबुद्धे राजाधिराज रघुकुंजवराधिराज!
+सिंदूरचर्चितकलेवर केंद्र श्री रामदूत हनुमन हर संकटम में॥
+सीता निमित्त रघुत्तम भूरिकष्ट-प्रोत्सारणैक सहायता निर्दयात पति राधने॥
+श्री रामदूत हनुमन हर संकटम में॥
+
+२.
+दुर्वार्यरावणविसर्जितशक्तिघात-कंठालक्ष्मणसुखातजीववल्ल!
+द्रोणाचलनयननन्दितरामपक्ष! श्री रामदूत हनुमन हर संकटम में॥
+
+३.
+रामागमोक्तितरिताळितबंध्वयोग-दुःखाब्धिमग्नभरतार्पितपारिबर्ह!
+रामांध्रिपद्ममधुपी भवदन्तरात्मन्! श्री रामदूत हनुमन हर संकटम में॥
+
+४.
+वातात्मकेसरिमहाकपिराट्तदीय-भार्यांजनीपुत्रतपःफलपुत्रभाव!
+तार्क्ष्योपमोचितवपुर्बलतीव्रवेग! श्री रामदूत हनुमन हर संकटम में॥
+
+५.
+नानाभिचारिकविसृष्टसवीरकृत्या-विद्रावणारुणसमीक्षणदुष्प्रधर्ष!
+रोगघ्नसत्सुतदवित्तदमन्रत्रजाप! श्री रामदूत हनुमन हर संकटम में॥
+
+६.
+यन्नामधेयपदकश्रुतिमात्रतोपि ये ब्रह्मराक्षसपिशाचगणाश्चभूता!
+ते मारिकाश्चसभयं ह्यपयान्ति सत्वं! श्री रामदूत हनुमन हर संकटम में॥
+
+७.
+त्वं भक्तमानससमीप्सितपूर्तिशक्तो दीनस्य दुर्मदसपत्नभयार्तिभाज!
+इष्टं ममापि परिपूरय पूर्णकाम! श्री रामदूत हनुमन हर संकटम में॥`;
+
 export default memo(function MahamanidirPage() {
   const { data } = useApi(() => mandirApi.get());
   const [activeSlide, setActiveSlide] = useState(0);
-  const [activePrayer, setActivePrayer] = useState<"chalisa" | "aarti" | null>(null);
+  const [activePrayer, setActivePrayer] = useState<"chalisa" | "aarti" | "kapiBala" | "nitiStotram" | null>(null);
   const [now, setNow] = useState(() => new Date());
   const [showMorningAarti, setShowMorningAarti] = useState(false);
   const [showEveningAarti, setShowEveningAarti] = useState(false);
@@ -331,35 +418,35 @@ export default memo(function MahamanidirPage() {
         <div className="p-5 md:p-7">
           <h2 className="text-2xl md:text-3xl font-black text-[#6a1b9a] text-center mb-5">Hanuman Paath</h2>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
-            <button
-              type="button"
-              onClick={() => setActivePrayer((prev) => (prev === "chalisa" ? null : "chalisa"))}
-              className={`rounded-full px-5 py-2.5 font-semibold transition ${
-                activePrayer === "chalisa"
-                  ? "bg-gradient-to-r from-[#6a1b9a] to-[#e91e63] text-white"
-                  : "bg-white text-[#6a1b9a] border border-[#e91e63]/40 hover:bg-[#fce4ec]"
-              }`}
-            >
-              ॥ श्री हनुमान चालीसा ॥
-            </button>
-            <button
-              type="button"
-              onClick={() => setActivePrayer((prev) => (prev === "aarti" ? null : "aarti"))}
-              className={`rounded-full px-5 py-2.5 font-semibold transition ${
-                activePrayer === "aarti"
-                  ? "bg-gradient-to-r from-[#6a1b9a] to-[#e91e63] text-white"
-                  : "bg-white text-[#6a1b9a] border border-[#e91e63]/40 hover:bg-[#fce4ec]"
-              }`}
-            >
-              ॥ श्री हनुमान आरती ॥
-            </button>
+          <div className="flex flex-wrap gap-3 justify-center mb-6">
+            {[
+              { key: "chalisa" as const, label: "॥ श्री हनुमान चालीसा ॥" },
+              { key: "aarti" as const, label: "॥ श्री हनुमान आरती ॥" },
+              { key: "kapiBala" as const, label: "॥ जय कपि बलवंता ॥" },
+              { key: "nitiStotram" as const, label: "॥ नीति प्रवीण स्तोत्रम ॥" },
+            ].map(({ key, label }) => (
+              <button
+                key={key}
+                type="button"
+                onClick={() => setActivePrayer((prev) => (prev === key ? null : key))}
+                className={`rounded-full px-5 py-2.5 font-semibold transition text-sm md:text-base ${
+                  activePrayer === key
+                    ? "bg-gradient-to-r from-[#6a1b9a] to-[#e91e63] text-white"
+                    : "bg-white text-[#6a1b9a] border border-[#e91e63]/40 hover:bg-[#fce4ec]"
+                }`}
+              >
+                {label}
+              </button>
+            ))}
           </div>
 
           {activePrayer && (
-            <div className="rounded-2xl bg-white border border-[#efd8b4] p-4 md:p-5">
+            <div className="rounded-2xl bg-white border border-[#efd8b4] p-4 md:p-6">
               <pre className="whitespace-pre-wrap font-sans text-[#503921] leading-8 text-sm md:text-base">
-                {activePrayer === "chalisa" ? HANUMAN_CHALISA_TEXT : HANUMAN_AARTI_TEXT}
+                {activePrayer === "chalisa" && HANUMAN_CHALISA_TEXT}
+                {activePrayer === "aarti" && HANUMAN_AARTI_TEXT}
+                {activePrayer === "kapiBala" && JAY_KAPI_TEXT}
+                {activePrayer === "nitiStotram" && NITI_STOTRAM_TEXT}
               </pre>
             </div>
           )}

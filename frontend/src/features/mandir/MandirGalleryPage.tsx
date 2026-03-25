@@ -26,10 +26,7 @@ const GALLERY_DATA: GalleryPhoto[] = [
   { id: "6", title: "Bhagwat geeta", category: "Bhagwat Katha", imageUrl: "https://res.cloudinary.com/der8zinu8/image/upload/v1772865019/geeta_kovakm.png", date: "2026-02-18", location: "Katha Mandap" },
   { id: "7", title: "Evening Deep Daan", category: "Temple Activities", imageUrl: "https://res.cloudinary.com/der8zinu8/image/upload/v1771829450/sanskriti_3_bhvx6q.png", date: "2026-02-20", location: "Mandir Prangan" },
   { id: "8", title: "Medical Camp Seva", category: "Social Work", imageUrl: "https://res.cloudinary.com/der8zinu8/image/upload/v1772865163/IMG20210131120908_yedz0w.jpg", date: "2026-02-23", location: "Service Wing" },
-  { id: "9", title: "Trust Volunteer Orientation", category: "Trust Members", imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80", date: "2026-02-26", location: "Seminar Room" },
-  { id: "10", title: "Cultural Devotional Evening", category: "Events", imageUrl: "https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1200&q=80", date: "2026-03-01", location: "Open Stage" },
   { id: "11", title: "Ghanshyam Maharaj ", category: "Bhagwat Katha", imageUrl: "https://res.cloudinary.com/der8zinu8/image/upload/v1772865479/IMG20211123174636_-_Copy_eegtvn.jpg", date: "2026-03-03", location: "Katha Mandap" },
-  { id: "12", title: "Temple Volunteer Seva", category: "Temple Activities", imageUrl: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80", date: "2026-03-05", location: "Temple Complex" },
 ];
 
 const PAGE_SIZE = 8;
