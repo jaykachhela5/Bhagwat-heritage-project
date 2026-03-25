@@ -3,7 +3,7 @@ import type { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../app/providers/AuthProvider";
-import { ROUTES } from "../../app/routes/routes";
+import { EXTERNAL_RAZORPAY_DONATE_URL, ROUTES } from "../../app/routes/routes";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
 interface NavChildConfig {
@@ -241,9 +241,14 @@ export const Navbar = memo(function Navbar() {
               </button>
             </>
           ) : (
-            <Link to={ROUTES.donate} className="btn-primary text-sm px-5 py-2.5 whitespace-nowrap">
+            <a
+              href={EXTERNAL_RAZORPAY_DONATE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary text-sm px-5 py-2.5 whitespace-nowrap"
+            >
               {t("navbar.donate")}
-            </Link>
+            </a>
           )}
           <LanguageSwitcher compact />
         </div>
@@ -299,9 +304,15 @@ export const Navbar = memo(function Navbar() {
               {t("navbar.logout")}
             </button>
           ) : (
-            <Link to={ROUTES.donate} className="btn-primary block text-center" onClick={() => setMobileOpen(false)}>
+            <a
+              href={EXTERNAL_RAZORPAY_DONATE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary block text-center"
+              onClick={() => setMobileOpen(false)}
+            >
               {t("navbar.donate")}
-            </Link>
+            </a>
           )}
         </div>
       ) : null}

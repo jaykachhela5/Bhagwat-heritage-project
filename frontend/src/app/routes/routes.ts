@@ -100,6 +100,10 @@ export const ROUTES = {
   },
 } as const;
 
+/** Razorpay payment request page — open in new tab from primary CTAs. */
+export const EXTERNAL_RAZORPAY_DONATE_URL =
+  "https://razorpay.me/@shreebhagwatheritageservicefo";
+
 export const LEGACY_ROUTES = {
   founderOld: "/about/manish-bhaiji",
   spiritualOld: "/mission/spiritual",

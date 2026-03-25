@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { ROUTES } from "../../app/routes/routes";
+import { EXTERNAL_RAZORPAY_DONATE_URL, ROUTES } from "../../app/routes/routes";
 import { ImpactCounter } from "../../components/ui/ImpactCounter";
 import { usePageMeta } from "../../hooks/usePageMeta";
 
@@ -149,7 +149,9 @@ function RamJanmotsavModal({ onClose }: { onClose: () => void }) {
               Close
             </button>
             <a
-              href="tel:+919822471551"
+              href={EXTERNAL_RAZORPAY_DONATE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex-1 bg-gradient-to-r from-[#ff6f00] to-[#b32e22] text-white font-semibold py-2.5 rounded-lg text-center hover:opacity-90 transition-opacity text-sm"
             >
               🙏 Register / Donate

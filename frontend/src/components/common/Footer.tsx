@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { ROUTES } from "../../app/routes/routes";
+import { EXTERNAL_RAZORPAY_DONATE_URL, ROUTES } from "../../app/routes/routes";
 
 const QUICK_LINKS = [
   { key: "footer.links.about", href: ROUTES.about.index },
@@ -34,12 +34,14 @@ export const Footer = memo(function Footer() {
             >
               {t("footer.becomeVolunteer")}
             </Link>
-            <Link
-              to={ROUTES.donate}
+            <a
+              href={EXTERNAL_RAZORPAY_DONATE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-lg bg-[#f1a15c] text-white px-5 py-2.5 font-semibold hover:bg-[#e48d45] transition-colors"
             >
               {t("footer.makeDonation")}
-            </Link>
+            </a>
           </div>
         </div>
 
