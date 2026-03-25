@@ -1,4 +1,5 @@
 import { memo, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { useApi } from "../../hooks/useApi";
 import { mandirApi } from "../../services/api/misc";
@@ -363,6 +364,7 @@ const NITI_STOTRAM_TEXT = `॥ नीति प्रवीण स्तोत�
 इष्टं ममापि परिपूरय पूर्णकाम! श्री रामदूत हनुमन हर संकटम में॥`;
 
 export default memo(function MahamanidirPage() {
+  const { t } = useTranslation();
   const { data } = useApi(() => mandirApi.get());
   const [activeSlide, setActiveSlide] = useState(0);
   const [activePrayer, setActivePrayer] = useState<"chalisa" | "aarti" | "kapiBala" | "nitiStotram" | null>(null);
@@ -386,44 +388,63 @@ export default memo(function MahamanidirPage() {
 
   return (
     <div className="bg-[#fce4ec]">
-      {/* Hero — full-width banner with text on the left */}
-      <section className="relative w-full overflow-hidden">
-        <img
-          src="/images/hanuman-banner-01.jpg"
-          alt="Hanuman Murti — Jay Shree Maharudra Kashthbhanjan"
-          className="w-full h-[55vh] md:h-[80vh] object-cover object-right"
-        />
-        {/* Text overlay on the left (pink cloud area) */}
-        <div className="absolute inset-0 flex items-center">
-          <div className="w-full md:w-1/2 px-6 md:px-12 lg:px-20">
-            <p className="inline-flex rounded-full border border-[#c98e35]/60 bg-white/60 backdrop-blur-sm px-4 py-1 text-xs md:text-sm font-semibold text-[#7a4f1f] mb-4">
-              Bhagwat Heritage Service Foundation Trust
-            </p>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight text-[#6a1b9a] drop-shadow-sm">
-              Jay Shree Maharudra Kashthbhanjan Hanuman Darshan
-            </h1>
-            <p className="text-base md:text-xl text-[#7a3f00] font-semibold mt-3">
-              Dham Chandrapur (Chichpalli), Maharashtra
-            </p>
-            <p className="text-sm md:text-base text-[#7a4f1f] mt-2 max-w-sm">
-              Welcome to the divine abode of Hanuman Ji Maharaj. Experience devotion, strength, and spiritual peace.
-            </p>
+      {/* Hero — full-width banner */}
+      <section className="w-full bg-[#fce4ec]">
+        {/* Image — shorter on mobile, taller on desktop */}
+        <div className="relative w-full overflow-hidden">
+          <img
+            src="/images/hanuman-banner-01.jpg"
+            alt={t("hanumanPage.heroTitle")}
+            className="w-full h-[45vw] min-h-[220px] md:h-[80vh] object-cover object-right"
+          />
+          {/* Desktop-only text overlay on the left pink-cloud area */}
+          <div className="hidden md:flex absolute inset-0 items-center">
+            <div className="w-1/2 px-12 lg:px-20">
+              <p className="inline-flex rounded-full border border-[#c98e35]/60 bg-white/60 backdrop-blur-sm px-4 py-1 text-sm font-semibold text-[#7a4f1f] mb-4">
+                {t("hanumanPage.heroBadge")}
+              </p>
+              <h1 className="text-4xl lg:text-6xl font-black leading-tight text-[#6a1b9a] drop-shadow-sm">
+                {t("hanumanPage.heroTitle")}
+              </h1>
+              <p className="text-xl text-[#7a3f00] font-semibold mt-3">
+                {t("hanumanPage.heroLocation")}
+              </p>
+              <p className="text-base text-[#7a4f1f] mt-2 max-w-sm">
+                {t("hanumanPage.heroWelcome")}
+              </p>
+            </div>
           </div>
+          {/* Bottom fade */}
+          <div className="hidden md:block absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#fce4ec] to-transparent pointer-events-none" />
         </div>
-        {/* Bottom fade into page background */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#fce4ec] to-transparent pointer-events-none" />
+
+        {/* Mobile-only text block below the image */}
+        <div className="md:hidden px-5 py-6">
+          <p className="inline-flex rounded-full border border-[#c98e35]/60 bg-white/80 px-3 py-1 text-xs font-semibold text-[#7a4f1f] mb-3">
+            {t("hanumanPage.heroBadge")}
+          </p>
+          <h1 className="text-2xl sm:text-3xl font-black leading-tight text-[#6a1b9a] mb-2">
+            {t("hanumanPage.heroTitle")}
+          </h1>
+          <p className="text-sm sm:text-base text-[#7a3f00] font-semibold mb-1">
+            {t("hanumanPage.heroLocation")}
+          </p>
+          <p className="text-sm text-[#7a4f1f]">
+            {t("hanumanPage.heroWelcome")}
+          </p>
+        </div>
       </section>
 
       <section className="max-w-6xl mx-auto px-4 py-10">
         <div className="p-5 md:p-7">
-          <h2 className="text-2xl md:text-3xl font-black text-[#6a1b9a] text-center mb-5">Hanuman Paath</h2>
+          <h2 className="text-2xl md:text-3xl font-black text-[#6a1b9a] text-center mb-5">{t("hanumanPage.paathTitle")}</h2>
 
           <div className="flex flex-wrap gap-3 justify-center mb-6">
             {[
-              { key: "chalisa" as const, label: "॥ श्री हनुमान चालीसा ॥" },
-              { key: "aarti" as const, label: "॥ श्री हनुमान आरती ॥" },
-              { key: "kapiBala" as const, label: "॥ जय कपि बलवंता ॥" },
-              { key: "nitiStotram" as const, label: "॥ नीति प्रवीण स्तोत्रम ॥" },
+              { key: "chalisa" as const, label: t("hanumanPage.btnChalisa") },
+              { key: "aarti" as const, label: t("hanumanPage.btnAarti") },
+              { key: "kapiBala" as const, label: t("hanumanPage.btnKapiBala") },
+              { key: "nitiStotram" as const, label: t("hanumanPage.btnNitiStotram") },
             ].map(({ key, label }) => (
               <button
                 key={key}
@@ -458,23 +479,22 @@ export default memo(function MahamanidirPage() {
 
       <section className="py-16 max-w-6xl mx-auto px-4">
         <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-4xl font-black text-[#6a1b9a]">{data?.title ?? "Kast Bhanjan Hanuman"}</h2>
+            <h2 className="text-2xl md:text-4xl font-black text-[#6a1b9a]">{data?.title ?? t("hanumanPage.darshantimingsTitle")}</h2>
             <p className="text-[#4d5d68] text-base md:text-lg leading-relaxed max-w-4xl mx-auto mt-3">
-              {data?.about ??
-                "Our 63-foot Hanuman idol is a symbol of devotion and strength. The temple serves as a spiritual center for thousands of devotees and is the home of regular pujas, bhajans, and seva programs."}
+              {data?.about ?? t("hanumanPage.darshantimingsDesc")}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             <article className="rounded-2xl border border-[#e91e63]/20 bg-gradient-to-b from-[#fce4ec] to-white p-5 shadow-sm">
-              <h3 className="font-black text-[#6a1b9a] text-lg mb-2">Morning Darshan</h3>
+              <h3 className="font-black text-[#6a1b9a] text-lg mb-2">{t("hanumanPage.morningTitle")}</h3>
               <p className="text-[#4d5d68] mb-3">{data?.morningTime ?? "09:00 AM - 12:00 PM"}</p>
               <button
                 type="button"
                 onClick={() => setShowMorningAarti((prev) => !prev)}
                 className="rounded-lg bg-gradient-to-r from-[#6a1b9a] to-[#e91e63] text-white text-sm font-semibold px-4 py-2 transition"
               >
-                Morning Aarti
+                {t("hanumanPage.morningAartiBtn")}
               </button>
               {showMorningAarti && (
                 <pre className="mt-3 whitespace-pre-wrap rounded-xl border border-[#d8e5f3] bg-[#f6fbff] p-3 text-sm text-[#20415f] leading-7 font-sans">
@@ -484,25 +504,24 @@ export default memo(function MahamanidirPage() {
             </article>
 
             <article className="rounded-2xl border border-[#f57c00]/30 bg-gradient-to-b from-[#fce4ec] to-white p-5 shadow-sm">
-              <h3 className="font-black text-[#f57c00] text-lg mb-2">Afternoon Vishram</h3>
+              <h3 className="font-black text-[#f57c00] text-lg mb-2">{t("hanumanPage.afternoonTitle")}</h3>
               <p className="text-[#7b6244]">{data?.afternoonTime ?? "01:00 PM - 03:00 PM Vishram Time"}</p>
               <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
-                <span className="rounded-lg border border-[#efdcb9] bg-white px-2 py-1 text-[#8a6b41] text-center">Mandir Silence</span>
-                <span className="rounded-lg border border-[#efdcb9] bg-white px-2 py-1 text-[#8a6b41] text-center">Maintenance</span>
-                <span className="rounded-lg border border-[#efdcb9] bg-white px-2 py-1 text-[#8a6b41] text-center">Deep Sajja</span>
-                <span className="rounded-lg border border-[#efdcb9] bg-white px-2 py-1 text-[#8a6b41] text-center">Prasad Prep</span>
+                {(t("hanumanPage.afternoonTags", { returnObjects: true }) as string[]).map((tag) => (
+                  <span key={tag} className="rounded-lg border border-[#efdcb9] bg-white px-2 py-1 text-[#8a6b41] text-center">{tag}</span>
+                ))}
               </div>
             </article>
 
             <article className="rounded-2xl border border-[#e91e63]/20 bg-gradient-to-b from-[#fce4ec] to-white p-5 shadow-sm">
-              <h3 className="font-black text-[#6a1b9a] text-lg mb-2">Evening Darshan</h3>
+              <h3 className="font-black text-[#6a1b9a] text-lg mb-2">{t("hanumanPage.eveningTitle")}</h3>
               <p className="text-[#4d5d68] mb-3">{data?.eveningTime ?? "04:00 PM - 09:00 PM"}</p>
               <button
                 type="button"
                 onClick={() => setShowEveningAarti((prev) => !prev)}
                 className="rounded-lg bg-gradient-to-r from-[#f57c00] to-[#f9a825] text-white text-sm font-semibold px-4 py-2 transition"
               >
-                Evening Aarti
+                {t("hanumanPage.eveningAartiBtn")}
               </button>
               {showEveningAarti && (
                 <pre className="mt-3 whitespace-pre-wrap rounded-xl border border-[#f0dcbf] bg-[#fff9ef] p-3 text-sm text-[#7a4f1f] leading-7 font-sans">
@@ -595,9 +614,9 @@ export default memo(function MahamanidirPage() {
 
       <section className="max-w-6xl mx-auto px-4 pb-12">
         <div className="rounded-3xl bg-gradient-to-r from-[#6a1b9a] to-[#e91e63] text-white p-6 md:p-8">
-          <h2 className="text-2xl md:text-4xl font-black mb-5 text-center">Blessings of Hanuman Bhakti</h2>
+          <h2 className="text-2xl md:text-4xl font-black mb-5 text-center">{t("hanumanPage.blessingsTitle")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {HANUMAN_BLESSINGS.map((point) => (
+            {(t("hanumanPage.blessings", { returnObjects: true }) as string[]).map((point) => (
               <div key={point} className="rounded-xl border border-white/25 bg-white/10 p-4">
                 {point}
               </div>
@@ -611,9 +630,9 @@ export default memo(function MahamanidirPage() {
       </div>
 
       <section className="max-w-6xl mx-auto px-4 pb-12">
-        <h2 className="text-2xl md:text-4xl font-black text-[#6a1b9a] text-center mb-6">Hanuman Utsav & Programs</h2>
+        <h2 className="text-2xl md:text-4xl font-black text-[#6a1b9a] text-center mb-6">{t("hanumanPage.utsavTitle")}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {HANUMAN_UTSAV.map((item) => (
+          {(t("hanumanPage.utsavPrograms", { returnObjects: true }) as { name: string; time: string }[]).map((item) => (
             <article key={item.name} className="rounded-2xl bg-gradient-to-b from-[#fce4ec] to-white border border-[#e91e63]/20 p-5 shadow-sm">
               <h3 className="text-lg md:text-xl font-bold text-[#6a1b9a]">{item.name}</h3>
               <p className="text-[#f57c00] font-semibold mt-2">{item.time}</p>
@@ -627,16 +646,13 @@ export default memo(function MahamanidirPage() {
       </div>
 
       <section className="max-w-6xl mx-auto px-4 pb-12 text-center">
-        <h2 className="text-2xl md:text-4xl font-black text-[#6a1b9a] mb-3">Daily Hanuman Sadhana</h2>
-        <p className="text-[#6a1b9a]/80 max-w-3xl mx-auto">
-          Begin with "Om Hanumate Namah", recite Hanuman Chalisa with devotion, and conclude with deep daan and seva sankalp.
-          Consistent sadhana brings peace, protection, and divine energy in life.
-        </p>
+        <h2 className="text-2xl md:text-4xl font-black text-[#6a1b9a] mb-3">{t("hanumanPage.sadhanaTitle")}</h2>
+        <p className="text-[#6a1b9a]/80 max-w-3xl mx-auto">{t("hanumanPage.sadhanaText")}</p>
       </section>
 
       <div className="text-center pb-12 flex flex-wrap items-center justify-center gap-4">
-        <Link to="/mandir/gallery" className="bg-gradient-to-r from-[#6a1b9a] to-[#e91e63] text-white rounded-lg px-6 py-3 font-semibold">View Gallery</Link>
-        <Link to="/get-involved" className="bg-gradient-to-r from-[#f57c00] to-[#f9a825] text-white rounded-lg px-6 py-3 font-semibold">Plan a Visit</Link>
+        <Link to="/mandir/gallery" className="bg-gradient-to-r from-[#6a1b9a] to-[#e91e63] text-white rounded-lg px-6 py-3 font-semibold">{t("hanumanPage.viewGallery")}</Link>
+        <Link to="/get-involved" className="bg-gradient-to-r from-[#f57c00] to-[#f9a825] text-white rounded-lg px-6 py-3 font-semibold">{t("hanumanPage.planVisit")}</Link>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState, useRef, useEffect } from "react";
+import { lazy, Suspense, useState, useRef, useEffect, useLayoutEffect, type RefObject } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./app/providers/AuthProvider";
 import { CartProvider } from "./app/providers/CartProvider";
@@ -88,7 +88,7 @@ function PageLoader() {
   );
 }
 
-function SiteHeader() {
+function SiteHeader({ headerRef }: { headerRef: RefObject<HTMLDivElement | null> }) {
   const [hidden, setHidden] = useState(false);
   const lastScroll = useRef(0);
   useEffect(() => {
@@ -101,7 +101,10 @@ function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <div className={`fixed top-0 w-full z-50 transition-transform duration-300 ${hidden ? "-translate-y-full" : "translate-y-0"}`}>
+    <div
+      ref={headerRef}
+      className={`fixed top-0 w-full z-50 transition-transform duration-300 ${hidden ? "-translate-y-full" : "translate-y-0"}`}
+    >
       <MarqueeBar />
       <Navbar />
     </div>
@@ -109,13 +112,34 @@ function SiteHeader() {
 }
 
 export default function App() {
+  const headerRef = useRef<HTMLDivElement | null>(null);
+  const [headerHeight, setHeaderHeight] = useState(128);
+
+  useLayoutEffect(() => {
+    const recalc = () => {
+      const h = headerRef.current?.offsetHeight;
+      if (h == null) return;
+      setHeaderHeight((prev) => (Math.abs(prev - h) > 0.5 ? h : prev));
+    };
+
+    // Initial measure + measure after first paint (fonts/images may affect layout).
+    recalc();
+    const raf = window.requestAnimationFrame(recalc);
+    window.addEventListener("resize", recalc);
+
+    return () => {
+      window.cancelAnimationFrame(raf);
+      window.removeEventListener("resize", recalc);
+    };
+  }, []);
+
   return (
     <BrowserRouter>
       <ErrorBoundary>
         <AuthProvider>
           <CartProvider>
-            <SiteHeader />
-            <main className="pt-[130px]">
+            <SiteHeader headerRef={headerRef} />
+            <main style={{ paddingTop: headerHeight }}>
               <Suspense fallback={<PageLoader />}>
                 <Routes>
                   <Route path={ROUTES.home} element={<HomePage />} />

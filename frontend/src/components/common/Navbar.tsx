@@ -201,16 +201,16 @@ export const Navbar = memo(function Navbar() {
 
   return (
     <header className="bg-white shadow-md w-full">
-      <div className="w-full max-w-[1920px] mx-auto px-4 lg:px-6 2xl:px-8 min-h-[92px] py-3 xl:grid xl:grid-cols-[auto_1fr_auto] xl:items-center xl:gap-3">
+      <div className="w-full max-w-[1920px] mx-auto px-4 lg:px-6 2xl:px-8 py-3 flex items-center justify-between xl:grid xl:grid-cols-[auto_1fr_auto] xl:items-center xl:gap-3">
         <Link
           to={ROUTES.home}
           className="flex min-w-0 max-w-[340px] items-center gap-3 md:max-w-[410px] md:gap-4 xl:max-w-[430px]"
         >
-          <div className="flex h-16 w-16 md:h-20 md:w-20 shrink-0 items-center justify-center overflow-hidden">
+          <div className="flex h-10 w-10 sm:h-14 sm:w-14 md:h-20 md:w-20 shrink-0 items-center justify-center overflow-hidden">
             <img src="/images/logo.jpg" alt={t("brand.logoAlt")} className="h-full w-full object-contain" />
           </div>
           <div className="min-w-0 leading-none">
-            <p className="text-[0.98rem] sm:text-[1.08rem] lg:text-[1.22rem] text-[#0d3b66] font-extrabold leading-tight whitespace-normal">
+            <p className="text-[0.82rem] sm:text-[0.98rem] lg:text-[1.22rem] text-[#0d3b66] font-extrabold leading-tight whitespace-normal">
               <span className="block">{t("brand.title")}</span>
               <span className="block text-[12px] sm:text-[13px] lg:text-[14px] font-semibold text-[#60758c]">
                 {t("brand.subtitle")}

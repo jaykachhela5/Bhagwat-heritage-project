@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 
-const SUPPORTED_LANGUAGES = ["en", "hi", "mr", "gu", "bn", "ta", "te", "kn", "pa", "sa"] as const;
+const SUPPORTED_LANGUAGES = ["en", "hi", "gu", "mr"] as const;
 
 interface LanguageSwitcherProps {
   className?: string;
