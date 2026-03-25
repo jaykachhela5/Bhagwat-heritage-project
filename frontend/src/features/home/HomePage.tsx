@@ -12,6 +12,7 @@ const HERO_SLIDES = [
   "https://res.cloudinary.com/der8zinu8/image/upload/v1772647646/hero4_giyget.png",
 ];
 
+/* COMMENTED OUT — Section 4
 const SEVA_HIGHLIGHT_META = [
   {
     link: ROUTES.seva.gau,
@@ -26,6 +27,7 @@ const SEVA_HIGHLIGHT_META = [
     image: "https://res.cloudinary.com/der8zinu8/image/upload/v1771583760/chikitsa_q2seq1.png",
   },
 ];
+*/
 
 const EVENT_META = [
   { href: ROUTES.eventsKatha.bhagwatKatha },
@@ -33,6 +35,7 @@ const EVENT_META = [
   { href: ROUTES.eventsKatha.annakut },
 ];
 
+/* COMMENTED OUT — Section 4
 const GALLERY_META = [
   {
     href: ROUTES.media.photos,
@@ -65,6 +68,7 @@ const GALLERY_META = [
     altKey: "home.galleryAlts.katha",
   },
 ];
+*/
 
 interface TextCard {
   title: string;
@@ -84,7 +88,8 @@ export default memo(function HomePage() {
     return () => window.clearInterval(timer);
   }, []);
 
-  const sevaHighlights = t("home.sevaHighlights", { returnObjects: true }) as TextCard[];
+  // COMMENTED OUT — Section 4
+  // const sevaHighlights = t("home.sevaHighlights", { returnObjects: true }) as TextCard[];
   const upcomingEvents = t("home.upcomingEvents", { returnObjects: true }) as TextCard[];
   const impactItems = [
     { label: t("home.impact.livesTouched"), target: 50000 },
@@ -138,7 +143,7 @@ export default memo(function HomePage() {
       </section>
 
       <section className="py-2 px-4">
-        <div className="max-w-5xl mx-auto rounded-2xl border border-[#dce8f5] bg-white p-6 md:p-8 shadow-sm">
+        <div className="w-full rounded-2xl border border-[#dce8f5] bg-white p-6 md:p-8 shadow-sm">
           <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-6 md:gap-8 items-center">
             <div className="mx-auto w-full max-w-[220px]">
               <div className="rounded-2xl border border-[#e0e8f0] bg-[#f6f8fb] p-2 shadow-sm">
@@ -165,6 +170,7 @@ export default memo(function HomePage() {
         </div>
       </section>
 
+      {/* COMMENTED OUT — Section 4: Seva Highlights
       <section className="py-16 max-w-6xl mx-auto px-4">
         <h2 className="section-title">{t("home.sevaHighlightsTitle")}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -187,10 +193,11 @@ export default memo(function HomePage() {
           ))}
         </div>
       </section>
+      */}
 
       <section className="max-w-6xl mx-auto px-4 pb-12">
         <h2 className="section-title">{t("home.upcomingEventsTitle")}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {upcomingEvents.map((event, index) => (
             <article key={event.title} className="rounded-2xl border border-[#dce8f5] bg-white p-5 shadow-sm">
               <h3 className="text-xl font-black text-[#123753]">{event.title}</h3>
@@ -205,6 +212,7 @@ export default memo(function HomePage() {
 
       <ImpactCounter items={impactItems} />
 
+      {/* COMMENTED OUT — Section 4: Gallery Preview
       <section className="py-16 max-w-6xl mx-auto px-4">
         <h2 className="section-title">{t("home.galleryTitle")}</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -220,6 +228,7 @@ export default memo(function HomePage() {
           ))}
         </div>
       </section>
+      */}
 
       <section className="py-16 px-4 bg-[#eef0f3]">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">

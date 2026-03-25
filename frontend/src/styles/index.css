@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-blue: #1166a3;
+  --color-brand-blue-light: #4abdca;
+  --color-brand-green: #8abe51;
+  --color-brand-green-light: #d2d183;
+  --color-brand-yellow: #ed9b24;
+  --color-brand-yellow-light: #edca56;
+  --color-brand-orange: #ff6a00;
+  --color-brand-orange-light: #fec758;
+  --color-brand-red: #b32e22;
+  --color-brand-red-light: #e03a24;
+}
+
 @layer base {
   * {
     box-sizing: border-box;
@@ -10,6 +23,7 @@
   body {
     font-family: "Poppins", sans-serif;
     @apply text-gray-900 bg-white;
+    overflow-x: hidden;
   }
 
   a {

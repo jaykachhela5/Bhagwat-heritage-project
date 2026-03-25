@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState, useRef, useEffect } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./app/providers/AuthProvider";
 import { CartProvider } from "./app/providers/CartProvider";
@@ -88,15 +88,34 @@ function PageLoader() {
   );
 }
 
+function SiteHeader() {
+  const [hidden, setHidden] = useState(false);
+  const lastScroll = useRef(0);
+  useEffect(() => {
+    const onScroll = () => {
+      const current = window.scrollY;
+      setHidden(current > lastScroll.current && current > 10);
+      lastScroll.current = current;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <div className={`fixed top-0 w-full z-50 transition-transform duration-300 ${hidden ? "-translate-y-full" : "translate-y-0"}`}>
+      <MarqueeBar />
+      <Navbar />
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <BrowserRouter>
       <ErrorBoundary>
         <AuthProvider>
           <CartProvider>
-            <MarqueeBar />
-            <Navbar />
-            <main>
+            <SiteHeader />
+            <main className="pt-[130px]">
               <Suspense fallback={<PageLoader />}>
                 <Routes>
                   <Route path={ROUTES.home} element={<HomePage />} />

@@ -21,8 +21,12 @@ interface NavItemConfig {
 
 const NAV_ITEMS: NavItemConfig[] = [
   { id: "home", labelKey: "navbar.items.home", href: ROUTES.home },
+  { id: "about", labelKey: "navbar.items.about", href: ROUTES.about.index },
+  { id: "founder", labelKey: "navbar.items.founder", href: ROUTES.about.founder },
+  { id: "hanuman-murti", labelKey: "navbar.items.hanuman", href: ROUTES.mandirTeerth.hanuman },
+  /* COMMENTED OUT — Section 6: all other nav items
   {
-    id: "about",
+    id: "about-dropdown",
     labelKey: "navbar.items.about",
     children: [
       { id: "about-overview", labelKey: "navbar.items.aboutOverview", href: ROUTES.about.index },
@@ -126,6 +130,7 @@ const NAV_ITEMS: NavItemConfig[] = [
     ],
   },
   { id: "contact", labelKey: "navbar.items.contact", href: ROUTES.contact },
+  */
 ];
 
 const DropdownItem = memo(function DropdownItem({ item, t }: { item: NavItemConfig; t: TFunction }) {
@@ -195,13 +200,13 @@ export const Navbar = memo(function Navbar() {
         : ROUTES.dashboards.volunteer;
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-40">
+    <header className="bg-white shadow-md w-full">
       <div className="w-full max-w-[1920px] mx-auto px-4 lg:px-6 2xl:px-8 min-h-[92px] py-3 xl:grid xl:grid-cols-[auto_1fr_auto] xl:items-center xl:gap-3">
         <Link
           to={ROUTES.home}
           className="flex min-w-0 max-w-[340px] items-center gap-3 md:max-w-[410px] md:gap-4 xl:max-w-[430px]"
         >
-          <div className="flex h-16 w-16 md:h-20 md:w-20 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-[#d8e4f2] bg-[linear-gradient(180deg,#fff8ef_0%,#eef7ff_100%)] p-1 shadow-sm">
+          <div className="flex h-16 w-16 md:h-20 md:w-20 shrink-0 items-center justify-center overflow-hidden">
             <img src="/images/logo.jpg" alt={t("brand.logoAlt")} className="h-full w-full object-contain" />
           </div>
           <div className="min-w-0 leading-none">

@@ -298,73 +298,38 @@ export default memo(function MahamanidirPage() {
   }, []);
 
   return (
-    <div>
-      <section className="max-w-6xl mx-auto px-4 pt-8 md:pt-10">
-        
-        <div className="relative overflow-hidden rounded-[28px] h-[280px] md:h-[430px] shadow-[0_14px_35px_rgba(13,45,78,0.22)]">
-          {HERO_IMAGES.map((src, index) => (
-            <img
-              key={src}
-              src={src}
-              alt={`Hanuman Ji ${index + 1}`}
-              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-                activeSlide === index ? "opacity-100" : "opacity-0"
-              }`}
-            />
-          ))}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-transparent" />
-
-          <button
-            type="button"
-            onClick={() => setActiveSlide((prev) => (prev - 1 + HERO_IMAGES.length) % HERO_IMAGES.length)}
-            className="absolute left-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-black/40 text-white hover:bg-black/55"
-            aria-label="Previous slide"
-          >
-            <i className="fas fa-chevron-left" />
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveSlide((prev) => (prev + 1) % HERO_IMAGES.length)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full bg-black/40 text-white hover:bg-black/55"
-            aria-label="Next slide"
-          >
-            <i className="fas fa-chevron-right" />
-          </button>
-
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2">
-            {HERO_IMAGES.map((_, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => setActiveSlide(idx)}
-                aria-label={`Go to slide ${idx + 1}`}
-                className={`h-2.5 rounded-full transition-all ${activeSlide === idx ? "w-6 bg-white" : "w-2.5 bg-white/50"}`}
-              />
-            ))}
+    <div className="bg-[#fce4ec]">
+      {/* Hero — full-width banner with text on the left */}
+      <section className="relative w-full overflow-hidden">
+        <img
+          src="/images/hanuman-banner-01.jpg"
+          alt="Hanuman Murti — Jay Shree Maharudra Kashthbhanjan"
+          className="w-full h-[55vh] md:h-[80vh] object-cover object-right"
+        />
+        {/* Text overlay on the left (pink cloud area) */}
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full md:w-1/2 px-6 md:px-12 lg:px-20">
+            <p className="inline-flex rounded-full border border-[#c98e35]/60 bg-white/60 backdrop-blur-sm px-4 py-1 text-xs md:text-sm font-semibold text-[#7a4f1f] mb-4">
+              Bhagwat Heritage Service Foundation Trust
+            </p>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight text-[#6a1b9a] drop-shadow-sm">
+              Jay Shree Maharudra Kashthbhanjan Hanuman Darshan
+            </h1>
+            <p className="text-base md:text-xl text-[#7a3f00] font-semibold mt-3">
+              Dham Chandrapur (Chichpalli), Maharashtra
+            </p>
+            <p className="text-sm md:text-base text-[#7a4f1f] mt-2 max-w-sm">
+              Welcome to the divine abode of Hanuman Ji Maharaj. Experience devotion, strength, and spiritual peace.
+            </p>
           </div>
         </div>
-      </section>
-
-      <section className="max-w-6xl mx-auto px-4 pt-6">
-        <div className="mb-4 rounded-2xl border border-[#f0dcc0] bg-[#fff7e8] px-4 py-3 text-center shadow-sm">
-          <p className="text-sm md:text-base font-medium text-[#7a4f1f]">
-            Welcome to the divine abode of Hanuman Ji Maharaj. Experience devotion, strength, and spiritual peace at Mahamandir.
-          </p>
-        </div>
-        <div className="rounded-3xl border border-[#f2ddbc] bg-gradient-to-r from-[#fff7e8] via-[#fff2da] to-[#ffe8c2] p-6 md:p-8 text-center shadow-[0_12px_28px_rgba(122,79,31,0.14)]">
-          <p className="inline-flex rounded-full border border-[#c98e35]/40 bg-white/70 px-4 py-1 text-xs md:text-sm font-semibold text-[#7a4f1f] mb-3">
-            Bhagwat Heritage Service Foundation Trust
-          </p>
-          <h1 className="text-2xl md:text-5xl font-black leading-tight text-[#7a3f00]">
-            Jay Shree Maharudra Kashthbhanjan Hanuman Darshan
-          </h1>
-          <p className="text-sm md:text-xl text-[#8a5720] mt-2">Dham Chandrapur (Chichpalli), Maharashtra</p>
-        </div>
+        {/* Bottom fade into page background */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#fce4ec] to-transparent pointer-events-none" />
       </section>
 
       <section className="max-w-6xl mx-auto px-4 py-10">
-        <div className="rounded-3xl border border-[#f1ddbf] bg-[#fff8ea] p-5 md:p-7 shadow-sm">
-          <h2 className="text-2xl md:text-3xl font-black text-[#7a4f1f] text-center mb-5">Hanuman Paath</h2>
+        <div className="p-5 md:p-7">
+          <h2 className="text-2xl md:text-3xl font-black text-[#6a1b9a] text-center mb-5">Hanuman Paath</h2>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
             <button
@@ -372,8 +337,8 @@ export default memo(function MahamanidirPage() {
               onClick={() => setActivePrayer((prev) => (prev === "chalisa" ? null : "chalisa"))}
               className={`rounded-full px-5 py-2.5 font-semibold transition ${
                 activePrayer === "chalisa"
-                  ? "bg-[#c47508] text-white"
-                  : "bg-white text-[#7a4f1f] border border-[#d7b47f] hover:bg-[#fff1d8]"
+                  ? "bg-gradient-to-r from-[#6a1b9a] to-[#e91e63] text-white"
+                  : "bg-white text-[#6a1b9a] border border-[#e91e63]/40 hover:bg-[#fce4ec]"
               }`}
             >
               ॥ श्री हनुमान चालीसा ॥
@@ -383,8 +348,8 @@ export default memo(function MahamanidirPage() {
               onClick={() => setActivePrayer((prev) => (prev === "aarti" ? null : "aarti"))}
               className={`rounded-full px-5 py-2.5 font-semibold transition ${
                 activePrayer === "aarti"
-                  ? "bg-[#c47508] text-white"
-                  : "bg-white text-[#7a4f1f] border border-[#d7b47f] hover:bg-[#fff1d8]"
+                  ? "bg-gradient-to-r from-[#6a1b9a] to-[#e91e63] text-white"
+                  : "bg-white text-[#6a1b9a] border border-[#e91e63]/40 hover:bg-[#fce4ec]"
               }`}
             >
               ॥ श्री हनुमान आरती ॥
@@ -400,10 +365,13 @@ export default memo(function MahamanidirPage() {
           )}
         </div>
       </section>
+      <div className="max-w-6xl mx-auto px-4 py-4">
+        <div className="bg-gradient-to-r from-[#e91e63] via-[#f57c00] to-[#f9a825] h-1 rounded-full" />
+      </div>
+
       <section className="py-16 max-w-6xl mx-auto px-4">
-        <div className="rounded-3xl border border-[#dbe8f4] bg-gradient-to-br from-[#f6fbff] via-[#ffffff] to-[#f8fcff] p-6 md:p-8 shadow-[0_14px_35px_rgba(13,59,102,0.08)]">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-4xl font-black text-[#123753]">{data?.title ?? "Kast Bhanjan Hanuman"}</h2>
+        <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-4xl font-black text-[#6a1b9a]">{data?.title ?? "Kast Bhanjan Hanuman"}</h2>
             <p className="text-[#4d5d68] text-base md:text-lg leading-relaxed max-w-4xl mx-auto mt-3">
               {data?.about ??
                 "Our 63-foot Hanuman idol is a symbol of devotion and strength. The temple serves as a spiritual center for thousands of devotees and is the home of regular pujas, bhajans, and seva programs."}
@@ -411,13 +379,13 @@ export default memo(function MahamanidirPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <article className="rounded-2xl border border-[#d6e5f4] bg-white p-5 shadow-sm">
-              <h3 className="font-black text-[#0d3b66] text-lg mb-2">Morning Darshan</h3>
+            <article className="rounded-2xl border border-[#e91e63]/20 bg-gradient-to-b from-[#fce4ec] to-white p-5 shadow-sm">
+              <h3 className="font-black text-[#6a1b9a] text-lg mb-2">Morning Darshan</h3>
               <p className="text-[#4d5d68] mb-3">{data?.morningTime ?? "09:00 AM - 12:00 PM"}</p>
               <button
                 type="button"
                 onClick={() => setShowMorningAarti((prev) => !prev)}
-                className="rounded-lg bg-[#0d3b66] text-white text-sm font-semibold px-4 py-2 hover:bg-[#124d84] transition"
+                className="rounded-lg bg-gradient-to-r from-[#6a1b9a] to-[#e91e63] text-white text-sm font-semibold px-4 py-2 transition"
               >
                 Morning Aarti
               </button>
@@ -428,8 +396,8 @@ export default memo(function MahamanidirPage() {
               )}
             </article>
 
-            <article className="rounded-2xl border border-[#efe0c6] bg-gradient-to-b from-[#fff8ea] to-[#fff3dd] p-5 shadow-sm">
-              <h3 className="font-black text-[#7a4f1f] text-lg mb-2">Afternoon Vishram</h3>
+            <article className="rounded-2xl border border-[#f57c00]/30 bg-gradient-to-b from-[#fce4ec] to-white p-5 shadow-sm">
+              <h3 className="font-black text-[#f57c00] text-lg mb-2">Afternoon Vishram</h3>
               <p className="text-[#7b6244]">{data?.afternoonTime ?? "01:00 PM - 03:00 PM Vishram Time"}</p>
               <div className="mt-4 grid grid-cols-2 gap-2 text-xs">
                 <span className="rounded-lg border border-[#efdcb9] bg-white px-2 py-1 text-[#8a6b41] text-center">Mandir Silence</span>
@@ -439,13 +407,13 @@ export default memo(function MahamanidirPage() {
               </div>
             </article>
 
-            <article className="rounded-2xl border border-[#d6e5f4] bg-white p-5 shadow-sm">
-              <h3 className="font-black text-[#0d3b66] text-lg mb-2">Evening Darshan</h3>
+            <article className="rounded-2xl border border-[#e91e63]/20 bg-gradient-to-b from-[#fce4ec] to-white p-5 shadow-sm">
+              <h3 className="font-black text-[#6a1b9a] text-lg mb-2">Evening Darshan</h3>
               <p className="text-[#4d5d68] mb-3">{data?.eveningTime ?? "04:00 PM - 09:00 PM"}</p>
               <button
                 type="button"
                 onClick={() => setShowEveningAarti((prev) => !prev)}
-                className="rounded-lg bg-[#c47508] text-white text-sm font-semibold px-4 py-2 hover:bg-[#a96305] transition"
+                className="rounded-lg bg-gradient-to-r from-[#f57c00] to-[#f9a825] text-white text-sm font-semibold px-4 py-2 transition"
               >
                 Evening Aarti
               </button>
@@ -456,15 +424,17 @@ export default memo(function MahamanidirPage() {
               )}
             </article>
           </div>
-        </div>
       </section>
 
+      <div className="max-w-6xl mx-auto px-4 py-4">
+        <div className="bg-gradient-to-r from-[#e91e63] via-[#f57c00] to-[#f9a825] h-1 rounded-full" />
+      </div>
+
       <section className="max-w-6xl mx-auto px-4 pb-12">
-        <div className="rounded-3xl border border-[#dfe7ef] bg-gradient-to-br from-[#f8fbff] via-[#ffffff] to-[#f3f8ff] p-6 md:p-8 shadow-[0_14px_35px_rgba(13,59,102,0.08)]">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-6">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-6">
             <div>
-              <p className="text-xs font-semibold tracking-wider text-[#1f5b88] uppercase">Live Dashboard</p>
-              <h2 className="text-2xl md:text-4xl font-black text-[#123753]">Hanuman Ji Seva Schedule</h2>
+              <p className="text-xs font-semibold tracking-wider text-[#e91e63] uppercase">Live Dashboard</p>
+              <h2 className="text-2xl md:text-4xl font-black text-[#6a1b9a]">Hanuman Ji Seva Schedule</h2>
             </div>
             <p className="text-sm text-[#4d5d68]">
               Updated at{" "}
@@ -480,10 +450,10 @@ export default memo(function MahamanidirPage() {
               return (
                 <article
                   key={item.title}
-                  className="rounded-2xl border border-[#dfe7ef] bg-white p-5 shadow-[0_8px_24px_rgba(13,59,102,0.06)]"
+                  className="rounded-2xl border border-[#e91e63]/20 bg-gradient-to-b from-[#fce4ec] to-white p-5 shadow-[0_8px_24px_rgba(106,27,154,0.06)]"
                 >
                   <div className="flex items-start justify-between gap-3">
-                    <h3 className="text-lg md:text-xl font-bold text-[#0d3b66]">{item.title}</h3>
+                    <h3 className="text-lg md:text-xl font-bold text-[#6a1b9a]">{item.title}</h3>
                     <span className={`shrink-0 rounded-full border px-3 py-1 text-xs font-bold ${status.toneClass}`}>
                       {status.label}
                     </span>
@@ -513,13 +483,13 @@ export default memo(function MahamanidirPage() {
                   <div className="mt-4 flex flex-col sm:flex-row gap-2">
                     <Link
                       to="/get-involved"
-                      className="inline-flex items-center justify-center rounded-lg bg-[#0d3b66] px-4 py-2 text-sm font-semibold text-white hover:bg-[#124d84] transition"
+                      className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-[#6a1b9a] to-[#e91e63] px-4 py-2 text-sm font-semibold text-white transition"
                     >
                       Join Seva
                     </Link>
                     <Link
                       to="/donate"
-                      className="inline-flex items-center justify-center rounded-lg border border-[#c47508] bg-[#fff4df] px-4 py-2 text-sm font-semibold text-[#a96305] hover:bg-[#ffeac6] transition"
+                      className="inline-flex items-center justify-center rounded-lg border border-[#f9a825] bg-[#fff8f0] px-4 py-2 text-sm font-semibold text-[#f57c00] hover:bg-[#fce4ec] transition"
                     >
                       Donate
                     </Link>
@@ -528,11 +498,14 @@ export default memo(function MahamanidirPage() {
               );
             })}
           </div>
-        </div>
       </section>
 
+      <div className="max-w-6xl mx-auto px-4 py-4">
+        <div className="bg-gradient-to-r from-[#e91e63] via-[#f57c00] to-[#f9a825] h-1 rounded-full" />
+      </div>
+
       <section className="max-w-6xl mx-auto px-4 pb-12">
-        <div className="rounded-3xl bg-gradient-to-r from-[#133a5a] to-[#1b5f7a] text-white p-6 md:p-8">
+        <div className="rounded-3xl bg-gradient-to-r from-[#6a1b9a] to-[#e91e63] text-white p-6 md:p-8">
           <h2 className="text-2xl md:text-4xl font-black mb-5 text-center">Blessings of Hanuman Bhakti</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {HANUMAN_BLESSINGS.map((point) => (
@@ -544,31 +517,37 @@ export default memo(function MahamanidirPage() {
         </div>
       </section>
 
+      <div className="max-w-6xl mx-auto px-4 py-4">
+        <div className="bg-gradient-to-r from-[#e91e63] via-[#f57c00] to-[#f9a825] h-1 rounded-full" />
+      </div>
+
       <section className="max-w-6xl mx-auto px-4 pb-12">
-        <h2 className="text-2xl md:text-4xl font-black text-[#1d2f3a] text-center mb-6">Hanuman Utsav & Programs</h2>
+        <h2 className="text-2xl md:text-4xl font-black text-[#6a1b9a] text-center mb-6">Hanuman Utsav & Programs</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {HANUMAN_UTSAV.map((item) => (
-            <article key={item.name} className="rounded-2xl bg-white border border-[#e3e9ef] p-5 shadow-sm">
-              <h3 className="text-lg md:text-xl font-bold text-[#0d3b66]">{item.name}</h3>
-              <p className="text-[#c47508] font-semibold mt-2">{item.time}</p>
+            <article key={item.name} className="rounded-2xl bg-gradient-to-b from-[#fce4ec] to-white border border-[#e91e63]/20 p-5 shadow-sm">
+              <h3 className="text-lg md:text-xl font-bold text-[#6a1b9a]">{item.name}</h3>
+              <p className="text-[#f57c00] font-semibold mt-2">{item.time}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 pb-12">
-        <div className="rounded-3xl bg-[#fff6e8] border border-[#f2ddbc] p-6 md:p-8 text-center">
-          <h2 className="text-2xl md:text-4xl font-black text-[#7a4f1f] mb-3">Daily Hanuman Sadhana</h2>
-          <p className="text-[#7a4f1f]/90 max-w-3xl mx-auto">
-            Begin with "Om Hanumate Namah", recite Hanuman Chalisa with devotion, and conclude with deep daan and seva sankalp.
-            Consistent sadhana brings peace, protection, and divine energy in life.
-          </p>
-        </div>
+      <div className="max-w-6xl mx-auto px-4 py-4">
+        <div className="bg-gradient-to-r from-[#e91e63] via-[#f57c00] to-[#f9a825] h-1 rounded-full" />
+      </div>
+
+      <section className="max-w-6xl mx-auto px-4 pb-12 text-center">
+        <h2 className="text-2xl md:text-4xl font-black text-[#6a1b9a] mb-3">Daily Hanuman Sadhana</h2>
+        <p className="text-[#6a1b9a]/80 max-w-3xl mx-auto">
+          Begin with "Om Hanumate Namah", recite Hanuman Chalisa with devotion, and conclude with deep daan and seva sankalp.
+          Consistent sadhana brings peace, protection, and divine energy in life.
+        </p>
       </section>
 
-      <div className="text-center pb-12">
-        <Link to="/mandir/gallery" className="btn-primary mr-4">View Gallery</Link>
-        <Link to="/get-involved" className="btn-secondary">Plan a Visit</Link>
+      <div className="text-center pb-12 flex flex-wrap items-center justify-center gap-4">
+        <Link to="/mandir/gallery" className="bg-gradient-to-r from-[#6a1b9a] to-[#e91e63] text-white rounded-lg px-6 py-3 font-semibold">View Gallery</Link>
+        <Link to="/get-involved" className="bg-gradient-to-r from-[#f57c00] to-[#f9a825] text-white rounded-lg px-6 py-3 font-semibold">Plan a Visit</Link>
       </div>
     </div>
   );

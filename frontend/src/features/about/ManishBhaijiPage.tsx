@@ -54,15 +54,15 @@ export default memo(function ManishBhaijiPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#eef0f4]">
-      <section className="max-w-6xl mx-auto px-4 pt-8 md:pt-10 pb-10">
-        <div className="rounded-[28px] bg-white border border-[#d9e4ee] shadow-[0_12px_30px_rgba(13,45,78,0.14)] p-5 md:p-10">
+    <div className="min-h-screen bg-[#fff8f0]">
+      <section className="w-full px-4 pt-8 md:pt-10 pb-10">
+          <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-            <div className="bg-[#f6f8fb] rounded-3xl p-3 border border-[#e1e8f0]">
+            <div>
               <img
                 src="/images/manish2.PNG"
                 alt="S.S. Manish Bhai Ji Maharaj"
-                className="w-full rounded-2xl shadow-lg object-cover h-[320px] md:h-[520px]"
+                className="w-full object-contain h-[320px] md:h-[520px]"
               />
             </div>
 
@@ -70,7 +70,7 @@ export default memo(function ManishBhaijiPage() {
               <p className="inline-flex items-center rounded-full border border-[#8bbbe6] bg-[#ebf5ff] px-4 py-1 text-sm text-[#0d4e85] mb-4">
                 Bhagwat Heritage Service Foundation Trust
               </p>
-              <h1 className="text-3xl md:text-5xl font-black text-[#0d3b66] leading-tight mb-3">
+              <h1 className="text-3xl md:text-5xl font-black text-[#b32e22] leading-tight mb-3">
                 Sant Shree Manish Bhai Ji Maharaj
               </h1>
               <h3 className="text-base md:text-xl text-[#f09100] font-semibold mb-5">
@@ -89,7 +89,7 @@ export default memo(function ManishBhaijiPage() {
               <div className="flex flex-wrap gap-3">
                 <Link
                   to={ROUTES.contact}
-                  className="inline-block bg-[#ff9d00] hover:bg-[#ea9000] text-white font-bold px-6 py-3 rounded-xl transition-colors"
+                  className="inline-block bg-gradient-to-r from-[#ff6a00] to-[#ed9b24] hover:from-[#ed9b24] hover:to-[#fec758] text-white font-bold px-6 py-3 rounded-xl transition-all duration-300"
                 >
                   Contact for Seva
                 </Link>
@@ -105,11 +105,15 @@ export default memo(function ManishBhaijiPage() {
         </div>
       </section>
 
+      <div className="max-w-6xl mx-auto px-4 pb-4">
+        <div className="bg-gradient-to-r from-[#ff6a00] to-[#fec758] h-1 w-full rounded-full my-4" />
+      </div>
+
       <section ref={servicesRef} className="max-w-6xl mx-auto px-4 pb-10">
-        <div className="rounded-[28px] border border-[#f1dcc0] bg-[linear-gradient(180deg,#fff8ef_0%,#fffdf9_100%)] p-5 md:p-8 shadow-[0_12px_28px_rgba(166,94,21,0.10)]">
+        <div className="rounded-[28px] border border-[#f1dcc0] bg-gradient-to-b from-[#fec758]/20 to-[#ff6a00]/10 p-5 md:p-8 shadow-[0_12px_28px_rgba(166,94,21,0.10)]">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#c6761e]">Guidance and Services</p>
-            <h2 className="mt-2 text-3xl md:text-4xl font-black text-[#0d3b66]">Connect with Manish Bhaiji Maharaj</h2>
+            <h2 className="mt-2 text-3xl md:text-4xl font-black text-[#b32e22]">Connect with Manish Bhaiji Maharaj</h2>
             <p className="mt-3 text-base md:text-lg leading-7 text-[#53626d]">
               These service cards are placed directly below the founder photo section so devotees, families, and organizations can quickly connect for spiritual guidance and consultation.
             </p>
@@ -137,7 +141,7 @@ export default memo(function ManishBhaijiPage() {
                 <p className="mt-3 flex-1 text-sm leading-7 text-[#5a6872]">{item.desc}</p>
                 <Link
                   to={ROUTES.contact}
-                  className="mt-6 inline-flex min-h-[52px] w-full items-center justify-center rounded-xl bg-[#ff9d00] px-5 py-3 text-center text-sm font-bold text-white transition-colors hover:bg-[#ea9000]"
+                  className="mt-6 inline-flex min-h-[52px] w-full items-center justify-center rounded-xl bg-gradient-to-r from-[#ff6a00] to-[#ed9b24] hover:from-[#ed9b24] hover:to-[#fec758] px-5 py-3 text-center text-sm font-bold text-white transition-all duration-300"
                 >
                   {item.button}
                 </Link>
@@ -150,7 +154,7 @@ export default memo(function ManishBhaijiPage() {
       <ImpactCounter items={IMPACT} />
 
       <section className="py-16 max-w-4xl mx-auto px-4">
-        <h2 className="section-title">Spiritual Journey</h2>
+        <h2 className="section-title text-[#b32e22]">Spiritual Journey</h2>
         <p className="text-gray-600 text-lg leading-relaxed">
           From a young age, Manish Bhai Ji showed deep devotion toward sacred scriptures and
           spiritual knowledge. Over decades, he established Bhagwat Heritage Service Foundation
@@ -159,9 +163,9 @@ export default memo(function ManishBhaijiPage() {
         </p>
       </section>
 
-      <section className="bg-gray-50 py-16">
+      <section className="bg-[#fff8f0] py-16">
         <div className="max-w-5xl mx-auto px-4">
-          <h2 className="section-title">Moments of Devotion</h2>
+          <h2 className="section-title text-[#b32e22]">Moments of Devotion</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {["/images/s1.jfif", "/images/Inspriation Main.jpg", "/images/Aims & objectives main.jpg"].map(
               (src, i) => (
