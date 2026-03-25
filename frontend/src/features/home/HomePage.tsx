@@ -1,9 +1,165 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
 import { ImpactCounter } from "../../components/ui/ImpactCounter";
 import { usePageMeta } from "../../hooks/usePageMeta";
+
+const SEVA_OPTIONS = [
+  { label: "वस्त्र श्रृंगार अलंकर की सेवा", amount: "₹ 5101/-" },
+  { label: "प्रसाद वितरण की सेवा", amount: "₹ 1101/-" },
+  { label: "फूल मालाओं की सेवा", amount: "₹ 2101/-" },
+  { label: "भगवान के पालने की सेवा", amount: "₹ 3101/-" },
+  { label: "महा अभिषेक की सेवा", amount: "₹ 1101/-" },
+  { label: "पंजीरी प्रसाद की सेवा", amount: "₹ 1101/-" },
+  { label: "महाप्रसाद की सेवा\n(साबूदाना खिचड़ी वितरण)", amount: "₹ 5101/-" },
+  { label: "लूट सामग्री की सेवा", amount: "₹ 501/-" },
+  { label: "महाआरती", amount: "₹ 501/-" },
+];
+
+const SESSION_KEY = "ramJanmotsavModalDismissed";
+
+function RamJanmotsavModal({ onClose }: { onClose: () => void }) {
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  const handleOverlayClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (e.target === overlayRef.current) onClose();
+    },
+    [onClose],
+  );
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      ref={overlayRef}
+      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm px-3 py-4"
+      onClick={handleOverlayClick}
+    >
+      <div className="relative w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-2xl shadow-2xl bg-gradient-to-b from-[#fff8f0] to-white">
+        {/* Header banner */}
+        <div className="relative bg-gradient-to-br from-[#ff9800] via-[#ff6f00] to-[#b32e22] px-6 pt-8 pb-6 text-center rounded-t-2xl overflow-hidden">
+          <div className="absolute inset-0 opacity-10 bg-[url('https://res.cloudinary.com/der8zinu8/image/upload/v1771413474/itcm84f9dnqpzgawp7ak.png')] bg-cover bg-center" />
+          <p className="relative text-orange-100 text-xs font-semibold uppercase tracking-widest mb-1">
+            🪔 Shri Bhagwat Heritage Service Foundation Trust
+          </p>
+          <h2 className="relative text-3xl md:text-4xl font-black text-white leading-tight drop-shadow">
+            श्री राम जन्मोत्सव
+          </h2>
+          <p className="relative text-2xl font-bold text-yellow-200 mt-1">२०२६</p>
+          <div className="relative mt-3 inline-block bg-yellow-400 text-[#7c1d00] font-bold text-sm px-5 py-1.5 rounded-full shadow">
+            गुरुवार, 26 मार्च 2026
+          </div>
+        </div>
+
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-white/30 hover:bg-white/60 text-white text-lg font-bold transition-colors"
+          aria-label="Close"
+        >
+          ✕
+        </button>
+
+        <div className="px-5 py-5 space-y-5">
+          {/* Programme */}
+          <div className="rounded-xl border border-orange-200 bg-orange-50 p-4">
+            <h3 className="text-[#b32e22] font-bold text-base mb-2 flex items-center gap-2">
+              <span className="text-lg">🕐</span> जन्मोत्सव कार्यक्रम
+            </h3>
+            <p className="text-sm text-gray-700 font-semibold mb-2">
+              गुरुवार दि. 26 मार्च 2026 &nbsp;·&nbsp; प्रातः 11:00 से 12:30 तक
+            </p>
+            <p className="text-sm text-gray-700 leading-relaxed">
+              <strong>परम पूज्य भागवतमनीषी संत श्री मनीष भाईजी महाराज</strong> के पावन मधुर स्वर में
+              भक्ति संगीतमय भजनों के साथ <strong>प्रभु श्री रामचन्द्र जी</strong> के प्रागट्य लीलाओं
+              पर सुंदर चरित्र गान।
+            </p>
+            <p className="text-sm text-gray-700 mt-2">
+              ठीक 12:00 बजे रामलला जन्मोत्सव के साथ{" "}
+              <strong>श्री विग्रहो</strong> का श्रृंगार दर्शन एवं महाआरती।
+            </p>
+            <ul className="mt-2 text-sm text-[#b32e22] font-semibold space-y-0.5 list-none">
+              <li>🎵 रामलला जन्मोत्सव &nbsp;|&nbsp; बधाई गान &nbsp;|&nbsp; पालना दर्शन</li>
+              <li>🙏 सामूहिक आरती एवं प्रसाद</li>
+            </ul>
+            <p className="mt-3 text-[#0d3b66] font-bold text-sm text-center bg-blue-50 rounded-lg py-2">
+              इस संपूर्ण भक्तिमय आयोजन में आप सभी श्रद्धालु स्नेहीजन सादर आमंत्रित हैं।
+            </p>
+          </div>
+
+          {/* Seva Options */}
+          <div>
+            <h3 className="text-[#b32e22] font-bold text-base mb-3 flex items-center gap-2">
+              <span className="text-lg">🌸</span> विविध सेवाएं
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {SEVA_OPTIONS.map((seva) => (
+                <div
+                  key={seva.label}
+                  className="flex items-start justify-between gap-2 rounded-lg border border-orange-100 bg-gradient-to-r from-[#fff8f0] to-white px-3 py-2.5 shadow-sm"
+                >
+                  <span className="text-sm text-gray-800 leading-snug whitespace-pre-line flex-1">
+                    {seva.label}
+                  </span>
+                  <span className="text-sm font-bold text-[#b32e22] whitespace-nowrap shrink-0 ml-2">
+                    {seva.amount}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Payment info */}
+          <div className="rounded-xl border border-blue-100 bg-blue-50 p-4 text-center text-sm text-gray-700 leading-relaxed">
+            सभी भक्तजन ऑनलाइन गूगल पे अकाउंट के द्वारा तथा कार्यक्रम स्थल पर अपनी भेंट अर्पण कर
+            संस्था की पक्की रसीद प्राप्त कर सकते हैं।
+          </div>
+
+          {/* Contact & Venue */}
+          <div className="rounded-xl bg-gradient-to-br from-[#7c1d00] to-[#b32e22] text-white px-5 py-4 text-center space-y-1 shadow-md">
+            <p className="text-sm font-semibold text-orange-200">भागवत मनीषी संत श्री मनीष भाईजी महाराज के पावन सानिध्य में</p>
+            <p className="text-xs text-white/70 uppercase tracking-widest mt-1">कार्यक्रम स्थल</p>
+            <p className="text-base font-extrabold leading-snug text-yellow-200">
+              भागवत धाम श्री स्वामीनारायण मंदिर, चंद्रपुर
+            </p>
+            <p className="text-xs text-white/70">भागवत हेरिटेज सर्विसेज़ फाउंडेशन, चंद्रपुर</p>
+            <a
+              href="tel:+919822471551"
+              className="inline-block mt-2 bg-yellow-400 text-[#7c1d00] font-bold text-sm px-5 py-1.5 rounded-full hover:bg-yellow-300 transition-colors"
+            >
+              📞 +91-9822471551
+            </a>
+          </div>
+
+          {/* CTA */}
+          <div className="flex gap-3 pt-1">
+            <button
+              onClick={onClose}
+              className="flex-1 border border-gray-300 text-gray-600 font-semibold py-2.5 rounded-lg hover:bg-gray-50 transition-colors text-sm"
+            >
+              Close
+            </button>
+            <a
+              href="tel:+919822471551"
+              className="flex-1 bg-gradient-to-r from-[#ff6f00] to-[#b32e22] text-white font-semibold py-2.5 rounded-lg text-center hover:opacity-90 transition-opacity text-sm"
+            >
+              🙏 Register / Donate
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const HERO_SLIDES = [
   "https://res.cloudinary.com/der8zinu8/image/upload/v1771413474/itcm84f9dnqpzgawp7ak.png",
@@ -80,12 +236,25 @@ export default memo(function HomePage() {
   usePageMeta(t("home.meta.title"), t("home.meta.description"));
 
   const [heroIndex, setHeroIndex] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
       setHeroIndex((prev) => (prev + 1) % HERO_SLIDES.length);
     }, 4000);
     return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    if (!sessionStorage.getItem(SESSION_KEY)) {
+      const t = setTimeout(() => setShowModal(true), 800);
+      return () => clearTimeout(t);
+    }
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setShowModal(false);
+    sessionStorage.setItem(SESSION_KEY, "1");
   }, []);
 
   // COMMENTED OUT — Section 4
@@ -99,6 +268,8 @@ export default memo(function HomePage() {
   ];
 
   return (
+    <>
+    {showModal && <RamJanmotsavModal onClose={closeModal} />}
     <div
       className="min-h-screen"
       style={{
@@ -198,7 +369,39 @@ export default memo(function HomePage() {
       <section className="max-w-6xl mx-auto px-4 pb-12">
         <h2 className="section-title">{t("home.upcomingEventsTitle")}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {upcomingEvents.map((event, index) => (
+          {/* Featured: Ram Janmotsav 2026 */}
+          <article className="relative rounded-2xl overflow-hidden shadow-lg border-0 bg-gradient-to-br from-[#ff9800] via-[#ff6f00] to-[#b32e22] text-white sm:col-span-2 lg:col-span-1">
+            <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMiI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMyIvPjwvZz48L3N2Zz4=')] bg-repeat" />
+            <div className="relative p-5">
+              <span className="inline-block bg-yellow-400 text-[#7c1d00] text-[11px] font-extrabold px-3 py-0.5 rounded-full mb-3 uppercase tracking-wide shadow">
+                🪔 Upcoming Festival
+              </span>
+              <h3 className="text-xl font-black leading-tight">
+                श्री राम जन्मोत्सव <span className="text-yellow-300">२०२६</span>
+              </h3>
+              <p className="text-orange-100 text-sm font-semibold mt-1">गुरुवार, 26 मार्च 2026</p>
+              <p className="text-orange-100 text-xs mt-1">प्रातः 11:00 – 12:30 तक</p>
+              <p className="text-white/90 text-sm mt-2 leading-snug">
+                भागवत धाम श्री स्वामीनारायण मंदिर, चंद्रपुर में रामलला जन्मोत्सव, महाआरती एवं विविध सेवाएं।
+              </p>
+              <div className="flex flex-wrap gap-2 mt-4">
+                <button
+                  onClick={() => setShowModal(true)}
+                  className="bg-yellow-400 hover:bg-yellow-300 text-[#7c1d00] font-bold text-sm px-4 py-2 rounded-lg transition-colors shadow"
+                >
+                  View Details & Donate
+                </button>
+                <a
+                  href="tel:+919822471551"
+                  className="border border-white/50 text-white font-semibold text-sm px-4 py-2 rounded-lg hover:bg-white/10 transition-colors"
+                >
+                  📞 Contact
+                </a>
+              </div>
+            </div>
+          </article>
+
+          {/* {upcomingEvents.map((event, index) => (
             <article key={event.title} className="rounded-2xl border border-[#dce8f5] bg-white p-5 shadow-sm">
               <h3 className="text-xl font-black text-[#123753]">{event.title}</h3>
               <p className="text-sm text-[#4f6272] mt-2 mb-4">{event.desc}</p>
@@ -206,7 +409,7 @@ export default memo(function HomePage() {
                 {t("home.openEvent")}
               </Link>
             </article>
-          ))}
+          ))} */}
         </div>
       </section>
 
@@ -264,5 +467,6 @@ export default memo(function HomePage() {
         </div>
       </section>
     </div>
+    </>
   );
 });
