@@ -1010,7 +1010,7 @@ export const MandirTeerthHubPage = memo(function MandirTeerthHubPage() {
         { title: "Bhagwat Dham Project", desc: "Swaminarayan Mandir project overview and seva matrix.", href: ROUTES.mandirTeerth.bhagwatDham },
         { title: "Mahamandir Architecture", desc: "Hanuman Mahamandir design and darshan details.", href: ROUTES.mandirTeerth.mahamandir },
         { title: "24 Avatars Installation", desc: "Planned avatar installation concept updates.", href: ROUTES.mandirTeerth.avatars },
-        { title: "Hanuman Murti Concept", desc: "Kasthbhanjan Hanuman murti and darshan concept.", href: ROUTES.mandirTeerth.hanuman },
+        { title: "Shree Kasthbhanjan Hanuman", desc: "Kasthbhanjan Hanuman murti and darshan concept.", href: ROUTES.mandirTeerth.hanuman },
         { title: "Temple Construction Updates", desc: "Milestones and progress reports.", href: ROUTES.mandirTeerth.construction },
         { title: "Pilgrimage Information", desc: "Travel and teerth visitor support details.", href: ROUTES.mandirTeerth.pilgrimage },
       ]}
