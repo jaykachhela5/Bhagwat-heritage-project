@@ -19,8 +19,8 @@ const SEVA_OPTIONS = [
 
 const SESSION_KEY = "ramJanmotsavModalDismissed";
 
-/** Served from `public/images/homepage/` (synced from `images/Homepage/HomepageBanner.jpeg`). */
-const HOMEPAGE_BANNER_SRC = "/images/homepage/HomepageBanner.jpeg";
+/** Must match filename in `public/images/homepage/` exactly — Linux/Vercel is case-sensitive. */
+const HOMEPAGE_BANNER_SRC = "/images/homepage/HomePageBanner.jpeg";
 
 function RamJanmotsavModal({ onClose }: { onClose: () => void }) {
   const overlayRef = useRef<HTMLDivElement>(null);
