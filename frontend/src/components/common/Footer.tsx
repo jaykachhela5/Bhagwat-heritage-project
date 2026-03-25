@@ -71,7 +71,7 @@ export const Footer = memo(function Footer() {
               </li>
               <li>
                 <i className="fas fa-phone mr-2" />
-                +91 9876543210
+                +91 8668897445
               </li>
             </ul>
             <a

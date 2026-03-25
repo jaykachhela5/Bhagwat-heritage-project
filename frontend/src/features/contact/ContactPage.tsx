@@ -43,8 +43,8 @@ const WHAT_WE_DO = [
 ];
 
 const QUICK_CONTACT = [
-  { title: "Call Us", value: "+91 9876543210", icon: "fas fa-phone", href: "tel:+919876543210" },
-  { title: "WhatsApp", value: "+91 9876543210", icon: "fab fa-whatsapp", href: "https://wa.me/919876543210" },
+  { title: "Call Us", value: "+91 8668897445", icon: "fas fa-phone", href: "tel:+918668897445" },
+  { title: "WhatsApp", value: "+91 8668897445", icon: "fab fa-whatsapp", href: "https://wa.me/918668897445" },
   { title: "Email", value: "info@bhagwatheritage.org", icon: "fas fa-envelope", href: "mailto:info@bhagwatheritage.org" },
 ];
 
@@ -277,7 +277,7 @@ export default memo(function ContactPage() {
               </li>
               <li className="flex items-center gap-3">
                 <i className="fas fa-phone text-[#0d3b66]" />
-                <span>+91 9876543210</span>
+                <span>+91 8668897445</span>
               </li>
               <li className="flex items-center gap-3">
                 <i className="fas fa-clock text-[#0d3b66]" />

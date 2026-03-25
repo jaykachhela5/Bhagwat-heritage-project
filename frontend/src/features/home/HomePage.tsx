@@ -136,10 +136,10 @@ function RamJanmotsavModal({ onClose }: { onClose: () => void }) {
             </p>
             <p className="text-xs text-white/70">भागवत हेरिटेज सर्विसेज़ फाउंडेशन, चंद्रपुर</p>
             <a
-              href="tel:+919822471551"
+              href="tel:+918668897445"
               className="inline-block mt-2 bg-yellow-400 text-[#7c1d00] font-bold text-sm px-5 py-1.5 rounded-full hover:bg-yellow-300 transition-colors"
             >
-              📞 +91-9822471551
+              📞 +91-8668897445
             </a>
           </div>
 
@@ -381,7 +381,7 @@ export default memo(function HomePage() {
                   View Details & Donate
                 </button>
                 <a
-                  href="tel:+919822471551"
+                  href="tel:+918668897445"
                   className="border border-white/50 text-white font-semibold text-sm px-4 py-2 rounded-lg hover:bg-white/10 transition-colors"
                 >
                   📞 Contact
