@@ -19,6 +19,9 @@ const SEVA_OPTIONS = [
 
 const SESSION_KEY = "ramJanmotsavModalDismissed";
 
+/** Served from `public/images/homepage/` (synced from `images/Homepage/HomepageBanner.jpeg`). */
+const HOMEPAGE_BANNER_SRC = "/images/homepage/HomepageBanner.jpeg";
+
 function RamJanmotsavModal({ onClose }: { onClose: () => void }) {
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -163,13 +166,6 @@ function RamJanmotsavModal({ onClose }: { onClose: () => void }) {
   );
 }
 
-const HERO_SLIDES = [
-  "https://res.cloudinary.com/der8zinu8/image/upload/v1771413474/itcm84f9dnqpzgawp7ak.png",
-  "https://res.cloudinary.com/der8zinu8/image/upload/v1772647455/hero2_eenipn.png",
-  "https://res.cloudinary.com/der8zinu8/image/upload/v1772647529/hero3_csexsl.png",
-  "https://res.cloudinary.com/der8zinu8/image/upload/v1772647646/hero4_giyget.png",
-];
-
 /* COMMENTED OUT — Section 4
 const SEVA_HIGHLIGHT_META = [
   {
@@ -237,15 +233,7 @@ export default memo(function HomePage() {
   const { t } = useTranslation();
   usePageMeta(t("home.meta.title"), t("home.meta.description"));
 
-  const [heroIndex, setHeroIndex] = useState(0);
   const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setHeroIndex((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 4000);
-    return () => window.clearInterval(timer);
-  }, []);
 
   useEffect(() => {
     if (!sessionStorage.getItem(SESSION_KEY)) {
@@ -280,23 +268,22 @@ export default memo(function HomePage() {
           "radial-gradient(circle at top left, rgba(47,127,115,0.35) 0%, rgba(47,127,115,0) 42%), radial-gradient(circle at top right, rgba(19,126,181,0.28) 0%, rgba(19,126,181,0) 40%), radial-gradient(circle at bottom left, rgba(252,182,48,0.22) 0%, rgba(252,182,48,0) 44%), radial-gradient(circle at bottom right, rgba(148,197,88,0.22) 0%, rgba(148,197,88,0) 46%), linear-gradient(135deg, #f7fcfa 0%, #edf8f2 45%, #fff7e6 100%)",
       }}
     >
-      <section className="px-4 md:px-6 pt-6 md:pt-8">
-        <div className="relative w-full max-w-[1240px] h-[360px] md:h-[520px] mx-auto rounded-2xl overflow-hidden">
-          {HERO_SLIDES.map((slide, index) => (
-            <div
-              key={slide}
-              className={`absolute inset-0 bg-cover bg-center transition-opacity duration-700 ${
-                heroIndex === index ? "opacity-100" : "opacity-0"
-              }`}
-              style={{ backgroundImage: `url('${slide}')` }}
-            />
-          ))}
-          <div className="absolute inset-0 bg-black/45" />
-          <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4 max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-7xl font-bold leading-tight">{t("home.heroTitle")}</h1>
-          </div>
+      <section className="w-full pt-0">
+        {/* Flush with fixed header: no extra top padding — main already offsets SiteHeader height */}
+        <div className="relative w-full min-h-[200px] h-[38vw] sm:h-[42vw] md:h-[min(68vh,800px)] max-h-[85vh] overflow-hidden">
+          <img
+            src={HOMEPAGE_BANNER_SRC}
+            alt=""
+            className="block h-full w-full object-cover object-center"
+            fetchPriority="high"
+            decoding="async"
+          />
         </div>
-
+        <div className="w-full px-4 pb-2 pt-4 text-center sm:px-5 sm:pt-5 md:px-6 md:pt-6">
+          <h1 className="mx-auto max-w-5xl text-2xl font-bold leading-tight text-[#0d3b66] sm:text-3xl md:text-4xl lg:text-5xl">
+            {t("home.heroTitle")}
+          </h1>
+        </div>
       </section>
 
       <section className="py-16 px-4">
