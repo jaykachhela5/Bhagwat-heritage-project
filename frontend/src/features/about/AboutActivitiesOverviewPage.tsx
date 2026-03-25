@@ -296,12 +296,12 @@ export default memo(function AboutActivitiesOverviewPage() {
                 compassionate service through katha, satsang, education, seva, and community-led outreach.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link
+                {/* <Link
                   to={ROUTES.involved.volunteer}
                   className="inline-flex items-center rounded-xl bg-[#F59E0B] px-6 py-3 font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[#dd8f0a]"
                 >
                   Become a Volunteer
-                </Link>
+                </Link> */}
                 <Link
                   to={ROUTES.donate}
                   className="inline-flex items-center rounded-xl border border-white/15 bg-white/10 px-6 py-3 font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-white/15"
@@ -560,12 +560,12 @@ export default memo(function AboutActivitiesOverviewPage() {
             rooted in devotion, public benefit, and cultural continuity.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link
+            {/* <Link
               to={ROUTES.involved.volunteer}
               className="inline-flex rounded-xl bg-[#F59E0B] px-6 py-3 font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[#dd8f0a]"
             >
               Become a Volunteer
-            </Link>
+            </Link> */}
             <Link
               to={ROUTES.involved.partner}
               className="inline-flex rounded-xl border border-white/15 bg-white/10 px-6 py-3 font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-white/15"

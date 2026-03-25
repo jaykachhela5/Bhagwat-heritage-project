@@ -437,7 +437,7 @@ export default memo(function HomePage() {
 
       <section className="py-16 px-4 bg-[#eef0f3]">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="rounded-2xl min-h-[230px] shadow-lg bg-[#14532d] border border-[#166534]">
+          {/* <div className="rounded-2xl min-h-[230px] shadow-lg bg-[#14532d] border border-[#166534]">
             <div className="p-8 h-full flex flex-col justify-center text-center">
               <h2 className="text-3xl font-bold mb-3 text-white">{t("home.volunteerTitle")}</h2>
               <p className="text-green-100 mb-6">{t("home.volunteerText")}</p>
@@ -450,7 +450,7 @@ export default memo(function HomePage() {
                 </Link>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="rounded-2xl min-h-[230px] shadow-lg bg-[#7f1d1d] border border-[#991b1b]">
             <div className="p-8 h-full flex flex-col justify-center text-center">

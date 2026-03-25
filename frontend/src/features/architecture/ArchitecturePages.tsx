@@ -1661,9 +1661,9 @@ export const AboutStructurePage = memo(function AboutStructurePage() {
               participation, collaboration, and mission support pathways.
             </p>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              <Link to={ROUTES.involved.volunteer} className="inline-flex items-center justify-center rounded-xl bg-[#ff9d00] px-5 py-3 font-bold text-white transition-colors hover:bg-[#ea9000]">
+              {/* <Link to={ROUTES.involved.volunteer} className="inline-flex items-center justify-center rounded-xl bg-[#ff9d00] px-5 py-3 font-bold text-white transition-colors hover:bg-[#ea9000]">
                 Become a Volunteer
-              </Link>
+              </Link> */}
               <Link to={ROUTES.digital.membership} className="inline-flex items-center justify-center rounded-xl border border-[#d8b98c] bg-white px-5 py-3 font-bold text-[#8a3d06] transition-colors hover:bg-[#fff7ea]">
                 Join the Trust
               </Link>
