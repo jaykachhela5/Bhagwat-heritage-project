@@ -513,6 +513,7 @@ export default memo(function MahamanidirPage() {
           </div>
       </section>
 
+      {/* COMMENTED OUT — Live Dashboard: Hanuman Ji Seva Schedule
       <div className="max-w-6xl mx-auto px-4 py-4">
         <div className="bg-gradient-to-r from-[#e91e63] via-[#f57c00] to-[#f9a825] h-1 rounded-full" />
       </div>
@@ -590,6 +591,7 @@ export default memo(function MahamanidirPage() {
       <div className="max-w-6xl mx-auto px-4 py-4">
         <div className="bg-gradient-to-r from-[#e91e63] via-[#f57c00] to-[#f9a825] h-1 rounded-full" />
       </div>
+      */}
 
       <section className="max-w-6xl mx-auto px-4 pb-12">
         <div className="rounded-3xl bg-gradient-to-r from-[#6a1b9a] to-[#e91e63] text-white p-6 md:p-8">
