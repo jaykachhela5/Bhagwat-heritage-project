@@ -30,7 +30,7 @@ const syncDocumentLanguage = (language) => {
     return;
   }
 
-  document.documentElement.lang = (language ?? "en").split("-")[0];
+  document.documentElement.lang = (language ?? "hi").split("-")[0];
 };
 
 i18n
@@ -38,14 +38,14 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: "en",
+    fallbackLng: "hi",
     supportedLngs: ["en", "hi", "mr", "gu", "bn", "ta", "te", "kn", "pa", "sa"],
     load: "languageOnly",
     interpolation: {
       escapeValue: false,
     },
     detection: {
-      order: ["localStorage", "navigator", "htmlTag"],
+      order: ["localStorage", "htmlTag"],
       caches: ["localStorage"],
       lookupLocalStorage: "bhagwat-language",
     },

@@ -253,21 +253,20 @@ export const Navbar = memo(function Navbar() {
           <LanguageSwitcher compact />
         </div>
 
-        <button
-          className="xl:hidden ml-auto p-2 text-[#0d3b66]"
-          onClick={() => setMobileOpen((prev) => !prev)}
-          aria-label={t("navbar.toggleMenu")}
-        >
-          <i className={`fas ${mobileOpen ? "fa-times" : "fa-bars"} text-xl`} />
-        </button>
+        <div className="xl:hidden ml-auto flex items-center gap-2">
+          <LanguageSwitcher compact className="px-2.5 py-1.3 text-xs" />
+          <button
+            className="p-2 text-[#0d3b66]"
+            onClick={() => setMobileOpen((prev) => !prev)}
+            aria-label={t("navbar.toggleMenu")}
+          >
+            <i className={`fas ${mobileOpen ? "fa-times" : "fa-bars"} text-xl`} />
+          </button>
+        </div>
       </div>
 
       {mobileOpen ? (
         <div className="xl:hidden bg-white border-t px-4 py-3 space-y-2 max-h-[75vh] overflow-y-auto">
-          <div className="pb-2">
-            <LanguageSwitcher className="w-full justify-between" />
-          </div>
-
           {NAV_ITEMS.map((item) =>
             item.href ? (
               <Link

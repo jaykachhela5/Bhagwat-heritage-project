@@ -13,7 +13,7 @@ export const LanguageSwitcher = memo(function LanguageSwitcher({
   compact = false,
 }: LanguageSwitcherProps) {
   const { i18n, t } = useTranslation();
-  const currentLanguage = (i18n.resolvedLanguage ?? i18n.language ?? "en").split("-")[0];
+  const currentLanguage = (i18n.resolvedLanguage ?? i18n.language ?? "hi").split("-")[0];
 
   return (
     <label
