@@ -30,6 +30,7 @@ interface VisionCard { title: string; desc: string; }
 interface CoreArea { title: string; desc: string; linkLabel: string; }
 interface Milestone { year: string; title: string; desc: string; }
 interface FutureCard { title: string; desc: string; }
+interface HighlightItem { label: string; value: string; }
 
 const VISION_ICONS = ["🕉️", "🌱", "🌏"];
 const FUTURE_ICONS = ["🛕", "📡", "🌟"];
@@ -44,13 +45,16 @@ export default memo(function AboutPage() {
   const { t } = useTranslation();
   usePageMeta(t("about.meta.title"), t("about.meta.description"));
 
-  const visionCards = t("aboutPage.visionCards", { returnObjects: true }) as VisionCard[];
-  const coreAreas = t("aboutPage.coreAreas", { returnObjects: true }) as CoreArea[];
-  const humanitarianItems = t("aboutPage.humanitarianItems", { returnObjects: true }) as string[];
-  const milestones = t("aboutPage.milestones", { returnObjects: true }) as Milestone[];
-  const futureCards = t("aboutPage.futureCards", { returnObjects: true }) as FutureCard[];
-  const leadershipRoles = t("aboutPage.leadershipRoles", { returnObjects: true }) as string[];
-  const sevaLabels = t("about.sevaLabels", { returnObjects: true }) as string[];
+  const asArray = <T,>(value: unknown): T[] => (Array.isArray(value) ? (value as T[]) : []);
+
+  const highlights = asArray<HighlightItem>(t("about.highlights", { returnObjects: true }));
+  const visionCards = asArray<VisionCard>(t("aboutPage.visionCards", { returnObjects: true }));
+  const coreAreas = asArray<CoreArea>(t("aboutPage.coreAreas", { returnObjects: true }));
+  const humanitarianItems = asArray<string>(t("aboutPage.humanitarianItems", { returnObjects: true }));
+  const milestones = asArray<Milestone>(t("aboutPage.milestones", { returnObjects: true }));
+  const futureCards = asArray<FutureCard>(t("aboutPage.futureCards", { returnObjects: true }));
+  const leadershipRoles = asArray<string>(t("aboutPage.leadershipRoles", { returnObjects: true }));
+  const sevaLabels = asArray<string>(t("about.sevaLabels", { returnObjects: true }));
 
   return (
     <div className="bg-[#0B2230] text-white">
@@ -90,7 +94,7 @@ export default memo(function AboutPage() {
       {/* ── Stats ─────────────────────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-4 py-8 md:py-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
-          {(t("about.highlights", { returnObjects: true }) as { label: string; value: string }[]).map((item) => (
+          {highlights.map((item) => (
             <div key={item.label} className="rounded-2xl bg-[#12394A] border border-white/10 p-4 md:p-5 text-center shadow-[0_10px_24px_rgba(0,0,0,0.18)]">
               <p className="text-3xl md:text-5xl font-extrabold text-[#F59E0B]">{item.value}</p>
               <p className="text-sm md:text-base text-white/80 mt-1.5">{item.label}</p>
