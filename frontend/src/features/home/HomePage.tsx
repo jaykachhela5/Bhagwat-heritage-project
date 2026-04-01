@@ -13,9 +13,9 @@ const UPCOMING_EVENT_SUBTITLE = "Hanumat Shakti Peeth, Shri Kshetra Chichpalli";
 const UPCOMING_EVENT_DATE = "Thursday, 2 April 2026";
 const UPCOMING_EVENT_CONTACT = "+91 9822471551";
 const UPCOMING_EVENT_VIDEO_URL = "https://youtu.be/uhPE_XK45lE";
-const UPCOMING_EVENT_VIDEO_POSTER = "https://res.cloudinary.com/der8zinu8/image/upload/v1775022287/watchnow_aaakef.png";
+const UPCOMING_EVENT_VIDEO_EMBED_URL = "https://www.youtube.com/embed/uhPE_XK45lE";
 const UPCOMING_EVENT_LIVE_URL = "https://youtube.com/live/b0Q8JoU4gI4?feature=share";
-const UPCOMING_EVENT_LIVE_POSTER = "https://res.cloudinary.com/der8zinu8/image/upload/v1775022232/live2_xb1w2f.png";
+const UPCOMING_EVENT_LIVE_EMBED_URL = "https://www.youtube.com/embed/b0Q8JoU4gI4";
 const UPCOMING_EVENT_DETAILS =
   "Celebrate Hanuman Janmotsav in the divine presence of Sant Shri Manish Bhaiji Maharaj with aarti, puja, maha abhishek, Sundarkand path, mahaprasad, Hanuman Charitra Gatha, and evening maha aarti.";
 
@@ -271,61 +271,47 @@ export default memo(function HomePage() {
             </div>
 
             <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
-              <a
-                href={UPCOMING_EVENT_VIDEO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group overflow-hidden rounded-[28px] border border-[#efcfaa] bg-white shadow-[0_18px_40px_rgba(122,74,27,0.12)] transition-transform duration-300 hover:-translate-y-1"
-              >
-                <div className="relative">
-                  <img
-                    src={UPCOMING_EVENT_VIDEO_POSTER}
-                    alt="Watch now banner for Hanuman Janmotsav YouTube video"
-                    className="h-[250px] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] md:h-[290px]"
-                    loading="lazy"
+              <div className="overflow-hidden rounded-[28px] border border-[#efcfaa] bg-white p-3 shadow-[0_18px_40px_rgba(122,74,27,0.12)]">
+                <div className="mb-3 px-2">
+                  <h3 className="text-lg font-black text-[#8a2f0a]">{t("home.upcomingVideoTitle")}</h3>
+                </div>
+                <div className="relative w-full overflow-hidden rounded-[22px] pt-[56.25%]">
+                  <iframe
+                    src={UPCOMING_EVENT_VIDEO_EMBED_URL}
+                    title="Hanuman Janmotsav YouTube video"
+                    className="absolute inset-0 h-full w-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
                   />
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#2b1300]/85 via-[#2b1300]/30 to-transparent px-6 py-5">
-                    <span className="inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-[#8a2f0a]">
-                      YouTube Video
-                    </span>
-                    <h3 className="mt-3 text-2xl font-black text-white">Watch Hanuman Janmotsav</h3>
-                  </div>
                 </div>
-                <div className="flex items-center justify-between gap-4 p-5">
-                  <p className="text-sm leading-7 text-[#5b4027]">Open the official event video on YouTube.</p>
-                  <span className="inline-flex items-center justify-center rounded-lg bg-[#9a5310] px-5 py-3 text-sm font-semibold text-white transition-colors group-hover:bg-[#7f430b]">
-                    Watch Now
-                  </span>
+                <div className="mt-3 px-2 pb-1">
+                  <a href={UPCOMING_EVENT_VIDEO_URL} target="_blank" rel="noopener noreferrer" className={SECONDARY_BUTTON}>
+                    Open on YouTube
+                  </a>
                 </div>
-              </a>
+              </div>
 
-              <a
-                href={UPCOMING_EVENT_LIVE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group overflow-hidden rounded-[28px] border border-[#efcfaa] bg-white shadow-[0_18px_40px_rgba(122,74,27,0.12)] transition-transform duration-300 hover:-translate-y-1"
-              >
-                <div className="relative">
-                  <img
-                    src={UPCOMING_EVENT_LIVE_POSTER}
-                    alt="Live banner for Hanuman Jayanti Janmotsav YouTube livestream"
-                    className="h-[250px] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] md:h-[290px]"
-                    loading="lazy"
+              <div className="overflow-hidden rounded-[28px] border border-[#efcfaa] bg-white p-3 shadow-[0_18px_40px_rgba(122,74,27,0.12)]">
+                <div className="mb-3 px-2">
+                  <h3 className="text-lg font-black text-[#8a2f0a]">{t("home.upcomingLiveTitle")}</h3>
+                </div>
+                <div className="relative w-full overflow-hidden rounded-[22px] pt-[56.25%]">
+                  <iframe
+                    src={UPCOMING_EVENT_LIVE_EMBED_URL}
+                    title="Hanuman Jayanti Janmotsav YouTube live"
+                    className="absolute inset-0 h-full w-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
                   />
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#2b1300]/85 via-[#2b1300]/30 to-transparent px-6 py-5">
-                    <span className="inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-[#8a2f0a]">
-                      YouTube Live
-                    </span>
-                    <h3 className="mt-3 text-2xl font-black text-white">Hanuman Jayanti Janmotsav Live</h3>
-                  </div>
                 </div>
-                <div className="flex items-center justify-between gap-4 p-5">
-                  <p className="text-sm leading-7 text-[#5b4027]">Join the live darshan broadcast directly on YouTube.</p>
-                  <span className="inline-flex items-center justify-center rounded-lg bg-[#9a5310] px-5 py-3 text-sm font-semibold text-white transition-colors group-hover:bg-[#7f430b]">
-                    Watch Live
-                  </span>
+                <div className="mt-3 px-2 pb-1">
+                  <a href={UPCOMING_EVENT_LIVE_URL} target="_blank" rel="noopener noreferrer" className={SECONDARY_BUTTON}>
+                    Open Live on YouTube
+                  </a>
                 </div>
-              </a>
+              </div>
             </div>
           </div>
         </section>
