@@ -154,7 +154,23 @@
     "donationText": "आमच्या उपक्रमांना साथ द्या आणि अधिक कुटुंबांपर्यंत पोहोचू द्या.",
     "donateNow": "आत्ताच दान करा",
     "upcomingVideoTitle": "हनुमान जन्मोत्सव पाहा",
-    "upcomingLiveTitle": "हनुमान जयंती जन्मोत्सव थेट प्रक्षेपण"
+    "upcomingLiveTitle": "हनुमान जयंती जन्मोत्सव थेट प्रक्षेपण",
+    "upcomingVideoIframeTitle": "हनुमान जन्मोत्सव यूट्यूब व्हिडिओ",
+    "upcomingLiveIframeTitle": "हनुमान जयंती जन्मोत्सव यूट्यूब लाइव",
+    "openOnYouTube": "यूट्यूबवर उघडा",
+    "openLiveOnYouTube": "थेट यूट्यूबवर उघडा",
+    "bloodDonationTitle": "🩸 रक्तदान शिबिर – आत्ताच सहभागी व्हा 🚩",
+    "bloodDonationIntro": "हनुमान जन्मोत्सवाच्या पावन प्रसंगी",
+    "bloodDonationInspired": "संत श्री मनीष भाईजी महाराज यांच्या प्रेरणेने",
+    "bloodDonationLocation": "📍 ठिकाण: भगवत निकेतन आश्रम (हनुमान जी कॅम्पस)",
+    "bloodDonationOccasion": "📅 प्रसंग: 2 एप्रिल 2026 हनुमान जन्मोत्सव",
+    "bloodDonationBullet1": "✔ जीवन वाचवा",
+    "bloodDonationBullet2": "✔ खरा सेवक व्हा",
+    "bloodDonationBullet3": "✔ दिव्य सेवेत सहभागी व्हा",
+    "bloodDonationClosing": "🙏 तुमचे एक पाऊल कोणाचं तरी जीवन वाचवू शकते",
+    "bloodDonationRegister": "नोंदणी",
+    "bloodDonationDonate": "दान",
+    "bloodDonationWhatsappPrefill": "नमस्कार, मला हनुमान जन्मोत्सवावरील रक्तदान शिबिरासाठी नोंदणी करायची आहे."
   },
   "about": {
     "meta": {

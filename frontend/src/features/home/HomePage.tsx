@@ -16,6 +16,7 @@ const UPCOMING_EVENT_VIDEO_URL = "https://youtu.be/uhPE_XK45lE";
 const UPCOMING_EVENT_VIDEO_EMBED_URL = "https://www.youtube.com/embed/uhPE_XK45lE";
 const UPCOMING_EVENT_LIVE_URL = "https://youtube.com/live/b0Q8JoU4gI4?feature=share";
 const UPCOMING_EVENT_LIVE_EMBED_URL = "https://www.youtube.com/embed/b0Q8JoU4gI4";
+const BLOOD_DONATION_WHATSAPP_URL = "https://wa.me/918668897445";
 const UPCOMING_EVENT_DETAILS =
   "Celebrate Hanuman Janmotsav in the divine presence of Sant Shri Manish Bhaiji Maharaj with aarti, puja, maha abhishek, Sundarkand path, mahaprasad, Hanuman Charitra Gatha, and evening maha aarti.";
 
@@ -238,6 +239,84 @@ export default memo(function HomePage() {
 
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <div className="overflow-hidden rounded-[28px] border border-[#efcfaa] bg-white p-3 shadow-[0_18px_40px_rgba(122,74,27,0.12)]">
+                <div className="mb-3 px-2">
+                  <h3 className="text-lg font-black text-[#8a2f0a]">{t("home.upcomingVideoTitle")}</h3>
+                </div>
+                <div className="relative w-full overflow-hidden rounded-[22px] pt-[56.25%]">
+                  <iframe
+                    src={UPCOMING_EVENT_VIDEO_EMBED_URL}
+                    title={t("home.upcomingVideoIframeTitle")}
+                    className="absolute inset-0 h-full w-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                </div>
+                <div className="mt-3 px-2 pb-1">
+                  <a href={UPCOMING_EVENT_VIDEO_URL} target="_blank" rel="noopener noreferrer" className={SECONDARY_BUTTON}>
+                    {t("home.openOnYouTube")}
+                  </a>
+                </div>
+              </div>
+
+              <div className="overflow-hidden rounded-[28px] border border-[#efcfaa] bg-white p-3 shadow-[0_18px_40px_rgba(122,74,27,0.12)]">
+                <div className="mb-3 px-2">
+                  <h3 className="text-lg font-black text-[#8a2f0a]">{t("home.upcomingLiveTitle")}</h3>
+                </div>
+                <div className="relative w-full overflow-hidden rounded-[22px] pt-[56.25%]">
+                  <iframe
+                    src={UPCOMING_EVENT_LIVE_EMBED_URL}
+                    title={t("home.upcomingLiveIframeTitle")}
+                    className="absolute inset-0 h-full w-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                </div>
+                <div className="mt-3 px-2 pb-1">
+                  <a href={UPCOMING_EVENT_LIVE_URL} target="_blank" rel="noopener noreferrer" className={SECONDARY_BUTTON}>
+                    {t("home.openLiveOnYouTube")}
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-10 overflow-hidden rounded-[28px] border border-[#c41e3a]/35 bg-[linear-gradient(180deg,#fff5f5_0%,#ffffff_100%)] p-6 shadow-[0_18px_40px_rgba(122,74,27,0.12)] md:p-8">
+              <h3 className="text-center text-xl font-black leading-snug text-[#8a0a0a] md:text-2xl">
+                {t("home.bloodDonationTitle")}
+              </h3>
+              <p className="mt-4 text-center text-base font-semibold text-[#5b4027]">{t("home.bloodDonationIntro")}</p>
+              <p className="mt-2 text-center text-sm text-[#6a4f38]">{t("home.bloodDonationInspired")}</p>
+              <p className="mt-4 text-center text-sm font-medium leading-relaxed text-[#4a3728]">{t("home.bloodDonationLocation")}</p>
+              <p className="mt-2 text-center text-sm font-medium leading-relaxed text-[#4a3728]">{t("home.bloodDonationOccasion")}</p>
+              <ul className="mx-auto mt-6 max-w-lg space-y-2 text-sm font-semibold text-[#5d4b3a] md:text-base">
+                <li>{t("home.bloodDonationBullet1")}</li>
+                <li>{t("home.bloodDonationBullet2")}</li>
+                <li>{t("home.bloodDonationBullet3")}</li>
+              </ul>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+                <a
+                  href={`${BLOOD_DONATION_WHATSAPP_URL}?text=${encodeURIComponent(t("home.bloodDonationWhatsappPrefill"))}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={PRIMARY_BUTTON}
+                >
+                  {t("home.bloodDonationRegister")}
+                </a>
+                <a
+                  href={EXTERNAL_RAZORPAY_DONATE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={SECONDARY_BUTTON}
+                >
+                  {t("home.bloodDonationDonate")}
+                </a>
+              </div>
+              <p className="mt-6 text-center text-sm font-medium italic text-[#6b4423] md:text-base">{t("home.bloodDonationClosing")}</p>
+            </div>
+
+            <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
+              <div className="overflow-hidden rounded-[28px] border border-[#efcfaa] bg-white p-3 shadow-[0_18px_40px_rgba(122,74,27,0.12)]">
                 <img
                   src={UPCOMING_EVENT_IMAGE_LEFT}
                   alt="Upcoming event poster left"
@@ -263,55 +342,11 @@ export default memo(function HomePage() {
                 rel="noopener noreferrer"
                 className={PRIMARY_BUTTON}
               >
-                Donate
+                {t("home.donateNow")}
               </a>
               <Link to={ROUTES.involved.index} className={SECONDARY_BUTTON}>
-                Join Us
+                {t("home.joinUs")}
               </Link>
-            </div>
-
-            <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
-              <div className="overflow-hidden rounded-[28px] border border-[#efcfaa] bg-white p-3 shadow-[0_18px_40px_rgba(122,74,27,0.12)]">
-                <div className="mb-3 px-2">
-                  <h3 className="text-lg font-black text-[#8a2f0a]">{t("home.upcomingVideoTitle")}</h3>
-                </div>
-                <div className="relative w-full overflow-hidden rounded-[22px] pt-[56.25%]">
-                  <iframe
-                    src={UPCOMING_EVENT_VIDEO_EMBED_URL}
-                    title="Hanuman Janmotsav YouTube video"
-                    className="absolute inset-0 h-full w-full border-0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  />
-                </div>
-                <div className="mt-3 px-2 pb-1">
-                  <a href={UPCOMING_EVENT_VIDEO_URL} target="_blank" rel="noopener noreferrer" className={SECONDARY_BUTTON}>
-                    Open on YouTube
-                  </a>
-                </div>
-              </div>
-
-              <div className="overflow-hidden rounded-[28px] border border-[#efcfaa] bg-white p-3 shadow-[0_18px_40px_rgba(122,74,27,0.12)]">
-                <div className="mb-3 px-2">
-                  <h3 className="text-lg font-black text-[#8a2f0a]">{t("home.upcomingLiveTitle")}</h3>
-                </div>
-                <div className="relative w-full overflow-hidden rounded-[22px] pt-[56.25%]">
-                  <iframe
-                    src={UPCOMING_EVENT_LIVE_EMBED_URL}
-                    title="Hanuman Jayanti Janmotsav YouTube live"
-                    className="absolute inset-0 h-full w-full border-0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  />
-                </div>
-                <div className="mt-3 px-2 pb-1">
-                  <a href={UPCOMING_EVENT_LIVE_URL} target="_blank" rel="noopener noreferrer" className={SECONDARY_BUTTON}>
-                    Open Live on YouTube
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </section>
