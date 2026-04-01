@@ -5,10 +5,12 @@ import { logger } from "./logger";
 interface KundliOrderMailData {
   fullName: string;
   email: string;
+  mobileNumber: string;
   orderId: string;
   invoiceNumber: string;
   totalAmount: number;
   paymentMethod: string;
+  deliveryPreference: string;
   selectedServices: string[];
 }
 
@@ -27,6 +29,7 @@ export const sendKundliOrderMail = async (data: KundliOrderMailData): Promise<vo
   });
 
   const servicesHtml = data.selectedServices.map((service) => `<li>${service}</li>`).join("");
+  const deliverySummary = data.deliveryPreference === "Both" ? "email and WhatsApp" : data.deliveryPreference.toLowerCase();
 
   await transporter.sendMail({
     from: `"Bhagwat Heritage" <${env.EMAIL_USER}>`,
@@ -38,7 +41,9 @@ export const sendKundliOrderMail = async (data: KundliOrderMailData): Promise<vo
       <p><strong>Invoice:</strong> ${data.invoiceNumber}</p>
       <p><strong>Name:</strong> ${data.fullName}</p>
       <p><strong>Email:</strong> ${data.email}</p>
+      <p><strong>Mobile:</strong> ${data.mobileNumber}</p>
       <p><strong>Payment Method:</strong> ${data.paymentMethod}</p>
+      <p><strong>Delivery Preference:</strong> ${data.deliveryPreference}</p>
       <p><strong>Total Amount:</strong> INR ${data.totalAmount}</p>
       <p><strong>Services:</strong></p>
       <ul>${servicesHtml}</ul>
@@ -52,10 +57,11 @@ export const sendKundliOrderMail = async (data: KundliOrderMailData): Promise<vo
     html: `
       <h2>Kundli Order Confirmed</h2>
       <p>Dear ${data.fullName},</p>
-      <p>Your Kundli request has been successfully submitted. Our astrologer will prepare your Kundli and send the report to your email.</p>
+      <p>Your Kundli request has been successfully submitted. Our astrologer will prepare your Kundli and share the report via ${deliverySummary}.</p>
       <p><strong>Order ID:</strong> ${data.orderId}</p>
       <p><strong>Invoice Number:</strong> ${data.invoiceNumber}</p>
       <p><strong>Payment Status:</strong> Paid</p>
+      <p><strong>Delivery Preference:</strong> ${data.deliveryPreference}</p>
       <p><strong>Total Amount:</strong> INR ${data.totalAmount}</p>
       <p><strong>Selected Services:</strong></p>
       <ul>${servicesHtml}</ul>

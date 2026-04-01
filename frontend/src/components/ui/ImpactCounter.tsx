@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useState } from "react";
+﻿import { memo, useEffect, useRef, useState } from "react";
 
 interface CounterItem {
   label: string;
@@ -48,7 +48,7 @@ const CounterCard = memo(function CounterCard({ item, theme }: { item: CounterIt
         theme === "dark" ? "border border-white/10 bg-[#153346]" : ""
       }`}
     >
-      <h3 className={`text-4xl font-bold mb-2 ${theme === "dark" ? "text-[#ffb06a]" : "text-[#0d3b66]"}`}>
+      <h3 className={`text-4xl font-bold mb-2 ${theme === "dark" ? "text-[#f2b44f]" : "text-[#0f678c]"}`}>
         {count.toLocaleString()}
         {item.suffix ?? "+"}
       </h3>
@@ -59,7 +59,7 @@ const CounterCard = memo(function CounterCard({ item, theme }: { item: CounterIt
 
 export const ImpactCounter = memo(function ImpactCounter({ items, theme = "light" }: ImpactCounterProps) {
   return (
-    <section className={theme === "dark" ? "bg-[#0a2534] py-12" : "bg-gray-50 py-12"}>
+    <section className={theme === "dark" ? "bg-[#084c66] py-12" : "bg-gray-50 py-12"}>
       <div className="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4">
         {items.map((item) => (
           <CounterCard key={item.label} item={item} theme={theme} />
@@ -68,3 +68,4 @@ export const ImpactCounter = memo(function ImpactCounter({ items, theme = "light
     </section>
   );
 });
+

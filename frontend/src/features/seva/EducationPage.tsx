@@ -1,176 +1,142 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
+import { ROUTES } from "../../app/routes/routes";
 import { HeroSection } from "../../components/ui/HeroSection";
-import { ImpactCounter } from "../../components/ui/ImpactCounter";
-
-const IMPACT = [
-  { label: "Students Supported", target: 5000 },
-  { label: "Schools Covered", target: 120 },
-  { label: "Scholarships Awarded", target: 1500 },
-  { label: "Medical Camps", target: 200 },
-];
-
-const PROGRAMS = [
-  {
-    image: "https://res.cloudinary.com/der8zinu8/image/upload/v1772699279/scholorship_ki7aes.png",
-    title: "Scholarship Program",
-    desc: "Financial aid for meritorious students from underprivileged backgrounds.",
-    href: "/seva/scholarship-program",
-  },
-  {
-    image: "https://res.cloudinary.com/der8zinu8/image/upload/v1771583760/chikitsa_q2seq1.png",
-    title: "Free Medical Camps",
-    desc: "Regular health check-ups and free medicine distribution.",
-    href: "/seva/medicine-distribution",
-  },
-  {
-    image: "https://res.cloudinary.com/der8zinu8/image/upload/v1772699843/pathshala_eza0sp.png",
-    title: "E-Pathshala",
-    desc: "Online spiritual and academic education platform.",
-    href: "/events/pathshala",
-  },
-  {
-    image: "https://res.cloudinary.com/der8zinu8/image/upload/v1772700010/distribution_nb16yv.png",
-    title: "Medicine Distribution",
-    desc: "Free medicines for chronic illness patients in rural areas.",
-    href: "/seva/medicine-distribution",
-  },
-];
+import { usePageMeta } from "../../hooks/usePageMeta";
+import { EducationServicesSection } from "./EducationServicesSection";
 
 const MODEL_STEPS = [
-  { title: "Identify Need", desc: "Ground teams identify students and patients needing urgent support." },
-  { title: "Verify & Plan", desc: "Applications are reviewed and personalized support plans are prepared." },
-  { title: "Deliver Support", desc: "Scholarships, camps, and medicines are delivered through verified channels." },
-  { title: "Track Outcomes", desc: "Progress and health records are monitored for long-term impact." },
+  { title: "Identify Learners", desc: "Students and families needing education support are identified through outreach, schools, and trust networks." },
+  { title: "Assess the Need", desc: "The team reviews the learner's situation, academic stage, and the type of support required." },
+  { title: "Deliver Education Support", desc: "Study materials, continuity aid, mentorship, or learning access support is arranged through the trust." },
+  { title: "Track Student Progress", desc: "The trust follows student continuity and learning progress so support remains meaningful and sustained." },
 ];
 
 const QUICK_HIGHLIGHTS = [
-  { title: "Students Supported", value: "5,000+", note: "Academic continuity through trust education seva" },
-  { title: "Schools Covered", value: "120+", note: "Partner institutions and outreach learning centers" },
-  { title: "Scholarship Aid", value: "1,500+", note: "Students supported through direct sponsorship" },
-  { title: "Medical Camps", value: "200+", note: "Integrated health support for learners and families" },
+  { title: "Academic Continuity", value: "School First", note: "Helping children stay in school with practical learning support" },
+  { title: "Learning Material Support", value: "Books and Kits", note: "Study essentials delivered where families need relief most" },
+  { title: "Mentorship Network", value: "Guided Growth", note: "Volunteer mentors encouraging students with care and consistency" },
+  { title: "Community Reach", value: "Village to City", note: "Education seva extending from rural learners to urban support cases" },
 ];
 
 const STORIES = [
   {
-    name: "Rani, Scholarship Student",
-    quote: "This scholarship helped me continue my studies and prepare for my nursing entrance exams.",
+    name: "Class 10 Student",
+    quote: "The trust's education support helped me continue school with books, stationery, and confidence during a difficult year.",
   },
   {
-    name: "Rural Health Camp Team",
-    quote: "Weekly camps now help families detect illnesses early and access essential medicines.",
+    name: "Parent Beneficiary",
+    quote: "We were worried our child might leave school, but timely support helped us keep education going with dignity.",
   },
   {
     name: "Volunteer Mentor",
-    quote: "With digital pathshala sessions, students are learning beyond classroom boundaries.",
+    quote: "Even a few hours of guidance each week can change how a student studies, dreams, and moves forward.",
   },
 ];
 
 export default memo(function EducationPage() {
+  usePageMeta(
+    "Education Seva",
+    "Bhagwat Heritage Service Foundation Trust education seva page focused on student learning continuity, mentorship, school resources, and educational support.",
+  );
+
   return (
-    <div className="min-h-screen bg-[#0b2230]">
+    <div className="min-h-screen bg-[#0B2230]">
       <HeroSection
-        title="Medicine & Education Seva"
-        subtitle="Empowering communities through knowledge and healthcare"
-        backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772699136/medicaleducatio_gmmhg5.png"
+        title="Education Seva"
+        subtitle="Lighting lives through learning."
+        subtitleClassName="text-[34px] font-semibold md:text-[40px]"
+        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
+        backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772699843/pathshala_eza0sp.png"
         boxed
         heightClass="h-[360px] md:h-[520px]"
       >
         <div className="flex flex-wrap justify-center gap-3">
-          <Link to="/donate" className="bg-[#ff8a00] hover:bg-[#e87900] text-white font-semibold px-6 py-3 rounded-lg transition-colors">
-            Sponsor a Student
+          <Link to={ROUTES.donate} className="inline-flex items-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]">
+            Support Education
           </Link>
-          <Link to="/volunteer" className="bg-white text-[#0f5a98] hover:bg-[#eef4ff] font-semibold px-6 py-3 rounded-lg transition-colors">
+          <Link to={ROUTES.involved.volunteer} className="inline-flex items-center rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]">
             Become Mentor
           </Link>
         </div>
       </HeroSection>
 
-      <section className="-mt-10 relative z-20 pb-6">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
+      <section className="relative z-20 mt-[10px] pb-6">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {QUICK_HIGHLIGHTS.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/15 bg-[#143446]/95 backdrop-blur-sm p-4 shadow-lg">
-                <p className="text-[#ffb06a] text-xs uppercase tracking-wide">{item.title}</p>
-                <p className="text-white text-2xl font-black mt-1">{item.value}</p>
-                <p className="text-[#c7d7e1] text-sm mt-1">{item.note}</p>
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+                <p className="text-[19px] font-black uppercase tracking-wide text-[#ef9a1e]">{item.title}</p>
+                <p className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.value}</p>
+                <p className="mt-1 text-base leading-7 text-[#dce7ec] md:text-lg">{item.note}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-b from-[#0d2f43] via-[#0c2a3a] to-[#0a2534]">
-        <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-8">Our Programs</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {PROGRAMS.map((item) => (
-            <div key={item.title} className="rounded-2xl shadow-sm border border-white/10 bg-[#17384b] overflow-hidden">
-              <img src={item.image} alt={item.title} className="w-full h-52 object-cover" loading="lazy" />
-              <div className="p-6">
-                <h3 className="font-bold text-white text-xl mb-2">{item.title}</h3>
-                <p className="text-[#d4e1e8] mb-4">{item.desc}</p>
-                <Link
-                  to={item.href}
-                  className="inline-block bg-[#ff8a00] hover:bg-[#e87900] text-white font-semibold px-5 py-2.5 rounded-lg transition-colors"
-                >
-                  Learn More
-                </Link>
-              </div>
-            </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <ImpactCounter items={IMPACT} theme="dark" />
-
-      <section className="py-16 bg-gradient-to-r from-[#0b2130] via-[#0d2f43] to-[#0b2130]">
-        <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-10">How Our Seva Model Works</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-          {MODEL_STEPS.map((step, idx) => (
-            <div key={step.title} className="rounded-2xl border border-white/10 bg-[#17384b] shadow-sm p-6">
-              <p className="text-[#ffb06a] text-sm font-semibold mb-2">Step {idx + 1}</p>
-              <h3 className="text-2xl font-black text-white mb-2">{step.title}</h3>
-              <p className="text-[#d4e1e8]">{step.desc}</p>
-            </div>
-          ))}
-        </div>
-        </div>
-      </section>
-
-      <section className="pb-16 bg-[#0a2534]">
-        <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-8">Impact Stories</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {STORIES.map((item) => (
-            <div key={item.name} className="rounded-2xl border border-white/10 bg-[#17384b] shadow-sm p-6">
-              <p className="text-[#d4e1e8] text-lg leading-relaxed">"{item.quote}"</p>
-              <p className="text-[#ffb06a] font-semibold mt-4">{item.name}</p>
-            </div>
-          ))}
-        </div>
-        </div>
-      </section>
-
-      <section className="pb-16 bg-gradient-to-r from-[#0b2130] via-[#0d2f43] to-[#0b2130]">
-        <div className="max-w-7xl mx-auto px-4">
-        <div className="bg-gradient-to-r from-[#0f5a98] to-[#0d8f91] rounded-2xl p-8 text-white">
-          <h3 className="text-4xl font-black mb-3">Monthly Learning & Health Drive</h3>
-          <p className="text-white/95 text-lg mb-5">
-            Each month we combine education mentorship, scholarship reviews, and health-check support
-            to ensure balanced development for students and families.
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">About Education Seva</p>
+          <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Learning support with guidance and continuity</h2>
+          <p className="mt-5 text-base leading-7 text-white md:text-lg">
+            Education Seva is aimed at helping students move forward with confidence and dignity. Through this initiative,
+            the foundation supports educational needs such as study materials, guidance, and assistance for learners from deserving backgrounds.
           </p>
-          <div className="flex flex-wrap gap-3">
-            <Link to="/donate" className="bg-[#ff8a00] hover:bg-[#e87900] text-white font-semibold px-6 py-3 rounded-lg transition-colors">
-              Donate Now
-            </Link>
-            <Link to="/volunteer" className="bg-white text-[#0f5a98] font-semibold px-6 py-3 rounded-lg">
-              Volunteer as Teacher
-            </Link>
+          <p className="mt-4 text-base leading-7 text-white md:text-lg">
+            We believe that education should be strengthened by values, discipline, and inner growth along with academic progress.
+          </p>
+        </div>
+      </section>
+
+      <EducationServicesSection />
+
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">How Education Seva Works</p>
+          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {MODEL_STEPS.map((step, idx) => (
+              <div key={step.title} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">Step {idx + 1}</p>
+                <h3 className="mt-3 text-xl font-black text-white">{step.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{step.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
+      </section>
+
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Education Stories</p>
+          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
+            {STORIES.map((item) => (
+              <div key={item.name} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+                <p className="text-base leading-7 text-[#dce7ec]">"{item.quote}"</p>
+                <p className="mt-4 text-[14px] font-black text-white md:text-[20px]">{item.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Monthly Education Support Drive</p>
+            <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">
+              Each month the trust supports students through learning materials, school continuity help,
+              mentorship guidance, and digital education assistance so children can keep moving forward.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Link to={ROUTES.donate} className="rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]">
+                Donate Now
+              </Link>
+              <Link to={ROUTES.involved.volunteer} className="rounded-xl bg-[#0b2230] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#15384b]">
+                Volunteer as Teacher
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
     </div>

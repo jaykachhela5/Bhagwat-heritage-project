@@ -1,4 +1,4 @@
-import { memo, useState, type FormEvent } from "react";
+﻿import { memo, useState, type FormEvent } from "react";
 import { useAuth } from "../../app/providers/AuthProvider";
 import { donationsApi } from "../../services/api/misc";
 import { useApi } from "../../hooks/useApi";
@@ -14,7 +14,7 @@ export default memo(function DonorDashboardPage() {
     e.preventDefault();
     try {
       await donationsApi.create(form);
-      setMsg("Donation recorded! Thank you 🙏");
+      setMsg("Donation recorded! Thank you.");
       refetch();
     } catch {
       setMsg("Failed to record donation.");
@@ -23,7 +23,7 @@ export default memo(function DonorDashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-[#0d3b66] text-white px-6 py-4">
+      <div className="bg-[#0f678c] text-white px-6 py-4">
         <h1 className="text-xl font-bold">Donor Dashboard</h1>
         <p className="text-sm text-gray-300">Welcome, {user?.name}</p>
       </div>
@@ -31,29 +31,29 @@ export default memo(function DonorDashboardPage() {
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="bg-white rounded-2xl shadow-md p-6">
-            <h2 className="text-xl font-bold text-[#0d3b66] mb-4">Make a Donation</h2>
+            <h2 className="text-xl font-bold text-[#0f678c] mb-4">Make a Donation</h2>
             <form onSubmit={handleDonate} className="space-y-3">
               <input type="text" placeholder="Your Name" value={form.name}
                 onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} required
-                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]" />
+                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0f678c]" />
               <input type="email" placeholder="Email" value={form.email}
                 onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} required
-                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]" />
+                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0f678c]" />
               <div className="flex items-center gap-2">
-                <span className="text-gray-500">₹</span>
+                <span className="text-gray-500">INR</span>
                 <input type="number" placeholder="Amount" value={form.amount} min={1}
                   onChange={(e) => setForm((f) => ({ ...f, amount: Number(e.target.value) }))} required
-                  className="flex-1 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]" />
+                  className="flex-1 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0f678c]" />
               </div>
               {msg && <p className="text-green-600 text-sm">{msg}</p>}
               <button type="submit" className="btn-primary w-full py-3">
-                Donate ₹{form.amount.toLocaleString()}
+                Donate INR {form.amount.toLocaleString()}
               </button>
             </form>
           </div>
 
           <div className="bg-white rounded-2xl shadow-md p-6">
-            <h2 className="text-xl font-bold text-[#0d3b66] mb-4">Donation History</h2>
+            <h2 className="text-xl font-bold text-[#0f678c] mb-4">Donation History</h2>
             {loading ? (
               <p className="text-gray-500">Loading...</p>
             ) : (
@@ -61,7 +61,7 @@ export default memo(function DonorDashboardPage() {
                 {(donations ?? []).slice(0, 10).map((d: Donation) => (
                   <div key={d._id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div>
-                      <p className="font-semibold text-[#0d3b66]">₹{d.amount.toLocaleString()}</p>
+                      <p className="font-semibold text-[#0f678c]">INR {d.amount.toLocaleString()}</p>
                       <p className="text-xs text-gray-500">{new Date(d.createdAt).toLocaleDateString()}</p>
                     </div>
                     <span className={`text-xs px-2 py-1 rounded-full font-semibold ${
@@ -81,3 +81,4 @@ export default memo(function DonorDashboardPage() {
     </div>
   );
 });
+

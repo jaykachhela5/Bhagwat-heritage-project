@@ -14,8 +14,13 @@ const UPCOMING_EVENT_DATE = "Thursday, 2 April 2026";
 const UPCOMING_EVENT_CONTACT = "+91 9822471551";
 const UPCOMING_EVENT_VIDEO_URL = "https://youtu.be/uhPE_XK45lE";
 const UPCOMING_EVENT_VIDEO_POSTER = "https://res.cloudinary.com/der8zinu8/image/upload/v1775022287/watchnow_aaakef.png";
+<<<<<<< Updated upstream
 const UPCOMING_EVENT_LIVE_URL = "https://youtube.com/live/b0Q8JoU4gI4?feature=share";
 const UPCOMING_EVENT_LIVE_POSTER = "https://res.cloudinary.com/der8zinu8/image/upload/v1775022232/live2_xb1w2f.png";
+=======
+const UPCOMING_EVENT_LIVE_POSTER = "https://res.cloudinary.com/der8zinu8/image/upload/v1775022232/live2_xb1w2f.png";
+const UPCOMING_EVENT_LIVE_URL = "";
+>>>>>>> Stashed changes
 const UPCOMING_EVENT_DETAILS =
   "Celebrate Hanuman Janmotsav in the divine presence of Sant Shri Manish Bhaiji Maharaj with aarti, puja, maha abhishek, Sundarkand path, mahaprasad, Hanuman Charitra Gatha, and evening maha aarti.";
 
@@ -23,6 +28,67 @@ const PRIMARY_BUTTON =
   "inline-flex items-center justify-center rounded-lg bg-[#f1a15c] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#e48d45]";
 const SECONDARY_BUTTON =
   "inline-flex items-center justify-center rounded-lg border border-[#d4a270] bg-white px-6 py-3 text-sm font-semibold text-[#9a5310] transition-colors hover:bg-[#fff7ef]";
+
+function UpcomingEventMediaCard({
+  eyebrow,
+  title,
+  imageSrc,
+  imageAlt,
+  href,
+  ctaLabel,
+  placeholderText,
+}: {
+  eyebrow: string;
+  title: string;
+  imageSrc: string;
+  imageAlt: string;
+  href?: string;
+  ctaLabel: string;
+  placeholderText?: string;
+}) {
+  const image = (
+    <div className="relative overflow-hidden rounded-[24px]">
+      <img src={imageSrc} alt={imageAlt} className="h-[240px] w-full object-cover md:h-[280px]" loading="lazy" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#2a1200]/80 via-[#2a1200]/15 to-transparent px-5 py-5">
+        <span className="inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-[#8c3d00]">
+          {eyebrow}
+        </span>
+      </div>
+    </div>
+  );
+
+  return (
+    <article className="overflow-hidden rounded-[30px] border border-[#efcfaa] bg-white p-4 shadow-[0_18px_40px_rgba(122,74,27,0.12)]">
+      {href ? (
+        <a href={href} target="_blank" rel="noopener noreferrer" className="block">
+          {image}
+        </a>
+      ) : (
+        image
+      )}
+      <div className="px-1 pb-1 pt-5">
+        <h3 className="text-2xl font-black text-[#7c1d00]">{title}</h3>
+        {href ? (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center justify-center rounded-lg bg-[#9a5310] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#7f430b]"
+          >
+            {ctaLabel}
+          </a>
+        ) : (
+          <div className="mt-4">
+            <span className="inline-flex items-center justify-center rounded-lg border border-[#e8d2bb] bg-[#fff7ef] px-5 py-3 text-sm font-semibold text-[#9a5310]">
+              {ctaLabel}
+            </span>
+            {placeholderText ? <p className="mt-3 text-sm leading-6 text-[#6c5440]">{placeholderText}</p> : null}
+          </div>
+        )}
+      </div>
+    </article>
+  );
+}
 
 function UpcomingEventModal({ onClose }: { onClose: () => void }) {
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -271,6 +337,7 @@ export default memo(function HomePage() {
             </div>
 
             <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
+<<<<<<< Updated upstream
               <a
                 href={UPCOMING_EVENT_VIDEO_URL}
                 target="_blank"
@@ -326,6 +393,29 @@ export default memo(function HomePage() {
                   </span>
                 </div>
               </a>
+=======
+              <UpcomingEventMediaCard
+                eyebrow="YouTube Video"
+                title="Hanuman Janmotsav Video"
+                imageSrc={UPCOMING_EVENT_VIDEO_POSTER}
+                imageAlt="Hanuman Janmotsav YouTube video poster"
+                href={UPCOMING_EVENT_VIDEO_URL}
+                ctaLabel="Watch on YouTube"
+              />
+              <UpcomingEventMediaCard
+                eyebrow="YouTube Live"
+                title="Hanuman Jayanti Janmotsav Live"
+                imageSrc={UPCOMING_EVENT_LIVE_POSTER}
+                imageAlt="Hanuman Jayanti Janmotsav live poster"
+                href={UPCOMING_EVENT_LIVE_URL || undefined}
+                ctaLabel={UPCOMING_EVENT_LIVE_URL ? "Watch Live" : "Live Link Coming Soon"}
+                placeholderText={
+                  UPCOMING_EVENT_LIVE_URL
+                    ? undefined
+                    : "Send the YouTube live URL and this card will open the livestream directly."
+                }
+              />
+>>>>>>> Stashed changes
             </div>
           </div>
         </section>

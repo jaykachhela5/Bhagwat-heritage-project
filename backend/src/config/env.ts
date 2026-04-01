@@ -12,6 +12,11 @@ const envSchema = z.object({
   EMAIL_USER: z.string().email().optional(),
   EMAIL_PASS: z.string().optional(),
   ADMIN_EMAIL: z.string().email().optional(),
+  RAZORPAY_KEY_ID: z.string().optional(),
+  RAZORPAY_KEY_SECRET: z.string().optional(),
+  RAZORPAY_PLAN_151: z.string().optional(),
+  RAZORPAY_PLAN_501: z.string().optional(),
+  RAZORPAY_PLAN_1100: z.string().optional(),
   ALLOWED_ORIGINS: z.string().default("http://localhost:5173"),
 });
 

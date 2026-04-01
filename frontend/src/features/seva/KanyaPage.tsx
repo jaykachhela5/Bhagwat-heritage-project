@@ -1,124 +1,94 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
+import { ROUTES } from "../../app/routes/routes";
 import { HeroSection } from "../../components/ui/HeroSection";
-import { ImpactCounter } from "../../components/ui/ImpactCounter";
-
-const IMPACT = [
-  { label: "Daughters Supported", target: 250 },
-  { label: "Marriage Assistance (Rs Lakh)", target: 50 },
-  { label: "Community Wedding Events", target: 40 },
-  { label: "Transparent Donations", target: 100, suffix: "%" },
-];
-
-const SUPPORT_TYPES = [
-  {
-    image: "/images/kanyadan.png",
-    title: "Marriage Financial Support",
-    desc: "Direct financial assistance for essential wedding expenses.",
-  },
-  {
-    image: "/images/vastraseva.png",
-    title: "Essential Marriage Kit",
-    desc: "Clothing, utensils, and household starter essentials for daughters.",
-  },
-  {
-    image: "/images/page1.png",
-    title: "Ceremony Arrangement",
-    desc: "Basic venue and ritual setup support for a dignified ceremony.",
-  },
-  {
-    image: "/images/aa.png",
-    title: "Documentation Support",
-    desc: "Marriage registration and required paperwork assistance.",
-  },
-];
+import { usePageMeta } from "../../hooks/usePageMeta";
+import { KanyadaanServicesSection } from "./KanyadaanServicesSection";
 
 const QUICK_HIGHLIGHTS = [
-  { title: "Daughters Supported", value: "250+", note: "Direct marriage assistance and dignity support" },
-  { title: "Volunteer Network", value: "180+", note: "Community sevadars for logistics and care" },
-  { title: "Marriage Support Kits", value: "300+", note: "Clothing, essentials, and family support items" },
-  { title: "Transparent Assistance", value: "100%", note: "Verified and documented support delivery" },
+  { title: "Dignity First", note: "Kanyadaan Seva is guided by respect, prayer, and family care" },
+  { title: "Volunteer Network", note: "Community volunteers available for coordination and support" },
+  { title: "Support Models", note: "Multiple formats of marriage support for different needs" },
+  { title: "Transparent Help", note: "Structured support aligned through the foundation's service flow" },
 ];
 
 export default memo(function KanyaPage() {
+  usePageMeta(
+    "Kanyadaan Seva",
+    "Bhagwat Heritage Service Foundation Trust Kanyadaan Seva page focused on dignified marriage support, sponsorship, and compassionate family assistance.",
+  );
+
   return (
-    <div className="min-h-screen bg-[#0b2230]">
+    <div className="min-h-screen bg-[#0B2230]">
       <HeroSection
         title="Kanyadaan Seva"
-        subtitle="Supporting Daughters with Respect, Dignity, and Blessings"
+        subtitle="Supporting daughters with respect, dignity, and blessings"
+        subtitleClassName="text-[34px] font-semibold md:text-[40px]"
+        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="/images/kanyadan.png"
         boxed
         heightClass="h-[360px] md:h-[520px]"
+        backgroundPositionClass="bg-center"
+        overlayClass="bg-black/45"
       >
         <div className="flex flex-wrap justify-center gap-3">
           <Link
-            to="/donate"
-            className="bg-[#ff8a00] hover:bg-[#e87900] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+            to={ROUTES.donate}
+            className="rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
           >
             Sponsor Kanyadaan
           </Link>
           <Link
-            to="/volunteer"
-            className="bg-white text-[#0f5a98] hover:bg-[#eef4ff] font-semibold px-6 py-3 rounded-lg transition-colors"
+            to={ROUTES.involved.volunteer}
+            className="rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
           >
             Become Volunteer
           </Link>
         </div>
       </HeroSection>
 
-      <section className="-mt-10 relative z-20 pb-6">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
+      <section className="relative z-20 mt-[10px] pb-6">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {QUICK_HIGHLIGHTS.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/15 bg-[#143446]/95 backdrop-blur-sm p-4 shadow-lg">
-                <p className="text-[#ffb06a] text-xs uppercase tracking-wide">{item.title}</p>
-                <p className="text-white text-2xl font-black mt-1">{item.value}</p>
-                <p className="text-[#c7d7e1] text-sm mt-1">{item.note}</p>
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+                <p className="text-[24px] uppercase tracking-wide text-[#ef9a1e]">{item.title}</p>
+                <p className="mt-2 text-base leading-7 text-[#dce7ec] md:text-lg">{item.note}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-b from-[#0d2f43] via-[#0c2a3a] to-[#0a2534] py-16">
-        <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-8">About Kanyadaan Seva</h2>
-        <p className="max-w-4xl mx-auto text-center text-[#d7e3ea] text-xl leading-relaxed mb-5">
-          Kanyadaan Seva supports underprivileged daughters with dignified marriage assistance through
-          transparent and compassionate community support.
-        </p>
-        <p className="max-w-4xl mx-auto text-center text-[#d7e3ea] text-xl leading-relaxed mb-8">
-          The page now follows the same seva visual theme, with a stronger focus on dignity, family support, and structured seva participation.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
-          {SUPPORT_TYPES.map((item) => (
-            <div key={item.title} className="rounded-2xl border border-white/10 bg-[#1b3646]/80 shadow-sm overflow-hidden">
-              <img src={item.image} alt={item.title} className="w-full h-44 object-cover" loading="lazy" />
-              <div className="p-5">
-                <h3 className="text-2xl font-black text-white mb-2">{item.title}</h3>
-                <p className="text-[#d4e1e8]">{item.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">About Kanyadaan Seva</p>
+          <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Support rooted in dignity and family care</h2>
+          <p className="mt-5 text-base leading-7 text-white md:text-lg">
+            Kanyadaan Seva supports underprivileged daughters with dignified marriage assistance through transparent and compassionate community support.
+          </p>
+          <p className="mt-4 text-base leading-7 text-white md:text-lg">
+            The page now follows a stronger seva experience with focused service categories, sponsor pathways, and clear support actions for families and donors.
+          </p>
         </div>
       </section>
 
-      <ImpactCounter items={IMPACT} theme="dark" />
+      <KanyadaanServicesSection />
 
-      <section className="py-16 bg-gradient-to-r from-[#0b2130] via-[#0d2f43] to-[#0b2130] border-y border-white/5">
-        <div className="max-w-5xl mx-auto px-4 text-center">
-          <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-8">Sponsor a Wedding</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Sponsor a Wedding</p>
+          <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Support a dignified marriage journey</h2>
+          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
             {[
               { label: "Basic Support", amount: "Rs 11,000" },
               { label: "Full Marriage Support", amount: "Rs 51,000" },
               { label: "Community Wedding Sponsor", amount: "Rs 1,11,000" },
             ].map((tier) => (
-              <div key={tier.label} className="rounded-xl p-6 shadow border border-white/10 bg-[#17384b]">
-                <h3 className="font-bold text-white text-lg">{tier.label}</h3>
-                <p className="text-2xl font-bold text-[#ffb06a] mt-2">{tier.amount}</p>
-                <Link to="/donate" className="btn-primary mt-4 inline-block">
+              <div key={tier.label} className="flex h-full flex-col rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+                <h3 className="text-xl font-black text-white">{tier.label}</h3>
+                <p className="mt-2 text-[14px] font-black text-[#ef9a1e] md:text-[20px]">{tier.amount}</p>
+                <Link to={ROUTES.donate} className="mt-5 inline-flex w-fit rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]">
                   Donate Now
                 </Link>
               </div>

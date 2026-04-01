@@ -5,6 +5,7 @@ export interface IBook extends Document {
   author: string;
   category?: string;
   isbn?: string;
+  image?: string;
   quantity?: number;
   available?: number;
   description?: string;
@@ -16,6 +17,7 @@ const bookSchema = new Schema<IBook>({
   author: { type: String, required: true },
   category: { type: String },
   isbn: { type: String },
+  image: { type: String },
   quantity: { type: Number },
   available: { type: Number },
   description: { type: String },

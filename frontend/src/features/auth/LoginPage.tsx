@@ -57,14 +57,14 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0d3b66] to-[#1fa3b8] flex items-center justify-center px-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
-        <div className="text-center mb-8">
-          <img src="/images/logo.jpg" alt="Logo" className="h-16 w-16 rounded-full mx-auto mb-3 object-cover" />
-          <h2 className="text-2xl font-bold text-[#0d3b66]">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#0a5375] via-[#1788ac] to-[#8fc65b] px-4">
+      <div className="w-full max-w-md rounded-2xl border border-white/60 bg-white/95 p-8 shadow-[0_24px_48px_rgba(10,83,117,0.18)] backdrop-blur-sm">
+        <div className="mb-8 text-center">
+          <img src="/images/logo.jpg" alt="Logo" className="mx-auto mb-3 h-16 w-16 rounded-full object-cover" />
+          <h2 className="text-2xl font-bold text-[#0a5375]">
             {mode === "login" ? "Welcome Back" : "Create Account"}
           </h2>
-          <p className="text-sm text-gray-500 mt-1">Bhagwat Heritage Service Foundation Trust</p>
+          <p className="mt-1 text-sm text-[#5d7f8b]">Bhagwat Heritage Service Foundation Trust</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -75,7 +75,7 @@ export default function LoginPage() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+              className="w-full rounded-lg border border-[#dce9ee] bg-[#fffdf7] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ef9a1e]"
             />
           )}
           <input
@@ -84,7 +84,7 @@ export default function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+            className="w-full rounded-lg border border-[#dce9ee] bg-[#fffdf7] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ef9a1e]"
           />
           <input
             type="password"
@@ -92,7 +92,7 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+            className="w-full rounded-lg border border-[#dce9ee] bg-[#fffdf7] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ef9a1e]"
           />
 
           {msg && (
@@ -104,20 +104,20 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#0d3b66] text-white py-3 rounded-lg font-semibold hover:bg-[#1a5276] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#0f678c] py-3 font-semibold text-white transition-colors hover:bg-[#0a5375] disabled:opacity-50"
           >
             {loading ? <LoadingSpinner size="sm" /> : null}
             {mode === "login" ? "Login" : "Sign Up"}
           </button>
         </form>
 
-        <p className="text-center text-sm text-gray-600 mt-4">
+        <p className="mt-4 text-center text-sm text-gray-600">
           {mode === "login" ? (
             <>
               Don&apos;t have an account?{" "}
               <button
                 onClick={() => setMode("signup")}
-                className="text-[#0d3b66] font-semibold hover:underline"
+                className="font-semibold text-[#0f678c] hover:underline"
               >
                 Sign Up
               </button>
@@ -127,7 +127,7 @@ export default function LoginPage() {
               Already have an account?{" "}
               <button
                 onClick={() => setMode("login")}
-                className="text-[#0d3b66] font-semibold hover:underline"
+                className="font-semibold text-[#0f678c] hover:underline"
               >
                 Login
               </button>
@@ -135,9 +135,9 @@ export default function LoginPage() {
           )}
         </p>
 
-        <p className="text-center mt-3">
-          <Link to="/" className="text-sm text-gray-500 hover:text-[#0d3b66]">
-            ← Back to Home
+        <p className="mt-3 text-center">
+          <Link to="/" className="text-sm text-[#5d7f8b] hover:text-[#0f678c]">
+            Back to Home
           </Link>
         </p>
       </div>

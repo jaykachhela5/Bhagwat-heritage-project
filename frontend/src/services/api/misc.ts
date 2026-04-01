@@ -23,9 +23,11 @@ export const donorApi = {
 };
 
 export const membersApi = {
-  add: (payload: { name: string; email: string; phone?: string; address?: string }) =>
+  add: (payload: { name: string; email?: string; phone?: string; address?: string }) =>
     apiClient.post<{ message: string }>("/api/members", payload),
   getAll: () => apiClient.get<Member[]>("/api/members"),
+  updateStatus: (id: string, payload: { status: "Pending" | "Approved" | "Rejected" }) =>
+    apiClient.put<{ message: string; member: Member }>(`/api/members/${id}/status`, payload),
 };
 
 export const mandirApi = {

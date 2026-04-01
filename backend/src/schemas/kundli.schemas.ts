@@ -30,6 +30,7 @@ export const kundliCreateSchema = z.object({
   country: z.string().trim().min(2),
   selectedServices: selectedServicesSchema,
   preferredLanguage: z.enum(["English", "Hindi", "Marathi", "Gujarati"]),
+  deliveryPreference: z.enum(["Email", "WhatsApp", "Both"]),
   mobileNumber: z.string().trim().regex(/^\+?[0-9()\-\s]{7,18}$/, "Invalid phone number"),
   email: z.string().email(),
   address: z.string().trim().max(400).optional().or(z.literal("")),

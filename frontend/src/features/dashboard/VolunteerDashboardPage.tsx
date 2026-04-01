@@ -1,4 +1,4 @@
-import { memo } from "react";
+﻿import { memo } from "react";
 import { useAuth } from "../../app/providers/AuthProvider";
 import { useApi } from "../../hooks/useApi";
 import { volunteersApi } from "../../services/api/volunteers";
@@ -16,7 +16,7 @@ export default memo(function VolunteerDashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-[#0d3b66] text-white px-6 py-4">
+      <div className="bg-[#0f678c] text-white px-6 py-4">
         <h1 className="text-xl font-bold">Volunteer Dashboard</h1>
         <p className="text-sm text-gray-300">Welcome, {user?.name}</p>
       </div>
@@ -27,11 +27,11 @@ export default memo(function VolunteerDashboardPage() {
         ) : myRecord ? (
           <div className="bg-white rounded-2xl shadow-md p-8">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 bg-[#0d3b66]/10 rounded-full flex items-center justify-center">
-                <i className="fas fa-user text-2xl text-[#0d3b66]" />
+              <div className="w-16 h-16 bg-[#0f678c]/10 rounded-full flex items-center justify-center">
+                <i className="fas fa-user text-2xl text-[#0f678c]" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-[#0d3b66]">{myRecord.fullName}</h2>
+                <h2 className="text-xl font-bold text-[#0f678c]">{myRecord.fullName}</h2>
                 <p className="text-gray-500">{myRecord.email}</p>
               </div>
             </div>
@@ -39,7 +39,7 @@ export default memo(function VolunteerDashboardPage() {
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-gray-50 rounded-lg p-4">
                 <p className="text-xs text-gray-500 mb-1">Seva Area</p>
-                <p className="font-semibold text-[#0d3b66]">{myRecord.sevaArea}</p>
+                <p className="font-semibold text-[#0f678c]">{myRecord.sevaArea}</p>
               </div>
               <div className="bg-gray-50 rounded-lg p-4">
                 <p className="text-xs text-gray-500 mb-1">Status</p>
@@ -79,3 +79,4 @@ export default memo(function VolunteerDashboardPage() {
     </div>
   );
 });
+

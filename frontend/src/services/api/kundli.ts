@@ -15,6 +15,7 @@ export const kundliRequestsApi = {
     country: string;
     selectedServices: Array<{ title: string; pages: number; price: number }>;
     preferredLanguage: "English" | "Hindi" | "Marathi" | "Gujarati";
+    deliveryPreference: "Email" | "WhatsApp" | "Both";
     mobileNumber: string;
     email: string;
     address?: string;

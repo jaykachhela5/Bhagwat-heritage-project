@@ -1,4 +1,4 @@
-import { memo, useMemo, useState, type FormEvent } from "react";
+﻿import { memo, useMemo, useState, type FormEvent } from "react";
 import { volunteersApi } from "../../services/api/volunteers";
 import { FeatureHeroSlider } from "../../components/sections/FeatureHeroSlider";
 import { StatStrip } from "../../components/sections/StatStrip";
@@ -64,6 +64,27 @@ const TOP_BANNER_SLIDES = [
     subtitle: "Be part of disciplined seva teams and spiritual service programs",
   },
 ];
+
+const THEME = {
+  page: "min-h-screen bg-[#0B2230] pb-16",
+  bannerWrap: "pt-8 md:pt-10",
+  section: "max-w-6xl mx-auto px-4 pt-8",
+  darkPanel: "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 md:p-8 shadow-[0_18px_40px_rgba(0,0,0,0.20)]",
+  darkCard: "rounded-[24px] border border-white/10 bg-[#0c5871] p-4 shadow-[0_14px_30px_rgba(0,0,0,0.18)]",
+  label: "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]",
+  heading: "mt-2 text-[14px] font-black text-white md:text-[20px]",
+  formNote: "text-sm leading-6 text-[#dce7ec]",
+  formInput:
+    "w-full rounded-2xl border border-white/10 bg-white px-4 py-3 text-sm text-[#17314a] outline-none transition placeholder:text-[#6b8091] focus:border-[#ef9a1e] focus:ring-2 focus:ring-[#efc06a]",
+  filterChip: "rounded-full px-3 py-1.5 text-xs font-semibold transition",
+  sliderWrap: "rounded-[24px] border border-white/10 bg-[#0c5871] p-4",
+  sliderLabel: "mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]",
+  sliderValue: "mt-1 text-xs text-[#dce7ec]",
+  progressLabel: "mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]",
+  progressValue: "mt-1 text-xs text-[#dce7ec]",
+  button:
+    "mt-4 inline-flex w-full items-center justify-center rounded-2xl bg-[#ef9a1e] px-6 py-4 text-base font-bold text-white shadow-[0_18px_34px_rgba(239,154,30,0.28)] transition hover:bg-[#de930a] disabled:cursor-not-allowed disabled:opacity-70",
+} as const;
 
 export default memo(function VolunteerFormPage() {
   usePageMeta("Volunteer Registration", "Join Bhagwat Heritage volunteer teams and serve with purpose.");
@@ -131,24 +152,28 @@ export default memo(function VolunteerFormPage() {
   };
 
   return (
-    <div>
-      <PageSectionShell className="pt-8 md:pt-10">
-        <FeatureHeroSlider slides={TOP_BANNER_SLIDES} />
+    <div className={THEME.page}>
+      <PageSectionShell className={THEME.bannerWrap}>
+        <FeatureHeroSlider slides={TOP_BANNER_SLIDES} variant="gauseva" />
       </PageSectionShell>
 
       <PageSectionShell className="pt-8">
-        <StatStrip items={IMPACT_METRICS} />
+        <StatStrip items={IMPACT_METRICS} variant="gauseva" />
       </PageSectionShell>
 
-      <section className="max-w-6xl mx-auto px-4 pt-8">
-        <div className="rounded-3xl border border-[#dbe8f4] bg-gradient-to-br from-[#f7fbff] via-white to-[#eef6ff] p-6 md:p-8 shadow-sm">
-          <h2 className="text-2xl md:text-3xl font-black text-[#123753] mb-5">Volunteer Onboarding Journey</h2>
+      <section className={THEME.section}>
+        <div className={THEME.darkPanel}>
+          <p className={THEME.label}>Volunteer Onboarding Journey</p>
+          <h2 className={THEME.heading}>Register, Screen, Orient, and Start Seva</h2>
+          <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">
+            Complete the steps below to begin guided volunteer onboarding with the trust team.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
             {ONBOARDING.map((item, index) => (
-              <article key={item.title} className="rounded-xl border border-[#d8e5f3] bg-white p-4">
-                <p className="text-xs font-bold text-[#2d5b83]">Step {index + 1}</p>
-                <h3 className="mt-1 text-lg font-black text-[#123753]">{item.title}</h3>
-                <p className="mt-1 text-sm text-[#4f6272]">{item.detail}</p>
+              <article key={item.title} className={THEME.darkCard}>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">Step {index + 1}</p>
+                <h3 className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.title}</h3>
+                <p className="mt-1 text-sm leading-6 text-[#dce7ec]">{item.detail}</p>
               </article>
             ))}
           </div>
@@ -156,18 +181,19 @@ export default memo(function VolunteerFormPage() {
       </section>
 
       <section className="py-10 max-w-4xl mx-auto px-4">
-        <form onSubmit={handleSubmit} className="rounded-3xl border border-[#dce8f4] bg-white p-6 md:p-8 shadow-[0_16px_35px_rgba(13,59,102,0.10)]">
+        <form onSubmit={handleSubmit} className={THEME.darkPanel}>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-5">
             <div>
-              <h2 className="text-2xl md:text-3xl font-black text-[#123753]">Advanced Volunteer Application</h2>
-              <p className="text-sm text-[#5a6c79] mt-1">Fill details for better role matching.</p>
+              <p className={THEME.label}>Advanced Volunteer Application</p>
+              <h2 className={THEME.heading}>Fill details for better role matching</h2>
+              <p className={THEME.formNote}>Share your skills and availability so we can place you in the right seva track.</p>
             </div>
             <div className="min-w-[180px]">
-              <p className="text-xs uppercase tracking-wide text-[#46627f] font-semibold mb-1">Profile Completion</p>
-              <div className="h-2 rounded-full bg-[#e6eef8] overflow-hidden">
-                <div className="h-full bg-[#c47508] transition-all" style={{ width: `${completion}%` }} />
+              <p className={THEME.progressLabel}>Profile Completion</p>
+              <div className="h-2 overflow-hidden rounded-full bg-white/10">
+                <div className="h-full bg-[#ef9a1e] transition-all" style={{ width: `${completion}%` }} />
               </div>
-              <p className="text-xs text-[#5a6c79] mt-1">{completion}% complete</p>
+              <p className={THEME.progressValue}>{completion}% complete</p>
             </div>
           </div>
 
@@ -178,7 +204,7 @@ export default memo(function VolunteerFormPage() {
               value={form.fullName}
               onChange={(e) => setForm((f) => ({ ...f, fullName: e.target.value }))}
               required
-              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+              className={THEME.formInput}
             />
             <input
               type="email"
@@ -186,7 +212,7 @@ export default memo(function VolunteerFormPage() {
               value={form.email}
               onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
               required
-              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+              className={THEME.formInput}
             />
             <input
               type="tel"
@@ -196,20 +222,20 @@ export default memo(function VolunteerFormPage() {
               required
               pattern="[6-9][0-9]{9}"
               title="Enter a valid 10-digit Indian mobile number"
-              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+              className={THEME.formInput}
             />
             <input
               type="text"
               placeholder="City"
               value={form.city}
               onChange={(e) => setForm((f) => ({ ...f, city: e.target.value }))}
-              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+              className={THEME.formInput}
             />
             <select
               value={form.sevaArea}
               onChange={(e) => setForm((f) => ({ ...f, sevaArea: e.target.value }))}
               required
-              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+              className={THEME.formInput}
             >
               <option value="">Select Seva Area</option>
               {SEVA_AREAS.map((area) => (
@@ -223,21 +249,23 @@ export default memo(function VolunteerFormPage() {
               placeholder="Skills"
               value={form.skills}
               onChange={(e) => setForm((f) => ({ ...f, skills: e.target.value }))}
-              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+              className={THEME.formInput}
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-            <div className="rounded-lg border border-[#d5e2f0] p-3">
-              <p className="text-sm font-semibold text-[#123753] mb-2">Availability</p>
+            <div className={THEME.darkCard}>
+              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Availability</p>
               <div className="flex flex-wrap gap-2">
                 {(["Weekdays", "Weekends", "Flexible"] as Availability[]).map((slot) => (
                   <button
                     key={slot}
                     type="button"
                     onClick={() => setForm((f) => ({ ...f, availability: slot }))}
-                    className={`rounded-full px-3 py-1.5 text-xs font-semibold ${
-                      form.availability === slot ? "bg-[#0d3b66] text-white" : "bg-[#edf3fb] text-[#37516b]"
+                    className={`${THEME.filterChip} ${
+                      form.availability === slot
+                        ? "bg-[#ef9a1e] text-white"
+                        : "border border-white/10 bg-[#0d6179] text-[#dce7ec]"
                     }`}
                   >
                     {slot}
@@ -246,8 +274,8 @@ export default memo(function VolunteerFormPage() {
               </div>
             </div>
 
-            <div className="rounded-lg border border-[#d5e2f0] p-3">
-              <p className="text-sm font-semibold text-[#123753] mb-2">Hours Per Week</p>
+            <div className={`${THEME.darkCard} ${THEME.sliderWrap}`}>
+              <p className={THEME.sliderLabel}>Hours Per Week</p>
               <input
                 type="range"
                 min={1}
@@ -256,7 +284,7 @@ export default memo(function VolunteerFormPage() {
                 onChange={(e) => setForm((f) => ({ ...f, hoursPerWeek: e.target.value }))}
                 className="w-full"
               />
-              <p className="text-xs text-[#5a6c79] mt-1">{form.hoursPerWeek} hours / week</p>
+              <p className={THEME.sliderValue}>{form.hoursPerWeek} hours / week</p>
             </div>
           </div>
 
@@ -266,16 +294,16 @@ export default memo(function VolunteerFormPage() {
             onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
             rows={4}
             maxLength={500}
-            className="w-full mt-4 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66] resize-none"
+            className={`${THEME.formInput} mt-4 w-full resize-none`}
           />
 
           {msg && (
-            <p className={`mt-3 text-sm font-semibold ${msg.type === "success" ? "text-green-600" : "text-red-600"}`}>
+            <p className={`mt-3 text-sm font-semibold ${msg.type === "success" ? "text-green-300" : "text-red-300"}`}>
               {msg.text}
             </p>
           )}
 
-          <button type="submit" disabled={loading} className="btn-primary w-full py-3 mt-4">
+          <button type="submit" disabled={loading} className={THEME.button}>
             {loading ? "Submitting..." : "Submit Advanced Application"}
           </button>
         </form>
@@ -283,9 +311,10 @@ export default memo(function VolunteerFormPage() {
 
       <PageSectionShell className="pb-12">
         <div className="max-w-4xl mx-auto">
-          <FAQSection title="Volunteer FAQs" items={FAQS} />
+          <FAQSection title="Volunteer FAQs" items={FAQS} variant="gauseva" />
         </div>
       </PageSectionShell>
     </div>
   );
 });
+

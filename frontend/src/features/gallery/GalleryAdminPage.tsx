@@ -1,4 +1,4 @@
-import { memo, useState, useRef, useCallback } from "react";
+﻿import { memo, useState, useRef, useCallback } from "react";
 import { HeroSection } from "../../components/ui/HeroSection";
 import { useApi } from "../../hooks/useApi";
 import { galleryApi } from "../../services/api/media";
@@ -49,7 +49,7 @@ export default memo(function GalleryAdminPage() {
       <section className="py-8 max-w-5xl mx-auto px-4">
         <div className="bg-white rounded-xl shadow-md p-6 mb-8">
           <div
-            className="border-2 border-dashed border-[#0d3b66]/30 rounded-xl p-8 text-center cursor-pointer hover:border-[#0d3b66] transition-colors"
+            className="border-2 border-dashed border-[#0f678c]/30 rounded-xl p-8 text-center cursor-pointer hover:border-[#0f678c] transition-colors"
             onClick={() => fileRef.current?.click()}
             onDragOver={(e) => e.preventDefault()}
             onDrop={(e) => {
@@ -58,7 +58,7 @@ export default memo(function GalleryAdminPage() {
               if (file) handleUpload(file);
             }}
           >
-            <i className="fas fa-cloud-upload-alt text-4xl text-[#0d3b66]/50 mb-3" />
+            <i className="fas fa-cloud-upload-alt text-4xl text-[#0f678c]/50 mb-3" />
             <p className="text-gray-500">Drag & Drop or click to upload</p>
             <input
               ref={fileRef}
@@ -76,7 +76,7 @@ export default memo(function GalleryAdminPage() {
             <div className="mt-4">
               <div className="bg-gray-200 rounded-full h-2">
                 <div
-                  className="bg-[#0d3b66] h-2 rounded-full transition-all"
+                  className="bg-[#0f678c] h-2 rounded-full transition-all"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -117,3 +117,4 @@ export default memo(function GalleryAdminPage() {
     </div>
   );
 });
+

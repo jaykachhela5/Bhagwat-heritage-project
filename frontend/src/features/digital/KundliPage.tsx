@@ -1,372 +1,615 @@
-import { memo, useMemo, useState, type ChangeEvent, type FormEvent } from "react";
+﻿import { memo, useMemo, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { kundliRequestsApi } from "../../services/api/kundli";
 
 type Gender = "Male" | "Female";
-type Language = "English" | "Hindi" | "Marathi" | "Gujarati";
+type PreferredLanguage = "English" | "Hindi" | "Marathi" | "Gujarati";
+type DeliveryPreference = "Email" | "WhatsApp" | "Both";
 type PaymentMethod = "UPI" | "Razorpay" | "Stripe";
 
-type KundliService = {
+type ServiceOption = {
   title: string;
+  englishTitle: string;
   pages: number;
   price: number;
+  detail: string;
 };
 
-const KUNDLI_SERVICES: KundliService[] = [
-  { title: "Sampurna Vistrut Kundli", pages: 100, price: 1501 },
-  { title: "Vishesh Vistrut Kundli", pages: 40, price: 701 },
-  { title: "Janam Kundli + Falit + Varshfal", pages: 30, price: 501 },
-  { title: "Janam Kundli + Falit", pages: 30, price: 351 },
-  { title: "Computer Printed Kundli", pages: 20, price: 351 },
-  { title: "Vivahik Gun Milan", pages: 7, price: 301 },
-  { title: "Varshik Kundli + Varshfal", pages: 8, price: 200 },
-  { title: "Naamkaran Kundli", pages: 4, price: 151 },
-  { title: "Janm Tippan", pages: 1, price: 101 },
-];
-
-const PROCESS = [
-  "Step 1 - Fill the kundli order form",
-  "Step 2 - Select one or more kundli services",
-  "Step 3 - Review the automatic total and proceed to payment",
-  "Step 4 - After payment success, the order is submitted for kundli preparation",
-];
-
-const INITIAL_FORM = {
-  fullName: "",
-  gender: "Male" as Gender,
-  orderDate: new Date().toISOString().slice(0, 10),
-  signature: "",
-  dateOfBirth: "",
-  timeOfBirth: "",
-  placeOfBirth: "",
-  district: "",
-  state: "",
-  country: "",
-  preferredLanguage: "English" as Language,
-  mobileNumber: "",
-  email: "",
-  address: "",
+type KundliFormState = {
+  fullName: string;
+  gender: Gender;
+  orderDate: string;
+  dateOfBirth: string;
+  timeOfBirth: string;
+  placeOfBirth: string;
+  district: string;
+  state: string;
+  signature: string;
+  preferredLanguage: PreferredLanguage;
+  deliveryPreference: DeliveryPreference;
+  mobileNumber: string;
+  email: string;
+  address: string;
+  paymentMethod: PaymentMethod;
+  selectedTitles: string[];
+  consent: boolean;
 };
+
+const SERVICES: ServiceOption[] = [
+  { title: "संपूर्ण विस्तृत कुंडली", englishTitle: "Complete Detailed Kundli", pages: 100, price: 1501, detail: "Full report with complete reading and guidance." },
+  { title: "विशेष विस्तृत कुंडली", englishTitle: "Special Detailed Kundli", pages: 40, price: 701, detail: "Focused kundli guidance with refined insights." },
+  { title: "जन्म कुंडली फलित एवं वर्षफल", englishTitle: "Birth Chart Analysis and Annual Forecast", pages: 30, price: 501, detail: "Birth chart reading with yearly forecast direction." },
+  { title: "जन्म कुंडली फलित", englishTitle: "Birth Chart Analysis", pages: 30, price: 351, detail: "Practical interpretation of the birth chart." },
+  { title: "कृष्णमूर्ति पद्धती कुंडली", englishTitle: "Krishnamurti Paddhati Kundli", pages: 20, price: 351, detail: "KP-based reading for precise timing and clarity." },
+  { title: "वैवाहिक गुण मिलान", englishTitle: "Marriage Compatibility Analysis", pages: 7, price: 301, detail: "Compatibility analysis for marriage guidance." },
+  { title: "वार्षिक कुंडली एवं वर्षफल", englishTitle: "Annual Kundli and Forecast", pages: 8, price: 200, detail: "Yearly reading with forecast points." },
+  { title: "नामकरण कुंडली", englishTitle: "Naming Ceremony Kundli", pages: 4, price: 151, detail: "Kundli support for naming ceremony decisions." },
+  { title: "जन्म टिप्पणी", englishTitle: "Birth Notes", pages: 1, price: 101, detail: "Quick birth note for concise reference." },
+];
+
+const LANGUAGE_OPTIONS: PreferredLanguage[] = ["English", "Hindi", "Marathi", "Gujarati"];
+const DELIVERY_OPTIONS: DeliveryPreference[] = ["Email", "WhatsApp", "Both"];
+const PAYMENT_OPTIONS: PaymentMethod[] = ["UPI", "Razorpay", "Stripe"];
+const GENDER_OPTIONS: Gender[] = ["Male", "Female"];
+const TODAY = new Date().toISOString().slice(0, 10);
+
+const THEME = {
+  page: "min-h-screen bg-[#0B2230] pb-16",
+  heroWrap: "overflow-hidden rounded-[34px] border border-white/10 bg-[#0d6179] shadow-[0_20px_44px_rgba(0,0,0,0.22)]",
+  heroIcon:
+    "flex h-20 w-20 items-center justify-center rounded-[26px] border border-white/10 bg-[#ef9a1e]/15 text-[2.75rem] font-black text-[#ef9a1e] shadow-[0_14px_30px_rgba(0,0,0,0.12)]",
+  heroLabel: "text-[18px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]",
+  heroTitleLine: "mt-2 text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[28px]",
+  heroTitle: "mt-3 text-4xl font-black leading-[0.95] text-white md:text-5xl",
+  heroSubtitle: "mt-3 text-[18px] font-bold text-[#ef9a1e] md:text-[24px]",
+  heroBody: "mt-6 max-w-2xl text-base leading-7 text-[#dce7ec] md:text-lg",
+  heroPrimaryButton:
+    "inline-flex items-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]",
+  heroSecondaryButton:
+    "inline-flex items-center rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]",
+  sidePanel: "border-t border-white/10 bg-[#0c5871] p-6 md:p-8 lg:border-l lg:border-t-0",
+  sideCard: "rounded-[24px] border border-white/10 bg-[#0c5871] p-4 shadow-[0_14px_30px_rgba(0,0,0,0.18)]",
+  label: "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]",
+  heading: "mt-1 text-[14px] font-black text-white md:text-[20px]",
+  note: "mt-2 text-sm leading-6 text-[#dce7ec]",
+  summaryCard: "rounded-[26px] border border-white/10 bg-[#0d6179] p-4 text-white shadow-[0_16px_34px_rgba(0,0,0,0.20)]",
+  summaryLabel: "text-[24px] uppercase tracking-[0.18em] text-[#ef9a1e]",
+  summaryValue: "mt-1 text-[14px] font-black text-white md:text-[20px]",
+  sectionHeader: "mb-6 text-center",
+  sectionLabel: "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]",
+  sectionTitle: "mt-2 text-[14px] font-black text-white md:text-[20px]",
+  sectionNote: "mt-2 text-sm text-[#dce7ec] md:text-base",
+  serviceGrid: "space-y-4 rounded-[30px] border border-white/10 bg-[#0d6179] p-4 shadow-[0_18px_40px_rgba(0,0,0,0.20)] md:p-6",
+  serviceCard:
+    "flex h-full flex-col rounded-[24px] border border-white/10 bg-[#0c5871] p-4 text-left shadow-sm transition hover:border-[#ef9a1e] hover:shadow-[0_14px_30px_rgba(0,0,0,0.24)]",
+  serviceCardSelected:
+    "flex h-full flex-col rounded-[24px] border border-[#ef9a1e] bg-[#123e55] p-4 text-left shadow-[0_14px_30px_rgba(0,0,0,0.24)]",
+  serviceName: "text-[24px] uppercase tracking-[0.18em] text-[#ef9a1e]",
+  serviceTitle: "mt-1 text-[16px] font-black text-white md:text-[20px]",
+  serviceDetail: "mt-3 text-sm leading-6 text-[#dce7ec] md:text-[15px]",
+  serviceMeta: "text-lg font-black text-white",
+  formCard: "space-y-4 rounded-[30px] border border-white/10 bg-[#0d6179] p-5 shadow-[0_18px_40px_rgba(0,0,0,0.20)] md:p-6",
+  formSection: "rounded-[24px] border border-white/10 bg-[#0c5871] p-4",
+  formLabel: "text-[24px] uppercase tracking-[0.18em] text-[#ef9a1e]",
+  formHeading: "mt-1 text-[14px] font-black text-white md:text-[20px]",
+  formNote: "mt-1 text-sm text-[#dce7ec]",
+  formSummaryCard: "rounded-2xl border border-white/10 bg-[#0c5871] p-4",
+  formSummaryText: "mt-1 text-[14px] font-black text-white md:text-[20px]",
+  formSelectedItem:
+    "flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-[#0d6179] px-4 py-3 text-sm text-[#dce7ec]",
+  noticeSuccess: "rounded-2xl bg-green-50 px-4 py-3 text-sm font-semibold text-green-700",
+  noticeError: "rounded-2xl bg-red-50 px-4 py-3 text-sm font-semibold text-red-700",
+  submitButton:
+    "inline-flex w-full items-center justify-center rounded-2xl bg-[#ef9a1e] px-6 py-4 text-base font-bold text-white shadow-[0_18px_34px_rgba(239,154,30,0.28)] transition hover:bg-[#de930a] disabled:cursor-not-allowed disabled:opacity-70",
+  deliveryNote: "rounded-[24px] border border-dashed border-white/10 bg-[#0c5871] p-4",
+  deliveryNoteLabel: "text-[24px] uppercase tracking-[0.18em] text-[#ef9a1e]",
+  deliveryNoteText: "mt-2 text-sm leading-6 text-[#dce7ec]",
+} as const;
+
+const inputClass =
+  "w-full rounded-2xl border border-white/10 bg-white px-4 py-3 text-sm text-[#17314a] outline-none transition placeholder:text-[#6b8091] focus:border-[#ef9a1e] focus:ring-2 focus:ring-[#efc06a]";
+
+function formatAmount(amount: number) {
+  return `INR ${amount.toLocaleString("en-IN")}`;
+}
+
+function createInitialForm(): KundliFormState {
+  return {
+    fullName: "",
+    gender: "Male",
+    orderDate: TODAY,
+    dateOfBirth: "",
+    timeOfBirth: "",
+    placeOfBirth: "",
+    district: "",
+    state: "",
+    signature: "",
+    preferredLanguage: "Hindi",
+    deliveryPreference: "Email",
+    mobileNumber: "",
+    email: "",
+    address: "",
+    paymentMethod: "UPI",
+    selectedTitles: [],
+    consent: false,
+  };
+}
+
+function chipClass(selected: boolean) {
+  return `rounded-full px-4 py-2 text-sm font-semibold transition ${
+    selected
+      ? "border border-[#ef9a1e] bg-[#ef9a1e] text-white shadow-[0_10px_24px_rgba(239,154,30,0.24)]"
+      : "border border-white/10 bg-[#0c5871] text-[#dce7ec]"
+  }`;
+}
 
 export default memo(function KundliPage() {
-  const [form, setForm] = useState(INITIAL_FORM);
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("UPI");
-  const [paymentOpen, setPaymentOpen] = useState(false);
+  usePageMeta("Kundli Booking", "Book traditional computer janam kundli reports with email or WhatsApp delivery.");
+
+  const [form, setForm] = useState<KundliFormState>(createInitialForm);
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successInfo, setSuccessInfo] = useState<{
-    orderId: string;
-    invoiceNumber: string;
-    paymentStatus: string;
-    estimatedDeliveryTime: string;
-    services: KundliService[];
-    totalAmount: number;
-  } | null>(null);
+  const [notice, setNotice] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
-  usePageMeta(
-    "Kundli Order Form",
-    "Book a Kundli online from Bhagwat Heritage Service Foundation Trust with priced kundli options, language selection, payment confirmation, and order tracking.",
+  const selectedServices = useMemo(
+    () => SERVICES.filter((service) => form.selectedTitles.includes(service.title)),
+    [form.selectedTitles],
   );
+  const totalAmount = useMemo(() => selectedServices.reduce((sum, service) => sum + service.price, 0), [selectedServices]);
+  const totalPages = useMemo(() => selectedServices.reduce((sum, service) => sum + service.pages, 0), [selectedServices]);
+  const deliverySummary = form.deliveryPreference === "Both" ? "email and WhatsApp" : form.deliveryPreference.toLowerCase();
 
-  const chosenServices = useMemo(
-    () => KUNDLI_SERVICES.filter((service) => selectedServices.includes(service.title)),
-    [selectedServices],
-  );
-  const totalAmount = useMemo(
-    () => chosenServices.reduce((sum, item) => sum + item.price, 0),
-    [chosenServices],
-  );
+  const scrollToForm = () => document.getElementById("kundli-booking-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = event.target;
-    setForm((current) => ({ ...current, [name]: value }));
+  const toggleService = (title: string) => {
+    setForm((current) => ({
+      ...current,
+      selectedTitles: current.selectedTitles.includes(title)
+        ? current.selectedTitles.filter((item) => item !== title)
+        : [...current.selectedTitles, title],
+    }));
   };
 
-  const toggleService = (serviceTitle: string) => {
-    setSelectedServices((current) =>
-      current.includes(serviceTitle) ? current.filter((item) => item !== serviceTitle) : [...current, serviceTitle],
-    );
-  };
-
-  const validateBeforePayment = (event?: FormEvent<HTMLFormElement>) => {
-    event?.preventDefault();
-    setErrorMessage("");
-
-    const required = [
-      form.fullName,
-      form.orderDate,
-      form.dateOfBirth,
-      form.timeOfBirth,
-      form.placeOfBirth,
-      form.district,
-      form.state,
-      form.country,
-      form.mobileNumber,
-      form.email,
-    ];
-
-    if (required.some((value) => value.trim().length === 0)) {
-      setErrorMessage("Please complete all required fields before payment.");
-      return false;
-    }
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault();
 
     if (selectedServices.length === 0) {
-      setErrorMessage("Please select at least one Kundli service.");
-      return false;
+      setNotice({ type: "error", text: "Please select at least one kundli type." });
+      return;
     }
 
-    return true;
-  };
-
-  const handleOpenPayment = (event: FormEvent<HTMLFormElement>) => {
-    if (!validateBeforePayment(event)) return;
-    setPaymentOpen(true);
-  };
-
-  const handleConfirmPayment = async () => {
     setLoading(true);
-    setErrorMessage("");
+    setNotice(null);
 
     try {
-      const paymentReference = `PAY-${Date.now()}`;
-      const response = await kundliRequestsApi.create({
-        ...form,
-        selectedServices: chosenServices,
+      const paymentReference = `KND-${TODAY.replace(/-/g, "")}-${Math.floor(1000 + Math.random() * 9000)}`;
+      const { data } = await kundliRequestsApi.create({
+        fullName: form.fullName.trim(),
+        gender: form.gender,
+        orderDate: form.orderDate,
+        signature: form.signature.trim() || undefined,
+        dateOfBirth: form.dateOfBirth,
+        timeOfBirth: form.timeOfBirth,
+        placeOfBirth: form.placeOfBirth.trim(),
+        district: form.district.trim(),
+        state: form.state.trim(),
+        country: "India",
+        selectedServices: selectedServices.map(({ title, pages, price }) => ({ title, pages, price })),
+        preferredLanguage: form.preferredLanguage,
+        deliveryPreference: form.deliveryPreference,
+        mobileNumber: form.mobileNumber.trim(),
+        email: form.email.trim(),
+        address: form.address.trim() || undefined,
         totalAmount,
-        paymentMethod,
+        paymentMethod: form.paymentMethod,
         paymentStatus: "Paid",
         paymentReference,
       });
 
-      setSuccessInfo({
-        orderId: response.data.orderId,
-        invoiceNumber: response.data.invoiceNumber,
-        paymentStatus: response.data.paymentStatus,
-        estimatedDeliveryTime: response.data.estimatedDeliveryTime,
-        services: chosenServices,
-        totalAmount,
+      setNotice({
+        type: "success",
+        text: `Order ${data.orderId} has been created. Your Kundli will be shared by ${deliverySummary} within ${data.estimatedDeliveryTime}.`,
       });
-      setForm({ ...INITIAL_FORM, orderDate: new Date().toISOString().slice(0, 10) });
-      setSelectedServices([]);
-      setPaymentOpen(false);
-    } catch (error) {
-      const message =
-        typeof error === "object" &&
-        error !== null &&
-        "response" in error &&
-        typeof (error as { response?: { data?: { message?: string } } }).response?.data?.message === "string"
-          ? (error as { response?: { data?: { message?: string } } }).response?.data?.message ?? "Unable to process the order."
-          : "Unable to process the order. Please try again.";
-      setErrorMessage(message);
+      setForm(createInitialForm());
+    } catch {
+      setNotice({
+        type: "error",
+        text: "Something went wrong while submitting the Kundli booking. Please review the form and try again.",
+      });
     } finally {
       setLoading(false);
     }
-  };
-
-  const downloadInvoice = () => {
-    if (!successInfo) return;
-
-    const content = [
-      "Bhagwat Heritage Service Foundation Trust",
-      "Kundli Invoice",
-      `Order ID: ${successInfo.orderId}`,
-      `Invoice Number: ${successInfo.invoiceNumber}`,
-      `Payment Status: ${successInfo.paymentStatus}`,
-      `Estimated Delivery: ${successInfo.estimatedDeliveryTime}`,
-      "",
-      "Selected Services:",
-      ...successInfo.services.map((service) => `- ${service.title} | ${service.pages} Pages | INR ${service.price}`),
-      "",
-      `Total Amount: INR ${successInfo.totalAmount}`,
-    ].join("\n");
-
-    const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${successInfo.invoiceNumber}.txt`;
-    link.click();
-    URL.revokeObjectURL(url);
-  };
+  }
 
   return (
-    <div className="min-h-screen bg-[#fff7ef] pb-16 text-[#5a2a08]">
-      <section className="px-4 pt-8 md:pt-10">
-        <div
-          className="relative mx-auto max-w-7xl overflow-hidden rounded-[32px] border border-[#f1c899] bg-cover bg-center shadow-[0_18px_45px_rgba(120,41,0,0.18)]"
-          style={{
-            backgroundImage:
-              "linear-gradient(120deg, rgba(122,54,4,0.92) 0%, rgba(169,57,7,0.78) 46%, rgba(245,158,11,0.24) 100%), url('/images/maharaj%20ji/astrologo.webp')",
-          }}
-        >
-          <div className="relative z-10 px-5 py-12 text-white md:px-10 md:py-16 lg:px-14">
-            <nav aria-label="Breadcrumb" className="mb-6">
-              <ol className="flex flex-wrap items-center gap-2 text-sm text-white/85">
-                <li><Link to={ROUTES.home} className="hover:text-[#ffe0b2]">Home</Link></li>
-                <li>&gt;</li>
-                <li><Link to={ROUTES.digital.index} className="hover:text-[#ffe0b2]">Digital Services</Link></li>
-                <li>&gt;</li>
-                <li aria-current="page" className="font-semibold text-[#ffe0b2]">Kundli</li>
-              </ol>
-            </nav>
-            <p className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.24em]">ॐ Kundli Booking</p>
-            <h1 className="mt-5 text-4xl font-black leading-tight md:text-6xl">Kundli Order Form</h1>
-            <p className="mt-4 max-w-3xl text-base leading-8 text-white/90 md:text-xl">
-              Fill the booking form, select your Kundli services, complete payment, and submit your order for preparation.
-            </p>
-            <a href="#kundli-order-form" className="mt-8 inline-flex rounded-xl bg-[#f59e0b] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#dd8f0a]">
-              Create Your Kundli Order
-            </a>
+    <div className={THEME.page}>
+      <section className="mx-auto max-w-7xl px-4 pt-6">
+        <div className={THEME.heroWrap}>
+          <div className="grid gap-0 lg:grid-cols-[1.08fr_0.92fr]">
+            <div className="p-6 md:p-10">
+              <div className="flex flex-wrap items-start gap-4">
+                <div className={THEME.heroIcon}>
+                  ॐ
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className={THEME.heroLabel}>॥ स्वामी श्रीजी ॥</p>
+                  <p className={THEME.heroTitleLine}>
+                    श्री भगवत संस्कृती सेवा प्रतिष्ठान
+                  </p>
+                  <h1 className={THEME.heroTitle}>
+                    कम्प्यूटर जन्म कुंडली
+                  </h1>
+                  <p className={THEME.heroSubtitle}>श्री स्वामीनारायण मंदिर, चंद्रपुर</p>
+                </div>
+              </div>
+
+              <p className={THEME.heroBody}>
+                Select the kundli type, enter birth details, and choose how you want the completed report delivered.
+                The report can be sent through email or WhatsApp after preparation.
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <button
+                  type="button"
+                  onClick={scrollToForm}
+                  className={THEME.heroPrimaryButton}
+                >
+                  Book Kundli
+                </button>
+                <Link
+                  to={ROUTES.contact}
+                  className={THEME.heroSecondaryButton}
+                >
+                  Contact Us
+                </Link>
+                <Link
+                  to={ROUTES.digital.index}
+                  className={THEME.heroSecondaryButton}
+                >
+                  Digital Services
+                </Link>
+              </div>
+            </div>
+
+            <div className={THEME.sidePanel}>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+                {[
+                  ["Booking Mode", "Traditional Kundli Form", "Fill your birth details, select kundli types, and receive the prepared report by email or WhatsApp."],
+                  ["Languages", "English, Hindi, Marathi, Gujarati", "Rates are for only one selected language."],
+                  ["Delivery", "Email, WhatsApp, or Both", "The finished Kundli can be delivered by the channel you choose."],
+                  ["Payment", "UPI, Razorpay, Stripe", "Choose the gateway that suits your booking flow."],
+                ].map(([title, value, note]) => (
+                  <article
+                    key={title}
+                    className={THEME.sideCard}
+                  >
+                    <p className={THEME.label}>{title}</p>
+                    <p className={THEME.heading}>{value}</p>
+                    <p className={THEME.note}>{note}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-8">
-        <div className="grid gap-6 lg:grid-cols-[1.12fr_0.88fr]">
-          <form id="kundli-order-form" onSubmit={handleOpenPayment} className="rounded-[32px] border border-[#efc89b] bg-white p-6 shadow-[0_16px_34px_rgba(177,96,23,0.12)] md:p-8">
-            <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#b94a0f]">Traditional Booking Form</p>
-                <h2 className="mt-2 text-3xl font-black text-[#7a3604] md:text-5xl">Complete Kundli Booking Details</h2>
+      <section id="kundli-booking-form" className="mx-auto mt-8 max-w-7xl px-4">
+        <div className="mb-6 text-center">
+          <p className={THEME.sectionLabel}>Kundli Types</p>
+          <h2 className={THEME.sectionTitle}>Price List and Service Options</h2>
+          <p className={THEME.sectionNote}>Rates are for one language only.</p>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
+          <div className={THEME.serviceGrid}>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              {SERVICES.map((service) => {
+                const selected = form.selectedTitles.includes(service.title);
+
+                return (
+                  <button
+                    key={service.title}
+                    type="button"
+                    onClick={() => toggleService(service.title)}
+                    className={`flex h-full flex-col rounded-[24px] border p-4 text-left transition ${
+                      selected
+                        ? "border-[#ef9a1e] bg-[#123e55] shadow-[0_14px_30px_rgba(0,0,0,0.24)]"
+                        : "border-white/10 bg-[#0c5871] hover:border-[#ef9a1e]"
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <p className={THEME.label}>{service.englishTitle}</p>
+                        <h3 className={THEME.serviceTitle}>{service.title}</h3>
+                      </div>
+                      <span
+                        className={`shrink-0 rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] ${
+                          selected
+                            ? "border-[#ef9a1e] bg-[#ef9a1e] text-white"
+                            : "border-white/10 bg-[#0d6179] text-[#dce7ec]"
+                        }`}
+                      >
+                        {selected ? "Selected" : "Select"}
+                      </span>
+                    </div>
+
+                    <p className={THEME.serviceDetail}>{service.detail}</p>
+
+                    <div className="mt-4 flex items-center justify-between border-t border-dashed border-white/10 pt-3">
+                      <span className={THEME.label}>
+                        {service.pages} Pages
+                      </span>
+                      <span className="text-lg font-black text-white">{formatAmount(service.price)}</span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <form
+            onSubmit={handleSubmit}
+            className={THEME.formCard}
+          >
+            <div>
+              <p className={THEME.sectionLabel}>Traditional Booking Form</p>
+              <h3 className={THEME.sectionTitle}>Complete Kundli Booking Details</h3>
+            </div>
+
+            <div className={THEME.formSection}>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <p className={THEME.label}>Selected Kundli Types</p>
+                  <h4 className={THEME.heading}>Your report summary</h4>
+                </div>
+                <span className="rounded-full bg-[#ef9a1e] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-white">
+                  {selectedServices.length} Selected
+                </span>
               </div>
-              <div className="rounded-2xl border border-[#f1d4b4] bg-[#fff6ea] px-4 py-3 text-right">
-                <p className="text-xs uppercase tracking-wide text-[#9a5b1d]">Automatic Total</p>
-                <p className="mt-1 text-2xl font-black text-[#a63d07]">INR {totalAmount.toLocaleString()}</p>
+
+              <div className="mt-4 grid gap-3 md:grid-cols-3">
+                {[
+                  ["Pages", `${totalPages} pages`],
+                  ["Amount", formatAmount(totalAmount)],
+                  ["Delivery", form.deliveryPreference],
+                ].map(([label, value]) => (
+                  <div key={label} className={THEME.formSummaryCard}>
+                    <p className={THEME.label}>{label}</p>
+                    <p className={THEME.heading}>{value}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 rounded-2xl border border-dashed border-white/10 bg-[#0d6179] p-4">
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Selected items</p>
+                {selectedServices.length > 0 ? (
+                  <ul className="mt-3 space-y-2">
+                    {selectedServices.map((service) => (
+                      <li
+                        key={service.title}
+                        className={THEME.formSelectedItem}
+                      >
+                        <span className="font-semibold text-white">{service.title}</span>
+                        <span className="text-xs uppercase tracking-[0.18em] text-[#ef9a1e]">
+                          {service.pages} Pages | {formatAmount(service.price)}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className={THEME.deliveryNoteText}>
+                    No kundli type selected yet. Choose at least one report from the list.
+                  </p>
+                )}
               </div>
             </div>
 
-            {successInfo ? (
-              <div className="mt-6 rounded-[24px] border border-[#86c79b] bg-[#f0fff4] p-5 text-[#245a33]">
-                <p className="text-lg font-bold text-[#245a33]">Your Kundli request has been successfully submitted. Our astrologer will prepare your Kundli and send the report to your email.</p>
-                <div className="mt-4 grid gap-3 md:grid-cols-2">
-                  <div className="rounded-2xl border border-[#d7eadb] bg-white p-4"><p className="text-xs uppercase tracking-wide text-[#4f7b58]">Order ID</p><p className="mt-1 text-xl font-black">{successInfo.orderId}</p></div>
-                  <div className="rounded-2xl border border-[#d7eadb] bg-white p-4"><p className="text-xs uppercase tracking-wide text-[#4f7b58]">Payment Status</p><p className="mt-1 text-xl font-black">{successInfo.paymentStatus}</p></div>
-                  <div className="rounded-2xl border border-[#d7eadb] bg-white p-4"><p className="text-xs uppercase tracking-wide text-[#4f7b58]">Selected Kundli Type</p><p className="mt-1 font-bold">{successInfo.services.map((item) => item.title).join(", ")}</p></div>
-                  <div className="rounded-2xl border border-[#d7eadb] bg-white p-4"><p className="text-xs uppercase tracking-wide text-[#4f7b58]">Estimated Delivery</p><p className="mt-1 font-bold">{successInfo.estimatedDeliveryTime}</p></div>
-                </div>
-                <button type="button" onClick={downloadInvoice} className="mt-4 rounded-xl bg-[#b94a0f] px-5 py-3 font-semibold text-white hover:bg-[#983707]">Download Invoice</button>
+            <div className={THEME.formSection}>
+              <p className={THEME.label}>1. Personal Information</p>
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  value={form.fullName}
+                  onChange={(e) => setForm((current) => ({ ...current, fullName: e.target.value }))}
+                  required
+                  className={inputClass}
+                />
+                <input
+                  type="date"
+                  value={form.orderDate}
+                  onChange={(e) => setForm((current) => ({ ...current, orderDate: e.target.value }))}
+                  required
+                  className={inputClass}
+                />
               </div>
+              <div className="mt-4 grid grid-cols-2 gap-2">
+                {GENDER_OPTIONS.map((item) => (
+                  <button
+                    key={item}
+                    type="button"
+                    onClick={() => setForm((current) => ({ ...current, gender: item }))}
+                    className={chipClass(form.gender === item)}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className={THEME.formSection}>
+              <p className={THEME.label}>2. Birth Details</p>
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                <input
+                  type="date"
+                  value={form.dateOfBirth}
+                  onChange={(e) => setForm((current) => ({ ...current, dateOfBirth: e.target.value }))}
+                  required
+                  className={inputClass}
+                />
+                <input
+                  type="time"
+                  value={form.timeOfBirth}
+                  onChange={(e) => setForm((current) => ({ ...current, timeOfBirth: e.target.value }))}
+                  required
+                  className={inputClass}
+                />
+                <input
+                  type="text"
+                  placeholder="Place of Birth"
+                  value={form.placeOfBirth}
+                  onChange={(e) => setForm((current) => ({ ...current, placeOfBirth: e.target.value }))}
+                  required
+                  className={inputClass}
+                />
+                <input
+                  type="text"
+                  placeholder="District"
+                  value={form.district}
+                  onChange={(e) => setForm((current) => ({ ...current, district: e.target.value }))}
+                  required
+                  className={inputClass}
+                />
+                <input
+                  type="text"
+                  placeholder="State"
+                  value={form.state}
+                  onChange={(e) => setForm((current) => ({ ...current, state: e.target.value }))}
+                  required
+                  className={inputClass}
+                />
+                <input
+                  type="text"
+                  placeholder="Signature / हस्ताक्षर (optional)"
+                  value={form.signature}
+                  onChange={(e) => setForm((current) => ({ ...current, signature: e.target.value }))}
+                  className={inputClass}
+                />
+              </div>
+            </div>
+
+            <div className={THEME.formSection}>
+              <p className={THEME.label}>3. Preferred Language</p>
+              <p className={THEME.formNote}>Rates are for only one selected language.</p>
+              <div className="mt-4 grid grid-cols-2 gap-2 md:grid-cols-4">
+                {LANGUAGE_OPTIONS.map((item) => (
+                  <button
+                    key={item}
+                    type="button"
+                    onClick={() => setForm((current) => ({ ...current, preferredLanguage: item }))}
+                    className={chipClass(form.preferredLanguage === item)}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className={THEME.formSection}>
+              <p className={THEME.label}>4. Delivery Preference</p>
+              <p className={THEME.formNote}>Choose how you want the completed Kundli to be shared.</p>
+              <div className="mt-4 grid gap-2 md:grid-cols-3">
+                {DELIVERY_OPTIONS.map((item) => (
+                  <button
+                    key={item}
+                    type="button"
+                    onClick={() => setForm((current) => ({ ...current, deliveryPreference: item }))}
+                    className={chipClass(form.deliveryPreference === item)}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className={THEME.formSection}>
+              <p className={THEME.label}>5. Contact Details</p>
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                <input
+                  type="tel"
+                  placeholder="Mobile Number"
+                  value={form.mobileNumber}
+                  onChange={(e) => setForm((current) => ({ ...current, mobileNumber: e.target.value }))}
+                  required
+                  className={inputClass}
+                />
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  value={form.email}
+                  onChange={(e) => setForm((current) => ({ ...current, email: e.target.value }))}
+                  required
+                  className={inputClass}
+                />
+                <textarea
+                  placeholder="Address (optional)"
+                  value={form.address}
+                  onChange={(e) => setForm((current) => ({ ...current, address: e.target.value }))}
+                  rows={3}
+                  className={inputClass}
+                />
+              </div>
+            </div>
+
+            <div className={THEME.formSection}>
+              <p className={THEME.label}>6. Payment System</p>
+              <p className={THEME.formNote}>Choose your preferred gateway before submitting the booking.</p>
+              <div className="mt-4 grid gap-2 md:grid-cols-3">
+                {PAYMENT_OPTIONS.map((item) => (
+                  <button
+                    key={item}
+                    type="button"
+                    onClick={() => setForm((current) => ({ ...current, paymentMethod: item }))}
+                    className={chipClass(form.paymentMethod === item)}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+              <p className={THEME.deliveryNoteText}>Razorpay is included for secure online processing.</p>
+            </div>
+
+            <label className="flex items-start gap-3 rounded-[24px] border border-white/10 bg-[#0c5871] p-4 text-sm text-[#dce7ec]">
+              <input
+                type="checkbox"
+                checked={form.consent}
+                onChange={(e) => setForm((current) => ({ ...current, consent: e.target.checked }))}
+                required
+                className="mt-1 h-4 w-4 rounded border-[#ef9a1e] text-[#ef9a1e] focus:ring-[#ef9a1e]"
+              />
+              <span>I confirm the information above is accurate and I agree to the Kundli booking and payment process.</span>
+            </label>
+
+            {notice ? (
+              <p className={`rounded-2xl px-4 py-3 text-sm font-semibold ${notice.type === "success" ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700"}`}>
+                {notice.text}
+              </p>
             ) : null}
 
-            {errorMessage ? <div className="mt-6 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">{errorMessage}</div> : null}
+            <button
+              type="submit"
+              disabled={loading}
+              className={THEME.submitButton}
+            >
+              {loading ? "Processing..." : `Proceed to Payment & Submit (${formatAmount(totalAmount || 0)})`}
+            </button>
 
-            <div className="mt-8 space-y-6">
-              <section className="rounded-[28px] border border-[#f1d4b4] bg-[#fffaf4] p-5">
-                <h3 className="text-xl font-black text-[#7a3604]">1. Personal Information</h3>
-                <div className="mt-4 grid gap-4 md:grid-cols-2">
-                  <input name="fullName" value={form.fullName} onChange={handleChange} required placeholder="Full Name" className="rounded-xl border border-[#efcfb0] px-4 py-3 outline-none focus:border-[#c46a1f]" />
-                  <input name="orderDate" type="date" value={form.orderDate} onChange={handleChange} required className="rounded-xl border border-[#efcfb0] px-4 py-3 outline-none focus:border-[#c46a1f]" />
-                  <div className="rounded-xl border border-[#efcfb0] bg-white px-4 py-3">
-                    <p className="text-sm font-semibold text-[#7a3604]">Gender</p>
-                    <div className="mt-2 flex gap-4">{(["Male", "Female"] as Gender[]).map((gender) => <label key={gender} className="inline-flex items-center gap-2 text-sm"><input type="radio" checked={form.gender === gender} onChange={() => setForm((current) => ({ ...current, gender }))} />{gender}</label>)}</div>
-                  </div>
-                  <input name="signature" value={form.signature} onChange={handleChange} placeholder="Signature (optional)" className="rounded-xl border border-[#efcfb0] px-4 py-3 outline-none focus:border-[#c46a1f]" />
-                </div>
-              </section>
-
-              <section className="rounded-[28px] border border-[#f1d4b4] bg-[#fffaf4] p-5">
-                <h3 className="text-xl font-black text-[#7a3604]">2. Birth Details</h3>
-                <div className="mt-4 grid gap-4 md:grid-cols-2">
-                  <input name="dateOfBirth" type="date" value={form.dateOfBirth} onChange={handleChange} required className="rounded-xl border border-[#efcfb0] px-4 py-3 outline-none focus:border-[#c46a1f]" />
-                  <input name="timeOfBirth" type="time" value={form.timeOfBirth} onChange={handleChange} required className="rounded-xl border border-[#efcfb0] px-4 py-3 outline-none focus:border-[#c46a1f]" />
-                  <input name="placeOfBirth" value={form.placeOfBirth} onChange={handleChange} required placeholder="Place of Birth" className="rounded-xl border border-[#efcfb0] px-4 py-3 outline-none focus:border-[#c46a1f]" />
-                  <input name="district" value={form.district} onChange={handleChange} required placeholder="District" className="rounded-xl border border-[#efcfb0] px-4 py-3 outline-none focus:border-[#c46a1f]" />
-                  <input name="state" value={form.state} onChange={handleChange} required placeholder="State" className="rounded-xl border border-[#efcfb0] px-4 py-3 outline-none focus:border-[#c46a1f]" />
-                  <input name="country" value={form.country} onChange={handleChange} required placeholder="Country" className="rounded-xl border border-[#efcfb0] px-4 py-3 outline-none focus:border-[#c46a1f]" />
-                </div>
-              </section>
-
-              <section className="rounded-[28px] border border-[#f1d4b4] bg-[#fffaf4] p-5">
-                <h3 className="text-xl font-black text-[#7a3604]">3. Kundli Type Selection</h3>
-                <div className="mt-4 grid gap-4 md:grid-cols-2">
-                  {KUNDLI_SERVICES.map((service, index) => (
-                    <label key={service.title} className={`rounded-2xl border p-4 shadow-sm transition ${selectedServices.includes(service.title) ? "border-[#c46a1f] bg-[#fff1e2]" : "border-[#efcfb0] bg-white"}`}>
-                      <div className="flex items-start gap-3">
-                        <input type="checkbox" checked={selectedServices.includes(service.title)} onChange={() => toggleService(service.title)} className="mt-1" />
-                        <div className="flex-1">
-                          <p className="text-xs uppercase tracking-[0.2em] text-[#b94a0f]">{index < 5 ? "Basic" : "Additional"} Service</p>
-                          <h4 className="mt-1 font-black text-[#7a3604]">{service.title}</h4>
-                          <p className="mt-2 text-sm text-[#7b4a22]">{service.pages} Pages</p>
-                          <p className="mt-1 text-lg font-black text-[#a63d07]">INR {service.price}</p>
-                        </div>
-                        <span className="text-xl text-[#c46a1f]">{index < 5 ? "ॐ" : "♈"}</span>
-                      </div>
-                    </label>
-                  ))}
-                </div>
-              </section>
-
-              <section className="grid gap-6 lg:grid-cols-2">
-                <div className="rounded-[28px] border border-[#f1d4b4] bg-[#fffaf4] p-5">
-                  <h3 className="text-xl font-black text-[#7a3604]">4. Preferred Language</h3>
-                  <div className="mt-4 grid grid-cols-2 gap-3">{(["English", "Hindi", "Marathi", "Gujarati"] as Language[]).map((language) => <button key={language} type="button" onClick={() => setForm((current) => ({ ...current, preferredLanguage: language }))} className={`rounded-xl px-4 py-3 text-sm font-semibold ${form.preferredLanguage === language ? "bg-[#b94a0f] text-white" : "border border-[#efcfb0] bg-white text-[#7a3604]"}`}>{language}</button>)}</div>
-                </div>
-
-                <div className="rounded-[28px] border border-[#f1d4b4] bg-[#fffaf4] p-5">
-                  <h3 className="text-xl font-black text-[#7a3604]">5. Contact Details</h3>
-                  <div className="mt-4 grid gap-4">
-                    <input name="mobileNumber" value={form.mobileNumber} onChange={handleChange} required placeholder="Mobile Number" className="rounded-xl border border-[#efcfb0] px-4 py-3 outline-none focus:border-[#c46a1f]" />
-                    <input name="email" type="email" value={form.email} onChange={handleChange} required placeholder="Email Address" className="rounded-xl border border-[#efcfb0] px-4 py-3 outline-none focus:border-[#c46a1f]" />
-                    <textarea name="address" value={form.address} onChange={handleChange} rows={3} placeholder="Address (optional)" className="rounded-xl border border-[#efcfb0] px-4 py-3 outline-none focus:border-[#c46a1f]" />
-                  </div>
-                </div>
-              </section>
-
-              <div className="rounded-[28px] border border-[#f1d4b4] bg-[linear-gradient(135deg,#fff1e2_0%,#fff8ef_100%)] p-5">
-                <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#b94a0f]">6. Payment System</p>
-                    <p className="mt-2 text-lg font-bold text-[#7a3604]">Fill the form, review the total, and proceed to secure payment before order submission.</p>
-                  </div>
-                  <button type="submit" className="rounded-xl bg-[#b94a0f] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#983707]">Proceed to Payment</button>
-                </div>
-              </div>
+            <div className={THEME.deliveryNote}>
+              <p className={THEME.label}>Delivery Note</p>
+              <p className={THEME.deliveryNoteText}>
+                The completed Kundli will be shared through {deliverySummary} using the contact details you provide.
+              </p>
+              <p className={THEME.deliveryNoteText}>
+                Estimated delivery time is usually 3-5 working days after the booking is reviewed.
+              </p>
             </div>
           </form>
-
-          <div className="space-y-6">
-            <section className="rounded-[32px] border border-[#efc89b] bg-white p-6 shadow-[0_16px_34px_rgba(177,96,23,0.12)]">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#b94a0f]">How It Works</p>
-              <h2 className="mt-2 text-3xl font-black text-[#7a3604]">Payment-First Kundli Workflow</h2>
-              <div className="mt-5 space-y-3">{PROCESS.map((step, index) => <div key={step} className="flex gap-3 rounded-2xl border border-[#f1d4b4] bg-[#fffaf4] p-4"><div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#b94a0f] font-black text-white">{index + 1}</div><p className="leading-7 text-[#7b4a22]">{step}</p></div>)}</div>
-            </section>
-
-            <section className="rounded-[32px] border border-[#efc89b] bg-white p-6 shadow-[0_16px_34px_rgba(177,96,23,0.12)]">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#b94a0f]">Order Summary</p>
-              <h2 className="mt-2 text-3xl font-black text-[#7a3604]">Selected Kundli Services</h2>
-              <div className="mt-5 space-y-3">
-                {chosenServices.length > 0 ? chosenServices.map((service) => <div key={service.title} className="rounded-2xl border border-[#f1d4b4] bg-[#fffaf4] p-4"><p className="font-black text-[#7a3604]">{service.title}</p><p className="mt-1 text-sm text-[#7b4a22]">{service.pages} Pages</p><p className="mt-1 text-sm font-semibold text-[#a63d07]">INR {service.price}</p></div>) : <div className="rounded-2xl border border-dashed border-[#f1d4b4] bg-[#fffaf4] p-4 text-sm text-[#7b4a22]">Select one or more services to see your order summary.</div>}
-              </div>
-              <div className="mt-5 rounded-2xl bg-[#b94a0f] px-4 py-4 text-white"><p className="text-sm uppercase tracking-[0.16em]">Total Price</p><p className="mt-1 text-3xl font-black">INR {totalAmount.toLocaleString()}</p></div>
-            </section>
-          </div>
         </div>
       </section>
-
-      {paymentOpen ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="w-full max-w-xl rounded-[28px] border border-[#efc89b] bg-white p-6 shadow-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#b94a0f]">Secure Payment Gateway</p>
-            <h2 className="mt-2 text-3xl font-black text-[#7a3604]">Complete Payment to Submit Order</h2>
-            <p className="mt-3 text-[#7b4a22]">Choose a payment gateway, confirm the amount, and then the Kundli order will be submitted.</p>
-            <div className="mt-5 grid grid-cols-3 gap-3">{(["UPI", "Razorpay", "Stripe"] as PaymentMethod[]).map((method) => <button key={method} type="button" onClick={() => setPaymentMethod(method)} className={`rounded-xl px-4 py-3 text-sm font-semibold ${paymentMethod === method ? "bg-[#b94a0f] text-white" : "border border-[#efcfb0] bg-[#fffaf4] text-[#7a3604]"}`}>{method}</button>)}</div>
-            <div className="mt-5 rounded-2xl border border-[#f1d4b4] bg-[#fffaf4] p-4">
-              <p className="text-sm text-[#9a5b1d]">Payment Amount</p>
-              <p className="mt-1 text-3xl font-black text-[#a63d07]">INR {totalAmount.toLocaleString()}</p>
-              <p className="mt-2 text-sm text-[#7b4a22]">After successful payment the order will be recorded with paid status and an invoice number.</p>
-            </div>
-            <div className="mt-6 flex flex-wrap justify-end gap-3">
-              <button type="button" onClick={() => setPaymentOpen(false)} className="rounded-xl border border-[#efcfb0] bg-white px-5 py-3 font-semibold text-[#7a3604]">Cancel</button>
-              <button type="button" onClick={handleConfirmPayment} disabled={loading} className="rounded-xl bg-[#b94a0f] px-5 py-3 font-semibold text-white hover:bg-[#983707] disabled:opacity-70">
-                {loading ? "Confirming Payment..." : "Confirm Payment"}
-              </button>
-            </div>
-          </div>
-        </div>
-      ) : null}
     </div>
   );
 });
+
+

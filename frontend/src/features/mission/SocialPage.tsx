@@ -1,266 +1,428 @@
 import { memo, useEffect, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
+import { HeroSection } from "../../components/ui/HeroSection";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
-type MissionCategory = "food" | "water" | "health" | "education" | "essentials";
+type MissionCategory = "all" | "food" | "health" | "education" | "gau" | "relief" | "support";
 
-const HERO_IMAGE = "https://res.cloudinary.com/der8zinu8/image/upload/v1771413474/itcm84f9dnqpzgawp7ak.png";
+const HERO_IMAGE =
+  "https://res.cloudinary.com/der8zinu8/image/upload/v1771413474/itcm84f9dnqpzgawp7ak.png";
 
-const STATS = [
-  { label: "Families Supported", value: "50,000+" },
-  { label: "Meals Distributed", value: "1,00,000+" },
-  { label: "Water Support", value: "850+" },
-  { label: "Medical Cases", value: "12,000+" },
+const IMPACT_SIGNALS = [
+  {
+    title: "Core Expression",
+    value: "Compassion and Seva",
+    note: "Social service is treated as a living expression of devotion, care, and responsibility.",
+  },
+  {
+    title: "Mission Force",
+    value: "Human Welfare",
+    note: "Every initiative is focused on dignity, protection, and long-term upliftment for people in need.",
+  },
+  {
+    title: "Sacred Inspiration",
+    value: "Shrimad Bhagwat",
+    note: "Bhagwat wisdom remains the foundation behind the trust's humanitarian service work.",
+  },
+  {
+    title: "Long-Term Aim",
+    value: "Social Transformation",
+    note: "The mission extends beyond relief to build lasting change, trust, and social harmony.",
+  },
 ];
 
-const ACTIVITIES = [
-  { category: "food" as const, href: ROUTES.donate },
-  { category: "water" as const, href: ROUTES.seva.annJal },
-  { category: "health" as const, href: ROUTES.seva.medicine },
-  { category: "education" as const, href: ROUTES.seva.education },
-  { category: "essentials" as const, href: ROUTES.involved.index },
+const SERVICE_STREAMS = [
+  {
+    category: "food" as const,
+    title: "Food Distribution (Ann Seva)",
+    description:
+      "Nutritious food support for families, pilgrims, and people facing hardship so no one is deprived of dignity, care, and basic nourishment.",
+    impact: "Meals, ration support, and compassionate food outreach.",
+    href: ROUTES.seva.ann,
+  },
+  {
+    category: "health" as const,
+    title: "Medical Support",
+    description:
+      "Healthcare assistance, relief support, and medicine-centered seva for people who cannot easily access timely treatment and care.",
+    impact: "Medicine distribution and practical healthcare support.",
+    href: ROUTES.seva.medicine,
+  },
+  {
+    category: "education" as const,
+    title: "Educational Assistance",
+    description:
+      "Educational help for children, youth, and economically weaker families so learning, self-respect, and growth remain possible.",
+    impact: "Study support, learning continuity, and value-based upliftment.",
+    href: ROUTES.seva.education,
+  },
+  {
+    category: "gau" as const,
+    title: "Gau Seva (Cow Protection)",
+    description:
+      "Support for Gau Seva through care, shelter, and protection rooted in reverence, responsibility, and dharmic compassion.",
+    impact: "Protection, nourishment, and sacred animal care.",
+    href: ROUTES.seva.gau,
+  },
+  {
+    category: "relief" as const,
+    title: "Disaster Relief",
+    description:
+      "Rapid and organized support during crisis situations so families and communities receive food, essentials, and hope when they need it most.",
+    impact: "Emergency response with dignity and discipline.",
+    href: ROUTES.seva.disasterRelief,
+  },
+  {
+    category: "support" as const,
+    title: "Support for Weaker Sections",
+    description:
+      "Sustained social support for underprivileged communities and economically weaker sections through care-led and opportunity-focused initiatives.",
+    impact: "Basic necessities, dignity, and opportunities for growth.",
+    href: ROUTES.involved.index,
+  },
 ];
 
-const LIVE_OPERATIONS = [
-  { statusKey: "day" },
-  { statusKey: "day" },
-  { statusKey: "day" },
-  { statusKey: "always" },
+const VALUE_PILLARS = [
+  {
+    title: "Compassion",
+    description:
+      "True spirituality must respond to suffering with active kindness, not passive sympathy.",
+  },
+  {
+    title: "Empathy",
+    description:
+      "Service begins when people are seen with dignity, care, and human understanding.",
+  },
+  {
+    title: "Collective Responsibility",
+    description:
+      "We encourage individuals to become part of a shared mission instead of waiting for change from others.",
+  },
+  {
+    title: "Hope and Security",
+    description:
+      "Social service should help communities live with respect, stability, and confidence in the future.",
+  },
 ];
 
-interface LabelValue {
-  label: string;
-  value: string;
-}
+const SERVICE_WINDOWS = [
+  {
+    startHour: 6,
+    endHour: 10,
+    title: "Morning Seva Coordination",
+    window: "6:00 AM - 10:00 AM",
+    detail: "Volunteer alignment, field planning, and readiness for food, health, and welfare outreach.",
+  },
+  {
+    startHour: 10,
+    endHour: 17,
+    title: "Community Support Operations",
+    window: "10:00 AM - 5:00 PM",
+    detail: "Active execution of Ann Seva, healthcare support, education assistance, and public welfare services.",
+  },
+  {
+    startHour: 17,
+    endHour: 21,
+    title: "Review and Response Window",
+    window: "5:00 PM - 9:00 PM",
+    detail: "Follow-up support, next-day planning, and emergency coordination for urgent social response.",
+  },
+] as const;
 
-interface ActivityContent {
-  title: string;
-  desc: string;
-  frequency: string;
-  beneficiaries: string;
-}
+const DAILY_SERVICE_NOTES = [
+  "Begin the week by serving with discipline so compassion becomes action, not intention alone.",
+  "Offer care with respect and sensitivity so help strengthens dignity, not dependence.",
+  "Let food, medicine, and education support become expressions of living devotion.",
+  "Remember that Gau Seva, humanitarian care, and public welfare all arise from the same spiritual heart.",
+  "Work for those in need with patience and a long-term vision for change.",
+  "Use seva to cultivate empathy, collective responsibility, and trust within society.",
+  "End the week by reflecting on how temporary help can grow into lasting transformation.",
+] as const;
 
-interface OperationContent {
-  title: string;
-  activeHours: string;
-  detail: string;
-}
+const FILTERS: { key: MissionCategory; label: string }[] = [
+  { key: "all", label: "All Initiatives" },
+  { key: "food", label: "Ann Seva" },
+  { key: "health", label: "Medical" },
+  { key: "education", label: "Education" },
+  { key: "gau", label: "Gau Seva" },
+  { key: "relief", label: "Relief" },
+  { key: "support", label: "Community Support" },
+];
+
+const SECTION_SHELL =
+  "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
+const SECTION_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]";
+const SECTION_HEADING = "mt-2 text-[14px] font-black text-white md:text-[20px]";
+const SECTION_BODY = "mt-4 text-base leading-7 text-[#dce7ec] md:text-lg";
+const CARD_SHELL =
+  "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
 
 export default memo(function SocialPage() {
-  const { t } = useTranslation();
-  const [activeCategory, setActiveCategory] = useState<MissionCategory | "all">("all");
+  const [activeCategory, setActiveCategory] = useState<MissionCategory>("all");
   const [now, setNow] = useState(() => new Date());
+
+  usePageMeta(
+    "Social Service Mission",
+    "Social service mission of Shri Bhagwat Heritage Service Foundation focused on compassion, selfless service, Ann Seva, medical support, education, Gau Seva, disaster relief, and long-term social transformation.",
+  );
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(new Date()), 60_000);
     return () => window.clearInterval(timer);
   }, []);
 
-  const stats = (t("missionPages.social.stats", { returnObjects: true }) as LabelValue[]) ?? STATS;
-  const activities = (t("missionPages.social.activities", { returnObjects: true }) as ActivityContent[]) ?? [];
-  const operations = (t("missionPages.social.operations", { returnObjects: true }) as OperationContent[]) ?? [];
-  const actionItems = (t("missionPages.social.actionItems", { returnObjects: true }) as string[]) ?? [];
-  const planningCards = (t("missionPages.social.planningCards", { returnObjects: true }) as { title: string; desc: string }[]) ?? [];
-  const categories = [
-    { key: "all" as const, label: t("missionPages.social.categories.all") },
-    { key: "food" as const, label: t("missionPages.social.categories.food") },
-    { key: "water" as const, label: t("missionPages.social.categories.water") },
-    { key: "health" as const, label: t("missionPages.social.categories.health") },
-    { key: "education" as const, label: t("missionPages.social.categories.education") },
-    { key: "essentials" as const, label: t("missionPages.social.categories.essentials") },
-  ];
+  const activeWindowIndex = SERVICE_WINDOWS.findIndex(
+    (item) => now.getHours() >= item.startHour && now.getHours() < item.endHour,
+  );
+  const nextWindowIndex = SERVICE_WINDOWS.findIndex((item) => now.getHours() < item.startHour);
+  const visibleStreams = useMemo(() => {
+    if (activeCategory === "all") {
+      return SERVICE_STREAMS;
+    }
 
-  const resolvedActivities = ACTIVITIES.map((item, index) => ({
-    ...item,
-    title: activities[index]?.title ?? "",
-    desc: activities[index]?.desc ?? "",
-    frequency: activities[index]?.frequency ?? "",
-    beneficiaries: activities[index]?.beneficiaries ?? "",
-  }));
-
-  const resolvedOperations = LIVE_OPERATIONS.map((item, index) => ({
-    ...item,
-    title: operations[index]?.title ?? "",
-    activeHours: operations[index]?.activeHours ?? "",
-    detail: operations[index]?.detail ?? "",
-  }));
-
-  const visibleActivities = useMemo(() => {
-    if (activeCategory === "all") return resolvedActivities;
-    return resolvedActivities.filter((item) => item.category === activeCategory);
-  }, [activeCategory, resolvedActivities]);
-
-  const serviceMode = useMemo(() => {
-    const hour = now.getHours();
-    if (hour >= 7 && hour < 18) return t("missionPages.social.operationStatus.fieldActive");
-    if (hour >= 18 && hour < 22) return t("missionPages.social.operationStatus.reviewPlanning");
-    return t("missionPages.social.operationStatus.standby");
-  }, [now, t]);
+    return SERVICE_STREAMS.filter((item) => item.category === activeCategory);
+  }, [activeCategory]);
+  const serviceNote = DAILY_SERVICE_NOTES[now.getDay()] ?? DAILY_SERVICE_NOTES[0];
 
   return (
-    <div className="min-h-screen bg-[#0B2230] pb-16">
-      <section className="px-4 pb-6 pt-8 md:pt-10">
-        <div className="mx-auto max-w-[1240px] overflow-hidden rounded-3xl border border-white/10 shadow-xl">
-          <div
-            className="relative h-[360px] md:h-[520px]"
-            style={{
-              backgroundImage: `linear-gradient(rgba(11,34,48,0.62), rgba(11,34,48,0.78)), url('${HERO_IMAGE}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
+    <div className="min-h-screen bg-[#0B2230]">
+      <HeroSection
+        title="Social Service Mission"
+        subtitle="True spirituality expresses itself through compassion, selfless service, and social welfare."
+        subtitleClassName="text-[34px] font-semibold md:text-[40px]"
+        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
+        backgroundImage={HERO_IMAGE}
+        boxed
+        heightClass="h-[360px] md:h-[520px]"
+      >
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link
+            to={ROUTES.donate}
+            className="inline-flex items-center justify-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
           >
-            <div className="relative flex h-full flex-col items-center justify-center px-4 text-center text-white">
-              <p className="mb-4 inline-flex rounded-full border border-[#F59E0B]/40 bg-[#F59E0B]/10 px-4 py-1 text-sm">
-                {t("missionPages.common.badge")}
-              </p>
-              <h1 className="text-4xl font-black leading-tight md:text-6xl">{t("missionPages.social.title")}</h1>
-              <p className="mt-4 text-lg text-white/95 md:text-2xl">{t("missionPages.social.subtitle")}</p>
-              <div className="mt-7 flex flex-wrap justify-center gap-3">
-                <Link to={ROUTES.donate} className="rounded-lg bg-[#F59E0B] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]">
-                  {t("missionPages.social.donate")}
-                </Link>
-                <Link to={ROUTES.involved.volunteer} className="rounded-lg bg-white px-6 py-3 font-semibold text-[#0B2230] transition-colors hover:bg-[#eef4f7]">
-                  {t("missionPages.common.becomeVolunteer")}
-                </Link>
+            Support the Mission
+          </Link>
+          <Link
+            to={ROUTES.involved.volunteer}
+            className="inline-flex items-center justify-center rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
+          >
+            Join Seva
+          </Link>
+        </div>
+      </HeroSection>
+
+      <section className="relative z-20 mt-[10px] pb-6">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {IMPACT_SIGNALS.map((item) => (
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+                <p className="text-[24px] uppercase tracking-wide text-[#ef9a1e]">{item.title}</p>
+                <p className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.value}</p>
+                <p className="mt-1 text-base leading-7 text-[#dce7ec] md:text-lg">{item.note}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-10">
+        <div className={SECTION_SHELL}>
+          <div className="grid gap-5 lg:grid-cols-[1.12fr_0.88fr]">
+            <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+              <p className={SECTION_LABEL}>Mission Write-up</p>
+              <h2 className={SECTION_HEADING}>Social service as an expression of devotion</h2>
+              <div className="mt-5 space-y-4 text-base leading-7 text-white md:text-lg">
+                <p>
+                  True spirituality expresses itself through compassion, selfless service, and a deep commitment to the
+                  welfare of society.
+                </p>
+                <p>
+                  At Shri Bhagwat Heritage Service Foundation, we believe that serving humanity is the highest form of
+                  devotion. Inspired by the teachings of Shrimad Bhagwat Mahapuran, our social service mission focuses on
+                  uplifting underprivileged communities and creating a positive impact through meaningful initiatives.
+                </p>
+                <p>
+                  Through our humanitarian efforts, we actively engage in programs such as food distribution, medical
+                  support, educational assistance, Gau Seva, disaster relief, and support for economically weaker sections
+                  of society. Our goal is to ensure that no individual is deprived of basic necessities, dignity, and
+                  opportunities for growth.
+                </p>
+                <p>
+                  We encourage individuals to participate in seva and become a part of this noble mission. By fostering
+                  kindness, empathy, and collective responsibility, we aim to build a compassionate and harmonious
+                  society where everyone can live with respect, security, and hope.
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-5">
+              <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+                <p className={SECTION_LABEL}>Social Intention</p>
+                <h2 className={SECTION_HEADING}>What this mission protects</h2>
+                <div className="mt-5 space-y-3">
+                  {[
+                    "Basic necessities should reach people with dignity and respect.",
+                    "No person should be denied growth due to poverty or neglect.",
+                    "Seva should strengthen social trust, not only provide temporary relief.",
+                    "Compassion must become organized, disciplined, and collective action.",
+                  ].map((item) => (
+                    <div key={item} className="rounded-[20px] border border-white/10 bg-[#0b2230] px-4 py-3">
+                      <span className="text-sm leading-7 text-[#dce7ec]">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+                <p className={SECTION_LABEL}>Today&apos;s Seva Note</p>
+                <h2 className={SECTION_HEADING}>Daily direction for social service</h2>
+                <p className={SECTION_BODY}>{serviceNote}</p>
+                <p className="mt-5 text-sm leading-7 text-[#dce7ec]">
+                  Updated on{" "}
+                  {now.toLocaleDateString("en-IN", {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}{" "}
+                  at {now.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
+                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1240px] px-4 py-8">
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-          {stats.map((item) => (
-            <div key={item.label} className="rounded-xl border border-white/10 bg-[#12394A] p-5 text-center shadow-sm">
-              <p className="text-3xl font-black text-[#F59E0B]">{item.value}</p>
-              <p className="mt-1 text-sm text-white">{item.label}</p>
-            </div>
-          ))}
+      <section className="mx-auto max-w-7xl px-4 py-10">
+        <div className={SECTION_SHELL}>
+          <div className="max-w-3xl">
+            <p className={SECTION_LABEL}>Mission Explorer</p>
+            <h2 className={SECTION_HEADING}>Service initiatives shaping social impact</h2>
+            <p className={SECTION_BODY}>
+              Explore the major initiatives through which the foundation carries compassion, dignity, and practical
+              public support into society.
+            </p>
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            {FILTERS.map((item) => (
+              <button
+                key={item.key}
+                type="button"
+                onClick={() => setActiveCategory(item.key)}
+                className={`rounded-xl px-4 py-2 text-sm font-bold transition-colors ${
+                  activeCategory === item.key
+                    ? "bg-[#ef9a1e] text-white"
+                    : "bg-[#0b2230] text-white hover:bg-[#15384b]"
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {visibleStreams.map((item) => (
+              <article key={item.title} className={CARD_SHELL}>
+                <h3 className="text-xl font-black text-white">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{item.description}</p>
+                <div className="mt-4 rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
+                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">Social Impact</p>
+                  <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{item.impact}</p>
+                </div>
+                <Link
+                  to={item.href}
+                  className="mt-5 inline-flex items-center justify-center rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                >
+                  Explore
+                </Link>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-12">
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-3xl border border-white/10 bg-[#12394A] p-6 shadow-sm">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">{t("missionPages.social.liveFeature")}</p>
-            <h2 className="mt-2 text-3xl font-black text-white md:text-4xl">{t("missionPages.social.boardTitle")}</h2>
-            <div className="mt-6 grid gap-4">
-              {resolvedOperations.map((item, index) => {
-                const live = LIVE_OPERATIONS[index].statusKey === "always" || serviceMode === t("missionPages.social.operationStatus.fieldActive");
+      <section className="mx-auto max-w-7xl px-4 py-10">
+        <div className={SECTION_SHELL}>
+          <div className="grid gap-5 lg:grid-cols-2">
+            <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+              <p className={SECTION_LABEL}>Social Values</p>
+              <h2 className={SECTION_HEADING}>Values behind long-term transformation</h2>
+              <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                {VALUE_PILLARS.map((item) => (
+                  <div key={item.title} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
+                    <h3 className="text-xl font-black text-white">{item.title}</h3>
+                    <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-                return (
-                  <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0f3140] p-5">
-                    <div className="flex flex-wrap items-start justify-between gap-3">
-                      <div>
-                        <h3 className="text-2xl font-black text-white">{item.title}</h3>
-                        <p className="mt-2 text-[#dce7ec]">{item.detail}</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-sm font-semibold text-[#F59E0B]">{item.activeHours}</p>
-                        <p className={`mt-2 inline-flex rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${
-                          live ? "bg-[#F59E0B] text-white" : "bg-white text-[#0B2230]"
-                        }`}>
-                          {live ? t("missionPages.social.operationStatus.operational") : t("missionPages.social.operationStatus.queued")}
-                        </p>
+            <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+              <p className={SECTION_LABEL}>Operations Board</p>
+              <h2 className={SECTION_HEADING}>Live service rhythm</h2>
+              <div className="mt-5 space-y-4">
+                {SERVICE_WINDOWS.map((item, index) => {
+                  const isActive = activeWindowIndex === index;
+                  const isNext = !isActive && (nextWindowIndex === index || (nextWindowIndex === -1 && index === 0));
+
+                  return (
+                    <div key={item.title} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
+                      <div className="flex flex-wrap items-start justify-between gap-3">
+                        <div>
+                          <h3 className="text-xl font-black text-white">{item.title}</h3>
+                          <p className="mt-2 text-sm leading-7 text-[#dce7ec]">{item.detail}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-sm font-semibold text-[#ef9a1e]">{item.window}</p>
+                          <p
+                            className={`mt-3 inline-flex rounded-full px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] ${
+                              isActive
+                                ? "bg-[#ef9a1e] text-white"
+                                : isNext
+                                  ? "bg-white text-[#0b2230]"
+                                  : "bg-white/10 text-white/78"
+                            }`}
+                          >
+                            {isActive ? "Active now" : isNext ? "Next window" : "Scheduled"}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <div className="rounded-3xl border border-white/10 bg-[#12394A] p-6 shadow-sm">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">{t("missionPages.social.snapshot")}</p>
-              <h2 className="mt-2 text-3xl font-black text-white">{t("missionPages.social.missionStatus")}</h2>
-              <p className="mt-4 text-2xl font-black text-[#F59E0B]">{serviceMode}</p>
-              <p className="mt-3 text-[#dce7ec]">
-                {t("missionPages.common.updatedOn", {
-                  date: now.toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" }),
-                  time: now.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" }),
+                  );
                 })}
-              </p>
-            </div>
-
-            <div className="rounded-3xl border border-white/10 bg-[#12394A] p-6 shadow-sm">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">{t("missionPages.social.actionLayers")}</p>
-              <ul className="mt-4 space-y-3 text-[#dce7ec]">
-                {actionItems.map((item) => (
-                  <li key={item} className="rounded-2xl bg-[#0f3140] px-4 py-3">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 pb-12">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-          <div className="rounded-3xl border border-white/10 bg-[#12394A] p-6 shadow-sm">
-            <h2 className="text-4xl font-black text-[#F59E0B]">{t("missionPages.social.aboutTitle")}</h2>
-            <p className="mt-4 text-lg leading-relaxed text-white">{t("missionPages.social.aboutText1")}</p>
-            <p className="mt-4 text-lg leading-relaxed text-white">{t("missionPages.social.aboutText2")}</p>
-          </div>
-          <div className="rounded-3xl border border-white/10 bg-[#12394A] p-6 shadow-sm">
-            <h2 className="text-3xl font-black text-[#F59E0B]">{t("missionPages.social.filterTitle")}</h2>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {categories.map((category) => (
-                <button
-                  key={category.key}
-                  type="button"
-                  onClick={() => setActiveCategory(category.key)}
-                  className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
-                    activeCategory === category.key
-                      ? "border-[#F59E0B] bg-[#F59E0B] text-white"
-                      : "border-white/10 bg-[#0f3140] text-white hover:border-[#F59E0B]/45"
-                  }`}
-                >
-                  {category.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 pb-16">
-        <div className="space-y-4">
-          {visibleActivities.map((item) => (
-            <div key={item.title} className="rounded-2xl border border-white/10 bg-[#12394A] p-5 shadow-md">
-              <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <div className="max-w-3xl">
-                  <h3 className="text-3xl font-black text-white">{item.title}</h3>
-                  <p className="mt-2 text-lg text-[#dce7ec]">{item.desc}</p>
-                  <p className="mt-2 text-sm text-[#F59E0B]">
-                    {t("missionPages.social.frequencyPrefix")}: {item.frequency} | {t("missionPages.social.beneficiariesPrefix")}: {item.beneficiaries}
-                  </p>
-                </div>
-                <div className="flex gap-2">
-                  <Link to={item.href} className="rounded-lg bg-[#F59E0B] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#de930a]">
-                    {t("missionPages.social.buttons.donate")}
-                  </Link>
-                  <Link to={ROUTES.involved.volunteer} className="rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-[#0B2230] transition-colors hover:bg-[#eef4f7]">
-                    {t("missionPages.social.buttons.join")}
-                  </Link>
-                </div>
               </div>
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-16">
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-          {planningCards.map((item) => (
-            <div key={item.title} className="rounded-3xl border border-white/10 bg-[#12394A] p-6 shadow-sm">
-              <h3 className="text-2xl font-black text-white">{item.title}</h3>
-              <p className="mt-3 leading-7 text-[#dce7ec]">{item.desc}</p>
+      <section className="mx-auto max-w-7xl px-4 py-10">
+        <div className={SECTION_SHELL}>
+          <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 text-white shadow-sm">
+            <p className={SECTION_LABEL}>Participate</p>
+            <h2 className={SECTION_HEADING}>Become part of a compassionate and harmonious society</h2>
+            <p className={SECTION_BODY}>
+              Help carry kindness, empathy, and organized seva into communities through donation, volunteering, and
+              trust-led participation.
+            </p>
+
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Link
+                to={ROUTES.involved.volunteer}
+                className="inline-flex items-center justify-center rounded-xl bg-[#0b2230] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#15384b]"
+              >
+                Become a Volunteer
+              </Link>
+              <Link
+                to={ROUTES.donate}
+                className="inline-flex items-center justify-center rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+              >
+                Support Social Seva
+              </Link>
             </div>
-          ))}
+          </div>
         </div>
       </section>
     </div>

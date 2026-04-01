@@ -7,7 +7,10 @@ export const ROUTES = {
 
   about: {
     index: "/about",
+    sansthaParichay: "/about/sanstha-parichay",
+    visionMission: "/about/vision-mission",
     objectives: "/about/objectives",
+    founderAlias: "/about/founder",
     founder: "/about/founder-manish-bhaiji",
     awards: "/about/awards-recognition",
     structure: "/about/organizational-structure",
@@ -25,6 +28,8 @@ export const ROUTES = {
   seva: {
     index: "/seva",
     gau: "/seva/gau-seva",
+    jal: "/seva/jal-seva",
+    ann: "/seva/ann-seva",
     annJal: "/seva/ann-jal-seva",
     medicine: "/seva/medicine-distribution",
     education: "/seva/education-support",
@@ -81,6 +86,7 @@ export const ROUTES = {
     satsang: "/digital-services/online-satsang",
     membership: "/digital-services/membership-portal",
     kundli: "/digital-services/kundli",
+    guidance: "/guidance",
   },
 
   involved: {
@@ -112,6 +118,7 @@ export const LEGACY_ROUTES = {
   pathshalaOld: "/events/pathshala",
   libraryOld: "/events/library",
   storeOld: "/store",
+  requestSevaOld: "/request-seva",
   mandirOld: "/mandir",
   ghanshyamOld: "/mandir/ghanshyam",
   galleryOldPublic: "/mandir/gallery",

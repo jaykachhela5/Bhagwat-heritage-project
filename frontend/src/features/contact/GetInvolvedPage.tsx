@@ -1,4 +1,4 @@
-import { memo, useMemo, useState, type FormEvent } from "react";
+﻿import { memo, useMemo, useState, type FormEvent } from "react";
 import { involvedApi } from "../../services/api/misc";
 import { FeatureHeroSlider } from "../../components/sections/FeatureHeroSlider";
 import { InfoCardGrid } from "../../components/sections/InfoCardGrid";
@@ -13,10 +13,43 @@ type JoinTimeline = "Immediately" | "Within 1 Month" | "Within 3 Months";
 const INTERESTS = [
   "Volunteer Work",
   "Donation",
+  "Jal Seva",
+  "Ann Seva",
+  "Both",
   "Cultural Events",
   "Spiritual Programs",
   "Education Support",
   "Healthcare Support",
+];
+
+const JAL_JOIN_HIGHLIGHTS = [
+  {
+    title: "Quick Contact",
+    text: "Share your phone and email so the trust team can coordinate Jal Seva support without delay.",
+  },
+  {
+    title: "City & Role",
+    text: "Mention your location and whether you want to volunteer, organise, or lead relief support locally.",
+  },
+  {
+    title: "Skills & Availability",
+    text: "Add your preferred days and useful support details like field coordination, distribution, or logistics.",
+  },
+];
+
+const ANN_JOIN_HIGHLIGHTS = [
+  {
+    title: "Quick Contact",
+    text: "Share your phone and email so the trust team can coordinate Ann Seva support without delay.",
+  },
+  {
+    title: "City & Role",
+    text: "Mention your location and whether you want to volunteer, organise, or lead meal seva locally.",
+  },
+  {
+    title: "Skills & Availability",
+    text: "Add your preferred days and useful support details like distribution, packing, or local coordination.",
+  },
 ];
 
 const IMPACT_METRICS = [
@@ -109,6 +142,28 @@ const WHAT_WE_DO = [
   { title: "Temple Activities", desc: "Contribute to puja support, prasad distribution, and daily darshan operations." },
 ];
 
+const THEME = {
+  page: "min-h-screen bg-[#0B2230] pb-16",
+  section: "max-w-6xl mx-auto px-4 pt-8",
+  banner: "rounded-[30px] border border-white/10 bg-[#0d6179] p-5 md:p-6 shadow-[0_18px_40px_rgba(0,0,0,0.20)]",
+  bannerText: "text-[16px] leading-7 text-[#dce7ec] md:text-[18px]",
+  label: "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]",
+  heading: "mt-2 text-[14px] font-black text-white md:text-[20px]",
+  subheading: "mt-4 text-base leading-7 text-[#dce7ec] md:text-lg",
+  trackCard: "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-[0_14px_30px_rgba(0,0,0,0.18)]",
+  trackTitle: "text-[14px] font-black text-white md:text-[20px]",
+  trackText: "mt-2 text-sm leading-6 text-[#dce7ec]",
+  darkPanel: "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 md:p-8 shadow-[0_18px_40px_rgba(0,0,0,0.20)]",
+  darkCard: "rounded-[24px] border border-white/10 bg-[#0c5871] p-4 shadow-[0_14px_30px_rgba(0,0,0,0.18)]",
+  goldCard: "rounded-[24px] border border-[#ef9a1e]/30 bg-[#123e55] p-4 shadow-[0_14px_30px_rgba(0,0,0,0.18)]",
+  formNote: "text-sm leading-6 text-[#dce7ec]",
+  formInput:
+    "rounded-2xl border border-white/10 bg-white px-4 py-3 text-sm text-[#17314a] outline-none transition placeholder:text-[#6b8091] focus:border-[#ef9a1e] focus:ring-2 focus:ring-[#efc06a]",
+  filterChip: "rounded-full px-3 py-1.5 text-xs font-semibold transition",
+  mutedText: "text-sm text-[#dce7ec]",
+  faqIntro: "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]",
+} as const;
+
 export default memo(function GetInvolvedPage() {
   usePageMeta("Get Involved", "Volunteer, donate, and support trust seva initiatives.");
 
@@ -187,47 +242,48 @@ export default memo(function GetInvolvedPage() {
   };
 
   return (
-    <div>
+    <div className={THEME.page}>
       <PageSectionShell className="pt-6">
-        <FeatureHeroSlider slides={TOP_BANNER_SLIDES} />
+        <FeatureHeroSlider slides={TOP_BANNER_SLIDES} variant="gauseva" />
       </PageSectionShell>
 
       <PageSectionShell className="pt-8">
-        <InfoCardGrid title="What We Do" items={WHAT_WE_DO.map((item) => ({ ...item, iconClass: "fas fa-hands-helping" }))} />
+        <InfoCardGrid
+          title="What We Do"
+          variant="gauseva"
+          items={WHAT_WE_DO.map((item) => ({ ...item, iconClass: "fas fa-hands-helping" }))}
+        />
       </PageSectionShell>
 
       <section className="max-w-6xl mx-auto px-4 pt-6">
-        <div className="rounded-3xl border border-[#f1c899] bg-gradient-to-r from-[#fff7eb] via-[#fff2e3] to-[#ffe8cf] p-5 md:p-6 shadow-[0_12px_26px_rgba(177,96,23,0.14)]">
-          <p className="text-sm md:text-base font-medium text-[#7a4f1f] text-center">
+        <div className={THEME.banner}>
+          <p className={`${THEME.bannerText} text-center`}>
             Join hands with Bhagwat Heritage Service Foundation Trust to support temple seva, community outreach, and devotional programs with disciplined teamwork and transparent impact.
           </p>
         </div>
       </section>
 
-      <PageSectionShell className="pt-8">
-        <StatStrip items={IMPACT_METRICS} />
-      </PageSectionShell>
-
       <section className="max-w-6xl mx-auto px-4 pt-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {CONTRIBUTION_TRACKS.map((item) => (
-            <article key={item.title} className="rounded-2xl border border-[#dce8f5] bg-white p-5 shadow-sm hover:shadow-md transition">
-              <h3 className="text-lg font-black text-[#123753]">{item.title}</h3>
-              <p className="mt-2 text-[#4f6272] text-sm">{item.desc}</p>
+            <article key={item.title} className={THEME.trackCard}>
+              <h3 className={THEME.trackTitle}>{item.title}</h3>
+              <p className={THEME.trackText}>{item.desc}</p>
             </article>
           ))}
         </div>
       </section>
 
       <section className="max-w-6xl mx-auto px-4 pt-8">
-        <div className="rounded-3xl border border-[#dbe8f4] bg-gradient-to-br from-[#f7fbff] via-white to-[#eef6ff] p-6 md:p-8 shadow-sm">
-          <h2 className="text-2xl md:text-3xl font-black text-[#123753] mb-5">How It Works</h2>
+        <div className={THEME.darkPanel}>
+          <p className={THEME.label}>How It Works</p>
+          <h2 className={THEME.heading}>Simple seva onboarding</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
             {ONBOARDING_STEPS.map((item, index) => (
-              <article key={item.title} className="rounded-xl border border-[#d8e5f3] bg-white p-4">
-                <p className="text-xs font-bold text-[#2d5b83]">Step {index + 1}</p>
-                <h3 className="mt-1 text-lg font-black text-[#123753]">{item.title}</h3>
-                <p className="mt-1 text-sm text-[#4f6272]">{item.detail}</p>
+              <article key={item.title} className={THEME.darkCard}>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">Step {index + 1}</p>
+                <h3 className={THEME.heading}>{item.title}</h3>
+                <p className={THEME.trackText}>{item.detail}</p>
               </article>
             ))}
           </div>
@@ -236,29 +292,29 @@ export default memo(function GetInvolvedPage() {
 
       <section className="max-w-6xl mx-auto px-4 pt-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <article className="rounded-3xl border border-[#dce8f4] bg-white p-6 shadow-sm">
-            <h2 className="text-2xl font-black text-[#123753] mb-4">Seva Opportunities</h2>
+          <article className={THEME.darkPanel}>
+            <p className={THEME.label}>Seva Opportunities</p>
             <div className="space-y-3">
               {SEVA_OPPORTUNITIES.map((item) => (
-                <div key={item.title} className="rounded-xl border border-[#e4edf7] bg-[#fbfdff] p-3">
-                  <h3 className="font-bold text-[#17486f]">{item.title}</h3>
-                  <p className="text-sm text-[#4f6272] mt-1">{item.detail}</p>
+                <div key={item.title} className={THEME.darkCard}>
+                  <h3 className={THEME.heading}>{item.title}</h3>
+                  <p className={THEME.trackText}>{item.detail}</p>
                 </div>
               ))}
             </div>
           </article>
 
-          <article className="rounded-3xl border border-[#f1d8b9] bg-gradient-to-b from-[#fff9ef] to-[#fff3e3] p-6 shadow-sm">
-            <h2 className="text-2xl font-black text-[#7a4f1f] mb-4">Why Join Bhagwat Heritage?</h2>
+          <article className={THEME.darkPanel}>
+            <p className={THEME.label}>Why Join Bhagwat Heritage?</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {VOLUNTEER_BENEFITS.map((benefit) => (
-                <div key={benefit} className="rounded-lg border border-[#efd8b9] bg-white px-3 py-2 text-sm text-[#6f4d2d]">
-                  {benefit}
+                <div key={benefit} className={THEME.darkCard}>
+                  <p className={THEME.trackText}>{benefit}</p>
                 </div>
               ))}
             </div>
-            <div className="mt-4 rounded-xl border border-[#efc99a] bg-[#fff1de] p-3">
-              <p className="text-sm text-[#8a4c16]">
+            <div className="mt-4 rounded-xl border border-white/10 bg-[#123e55] p-3">
+              <p className={THEME.trackText}>
                 <span className="font-bold">Trust Commitment:</span> Every volunteer is assigned with transparency, dignity, and meaningful contribution paths.
               </p>
             </div>
@@ -266,67 +322,116 @@ export default memo(function GetInvolvedPage() {
         </div>
       </section>
 
+      <section className="max-w-6xl mx-auto px-4 pt-8">
+        <div className={THEME.darkPanel}>
+          <div className="max-w-3xl">
+            <p className={THEME.label}>Volunteer & Organizer Join</p>
+            <h2 className={THEME.heading}>Start Jal Seva in Your City</h2>
+            <p className={THEME.subheading}>
+              If you want to begin water seva in your city or support relief coordination, the trust team can connect with you through this form.
+            </p>
+          </div>
+          <div className="mt-6 space-y-3">
+            <p className={THEME.label}>Important Details</p>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              {JAL_JOIN_HIGHLIGHTS.map((item) => (
+                <article key={item.title} className={THEME.darkCard}>
+                  <p className={THEME.heading}>{item.title}</p>
+                  <p className={THEME.trackText}>{item.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-4 pt-8">
+        <div className={THEME.darkPanel}>
+          <div className="max-w-3xl">
+            <p className={THEME.label}>Volunteer & Organizer Join</p>
+            <h2 className={THEME.heading}>Start Ann Seva in Your City</h2>
+            <p className={THEME.subheading}>
+              If you want to organise meal support in your city or help with food distribution, this form connects you with the trust team.
+            </p>
+          </div>
+          <div className="mt-6 space-y-3">
+            <p className={THEME.label}>Important Details</p>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              {ANN_JOIN_HIGHLIGHTS.map((item) => (
+                <article key={item.title} className={THEME.darkCard}>
+                  <p className={THEME.heading}>{item.title}</p>
+                  <p className={THEME.trackText}>{item.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-10 max-w-4xl mx-auto px-4">
-        <form onSubmit={handleSubmit} className="rounded-3xl border border-[#dce8f4] bg-white p-6 md:p-8 shadow-[0_16px_35px_rgba(13,59,102,0.10)]">
+        <form onSubmit={handleSubmit} className={THEME.darkPanel}>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-5">
             <div>
-              <h2 className="text-2xl md:text-3xl font-black text-[#123753]">Advanced Volunteer Application</h2>
-              <p className="text-sm text-[#5a6c79] mt-1">Share your interests and availability to get the right seva role.</p>
+              <p className={THEME.label}>Volunteer & Organizer Join</p>
+              <h2 className={THEME.heading}>Join Seva with the Trust</h2>
+              <p className={THEME.formNote}>Use this form to begin Ann Seva or Jal Seva in your city, or support trust coordination.</p>
             </div>
             <div className="min-w-[180px]">
-              <p className="text-xs uppercase tracking-wide text-[#46627f] font-semibold mb-1">Profile Completion</p>
-              <div className="h-2 rounded-full bg-[#e6eef8] overflow-hidden">
-                <div className="h-full bg-[#c47508] transition-all" style={{ width: `${completion}%` }} />
+              <p className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Profile Completion</p>
+              <div className="h-2 overflow-hidden rounded-full bg-white/10">
+                <div className="h-full bg-[#ef9a1e] transition-all" style={{ width: `${completion}%` }} />
               </div>
-              <p className="text-xs text-[#5a6c79] mt-1">{completion}% complete</p>
+              <p className="mt-1 text-xs text-[#dce7ec]">{completion}% complete</p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <input
               type="text"
-              placeholder="Full Name"
+              placeholder="Your full name"
               value={form.name}
               onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
               required
-              className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+              className={THEME.formInput}
             />
             <input
               type="email"
-              placeholder="Email"
+              placeholder="Email for follow-up"
               value={form.email}
               onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
               required
-              className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+              className={THEME.formInput}
             />
             <input
               type="tel"
-              placeholder="Phone"
+              placeholder="10-digit mobile number"
               value={form.phone}
               onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
-              className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+              required
+              className={THEME.formInput}
             />
             <input
               type="text"
-              placeholder="City"
+              placeholder="City or service location"
               value={form.city}
               onChange={(e) => setForm((f) => ({ ...f, city: e.target.value }))}
-              className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+              required
+              className={THEME.formInput}
             />
             <input
               type="number"
               placeholder="Age"
               value={form.age}
               onChange={(e) => setForm((f) => ({ ...f, age: e.target.value }))}
-              className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+              className={THEME.formInput}
             />
             <select
               value={form.interest}
               onChange={(e) => setForm((f) => ({ ...f, interest: e.target.value }))}
               required
-              className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+              className={THEME.formInput}
             >
-              <option value="">Primary Area of Interest</option>
+              <option value="">Select the seva area you want to support</option>
               {INTERESTS.map((i) => (
                 <option key={i} value={i}>
                   {i}
@@ -338,31 +443,33 @@ export default memo(function GetInvolvedPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
             <input
               type="text"
-              placeholder="Availability (e.g., Weekends / Daily 2 hours)"
+              placeholder="Weekdays / Weekends / Flexible"
               value={form.availability}
               onChange={(e) => setForm((f) => ({ ...f, availability: e.target.value }))}
-              className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+              className={THEME.formInput}
             />
             <input
               type="text"
-              placeholder="Skills (e.g., Event Management, Teaching, Medical)"
+              placeholder="Meal packing, distribution, kitchen help, water support, logistics, local coordination"
               value={form.skills}
               onChange={(e) => setForm((f) => ({ ...f, skills: e.target.value }))}
-              className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+              className={THEME.formInput}
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-            <div className="rounded-lg border border-[#d5e2f0] p-3">
-              <p className="text-sm font-semibold text-[#123753] mb-2">Contribution Mode</p>
+            <div className={THEME.darkCard}>
+              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Contribution Mode</p>
               <div className="flex gap-2 flex-wrap">
                 {(["Volunteer", "Donate", "Both"] as ContributionMode[]).map((mode) => (
                   <button
                     key={mode}
                     type="button"
                     onClick={() => setForm((f) => ({ ...f, contributionMode: mode }))}
-                    className={`rounded-full px-3 py-1.5 text-xs font-semibold ${
-                      form.contributionMode === mode ? "bg-[#0d3b66] text-white" : "bg-[#edf3fb] text-[#37516b]"
+                    className={`${THEME.filterChip} ${
+                      form.contributionMode === mode
+                        ? "bg-[#ef9a1e] text-white"
+                        : "border border-white/10 bg-[#0d6179] text-[#dce7ec]"
                     }`}
                   >
                     {mode}
@@ -371,16 +478,18 @@ export default memo(function GetInvolvedPage() {
               </div>
             </div>
 
-            <div className="rounded-lg border border-[#d5e2f0] p-3">
-              <p className="text-sm font-semibold text-[#123753] mb-2">Join Timeline</p>
+            <div className={THEME.darkCard}>
+              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Join Timeline</p>
               <div className="flex gap-2 flex-wrap">
                 {(["Immediately", "Within 1 Month", "Within 3 Months"] as JoinTimeline[]).map((timeline) => (
                   <button
                     key={timeline}
                     type="button"
                     onClick={() => setForm((f) => ({ ...f, timeline }))}
-                    className={`rounded-full px-3 py-1.5 text-xs font-semibold ${
-                      form.timeline === timeline ? "bg-[#c47508] text-white" : "bg-[#fff3e0] text-[#8a5b23]"
+                    className={`${THEME.filterChip} ${
+                      form.timeline === timeline
+                        ? "bg-[#ef9a1e] text-white"
+                        : "border border-white/10 bg-[#0d6179] text-[#dce7ec]"
                     }`}
                   >
                     {timeline}
@@ -391,30 +500,35 @@ export default memo(function GetInvolvedPage() {
           </div>
 
           <textarea
-            placeholder="Your Message"
+            placeholder="Share your city plans, preferred dates, group strength, or coordination notes"
             value={form.message}
             onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
             rows={4}
-            className="w-full mt-4 px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66] resize-none"
+            className={`${THEME.formInput} mt-4 w-full resize-none`}
           />
 
+          <p className="mt-4 text-sm leading-6 text-[#dce7ec]">
+            A valid phone number and clear location help the trust team connect with you faster for seva planning.
+          </p>
+
           {msg && (
-            <p className={`mt-3 text-sm font-semibold ${msg.type === "success" ? "text-green-600" : "text-red-600"}`}>
+            <p className={`mt-3 text-sm font-semibold ${msg.type === "success" ? "text-green-300" : "text-red-300"}`}>
               {msg.text}
             </p>
           )}
 
-          <button type="submit" disabled={loading} className="mt-4 btn-primary w-full py-3">
-            {loading ? "Submitting..." : "Submit Advanced Application"}
+          <button type="submit" disabled={loading} className="mt-4 inline-flex w-full items-center justify-center rounded-2xl bg-[#ef9a1e] px-6 py-4 text-base font-bold text-white shadow-[0_18px_34px_rgba(239,154,30,0.28)] transition hover:bg-[#de930a] disabled:cursor-not-allowed disabled:opacity-70">
+            {loading ? "Submitting..." : "Join Seva"}
           </button>
         </form>
       </section>
 
       <PageSectionShell className="pb-12">
         <div className="max-w-4xl mx-auto">
-          <FAQSection title="Frequently Asked Questions" items={FAQS} />
+          <FAQSection title="Frequently Asked Questions" items={FAQS} variant="gauseva" />
         </div>
       </PageSectionShell>
     </div>
   );
 });
+

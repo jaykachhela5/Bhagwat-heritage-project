@@ -1,4 +1,4 @@
-import { memo, useMemo, useState } from "react";
+﻿import { memo, useMemo, useState } from "react";
 import { useCart } from "../../app/providers/CartProvider";
 
 interface Product {
@@ -14,6 +14,39 @@ interface Product {
 }
 
 const PRODUCTS: Product[] = [
+  {
+    id: "13",
+    name: "Rudraksha",
+    price: 299,
+    category: "Spiritual Remedies",
+    description: "Sacred mala for japa, meditation, and daily mantra practice.",
+    image: "/images/maharaj ji/faith.png",
+    stock: 18,
+    featured: true,
+    tag: "Guidance",
+  },
+  {
+    id: "14",
+    name: "Yantra",
+    price: 499,
+    category: "Spiritual Remedies",
+    description: "Devotional yantra item for puja, focus, and blessings.",
+    image: "/images/maharaj ji/store.avif",
+    stock: 12,
+    featured: true,
+    tag: "Temple Supply",
+  },
+  {
+    id: "15",
+    name: "Puja Samagri",
+    price: 199,
+    category: "Spiritual Remedies",
+    description: "Essential puja pack for daily worship and home rituals.",
+    image: "/images/maharaj ji/vastu.jpg",
+    stock: 24,
+    featured: true,
+    tag: "Daily Use",
+  },
   {
     id: "1",
     name: "Bhagwat Gita Deluxe",
@@ -189,65 +222,44 @@ export default memo(function StorePage() {
 
       <section className="max-w-6xl mx-auto px-4 pt-8 md:pt-10">
         <div
-          className="relative overflow-hidden rounded-[30px] bg-cover bg-center text-white px-6 py-12 md:px-12 md:py-16 shadow-[0_20px_50px_rgba(15,47,87,0.24)]"
+          className="relative overflow-hidden rounded-[30px] bg-cover bg-center text-white px-6 py-10 md:px-12 md:py-12 shadow-[0_20px_50px_rgba(15,47,87,0.24)]"
           style={{ backgroundImage: "url('https://res.cloudinary.com/der8zinu8/image/upload/v1772920428/store_snvng8.avif')" }}
         >
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,28,53,0.86)_0%,rgba(12,54,87,0.72)_45%,rgba(13,84,94,0.56)_100%)]" />
           <div className="absolute -bottom-20 -right-10 h-56 w-56 rounded-full bg-white/10 blur-xl" />
-          <div className="relative z-10">
-            <p className="inline-flex rounded-full border border-white/35 bg-white/10 px-4 py-1 text-sm mb-4">
-              Bhagwat Heritage E-Store
-            </p>
-            <h1 className="text-3xl md:text-6xl font-black leading-tight">Advanced Spiritual Store</h1>
-            <p className="mt-3 text-lg md:text-2xl text-white/90 max-w-4xl">
-              Books, puja essentials, devotional products, and wellness items in one modern storefront.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={() => setCartVisible(true)}
-                className="rounded-xl bg-[#ffa114] px-7 py-3 font-bold text-white hover:bg-[#e78e07] transition-colors"
-              >
-                Open Cart ({count})
-              </button>
-              <button
-                type="button"
-                onClick={() => window.scrollTo({ top: 700, behavior: "smooth" })}
-                className="rounded-xl bg-white px-7 py-3 font-bold text-[#0d4e85] hover:bg-[#eef5fb] transition-colors"
-              >
-                Browse Products
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="max-w-6xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="rounded-2xl bg-white border border-[#dce7f2] p-4 text-center shadow-sm">
-            <p className="text-2xl md:text-3xl font-extrabold text-[#165e98]">{PRODUCTS.length}+</p>
-            <p className="text-sm text-[#4b5963] mt-1">Products</p>
-          </div>
-          <div className="rounded-2xl bg-white border border-[#dce7f2] p-4 text-center shadow-sm">
-            <p className="text-2xl md:text-3xl font-extrabold text-[#165e98]">{CATEGORIES.length - 1}</p>
-            <p className="text-sm text-[#4b5963] mt-1">Categories</p>
-          </div>
-          <div className="rounded-2xl bg-white border border-[#dce7f2] p-4 text-center shadow-sm">
-            <p className="text-2xl md:text-3xl font-extrabold text-[#165e98]">{count}</p>
-            <p className="text-sm text-[#4b5963] mt-1">Items In Cart</p>
-          </div>
-          <div className="rounded-2xl bg-white border border-[#dce7f2] p-4 text-center shadow-sm">
-            <p className="text-2xl md:text-3xl font-extrabold text-[#165e98]">7 Days</p>
-            <p className="text-sm text-[#4b5963] mt-1">Fast Dispatch</p>
+          <div className="relative z-10 mx-auto max-w-3xl text-center">
+              <h1 className="max-w-2xl mx-auto text-4xl font-black leading-tight md:text-5xl">Bhagwat Heritage E-Store</h1>
+              <p className="mt-2 text-[34px] font-semibold leading-tight text-gray-200 md:text-[40px]">
+                Digital Spiritual Store
+              </p>
+              <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-white/90 md:text-xl">
+                Browse books, puja essentials, devotional goods, and wellness items in one organized storefront.
+              </p>
+              <div className="mt-7 flex flex-wrap justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setCartVisible(true)}
+                  className="inline-flex items-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
+                >
+                  Open Cart ({count})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => window.scrollTo({ top: 700, behavior: "smooth" })}
+                  className="inline-flex items-center rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
+                >
+                  Browse Products
+                </button>
+              </div>
           </div>
         </div>
       </section>
 
       <section className="max-w-6xl mx-auto px-4 pb-8">
-        <h2 className="text-2xl md:text-4xl font-black text-[#18324c] mb-4">Store Features</h2>
+        <h2 className="mb-4 text-xl font-black text-[#18324c] md:text-2xl">Store Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {STORE_FEATURES.map((feature) => (
-            <div key={feature} className="rounded-2xl bg-white border border-[#dce6ef] p-4 shadow-sm text-[#304657] font-medium">
+            <div key={feature} className="rounded-2xl border border-[#dce6ef] bg-white p-3 text-sm font-medium text-[#304657] shadow-sm md:p-4 md:text-[15px]">
               {feature}
             </div>
           ))}
@@ -255,23 +267,23 @@ export default memo(function StorePage() {
       </section>
 
       <section className="max-w-6xl mx-auto px-4 pb-8">
-        <h2 className="text-2xl md:text-4xl font-black text-[#18324c] mb-4">Featured Products</h2>
+        <h2 className="mb-4 text-xl font-black text-[#18324c] md:text-2xl">Featured Products</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {featuredProducts.map((product) => (
             <div key={product.id} className="rounded-2xl overflow-hidden border border-[#dce6ef] bg-white shadow-sm">
-              <img src={product.image} alt={product.name} className="w-full h-44 object-cover" />
-              <div className="p-4">
-                <p className="inline-block rounded-full bg-[#eaf3ff] text-[#145b95] text-xs px-2 py-1 font-bold mb-2">
+              <img src={product.image} alt={product.name} className="w-full h-40 object-cover" />
+              <div className="p-4 md:p-5">
+                <p className="mb-2 inline-block rounded-full bg-[#eaf3ff] px-2 py-1 text-[11px] font-bold text-[#145b95]">
                   {product.tag || "Featured"}
                 </p>
-                <h3 className="font-bold text-[#0d3b66]">{product.name}</h3>
-                <p className="text-sm text-[#5c6f7d] mt-1">{product.description}</p>
+                <h3 className="font-bold text-[#0f678c] text-base md:text-lg">{product.name}</h3>
+                <p className="mt-1 text-xs text-[#5c6f7d] md:text-sm">{product.description}</p>
                 <div className="mt-3 flex items-center justify-between">
-                  <span className="font-bold text-[#f29508]">Rs {product.price}</span>
+                  <span className="font-bold text-[#f29508] text-base md:text-lg">Rs {product.price}</span>
                   <button
                     type="button"
                     onClick={() => addItem({ id: product.id, name: product.name, price: product.price, quantity: 1 })}
-                    className="rounded-lg bg-[#0f5fbf] text-white text-sm px-3 py-1.5 hover:bg-[#0d55ab] transition-colors"
+                    className="rounded-lg bg-[#0f5fbf] px-3 py-1.5 text-xs text-white transition-colors hover:bg-[#0d55ab] md:text-sm"
                   >
                     Add
                   </button>
@@ -338,22 +350,22 @@ export default memo(function StorePage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {filteredProducts.map((product) => (
             <article key={product.id} className="bg-white rounded-2xl border border-[#dce6ef] overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-              <img src={product.image} alt={product.name} className="w-full h-40 object-cover" />
+              <img src={product.image} alt={product.name} className="w-full h-36 object-cover md:h-40" />
               <div className="p-4">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs bg-[#0d3b66]/10 text-[#0d3b66] px-2 py-0.5 rounded">{product.category}</span>
+                  <span className="text-xs bg-[#0f678c]/10 text-[#0f678c] px-2 py-0.5 rounded">{product.category}</span>
                   {product.stock <= 5 ? (
                     <span className="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded">Low Stock</span>
                   ) : null}
                 </div>
-                <h3 className="font-bold text-[#0d3b66] mt-2">{product.name}</h3>
-                <p className="text-sm text-[#5b6d7b] mt-1">{product.description}</p>
+                <h3 className="mt-2 font-bold text-[#0f678c] text-base">{product.name}</h3>
+                <p className="mt-1 text-xs text-[#5b6d7b] md:text-sm">{product.description}</p>
                 <div className="mt-3 flex items-center justify-between">
-                  <span className="text-lg font-bold text-[#f29508]">Rs {product.price}</span>
+                  <span className="text-base font-bold text-[#f29508] md:text-lg">Rs {product.price}</span>
                   <button
                     type="button"
                     onClick={() => addItem({ id: product.id, name: product.name, price: product.price, quantity: 1 })}
-                    className="rounded-lg bg-[#0f5fbf] text-white text-sm px-3 py-1.5 hover:bg-[#0d55ab] transition-colors"
+                    className="rounded-lg bg-[#0f5fbf] px-3 py-1.5 text-xs text-white transition-colors hover:bg-[#0d55ab] md:text-sm"
                   >
                     Add to Cart
                   </button>
@@ -366,10 +378,10 @@ export default memo(function StorePage() {
 
       {cartVisible && (
         <div className="fixed inset-0 z-50">
-          <div className="absolute inset-0 bg-black/35" onClick={() => setCartVisible(false)} />
-          <aside className="absolute right-0 top-0 h-full w-full max-w-md bg-white border-l border-[#dce6ef] shadow-2xl p-5 overflow-y-auto">
-            <div className="flex items-center justify-between">
-              <h3 className="text-xl font-bold text-[#173b57]">Your Cart ({count})</h3>
+        <div className="absolute inset-0 bg-black/35" onClick={() => setCartVisible(false)} />
+        <aside className="absolute right-0 top-0 h-full w-full max-w-md bg-white border-l border-[#dce6ef] shadow-2xl p-5 overflow-y-auto">
+          <div className="flex items-center justify-between">
+              <h3 className="text-lg font-bold text-[#173b57] md:text-xl">Your Cart ({count})</h3>
               <button
                 type="button"
                 onClick={() => setCartVisible(false)}
@@ -388,7 +400,7 @@ export default memo(function StorePage() {
                     <div key={item.id} className="rounded-xl border border-[#e1eaf2] p-3">
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <p className="font-semibold text-[#0d3b66]">{item.name}</p>
+                          <p className="font-semibold text-[#0f678c]">{item.name}</p>
                           <p className="text-sm text-[#607281]">Rs {item.price} each</p>
                         </div>
                         <button
@@ -461,3 +473,4 @@ export default memo(function StorePage() {
     </div>
   );
 });
+

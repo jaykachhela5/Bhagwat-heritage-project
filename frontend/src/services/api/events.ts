@@ -1,8 +1,9 @@
 import { apiClient } from "./client";
-import type { Event } from "../../types";
+import type { Event, MahotsavLiveData } from "../../types";
 
 export const eventsApi = {
   getAll: () => apiClient.get<Event[]>("/api/events"),
+  getMahotsavLive: () => apiClient.get<MahotsavLiveData>("/api/events/mahotsav/live"),
 
   create: (formData: FormData, onProgress?: (pct: number) => void) =>
     apiClient.post<Event>("/api/events", formData, {

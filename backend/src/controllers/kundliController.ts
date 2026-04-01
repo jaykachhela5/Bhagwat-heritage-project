@@ -72,10 +72,12 @@ export const createKundliRequest = asyncHandler(async (req: Request, res: Respon
   await sendKundliOrderMail({
     fullName: order.fullName,
     email: order.email,
+    mobileNumber: order.mobileNumber,
     orderId: order.orderId,
     invoiceNumber: order.invoiceNumber,
     totalAmount: order.totalAmount,
     paymentMethod: order.paymentMethod,
+    deliveryPreference: order.deliveryPreference,
     selectedServices: order.selectedServices.map((service) => service.title),
   });
 

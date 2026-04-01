@@ -26,6 +26,12 @@ import issueRoutes from "./routes/issueRoutes";
 import memberRoutes from "./routes/memberRoutes";
 import pathshalaRoutes from "./routes/pathshalaRoutes";
 import kundliRoutes from "./routes/kundliRoutes";
+import sevaRoutes from "./routes/sevaRoutes";
+import campaignRoutes from "./routes/campaignRoutes";
+import reportRoutes from "./routes/reportRoutes";
+import libraryRequestRoutes from "./routes/libraryRequestRoutes";
+import libraryDonationRoutes from "./routes/libraryDonationRoutes";
+import libraryStatsRoutes from "./routes/libraryStatsRoutes";
 
 const app = express();
 
@@ -91,6 +97,13 @@ app.use("/api/issue", issueRoutes);
 app.use("/api/members", memberRoutes);
 app.use("/api/pathshala", pathshalaRoutes);
 app.use("/api/kundli-requests", kundliRoutes);
+app.use("/api/seva-requests", sevaRoutes);
+app.use("/api/seva-request", sevaRoutes);
+app.use("/api/campaigns", campaignRoutes);
+app.use("/api/reports", reportRoutes);
+app.use("/api/library-requests", libraryRequestRoutes);
+app.use("/api/library-donations", libraryDonationRoutes);
+app.use("/api/library-stats", libraryStatsRoutes);
 
 app.use(errorHandler);
 

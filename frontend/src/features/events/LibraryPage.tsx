@@ -1,649 +1,311 @@
 import { memo, useMemo, useState, type FormEvent } from "react";
-import { useApi } from "../../hooks/useApi";
-import { booksApi, issuesApi } from "../../services/api/books";
-import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
-import type { Book } from "../../types";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../../app/routes/routes";
+import { HeroSection } from "../../components/ui/HeroSection";
 
-const LIBRARY_FEATURES = [
-  { title: "Smart Discovery", desc: "Search, filter, and quickly discover books by category and availability." },
-  { title: "Digital Catalog", desc: "Unified collection for scriptures, literature, reference, and learning texts." },
-  { title: "Mentor Corner", desc: "Guided reading support with curated lists for students and families." },
-  { title: "Rapid Issue Desk", desc: "Fast issue workflow with real-time stock status." },
+const BOOK_CATEGORIES = [
+  "School Books",
+  "Competitive Exams",
+  "Spiritual / Religious",
+  "Skill Development",
+  "Story / Kids Books",
+] as const;
+
+const LIBRARY_BOOKS = [
+  {
+    id: "school-1",
+    title: "Mathematics Foundation Class 8",
+    author: "Rural Learning Team",
+    category: "School Books",
+    image: "/images/books/bhagwat geeta.png",
+    available: true,
+    summary: "Core school-level mathematics support for regular study and revision.",
+  },
+  {
+    id: "school-2",
+    title: "Science Basics for School Learners",
+    author: "Open Study Series",
+    category: "School Books",
+    image: "/images/books/MahabharataSet.png",
+    available: false,
+    summary: "Simple explanations and diagrams for rural and first-generation learners.",
+  },
+  {
+    id: "exam-1",
+    title: "Competitive Exam Aptitude Guide",
+    author: "Career Prep Circle",
+    category: "Competitive Exams",
+    image: "/images/books/Sanskrit Dictionary.png",
+    available: true,
+    summary: "Reasoning, aptitude, and practice support for exam preparation.",
+  },
+  {
+    id: "exam-2",
+    title: "General Knowledge Success Handbook",
+    author: "Future Aspirants Forum",
+    category: "Competitive Exams",
+    image: "/images/books/Vedic Chant Audio.png",
+    available: false,
+    summary: "Helpful reference for current affairs, civics, and interview awareness.",
+  },
+  {
+    id: "spiritual-1",
+    title: "Bhagavad Gita for Daily Life",
+    author: "Bhagwat Heritage Editorial",
+    category: "Spiritual / Religious",
+    image: "/images/books/bhagwat geeta.png",
+    available: true,
+    summary: "A practical reading guide for values, clarity, and spiritual reflection.",
+  },
+  {
+    id: "spiritual-2",
+    title: "Stories from Shrimad Bhagwat",
+    author: "Bhagwat Heritage Editorial",
+    category: "Spiritual / Religious",
+    image: "/images/books/ramayan.png",
+    available: true,
+    summary: "Selected stories for satsang, family reading, and value-based learning.",
+  },
+  {
+    id: "skill-1",
+    title: "Spoken English and Confidence Building",
+    author: "Skill Growth Collective",
+    category: "Skill Development",
+    image: "/images/books/Yoga Mat Premium.png",
+    available: true,
+    summary: "Communication support for youth, volunteers, and job seekers.",
+  },
+  {
+    id: "skill-2",
+    title: "Digital Skills Starter Book",
+    author: "Community Learning Lab",
+    category: "Skill Development",
+    image: "/images/books/Temple Bell Brass.png",
+    available: false,
+    summary: "Basic digital literacy, typing, internet use, and online safety.",
+  },
+  {
+    id: "kids-1",
+    title: "Moral Stories for Young Readers",
+    author: "Children Sanskar Desk",
+    category: "Story / Kids Books",
+    image: "/images/books/Hanuman Idol.png",
+    available: true,
+    summary: "Short inspiring stories focused on kindness, honesty, and discipline.",
+  },
+  {
+    id: "kids-2",
+    title: "Krishna Stories for Children",
+    author: "Children Sanskar Desk",
+    category: "Story / Kids Books",
+    image: "/images/books/Krishna Idol.png",
+    available: true,
+    summary: "Colorful devotional stories for joyful family reading and learning.",
+  },
 ];
 
-const KNOWLEDGE_ZONES = [
-  { title: "Scripture Vault", desc: "Bhagwat, Gita, Upanishads, and commentary collections." },
-  { title: "Children Sanskar Shelf", desc: "Illustrated values stories and foundational dharmic reading." },
-  { title: "Research and Reference", desc: "Philosophy, comparative studies, and historical records." },
-  { title: "Audio-Visual Study Hub", desc: "Lecture-backed material and guided learning resources." },
-];
-
-const PROGRAMS = [
-  { name: "Weekly Reading Circle", detail: "Peer reading sessions with mentor discussions and reflection notes." },
-  { name: "Youth Book Leadership Club", detail: "Book-based speaking practice and critical presentation training." },
-  { name: "Family Reading Saturdays", detail: "Parent-child storytelling, value sessions, and shared activities." },
-  { name: "Scripture Deep Dive Series", detail: "Structured chapter-wise study led by senior faculty." },
-];
-
-const DIGITAL_SERVICES = [
-  "Book reservation waitlist",
-  "Priority issue for active learners",
-  "Curated monthly reading paths",
-  "Category-wise recommendation feed",
-  "Student reading progress insights",
-  "Mentor-assisted reading plans",
-];
-
-const LIBRARY_RULES = [
-  "Carry student ID during issue and return.",
-  "Return or renew books before due date.",
-  "Keep books clean and damage-free.",
-  "Report lost books to admin immediately.",
-];
-
-const LIBRARY_CATEGORIES = [
-  "Bhagwat Heritage",
-  "Bhagavad Gita",
-  "Bhakti and Devotion",
-  "Sanatan Dharma",
-  "Spiritual Growth",
-  "Seva and Humanity",
-  "Culture and Sanskar",
-  "Krishna Literature",
-  "Society and Values",
-  "Yoga and Meditation",
-];
-
-const BOOK_COVER_THEME_MAP: { keywords: string[]; query: string }[] = [
-  { keywords: ["गीता"], query: "/images/books/bhagwat geeta.png" },
-  { keywords: ["कृष्ण", "भक्ति", "भगवद्भक्ति"], query: "/images/books/Krishna Idol.png" },
-  { keywords: ["भागवत", "श्रीमद्भागवत", "कथा"], query: "/images/books/MahabharataSet.png" },
-  { keywords: ["सनातन", "धर्म"], query: "/images/books/ramayan.png" },
-  { keywords: ["संस्कृति", "संस्कार", "भारतीय"], query: "/images/books/Sanskrit Dictionary.png" },
-  { keywords: ["सेवा", "मानवता", "समाज"], query: "/images/books/Temple Bell Brass.png" },
-  { keywords: ["योग", "आध्यात्मिक", "शांति"], query: "/images/books/Yoga Mat Premium.png" },
-];
-
-const getBookCoverUrl = (title: string, index: number) => {
-  const lowered = title.toLowerCase();
-  const matched = BOOK_COVER_THEME_MAP.find((group) =>
-    group.keywords.some((word) => lowered.includes(word.toLowerCase()))
-  );
-  if (matched) return encodeURI(matched.query);
-
-  const localFallbacks = [
-    "/images/books/bhagwat geeta.png",
-    "/images/books/ramayan.png",
-    "/images/books/MahabharataSet.png",
-    "/images/books/Vedic Chant Audio.png",
-    "/images/books/Sanskrit Dictionary.png",
-    "/images/books/Hanuman Idol.png",
-  ];
-  return encodeURI(localFallbacks[index % localFallbacks.length]);
-};
-
-const getCategoryByTitle = (title: string, index: number) => {
-  const t = title.toLowerCase();
-  if (t.includes("गीता")) return "Bhagavad Gita";
-  if (t.includes("कृष्ण")) return "Krishna Literature";
-  if (t.includes("भक्ति")) return "Bhakti and Devotion";
-  if (t.includes("सनातन") || t.includes("धर्म")) return "Sanatan Dharma";
-  if (t.includes("सेवा") || t.includes("मानवता") || t.includes("समाज")) return "Seva and Humanity";
-  if (t.includes("संस्कार") || t.includes("संस्कृति") || t.includes("भारतीय")) return "Culture and Sanskar";
-  if (t.includes("योग") || t.includes("शांति") || t.includes("आध्यात्मिक")) return "Yoga and Meditation";
-  return LIBRARY_CATEGORIES[index % LIBRARY_CATEGORIES.length];
-};
-
-const BHAGWAT_HERITAGE_BOOK_TITLES = [
-  "श्रीमद्भागवत का दिव्य ज्ञान",
-  "भागवत धर्म का प्रकाश",
-  "सनातन संस्कृति की अमर धरोहर",
-  "भागवत कथा का आध्यात्मिक रहस्य",
-  "सेवा, संस्कार और सनातन मार्ग",
-  "श्रीकृष्ण भक्ति का पवित्र पथ",
-  "भागवत संदेश और मानवता",
-  "भारतीय संस्कृति का दिव्य दर्शन",
-  "धर्म, सेवा और समाज",
-  "भागवत ज्ञान से जीवन परिवर्तन",
-  "सनातन जीवन के आदर्श",
-  "श्रीमद्भागवत और आधुनिक समाज",
-  "भक्ति योग का सच्चा मार्ग",
-  "भागवत कथा का अमृत संदेश",
-  "धर्म और मानवता का संगम",
-  "भागवत परंपरा की गौरव गाथा",
-  "सेवा ही सच्चा धर्म",
-  "श्रीकृष्ण लीला का आध्यात्मिक अर्थ",
-  "सनातन संस्कृति और समाज सेवा",
-  "भागवत भक्ति की शक्ति",
-  "आध्यात्मिक जीवन की ओर",
-  "श्रीमद्भागवत का जीवन दर्शन",
-  "धर्म, करुणा और सेवा",
-  "भागवत कथा और संस्कार",
-  "भारतीय आध्यात्मिक विरासत",
-  "भागवत ज्ञान की अमर ज्योति",
-  "श्रीकृष्ण और मानव जीवन",
-  "सनातन धर्म का पवित्र मार्ग",
-  "सेवा और संस्कार की प्रेरणा",
-  "भागवत संस्कृति का संदेश",
-  "श्रीमद्भागवत की प्रेरक कथाएँ",
-  "भक्ति, सेवा और समर्पण",
-  "भागवत ज्ञान का प्रकाश",
-  "धर्म और संस्कृति की रक्षा",
-  "श्रीकृष्ण भक्ति का रहस्य",
-  "समाज निर्माण में भागवत की भूमिका",
-  "भागवत कथा का दिव्य अमृत",
-  "सेवा मार्ग की महानता",
-  "सनातन संस्कृति का उज्ज्वल भविष्य",
-  "श्रीमद्भागवत और मानव कल्याण",
-  "भागवत प्रेरणा से जीवन सुधार",
-  "धर्म और सेवा का संगम",
-  "श्रीकृष्ण भक्ति की महिमा",
-  "भागवत मार्ग से आत्मिक शांति",
-  "भारतीय संस्कार और भागवत ज्ञान",
-  "सेवा से समाज परिवर्तन",
-  "भागवत संदेश और विश्व शांति",
-  "सनातन जीवन का प्रकाश मार्ग",
-  "श्रीमद्भागवत का अमर संदेश",
-  "भगवद्भक्ति और मानव सेवा",
-];
+const sectionTitleClass = "mb-5 text-[24px] font-semibold uppercase tracking-[0.18em] text-[#f2b44f]";
+const sectionPanelClass = "rounded-[28px] border border-white/10 bg-[#143446] p-6 shadow-[0_18px_40px_rgba(5,21,35,0.24)] md:p-8";
+const inputClass =
+  "w-full rounded-xl border border-white/10 bg-[#0b5570] px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#f2b44f]/40";
 
 export default memo(function LibraryPage() {
-  const { data: books, loading, refetch } = useApi(() => booksApi.getAll());
-  const { data: issues, loading: issuesLoading, refetch: refetchIssues } = useApi(() => issuesApi.getAll());
-  const [issueForm, setIssueForm] = useState({ bookId: "", studentName: "", phone: "" });
-  const [msg, setMsg] = useState("");
-  const [msgType, setMsgType] = useState<"success" | "error" | "">("");
-
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("all");
-  const [availability, setAvailability] = useState("all");
-  const [sortBy, setSortBy] = useState("title-asc");
-  const [issueSearch, setIssueSearch] = useState("");
-  const [issueStatus, setIssueStatus] = useState("all");
-
-  const allBooks = books ?? [];
-  const allIssues = issues ?? [];
-  const curatedBooks = useMemo(
-    () =>
-      BHAGWAT_HERITAGE_BOOK_TITLES.map((title, index) => ({
-        _id: `bhagwat-heritage-book-${index + 1}`,
-        title,
-        author: "Bhagwat Heritage Editorial",
-        category: getCategoryByTitle(title, index),
-        isbn: `BHSF-${String(index + 1).padStart(4, "0")}`,
-        quantity: 3,
-        available: (index % 4) + 1,
-        description: `${title} - curated collection.`,
-        createdAt: new Date(2025, 0, index + 1).toISOString(),
-      })),
-    []
-  );
-  const catalogBooks = useMemo(() => {
-    const merged = [...allBooks];
-    curatedBooks.forEach((book) => {
-      const exists = merged.some((apiBook) => apiBook.title?.trim() === book.title.trim());
-      if (!exists) merged.push(book);
-    });
-    return merged;
-  }, [allBooks, curatedBooks]);
-
-  const categoryOptions = useMemo(() => {
-    return Array.from(new Set([...LIBRARY_CATEGORIES, ...catalogBooks.map((b: Book) => b.category).filter(Boolean)])) as string[];
-  }, [catalogBooks]);
-
-  const stats = useMemo(() => {
-    const totalBooks = catalogBooks.length;
-    const totalAvailable = catalogBooks.reduce((sum: number, b: Book) => sum + (b.available ?? 0), 0);
-    const categories = categoryOptions.length;
-    const inStockTitles = catalogBooks.filter((b: Book) => (b.available ?? 0) > 0).length;
-    return { totalBooks, totalAvailable, categories, inStockTitles };
-  }, [catalogBooks, categoryOptions]);
+  const [selectedBookId, setSelectedBookId] = useState<string>(LIBRARY_BOOKS[0].id);
+  const [membershipForm, setMembershipForm] = useState({ name: "", mobile: "", address: "" });
+  const [requestForm, setRequestForm] = useState({ name: "", mobile: "", bookTitle: "", reason: "" });
+  const [membershipMsg, setMembershipMsg] = useState("");
+  const [requestMsg, setRequestMsg] = useState("");
 
   const filteredBooks = useMemo(() => {
     const normalized = search.trim().toLowerCase();
-
-    const base = catalogBooks.filter((book: Book) => {
-      const matchSearch =
-        normalized.length === 0 ||
-        book.title?.toLowerCase().includes(normalized) ||
-        book.author?.toLowerCase().includes(normalized) ||
-        book.category?.toLowerCase().includes(normalized);
-
-      const matchCategory = category === "all" || (book.category ?? "").toLowerCase() === category.toLowerCase();
-      const availableCount = book.available ?? 0;
-      const matchAvailability =
-        availability === "all" ||
-        (availability === "available" && availableCount > 0) ||
-        (availability === "limited" && availableCount > 0 && availableCount <= 2) ||
-        (availability === "unavailable" && availableCount === 0);
-
-      return matchSearch && matchCategory && matchAvailability;
+    return LIBRARY_BOOKS.filter((book) => {
+      const matchesCategory = selectedCategory === "All" || book.category === selectedCategory;
+      const matchesSearch = normalized.length === 0 || book.title.toLowerCase().includes(normalized);
+      return matchesCategory && matchesSearch;
     });
+  }, [search, selectedCategory]);
 
-    return [...base].sort((a: Book, b: Book) => {
-      if (sortBy === "title-asc") return (a.title ?? "").localeCompare(b.title ?? "");
-      if (sortBy === "title-desc") return (b.title ?? "").localeCompare(a.title ?? "");
-      if (sortBy === "available-desc") return (b.available ?? 0) - (a.available ?? 0);
-      if (sortBy === "available-asc") return (a.available ?? 0) - (b.available ?? 0);
-      return 0;
-    });
-  }, [catalogBooks, search, category, availability, sortBy]);
+  const selectedBook = useMemo(
+    () => filteredBooks.find((book) => book.id === selectedBookId) ?? filteredBooks[0] ?? LIBRARY_BOOKS[0],
+    [filteredBooks, selectedBookId]
+  );
 
-  const issueRows = useMemo(() => {
-    return allIssues
-      .map((issue) => {
-        const fromBook = typeof issue.bookId === "object" ? issue.bookId : null;
-        const linkedBook = typeof issue.bookId === "string" ? allBooks.find((b) => b._id === issue.bookId) : null;
-        const title = fromBook?.title || linkedBook?.title || "Unknown Book";
-        const author = fromBook?.author || linkedBook?.author || "Unknown Author";
-        const status = issue.status || "Issued";
-        return {
-          _id: issue._id,
-          studentName: issue.studentName,
-          phone: issue.phone || "-",
-          title,
-          author,
-          issueDate: issue.issueDate,
-          returnDate: issue.returnDate,
-          status,
-        };
-      })
-      .sort((a, b) => new Date(b.issueDate).getTime() - new Date(a.issueDate).getTime());
-  }, [allIssues, allBooks]);
-
-  const filteredIssueRows = useMemo(() => {
-    const q = issueSearch.trim().toLowerCase();
-    return issueRows.filter((row) => {
-      const matchesSearch =
-        q.length === 0 ||
-        row.studentName.toLowerCase().includes(q) ||
-        row.title.toLowerCase().includes(q) ||
-        row.phone.toLowerCase().includes(q);
-      const matchesStatus = issueStatus === "all" || row.status.toLowerCase() === issueStatus.toLowerCase();
-      return matchesSearch && matchesStatus;
-    });
-  }, [issueRows, issueSearch, issueStatus]);
-
-  const issueStats = useMemo(() => {
-    const total = issueRows.length;
-    const issued = issueRows.filter((r) => r.status.toLowerCase() === "issued").length;
-    const returned = issueRows.filter((r) => r.status.toLowerCase() === "returned").length;
-    const overdue = issueRows.filter((r) => r.status.toLowerCase() === "overdue").length;
-    return { total, issued, returned, overdue };
-  }, [issueRows]);
-
-  const handleIssue = async (e: FormEvent) => {
+  const handleMembershipSubmit = (e: FormEvent) => {
     e.preventDefault();
-    setMsg("");
-    setMsgType("");
-    try {
-      await issuesApi.issue(issueForm);
-      setMsg("Book issued successfully.");
-      setMsgType("success");
-      setIssueForm({ bookId: "", studentName: "", phone: "" });
-      refetch();
-      refetchIssues();
-    } catch {
-      setMsg("Failed to issue book. Please try again.");
-      setMsgType("error");
-    }
+    setMembershipMsg("Library membership request submitted successfully.");
+    setMembershipForm({ name: "", mobile: "", address: "" });
+  };
+
+  const handleRequestSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    setRequestMsg("Book request submitted successfully. Our team will contact you soon.");
+    setRequestForm({ name: "", mobile: "", bookTitle: "", reason: "" });
+  };
+
+  const handleBookRequest = (bookTitle: string) => {
+    setRequestForm((form) => ({ ...form, bookTitle }));
+    setRequestMsg("");
   };
 
   return (
-    <div className="relative overflow-hidden bg-[linear-gradient(180deg,#0b2230_0%,#0b2230_22%,#0c2a3a_58%,#0a2534_100%)] pb-16">
-      <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-[#2d7ed4]/14 blur-3xl" />
-      <div className="pointer-events-none absolute top-[480px] -right-24 h-72 w-72 rounded-full bg-[#19af8d]/12 blur-3xl" />
-
-      <section className="max-w-6xl mx-auto px-4 pt-8 md:pt-10">
-        <div
-          className="relative overflow-hidden rounded-[30px] bg-cover bg-center text-white px-5 py-14 md:px-12 md:py-20 shadow-[0_20px_50px_rgba(15,47,87,0.24)]"
-          style={{ backgroundImage: "url('https://res.cloudinary.com/der8zinu8/image/upload/v1772914298/library_z21zxr.jpg')" }}
-        >
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,28,53,0.84)_0%,rgba(12,54,87,0.72)_45%,rgba(13,84,94,0.58)_100%)]" />
-          <div className="absolute -bottom-20 -right-10 h-56 w-56 rounded-full bg-white/10 blur-xl" />
-          <div className="relative z-10">
-            <p className="inline-flex rounded-full border border-white/35 bg-white/10 px-4 py-1 text-sm mb-5">
-              Bhagwat Heritage Service Foundation Trust
-            </p>
-            <h1 className="text-3xl md:text-6xl font-black leading-tight">E-Library . Ultra Advanced Knowledge Hub</h1>
-            <p className="mt-4 text-lg md:text-2xl text-white/90 max-w-4xl">
-              A next-generation spiritual and academic library with smart access, structured reading, and guided growth.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href="#catalog"
-                className="inline-block rounded-xl bg-[#ffa114] px-7 py-3 font-bold text-white hover:bg-[#e78e07] transition-colors"
-              >
-                Explore Catalog
-              </a>
-              <a
-                href="#issue-desk"
-                className="inline-block rounded-xl border border-white/20 bg-white/10 px-7 py-3 font-bold text-white hover:bg-white/16 transition-colors"
-              >
-                Issue Book
-              </a>
-            </div>
-          </div>
+    <div className="relative overflow-hidden bg-[#084c66] pb-16">
+      <HeroSection
+        title="Library & Learning Center"
+        subtitle="Gyaan Sabke Liye"
+        subtitleClassName="text-[34px] font-semibold md:text-[40px]"
+        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
+        backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772914298/library_z21zxr.jpg"
+        boxed
+        heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-[linear-gradient(90deg,rgba(6,28,53,0.84)_0%,rgba(12,54,87,0.72)_45%,rgba(13,84,94,0.58)_100%)]"
+      >
+        <div className="flex flex-wrap justify-center gap-3">
+          <a
+            href="#books"
+            className="inline-flex items-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
+          >
+            Explore Books
+          </a>
+          <a
+            href="#membership"
+            className="inline-flex items-center rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
+          >
+            Join Library
+          </a>
         </div>
-      </section>
+      </HeroSection>
 
-      <section className="max-w-6xl mx-auto px-4 py-8 md:py-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
-          <div className="rounded-2xl border border-white/10 bg-[#143446]/95 p-4 md:p-5 text-center shadow-sm">
-            <p className="text-3xl md:text-4xl font-extrabold text-white">{stats.totalBooks}</p>
-            <p className="mt-1.5 text-sm md:text-base text-white">Total Titles</p>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-[#143446]/95 p-4 md:p-5 text-center shadow-sm">
-            <p className="text-3xl md:text-4xl font-extrabold text-white">{stats.totalAvailable}</p>
-            <p className="mt-1.5 text-sm md:text-base text-white">Books Available</p>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-[#143446]/95 p-4 md:p-5 text-center shadow-sm">
-            <p className="text-3xl md:text-4xl font-extrabold text-white">{stats.categories}</p>
-            <p className="mt-1.5 text-sm md:text-base text-white">Categories</p>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-[#143446]/95 p-4 md:p-5 text-center shadow-sm">
-            <p className="text-3xl md:text-4xl font-extrabold text-white">{stats.inStockTitles}</p>
-            <p className="mt-1.5 text-sm md:text-base text-white">In-Stock Titles</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="max-w-6xl mx-auto px-4 pb-10">
-        <h2 className="text-2xl md:text-4xl font-black text-white mb-5">Advanced Library Features</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {LIBRARY_FEATURES.map((item) => (
-            <article key={item.title} className="rounded-2xl border border-white/10 bg-[#17384b] p-5 shadow-sm">
-              <h3 className="text-lg font-bold text-white">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white">{item.desc}</p>
+      <section className="max-w-6xl mx-auto px-4 pt-6">
+        <div className={sectionPanelClass}>
+          <h2 className={sectionTitleClass}>About the Library</h2>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <article className="rounded-2xl bg-[#0f2f50] p-5 text-white shadow-sm">
+              <h3 className="text-xl font-black">Purpose-Driven Learning</h3>
+              <p className="mt-3 text-sm leading-7 text-white/90">The library is built to offer learning, reading, and value-based growth for students and families.</p>
             </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="max-w-6xl mx-auto px-4 pb-10">
-        <h2 className="text-2xl md:text-4xl font-black text-white mb-5">Knowledge Zones</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {KNOWLEDGE_ZONES.map((item) => (
-            <article key={item.title} className="rounded-2xl border border-white/10 bg-[linear-gradient(135deg,#17384b_0%,#133345_100%)] p-6 shadow-sm">
-              <h3 className="text-xl font-bold text-white">{item.title}</h3>
-              <p className="mt-2 text-white">{item.desc}</p>
+            <article className="rounded-2xl bg-[#0f2f50] p-5 text-white shadow-sm">
+              <h3 className="text-xl font-black">Support for Rural Students</h3>
+              <p className="mt-3 text-sm leading-7 text-white/90">Special attention is given to rural and needy students who need reliable study access and reading support.</p>
             </article>
-          ))}
-        </div>
-      </section>
-
-      <section id="catalog" className="max-w-6xl mx-auto px-4 pb-10">
-        <div className="rounded-3xl border border-white/10 bg-[#143446] p-5 md:p-6 shadow-sm">
-          <div className="flex flex-col md:flex-row md:items-center gap-3 mb-5">
-            <input
-              type="text"
-              placeholder="Search by title, author, or category"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full md:flex-1 rounded-xl border border-white/10 bg-[#0d2b3c] px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#ffb06a]/40"
-            />
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="w-full md:w-56 rounded-xl border border-white/10 bg-[#0d2b3c] px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#ffb06a]/40"
-            >
-              <option value="all">All Categories</option>
-              {categoryOptions.map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
-              ))}
-            </select>
-            <select
-              value={availability}
-              onChange={(e) => setAvailability(e.target.value)}
-              className="w-full md:w-52 rounded-xl border border-white/10 bg-[#0d2b3c] px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#ffb06a]/40"
-            >
-              <option value="all">All Stock</option>
-              <option value="available">Available</option>
-              <option value="limited">Limited (1-2)</option>
-              <option value="unavailable">Unavailable</option>
-            </select>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="w-full md:w-52 rounded-xl border border-white/10 bg-[#0d2b3c] px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#ffb06a]/40"
-            >
-              <option value="title-asc">Title A-Z</option>
-              <option value="title-desc">Title Z-A</option>
-              <option value="available-desc">Most Available</option>
-              <option value="available-asc">Least Available</option>
-            </select>
+            <article className="rounded-2xl bg-[#0f2f50] p-5 text-white shadow-sm">
+              <h3 className="text-xl font-black">Free or Low-Cost Access</h3>
+              <p className="mt-3 text-sm leading-7 text-white/90">Books, learning tools, and membership support are designed to stay affordable and community-friendly.</p>
+            </article>
           </div>
-
-          {loading ? (
-            <div className="flex justify-center py-10">
-              <LoadingSpinner size="lg" />
-            </div>
-          ) : (
-            <>
-              <p className="mb-4 text-sm text-white">Showing {filteredBooks.length} books</p>
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {filteredBooks.map((book: Book, index: number) => {
-                  const available = book.available ?? 0;
-                  const statusClass =
-                    available === 0
-                      ? "bg-red-500/20 text-white"
-                      : available <= 2
-                      ? "bg-amber-500/20 text-white"
-                      : "bg-emerald-500/20 text-white";
-                  const statusText = available === 0 ? "Unavailable" : available <= 2 ? "Limited" : "In Stock";
-                  const coverUrl = getBookCoverUrl(book.title || "", index);
-
-                  return (
-                    <article key={book._id} className="rounded-2xl border border-white/10 bg-[#0f2c3d] p-4 shadow-sm">
-                      <div className="relative w-full h-32 rounded-xl mb-3 overflow-hidden">
-                        <img
-                          src={coverUrl}
-                          alt={book.title}
-                          className="w-full h-full object-cover"
-                          loading="lazy"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = "/images/books/bhagwat geeta.png";
-                          }}
-                        />
-                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-2 py-1">
-                          <p className="text-[10px] text-white truncate">{book.title}</p>
-                        </div>
-                      </div>
-                      <h3 className="mb-1 text-sm font-bold text-white line-clamp-2">{book.title}</h3>
-                      <p className="text-xs text-white">{book.author || "Unknown Author"}</p>
-                      <div className="mt-2 flex flex-wrap gap-2">
-                        {book.category ? (
-                          <span className="inline-block rounded bg-white/10 px-2 py-0.5 text-xs text-white">
-                            {book.category}
-                          </span>
-                        ) : null}
-                        <span className={`inline-block text-xs px-2 py-0.5 rounded ${statusClass}`}>{statusText}</span>
-                      </div>
-                      <p className="mt-2 text-xs text-white">Available: {available}</p>
-                    </article>
-                  );
-                })}
-              </div>
-            </>
-          )}
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 pb-10">
-        <h2 className="text-2xl md:text-4xl font-black text-white mb-5">Reading Programs</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {PROGRAMS.map((item) => (
-            <article key={item.name} className="rounded-2xl border border-white/10 bg-[#17384b] p-5 shadow-sm">
-              <h3 className="text-xl font-bold text-white">{item.name}</h3>
-              <p className="mt-2 text-white">{item.detail}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="max-w-6xl mx-auto px-4 pb-10">
-        <div className="rounded-3xl bg-gradient-to-r from-[#0f3456] to-[#0f5e71] text-white p-6 md:p-8">
-          <h2 className="text-2xl md:text-4xl font-black mb-5">Digital Services</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {DIGITAL_SERVICES.map((item) => (
-              <div key={item} className="rounded-xl border border-white/20 bg-white/10 p-4">
-                {item}
-              </div>
+      <section className="max-w-6xl mx-auto px-4 pt-6">
+        <div className={sectionPanelClass}>
+          <h2 className={sectionTitleClass}>Book Categories</h2>
+          <div className="flex flex-wrap gap-3">
+            <button onClick={() => setSelectedCategory("All")} className={`rounded-full px-5 py-3 text-sm font-bold transition ${selectedCategory === "All" ? "bg-[#ffa114] text-white" : "bg-white/10 text-white hover:bg-white/20"}`}>All Books</button>
+            {BOOK_CATEGORIES.map((category) => (
+              <button key={category} onClick={() => setSelectedCategory(category)} className={`rounded-full px-5 py-3 text-sm font-bold transition ${selectedCategory === category ? "bg-[#ffa114] text-white" : "bg-white/10 text-white hover:bg-white/20"}`}>
+                {category}
+              </button>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="issue-desk" className="max-w-6xl mx-auto px-4 pb-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-6">
-          <div className="rounded-3xl border border-white/10 bg-[#143446] p-6 md:p-7 shadow-sm">
-            <h2 className="text-2xl md:text-3xl font-black text-white">Library Rules</h2>
-            <ul className="mt-4 space-y-2">
-              {LIBRARY_RULES.map((rule) => (
-                <li key={rule} className="flex items-start gap-2 text-white">
-                  <span className="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-[#ffb06a]" />
-                  <span>{rule}</span>
-                </li>
-              ))}
-            </ul>
+      <section id="books" className="max-w-6xl mx-auto px-4 pt-6">
+        <div className={sectionPanelClass}>
+          <h2 className={sectionTitleClass}>Search &amp; Filter</h2>
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-[1fr_260px]">
+            <input type="text" placeholder="Search by book name" value={search} onChange={(e) => setSearch(e.target.value)} className={inputClass} />
+            <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} className={inputClass}>
+              <option value="All">All Categories</option>
+              {BOOK_CATEGORIES.map((category) => <option key={category} value={category}>{category}</option>)}
+            </select>
           </div>
 
-          <form onSubmit={handleIssue} className="space-y-3 rounded-3xl border border-white/10 bg-[#143446] p-6 md:p-7 shadow-sm">
-            <h3 className="mb-1 text-2xl font-bold text-white">Issue a Book</h3>
-            <select
-              value={issueForm.bookId}
-              onChange={(e) => setIssueForm((f) => ({ ...f, bookId: e.target.value }))}
-              required
-              className="w-full rounded-xl border border-white/10 bg-[#0d2b3c] px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#ffb06a]/40"
-            >
-              <option value="">Select Book</option>
-              {allBooks.map((book: Book) => (
-                <option key={book._id} value={book._id}>
-                  {book.title}
-                </option>
-              ))}
-            </select>
-            <input
-              type="text"
-              placeholder="Student Name"
-              value={issueForm.studentName}
-              onChange={(e) => setIssueForm((f) => ({ ...f, studentName: e.target.value }))}
-              required
-              className="w-full rounded-xl border border-white/10 bg-[#0d2b3c] px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#ffb06a]/40"
-            />
-            <input
-              type="tel"
-              placeholder="Phone"
-              value={issueForm.phone}
-              onChange={(e) => setIssueForm((f) => ({ ...f, phone: e.target.value }))}
-              className="w-full rounded-xl border border-white/10 bg-[#0d2b3c] px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#ffb06a]/40"
-            />
-            {msg ? <p className={`text-sm ${msgType === "success" ? "text-green-600" : "text-red-600"}`}>{msg}</p> : null}
-            <button type="submit" className="w-full rounded-xl bg-[#ffa114] hover:bg-[#e78e07] text-white font-bold py-3 transition-colors">
-              Issue Book
-            </button>
-          </form>
+          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {filteredBooks.map((book) => (
+              <article key={book.id} className="rounded-2xl bg-[#0f2f50] p-5 text-white shadow-sm transition duration-300 hover:-translate-y-1">
+                <div className="overflow-hidden rounded-xl">
+                  <img src={book.image} alt={book.title} className="h-44 w-full object-cover" />
+                </div>
+                <h3 className="mt-4 text-xl font-black">{book.title}</h3>
+                <p className="mt-1 text-sm text-white/80">Author: {book.author}</p>
+                <p className="mt-1 text-sm text-white/80">Category: {book.category}</p>
+                <p className={`mt-3 inline-flex rounded-full px-3 py-1 text-xs font-bold ${book.available ? "bg-emerald-500/20 text-white" : "bg-red-500/20 text-white"}`}>
+                  {book.available ? "Available" : "Issued"}
+                </p>
+                <div className="mt-5 flex gap-3">
+                  <button onClick={() => setSelectedBookId(book.id)} className="rounded-xl bg-white px-4 py-2 text-sm font-bold text-[#0f5a98] transition hover:bg-[#eef4ff]">
+                    View Details
+                  </button>
+                  <a href="#request" onClick={() => handleBookRequest(book.title)} className="rounded-xl bg-[#ffa114] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#e78e07]">
+                    Request Book
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {selectedBook ? (
+            <div className="mt-6 rounded-2xl bg-[#0b5570] p-5 text-white">
+              <h3 className="text-xl font-black">{selectedBook.title}</h3>
+              <p className="mt-2 text-sm leading-7 text-white/90">{selectedBook.summary}</p>
+            </div>
+          ) : null}
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 pb-10">
-        <h2 className="text-2xl md:text-4xl font-black text-white mb-5">Issue Tracking Dashboard</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-5">
-          <div className="rounded-2xl border border-white/10 bg-[#143446]/95 p-4 text-center shadow-sm">
-            <p className="text-2xl md:text-3xl font-extrabold text-white">{issueStats.total}</p>
-            <p className="mt-1 text-sm text-white">Total Issued Records</p>
+      <section id="membership" className="max-w-6xl mx-auto px-4 pt-6">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.05fr_1fr]">
+          <div className={sectionPanelClass}>
+            <h2 className={sectionTitleClass}>Membership Form</h2>
+            <form onSubmit={handleMembershipSubmit} className="space-y-3">
+              <input type="text" placeholder="Name" value={membershipForm.name} onChange={(e) => setMembershipForm((form) => ({ ...form, name: e.target.value }))} required className={inputClass} />
+              <input type="tel" placeholder="Mobile" value={membershipForm.mobile} onChange={(e) => setMembershipForm((form) => ({ ...form, mobile: e.target.value }))} required className={inputClass} />
+              <textarea placeholder="Address" value={membershipForm.address} onChange={(e) => setMembershipForm((form) => ({ ...form, address: e.target.value }))} rows={4} required className={`${inputClass} resize-none`} />
+              {membershipMsg ? <p className="text-sm text-green-300">{membershipMsg}</p> : null}
+              <button type="submit" className="w-full rounded-xl bg-[#ffa114] py-3 font-bold text-white transition hover:bg-[#e78e07]">Join Library</button>
+            </form>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-[#143446]/95 p-4 text-center shadow-sm">
-            <p className="text-2xl md:text-3xl font-extrabold text-white">{issueStats.issued}</p>
-            <p className="mt-1 text-sm text-white">Currently Issued</p>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-[#143446]/95 p-4 text-center shadow-sm">
-            <p className="text-2xl md:text-3xl font-extrabold text-white">{issueStats.returned}</p>
-            <p className="mt-1 text-sm text-white">Returned</p>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-[#143446]/95 p-4 text-center shadow-sm">
-            <p className="text-2xl md:text-3xl font-extrabold text-white">{issueStats.overdue}</p>
-            <p className="mt-1 text-sm text-white">Overdue</p>
+
+          <div id="request" className={sectionPanelClass}>
+            <h2 className={sectionTitleClass}>Book Request Section</h2>
+            <p className="mb-4 text-sm leading-7 text-white/90">Users can request books that are currently unavailable or not yet added to the library collection.</p>
+            <form onSubmit={handleRequestSubmit} className="space-y-3">
+              <input type="text" placeholder="Name" value={requestForm.name} onChange={(e) => setRequestForm((form) => ({ ...form, name: e.target.value }))} required className={inputClass} />
+              <input type="tel" placeholder="Mobile" value={requestForm.mobile} onChange={(e) => setRequestForm((form) => ({ ...form, mobile: e.target.value }))} required className={inputClass} />
+              <input type="text" placeholder="Book Title" value={requestForm.bookTitle} onChange={(e) => setRequestForm((form) => ({ ...form, bookTitle: e.target.value }))} required className={inputClass} />
+              <textarea placeholder="Why do you need this book?" value={requestForm.reason} onChange={(e) => setRequestForm((form) => ({ ...form, reason: e.target.value }))} rows={4} className={`${inputClass} resize-none`} />
+              {requestMsg ? <p className="text-sm text-green-300">{requestMsg}</p> : null}
+              <button type="submit" className="w-full rounded-xl bg-white py-3 font-bold text-[#0f5a98] transition hover:bg-[#eef4ff]">Submit Request</button>
+            </form>
           </div>
         </div>
+      </section>
 
-        <div className="rounded-3xl border border-white/10 bg-[#143446] p-5 md:p-6 shadow-sm">
-          <div className="flex flex-col md:flex-row md:items-center gap-3 mb-5">
-            <input
-              type="text"
-              placeholder="Search by student, phone, or book title"
-              value={issueSearch}
-              onChange={(e) => setIssueSearch(e.target.value)}
-              className="w-full md:flex-1 rounded-xl border border-white/10 bg-[#0d2b3c] px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#ffb06a]/40"
-            />
-            <select
-              value={issueStatus}
-              onChange={(e) => setIssueStatus(e.target.value)}
-              className="w-full md:w-52 rounded-xl border border-white/10 bg-[#0d2b3c] px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#ffb06a]/40"
-            >
-              <option value="all">All Status</option>
-              <option value="issued">Issued</option>
-              <option value="returned">Returned</option>
-              <option value="overdue">Overdue</option>
-            </select>
+      <section className="max-w-6xl mx-auto px-4 pt-6">
+        <div className={sectionPanelClass}>
+          <h2 className={sectionTitleClass}>Reading Center Info</h2>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <article className="rounded-2xl bg-[#0f2f50] p-5 text-white shadow-sm"><h3 className="text-xl font-black">Location</h3><p className="mt-3 text-sm leading-7 text-white/90">Bhagwat Heritage Service Foundation Trust Campus, Chichpalli, Chandrapur.</p></article>
+            <article className="rounded-2xl bg-[#0f2f50] p-5 text-white shadow-sm"><h3 className="text-xl font-black">Timing</h3><p className="mt-3 text-sm leading-7 text-white/90">Monday to Saturday, 9:00 AM to 6:00 PM.</p></article>
+            <article className="rounded-2xl bg-[#0f2f50] p-5 text-white shadow-sm"><h3 className="text-xl font-black">Seating Capacity</h3><p className="mt-3 text-sm leading-7 text-white/90">Comfortable reading space for 40 learners at a time.</p></article>
           </div>
+        </div>
+      </section>
 
-          {issuesLoading ? (
-            <div className="flex justify-center py-8">
-              <LoadingSpinner size="lg" />
-            </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="min-w-full text-sm">
-                <thead>
-                  <tr className="border-b border-white/10 text-left">
-                    <th className="py-3 pr-4 font-semibold text-white">Student</th>
-                    <th className="py-3 pr-4 font-semibold text-white">Phone</th>
-                    <th className="py-3 pr-4 font-semibold text-white">Book</th>
-                    <th className="py-3 pr-4 font-semibold text-white">Issue Date</th>
-                    <th className="py-3 pr-4 font-semibold text-white">Return Date</th>
-                    <th className="py-3 pr-4 font-semibold text-white">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredIssueRows.map((row) => (
-                    <tr key={row._id} className="border-b border-white/6">
-                      <td className="py-3 pr-4">
-                        <p className="font-semibold text-white">{row.studentName}</p>
-                      </td>
-                      <td className="py-3 pr-4 text-white">{row.phone}</td>
-                      <td className="py-3 pr-4">
-                        <p className="font-medium text-white">{row.title}</p>
-                        <p className="text-xs text-white">{row.author}</p>
-                      </td>
-                      <td className="py-3 pr-4 text-white">{new Date(row.issueDate).toLocaleDateString()}</td>
-                      <td className="py-3 pr-4 text-white">
-                        {row.returnDate ? new Date(row.returnDate).toLocaleDateString() : "-"}
-                      </td>
-                      <td className="py-3 pr-4">
-                        <span
-                          className={`inline-flex px-2 py-1 rounded-full text-xs font-semibold ${
-                            row.status.toLowerCase() === "returned"
-                              ? "bg-emerald-500/20 text-white"
-                              : row.status.toLowerCase() === "overdue"
-                              ? "bg-red-500/20 text-white"
-                              : "bg-amber-500/20 text-white"
-                          }`}
-                        >
-                          {row.status}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              {filteredIssueRows.length === 0 ? (
-                <p className="py-6 text-center text-white">No issue records found.</p>
-              ) : null}
-            </div>
-          )}
+      <section className="max-w-6xl mx-auto px-4 pt-6">
+        <div className={`${sectionPanelClass} bg-[linear-gradient(135deg,#17384b_0%,#0f5e71_100%)]`}>
+          <h2 className={sectionTitleClass}>Donation Section</h2>
+          <p className="mb-5 max-w-3xl text-sm leading-7 text-white/90">Support the library by donating books, sponsoring learning material, or helping expand reading access for rural and needy students.</p>
+          <div className="flex flex-wrap gap-3">
+            <Link to={ROUTES.donate} className="rounded-xl bg-white px-6 py-3 font-bold text-[#0f5a98] transition hover:bg-[#eef4ff]">
+              Donate Books
+            </Link>
+            <Link to={ROUTES.involved.sponsor} className="rounded-xl bg-[#ffa114] px-6 py-3 font-bold text-white transition hover:bg-[#e78e07]">
+              Sponsor Library
+            </Link>
+          </div>
         </div>
       </section>
     </div>

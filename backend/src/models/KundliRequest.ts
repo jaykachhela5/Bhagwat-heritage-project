@@ -2,6 +2,7 @@ import mongoose, { Document, Schema } from "mongoose";
 
 export type KundliGender = "Male" | "Female";
 export type KundliLanguage = "English" | "Hindi" | "Marathi" | "Gujarati";
+export type KundliDeliveryPreference = "Email" | "WhatsApp" | "Both";
 export type KundliPaymentMethod = "UPI" | "Razorpay" | "Stripe";
 export type KundliPaymentStatus = "Pending" | "Paid" | "Failed";
 export type KundliOrderStatus = "Pending" | "Processing" | "Completed";
@@ -27,6 +28,7 @@ export interface IKundliRequest extends Document {
   country: string;
   selectedServices: IKundliServiceItem[];
   preferredLanguage: KundliLanguage;
+  deliveryPreference: KundliDeliveryPreference;
   mobileNumber: string;
   email: string;
   address?: string;
@@ -67,6 +69,7 @@ const kundliRequestSchema = new Schema<IKundliRequest>(
     country: { type: String, required: true, trim: true },
     selectedServices: { type: [kundliServiceSchema], required: true, validate: [(value: IKundliServiceItem[]) => value.length > 0, "Select at least one service"] },
     preferredLanguage: { type: String, enum: ["English", "Hindi", "Marathi", "Gujarati"], required: true },
+    deliveryPreference: { type: String, enum: ["Email", "WhatsApp", "Both"], required: true, default: "Email" },
     mobileNumber: {
       type: String,
       required: true,

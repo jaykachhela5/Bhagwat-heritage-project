@@ -677,7 +677,7 @@ export function generateOpenAPI() {
         "Authentication uses Bearer JWT tokens obtained from POST /api/auth/login.",
       contact: {
         name: "Bhagwat Heritage",
-        email: "info@bhagwatheritage.org",
+        email: "bhagwatheritage@gmail.com",
       },
     },
     servers: [

@@ -30,9 +30,6 @@ import {
   KnowledgeTodayQuotePage,
   KnowledgeHubPage,
   KnowledgeStudyResourcesPage,
-  MandirAvatarsPage,
-  MandirConstructionPage,
-  MandirPilgrimagePage,
   MandirTeerthHubPage,
   MediaEventHighlightsPage,
   MediaGalleryHubPage,
@@ -40,7 +37,6 @@ import {
   MediaSocialFeedPage,
   MediaVideoGalleryPage,
   MediaVideoPlayerPage,
-  MissionGlobalOutreachPage,
   MissionHubPage,
   NotFoundPage,
   SevaDisasterReliefPage,
@@ -53,10 +49,13 @@ const LoginPage = lazy(() => import("./features/auth/LoginPage"));
 const GetInvolvedPage = lazy(() => import("./features/contact/GetInvolvedPage"));
 const AboutPage = lazy(() => import("./features/about/AboutPage"));
 const AboutActivitiesOverviewPage = lazy(() => import("./features/about/AboutActivitiesOverviewPage"));
+const SansthaParichayPage = lazy(() => import("./features/about/SansthaParichayPage"));
+const VisionMissionPage = lazy(() => import("./features/about/VisionMissionPage"));
 const ManishBhaijiPage = lazy(() => import("./features/about/ManishBhaijiPage"));
 const ObjectivesPage = lazy(() => import("./features/about/ObjectivesPage"));
 const ContactPage = lazy(() => import("./features/contact/ContactPage"));
 const KundliPage = lazy(() => import("./features/digital/KundliPage"));
+const GuidancePage = lazy(() => import("./features/digital/GuidancePage"));
 const VolunteerFormPage = lazy(() => import("./features/contact/VolunteerFormPage"));
 const AdminDashboardPage = lazy(() => import("./features/dashboard/AdminDashboardPage"));
 const DashboardPage = lazy(() => import("./features/dashboard/DashboardPage"));
@@ -68,13 +67,16 @@ const StorePage = lazy(() => import("./features/events/StorePage"));
 const MandirGalleryPage = lazy(() => import("./features/mandir/MandirGalleryPage"));
 const GhanshyamPage = lazy(() => import("./features/mandir/GhanshyamPage"));
 const MahamandirPage = lazy(() => import("./features/mandir/MahamandirPage"));
+const PilgrimageInfoPage = lazy(() => import("./features/mandir/PilgrimageInfoPage"));
 const CulturalPage = lazy(() => import("./features/mission/CulturalPage"));
+const GlobalOutreachPage = lazy(() => import("./features/mission/GlobalOutreachPage"));
 const SocialPage = lazy(() => import("./features/mission/SocialPage"));
 const SpiritualPage = lazy(() => import("./features/mission/SpiritualPage"));
 const EducationPage = lazy(() => import("./features/seva/EducationPage"));
 const MedicinePage = lazy(() => import("./features/seva/MedicinePage"));
 const ScholarshipPage = lazy(() => import("./features/seva/ScholarshipPage"));
 const JalSevaPage = lazy(() => import("./features/seva/JalSevaPage"));
+const AnnSevaPage = lazy(() => import("./features/seva/AnnSevaPage"));
 const KanyaPage = lazy(() => import("./features/seva/KanyaPage"));
 const VyasanPage = lazy(() => import("./features/seva/VyasanPage"));
 const GalleryAdminPage = lazy(() => import("./features/gallery/GalleryAdminPage"));
@@ -145,8 +147,17 @@ export default function App() {
                   <Route path={ROUTES.login} element={<LoginPage />} />
                   <Route path={ROUTES.contact} element={<ContactPage />} />
                   <Route path={ROUTES.volunteer} element={<VolunteerFormPage />} />
+                  <Route path="/events" element={<Navigate to={ROUTES.eventsKatha.index} replace />} />
+                  <Route path="/media" element={<Navigate to={ROUTES.media.index} replace />} />
+                  <Route path="/media/videos" element={<Navigate to={ROUTES.media.videos} replace />} />
+                  <Route path="/about/founder" element={<Navigate to={ROUTES.about.founder} replace />} />
+                  <Route path={ROUTES.digital.guidance} element={<GuidancePage />} />
+                  <Route path="/get-involved/invite-maharaj-ji" element={<Navigate to={ROUTES.contact} replace />} />
+                  <Route path="/help-request" element={<Navigate to={ROUTES.contact} replace />} />
 
                   <Route path={ROUTES.about.index} element={<AboutPage />} />
+                  <Route path={ROUTES.about.sansthaParichay} element={<SansthaParichayPage />} />
+                  <Route path={ROUTES.about.visionMission} element={<VisionMissionPage />} />
                   <Route path={ROUTES.about.objectives} element={<ObjectivesPage />} />
                   <Route path={ROUTES.about.founder} element={<ManishBhaijiPage />} />
                   <Route path={ROUTES.about.awards} element={<AboutAwardsPage />} />
@@ -157,11 +168,13 @@ export default function App() {
                   <Route path={ROUTES.mission.spiritual} element={<SpiritualPage />} />
                   <Route path={ROUTES.mission.social} element={<SocialPage />} />
                   <Route path={ROUTES.mission.cultural} element={<CulturalPage />} />
-                  <Route path={ROUTES.mission.global} element={<MissionGlobalOutreachPage />} />
+                  <Route path={ROUTES.mission.global} element={<GlobalOutreachPage />} />
 
                   <Route path={ROUTES.seva.index} element={<SevaHubPage />} />
                   <Route path={ROUTES.seva.gau} element={<SevaGauSevaPage />} />
-                  <Route path={ROUTES.seva.annJal} element={<JalSevaPage />} />
+                  <Route path={ROUTES.seva.jal} element={<JalSevaPage />} />
+                  <Route path={ROUTES.seva.ann} element={<AnnSevaPage />} />
+                  <Route path={ROUTES.seva.annJal} element={<Navigate to={ROUTES.seva.jal} replace />} />
                   <Route path={ROUTES.seva.medicine} element={<MedicinePage />} />
                   <Route path={ROUTES.seva.education} element={<EducationPage />} />
                   <Route path={ROUTES.seva.scholarship} element={<ScholarshipPage />} />
@@ -188,11 +201,11 @@ export default function App() {
 
                   <Route path={ROUTES.mandirTeerth.index} element={<MandirTeerthHubPage />} />
                   <Route path={ROUTES.mandirTeerth.bhagwatDham} element={<GhanshyamPage />} />
-                  <Route path={ROUTES.mandirTeerth.mahamandir} element={<MahamandirPage />} />
-                  <Route path={ROUTES.mandirTeerth.avatars} element={<MandirAvatarsPage />} />
+                  <Route path={ROUTES.mandirTeerth.mahamandir} element={<Navigate to={ROUTES.mandirTeerth.bhagwatDham} replace />} />
+                  <Route path={ROUTES.mandirTeerth.avatars} element={<Navigate to={ROUTES.mandirTeerth.bhagwatDham} replace />} />
                   <Route path={ROUTES.mandirTeerth.hanuman} element={<MahamandirPage />} />
-                  <Route path={ROUTES.mandirTeerth.construction} element={<MandirConstructionPage />} />
-                  <Route path={ROUTES.mandirTeerth.pilgrimage} element={<MandirPilgrimagePage />} />
+                  <Route path={ROUTES.mandirTeerth.construction} element={<Navigate to={ROUTES.mandirTeerth.bhagwatDham} replace />} />
+                  <Route path={ROUTES.mandirTeerth.pilgrimage} element={<PilgrimageInfoPage />} />
 
                   <Route path={ROUTES.media.index} element={<MediaGalleryHubPage />} />
                   <Route path={ROUTES.media.photos} element={<MandirGalleryPage />} />
@@ -262,7 +275,8 @@ export default function App() {
                   <Route path={LEGACY_ROUTES.pathshalaOld} element={<Navigate to={ROUTES.knowledge.pathshala} replace />} />
                   <Route path={LEGACY_ROUTES.libraryOld} element={<Navigate to={ROUTES.knowledge.library} replace />} />
                   <Route path={LEGACY_ROUTES.storeOld} element={<Navigate to={ROUTES.digital.store} replace />} />
-                  <Route path={LEGACY_ROUTES.mandirOld} element={<Navigate to={ROUTES.mandirTeerth.mahamandir} replace />} />
+                  <Route path={LEGACY_ROUTES.requestSevaOld} element={<Navigate to={ROUTES.contact} replace />} />
+                  <Route path={LEGACY_ROUTES.mandirOld} element={<Navigate to={ROUTES.mandirTeerth.bhagwatDham} replace />} />
                   <Route path={LEGACY_ROUTES.ghanshyamOld} element={<Navigate to={ROUTES.mandirTeerth.bhagwatDham} replace />} />
                   <Route path={LEGACY_ROUTES.galleryOldPublic} element={<Navigate to={ROUTES.media.photos} replace />} />
                   <Route path={LEGACY_ROUTES.galleryOldAdmin} element={<Navigate to={ROUTES.dashboards.galleryAdmin} replace />} />
