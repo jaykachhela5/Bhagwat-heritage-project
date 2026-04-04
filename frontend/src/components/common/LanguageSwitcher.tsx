@@ -1,4 +1,4 @@
-import { memo } from "react";
+﻿import { memo } from "react";
 import { useTranslation } from "react-i18next";
 
 const SUPPORTED_LANGUAGES = ["en", "hi", "gu", "mr"] as const;
@@ -20,6 +20,7 @@ export const LanguageSwitcher = memo(function LanguageSwitcher({
       className={`relative inline-flex items-center gap-2 rounded-xl border border-[#dce9ee] bg-[#fffdf7] px-3 py-2 text-sm text-[#0a5375] shadow-[0_8px_18px_rgba(15,103,140,0.08)] ${className}`}
     >
       <i className="fas fa-language text-[#ef9a1e]" aria-hidden="true" />
+      <i className="fas fa-language text-[#ef9a1e]" aria-hidden="true" />
       {compact ? null : <span className="font-semibold">{t("switcher.label")}</span>}
       <span className="font-semibold tracking-wide">EN हिं ગુજ म</span>
       <i className="fas fa-chevron-down text-xs text-[#0a5375]/85" aria-hidden="true" />
@@ -40,4 +41,5 @@ export const LanguageSwitcher = memo(function LanguageSwitcher({
     </label>
   );
 });
+
 

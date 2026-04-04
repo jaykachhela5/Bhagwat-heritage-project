@@ -24,7 +24,6 @@ const NAV_ITEMS: NavItemConfig[] = [
   { id: "about", labelKey: "navbar.items.about", href: ROUTES.about.index },
   { id: "founder", labelKey: "navbar.items.founder", href: ROUTES.about.founder },
   { id: "hanuman-murti", labelKey: "navbar.items.hanuman", href: ROUTES.mandirTeerth.hanuman },
-  /* COMMENTED OUT — Section 6: all other nav items
   {
     id: "about-dropdown",
     labelKey: "navbar.items.about",
@@ -130,7 +129,6 @@ const NAV_ITEMS: NavItemConfig[] = [
     ],
   },
   { id: "contact", labelKey: "navbar.items.contact", href: ROUTES.contact },
-  */
 ];
 
 const DropdownItem = memo(function DropdownItem({ item, t }: { item: NavItemConfig; t: TFunction }) {

@@ -30,6 +30,8 @@ import {
   KnowledgeTodayQuotePage,
   KnowledgeHubPage,
   KnowledgeStudyResourcesPage,
+  MandirAvatarsPage,
+  MandirConstructionPage,
   MandirTeerthHubPage,
   MediaEventHighlightsPage,
   MediaGalleryHubPage,
@@ -54,6 +56,7 @@ const VisionMissionPage = lazy(() => import("./features/about/VisionMissionPage"
 const ManishBhaijiPage = lazy(() => import("./features/about/ManishBhaijiPage"));
 const ObjectivesPage = lazy(() => import("./features/about/ObjectivesPage"));
 const ContactPage = lazy(() => import("./features/contact/ContactPage"));
+const DonatePage = lazy(() => import("./features/contact/DonatePage"));
 const KundliPage = lazy(() => import("./features/digital/KundliPage"));
 const GuidancePage = lazy(() => import("./features/digital/GuidancePage"));
 const VolunteerFormPage = lazy(() => import("./features/contact/VolunteerFormPage"));
@@ -146,11 +149,12 @@ export default function App() {
                   <Route path={ROUTES.home} element={<HomePage />} />
                   <Route path={ROUTES.login} element={<LoginPage />} />
                   <Route path={ROUTES.contact} element={<ContactPage />} />
+                  <Route path={ROUTES.donate} element={<DonatePage />} />
                   <Route path={ROUTES.volunteer} element={<VolunteerFormPage />} />
                   <Route path="/events" element={<Navigate to={ROUTES.eventsKatha.index} replace />} />
                   <Route path="/media" element={<Navigate to={ROUTES.media.index} replace />} />
                   <Route path="/media/videos" element={<Navigate to={ROUTES.media.videos} replace />} />
-                  <Route path="/about/founder" element={<Navigate to={ROUTES.about.founder} replace />} />
+                  <Route path={ROUTES.about.founderAlias} element={<Navigate to={ROUTES.about.founder} replace />} />
                   <Route path={ROUTES.digital.guidance} element={<GuidancePage />} />
                   <Route path="/get-involved/invite-maharaj-ji" element={<Navigate to={ROUTES.contact} replace />} />
                   <Route path="/help-request" element={<Navigate to={ROUTES.contact} replace />} />
@@ -201,10 +205,10 @@ export default function App() {
 
                   <Route path={ROUTES.mandirTeerth.index} element={<MandirTeerthHubPage />} />
                   <Route path={ROUTES.mandirTeerth.bhagwatDham} element={<GhanshyamPage />} />
-                  <Route path={ROUTES.mandirTeerth.mahamandir} element={<Navigate to={ROUTES.mandirTeerth.bhagwatDham} replace />} />
-                  <Route path={ROUTES.mandirTeerth.avatars} element={<Navigate to={ROUTES.mandirTeerth.bhagwatDham} replace />} />
+                  <Route path={ROUTES.mandirTeerth.mahamandir} element={<MahamandirPage />} />
+                  <Route path={ROUTES.mandirTeerth.avatars} element={<MandirAvatarsPage />} />
                   <Route path={ROUTES.mandirTeerth.hanuman} element={<MahamandirPage />} />
-                  <Route path={ROUTES.mandirTeerth.construction} element={<Navigate to={ROUTES.mandirTeerth.bhagwatDham} replace />} />
+                  <Route path={ROUTES.mandirTeerth.construction} element={<MandirConstructionPage />} />
                   <Route path={ROUTES.mandirTeerth.pilgrimage} element={<PilgrimageInfoPage />} />
 
                   <Route path={ROUTES.media.index} element={<MediaGalleryHubPage />} />
@@ -217,12 +221,14 @@ export default function App() {
 
                   <Route path={ROUTES.digital.index} element={<DigitalServicesHubPage />} />
                   <Route path={ROUTES.digital.store} element={<StorePage />} />
+                  <Route path={ROUTES.digital.donation} element={<DonatePage />} />
                   <Route path={ROUTES.digital.satsang} element={<DigitalSatsangPage />} />
                   <Route path={ROUTES.digital.membership} element={<DigitalMembershipPage />} />
                   <Route path={ROUTES.digital.kundli} element={<KundliPage />} />
 
                   <Route path={ROUTES.involved.index} element={<GetInvolvedPage />} />
                   <Route path={ROUTES.involved.volunteer} element={<VolunteerFormPage />} /> 
+                  <Route path={ROUTES.involved.donor} element={<DonatePage />} />
                   <Route path={ROUTES.involved.partner} element={<InvolvedPartnerPage />} />
                   <Route path={ROUTES.involved.sponsor} element={<InvolvedSponsorPage />} />
                   <Route path="/get-involved/overview" element={<GetInvolvedHubPage />} />

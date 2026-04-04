@@ -24,6 +24,67 @@ const PRIMARY_BUTTON =
 const SECONDARY_BUTTON =
   "inline-flex items-center justify-center rounded-lg border border-[#d4a270] bg-white px-6 py-3 text-sm font-semibold text-[#9a5310] transition-colors hover:bg-[#fff7ef]";
 
+function UpcomingEventMediaCard({
+  eyebrow,
+  title,
+  imageSrc,
+  imageAlt,
+  href,
+  ctaLabel,
+  placeholderText,
+}: {
+  eyebrow: string;
+  title: string;
+  imageSrc: string;
+  imageAlt: string;
+  href?: string;
+  ctaLabel: string;
+  placeholderText?: string;
+}) {
+  const image = (
+    <div className="relative overflow-hidden rounded-[24px]">
+      <img src={imageSrc} alt={imageAlt} className="h-[240px] w-full object-cover md:h-[280px]" loading="lazy" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#2a1200]/80 via-[#2a1200]/15 to-transparent px-5 py-5">
+        <span className="inline-flex rounded-full bg-white/90 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-[#8c3d00]">
+          {eyebrow}
+        </span>
+      </div>
+    </div>
+  );
+
+  return (
+    <article className="overflow-hidden rounded-[30px] border border-[#efcfaa] bg-white p-4 shadow-[0_18px_40px_rgba(122,74,27,0.12)]">
+      {href ? (
+        <a href={href} target="_blank" rel="noopener noreferrer" className="block">
+          {image}
+        </a>
+      ) : (
+        image
+      )}
+      <div className="px-1 pb-1 pt-5">
+        <h3 className="text-2xl font-black text-[#7c1d00]">{title}</h3>
+        {href ? (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center justify-center rounded-lg bg-[#9a5310] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#7f430b]"
+          >
+            {ctaLabel}
+          </a>
+        ) : (
+          <div className="mt-4">
+            <span className="inline-flex items-center justify-center rounded-lg border border-[#e8d2bb] bg-[#fff7ef] px-5 py-3 text-sm font-semibold text-[#9a5310]">
+              {ctaLabel}
+            </span>
+            {placeholderText ? <p className="mt-3 text-sm leading-6 text-[#6c5440]">{placeholderText}</p> : null}
+          </div>
+        )}
+      </div>
+    </article>
+  );
+}
+
 function UpcomingEventModal({ onClose }: { onClose: () => void }) {
   const overlayRef = useRef<HTMLDivElement>(null);
 
