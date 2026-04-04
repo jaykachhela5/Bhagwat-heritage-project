@@ -21,7 +21,7 @@ import {
 const OCCASION_OPTIONS = [
   {
     id: "birthday-annadaan",
-    title: "Occasion-Based Meal Offering",
+    title: "Occasion Based Meal Offering",
     label: "Birthday Offering",
     description: "Celebrate a birthday by offering meals with gratitude and compassion.",
   },
