@@ -21,9 +21,6 @@ interface NavItemConfig {
 
 const NAV_ITEMS: NavItemConfig[] = [
   { id: "home", labelKey: "navbar.items.home", href: ROUTES.home },
-  { id: "about", labelKey: "navbar.items.about", href: ROUTES.about.index },
-  { id: "founder", labelKey: "navbar.items.founder", href: ROUTES.about.founder },
-  { id: "hanuman-murti", labelKey: "navbar.items.hanuman", href: ROUTES.mandirTeerth.hanuman },
   {
     id: "about-dropdown",
     labelKey: "navbar.items.about",
