@@ -178,7 +178,7 @@ export default function App() {
                   <Route path={ROUTES.seva.gau} element={<GauSevaPage />} />
                   <Route path={ROUTES.seva.jal} element={<JalSevaPage />} />
                   <Route path={ROUTES.seva.ann} element={<AnnSevaPage />} />
-                  <Route path={ROUTES.seva.annJal} element={<Navigate to={ROUTES.seva.jal} replace />} />
+                  <Route path={ROUTES.seva.annJal} element={<Navigate to={ROUTES.seva.index} replace />} />
                   <Route path={ROUTES.seva.medicine} element={<MedicinePage />} />
                   <Route path={ROUTES.seva.education} element={<EducationPage />} />
                   <Route path={ROUTES.seva.scholarship} element={<ScholarshipPage />} />

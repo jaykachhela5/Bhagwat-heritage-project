@@ -955,7 +955,8 @@ export const SevaHubPage = memo(function SevaHubPage() {
       subtitle="A structured seva ecosystem covering food, water, education, healthcare, and social upliftment."
       cards={[
         { title: "Gau Seva", desc: "Cow care, protection, and sattvik seva support.", href: ROUTES.seva.gau },
-        { title: "Ann / Jal Seva", desc: "Food and water service for devotees and communities.", href: ROUTES.seva.annJal },
+        { title: "Jal Seva", desc: "Water relief, hydration support, and compassionate public water seva.", href: ROUTES.seva.jal },
+        { title: "Ann Seva", desc: "Meal service, annadaan support, and dignified food seva for communities.", href: ROUTES.seva.ann },
         { title: "Medicine Distribution", desc: "Medical support and medicine access programs.", href: ROUTES.seva.medicine },
         { title: "Education Support", desc: "Student aid, mentoring, and educational seva.", href: ROUTES.seva.education },
         { title: "Scholarship Program", desc: "Scholarship support for deserving learners.", href: ROUTES.seva.scholarship },

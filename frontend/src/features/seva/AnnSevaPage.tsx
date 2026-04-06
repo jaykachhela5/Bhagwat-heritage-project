@@ -2,6 +2,7 @@ import { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
 import { usePageMeta } from "../../hooks/usePageMeta";
+import { HeroSection } from "../../components/ui/HeroSection";
 import { JalSevaDonationHub } from "./JalSevaDonationHub";
 import {
   ANNADAAN_PROGRAMS,
@@ -251,41 +252,40 @@ export default memo(function AnnSevaPage() {
 
   usePageMeta(
     "Ann Seva",
-    "Support Bhagwat Heritage Service Foundation Trust through Ann Seva, meal distribution, sponsorship, volunteering, and food relief support.",
+    "Support Ann Seva through meal distribution, sponsorship, volunteering, and food relief support.",
   );
 
   return (
     <div className="bg-[#0B2230] px-4 pb-24 pt-6 md:px-6 md:pb-28 md:pt-8">
       <style>{`@keyframes sevaFadeInUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}`}</style>
 
-      <section className="relative isolate mx-auto min-h-[460px] max-w-[1240px] overflow-hidden rounded-2xl bg-[#3c1f0a] shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:min-h-[540px] lg:min-h-[620px]">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/annseva.png')" }} />
-        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(8,28,40,0.90)_0%,rgba(13,97,121,0.76)_42%,rgba(239,154,30,0.32)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,196,87,0.20),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(255,236,188,0.18),transparent_28%)]" />
-
-        <div className="relative mx-auto flex min-h-[460px] max-w-6xl items-end justify-center px-5 py-8 text-center sm:px-8 md:min-h-[540px] lg:min-h-[620px]">
-          <div className="w-full max-w-4xl">
-            <h1 className="mt-[10px] text-4xl font-black leading-tight text-white md:text-5xl">Ann Seva</h1>
-            <p className="mt-[10px] text-[34px] font-semibold text-gray-200 md:text-[40px]">Ek Thali Bhojan, Ek Jeevan Ka Sahara</p>
-            <div className="mt-[10px] flex flex-col items-center justify-center gap-[10px] sm:flex-row">
-              <button
-                type="button"
-                onClick={() => navigate(ROUTES.donate)}
-                className="inline-flex min-w-[190px] items-center justify-center rounded-xl bg-[#ef9a1e] px-7 py-4 text-base font-bold text-white transition-colors hover:bg-[#de930a]"
-              >
-                <span>Donate Now</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => navigate(ROUTES.involved.index)}
-                className="inline-flex min-w-[190px] items-center justify-center rounded-xl border border-white/10 bg-[#0d6179] px-7 py-4 text-base font-bold text-white transition-colors hover:bg-[#18495e]"
-              >
-                <span>Join Seva</span>
-              </button>
-            </div>
-          </div>
+      <HeroSection
+        title="Ann Seva"
+        subtitle="Ek Thali Bhojan, Ek Jeevan Ka Sahara"
+        subtitleClassName="whitespace-nowrap text-[18px] font-semibold text-white sm:text-[24px] md:text-[34px]"
+        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
+        backgroundImage="/images/annseva.png"
+        boxed
+        heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-black/55"
+      >
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <button
+            type="button"
+            onClick={() => navigate(ROUTES.donate)}
+            className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[#ef9a1e] px-7 py-4 text-base font-bold text-white transition-colors hover:bg-[#de930a]"
+          >
+            <span>Donate Now</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate(ROUTES.involved.index)}
+            className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[#0d6179] px-7 py-4 text-base font-bold text-white transition-colors hover:bg-[#18495e]"
+          >
+            <span>Join Seva</span>
+          </button>
         </div>
-      </section>
+      </HeroSection>
 
       <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[#0d6179] px-6 py-10 text-center shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8">
         <div className="mx-auto max-w-4xl">

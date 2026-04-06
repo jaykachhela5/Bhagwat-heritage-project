@@ -48,7 +48,8 @@ const NAV_ITEMS: NavItemConfig[] = [
     labelKey: "navbar.items.seva",
     children: [
       { id: "seva-gau", labelKey: "navbar.items.gauSeva", href: ROUTES.seva.gau },
-      { id: "seva-ann-jal", labelKey: "navbar.items.annJalSeva", href: ROUTES.seva.annJal },
+      { id: "seva-jal", labelKey: "navbar.items.jalSeva", href: ROUTES.seva.jal },
+      { id: "seva-ann", labelKey: "navbar.items.annSeva", href: ROUTES.seva.ann },
       { id: "seva-medicine", labelKey: "navbar.items.medicineDistribution", href: ROUTES.seva.medicine },
       { id: "seva-education", labelKey: "navbar.items.educationSupport", href: ROUTES.seva.education },
       { id: "seva-scholarship", labelKey: "navbar.items.scholarshipProgram", href: ROUTES.seva.scholarship },
