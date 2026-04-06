@@ -1,6 +1,7 @@
 import { memo, useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
+import { SEVA_BODY_TEXT_CLASS, SEVA_CARD_TITLE_CLASS, SEVA_SECTION_HEADING_CLASS, SEVA_SECTION_LABEL_CLASS } from "./sevaTypography";
 
 type IconProps = { className?: string };
 type ServiceItem = {
@@ -139,8 +140,8 @@ const EducationServiceCard = memo(function EducationServiceCard({
       <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-[#ef9a1e] transition-all duration-300 group-hover:bg-[#ef9a1e] group-hover:text-white">
         {service.icon}
       </div>
-      <h3 className="mt-4 text-xl font-black text-white">{service.title}</h3>
-      <p className="mt-3 flex-1 text-sm leading-7 text-[#dce7ec]">{service.description}</p>
+      <h3 className={`mt-4 ${SEVA_CARD_TITLE_CLASS}`}>{service.title}</h3>
+      <p className={`mt-3 flex-1 ${SEVA_BODY_TEXT_CLASS}`}>{service.description}</p>
       <div className="mt-5 flex flex-wrap gap-3">
         <Link
           to={ROUTES.donate}
@@ -164,8 +165,8 @@ export const EducationServicesSection = memo(function EducationServicesSection()
     <RevealSection className="max-w-7xl mx-auto px-4 py-10">
       <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Education Services</p>
-            <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Support learning through focused educational seva</h2>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Education Services</p>
+            <h2 className={SEVA_SECTION_HEADING_CLASS}>Support learning through focused educational seva</h2>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">

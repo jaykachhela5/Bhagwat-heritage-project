@@ -3,6 +3,14 @@ import { Link } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
 import { HeroSection } from "../../components/ui/HeroSection";
 import { usePageMeta } from "../../hooks/usePageMeta";
+import {
+  SEVA_BODY_TEXT_CLASS,
+  SEVA_CARD_TITLE_CLASS,
+  SEVA_HERO_SUBTITLE_CLASS,
+  SEVA_HIGHLIGHT_TITLE_CLASS,
+  SEVA_SECTION_HEADING_CLASS,
+  SEVA_SECTION_LABEL_CLASS,
+} from "./sevaTypography";
 
 const MONTHLY_METRICS = [
   {
@@ -148,13 +156,13 @@ export default memo(function VyasanPage() {
       <HeroSection
         title="Vyasanmukti Seva"
         subtitle="Break addiction, rebuild life."
-        subtitleClassName="text-[34px] font-semibold md:text-[40px]"
+        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
         contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="/images/vyasanmukti.png"
         boxed
         heightClass="h-[360px] md:h-[520px]"
         backgroundPositionClass="bg-center"
-        overlayClass="bg-black/45"
+        overlayClass="bg-black/55"
       >
         <div className="flex flex-wrap justify-center gap-3">
           <Link
@@ -183,8 +191,8 @@ export default memo(function VyasanPage() {
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {MONTHLY_METRICS.map((item) => (
               <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
-                <p className="text-[24px] uppercase tracking-wide text-[#ef9a1e]">{item.title}</p>
-                <p className="mt-2 text-base leading-7 text-[#dce7ec] md:text-lg">{item.note}</p>
+                <p className={SEVA_HIGHLIGHT_TITLE_CLASS}>{item.title}</p>
+                <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
               </div>
             ))}
           </div>
@@ -193,8 +201,8 @@ export default memo(function VyasanPage() {
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Addiction We Address</p>
-          <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Understanding the forms of dependency</h2>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Addiction We Address</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Understanding the forms of dependency</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
             {ADDICTION_TYPES.map((item) => (
               <div key={item.title} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
@@ -204,7 +212,7 @@ export default memo(function VyasanPage() {
                   className="mx-auto mb-4 h-20 w-20 rounded-full border border-white/15 object-cover"
                   loading="lazy"
                 />
-                <h3 className="text-xl font-black text-white">{item.title}</h3>
+                <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
                 <button
                   type="button"
                   onClick={() => setActiveLearnMore((prev) => (prev === item.title ? null : item.title))}
@@ -213,7 +221,7 @@ export default memo(function VyasanPage() {
                   Learn More
                 </button>
                 {activeLearnMore === item.title ? (
-                  <p className="mt-4 text-sm leading-7 text-[#dce7ec]">{item.details}</p>
+                  <p className={`mt-4 ${SEVA_BODY_TEXT_CLASS}`}>{item.details}</p>
                 ) : null}
               </div>
             ))}
@@ -223,16 +231,16 @@ export default memo(function VyasanPage() {
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Recovery Pillars</p>
-          <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Key areas supporting healing and reintegration</h2>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Recovery Pillars</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Key areas supporting healing and reintegration</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
             {RECOVERY_PILLARS.map((item) => (
               <div key={item.title} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 text-center shadow-sm">
                 <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-xl font-black text-[#ef9a1e]">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-black text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{item.desc}</p>
+                <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
               </div>
             ))}
           </div>
@@ -241,8 +249,8 @@ export default memo(function VyasanPage() {
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Rehabilitation Process</p>
-          <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Step-by-step recovery and support journey</h2>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Rehabilitation Process</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Step-by-step recovery and support journey</h2>
           <div className="mt-8 space-y-4">
             {REHABILITATION_STEPS.map((step, i) => (
               <div key={step} className="flex items-start gap-4 rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
@@ -258,8 +266,8 @@ export default memo(function VyasanPage() {
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Recovery Stories</p>
-          <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Voices of change, trust, and healing</h2>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Recovery Stories</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Voices of change, trust, and healing</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
             {TESTIMONIALS.map((item) => (
               <div key={item.name} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
@@ -273,8 +281,8 @@ export default memo(function VyasanPage() {
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Support Recovery Programs</p>
-          <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Ways to sponsor treatment and awareness support</h2>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Support Recovery Programs</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Ways to sponsor treatment and awareness support</h2>
           <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">
             Choose a direct donation or sponsor a focused support track to help someone move from addiction toward recovery, discipline, and hope.
           </p>
@@ -284,9 +292,9 @@ export default memo(function VyasanPage() {
                 <span className="inline-flex w-fit rounded-full bg-[#ef9a1e]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#ef9a1e]">
                   {tier.badge}
                 </span>
-                <h3 className="mt-4 text-xl font-black text-white">{tier.label}</h3>
+                <h3 className={`mt-4 ${SEVA_CARD_TITLE_CLASS}`}>{tier.label}</h3>
                 <p className="mt-2 text-[14px] font-black text-[#ef9a1e] md:text-[20px]">{tier.amount}</p>
-                <p className="mt-3 flex-1 text-sm leading-7 text-[#dce7ec]">{tier.note}</p>
+                <p className={`mt-3 flex-1 ${SEVA_BODY_TEXT_CLASS}`}>{tier.note}</p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <Link
                     to={ROUTES.donate}
@@ -309,7 +317,7 @@ export default memo(function VyasanPage() {
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Frequently Asked Questions</p>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Frequently Asked Questions</p>
           <div className="mt-8 space-y-3">
             {FAQ.map((item) => (
               <details key={item.q} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5">
@@ -325,7 +333,7 @@ export default memo(function VyasanPage() {
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
             <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm lg:col-span-1">
-              <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Early Warning Signs</p>
+              <p className={SEVA_SECTION_LABEL_CLASS}>Early Warning Signs</p>
               <ul className="mt-5 space-y-3 text-base leading-7 text-[#dce7ec] md:text-lg">
                 {WARNING_SIGNS.map((line) => (
                   <li key={line} className="flex gap-3">
@@ -336,8 +344,8 @@ export default memo(function VyasanPage() {
               </ul>
             </div>
             <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 text-white shadow-sm lg:col-span-3">
-              <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Need Immediate Help?</p>
-              <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Connect for confidential recovery guidance</h2>
+              <p className={SEVA_SECTION_LABEL_CLASS}>Need Immediate Help?</p>
+              <h2 className={SEVA_SECTION_HEADING_CLASS}>Connect for confidential recovery guidance</h2>
               <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">
                 Connect with our Vyasanmukti support team for confidential guidance, counseling, and the right recovery path.
               </p>

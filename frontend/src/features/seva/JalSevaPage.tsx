@@ -4,6 +4,7 @@ import { ROUTES } from "../../app/routes/routes";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { HeroSection } from "../../components/ui/HeroSection";
 import { JalSevaDonationHub } from "./JalSevaDonationHub";
+import { SEVA_BODY_TEXT_CLASS, SEVA_HERO_SUBTITLE_CLASS, SEVA_SECTION_HEADING_CLASS, SEVA_SECTION_LABEL_CLASS } from "./sevaTypography";
 import {
   JAL_FAQS,
   JAL_FLOW_STEPS,
@@ -116,9 +117,9 @@ function toneClasses(icon: SevaVisualKey) {
 const JAL_SECTION_SHELL =
   "mx-auto mt-8 max-w-7xl rounded-[30px] border border-white/10 bg-[#0d6179] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8";
 
-const JAL_SECTION_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]";
-const JAL_SECTION_HEADING = "mt-2 text-[14px] font-black text-white md:text-[20px]";
-const JAL_SECTION_BODY = "mx-auto mt-4 max-w-3xl text-base leading-7 text-[#dce7ec] md:text-lg";
+const JAL_SECTION_LABEL = SEVA_SECTION_LABEL_CLASS;
+const JAL_SECTION_HEADING = SEVA_SECTION_HEADING_CLASS;
+const JAL_SECTION_BODY = `mx-auto mt-4 max-w-3xl ${SEVA_BODY_TEXT_CLASS}`;
 
 function ProgramCard({
   onDonate,
@@ -240,7 +241,7 @@ export default memo(function JalSevaPage() {
       <HeroSection
         title="Jal Seva"
         subtitle="Har Pyaase Tak Karuna Ka Sandesh"
-        subtitleClassName="whitespace-nowrap text-[18px] font-semibold text-white sm:text-[24px] md:text-[34px]"
+        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
         contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="/images/jal1.png"
         boxed

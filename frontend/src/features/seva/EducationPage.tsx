@@ -4,6 +4,15 @@ import { ROUTES } from "../../app/routes/routes";
 import { HeroSection } from "../../components/ui/HeroSection";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { EducationServicesSection } from "./EducationServicesSection";
+import {
+  SEVA_BODY_TEXT_CLASS,
+  SEVA_CARD_TITLE_CLASS,
+  SEVA_HERO_SUBTITLE_CLASS,
+  SEVA_HIGHLIGHT_TITLE_CLASS,
+  SEVA_HIGHLIGHT_VALUE_CLASS,
+  SEVA_SECTION_HEADING_CLASS,
+  SEVA_SECTION_LABEL_CLASS,
+} from "./sevaTypography";
 
 const MODEL_STEPS = [
   { title: "Identify Learners", desc: "Students and families needing education support are identified through outreach, schools, and trust networks." },
@@ -45,11 +54,12 @@ export default memo(function EducationPage() {
       <HeroSection
         title="Education Seva"
         subtitle="Lighting lives through learning."
-        subtitleClassName="text-[34px] font-semibold md:text-[40px]"
+        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
         contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772699843/pathshala_eza0sp.png"
         boxed
         heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-black/55"
       >
         <div className="flex flex-wrap justify-center gap-3">
           <Link to={ROUTES.donate} className="inline-flex items-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]">
@@ -66,9 +76,9 @@ export default memo(function EducationPage() {
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {QUICK_HIGHLIGHTS.map((item) => (
               <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
-                <p className="text-[19px] font-black uppercase tracking-wide text-[#ef9a1e]">{item.title}</p>
-                <p className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.value}</p>
-                <p className="mt-1 text-base leading-7 text-[#dce7ec] md:text-lg">{item.note}</p>
+                <p className={SEVA_HIGHLIGHT_TITLE_CLASS}>{item.title}</p>
+                <p className={SEVA_HIGHLIGHT_VALUE_CLASS}>{item.value}</p>
+                <p className={`mt-1 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
               </div>
             ))}
           </div>
@@ -77,8 +87,8 @@ export default memo(function EducationPage() {
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">About Education Seva</p>
-          <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Learning support with guidance and continuity</h2>
+          <p className={SEVA_SECTION_LABEL_CLASS}>About Education Seva</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Learning support with guidance and continuity</h2>
           <p className="mt-5 text-base leading-7 text-white md:text-lg">
             Education Seva is aimed at helping students move forward with confidence and dignity. Through this initiative,
             the foundation supports educational needs such as study materials, guidance, and assistance for learners from deserving backgrounds.
@@ -93,13 +103,13 @@ export default memo(function EducationPage() {
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">How Education Seva Works</p>
+          <p className={SEVA_SECTION_LABEL_CLASS}>How Education Seva Works</p>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
             {MODEL_STEPS.map((step, idx) => (
               <div key={step.title} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
                 <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">Step {idx + 1}</p>
-                <h3 className="mt-3 text-xl font-black text-white">{step.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{step.desc}</p>
+                <h3 className={`mt-3 ${SEVA_CARD_TITLE_CLASS}`}>{step.title}</h3>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{step.desc}</p>
               </div>
             ))}
           </div>
@@ -108,7 +118,7 @@ export default memo(function EducationPage() {
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Education Stories</p>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Education Stories</p>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
             {STORIES.map((item) => (
               <div key={item.name} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
@@ -123,8 +133,8 @@ export default memo(function EducationPage() {
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
-            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Monthly Education Support Drive</p>
-            <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">
+            <p className={SEVA_SECTION_LABEL_CLASS}>Monthly Education Support Drive</p>
+            <p className={`mt-4 ${SEVA_BODY_TEXT_CLASS}`}>
               Each month the trust supports students through learning materials, school continuity help,
               mentorship guidance, and digital education assistance so children can keep moving forward.
             </p>

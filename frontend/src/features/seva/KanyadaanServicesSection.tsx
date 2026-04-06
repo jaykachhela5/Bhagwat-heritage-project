@@ -1,6 +1,7 @@
 import { memo, useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
+import { SEVA_BODY_TEXT_CLASS, SEVA_CARD_TITLE_CLASS, SEVA_SECTION_HEADING_CLASS, SEVA_SECTION_LABEL_CLASS } from "./sevaTypography";
 
 type IconProps = { className?: string };
 type KanyadaanService = {
@@ -144,8 +145,8 @@ const KanyadaanServiceCard = memo(function KanyadaanServiceCard({
         {service.icon}
       </div>
 
-      <h3 className="mt-4 pr-24 text-xl font-black text-white">{service.title}</h3>
-      <p className="mt-3 flex-1 text-sm leading-7 text-[#dce7ec]">{service.description}</p>
+      <h3 className={`mt-4 pr-24 ${SEVA_CARD_TITLE_CLASS}`}>{service.title}</h3>
+      <p className={`mt-3 flex-1 ${SEVA_BODY_TEXT_CLASS}`}>{service.description}</p>
 
       <div className="mt-5 flex flex-wrap gap-3">
         <Link
@@ -171,7 +172,7 @@ const KanyadaanServiceCard = memo(function KanyadaanServiceCard({
 
       <div className={`grid transition-all duration-300 ${isOpen ? "mt-5 grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
         <div className="overflow-hidden">
-          <div className="rounded-[20px] border border-white/10 bg-[#0b2230] px-4 py-4 text-sm leading-7 text-[#dce7ec]">
+          <div className={`rounded-[20px] border border-white/10 bg-[#0b2230] px-4 py-4 ${SEVA_BODY_TEXT_CLASS}`}>
             {service.details}
           </div>
         </div>
@@ -187,8 +188,8 @@ export const KanyadaanServicesSection = memo(function KanyadaanServicesSection()
     <RevealSection className="max-w-7xl mx-auto px-4 py-10">
       <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Kanyadaan Services</p>
-            <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Dignified support for daughters and families</h2>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Kanyadaan Services</p>
+            <h2 className={SEVA_SECTION_HEADING_CLASS}>Dignified support for daughters and families</h2>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">

@@ -3,6 +3,14 @@ import { Link } from "react-router-dom";
 import { HeroSection } from "../../components/ui/HeroSection";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { ROUTES } from "../../app/routes/routes";
+import {
+  SEVA_BODY_TEXT_CLASS,
+  SEVA_CARD_TITLE_CLASS,
+  SEVA_HERO_SUBTITLE_CLASS,
+  SEVA_HIGHLIGHT_TITLE_CLASS,
+  SEVA_SECTION_HEADING_CLASS,
+  SEVA_SECTION_LABEL_CLASS,
+} from "./sevaTypography";
 
 const QUICK_HIGHLIGHTS = [
   { title: "Students Assisted", note: "Scholarship beneficiaries supported across multiple academic journeys" },
@@ -171,13 +179,13 @@ export default memo(function ScholarshipPage() {
       <HeroSection
         title="Scholarship Seva"
         subtitle="Supporting dreams, shaping futures."
-        subtitleClassName="text-[34px] font-semibold md:text-[40px]"
+        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
         contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772699279/scholorship_ki7aes.png"
         boxed
         heightClass="h-[360px] md:h-[520px]"
         backgroundPositionClass="bg-center"
-        overlayClass="bg-black/45"
+        overlayClass="bg-black/55"
       >
         <div className="flex flex-wrap justify-center gap-3">
           <Link
@@ -206,8 +214,8 @@ export default memo(function ScholarshipPage() {
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {QUICK_HIGHLIGHTS.map((item) => (
               <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
-                <p className="text-[19px] font-black uppercase tracking-wide text-[#ef9a1e]">{item.title}</p>
-                <p className="mt-2 text-lg leading-8 text-[#dce7ec] md:text-[20px]">{item.note}</p>
+                <p className={SEVA_HIGHLIGHT_TITLE_CLASS}>{item.title}</p>
+                <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
               </div>
             ))}
           </div>
@@ -218,8 +226,8 @@ export default memo(function ScholarshipPage() {
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <div className="grid gap-5 lg:grid-cols-[1.12fr_0.88fr]">
             <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
-              <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Scholarship Program</p>
-              <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Scholarship Program</h2>
+              <p className={SEVA_SECTION_LABEL_CLASS}>Scholarship Program</p>
+              <h2 className={SEVA_SECTION_HEADING_CLASS}>Scholarship Program</h2>
               <p className="mt-5 text-base leading-7 text-white md:text-lg">
                 The Scholarship Program is designed to encourage deserving students by offering financial support for their educational journey.
                 This initiative seeks to remove obstacles and open doors for bright and sincere learners who need assistance.
@@ -246,8 +254,8 @@ export default memo(function ScholarshipPage() {
             <div className="grid gap-4">
               {SCHOLARSHIP_PILLARS.map((item) => (
                 <div key={item.title} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
-                  <h3 className="text-xl font-black text-white">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{item.desc}</p>
+                  <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
+                  <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -258,8 +266,8 @@ export default memo(function ScholarshipPage() {
       <RevealSection className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Scholarship Pathways</p>
-            <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Choose the support journey</h2>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Scholarship Pathways</p>
+            <h2 className={SEVA_SECTION_HEADING_CLASS}>Choose the support journey</h2>
           </div>
 
           <div className="mt-10 flex flex-wrap justify-center gap-3">
@@ -281,21 +289,21 @@ export default memo(function ScholarshipPage() {
 
           <div className="mt-8 grid gap-6 lg:grid-cols-[0.92fr_1.08fr]">
             <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
-              <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Selected Support Area</p>
+              <p className={SEVA_SECTION_LABEL_CLASS}>Selected Support Area</p>
               <h3 className="mt-2 text-[14px] font-black text-white md:text-[20px]">{activePathway.title}</h3>
               <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">{activePathway.audience}</p>
               <div className="mt-5 rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
                 <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">What the trust supports</p>
-                <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{activePathway.support}</p>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{activePathway.support}</p>
               </div>
               <div className="mt-4 rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
                 <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">Scholarship impact</p>
-                <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{activePathway.impact}</p>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{activePathway.impact}</p>
               </div>
             </div>
 
             <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 text-white shadow-sm">
-              <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Sponsor education continuity</p>
+              <p className={SEVA_SECTION_LABEL_CLASS}>Sponsor education continuity</p>
               <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">
                 Your contribution can help a deserving student continue school or higher studies without losing momentum due to financial barriers.
               </p>
@@ -305,7 +313,7 @@ export default memo(function ScholarshipPage() {
                   <div key={tier.label} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:bg-[#15384b]">
                     <p className="text-sm font-bold uppercase tracking-[0.12em] text-[#ef9a1e]">{tier.label}</p>
                     <p className="mt-2 text-[14px] font-black text-white md:text-[20px]">{tier.amount}</p>
-                    <p className="mt-2 text-sm leading-7 text-[#dce7ec]">{tier.note}</p>
+                    <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{tier.note}</p>
                   </div>
                 ))}
               </div>
@@ -331,12 +339,12 @@ export default memo(function ScholarshipPage() {
 
       <RevealSection className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Scholarship Process</p>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Scholarship Process</p>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
             {APPLICATION_STEPS.map((item) => (
               <div key={item.step} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
-                <h3 className="text-xl font-black text-white">{item.step}</h3>
-                <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{item.desc}</p>
+                <h3 className={SEVA_CARD_TITLE_CLASS}>{item.step}</h3>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
               </div>
             ))}
           </div>
@@ -345,7 +353,7 @@ export default memo(function ScholarshipPage() {
 
       <RevealSection className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Impact Stories</p>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Impact Stories</p>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
             {STORIES.map((item) => (
               <div key={item.name} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
@@ -359,7 +367,7 @@ export default memo(function ScholarshipPage() {
 
       <RevealSection className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Frequently Asked Questions</p>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Frequently Asked Questions</p>
           <div className="mt-8 space-y-3">
             {FAQS.map((item, index) => {
               const isOpen = openFaqIndex === index;
@@ -391,8 +399,8 @@ export default memo(function ScholarshipPage() {
       <RevealSection className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 text-white shadow-sm">
-            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Final Scholarship CTA</p>
-            <h3 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Support talent, responsibility, and a brighter future</h3>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Final Scholarship CTA</p>
+            <h3 className={SEVA_SECTION_HEADING_CLASS}>Support talent, responsibility, and a brighter future</h3>
             <p className="mt-4 max-w-4xl text-base leading-7 text-[#dce7ec] md:text-lg">
               Bhagwat Heritage Service Foundation Trust aims to help sincere students continue their educational journey with stability,
               values, and meaningful encouragement. Every scholarship contribution can become a turning point in a student's life.

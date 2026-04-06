@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { HeroSection } from "../../components/ui/HeroSection";
 import { ROUTES } from "../../app/routes/routes";
 import { usePageMeta } from "../../hooks/usePageMeta";
+import { SEVA_BODY_TEXT_CLASS, SEVA_CARD_TITLE_CLASS, SEVA_HERO_SUBTITLE_CLASS } from "./sevaTypography";
 
 const HERO_IMAGE = "https://res.cloudinary.com/der8zinu8/image/upload/v1771583760/chikitsa_q2seq1.png";
 
@@ -171,20 +172,21 @@ const FAQS = [
 
 export default memo(function MedicinePage() {
   usePageMeta(
-    "Medical Seva",
-    "Medical Seva page with medicine distribution, health camp support, chronic care relief, donation options, and medical volunteer support.",
+    "Chikitsa Seva",
+    "Chikitsa Seva page with medicine distribution, health camp support, chronic care relief, donation options, and medical volunteer support.",
   );
 
   return (
     <div className="min-h-screen bg-[#0B2230]">
       <HeroSection
-        title="Medical Seva"
+        title="Chikitsa Seva"
         subtitle="Service is the greatest form of healing."
-        subtitleClassName="whitespace-nowrap text-[18px] font-semibold sm:text-[24px] md:text-[34px]"
+        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
         contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage={HERO_IMAGE}
         boxed
         heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-black/55"
       >
         <div className="flex flex-wrap justify-center gap-3">
           <Link
@@ -219,10 +221,10 @@ export default memo(function MedicinePage() {
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">About Medical Seva</p>
+            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">About Chikitsa Seva</p>
             <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Medical support with dignity and timely care</h2>
             <p className="mt-5 text-base leading-7 text-white md:text-lg">
-              Medical Seva is dedicated to helping low-income families, elderly patients, and medically vulnerable households receive essential
+              Chikitsa Seva is dedicated to helping low-income families, elderly patients, and medically vulnerable households receive essential
               medicines before delay becomes danger.
             </p>
             <p className="mt-4 text-base leading-7 text-white md:text-lg">
@@ -263,7 +265,7 @@ export default memo(function MedicinePage() {
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">How Medical Seva Works</p>
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">How Chikitsa Seva Works</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">From medical need to medicine support</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
             {HOW_IT_WORKS.map((item) => (
@@ -281,14 +283,14 @@ export default memo(function MedicinePage() {
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Medical Seva Donation Options</p>
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Chikitsa Seva Donation Options</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Different ways to support medical relief</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
             {DONATION_TIERS.map((item) => (
               <div key={item.title} className="flex h-full flex-col rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
-                <h3 className="text-xl font-black text-white">{item.title}</h3>
+                <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
                 <p className="mt-2 text-2xl font-black text-[#ef9a1e]">{item.amount}</p>
-                <p className="mt-3 flex-1 text-sm leading-7 text-[#dce7ec]">{item.note}</p>
+                <p className={`mt-3 flex-1 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
                 <Link
                   to={ROUTES.donate}
                   className="mt-5 inline-flex w-fit rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
@@ -358,7 +360,7 @@ export default memo(function MedicinePage() {
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Medical Seva FAQ</p>
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Chikitsa Seva FAQ</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Common questions about medicine support</h2>
           <div className="mt-8 space-y-4">
             {FAQS.map((item) => (

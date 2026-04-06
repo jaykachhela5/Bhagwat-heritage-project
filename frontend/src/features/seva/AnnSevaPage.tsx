@@ -4,6 +4,7 @@ import { ROUTES } from "../../app/routes/routes";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { HeroSection } from "../../components/ui/HeroSection";
 import { JalSevaDonationHub } from "./JalSevaDonationHub";
+import { SEVA_HERO_SUBTITLE_CLASS } from "./sevaTypography";
 import {
   ANNADAAN_PROGRAMS,
   ANN_FAQS,
@@ -262,7 +263,7 @@ export default memo(function AnnSevaPage() {
       <HeroSection
         title="Ann Seva"
         subtitle="Ek Thali Bhojan, Ek Jeevan Ka Sahara"
-        subtitleClassName="whitespace-nowrap text-[18px] font-semibold text-white sm:text-[24px] md:text-[34px]"
+        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
         contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="/images/annseva.png"
         boxed
