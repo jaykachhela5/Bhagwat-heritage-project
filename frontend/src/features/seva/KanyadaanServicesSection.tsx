@@ -22,6 +22,7 @@ const SERVICES: KanyadaanService[] = [
     featured: true,
     tag: "Featured",
   },
+  
   {
     title: "Marriage Kit Distribution",
     description: "Providing sarees, utensils, bedding, and basic household items for a new beginning.",

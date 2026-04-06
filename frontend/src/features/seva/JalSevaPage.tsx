@@ -44,7 +44,7 @@ function ShieldIcon({ className = "h-7 w-7" }: { className?: string }) {
       <path d="M9.4 12.3L11.1 14L14.8 10.3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
-}
+} 
 
 function CommunityIcon({ className = "h-7 w-7" }: { className?: string }) {
   return (

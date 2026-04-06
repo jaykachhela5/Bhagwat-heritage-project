@@ -24,7 +24,7 @@ const MONTHLY_METRICS = [
   {
     title: "Awareness Outreach",
     note: "Public awareness efforts reaching communities with prevention and early-help guidance.",
-  },
+  }, 
   {
     title: "Family Follow-ups",
     note: "Regular family coordination helping recovery stay supported at home and beyond.",

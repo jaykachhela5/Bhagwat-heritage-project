@@ -26,6 +26,7 @@ export default memo(function KanyaPage() {
     "Bhagwat Heritage Service Foundation Trust Kanyadaan Seva page focused on dignified marriage support, sponsorship, and compassionate family assistance.",
   );
 
+  
   return (
     <div className="min-h-screen bg-[#0B2230]">
       <HeroSection

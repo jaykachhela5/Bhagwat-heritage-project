@@ -14,6 +14,8 @@ const heroButtons = [
     className:
       "bg-[#f3a11f] text-white shadow-[0_14px_28px_rgba(243,161,31,0.28)] hover:bg-[#ffaf31]",
   },
+
+  
   {
     label: "Sponsor a Cow",
     to: ROUTES.donate,

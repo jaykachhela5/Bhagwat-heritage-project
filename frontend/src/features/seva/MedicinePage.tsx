@@ -23,6 +23,7 @@ const QUICK_HIGHLIGHTS = [
     value: "Camp Ready",
     note: "Screening, medicine kits, and outreach support can be organised through seva camps and field visits.",
   },
+  
   {
     title: "Volunteer Presence",
     value: "Trusted Team",

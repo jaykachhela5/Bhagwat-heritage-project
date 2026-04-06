@@ -10,6 +10,7 @@ type ServiceItem = {
   icon: ReactNode;
 };
 
+
 const EDUCATION_SERVICES: ServiceItem[] = [
   {
     title: "Scholarship Support",

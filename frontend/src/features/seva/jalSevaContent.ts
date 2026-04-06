@@ -15,6 +15,7 @@ export interface ProgramCardContent {
   impact: string;
 }
 
+
 export interface SponsorshipOption {
   title: string;
   amount: number;

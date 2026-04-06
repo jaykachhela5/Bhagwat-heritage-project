@@ -17,6 +17,7 @@ import { JalSevaStoriesReports } from "./JalSevaStoriesReports";
 
 type HubMode = "ann" | "jal";
 
+
 function formatCurrency(amount: number) {
   return new Intl.NumberFormat("en-IN", {
     style: "currency",

@@ -14,6 +14,7 @@ import {
   SEVA_SECTION_LABEL_CLASS,
 } from "./sevaTypography";
 
+
 const MODEL_STEPS = [
   { title: "Identify Learners", desc: "Students and families needing education support are identified through outreach, schools, and trust networks." },
   { title: "Assess the Need", desc: "The team reviews the learner's situation, academic stage, and the type of support required." },

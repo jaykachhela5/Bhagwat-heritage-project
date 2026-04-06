@@ -11,3 +11,4 @@ export const SEVA_HIGHLIGHT_VALUE_CLASS = "mt-1 text-[14px] font-black text-whit
 export const SEVA_CARD_TITLE_CLASS = "text-2xl font-black text-white";
 
 export const SEVA_BODY_TEXT_CLASS = "text-base leading-7 text-[#dce7ec] md:text-lg";
+ 
