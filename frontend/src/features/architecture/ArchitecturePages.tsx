@@ -5,6 +5,14 @@ import { PageSectionShell } from "../../components/sections/PageSectionShell";
 import { HeroSection } from "../../components/ui/HeroSection";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { ROUTES } from "../../app/routes/routes";
+import {
+  ABOUT_BODY_CLASS,
+  ABOUT_CARD_TITLE_CLASS,
+  ABOUT_HERO_SUBTITLE_CLASS,
+  ABOUT_HERO_TITLE_CLASS,
+  ABOUT_SECTION_HEADING_CLASS,
+  ABOUT_SECTION_LABEL_CLASS,
+} from "../about/aboutTypography";
 
 type NavCard = {
   title: string;
@@ -1068,6 +1076,14 @@ export const GetInvolvedHubPage = memo(function GetInvolvedHubPage() {
 
 export const AboutAwardsPage = memo(function AboutAwardsPage() {
   const [activeFilter, setActiveFilter] = useState<RecognitionCategory>("All");
+  const awardsLabel = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]";
+  const awardsHeading = "text-[14px] font-black text-white md:text-[20px]";
+  const awardsBody = "text-base leading-7 text-[#dce7ec] md:text-lg";
+  const awardsCardTitle = "text-2xl font-black text-white md:text-[1.75rem]";
+  const awardsPanel =
+    "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
+  const awardsCardPanel =
+    "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
 
   usePageMeta(
     "Awards & Recognition",
@@ -1080,54 +1096,16 @@ export const AboutAwardsPage = memo(function AboutAwardsPage() {
       : RECOGNITION_ITEMS.filter((item) => item.category === activeFilter);
 
   return (
-    <div className="pb-12">
-      <PageSectionShell className="pt-8 md:pt-10">
-        <div className="overflow-hidden rounded-[2rem] border border-[#f0d9b5] bg-[radial-gradient(circle_at_top_left,_rgba(255,243,222,0.92),_rgba(255,255,255,1)_45%,_rgba(234,245,255,0.95)_100%)] p-6 md:p-8 shadow-[0_18px_40px_rgba(18,55,83,0.12)]">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-3xl">
-              <p className="inline-flex rounded-full border border-[#e7c79b] bg-white/80 px-3 py-1 text-xs font-bold uppercase tracking-[0.24em] text-[#9a5b1d]">
-                Trust Honors
-              </p>
-              <h1 className="mt-4 text-3xl font-black text-[#123753] md:text-5xl">Awards & Recognition</h1>
-              <p className="mt-3 text-base leading-7 text-[#4f6272] md:text-lg">
-                A living archive of trust honors, public acknowledgements, and milestone recognitions earned through seva,
-                spiritual programs, educational support, and cultural preservation.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:w-[420px]">
-              <div className="rounded-2xl border border-white/70 bg-white/80 p-4">
-                <p className="text-2xl font-black text-[#8a3d06]">12+</p>
-                <p className="mt-1 text-xs uppercase tracking-wide text-[#6a7f90]">Recognitions</p>
-              </div>
-              <div className="rounded-2xl border border-white/70 bg-white/80 p-4">
-                <p className="text-2xl font-black text-[#8a3d06]">7</p>
-                <p className="mt-1 text-xs uppercase tracking-wide text-[#6a7f90]">Institutions</p>
-              </div>
-              <div className="rounded-2xl border border-white/70 bg-white/80 p-4">
-                <p className="text-2xl font-black text-[#8a3d06]">4</p>
-                <p className="mt-1 text-xs uppercase tracking-wide text-[#6a7f90]">Impact Areas</p>
-              </div>
-              <div className="rounded-2xl border border-white/70 bg-white/80 p-4">
-                <p className="text-2xl font-black text-[#8a3d06]">2022</p>
-                <p className="mt-1 text-xs uppercase tracking-wide text-[#6a7f90]">Archive Start</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </PageSectionShell>
-
-      <PageSectionShell className="pt-6">
-        <section className="rounded-[2rem] border border-[#f1d8b9] bg-[linear-gradient(135deg,#fff8ef_0%,#fff2df_52%,#fffdf9_100%)] p-6 md:p-8 shadow-[0_16px_34px_rgba(138,61,6,0.12)]">
+    <div className="min-h-screen bg-[#0B2230] pb-12">
+      <section className="max-w-7xl mx-auto px-4 pt-8 pb-10 md:pt-10">
+        <section className={awardsPanel}>
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-3xl">
-              <p className="inline-flex rounded-full border border-[#e4bc84] bg-white/80 px-3 py-1 text-xs font-bold uppercase tracking-[0.24em] text-[#9a5b1d]">
-                International Award
-              </p>
-              <h2 className="mt-4 text-2xl font-black leading-tight text-[#8a3d06] md:text-4xl">
+              <p className={awardsLabel}>International Award</p>
+              <h2 className={`mt-2 ${awardsHeading}`}>
                 Maharshi Honor Conferred at Jio World Centre, Mumbai
               </h2>
-              <div className="mt-5 space-y-4 text-sm leading-7 text-[#7a4f1f] md:text-[15px]">
+              <div className={`mt-5 space-y-4 ${awardsBody}`}>
                 <p>
                   Shri Manish Bhaiji Maharaj, the revered founder and spiritual guide of Bhagwat Heritage Service Foundation
                   Trust, was honored with the prestigious <strong>&ldquo;Maharshi Award&rdquo;</strong> at the renowned{" "}
@@ -1153,35 +1131,35 @@ export const AboutAwardsPage = memo(function AboutAwardsPage() {
             </div>
 
             <div className="grid gap-3 lg:w-[280px]">
-              <div className="rounded-2xl border border-[#efd4ae] bg-white/85 p-4">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b1d]">Award Scope</p>
-                <p className="mt-2 text-lg font-black text-[#123753]">International Recognition</p>
+              <div className={awardsCardPanel}>
+                <p className={awardsLabel}>Award Scope</p>
+                <p className={`mt-2 ${awardsCardTitle}`}>International Recognition</p>
               </div>
-              <div className="rounded-2xl border border-[#efd4ae] bg-white/85 p-4">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b1d]">Award Title</p>
-                <p className="mt-2 text-lg font-black text-[#123753]">Maharshi Award</p>
+              <div className={awardsCardPanel}>
+                <p className={awardsLabel}>Award Title</p>
+                <p className={`mt-2 ${awardsCardTitle}`}>Maharshi Award</p>
               </div>
-              <div className="rounded-2xl border border-[#efd4ae] bg-white/85 p-4">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b1d]">Venue</p>
-                <p className="mt-2 text-lg font-black text-[#123753]">Jio World Centre, Mumbai</p>
+              <div className={awardsCardPanel}>
+                <p className={awardsLabel}>Venue</p>
+                <p className={`mt-2 ${awardsCardTitle}`}>Jio World Centre, Mumbai</p>
               </div>
-              <div className="rounded-2xl border border-[#efd4ae] bg-white/85 p-4">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b1d]">Honoree</p>
-                <p className="mt-2 text-lg font-black text-[#123753]">Shri Manish Bhaiji Maharaj</p>
+              <div className={awardsCardPanel}>
+                <p className={awardsLabel}>Honoree</p>
+                <p className={`mt-2 ${awardsCardTitle}`}>Shri Manish Bhaiji Maharaj</p>
               </div>
             </div>
           </div>
         </section>
-      </PageSectionShell>
+      </section>
 
-      <PageSectionShell className="pt-6">
+      <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="grid gap-6 xl:grid-cols-[minmax(0,1.4fr)_minmax(280px,0.8fr)]">
-          <section className="rounded-3xl border border-[#dce8f5] bg-white p-6 shadow-sm">
+          <section className={awardsPanel}>
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#9a5b1d]">New Feature</p>
-                <h2 className="mt-2 text-2xl font-black text-[#123753]">Recognition Explorer</h2>
-                <p className="mt-2 max-w-2xl text-sm leading-6 text-[#4f6272]">
+                <p className={awardsLabel}>New Feature</p>
+                <h2 className={`mt-2 ${awardsHeading}`}>Recognition Explorer</h2>
+                <p className={`mt-2 max-w-2xl ${awardsBody}`}>
                   Filter recognitions by category to quickly review honors related to national acknowledgement, seva impact,
                   education support, and cultural preservation.
                 </p>
@@ -1198,8 +1176,8 @@ export const AboutAwardsPage = memo(function AboutAwardsPage() {
                       onClick={() => setActiveFilter(filter)}
                       className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                         active
-                          ? "bg-[#123753] text-white shadow-sm"
-                          : "border border-[#d7e5f2] bg-[#f7fbff] text-[#36526b] hover:border-[#b7cfe3] hover:bg-white"
+                          ? "bg-[#ef9a1e] text-white shadow-sm"
+                          : "border border-white/15 bg-white/10 text-white hover:border-white/25 hover:bg-white/15"
                       }`}
                     >
                       {filter}
@@ -1213,66 +1191,66 @@ export const AboutAwardsPage = memo(function AboutAwardsPage() {
               {visibleRecognitions.map((item) => (
                 <article
                   key={`${item.year}-${item.title}`}
-                  className="rounded-2xl border border-[#e1ebf5] bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] p-5"
+                  className={awardsCardPanel}
                 >
                   <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                     <div>
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="rounded-full bg-[#fff3e0] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#9a5b1d]">
+                        <span className="rounded-full bg-[#ef9a1e]/15 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#ef9a1e]">
                           {item.category}
                         </span>
-                        <span className="text-sm font-semibold text-[#60758c]">{item.year}</span>
+                        <span className="text-sm font-semibold text-[#dce7ec]">{item.year}</span>
                       </div>
-                      <h3 className="mt-3 text-xl font-black text-[#123753]">{item.title}</h3>
-                      <p className="mt-1 text-sm font-semibold text-[#8a4d14]">{item.presenter}</p>
+                      <h3 className={`mt-3 ${awardsCardTitle}`}>{item.title}</h3>
+                      <p className="mt-1 text-sm font-semibold text-[#ef9a1e]">{item.presenter}</p>
                     </div>
 
-                    <div className="rounded-2xl border border-[#e7eef6] bg-white px-4 py-3 md:max-w-[240px]">
-                      <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#6a7f90]">Outcome</p>
-                      <p className="mt-2 text-sm leading-6 text-[#48606f]">{item.impact}</p>
+                    <div className="rounded-2xl border border-white/10 bg-[#0d6179] px-4 py-3 md:max-w-[240px]">
+                      <p className={awardsLabel}>Outcome</p>
+                      <p className={`mt-2 ${awardsBody}`}>{item.impact}</p>
                     </div>
                   </div>
 
-                  <p className="mt-4 text-sm leading-7 text-[#4f6272]">{item.summary}</p>
+                  <p className={`mt-4 ${awardsBody}`}>{item.summary}</p>
                 </article>
               ))}
             </div>
           </section>
 
           <aside className="space-y-6">
-            <section className="rounded-3xl border border-[#dce8f5] bg-white p-6 shadow-sm">
-              <h2 className="text-2xl font-black text-[#123753]">Recognition Focus</h2>
-              <ul className="mt-4 space-y-3 text-sm leading-6 text-[#4f6272]">
-                <li className="rounded-2xl bg-[#f7fbff] px-4 py-3">
+            <section className={awardsPanel}>
+              <h2 className={awardsHeading}>Recognition Focus</h2>
+              <ul className={`mt-4 space-y-3 ${awardsBody}`}>
+                <li className="rounded-2xl bg-[#0c5871] px-4 py-3">
                   Seva programs are evaluated on continuity, discipline, and measurable community relief.
                 </li>
-                <li className="rounded-2xl bg-[#fff7ea] px-4 py-3">
+                <li className="rounded-2xl bg-[#0c5871] px-4 py-3">
                   Educational support recognitions highlight long-term child and youth development impact.
                 </li>
-                <li className="rounded-2xl bg-[#f7fbff] px-4 py-3">
+                <li className="rounded-2xl bg-[#0c5871] px-4 py-3">
                   Cultural honors reflect preservation of devotion, heritage, and spiritual participation.
                 </li>
               </ul>
             </section>
 
-            <section className="rounded-3xl border border-[#f1d8b9] bg-[#fff8ef] p-6 shadow-sm">
-              <h2 className="text-2xl font-black text-[#8a3d06]">Milestone Snapshot</h2>
+            <section className={awardsPanel}>
+              <h2 className={awardsHeading}>Milestone Snapshot</h2>
               <div className="mt-4 space-y-4">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b1d]">Public Trust</p>
-                  <p className="mt-1 text-sm leading-6 text-[#7a4f1f]">
+                <div className={awardsCardPanel}>
+                  <p className={awardsLabel}>Public Trust</p>
+                  <p className={`mt-1 ${awardsBody}`}>
                     Recognition strengthens transparency, credibility, and long-term support for trust-led initiatives.
                   </p>
                 </div>
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b1d]">Service Quality</p>
-                  <p className="mt-1 text-sm leading-6 text-[#7a4f1f]">
+                <div className={awardsCardPanel}>
+                  <p className={awardsLabel}>Service Quality</p>
+                  <p className={`mt-1 ${awardsBody}`}>
                     Awards validate disciplined execution across social relief, event operations, and volunteer engagement.
                   </p>
                 </div>
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b1d]">Future Readiness</p>
-                  <p className="mt-1 text-sm leading-6 text-[#7a4f1f]">
+                <div className={awardsCardPanel}>
+                  <p className={awardsLabel}>Future Readiness</p>
+                  <p className={`mt-1 ${awardsBody}`}>
                     The archive creates a strong narrative base for upcoming partnerships, sponsorships, and institutional outreach.
                   </p>
                 </div>
@@ -1280,407 +1258,11 @@ export const AboutAwardsPage = memo(function AboutAwardsPage() {
             </section>
           </aside>
         </div>
-      </PageSectionShell>
+      </section>
     </div>
   );
 });
 
-export const AboutStructurePage = memo(function AboutStructurePage() {
-  usePageMeta(
-    "Organizational Structure",
-    "Leadership hierarchy, governance structure, and operational teams of Bhagwat Heritage Service Foundation Trust.",
-  );
-
-  const trustees = [
-    {
-      name: "Shri Hariprasad Ji",
-      role: "Chairman",
-      image: "/images/manish2.PNG",
-      desc: "Guides board direction, strategic trust alignment, and policy stewardship across core initiatives.",
-    },
-    {
-      name: "Smt. Shantaben Joshi",
-      role: "Secretary",
-      image: "/images/heritage1.png",
-      desc: "Coordinates trust records, governance communication, and committee follow-through for institutional continuity.",
-    },
-    {
-      name: "Shri Mukesh Bhai Patel",
-      role: "Treasurer",
-      image: "/images/heritage2.png",
-      desc: "Oversees accountable financial planning, reporting discipline, and donation utilization transparency.",
-    },
-    {
-      name: "Shri Devendra Bhai",
-      role: "Trustee",
-      image: "/images/spiritual1.png",
-      desc: "Supports trust-wide planning, seva execution review, and interdepartment coordination with field teams.",
-    },
-  ];
-
-  const advisors = [
-    {
-      title: "Spiritual Advisors",
-      icon: "fas fa-om",
-      desc: "Offer scriptural guidance, festival protocol support, and dharmic alignment for trust programs.",
-    },
-    {
-      title: "Legal Advisors",
-      icon: "fas fa-scale-balanced",
-      desc: "Support compliance, trust documentation, legal reviews, and governance safeguards.",
-    },
-    {
-      title: "Financial Advisors",
-      icon: "fas fa-chart-line",
-      desc: "Guide audit discipline, donor transparency, budgeting, and long-term financial sustainability.",
-    },
-    {
-      title: "Social Development Experts",
-      icon: "fas fa-hand-holding-heart",
-      desc: "Help shape outreach models, impact measurement, and community-serving program design.",
-    },
-  ];
-
-  const managementTeam = [
-    {
-      name: "Program Director",
-      image: "/images/education.png",
-      desc: "Leads annual planning, impact targets, and coordination across spiritual, seva, and educational initiatives.",
-    },
-    {
-      name: "Operations Manager",
-      image: "/images/jal.png",
-      desc: "Runs daily execution systems, team scheduling, logistics, and program readiness across departments.",
-    },
-    {
-      name: "Event Coordinator",
-      image: "/images/annseva.png",
-      desc: "Handles mahotsav planning, volunteer deployment, guest flow, and ceremonial execution support.",
-    },
-    {
-      name: "Media Manager",
-      image: "/images/pravachan.png",
-      desc: "Oversees digital storytelling, announcements, livestream support, and community media communication.",
-    },
-  ];
-
-  const departments = [
-    {
-      title: "Spiritual Programs Department",
-      icon: "fas fa-book-open",
-      desc: "Manages katha, satsang, discourse planning, scriptural learning support, and devotional program curation.",
-    },
-    {
-      title: "Gau Seva Department",
-      icon: "fas fa-cow",
-      desc: "Coordinates gaushala support, fodder seva, medical care response, and devotee participation programs.",
-    },
-    {
-      title: "Social Service Department",
-      icon: "fas fa-hands-helping",
-      desc: "Leads relief work, education support, food seva, healthcare assistance, and grassroots welfare outreach.",
-    },
-    {
-      title: "Digital Services Department",
-      icon: "fas fa-laptop-code",
-      desc: "Handles online satsang, digital membership, content publishing, website systems, and engagement channels.",
-    },
-    {
-      title: "Event Management Department",
-      icon: "fas fa-calendar-check",
-      desc: "Plans festivals, spiritual gatherings, guest logistics, volunteer operations, and event-day coordination.",
-    },
-  ];
-
-  const hierarchy = [
-    "Founder / Spiritual Head",
-    "Board of Trustees",
-    "Advisory Board",
-    "Management Team",
-    "Departments & Volunteers",
-  ];
-
-  const volunteerStats = [
-    { value: "1,200+", label: "Total Volunteers" },
-    { value: "18", label: "Operational Regions" },
-    { value: "25+", label: "Activities Supported" },
-  ];
-
-  const governancePoints = [
-    "Major decisions move through spiritual review, trustee discussion, and role-based execution ownership.",
-    "Ethical guidelines prioritize dharma, accountability, public trust, and respectful community service.",
-    "Financial transparency is maintained through tracked donations, utilization reporting, and compliance-led review.",
-    "Operational feedback from departments and volunteers is reviewed regularly to improve service quality.",
-  ];
-
-  const workflow = [
-    {
-      step: "1. Spiritual Direction",
-      desc: "Founder guidance shapes the intent, values, and mission focus of major trust initiatives.",
-    },
-    {
-      step: "2. Trustee Review",
-      desc: "Board members assess feasibility, resources, compliance, and institutional priority.",
-    },
-    {
-      step: "3. Advisory Input",
-      desc: "Specialized advisors refine the plan from legal, financial, and social-development angles.",
-    },
-    {
-      step: "4. Management Allocation",
-      desc: "Operational leads assign responsibilities, timelines, execution teams, and reporting checkpoints.",
-    },
-    {
-      step: "5. Department Execution",
-      desc: "Departments and volunteers deliver the program on ground with regular accountability loops.",
-    },
-  ];
-
-  return (
-    <div className="pb-12">
-      <PageSectionShell className="pt-8 md:pt-10">
-        <section
-          className="overflow-hidden rounded-[2rem] border border-[#f1d8b9] shadow-[0_22px_48px_rgba(138,61,6,0.16)]"
-          style={{
-            backgroundImage:
-              "linear-gradient(135deg, rgba(15,44,68,0.86) 0%, rgba(15,44,68,0.72) 44%, rgba(191,104,20,0.44) 100%), url('https://res.cloudinary.com/der8zinu8/image/upload/v1771413474/itcm84f9dnqpzgawp7ak.png')",
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-          }}
-        >
-          <div className="grid gap-8 p-6 md:p-8 lg:grid-cols-[minmax(0,1.1fr)_360px] lg:items-end">
-            <div className="max-w-3xl text-white">
-              <p className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-bold uppercase tracking-[0.24em] text-[#ffe7c7]">
-                Leadership & Governance
-              </p>
-              <h1 className="mt-4 text-3xl font-black md:text-5xl">Organizational Structure</h1>
-              <p className="mt-4 text-base leading-7 text-white/90 md:text-lg">
-                A transparent overview of how Bhagwat Heritage Service Foundation Trust is spiritually guided,
-                ethically governed, and professionally operated through trustees, advisors, management teams,
-                departments, and volunteer networks.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { value: "5", label: "Leadership Layers" },
-                { value: "4", label: "Trustee Roles" },
-                { value: "5", label: "Core Departments" },
-                { value: "100%", label: "Governance Focus" },
-              ].map((item) => (
-                <div key={item.label} className="rounded-2xl border border-white/15 bg-white/10 p-4 text-white backdrop-blur-sm">
-                  <p className="text-2xl font-black text-[#ffd08a]">{item.value}</p>
-                  <p className="mt-1 text-xs uppercase tracking-wide text-white/75">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      </PageSectionShell>
-
-      <PageSectionShell className="pt-6">
-        <section className="rounded-[2rem] border border-[#f0d8ba] bg-[linear-gradient(135deg,#fff8ef_0%,#fff5ea_52%,#ffffff_100%)] p-6 md:p-8 shadow-[0_16px_34px_rgba(138,61,6,0.10)]">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#9a5b1d]">Founder & Spiritual Head</p>
-          <div className="mt-4 grid gap-6 lg:grid-cols-[320px_minmax(0,1fr)] lg:items-center">
-            <div className="rounded-[28px] border border-[#f1dcc0] bg-white p-3 shadow-sm">
-              <img
-                src="/images/manish2.PNG"
-                alt="Manish Bhaiji Maharaj"
-                className="h-[320px] w-full rounded-[22px] object-cover"
-              />
-            </div>
-
-            <div className="rounded-[28px] border border-[#f0d8ba] bg-white p-6 shadow-sm">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#c6761e]">Founder Leadership Card</p>
-              <h2 className="mt-3 text-3xl font-black text-[#123753] md:text-4xl">Manish Bhaiji Maharaj</h2>
-              <p className="mt-2 text-lg font-semibold text-[#9a5b1d]">Founder & Spiritual Guide</p>
-              <p className="mt-4 text-base leading-7 text-[#53626d]">
-                Revered as the spiritual force behind the trust, Manish Bhaiji Maharaj provides the core moral,
-                devotional, and mission direction for Bhagwat Heritage Service Foundation Trust. His leadership
-                connects katha, seva, culture, and disciplined public service into one unified trust vision.
-              </p>
-              <p className="mt-4 text-base leading-7 text-[#53626d]">
-                Under his guidance, the trust advances spiritual education, community welfare, youth formation,
-                cultural preservation, and faith-rooted social impact with long-term integrity.
-              </p>
-              <Link to={ROUTES.about.founder} className="mt-6 inline-flex rounded-xl bg-[#ff9d00] px-6 py-3 font-bold text-white transition-colors hover:bg-[#ea9000]">
-                View Full Profile
-              </Link>
-            </div>
-          </div>
-        </section>
-      </PageSectionShell>
-
-      <PageSectionShell className="pt-6">
-        <section className="rounded-[2rem] border border-[#dce8f5] bg-white p-6 md:p-8 shadow-sm">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#9a5b1d]">Board Governance</p>
-            <h2 className="mt-2 text-3xl font-black text-[#123753] md:text-4xl">Board of Trustees</h2>
-            <p className="mt-3 text-base leading-7 text-[#4f6272]">
-              The Board of Trustees provides policy direction, fiduciary oversight, and strategic continuity for the trust.
-            </p>
-          </div>
-
-          <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {trustees.map((member) => (
-              <article
-                key={member.role}
-                className="group rounded-[24px] border border-[#e3ebf3] bg-[linear-gradient(180deg,#ffffff_0%,#f9fbff_100%)] p-5 shadow-sm transition duration-300 hover:-translate-y-2 hover:border-[#f0b15d] hover:shadow-[0_18px_36px_rgba(18,55,83,0.14)]"
-              >
-                <img src={member.image} alt={member.name} className="h-52 w-full rounded-[18px] object-cover" />
-                <h3 className="mt-4 text-xl font-black text-[#123753]">{member.name}</h3>
-                <p className="mt-1 text-sm font-semibold uppercase tracking-wide text-[#c6761e]">{member.role}</p>
-                <p className="mt-3 text-sm leading-7 text-[#53626d]">{member.desc}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-      </PageSectionShell>
-
-      <PageSectionShell className="pt-6">
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          <section className="rounded-[2rem] border border-[#dce8f5] bg-white p-6 md:p-8 shadow-sm">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#9a5b1d]">Guiding Specialists</p>
-            <h2 className="mt-2 text-3xl font-black text-[#123753]">Advisory Board</h2>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              {advisors.map((advisor) => (
-                <article key={advisor.title} className="rounded-2xl border border-[#e3ebf3] bg-[#fbfdff] p-5 transition hover:-translate-y-1 hover:shadow-md">
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#fff3df] text-[#c6761e] shadow-sm">
-                    <i className={advisor.icon} />
-                  </span>
-                  <h3 className="mt-4 text-xl font-black text-[#123753]">{advisor.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-[#53626d]">{advisor.desc}</p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="rounded-[2rem] border border-[#dce8f5] bg-white p-6 md:p-8 shadow-sm">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#9a5b1d]">Daily Leadership</p>
-            <h2 className="mt-2 text-3xl font-black text-[#123753]">Management Team</h2>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              {managementTeam.map((member) => (
-                <article key={member.name} className="rounded-2xl border border-[#e3ebf3] bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] p-4 transition hover:-translate-y-1 hover:shadow-md">
-                  <img src={member.image} alt={member.name} className="h-40 w-full rounded-[18px] object-cover" />
-                  <h3 className="mt-4 text-xl font-black text-[#123753]">{member.name}</h3>
-                  <p className="mt-3 text-sm leading-7 text-[#53626d]">{member.desc}</p>
-                </article>
-              ))}
-            </div>
-          </section>
-        </div>
-      </PageSectionShell>
-
-      <PageSectionShell className="pt-6">
-        <section className="rounded-[2rem] border border-[#f0d8ba] bg-[linear-gradient(180deg,#fff8ef_0%,#fffdf9_100%)] p-6 md:p-8 shadow-sm">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#9a5b1d]">Departments & Committees</p>
-          <h2 className="mt-2 text-3xl font-black text-[#123753] md:text-4xl">Operational Departments</h2>
-          <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
-            {departments.map((department) => (
-              <article key={department.title} className="rounded-[24px] border border-[#efd6b4] bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#fff3df] text-[#c6761e] shadow-sm">
-                  <i className={department.icon} />
-                </span>
-                <h3 className="mt-4 text-lg font-black text-[#123753]">{department.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-[#5a6872]">{department.desc}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-      </PageSectionShell>
-
-      <PageSectionShell className="pt-6">
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)]">
-          <section className="rounded-[2rem] border border-[#dce8f5] bg-white p-6 md:p-8 shadow-sm">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#9a5b1d]">Hierarchy Diagram</p>
-            <h2 className="mt-2 text-3xl font-black text-[#123753]">Organizational Hierarchy</h2>
-            <div className="mt-8 flex flex-col items-center gap-4">
-              {hierarchy.map((item, index) => (
-                <div key={item} className="flex w-full max-w-[540px] flex-col items-center">
-                  <div className="w-full rounded-[24px] border border-[#e3ebf3] bg-[linear-gradient(135deg,#f8fbff_0%,#ffffff_100%)] px-5 py-4 text-center shadow-sm">
-                    <p className="text-lg font-black text-[#123753]">{item}</p>
-                  </div>
-                  {index < hierarchy.length - 1 ? <span className="my-2 text-2xl text-[#c6761e]">↓</span> : null}
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <aside className="space-y-6">
-            <section className="rounded-[2rem] border border-[#dce8f5] bg-white p-6 shadow-sm">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#9a5b1d]">Volunteer Network</p>
-              <h2 className="mt-2 text-2xl font-black text-[#123753]">Volunteers Backbone</h2>
-              <div className="mt-5 grid grid-cols-3 gap-3">
-                {volunteerStats.map((item) => (
-                  <div key={item.label} className="rounded-2xl border border-[#e3ebf3] bg-[#fbfdff] p-4 text-center">
-                    <p className="text-2xl font-black text-[#c6761e]">{item.value}</p>
-                    <p className="mt-1 text-xs uppercase tracking-wide text-[#6a7f90]">{item.label}</p>
-                  </div>
-                ))}
-              </div>
-              <ul className="mt-5 space-y-3 text-sm leading-6 text-[#4f6272]">
-                <li className="rounded-2xl bg-[#f7fbff] px-4 py-3">Volunteers support festivals, seva drives, digital outreach, field distribution, and temple events.</li>
-                <li className="rounded-2xl bg-[#fff7ea] px-4 py-3">Regional teams work across local trust clusters, outreach districts, and event-based operational zones.</li>
-              </ul>
-            </section>
-
-            <section className="rounded-[2rem] border border-[#f1d8b9] bg-[#fff8ef] p-6 shadow-sm">
-              <h2 className="text-2xl font-black text-[#8a3d06]">Decision Workflow</h2>
-              <div className="mt-4 space-y-4">
-                {workflow.map((item) => (
-                  <div key={item.step} className="rounded-2xl border border-[#efd9ba] bg-white/75 p-4">
-                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#9a5b1d]">{item.step}</p>
-                    <p className="mt-2 text-sm leading-6 text-[#7a4f1f]">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </aside>
-        </div>
-      </PageSectionShell>
-
-      <PageSectionShell className="pt-6">
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          <section className="rounded-[2rem] border border-[#dce8f5] bg-white p-6 md:p-8 shadow-sm">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#9a5b1d]">Governance & Transparency</p>
-            <h2 className="mt-2 text-3xl font-black text-[#123753]">Ethical Governance Standards</h2>
-            <ul className="mt-6 space-y-3 text-sm leading-7 text-[#4f6272]">
-              {governancePoints.map((point, index) => (
-                <li key={point} className={`rounded-2xl px-4 py-3 ${index % 2 === 0 ? "bg-[#f7fbff]" : "bg-[#fff7ea]"}`}>
-                  <span className="mr-2 font-black text-[#c6761e]">•</span>
-                  {point}
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section className="rounded-[2rem] border border-[#f1d8b9] bg-[linear-gradient(135deg,#fff5e5_0%,#fffaf4_52%,#ffffff_100%)] p-6 md:p-8 shadow-sm">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#9a5b1d]">Engagement</p>
-            <h2 className="mt-2 text-3xl font-black text-[#123753]">Support the Trust Structure in Action</h2>
-            <p className="mt-4 text-base leading-7 text-[#5a6872]">
-              Visitors, donors, institutions, and sevadars can connect directly with the trust through service,
-              participation, collaboration, and mission support pathways.
-            </p>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              {/* <Link to={ROUTES.involved.volunteer} className="inline-flex items-center justify-center rounded-xl bg-[#ff9d00] px-5 py-3 font-bold text-white transition-colors hover:bg-[#ea9000]">
-                Become a Volunteer
-              </Link> */}
-              <Link to={ROUTES.digital.membership} className="inline-flex items-center justify-center rounded-xl border border-[#d8b98c] bg-white px-5 py-3 font-bold text-[#8a3d06] transition-colors hover:bg-[#fff7ea]">
-                Join the Trust
-              </Link>
-              <Link to={ROUTES.involved.partner} className="inline-flex items-center justify-center rounded-xl border border-[#d7e5f2] bg-[#f7fbff] px-5 py-3 font-bold text-[#123753] transition-colors hover:bg-white">
-                Partner With Us
-              </Link>
-              <Link to={ROUTES.donate} className="inline-flex items-center justify-center rounded-xl bg-[#123753] px-5 py-3 font-bold text-white transition-colors hover:bg-[#0d3b66]">
-                Donate Now
-              </Link>
-            </div>
-          </section>
-        </div>
-      </PageSectionShell>
-    </div>
-  );
-});
 
 export const AboutActivitiesOverviewPage = memo(function AboutActivitiesOverviewPage() {
   const [activeStream, setActiveStream] = useState<ActivityStream>("All");

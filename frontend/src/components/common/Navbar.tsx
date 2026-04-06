@@ -29,7 +29,6 @@ const NAV_ITEMS: NavItemConfig[] = [
       { id: "about-objectives", labelKey: "navbar.items.trustObjectives", href: ROUTES.about.objectives },
       { id: "about-founder", labelKey: "navbar.items.founder", href: ROUTES.about.founder },
       { id: "about-awards", labelKey: "navbar.items.awards", href: ROUTES.about.awards },
-      { id: "about-structure", labelKey: "navbar.items.structure", href: ROUTES.about.structure },
       { id: "about-activities", labelKey: "navbar.items.activities", href: ROUTES.about.activities },
     ],
   },

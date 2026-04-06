@@ -1,5 +1,6 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { HeroSection } from "../../components/ui/HeroSection";
 import { ROUTES } from "../../app/routes/routes";
 import { usePageMeta } from "../../hooks/usePageMeta";
 
@@ -38,6 +39,52 @@ type Testimonial = {
   name: string;
   role: string;
 };
+
+const heroActivitiesImage = "/images/hero1.png";
+
+const heroButtons = [
+  {
+    label: "Donate to the Trust",
+    to: ROUTES.donate,
+    className:
+      "bg-[#f3a11f] text-white shadow-[0_14px_28px_rgba(243,161,31,0.28)] hover:bg-[#ffaf31]",
+  },
+  {
+    label: "See Event Highlights",
+    to: ROUTES.media.highlights,
+    className:
+      "bg-[#0f7994] text-white shadow-[0_14px_28px_rgba(15,121,148,0.28)] hover:bg-[#1492b1]",
+  },
+  {
+    label: "Support Our Activities",
+    to: ROUTES.involved.partner,
+    className:
+      "border border-white/35 bg-white/8 text-white shadow-[0_12px_26px_rgba(6,22,33,0.22)] hover:bg-white/14",
+  },
+];
+
+const topStats = [
+  {
+    title: "Service Areas",
+    label: "6 Core Streams",
+    note: "Spiritual, cultural, educational, welfare, festival, and charity initiatives.",
+  },
+  {
+    title: "Volunteer Spirit",
+    label: "Mission-Led",
+    note: "Programs supported by disciplined trust coordination and seva teams.",
+  },
+  {
+    title: "Community Reach",
+    label: "Local + Regional",
+    note: "Activities built for families, devotees, students, and beneficiaries.",
+  },
+  {
+    title: "Approach",
+    label: "Faith + Service",
+    note: "A balanced model of devotion, heritage, and practical social contribution.",
+  },
+];
 
 const ACTIVITY_CATEGORIES: ActivityCategory[] = [
   {
@@ -224,17 +271,29 @@ const MetricCard = memo(function MetricCard({ metric }: { metric: ImpactMetric }
   return (
     <div
       ref={ref}
-      className="rounded-[28px] border border-white/10 bg-[#12394A] p-5 shadow-[0_14px_32px_rgba(0,0,0,0.22)]"
+      className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-[0_14px_32px_rgba(0,0,0,0.22)]"
     >
       <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#ffd08a]">{metric.label}</p>
       <p className="mt-3 text-4xl font-black text-white md:text-5xl">
         {count.toLocaleString()}
         {metric.suffix ?? ""}
       </p>
-      <p className="mt-3 text-sm leading-6 text-[#d7e3ea]">{metric.note}</p>
+      <p className={`mt-3 ${ACTIVITIES_BODY}`}>{metric.note}</p>
     </div>
   );
 });
+
+const ACTIVITIES_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]";
+const ACTIVITIES_HEADING = "text-[14px] font-black text-white md:text-[20px]";
+const ACTIVITIES_BODY = "text-base leading-7 text-[#dce7ec] md:text-lg";
+const ACTIVITIES_CARD_TITLE = "text-2xl font-black text-white md:text-[1.75rem]";
+const ACTIVITIES_LIST_TITLE = "text-lg font-black text-white md:text-xl";
+const ACTIVITIES_TOP_CARD_TITLE = "text-[20px] font-black uppercase tracking-wide text-[#ef9a1e] md:text-[24px]";
+const ACTIVITIES_TOP_CARD_VALUE = "mt-1 text-[14px] font-black text-white md:text-[20px]";
+const SECTION_PANEL =
+  "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
+const CARD_PANEL =
+  "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
 
 export default memo(function AboutActivitiesOverviewPage() {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -256,79 +315,47 @@ export default memo(function AboutActivitiesOverviewPage() {
 
   return (
     <div className="min-h-screen bg-[#0B2230] pb-16 text-white">
-      <section className="px-4 pt-8 md:pt-10">
-        <div
-          className="relative mx-auto max-w-7xl overflow-hidden rounded-[32px] border border-white/10 bg-cover bg-center shadow-[0_18px_45px_rgba(0,0,0,0.28)]"
-          style={{
-            backgroundImage:
-              "linear-gradient(120deg, rgba(11,34,48,0.92) 0%, rgba(11,34,48,0.78) 45%, rgba(245,158,11,0.24) 100%), url('/images/hero1.png')",
-          }}
-        >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,208,138,0.18),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(56,189,248,0.14),transparent_32%)]" />
-          <div className="relative z-10 px-5 py-12 md:px-10 md:py-16 lg:px-14 lg:py-20">
-            <nav aria-label="Breadcrumb" className="mb-6">
-              <ol className="flex flex-wrap items-center gap-2 text-sm text-white/80">
-                <li>
-                  <Link to={ROUTES.home} className="transition-colors hover:text-[#ffd08a]">
-                    Home
-                  </Link>
-                </li>
-                <li className="text-white/45">&gt;</li>
-                <li>
-                  <Link to={ROUTES.about.index} className="transition-colors hover:text-[#ffd08a]">
-                    About
-                  </Link>
-                </li>
-                <li className="text-white/45">&gt;</li>
-                <li aria-current="page" className="font-semibold text-[#ffd08a]">
-                  Trust Activities Overview
-                </li>
-              </ol>
-            </nav>
-
-            <div className="max-w-3xl">
-              <p className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.24em] text-[#ffd08a]">
-                Mission in Action
-              </p>
-              <h1 className="mt-5 text-4xl font-black leading-tight md:text-6xl">Trust Activities Overview</h1>
-              <p className="mt-5 text-base leading-7 text-white/85 md:text-xl md:leading-8">
-                Bhagwat Heritage Service Foundation Trust advances spiritual awakening, cultural continuity, and
-                compassionate service through katha, satsang, education, seva, and community-led outreach.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                {/* <Link
-                  to={ROUTES.involved.volunteer}
-                  className="inline-flex items-center rounded-xl bg-[#F59E0B] px-6 py-3 font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[#dd8f0a]"
-                >
-                  Become a Volunteer
-                </Link> */}
-                <Link
-                  to={ROUTES.donate}
-                  className="inline-flex items-center rounded-xl border border-white/15 bg-white/10 px-6 py-3 font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-white/15"
-                >
-                  Donate to the Trust
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="-mt-8 px-4 pb-6">
-        <div className="mx-auto grid max-w-7xl gap-3 md:grid-cols-2 xl:grid-cols-4">
-          {[
-            { label: "Service Areas", value: "6", note: "Spiritual, cultural, educational, welfare, festival, and charity initiatives." },
-            { label: "Volunteer Spirit", value: "Mission-Led", note: "Programs supported by disciplined trust coordination and seva teams." },
-            { label: "Community Reach", value: "Local + Regional", note: "Activities built for families, devotees, students, and beneficiaries." },
-            { label: "Approach", value: "Faith + Service", note: "A balanced model of devotion, heritage, and practical social contribution." },
-          ].map((item) => (
-            <div
-              key={item.label}
-              className="rounded-2xl border border-white/10 bg-[#12394A] p-4 shadow-[0_12px_28px_rgba(0,0,0,0.2)] backdrop-blur-sm"
+      <HeroSection
+        title="Trust Activities Overview"
+        subtitle="Mission in Action"
+        subtitleClassName="whitespace-nowrap text-[18px] font-semibold text-white sm:text-[24px] md:text-[34px]"
+        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
+        backgroundImage={heroActivitiesImage}
+        boxed
+        heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-black/55"
+      >
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          {heroButtons.slice(0, 2).map((button) => (
+            <Link
+              key={button.label}
+              to={button.to}
+              className={`inline-flex items-center rounded-lg px-6 py-3 font-semibold transition-colors ${button.className}`}
             >
-              <p className="text-xs uppercase tracking-[0.18em] text-[#ffd08a]">{item.label}</p>
-              <p className="mt-2 text-2xl font-black text-white">{item.value}</p>
-              <p className="mt-2 text-sm leading-6 text-[#d7e3ea]">{item.note}</p>
+              {button.label}
+            </Link>
+          ))}
+        </div>
+        <div className="mt-3 flex justify-center">
+          <Link
+            to={heroButtons[2].to}
+            className={`inline-flex items-center rounded-lg px-6 py-3 font-semibold transition-colors ${heroButtons[2].className}`}
+          >
+            {heroButtons[2].label}
+          </Link>
+        </div>
+      </HeroSection>
+
+      <section className="relative z-20 mt-[10px] pb-6">
+        <div className="mx-auto grid max-w-7xl gap-3 px-4 md:grid-cols-2 xl:grid-cols-4">
+          {topStats.map((item) => (
+            <div
+              key={item.title}
+              className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]"
+            >
+              <p className={ACTIVITIES_TOP_CARD_TITLE}>* {item.title}</p>
+              <p className={ACTIVITIES_TOP_CARD_VALUE}>{item.label}</p>
+              <p className={`mt-1 ${ACTIVITIES_BODY}`}>{item.note}</p>
             </div>
           ))}
         </div>
@@ -336,10 +363,10 @@ export default memo(function AboutActivitiesOverviewPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-8">
         <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-          <article className="rounded-[32px] border border-white/10 bg-[#103246] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.24)] md:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffd08a]">Introduction</p>
-            <h2 className="mt-3 text-3xl font-black text-white md:text-5xl">Serving Society, Culture, and Spiritual Heritage</h2>
-            <div className="mt-6 space-y-5 text-base leading-8 text-[#d7e3ea] md:text-lg">
+          <article className={SECTION_PANEL}>
+            <p className={ACTIVITIES_LABEL}>Introduction</p>
+            <h2 className={`mt-3 ${ACTIVITIES_HEADING}`}>Serving Society, Culture, and Spiritual Heritage</h2>
+            <div className={`mt-6 space-y-5 ${ACTIVITIES_BODY}`}>
               <p>
                 Bhagwat Heritage Service Foundation Trust exists to preserve and share spiritual wisdom while translating
                 devotion into organized service for society. Its work connects scriptural learning, satsang, cultural
@@ -373,10 +400,10 @@ export default memo(function AboutActivitiesOverviewPage() {
             ].map((item) => (
               <div
                 key={item.title}
-                className="rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,#133a4b_0%,#0f3140_100%)] p-5 shadow-[0_14px_30px_rgba(0,0,0,0.18)]"
+                className={CARD_PANEL}
               >
-                <h3 className="text-xl font-black text-white">{item.title}</h3>
-                <p className="mt-3 leading-7 text-[#d7e3ea]">{item.text}</p>
+                <h3 className={ACTIVITIES_CARD_TITLE}>{item.title}</h3>
+                <p className={`mt-3 ${ACTIVITIES_BODY}`}>{item.text}</p>
               </div>
             ))}
           </aside>
@@ -384,14 +411,14 @@ export default memo(function AboutActivitiesOverviewPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-8">
-        <div className="rounded-[32px] border border-white/10 bg-[#103246] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.24)] md:p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffd08a]">Main Activity Categories</p>
-          <h2 className="mt-3 text-3xl font-black text-white md:text-5xl">Core Areas of Trust Activity</h2>
+        <div className={SECTION_PANEL}>
+          <p className={ACTIVITIES_LABEL}>Main Activity Categories</p>
+          <h2 className={`mt-3 ${ACTIVITIES_HEADING}`}>Core Areas of Trust Activity</h2>
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {ACTIVITY_CATEGORIES.map((item) => (
               <article
                 key={item.title}
-                className="group overflow-hidden rounded-[28px] border border-white/10 bg-[#143446] shadow-[0_14px_32px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-[#F59E0B]/45"
+                className="group overflow-hidden rounded-[24px] border border-white/10 bg-[#0c5871] shadow-[0_14px_32px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-[#F59E0B]/45"
               >
                 <div className="relative h-52 overflow-hidden">
                   <img
@@ -405,8 +432,8 @@ export default memo(function AboutActivitiesOverviewPage() {
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-2xl font-black text-white">{item.title}</h3>
-                  <p className="mt-3 leading-7 text-[#d7e3ea]">{item.description}</p>
+                  <h3 className={ACTIVITIES_CARD_TITLE}>{item.title}</h3>
+                  <p className={`mt-3 ${ACTIVITIES_BODY}`}>{item.description}</p>
                   <Link
                     to={item.href}
                     className="mt-5 inline-flex rounded-xl border border-[#F59E0B]/35 bg-[#F59E0B]/10 px-4 py-2.5 text-sm font-bold text-[#ffd08a] transition-colors hover:bg-[#F59E0B]/20"
@@ -421,13 +448,13 @@ export default memo(function AboutActivitiesOverviewPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-8">
-        <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,#12394A_0%,#0f3140_100%)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.24)] md:p-8">
+        <div className={SECTION_PANEL}>
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffd08a]">Activity Highlights</p>
-              <h2 className="mt-3 text-3xl font-black text-white md:text-5xl">Measured Through Consistent Community Impact</h2>
+              <p className={ACTIVITIES_LABEL}>Activity Highlights</p>
+              <h2 className={`mt-3 ${ACTIVITIES_HEADING}`}>Measured Through Consistent Community Impact</h2>
             </div>
-            <p className="max-w-xl text-sm leading-7 text-[#d7e3ea] md:text-base">
+            <p className={`max-w-xl ${ACTIVITIES_BODY}`}>
               The trust's work spans recurring spiritual events, welfare support, volunteer participation, and long-term
               cultural preservation, all delivered with a service-first mindset.
             </p>
@@ -441,11 +468,11 @@ export default memo(function AboutActivitiesOverviewPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-8">
-        <div className="rounded-[32px] border border-white/10 bg-[#103246] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.24)] md:p-8">
+        <div className={SECTION_PANEL}>
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffd08a]">Recent Activities</p>
-              <h2 className="mt-3 text-3xl font-black text-white md:text-5xl">Recent Trust Work Across Programs and Outreach</h2>
+              <p className={ACTIVITIES_LABEL}>Recent Activities</p>
+              <h2 className={`mt-3 ${ACTIVITIES_HEADING}`}>Recent Trust Work Across Programs and Outreach</h2>
             </div>
             <Link
               to={ROUTES.media.highlights}
@@ -459,7 +486,7 @@ export default memo(function AboutActivitiesOverviewPage() {
             {RECENT_ACTIVITIES.map((item) => (
               <article
                 key={`${item.title}-${item.date}`}
-                className="overflow-hidden rounded-[28px] border border-white/10 bg-[#143446] shadow-[0_14px_32px_rgba(0,0,0,0.18)]"
+                className="overflow-hidden rounded-[24px] border border-white/10 bg-[#0c5871] shadow-[0_14px_32px_rgba(0,0,0,0.18)]"
               >
                 <img src={item.image} alt={item.title} className="h-56 w-full object-cover" />
                 <div className="p-6">
@@ -468,8 +495,8 @@ export default memo(function AboutActivitiesOverviewPage() {
                     <span className="text-white/35">|</span>
                     <span>{item.location}</span>
                   </div>
-                  <h3 className="mt-3 text-2xl font-black text-white">{item.title}</h3>
-                  <p className="mt-3 leading-7 text-[#d7e3ea]">{item.summary}</p>
+                  <h3 className={`mt-3 ${ACTIVITIES_CARD_TITLE}`}>{item.title}</h3>
+                  <p className={`mt-3 ${ACTIVITIES_BODY}`}>{item.summary}</p>
                 </div>
               </article>
             ))}
@@ -479,7 +506,7 @@ export default memo(function AboutActivitiesOverviewPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-8">
         <div className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
-          <div className="overflow-hidden rounded-[32px] border border-white/10 bg-[#103246] shadow-[0_16px_34px_rgba(0,0,0,0.24)]">
+          <div className="overflow-hidden rounded-[30px] border border-white/10 bg-[#0d6179] shadow-[0_16px_34px_rgba(0,0,0,0.24)]">
             <div className="relative">
               <img
                 src={activeGalleryItem.image}
@@ -488,16 +515,16 @@ export default memo(function AboutActivitiesOverviewPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0b2230] via-[#0b2230]/25 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffd08a]">Photo Gallery Preview</p>
-                <h2 className="mt-3 text-3xl font-black text-white md:text-4xl">{activeGalleryItem.title}</h2>
-                <p className="mt-3 max-w-2xl leading-7 text-[#d7e3ea]">{activeGalleryItem.caption}</p>
+                <p className={ACTIVITIES_LABEL}>Photo Gallery Preview</p>
+                <h2 className={`mt-3 ${ACTIVITIES_CARD_TITLE}`}>{activeGalleryItem.title}</h2>
+                <p className={`mt-3 max-w-2xl ${ACTIVITIES_BODY}`}>{activeGalleryItem.caption}</p>
               </div>
             </div>
           </div>
 
-          <div className="rounded-[32px] border border-white/10 bg-[#103246] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.24)] md:p-8">
-            <h2 className="text-3xl font-black text-white md:text-4xl">Moments from Trust Activities</h2>
-            <p className="mt-4 leading-7 text-[#d7e3ea]">
+          <div className={SECTION_PANEL}>
+            <h2 className={ACTIVITIES_HEADING}>Moments from Trust Activities</h2>
+            <p className={`mt-4 ${ACTIVITIES_BODY}`}>
               A quick visual preview of satsang, seva, education, and celebration across the trust's activity calendar.
             </p>
 
@@ -513,13 +540,13 @@ export default memo(function AboutActivitiesOverviewPage() {
                     className={`flex items-center gap-4 rounded-2xl border p-3 text-left transition-all ${
                       isActive
                         ? "border-[#F59E0B]/40 bg-[#F59E0B]/10"
-                        : "border-white/10 bg-[#143446] hover:border-white/20"
+                        : "border-white/10 bg-[#0c5871] hover:border-white/20"
                     }`}
                   >
                     <img src={slide.image} alt={slide.title} className="h-16 w-20 rounded-xl object-cover" />
                     <div>
-                      <h3 className="font-bold text-white">{slide.title}</h3>
-                      <p className="mt-1 text-sm leading-6 text-[#d7e3ea]">{slide.caption}</p>
+                      <h3 className={ACTIVITIES_LIST_TITLE}>{slide.title}</h3>
+                      <p className={`mt-1 ${ACTIVITIES_BODY}`}>{slide.caption}</p>
                     </div>
                   </button>
                 );
@@ -552,10 +579,10 @@ export default memo(function AboutActivitiesOverviewPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-8">
-        <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(135deg,#12394A_0%,#0f3140_50%,#17384a_100%)] p-6 text-center shadow-[0_16px_34px_rgba(0,0,0,0.24)] md:p-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffd08a]">Call To Action</p>
-          <h2 className="mt-3 text-3xl font-black text-white md:text-5xl">Participate in the Trust's Ongoing Work</h2>
-          <p className="mx-auto mt-4 max-w-3xl text-base leading-8 text-[#d7e3ea] md:text-lg">
+        <div className={`${SECTION_PANEL} text-center md:p-10`}>
+          <p className={ACTIVITIES_LABEL}>Call To Action</p>
+          <h2 className={`mt-3 ${ACTIVITIES_HEADING}`}>Participate in the Trust's Ongoing Work</h2>
+          <p className={`mx-auto mt-4 max-w-3xl ${ACTIVITIES_BODY}`}>
             Support the trust through volunteer service, partnership, or direct contribution and help expand programs
             rooted in devotion, public benefit, and cultural continuity.
           </p>
@@ -583,14 +610,14 @@ export default memo(function AboutActivitiesOverviewPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-8">
-        <div className="rounded-[32px] border border-white/10 bg-[#103246] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.24)] md:p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffd08a]">Testimonials</p>
-          <h2 className="mt-3 text-3xl font-black text-white md:text-5xl">Voices from Participants and Beneficiaries</h2>
+        <div className={SECTION_PANEL}>
+          <p className={ACTIVITIES_LABEL}>Testimonials</p>
+          <h2 className={`mt-3 ${ACTIVITIES_HEADING}`}>Voices from Participants and Beneficiaries</h2>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {TESTIMONIALS.map((item) => (
               <blockquote
                 key={`${item.name}-${item.role}`}
-                className="rounded-[28px] border border-white/10 bg-[#143446] p-6 shadow-[0_14px_32px_rgba(0,0,0,0.18)]"
+                className="rounded-[24px] border border-white/10 bg-[#0c5871] p-6 shadow-[0_14px_32px_rgba(0,0,0,0.18)]"
               >
                 <p className="text-lg leading-8 text-[#edf5f9]">&ldquo;{item.quote}&rdquo;</p>
                 <footer className="mt-6 border-t border-white/10 pt-4">

@@ -3,6 +3,14 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
 import { usePageMeta } from "../../hooks/usePageMeta";
+import {
+  ABOUT_BODY_CLASS,
+  ABOUT_CARD_TITLE_CLASS,
+  ABOUT_HERO_SUBTITLE_CLASS,
+  ABOUT_HERO_TITLE_CLASS,
+  ABOUT_SECTION_HEADING_CLASS,
+  ABOUT_SECTION_LABEL_CLASS,
+} from "./aboutTypography";
 
 const SEVA_MEDIA = [
   { href: ROUTES.seva.gau, image: "https://res.cloudinary.com/der8zinu8/image/upload/v1771583756/jal_ymllgv.png" },
@@ -22,7 +30,6 @@ const CORE_AREA_HREFS = [
 
 const LEADERS = [
   { image: "https://res.cloudinary.com/der8zinu8/image/upload/v1771583759/kathapravachan_fp8leo.png", href: ROUTES.about.founder, nameKey: "S.S. Manish Bhai Ji" },
-  { image: "https://res.cloudinary.com/der8zinu8/image/upload/v1771413474/itcm84f9dnqpzgawp7ak.png", href: ROUTES.about.structure, nameKey: "Trust Committee" },
   { image: "https://res.cloudinary.com/der8zinu8/image/upload/v1771583756/jal_ymllgv.png", href: ROUTES.involved.volunteer, nameKey: "Seva Volunteers" },
 ];
 
@@ -30,10 +37,15 @@ interface VisionCard { title: string; desc: string; }
 interface CoreArea { title: string; desc: string; linkLabel: string; }
 interface Milestone { year: string; title: string; desc: string; }
 interface FutureCard { title: string; desc: string; }
-interface HighlightItem { label: string; value: string; }
 
 const VISION_ICONS = ["🕉️", "🌱", "🌏"];
 const FUTURE_ICONS = ["🛕", "📡", "🌟"];
+
+const SECTION_LABEL = `${ABOUT_SECTION_LABEL_CLASS} text-[#F59E0B]`;
+const SECTION_HEADING = `${ABOUT_SECTION_HEADING_CLASS} text-white`;
+const BODY_TEXT = `${ABOUT_BODY_CLASS} text-white/80`;
+const CARD_TITLE = `${ABOUT_CARD_TITLE_CLASS} text-[#F59E0B]`;
+const CARD_BODY = `${ABOUT_BODY_CLASS} text-white/80`;
 
 const divider = (
   <div className="max-w-6xl mx-auto px-4 py-2">
@@ -47,7 +59,6 @@ export default memo(function AboutPage() {
 
   const asArray = <T,>(value: unknown): T[] => (Array.isArray(value) ? (value as T[]) : []);
 
-  const highlights = asArray<HighlightItem>(t("about.highlights", { returnObjects: true }));
   const visionCards = asArray<VisionCard>(t("aboutPage.visionCards", { returnObjects: true }));
   const coreAreas = asArray<CoreArea>(t("aboutPage.coreAreas", { returnObjects: true }));
   const humanitarianItems = asArray<string>(t("aboutPage.humanitarianItems", { returnObjects: true }));
@@ -75,8 +86,8 @@ export default memo(function AboutPage() {
             <p className="inline-flex items-center rounded-full border border-white/20 px-4 py-1 text-sm mb-6 bg-white/10">
               {t("about.heroBadge")}
             </p>
-            <h1 className="text-3xl md:text-6xl font-black mb-4">{t("aboutPage.heroTitle")}</h1>
-            <p className="text-lg md:text-2xl font-medium text-white/90 max-w-3xl mx-auto">
+            <h1 className={`${ABOUT_HERO_TITLE_CLASS} mb-4`}>{t("aboutPage.heroTitle")}</h1>
+            <p className={`${ABOUT_HERO_SUBTITLE_CLASS} max-w-3xl mx-auto text-white/90`}>
               {t("aboutPage.heroTagline")}
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -92,17 +103,6 @@ export default memo(function AboutPage() {
       </section>
 
       {/* ── Stats ─────────────────────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-4 py-8 md:py-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
-          {highlights.map((item) => (
-            <div key={item.label} className="rounded-2xl bg-[#12394A] border border-white/10 p-4 md:p-5 text-center shadow-[0_10px_24px_rgba(0,0,0,0.18)]">
-              <p className="text-3xl md:text-5xl font-extrabold text-[#F59E0B]">{item.value}</p>
-              <p className="text-sm md:text-base text-white/80 mt-1.5">{item.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* ── Introduction ──────────────────────────────────────────────── */}
       <section className="py-12 md:py-16 max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
@@ -114,9 +114,9 @@ export default memo(function AboutPage() {
             />
           </div>
           <div>
-            <p className="text-xs uppercase tracking-widest text-[#F59E0B] font-semibold mb-3">{t("aboutPage.introEyebrow")}</p>
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-5 leading-tight">{t("aboutPage.introHeading")}</h2>
-            <div className="space-y-4 text-white/80 text-base leading-relaxed">
+            <p className={`${SECTION_LABEL} mb-3`}>{t("aboutPage.introEyebrow")}</p>
+            <h2 className={`${SECTION_HEADING} mb-5 leading-tight`}>{t("aboutPage.introHeading")}</h2>
+            <div className={`space-y-4 ${BODY_TEXT}`}>
               <p>{t("aboutPage.introPara1")}</p>
               <p>{t("aboutPage.introPara2")}</p>
               <p>{t("aboutPage.introPara3")}</p>
@@ -131,9 +131,9 @@ export default memo(function AboutPage() {
       {/* ── Inspiration Behind the Mission ────────────────────────────── */}
       <section className="bg-[#0e2a3a] py-14 md:py-16">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <p className="text-xs uppercase tracking-widest text-[#F59E0B] font-semibold mb-3">{t("aboutPage.inspirationEyebrow")}</p>
-          <h2 className="text-3xl md:text-4xl font-black text-white mb-8">{t("aboutPage.inspirationHeading")}</h2>
-          <div className="space-y-5 text-white/80 text-base md:text-lg leading-relaxed">
+          <p className={`${SECTION_LABEL} mb-3`}>{t("aboutPage.inspirationEyebrow")}</p>
+          <h2 className={`${SECTION_HEADING} mb-8`}>{t("aboutPage.inspirationHeading")}</h2>
+          <div className={`space-y-5 ${BODY_TEXT}`}>
             <p>{t("aboutPage.inspirationPara1")}</p>
             <p>{t("aboutPage.inspirationPara2")}</p>
             <p>{t("aboutPage.inspirationPara3")}</p>
@@ -150,15 +150,15 @@ export default memo(function AboutPage() {
       {/* ── The Vision ────────────────────────────────────────────────── */}
       <section className="py-14 md:py-16 max-w-6xl mx-auto px-4">
         <div className="text-center mb-10">
-          <p className="text-xs uppercase tracking-widest text-[#F59E0B] font-semibold mb-3">{t("aboutPage.visionEyebrow")}</p>
-          <h2 className="text-3xl md:text-4xl font-black text-white">{t("aboutPage.visionHeading")}</h2>
+          <p className={`${SECTION_LABEL} mb-3`}>{t("aboutPage.visionEyebrow")}</p>
+          <h2 className={SECTION_HEADING}>{t("aboutPage.visionHeading")}</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {visionCards.map((v, i) => (
             <div key={v.title} className="bg-[#12394A] rounded-2xl p-6 border border-white/10 hover:border-[#F59E0B]/50 transition-all">
               <div className="text-4xl mb-4">{VISION_ICONS[i]}</div>
-              <h3 className="text-xl font-black text-[#F59E0B] mb-3">{v.title}</h3>
-              <p className="text-white/80 leading-relaxed">{v.desc}</p>
+              <h3 className={`${CARD_TITLE} mb-3`}>{v.title}</h3>
+              <p className={CARD_BODY}>{v.desc}</p>
             </div>
           ))}
         </div>
@@ -169,9 +169,9 @@ export default memo(function AboutPage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
             <div className="order-2 md:order-1">
-              <p className="text-xs uppercase tracking-widest text-[#F59E0B] font-semibold mb-3">{t("aboutPage.santRoleEyebrow")}</p>
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-5 leading-tight">{t("aboutPage.santRoleHeading")}</h2>
-              <div className="space-y-4 text-white/80 leading-relaxed">
+              <p className={`${SECTION_LABEL} mb-3`}>{t("aboutPage.santRoleEyebrow")}</p>
+              <h2 className={`${SECTION_HEADING} mb-5 leading-tight`}>{t("aboutPage.santRoleHeading")}</h2>
+              <div className={`space-y-4 ${BODY_TEXT}`}>
                 <p>{t("aboutPage.santRolePara1")}</p>
                 <p>{t("aboutPage.santRolePara2")}</p>
                 <p>{t("aboutPage.santRolePara3")}</p>
@@ -194,15 +194,15 @@ export default memo(function AboutPage() {
       {/* ── Core Areas of Work ────────────────────────────────────────── */}
       <section className="py-14 md:py-16 max-w-6xl mx-auto px-4">
         <div className="text-center mb-10">
-          <p className="text-xs uppercase tracking-widest text-[#F59E0B] font-semibold mb-3">{t("aboutPage.coreAreasEyebrow")}</p>
-          <h2 className="text-3xl md:text-4xl font-black text-white mb-3">{t("aboutPage.coreAreasHeading")}</h2>
-          <p className="text-white/70 max-w-2xl mx-auto">{t("aboutPage.coreAreasSubtitle")}</p>
+          <p className={`${SECTION_LABEL} mb-3`}>{t("aboutPage.coreAreasEyebrow")}</p>
+          <h2 className={`${SECTION_HEADING} mb-3`}>{t("aboutPage.coreAreasHeading")}</h2>
+          <p className={`${ABOUT_BODY_CLASS} max-w-2xl mx-auto text-white/70`}>{t("aboutPage.coreAreasSubtitle")}</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {coreAreas.map((area, i) => (
             <div key={area.title} className="bg-[#12394A] rounded-2xl p-6 border border-white/10 hover:border-[#F59E0B]/50 transition-all group">
-              <h3 className="text-xl font-black text-[#F59E0B] mb-3">{area.title}</h3>
-              <p className="text-white/80 leading-relaxed mb-4">{area.desc}</p>
+              <h3 className={`${CARD_TITLE} mb-3`}>{area.title}</h3>
+              <p className={`${CARD_BODY} mb-4`}>{area.desc}</p>
               <Link to={CORE_AREA_HREFS[i]} className="text-sm font-semibold text-[#F59E0B] hover:text-white transition-colors group-hover:underline">
                 {area.linkLabel} →
               </Link>
@@ -212,13 +212,13 @@ export default memo(function AboutPage() {
 
         {/* Humanitarian initiatives list */}
         <div className="mt-8 rounded-2xl bg-[#0e2a3a] border border-white/10 p-6 md:p-8">
-          <h3 className="text-xl font-black text-[#F59E0B] mb-4">{t("aboutPage.humanitarianHeading")}</h3>
-          <p className="text-white/70 mb-5 leading-relaxed">{t("aboutPage.humanitarianDesc")}</p>
+          <h3 className={`${CARD_TITLE} mb-4`}>{t("aboutPage.humanitarianHeading")}</h3>
+          <p className={`${CARD_BODY} mb-5 text-white/70`}>{t("aboutPage.humanitarianDesc")}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {humanitarianItems.map((item) => (
               <div key={item} className="flex items-start gap-2 bg-[#12394A] rounded-lg px-4 py-3 border border-white/10">
                 <span className="text-[#F59E0B] font-bold mt-0.5 shrink-0">✦</span>
-                <span className="text-white/85 text-sm">{item}</span>
+                <span className={`${ABOUT_BODY_CLASS} text-white/85`}>{item}</span>
               </div>
             ))}
           </div>
@@ -228,7 +228,7 @@ export default memo(function AboutPage() {
       {/* ── Seva Programs Grid ─────────────────────────────────────────── */}
       <section className="bg-[#0e2a3a] py-14 md:py-16">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-black text-center text-[#F59E0B] mb-10">{t("aboutPage.sevaTitle")}</h2>
+          <h2 className={`${SECTION_LABEL} text-center mb-10`}>{t("aboutPage.sevaTitle")}</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
             {SEVA_MEDIA.map((item, i) => (
               <Link
@@ -248,9 +248,9 @@ export default memo(function AboutPage() {
       <section className="py-14 md:py-16 max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div>
-            <p className="text-xs uppercase tracking-widest text-[#F59E0B] font-semibold mb-3">{t("aboutPage.buildingCultureEyebrow")}</p>
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-5 leading-tight">{t("aboutPage.buildingCultureHeading")}</h2>
-            <div className="space-y-4 text-white/80 leading-relaxed">
+            <p className={`${SECTION_LABEL} mb-3`}>{t("aboutPage.buildingCultureEyebrow")}</p>
+            <h2 className={`${SECTION_HEADING} mb-5 leading-tight`}>{t("aboutPage.buildingCultureHeading")}</h2>
+            <div className={`space-y-4 ${BODY_TEXT}`}>
               <p>{t("aboutPage.buildingCulturePara1")}</p>
               <p>{t("aboutPage.buildingCulturePara2")}</p>
             </div>
@@ -276,14 +276,14 @@ export default memo(function AboutPage() {
       {/* ── Timeline / Milestones ──────────────────────────────────────── */}
       <section className="bg-[#0e2a3a] py-14 md:py-16">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-black text-center text-[#F59E0B] mb-10">{t("aboutPage.journeyTitle")}</h2>
+          <h2 className={`${SECTION_LABEL} text-center mb-10`}>{t("aboutPage.journeyTitle")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {milestones.map((step) => (
               <div key={`${step.year}-${step.title}`} className="rounded-xl bg-[#12394A] border border-white/10 p-5 flex gap-4">
                 <p className="text-[#F59E0B] font-black text-lg shrink-0 w-12">{step.year}</p>
                 <div>
                   <h3 className="text-white font-bold text-base">{step.title}</h3>
-                  <p className="text-white/70 mt-1 text-sm leading-relaxed">{step.desc}</p>
+                  <p className={`${ABOUT_BODY_CLASS} mt-1 text-white/70`}>{step.desc}</p>
                 </div>
               </div>
             ))}
@@ -295,19 +295,19 @@ export default memo(function AboutPage() {
       <section className="py-14 md:py-16 max-w-6xl mx-auto px-4">
         <div className="rounded-[28px] bg-[linear-gradient(135deg,#12394A_0%,#0e2a3a_100%)] border border-[#F59E0B]/20 p-8 md:p-12">
           <div className="text-center mb-8">
-            <p className="text-xs uppercase tracking-widest text-[#F59E0B] font-semibold mb-3">{t("aboutPage.futureEyebrow")}</p>
-            <h2 className="text-3xl md:text-4xl font-black text-white mb-4">{t("aboutPage.futureHeading")}</h2>
+            <p className={`${SECTION_LABEL} mb-3`}>{t("aboutPage.futureEyebrow")}</p>
+            <h2 className={`${SECTION_HEADING} mb-4`}>{t("aboutPage.futureHeading")}</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             {futureCards.map((f, i) => (
               <div key={f.title} className="bg-white/5 rounded-2xl p-6 border border-white/10">
                 <div className="text-4xl mb-3">{FUTURE_ICONS[i]}</div>
-                <h3 className="text-lg font-black text-[#F59E0B] mb-2">{f.title}</h3>
-                <p className="text-white/75 text-sm leading-relaxed">{f.desc}</p>
+                <h3 className={`${CARD_TITLE} mb-2`}>{f.title}</h3>
+                <p className={`${CARD_BODY} text-white/75`}>{f.desc}</p>
               </div>
             ))}
           </div>
-          <p className="text-center text-white/70 mt-8 max-w-3xl mx-auto leading-relaxed">
+          <p className={`${ABOUT_BODY_CLASS} text-center text-white/70 mt-8 max-w-3xl mx-auto`}>
             {t("aboutPage.futureParagraph")}
           </p>
         </div>
@@ -316,7 +316,7 @@ export default memo(function AboutPage() {
       {/* ── Leadership ────────────────────────────────────────────────── */}
       <section className="bg-[#0e2a3a] py-14 md:py-16">
         <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-black text-center text-[#F59E0B] mb-10">{t("aboutPage.leadershipTitle")}</h2>
+          <h2 className={`${SECTION_LABEL} text-center mb-10`}>{t("aboutPage.leadershipTitle")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {LEADERS.map((person, i) => (
               <div key={person.nameKey} className="bg-[#12394A] rounded-xl p-6 text-center border border-white/10">
@@ -334,9 +334,9 @@ export default memo(function AboutPage() {
 
       {/* ── Invitation to Participate ─────────────────────────────────── */}
       <section className="py-14 md:py-16 max-w-4xl mx-auto px-4 text-center">
-        <p className="text-xs uppercase tracking-widest text-[#F59E0B] font-semibold mb-3">{t("aboutPage.invitationEyebrow")}</p>
-        <h2 className="text-3xl md:text-4xl font-black text-white mb-6">{t("aboutPage.invitationHeading")}</h2>
-        <div className="space-y-4 text-white/80 text-base md:text-lg leading-relaxed">
+        <p className={`${SECTION_LABEL} mb-3`}>{t("aboutPage.invitationEyebrow")}</p>
+        <h2 className={`${SECTION_HEADING} mb-6`}>{t("aboutPage.invitationHeading")}</h2>
+        <div className={`space-y-4 ${BODY_TEXT}`}>
           <p>{t("aboutPage.invitationPara1")}</p>
           <p>{t("aboutPage.invitationPara2")}</p>
           <p className="text-[#F59E0B] font-semibold italic text-lg">
@@ -348,8 +348,8 @@ export default memo(function AboutPage() {
       {/* ── CTA ───────────────────────────────────────────────────────── */}
       <section className="pb-16 px-4">
         <div className="max-w-5xl mx-auto rounded-2xl border border-[#F59E0B]/20 bg-[#12394A] p-8 md:p-10 text-center shadow-lg">
-          <h2 className="text-2xl md:text-4xl font-black text-white mb-2">{t("aboutPage.ctaTitle")}</h2>
-          <p className="text-white/75 max-w-3xl mx-auto mb-8 mt-3">{t("aboutPage.ctaDesc")}</p>
+          <h2 className={`${SECTION_HEADING} mb-2`}>{t("aboutPage.ctaTitle")}</h2>
+          <p className={`${ABOUT_BODY_CLASS} text-white/75 max-w-3xl mx-auto mb-8 mt-3`}>{t("aboutPage.ctaDesc")}</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to={ROUTES.involved.volunteer} className="inline-block bg-[#F59E0B] hover:bg-[#d88908] text-white font-bold px-8 py-3.5 rounded-xl transition-colors">
               {t("aboutPage.ctaVolunteer")}

@@ -2,7 +2,6 @@ import { memo, useCallback, useEffect, useRef, useState, type MouseEvent as Reac
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { EXTERNAL_RAZORPAY_DONATE_URL, ROUTES } from "../../app/routes/routes";
-import { ImpactCounter } from "../../components/ui/ImpactCounter";
 import { usePageMeta } from "../../hooks/usePageMeta";
 
 const HOMEPAGE_BANNER_SRC = "/images/homepage/HomePageBanner.jpeg";
@@ -24,6 +23,14 @@ const PRIMARY_BUTTON =
   "inline-flex items-center justify-center rounded-lg bg-[#f1a15c] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#e48d45]";
 const SECONDARY_BUTTON =
   "inline-flex items-center justify-center rounded-lg border border-[#d4a270] bg-white px-6 py-3 text-sm font-semibold text-[#9a5310] transition-colors hover:bg-[#fff7ef]";
+const HOME_SECTION_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]";
+const HOME_SECTION_HEADING = "mt-2 text-[14px] font-black leading-tight text-[#12394c] md:text-[20px]";
+const HOME_BODY = "text-base leading-7 text-[#38505f] md:text-lg";
+const HOME_CARD_TITLE = "text-2xl font-black text-[#12394c] md:text-[1.75rem]";
+const HOME_PANEL =
+  "rounded-[30px] border border-[#d8e5ea] bg-white/90 p-6 shadow-[0_16px_34px_rgba(0,0,0,0.10)] backdrop-blur-sm md:p-8";
+const HOME_CARD_PANEL =
+  "overflow-hidden rounded-[28px] border border-[#d8e5ea] bg-white/95 p-4 shadow-[0_18px_40px_rgba(13,58,85,0.10)]";
 
 function UpcomingEventMediaCard({
   eyebrow,
@@ -153,16 +160,16 @@ function UpcomingEventModal({ onClose }: { onClose: () => void }) {
           </div>
 
           <div className="p-6 md:p-8 lg:p-10">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#b35a10]">{UPCOMING_EVENT_SUBTITLE}</p>
-            <h2 className="mt-3 text-3xl font-black leading-tight text-[#7c1d00] md:text-5xl">{UPCOMING_EVENT_TITLE}</h2>
+            <p className={HOME_SECTION_LABEL}>{UPCOMING_EVENT_SUBTITLE}</p>
+            <h2 className="mt-3 text-2xl font-black leading-tight text-[#12394c] md:text-[2.5rem]">{UPCOMING_EVENT_TITLE}</h2>
             <div className="mt-4 inline-flex rounded-full bg-[#fff1d7] px-4 py-2 text-sm font-bold text-[#8d230d]">
               {UPCOMING_EVENT_DATE}
             </div>
-            <p className="mt-6 max-w-2xl text-base leading-8 text-[#5b4027]">{UPCOMING_EVENT_DETAILS}</p>
+            <p className={`mt-6 max-w-2xl ${HOME_BODY}`}>{UPCOMING_EVENT_DETAILS}</p>
 
             <div className="mt-6 rounded-[24px] border border-[#f1ddca] bg-[#fff9f3] p-5">
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-[#b35a10]">Quick Highlights</p>
-              <ul className="mt-4 space-y-3 text-sm leading-7 text-[#5d4b3a]">
+              <p className="text-base font-black uppercase tracking-[0.18em] text-[#ef9a1e]">Quick Highlights</p>
+              <ul className="mt-4 space-y-3 text-base leading-7 text-[#38505f]">
                 <li>5:30 AM - Janmotsav Aarti</li>
                 <li>8:00 AM - Puja, Maha Abhishek, Shringar, and Mandal Puja</li>
                 <li>8:30 AM - Shringar Darshan and Maha Aarti</li>
@@ -207,13 +214,6 @@ export default memo(function HomePage() {
     setShowUpcomingModal(false);
   }, []);
 
-  const impactItems = [
-    { label: t("home.impact.livesTouched"), target: 50000 },
-    { label: t("home.impact.eventsConducted"), target: 500 },
-    { label: t("home.impact.volunteers"), target: 1200 },
-    { label: t("home.impact.yearsOfService"), target: 40 },
-  ];
-
   return (
     <>
       {showUpcomingModal ? <UpcomingEventModal onClose={closeUpcomingModal} /> : null}
@@ -244,12 +244,12 @@ export default memo(function HomePage() {
         </section>
 
         <section className="px-4 py-16">
-          <div className="mx-auto max-w-4xl rounded-2xl border border-white/40 bg-white/35 px-6 py-10 text-center shadow-md backdrop-blur-sm md:px-10">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#7a4a1b] md:text-sm">
+          <div className="mx-auto max-w-[70rem] rounded-[30px] border border-[#d8e5ea] bg-white/90 px-6 py-10 text-center shadow-[0_16px_34px_rgba(0,0,0,0.10)] backdrop-blur-sm sm:px-[56px] md:px-[96px] lg:px-[120px]">
+            <p className={`mb-3 ${HOME_SECTION_LABEL}`}>
               {t("home.aboutEyebrow")}
             </p>
-            <h2 className="mb-4 text-3xl font-extrabold text-[#0d3b66] md:text-4xl">{t("home.aboutTitle")}</h2>
-            <p className="mx-auto mb-7 max-w-3xl text-lg leading-relaxed text-[#2f2f2f]">{t("home.aboutText")}</p>
+            <h2 className={`mx-auto mb-4 max-w-4xl ${HOME_SECTION_HEADING}`}>{t("home.aboutTitle")}</h2>
+            <p className={`mx-auto mb-7 max-w-4xl ${HOME_BODY}`}>{t("home.aboutText")}</p>
             <Link to={ROUTES.about.index} className={PRIMARY_BUTTON}>
               {t("home.readMore")}
             </Link>
@@ -257,7 +257,7 @@ export default memo(function HomePage() {
         </section>
 
         <section className="px-4 py-2">
-          <div className="w-full rounded-2xl border border-[#dce8f5] bg-white p-6 shadow-sm md:p-8">
+          <div className="mx-auto max-w-[70rem] rounded-[30px] border border-[#d8e5ea] bg-white/90 px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.10)] backdrop-blur-sm sm:px-[56px] md:px-[96px] lg:px-[120px]">
             <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-[220px_1fr] md:gap-8">
               <div className="mx-auto w-full max-w-[220px]">
                 <div className="rounded-2xl border border-[#e0e8f0] bg-[#f6f8fb] p-2 shadow-sm">
@@ -271,11 +271,11 @@ export default memo(function HomePage() {
               </div>
 
               <div>
-                <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-[#2b618f]">
+                <p className={`mb-2 ${HOME_SECTION_LABEL}`}>
                   {t("home.founderEyebrow")}
                 </p>
-                <h2 className="mb-3 text-2xl font-black text-[#123753] md:text-4xl">{t("home.founderTitle")}</h2>
-                <p className="leading-relaxed text-[#4f6272]">{t("home.founderQuote")}</p>
+                <h2 className={`mb-3 ${HOME_SECTION_HEADING}`}>{t("home.founderTitle")}</h2>
+                <p className={HOME_BODY}>{t("home.founderQuote")}</p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <Link to={ROUTES.about.founder} className={PRIMARY_BUTTON}>
                     {t("home.viewFounderProfile")}
@@ -295,13 +295,13 @@ export default memo(function HomePage() {
         <section className="px-4 py-16">
           <div className="mx-auto max-w-6xl">
             <div className="mb-8 text-center">
-              <h2 className="mt-3 text-3xl font-extrabold text-[#0d3b66] md:text-4xl">{t("home.upcomingEventsTitle")}</h2>
+              <h2 className={HOME_SECTION_LABEL}>{t("home.upcomingEventsTitle")}</h2>
             </div>
 
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-              <div className="overflow-hidden rounded-[28px] border border-[#efcfaa] bg-white p-3 shadow-[0_18px_40px_rgba(122,74,27,0.12)]">
+              <div className={HOME_CARD_PANEL}>
                 <div className="mb-3 px-2">
-                  <h3 className="text-lg font-black text-[#8a2f0a]">{t("home.upcomingVideoTitle")}</h3>
+                  <h3 className={HOME_CARD_TITLE}>{t("home.upcomingVideoTitle")}</h3>
                 </div>
                 <div className="relative w-full overflow-hidden rounded-[22px] pt-[56.25%]">
                   <iframe
@@ -320,9 +320,9 @@ export default memo(function HomePage() {
                 </div>
               </div>
 
-              <div className="overflow-hidden rounded-[28px] border border-[#efcfaa] bg-white p-3 shadow-[0_18px_40px_rgba(122,74,27,0.12)]">
+              <div className={HOME_CARD_PANEL}>
                 <div className="mb-3 px-2">
-                  <h3 className="text-lg font-black text-[#8a2f0a]">{t("home.upcomingLiveTitle")}</h3>
+                  <h3 className={HOME_CARD_TITLE}>{t("home.upcomingLiveTitle")}</h3>
                 </div>
                 <div className="relative w-full overflow-hidden rounded-[22px] pt-[56.25%]">
                   <iframe
@@ -342,15 +342,13 @@ export default memo(function HomePage() {
               </div>
             </div>
 
-            <div className="mt-10 overflow-hidden rounded-[28px] border border-[#c41e3a]/35 bg-[linear-gradient(180deg,#fff5f5_0%,#ffffff_100%)] p-6 shadow-[0_18px_40px_rgba(122,74,27,0.12)] md:p-8">
-              <h3 className="text-center text-xl font-black leading-snug text-[#8a0a0a] md:text-2xl">
-                {t("home.bloodDonationTitle")}
-              </h3>
-              <p className="mt-4 text-center text-base font-semibold text-[#5b4027]">{t("home.bloodDonationIntro")}</p>
-              <p className="mt-2 text-center text-sm text-[#6a4f38]">{t("home.bloodDonationInspired")}</p>
-              <p className="mt-4 text-center text-sm font-medium leading-relaxed text-[#4a3728]">{t("home.bloodDonationLocation")}</p>
-              <p className="mt-2 text-center text-sm font-medium leading-relaxed text-[#4a3728]">{t("home.bloodDonationOccasion")}</p>
-              <ul className="mx-auto mt-6 max-w-lg space-y-2 text-sm font-semibold text-[#5d4b3a] md:text-base">
+            <div className={`mt-10 text-center ${HOME_PANEL}`}>
+              <p className={HOME_SECTION_LABEL}>{t("home.bloodDonationTitle")}</p>
+              <h3 className={`mx-auto mt-2 max-w-3xl ${HOME_SECTION_HEADING}`}>{t("home.bloodDonationIntro")}</h3>
+              <p className={`mt-4 ${HOME_BODY}`}>{t("home.bloodDonationInspired")}</p>
+              <p className={`mt-4 ${HOME_BODY}`}>{t("home.bloodDonationLocation")}</p>
+              <p className={`mt-2 ${HOME_BODY}`}>{t("home.bloodDonationOccasion")}</p>
+              <ul className="mx-auto mt-6 max-w-lg space-y-2 text-base font-semibold leading-7 text-[#38505f] md:text-lg">
                 <li>{t("home.bloodDonationBullet1")}</li>
                 <li>{t("home.bloodDonationBullet2")}</li>
                 <li>{t("home.bloodDonationBullet3")}</li>
@@ -373,11 +371,11 @@ export default memo(function HomePage() {
                   {t("home.bloodDonationDonate")}
                 </a>
               </div>
-              <p className="mt-6 text-center text-sm font-medium italic text-[#6b4423] md:text-base">{t("home.bloodDonationClosing")}</p>
+              <p className="mt-6 text-base font-medium italic leading-7 text-[#8a4f18] md:text-lg">{t("home.bloodDonationClosing")}</p>
             </div>
 
             <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
-              <div className="overflow-hidden rounded-[28px] border border-[#efcfaa] bg-white p-3 shadow-[0_18px_40px_rgba(122,74,27,0.12)]">
+              <div className={HOME_CARD_PANEL}>
                 <img
                   src={UPCOMING_EVENT_IMAGE_LEFT}
                   alt="Upcoming event poster left"
@@ -386,7 +384,7 @@ export default memo(function HomePage() {
                 />
               </div>
 
-              <div className="overflow-hidden rounded-[28px] border border-[#efcfaa] bg-white p-3 shadow-[0_18px_40px_rgba(122,74,27,0.12)]">
+              <div className={HOME_CARD_PANEL}>
                 <img
                   src={UPCOMING_EVENT_IMAGE_RIGHT}
                   alt="Upcoming event poster right"
@@ -412,17 +410,30 @@ export default memo(function HomePage() {
           </div>
         </section>
 
-        <ImpactCounter items={impactItems} />
-
         <section className="bg-[#eef0f3] px-4 py-16">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2">
             <div className="min-h-[230px] rounded-2xl border border-[#991b1b] bg-[#7f1d1d] shadow-lg">
               <div className="flex h-full flex-col justify-center p-8 text-center">
-                <h2 className="mb-3 text-3xl font-bold text-white">{t("home.donationTitle")}</h2>
-                <p className="mb-6 text-red-100">{t("home.donationText")}</p>
+                <h2 className="mb-3 text-2xl font-black text-white md:text-[1.75rem]">{t("home.donationTitle")}</h2>
+                <p className="mb-6 text-base leading-7 text-red-100 md:text-lg">{t("home.donationText")}</p>
                 <div>
                   <Link to={ROUTES.donate} className={PRIMARY_BUTTON}>
                     {t("home.donateNow")}
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className="min-h-[230px] rounded-2xl border border-[#1f7a45] bg-[#166534] shadow-lg">
+              <div className="flex h-full flex-col justify-center p-8 text-center">
+                <h2 className="mb-3 text-2xl font-black text-white md:text-[1.75rem]">{t("home.joinUs")}</h2>
+                <p className="mb-6 text-base leading-7 text-green-100 md:text-lg">{t("home.volunteerText")}</p>
+                <div>
+                  <Link
+                    to={ROUTES.involved.index}
+                    className="inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-sm font-semibold text-[#166534] transition-colors hover:bg-[#ecfdf5]"
+                  >
+                    {t("home.joinUs")}
                   </Link>
                 </div>
               </div>

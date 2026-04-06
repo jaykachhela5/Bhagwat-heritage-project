@@ -2,6 +2,13 @@ import { memo } from "react";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
 import { usePageMeta } from "../../hooks/usePageMeta";
+import {
+  ABOUT_BODY_CLASS,
+  ABOUT_CARD_TITLE_CLASS,
+  ABOUT_HERO_SUBTITLE_CLASS,
+  ABOUT_SECTION_HEADING_CLASS,
+  ABOUT_SECTION_LABEL_CLASS,
+} from "./aboutTypography";
 
 type ObjectivePoint = {
   title: string;
@@ -27,12 +34,12 @@ type ObjectiveSignal = {
   note: string;
 };
 
-const SECTION_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]";
-const SECTION_HEADING = "mt-2 text-[14px] font-black text-white md:text-[20px]";
-const SECTION_BODY = "mt-4 text-base leading-7 text-[#dce7ec] md:text-lg";
-const CARD_LABEL = "text-[22px] font-semibold uppercase tracking-[0.12em] text-[#ef9a1e]";
-const CARD_TITLE = "mt-4 text-[22px] font-black text-white md:text-[24px]";
-const CARD_BODY = "mt-4 text-base leading-7 text-[#dce7ec] md:text-lg";
+const SECTION_LABEL = `${ABOUT_SECTION_LABEL_CLASS} text-[#ef9a1e]`;
+const SECTION_HEADING = `${ABOUT_SECTION_HEADING_CLASS} text-white`;
+const SECTION_BODY = `mt-4 ${ABOUT_BODY_CLASS} text-[#dce7ec]`;
+const CARD_LABEL = `${ABOUT_SECTION_LABEL_CLASS} text-[#ef9a1e]`;
+const CARD_TITLE = `mt-4 ${ABOUT_CARD_TITLE_CLASS} text-white`;
+const CARD_BODY = `mt-4 ${ABOUT_BODY_CLASS} text-[#dce7ec]`;
 const SECTION_SHELL =
   "rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,#0d6179_0%,#0c5871_100%)] p-6 shadow-[0_14px_30px_rgba(0,0,0,0.2)] md:p-8";
 const DARK_SECTION_SHELL =
@@ -151,7 +158,7 @@ const OBJECTIVE_SIGNALS: ObjectiveSignal[] = [
 export default memo(function ObjectivesPage() {
   usePageMeta(
     "Objectives",
-    "Objectives of Shri Bhagwat Heritage Service Foundation Trust including Bhagwat teachings, spiritual learning, education, cultural awareness, social welfare, and sacred centers.",
+    "Objectives of the trust including Bhagwat teachings, spiritual learning, education, cultural awareness, social welfare, and sacred centers.",
   );
 
   return (
@@ -177,13 +184,10 @@ export default memo(function ObjectivesPage() {
           />
           <div className="relative flex min-h-[420px] flex-col justify-end px-5 py-[22px] md:min-h-[540px] md:px-8 md:py-[30px]">
             <div className="mx-auto max-w-4xl text-center">
-              <p className="mb-[10px] text-[20px] font-semibold text-gray-200 md:text-[24px]">
-                Bhagwat Heritage Service Foundation Trust
-              </p>
               <h1 className="mb-[10px] text-4xl font-bold leading-tight text-white md:text-5xl">
                 Objectives
               </h1>
-              <p className="mx-auto max-w-4xl text-base leading-7 text-[#dce7ec] md:text-lg">
+              <p className={`mx-auto max-w-4xl ${ABOUT_HERO_SUBTITLE_CLASS} text-[#dce7ec]`}>
                 The trust&apos;s objectives are rooted in Bhagwat teachings and expressed through learning, culture, seva, and sacred institution-building.
               </p>
             </div>
@@ -241,7 +245,7 @@ export default memo(function ObjectivesPage() {
             <p className={SECTION_LABEL}>Why These Objectives Matter</p>
             <h2 className={SECTION_HEADING}>A Trust Model Rooted in Dharma and Public Good</h2>
             <p className={SECTION_BODY}>
-              Shri Bhagwat Heritage Service Foundation Trust is not built around one isolated activity. Its objectives connect spiritual knowledge, community learning, culture, seva, and sacred development into one integrated direction.
+              The trust is not built around one isolated activity. Its objectives connect spiritual knowledge, community learning, culture, seva, and sacred development into one integrated direction.
             </p>
             <p className={SECTION_BODY}>
               This creates a trust structure where worship deepens understanding, understanding shapes conduct, conduct inspires service, and service strengthens the social and spiritual life of the community.
@@ -261,7 +265,7 @@ export default memo(function ObjectivesPage() {
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3 rounded-[22px] border border-white/10 bg-white/[0.04] px-4 py-3">
                   <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#f7dc8a]" />
-                  <span className="text-base leading-7 text-[#dce7ec] md:text-lg">{item}</span>
+                  <span className={SECTION_BODY}>{item}</span>
                 </div>
               ))}
             </div>
@@ -288,7 +292,7 @@ export default memo(function ObjectivesPage() {
                   {item.points.map((point) => (
                     <div key={point} className="flex items-start gap-3 rounded-[20px] border border-white/10 bg-white/[0.04] px-4 py-3">
                       <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#ef9a1e]" />
-                      <span className="text-base font-medium leading-7 text-[#dce7ec] md:text-lg">{point}</span>
+                      <span className={CARD_BODY}>{point}</span>
                     </div>
                   ))}
                 </div>
@@ -318,7 +322,7 @@ export default memo(function ObjectivesPage() {
                 <p className="text-[22px] font-black text-white transition-colors group-hover:text-[#ef9a1e] md:text-[24px]">
                   {item.label}
                 </p>
-                <p className="mt-2 text-base leading-7 text-[#dce7ec] md:text-lg">{item.note}</p>
+                <p className={`mt-2 ${SECTION_BODY}`}>{item.note}</p>
               </Link>
             ))}
           </div>
@@ -331,7 +335,7 @@ export default memo(function ObjectivesPage() {
             <div>
               <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-white/75">Support the Objectives</p>
               <h2 className="mt-2 text-[14px] font-black md:text-[20px]">Help the Trust Carry These Objectives Forward</h2>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-white/88 md:text-lg">
+              <p className={`mt-4 max-w-2xl ${SECTION_BODY} text-white/88`}>
                 Participate through seva, support educational and cultural efforts, and help strengthen sacred, service-led, Bhagwat-rooted initiatives.
               </p>
             </div>

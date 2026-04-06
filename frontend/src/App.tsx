@@ -11,7 +11,6 @@ import { MarqueeBar } from "./components/common/MarqueeBar";
 import { LoadingSpinner } from "./components/ui/LoadingSpinner";
 import {
   AboutAwardsPage,
-  AboutStructurePage,
   DigitalMembershipPage,
   DigitalSatsangPage,
   DigitalServicesHubPage,
@@ -165,7 +164,6 @@ export default function App() {
                   <Route path={ROUTES.about.objectives} element={<ObjectivesPage />} />
                   <Route path={ROUTES.about.founder} element={<ManishBhaijiPage />} />
                   <Route path={ROUTES.about.awards} element={<AboutAwardsPage />} />
-                  <Route path={ROUTES.about.structure} element={<AboutStructurePage />} />
                   <Route path={ROUTES.about.activities} element={<AboutActivitiesOverviewPage />} />
 
                   <Route path={ROUTES.mission.index} element={<MissionHubPage />} />

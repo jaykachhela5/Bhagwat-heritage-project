@@ -13,7 +13,6 @@ export const ROUTES = {
     founderAlias: "/about/founder",
     founder: "/about/founder-manish-bhaiji",
     awards: "/about/awards-recognition",
-    structure: "/about/organizational-structure",
     activities: "/about/trust-activities-overview",
   },
 
