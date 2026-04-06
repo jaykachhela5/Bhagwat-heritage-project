@@ -3,6 +3,16 @@ import { Link } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
 import { HeroSection } from "../../components/ui/HeroSection";
 import { usePageMeta } from "../../hooks/usePageMeta";
+import {
+  MISSION_BODY_TEXT_CLASS,
+  MISSION_CARD_TITLE_CLASS,
+  MISSION_HERO_SUBTITLE_CLASS,
+  MISSION_HIGHLIGHT_TITLE_CLASS,
+  MISSION_HIGHLIGHT_VALUE_CLASS,
+  MISSION_SECTION_BODY_CLASS,
+  MISSION_SECTION_HEADING_CLASS,
+  MISSION_SECTION_LABEL_CLASS,
+} from "./missionTypography";
 
 type MissionCategory = "all" | "food" | "health" | "education" | "gau" | "relief" | "support";
 
@@ -152,9 +162,9 @@ const FILTERS: { key: MissionCategory; label: string }[] = [
 
 const SECTION_SHELL =
   "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
-const SECTION_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]";
-const SECTION_HEADING = "mt-2 text-[14px] font-black text-white md:text-[20px]";
-const SECTION_BODY = "mt-4 text-base leading-7 text-[#dce7ec] md:text-lg";
+const SECTION_LABEL = MISSION_SECTION_LABEL_CLASS;
+const SECTION_HEADING = MISSION_SECTION_HEADING_CLASS;
+const SECTION_BODY = MISSION_SECTION_BODY_CLASS;
 const CARD_SHELL =
   "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
 
@@ -190,11 +200,12 @@ export default memo(function SocialPage() {
       <HeroSection
         title="Social Service Mission"
         subtitle="True spirituality expresses itself through compassion, selfless service, and social welfare."
-        subtitleClassName="text-[34px] font-semibold md:text-[40px]"
+        subtitleClassName={MISSION_HERO_SUBTITLE_CLASS}
         contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage={HERO_IMAGE}
         boxed
         heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-black/55"
       >
         <div className="flex flex-wrap justify-center gap-3">
           <Link
@@ -217,9 +228,9 @@ export default memo(function SocialPage() {
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {IMPACT_SIGNALS.map((item) => (
               <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
-                <p className="text-[24px] uppercase tracking-wide text-[#ef9a1e]">{item.title}</p>
-                <p className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.value}</p>
-                <p className="mt-1 text-base leading-7 text-[#dce7ec] md:text-lg">{item.note}</p>
+                <p className={MISSION_HIGHLIGHT_TITLE_CLASS}>{item.title}</p>
+                <p className={MISSION_HIGHLIGHT_VALUE_CLASS}>{item.value}</p>
+                <p className={`mt-1 ${MISSION_BODY_TEXT_CLASS}`}>{item.note}</p>
               </div>
             ))}
           </div>
@@ -268,7 +279,7 @@ export default memo(function SocialPage() {
                     "Compassion must become organized, disciplined, and collective action.",
                   ].map((item) => (
                     <div key={item} className="rounded-[20px] border border-white/10 bg-[#0b2230] px-4 py-3">
-                      <span className="text-sm leading-7 text-[#dce7ec]">{item}</span>
+                      <span className={MISSION_BODY_TEXT_CLASS}>{item}</span>
                     </div>
                   ))}
                 </div>
@@ -325,11 +336,11 @@ export default memo(function SocialPage() {
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
             {visibleStreams.map((item) => (
               <article key={item.title} className={CARD_SHELL}>
-                <h3 className="text-xl font-black text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{item.description}</p>
+                <h3 className={MISSION_CARD_TITLE_CLASS}>{item.title}</h3>
+                <p className={`mt-3 ${MISSION_BODY_TEXT_CLASS}`}>{item.description}</p>
                 <div className="mt-4 rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
                   <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">Social Impact</p>
-                  <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{item.impact}</p>
+                  <p className={`mt-3 ${MISSION_BODY_TEXT_CLASS}`}>{item.impact}</p>
                 </div>
                 <Link
                   to={item.href}
@@ -352,8 +363,8 @@ export default memo(function SocialPage() {
               <div className="mt-5 grid gap-4 sm:grid-cols-2">
                 {VALUE_PILLARS.map((item) => (
                   <div key={item.title} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
-                    <h3 className="text-xl font-black text-white">{item.title}</h3>
-                    <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{item.description}</p>
+                    <h3 className={MISSION_CARD_TITLE_CLASS}>{item.title}</h3>
+                    <p className={`mt-3 ${MISSION_BODY_TEXT_CLASS}`}>{item.description}</p>
                   </div>
                 ))}
               </div>
@@ -371,8 +382,8 @@ export default memo(function SocialPage() {
                     <div key={item.title} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
                       <div className="flex flex-wrap items-start justify-between gap-3">
                         <div>
-                          <h3 className="text-xl font-black text-white">{item.title}</h3>
-                          <p className="mt-2 text-sm leading-7 text-[#dce7ec]">{item.detail}</p>
+                          <h3 className={MISSION_CARD_TITLE_CLASS}>{item.title}</h3>
+                          <p className={`mt-2 ${MISSION_BODY_TEXT_CLASS}`}>{item.detail}</p>
                         </div>
                         <div className="text-right">
                           <p className="text-sm font-semibold text-[#ef9a1e]">{item.window}</p>

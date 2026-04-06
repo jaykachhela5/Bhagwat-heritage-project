@@ -3,6 +3,16 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
 import { HeroSection } from "../../components/ui/HeroSection";
+import {
+  MISSION_BODY_TEXT_CLASS,
+  MISSION_CARD_TITLE_CLASS,
+  MISSION_HERO_SUBTITLE_CLASS,
+  MISSION_HIGHLIGHT_TITLE_CLASS,
+  MISSION_HIGHLIGHT_VALUE_CLASS,
+  MISSION_SECTION_BODY_CLASS,
+  MISSION_SECTION_HEADING_CLASS,
+  MISSION_SECTION_LABEL_CLASS,
+} from "./missionTypography";
 
 const HERO_IMAGE = "https://res.cloudinary.com/der8zinu8/image/upload/v1771829272/1771410109114-sanskriti_maft9c.png";
 
@@ -27,9 +37,9 @@ interface LabelValue {
 
 const SECTION_SHELL =
   "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
-const SECTION_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]";
-const SECTION_HEADING = "mt-2 text-[14px] font-black text-white md:text-[20px]";
-const SECTION_BODY = "mt-4 text-base leading-7 text-[#dce7ec] md:text-lg";
+const SECTION_LABEL = MISSION_SECTION_LABEL_CLASS;
+const SECTION_HEADING = MISSION_SECTION_HEADING_CLASS;
+const SECTION_BODY = MISSION_SECTION_BODY_CLASS;
 const CARD_SHELL =
   "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
 
@@ -58,11 +68,12 @@ export default memo(function CulturalPage() {
       <HeroSection
         title={t("missionPages.cultural.title")}
         subtitle={t("missionPages.cultural.subtitle")}
-        subtitleClassName="text-[34px] font-semibold md:text-[40px]"
+        subtitleClassName={MISSION_HERO_SUBTITLE_CLASS}
         contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage={HERO_IMAGE}
         boxed
         heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-black/55"
       >
         <div className="flex flex-wrap justify-center gap-3">
           <Link
@@ -85,8 +96,8 @@ export default memo(function CulturalPage() {
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {stats.map((item) => (
               <div key={item.label} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
-                <p className="text-[24px] uppercase tracking-wide text-[#ef9a1e]">{item.label}</p>
-                <p className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.value}</p>
+                <p className={MISSION_HIGHLIGHT_TITLE_CLASS}>{item.label}</p>
+                <p className={MISSION_HIGHLIGHT_VALUE_CLASS}>{item.value}</p>
               </div>
             ))}
           </div>
@@ -103,7 +114,7 @@ export default memo(function CulturalPage() {
                 {calendarItems.map((item, index) => (
                   <div key={item} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
                     <div className="flex flex-wrap items-center justify-between gap-3">
-                      <h3 className="text-xl font-black text-white">{item}</h3>
+                      <h3 className={MISSION_CARD_TITLE_CLASS}>{item}</h3>
                       <span
                         className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${
                           index === currentCalendarIndex ? "bg-[#ef9a1e] text-white" : "bg-white text-[#0B2230]"
@@ -141,8 +152,8 @@ export default memo(function CulturalPage() {
                 <p className={SECTION_LABEL}>{t("missionPages.cultural.missionDirection")}</p>
                 <h2 className={SECTION_HEADING}>{t("missionPages.cultural.aboutTitle")}</h2>
                 <ul className="mt-5 space-y-3 text-[#dce7ec]">
-                  {directionItems.map((item) => (
-                    <li key={item} className="rounded-[20px] border border-white/10 bg-[#0b2230] px-4 py-3 text-sm leading-7">
+                      {directionItems.map((item) => (
+                    <li key={item} className={`rounded-[20px] border border-white/10 bg-[#0b2230] px-4 py-3 ${MISSION_BODY_TEXT_CLASS}`}>
                       {item}
                     </li>
                   ))}
@@ -169,8 +180,8 @@ export default memo(function CulturalPage() {
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
             {PROGRAM_LINKS.map((href, index) => (
               <div key={href} className={CARD_SHELL}>
-                <h3 className="text-xl font-black text-white">{programs[index]?.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{programs[index]?.desc}</p>
+                <h3 className={MISSION_CARD_TITLE_CLASS}>{programs[index]?.title}</h3>
+                <p className={`mt-3 ${MISSION_BODY_TEXT_CLASS}`}>{programs[index]?.desc}</p>
                 <Link
                   to={href}
                   className="mt-5 inline-flex rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
@@ -190,8 +201,8 @@ export default memo(function CulturalPage() {
           <div className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-3">
             {focusCards.map((item) => (
               <div key={item.title} className={CARD_SHELL}>
-                <h3 className="text-xl font-black text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{item.desc}</p>
+                <h3 className={MISSION_CARD_TITLE_CLASS}>{item.title}</h3>
+                <p className={`mt-3 ${MISSION_BODY_TEXT_CLASS}`}>{item.desc}</p>
               </div>
             ))}
           </div>
