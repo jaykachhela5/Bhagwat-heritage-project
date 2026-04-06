@@ -42,7 +42,6 @@ import {
   MissionHubPage,
   NotFoundPage,
   SevaDisasterReliefPage,
-  SevaGauSevaPage,
   SevaHubPage,
 } from "./features/architecture/ArchitecturePages";
 
@@ -78,6 +77,7 @@ const SpiritualPage = lazy(() => import("./features/mission/SpiritualPage"));
 const EducationPage = lazy(() => import("./features/seva/EducationPage"));
 const MedicinePage = lazy(() => import("./features/seva/MedicinePage"));
 const ScholarshipPage = lazy(() => import("./features/seva/ScholarshipPage"));
+const GauSevaPage = lazy(() => import("./features/seva/GauSevaPage"));
 const JalSevaPage = lazy(() => import("./features/seva/JalSevaPage"));
 const AnnSevaPage = lazy(() => import("./features/seva/AnnSevaPage"));
 const KanyaPage = lazy(() => import("./features/seva/KanyaPage"));
@@ -175,7 +175,7 @@ export default function App() {
                   <Route path={ROUTES.mission.global} element={<GlobalOutreachPage />} />
 
                   <Route path={ROUTES.seva.index} element={<SevaHubPage />} />
-                  <Route path={ROUTES.seva.gau} element={<SevaGauSevaPage />} />
+                  <Route path={ROUTES.seva.gau} element={<GauSevaPage />} />
                   <Route path={ROUTES.seva.jal} element={<JalSevaPage />} />
                   <Route path={ROUTES.seva.ann} element={<AnnSevaPage />} />
                   <Route path={ROUTES.seva.annJal} element={<Navigate to={ROUTES.seva.jal} replace />} />

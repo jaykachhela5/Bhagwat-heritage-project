@@ -2133,31 +2133,69 @@ export const MissionGlobalOutreachPage = memo(function MissionGlobalOutreachPage
 });
 
 export const SevaGauSevaPage = memo(function SevaGauSevaPage() {
+  const heroCowImage = "/images/maharaj%20ji/gau.jpg";
+  const scenicCowImage = "https://res.cloudinary.com/der8zinu8/image/upload/v1772910777/gau_pdm92i.jpg";
+
+  const heroButtons = [
+    {
+      label: "Donate for Gau Seva",
+      to: ROUTES.donate,
+      className: "bg-gradient-to-b from-[#c76d28] via-[#8f3f13] to-[#6f2806] text-[#fff5df] shadow-[inset_0_1px_0_rgba(255,237,201,0.35),0_10px_18px_rgba(86,39,14,0.22)] hover:brightness-105",
+    },
+    {
+      label: "Sponsor a Cow",
+      to: ROUTES.donate,
+      className: "bg-gradient-to-b from-[#59733c] via-[#395b24] to-[#23421a] text-[#fff5df] shadow-[inset_0_1px_0_rgba(237,249,197,0.25),0_10px_18px_rgba(48,63,27,0.22)] hover:brightness-105",
+    },
+    {
+      label: "Visit Kamdhenu Ashram",
+      to: ROUTES.contact,
+      className: "bg-gradient-to-b from-[#cc9c55] via-[#9c6b28] to-[#6d4512] text-[#fff5df] shadow-[inset_0_1px_0_rgba(255,243,210,0.35),0_10px_18px_rgba(86,56,15,0.22)] hover:brightness-105",
+    },
+  ];
+
+  const topStats = [
+    {
+      title: "2.5 Tons",
+      label: "Daily Bhojan Seva",
+      note: "Fresh green fodder and dry feed offered every day.",
+    },
+    {
+      title: "Open",
+      label: "Cow Sponsorship",
+      note: "Devotees can sponsor routine nourishment and care.",
+    },
+    {
+      title: "365 Days",
+      label: "Volunteer Presence",
+      note: "Gaushala seva continues throughout the year.",
+    },
+  ];
+
   const sevaActivities = [
     {
       icon: "CF",
-      title: "Cow Feeding Programs",
+      title: "Cow Feeding",
       desc: "Daily bhojan seva with green fodder, dry feed, mineral support, and seasonal nourishment planning.",
+      className: "bg-gradient-to-b from-[#8d6632] via-[#6c4a1d] to-[#4f3511] text-[#fff8e9]",
     },
     {
       icon: "MC",
-      title: "Medical Care Support",
+      title: "Medical Care",
       desc: "Veterinary consultation, emergency treatment, health checks, and recovery care for weak or injured cows.",
+      className: "bg-gradient-to-b from-[#b86b20] via-[#8f4710] to-[#6c2c07] text-[#fff8e9]",
     },
     {
       icon: "SP",
-      title: "Shelter and Protection",
+      title: "Shelter & Protection",
       desc: "Safe shelter, rescue coordination, and long-term care for abandoned, elderly, and vulnerable cows.",
+      className: "bg-gradient-to-b from-[#4d6a3a] via-[#32512a] to-[#233b1f] text-[#fff8e9]",
     },
     {
-      icon: "GH",
-      title: "Healthy Gaushala Environment",
+      icon: "HE",
+      title: "Healthy Environment",
       desc: "Clean sheds, hygiene management, water access, shaded rest areas, and disciplined daily maintenance.",
-    },
-    {
-      icon: "VS",
-      title: "Volunteer and Devotee Seva",
-      desc: "Hands-on service through feeding, cleaning, prayer participation, and devotional ashram support.",
+      className: "bg-gradient-to-b from-[#425467] via-[#304355] to-[#1f3141] text-[#fff8e9]",
     },
   ];
 
@@ -2166,26 +2204,31 @@ export const SevaGauSevaPage = memo(function SevaGauSevaPage() {
       title: "Feed a Cow",
       amount: "Rs 501",
       desc: "Support one day of bhojan seva with green fodder and daily nourishment.",
+      className: "bg-gradient-to-b from-[#b56a22] via-[#8d4510] to-[#6d3008] text-[#fff6e3]",
     },
     {
-      title: "Monthly Cow Care Sponsorship",
+      title: "Monthly Cow Care",
       amount: "Rs 5,100",
-      desc: "Contribute toward recurring feed, care, water, and basic shelter support for one month.",
+      desc: "Contribute toward recurring feed, care, water, and shelter support for one month.",
+      className: "bg-gradient-to-b from-[#446676] via-[#29485a] to-[#1c3241] text-[#eff8ff]",
     },
     {
-      title: "Medical Support for Cows",
+      title: "Medical Support",
       amount: "Rs 2,100",
       desc: "Help cover veterinary consultation, medicines, supplements, and emergency treatment.",
+      className: "bg-gradient-to-b from-[#61733b] via-[#425525] to-[#2a3918] text-[#f5ffe7]",
     },
     {
-      title: "Gaushala Infrastructure Support",
+      title: "Gaushala Support",
       amount: "Rs 11,000",
-      desc: "Support shed upkeep, water systems, flooring, sanitation, and protective infrastructure.",
+      desc: "Support shed upkeep, water systems, sanitation, and protective infrastructure.",
+      className: "bg-gradient-to-b from-[#59627f] via-[#414a64] to-[#2f3548] text-[#f5f6ff]",
     },
     {
-      title: "Lifetime Gau Seva Donation",
+      title: "Lifetime Seva",
       amount: "Rs 51,000",
-      desc: "Offer long-term support to sustain protection, nourishment, and dharmic Gau Seva at the Ashram.",
+      desc: "Offer long-term support to sustain protection, nourishment, and dharmic Gau Seva.",
+      className: "bg-gradient-to-b from-[#8b511d] via-[#6c3310] to-[#4f2207] text-[#fff7e8]",
     },
   ];
 
@@ -2195,40 +2238,62 @@ export const SevaGauSevaPage = memo(function SevaGauSevaPage() {
       age: "6 years",
       status: "Available for Sponsorship",
       note: "Gentle, healthy, and part of the regular feeding seva circle.",
-      image: "https://res.cloudinary.com/der8zinu8/image/upload/v1772910777/gau_pdm92i.jpg",
+      image: scenicCowImage,
+      objectPosition: "center 35%",
     },
     {
       name: "Shyama",
       age: "9 years",
       status: "Partially Sponsored",
       note: "Requires recurring care, nutrition support, and shelter maintenance attention.",
-      image: "https://res.cloudinary.com/der8zinu8/image/upload/v1772910777/gau_pdm92i.jpg",
+      image: heroCowImage,
+      objectPosition: "center 18%",
     },
     {
       name: "Kamdhenu",
       age: "11 years",
       status: "Medical Care Needed",
       note: "Needs focused health monitoring, supplement support, and devotional care sponsorship.",
-      image: "https://res.cloudinary.com/der8zinu8/image/upload/v1772910777/gau_pdm92i.jpg",
+      image: scenicCowImage,
+      objectPosition: "center 45%",
     },
   ];
 
   const galleryItems = [
     {
-      title: "Sacred Cow Care",
-      image: "https://res.cloudinary.com/der8zinu8/image/upload/v1772910777/gau_pdm92i.jpg",
+      title: "Morning Gau Darshan",
+      image: scenicCowImage,
+      wrapperClassName: "md:col-span-2",
+      heightClassName: "h-64 md:h-full",
+      objectPosition: "center 35%",
     },
     {
-      title: "Ashram Environment",
+      title: "Ashram Care Space",
+      image: heroCowImage,
+      wrapperClassName: "",
+      heightClassName: "h-52",
+      objectPosition: "center 18%",
+    },
+    {
+      title: "Sacred Heritage Atmosphere",
       image: "/images/heritage1.png",
+      wrapperClassName: "",
+      heightClassName: "h-52",
+      objectPosition: "center",
     },
     {
-      title: "Volunteer Seva Spirit",
+      title: "Volunteer and Devotional Spirit",
       image: "/images/spiritual1.png",
+      wrapperClassName: "",
+      heightClassName: "h-52",
+      objectPosition: "center",
     },
     {
-      title: "Daily Feeding Support",
-      image: "/images/annseva.png",
+      title: "Care and Nourishment",
+      image: scenicCowImage,
+      wrapperClassName: "md:col-span-2",
+      heightClassName: "h-56",
+      objectPosition: "center 40%",
     },
   ];
 
@@ -2246,7 +2311,35 @@ export const SevaGauSevaPage = memo(function SevaGauSevaPage() {
     "Prayer participation and devotional ashram discipline",
   ];
 
-  usePageMeta("Gau Seva - Kamdhenu Ashram", "Kamdhenu Ashram page with Gau Seva activities, donation options, cow sponsorship, volunteer support, and spiritual significance.");
+  const volunteerAreas = ["Feeding & Care", "Gaushala Cleaning", "Prayer & Seva"];
+
+  const bottomButtons = [
+    {
+      label: "Donate for Gau Seva",
+      to: ROUTES.donate,
+      className: "bg-gradient-to-b from-[#c76d28] via-[#8f3f13] to-[#6f2806] text-[#fff6de]",
+    },
+    {
+      label: "Sponsor a Cow",
+      to: ROUTES.donate,
+      className: "bg-gradient-to-b from-[#59733c] via-[#395b24] to-[#23421a] text-[#fff6de]",
+    },
+    {
+      label: "Volunteer for Gau Seva",
+      to: ROUTES.involved.volunteer,
+      className: "bg-gradient-to-b from-[#b26c1f] via-[#8d4b0e] to-[#653008] text-[#fff6de]",
+    },
+    {
+      label: "Contact Kamdhenu Ashram",
+      to: ROUTES.contact,
+      className: "bg-gradient-to-b from-[#46627b] via-[#30495f] to-[#203447] text-[#fff6de]",
+    },
+  ];
+
+  usePageMeta(
+    "Gau Seva - Kamdhenu Ashram",
+    "Kamdhenu Ashram page with Gau Seva activities, donation options, cow sponsorship, volunteer support, and spiritual significance.",
+  );
 
   return (
     <div className="min-h-screen bg-[#0B2230]">
