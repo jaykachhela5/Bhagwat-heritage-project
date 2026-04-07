@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { HeroSection } from "../../components/ui/HeroSection";
 import { ROUTES } from "../../app/routes/routes";
@@ -11,13 +11,6 @@ type ActivityCategory = {
   href: string;
   accent: string;
   badge: string;
-};
-
-type ImpactMetric = {
-  label: string;
-  target: number;
-  suffix?: string;
-  note: string;
 };
 
 type RecentActivity = {
@@ -143,13 +136,6 @@ const ACTIVITY_CATEGORIES: ActivityCategory[] = [
   },
 ];
 
-const IMPACT_METRICS: ImpactMetric[] = [
-  { label: "Events Organized", target: 150, suffix: "+", note: "Bhagwat Katha, satsang, seva drives, and annual observances." },
-  { label: "People Benefited", target: 25000, suffix: "+", note: "Community members reached through spiritual and service programs." },
-  { label: "Volunteers Involved", target: 320, suffix: "+", note: "Dedicated sevadars supporting event execution and field outreach." },
-  { label: "Years of Service", target: 12, suffix: "+", note: "A growing commitment to dharma, heritage, and social responsibility." },
-];
-
 const RECENT_ACTIVITIES: RecentActivity[] = [
   {
     title: "Bhagwat Katha & Satsang Week",
@@ -228,60 +214,6 @@ const TESTIMONIALS: Testimonial[] = [
     role: "Seva Volunteer",
   },
 ];
-
-function useCountUp(target: number, duration = 1800) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLDivElement | null>(null);
-  const started = useRef(false);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting || started.current) return;
-
-        started.current = true;
-        const start = performance.now();
-
-        const tick = (now: number) => {
-          const progress = Math.min((now - start) / duration, 1);
-          setCount(Math.floor(target * progress));
-          if (progress < 1) {
-            window.requestAnimationFrame(tick);
-          }
-        };
-
-        window.requestAnimationFrame(tick);
-      },
-      { threshold: 0.35 },
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [duration, target]);
-
-  return { count, ref };
-}
-
-const MetricCard = memo(function MetricCard({ metric }: { metric: ImpactMetric }) {
-  const { count, ref } = useCountUp(metric.target);
-
-  return (
-    <div
-      ref={ref}
-      className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-[0_14px_32px_rgba(0,0,0,0.22)]"
-    >
-      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#ffd08a]">{metric.label}</p>
-      <p className="mt-3 text-4xl font-black text-white md:text-5xl">
-        {count.toLocaleString()}
-        {metric.suffix ?? ""}
-      </p>
-      <p className={`mt-3 ${ACTIVITIES_BODY}`}>{metric.note}</p>
-    </div>
-  );
-});
 
 const ACTIVITIES_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]";
 const ACTIVITIES_HEADING = "text-[14px] font-black text-white md:text-[20px]";
@@ -451,26 +383,6 @@ export default memo(function AboutActivitiesOverviewPage() {
         <div className={SECTION_PANEL}>
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className={ACTIVITIES_LABEL}>Activity Highlights</p>
-              <h2 className={`mt-3 ${ACTIVITIES_HEADING}`}>Measured Through Consistent Community Impact</h2>
-            </div>
-            <p className={`max-w-xl ${ACTIVITIES_BODY}`}>
-              The trust's work spans recurring spiritual events, welfare support, volunteer participation, and long-term
-              cultural preservation, all delivered with a service-first mindset.
-            </p>
-          </div>
-          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {IMPACT_METRICS.map((metric) => (
-              <MetricCard key={metric.label} metric={metric} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 py-8">
-        <div className={SECTION_PANEL}>
-          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-            <div>
               <p className={ACTIVITIES_LABEL}>Recent Activities</p>
               <h2 className={`mt-3 ${ACTIVITIES_HEADING}`}>Recent Trust Work Across Programs and Outreach</h2>
             </div>
@@ -524,9 +436,6 @@ export default memo(function AboutActivitiesOverviewPage() {
 
           <div className={SECTION_PANEL}>
             <h2 className={ACTIVITIES_HEADING}>Moments from Trust Activities</h2>
-            <p className={`mt-4 ${ACTIVITIES_BODY}`}>
-              A quick visual preview of satsang, seva, education, and celebration across the trust's activity calendar.
-            </p>
 
             <div className="mt-6 grid gap-3">
               {GALLERY_SLIDES.map((slide, index) => {

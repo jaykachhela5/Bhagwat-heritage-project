@@ -104,10 +104,10 @@ const LIBRARY_BOOKS = [
   },
 ];
 
-const sectionTitleClass = "mb-5 text-[24px] font-semibold uppercase tracking-[0.18em] text-[#f2b44f]";
-const sectionPanelClass = "rounded-[28px] border border-white/10 bg-[#143446] p-6 shadow-[0_18px_40px_rgba(5,21,35,0.24)] md:p-8";
+const sectionTitleClass = "mb-5 text-[24px] font-semibold uppercase tracking-[0.18em] text-[#F59E0B]";
+const sectionPanelClass = "rounded-[30px] border border-white/10 bg-[#12394A] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
 const inputClass =
-  "w-full rounded-xl border border-white/10 bg-[#0b5570] px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#f2b44f]/40";
+  "w-full rounded-xl border border-white/10 bg-[#0f3140] px-4 py-3 text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[#F59E0B]/40";
 
 export default memo(function LibraryPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -150,27 +150,25 @@ export default memo(function LibraryPage() {
   };
 
   return (
-    <div className="relative overflow-hidden bg-[#084c66] pb-16">
+    <div className="relative overflow-hidden bg-[#0B2230] pb-16">
       <HeroSection
         title="Library & Learning Center"
         subtitle="Gyaan Sabke Liye"
-        subtitleClassName="text-[34px] font-semibold md:text-[40px]"
-        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772914298/library_z21zxr.jpg"
         boxed
         heightClass="h-[360px] md:h-[520px]"
-        overlayClass="bg-[linear-gradient(90deg,rgba(6,28,53,0.84)_0%,rgba(12,54,87,0.72)_45%,rgba(13,84,94,0.58)_100%)]"
+        contentClassName="flex h-full flex-col justify-end !pb-8 !pt-0 md:!pb-12"
       >
         <div className="flex flex-wrap justify-center gap-3">
           <a
             href="#books"
-            className="inline-flex items-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
+            className="inline-flex items-center rounded-lg bg-[#F59E0B] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
           >
             Explore Books
           </a>
           <a
             href="#membership"
-            className="inline-flex items-center rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
+            className="inline-flex items-center rounded-lg bg-[#12394A] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
           >
             Join Library
           </a>
@@ -181,15 +179,15 @@ export default memo(function LibraryPage() {
         <div className={sectionPanelClass}>
           <h2 className={sectionTitleClass}>About the Library</h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            <article className="rounded-2xl bg-[#0f2f50] p-5 text-white shadow-sm">
+            <article className="rounded-[24px] border border-white/10 bg-[#0f3140] p-5 text-white shadow-sm">
               <h3 className="text-xl font-black">Purpose-Driven Learning</h3>
               <p className="mt-3 text-sm leading-7 text-white/90">The library is built to offer learning, reading, and value-based growth for students and families.</p>
             </article>
-            <article className="rounded-2xl bg-[#0f2f50] p-5 text-white shadow-sm">
+            <article className="rounded-[24px] border border-white/10 bg-[#0f3140] p-5 text-white shadow-sm">
               <h3 className="text-xl font-black">Support for Rural Students</h3>
               <p className="mt-3 text-sm leading-7 text-white/90">Special attention is given to rural and needy students who need reliable study access and reading support.</p>
             </article>
-            <article className="rounded-2xl bg-[#0f2f50] p-5 text-white shadow-sm">
+            <article className="rounded-[24px] border border-white/10 bg-[#0f3140] p-5 text-white shadow-sm">
               <h3 className="text-xl font-black">Free or Low-Cost Access</h3>
               <p className="mt-3 text-sm leading-7 text-white/90">Books, learning tools, and membership support are designed to stay affordable and community-friendly.</p>
             </article>
@@ -201,9 +199,9 @@ export default memo(function LibraryPage() {
         <div className={sectionPanelClass}>
           <h2 className={sectionTitleClass}>Book Categories</h2>
           <div className="flex flex-wrap gap-3">
-            <button onClick={() => setSelectedCategory("All")} className={`rounded-full px-5 py-3 text-sm font-bold transition ${selectedCategory === "All" ? "bg-[#ffa114] text-white" : "bg-white/10 text-white hover:bg-white/20"}`}>All Books</button>
+            <button onClick={() => setSelectedCategory("All")} className={`rounded-full px-5 py-3 text-sm font-bold transition ${selectedCategory === "All" ? "bg-[#F59E0B] text-white" : "bg-white/10 text-white hover:bg-white/20"}`}>All Books</button>
             {BOOK_CATEGORIES.map((category) => (
-              <button key={category} onClick={() => setSelectedCategory(category)} className={`rounded-full px-5 py-3 text-sm font-bold transition ${selectedCategory === category ? "bg-[#ffa114] text-white" : "bg-white/10 text-white hover:bg-white/20"}`}>
+              <button key={category} onClick={() => setSelectedCategory(category)} className={`rounded-full px-5 py-3 text-sm font-bold transition ${selectedCategory === category ? "bg-[#F59E0B] text-white" : "bg-white/10 text-white hover:bg-white/20"}`}>
                 {category}
               </button>
             ))}
@@ -224,7 +222,7 @@ export default memo(function LibraryPage() {
 
           <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
             {filteredBooks.map((book) => (
-              <article key={book.id} className="rounded-2xl bg-[#0f2f50] p-5 text-white shadow-sm transition duration-300 hover:-translate-y-1">
+              <article key={book.id} className="rounded-[24px] border border-white/10 bg-[#0f3140] p-5 text-white shadow-sm transition duration-300 hover:-translate-y-1">
                 <div className="overflow-hidden rounded-xl">
                   <img src={book.image} alt={book.title} className="h-44 w-full object-cover" />
                 </div>
@@ -235,10 +233,10 @@ export default memo(function LibraryPage() {
                   {book.available ? "Available" : "Issued"}
                 </p>
                 <div className="mt-5 flex gap-3">
-                  <button onClick={() => setSelectedBookId(book.id)} className="rounded-xl bg-white px-4 py-2 text-sm font-bold text-[#0f5a98] transition hover:bg-[#eef4ff]">
+                  <button onClick={() => setSelectedBookId(book.id)} className="rounded-xl bg-[#12394A] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#18495e]">
                     View Details
                   </button>
-                  <a href="#request" onClick={() => handleBookRequest(book.title)} className="rounded-xl bg-[#ffa114] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#e78e07]">
+                  <a href="#request" onClick={() => handleBookRequest(book.title)} className="rounded-xl bg-[#F59E0B] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#de930a]">
                     Request Book
                   </a>
                 </div>
@@ -247,7 +245,7 @@ export default memo(function LibraryPage() {
           </div>
 
           {selectedBook ? (
-            <div className="mt-6 rounded-2xl bg-[#0b5570] p-5 text-white">
+            <div className="mt-6 rounded-2xl border border-white/10 bg-[#0f3140] p-5 text-white">
               <h3 className="text-xl font-black">{selectedBook.title}</h3>
               <p className="mt-2 text-sm leading-7 text-white/90">{selectedBook.summary}</p>
             </div>
@@ -264,7 +262,7 @@ export default memo(function LibraryPage() {
               <input type="tel" placeholder="Mobile" value={membershipForm.mobile} onChange={(e) => setMembershipForm((form) => ({ ...form, mobile: e.target.value }))} required className={inputClass} />
               <textarea placeholder="Address" value={membershipForm.address} onChange={(e) => setMembershipForm((form) => ({ ...form, address: e.target.value }))} rows={4} required className={`${inputClass} resize-none`} />
               {membershipMsg ? <p className="text-sm text-green-300">{membershipMsg}</p> : null}
-              <button type="submit" className="w-full rounded-xl bg-[#ffa114] py-3 font-bold text-white transition hover:bg-[#e78e07]">Join Library</button>
+              <button type="submit" className="w-full rounded-xl bg-[#F59E0B] py-3 font-bold text-white transition hover:bg-[#de930a]">Join Library</button>
             </form>
           </div>
 
@@ -277,7 +275,7 @@ export default memo(function LibraryPage() {
               <input type="text" placeholder="Book Title" value={requestForm.bookTitle} onChange={(e) => setRequestForm((form) => ({ ...form, bookTitle: e.target.value }))} required className={inputClass} />
               <textarea placeholder="Why do you need this book?" value={requestForm.reason} onChange={(e) => setRequestForm((form) => ({ ...form, reason: e.target.value }))} rows={4} className={`${inputClass} resize-none`} />
               {requestMsg ? <p className="text-sm text-green-300">{requestMsg}</p> : null}
-              <button type="submit" className="w-full rounded-xl bg-white py-3 font-bold text-[#0f5a98] transition hover:bg-[#eef4ff]">Submit Request</button>
+              <button type="submit" className="w-full rounded-xl bg-[#12394A] py-3 font-bold text-white transition hover:bg-[#18495e]">Submit Request</button>
             </form>
           </div>
         </div>
@@ -287,22 +285,22 @@ export default memo(function LibraryPage() {
         <div className={sectionPanelClass}>
           <h2 className={sectionTitleClass}>Reading Center Info</h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            <article className="rounded-2xl bg-[#0f2f50] p-5 text-white shadow-sm"><h3 className="text-xl font-black">Location</h3><p className="mt-3 text-sm leading-7 text-white/90">Bhagwat Heritage Service Foundation Trust Campus, Chichpalli, Chandrapur.</p></article>
-            <article className="rounded-2xl bg-[#0f2f50] p-5 text-white shadow-sm"><h3 className="text-xl font-black">Timing</h3><p className="mt-3 text-sm leading-7 text-white/90">Monday to Saturday, 9:00 AM to 6:00 PM.</p></article>
-            <article className="rounded-2xl bg-[#0f2f50] p-5 text-white shadow-sm"><h3 className="text-xl font-black">Seating Capacity</h3><p className="mt-3 text-sm leading-7 text-white/90">Comfortable reading space for 40 learners at a time.</p></article>
+            <article className="rounded-[24px] border border-white/10 bg-[#0f3140] p-5 text-white shadow-sm"><h3 className="text-xl font-black">Location</h3><p className="mt-3 text-sm leading-7 text-white/90">Bhagwat Heritage Service Foundation Trust Campus, Chichpalli, Chandrapur.</p></article>
+            <article className="rounded-[24px] border border-white/10 bg-[#0f3140] p-5 text-white shadow-sm"><h3 className="text-xl font-black">Timing</h3><p className="mt-3 text-sm leading-7 text-white/90">Monday to Saturday, 9:00 AM to 6:00 PM.</p></article>
+            <article className="rounded-[24px] border border-white/10 bg-[#0f3140] p-5 text-white shadow-sm"><h3 className="text-xl font-black">Seating Capacity</h3><p className="mt-3 text-sm leading-7 text-white/90">Comfortable reading space for 40 learners at a time.</p></article>
           </div>
         </div>
       </section>
 
       <section className="max-w-6xl mx-auto px-4 pt-6">
-        <div className={`${sectionPanelClass} bg-[linear-gradient(135deg,#17384b_0%,#0f5e71_100%)]`}>
+        <div className={sectionPanelClass}>
           <h2 className={sectionTitleClass}>Donation Section</h2>
           <p className="mb-5 max-w-3xl text-sm leading-7 text-white/90">Support the library by donating books, sponsoring learning material, or helping expand reading access for rural and needy students.</p>
           <div className="flex flex-wrap gap-3">
-            <Link to={ROUTES.donate} className="rounded-xl bg-white px-6 py-3 font-bold text-[#0f5a98] transition hover:bg-[#eef4ff]">
+            <Link to={ROUTES.donate} className="rounded-xl bg-[#12394A] px-6 py-3 font-bold text-white transition hover:bg-[#18495e]">
               Donate Books
             </Link>
-            <Link to={ROUTES.involved.sponsor} className="rounded-xl bg-[#ffa114] px-6 py-3 font-bold text-white transition hover:bg-[#e78e07]">
+            <Link to={ROUTES.involved.sponsor} className="rounded-xl bg-[#F59E0B] px-6 py-3 font-bold text-white transition hover:bg-[#de930a]">
               Sponsor Library
             </Link>
           </div>

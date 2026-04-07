@@ -163,7 +163,7 @@ export default memo(function SpiritualPage() {
     <div className="min-h-screen bg-[#0B2230]">
       <HeroSection
         title="Spiritual Mission"
-        subtitle="Rooted in Bhagwat wisdom. Guided by devotion, inner peace, and righteous living."
+        subtitle="Bhagwat wisdom lights the path of life"
         subtitleClassName={MISSION_HERO_SUBTITLE_CLASS}
         contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage={HERO_IMAGE}

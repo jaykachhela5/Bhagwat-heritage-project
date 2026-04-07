@@ -188,6 +188,7 @@ export default function App() {
                   <Route path={ROUTES.eventsKatha.index} element={<EventsKathaHubPage />} />
                   <Route path={ROUTES.eventsKatha.bhagwatKatha} element={<EventsBhagwatKathaPage />} />
                   <Route path={ROUTES.eventsKatha.spiritualEvents} element={<EventsSpiritualPage />} />
+                  <Route path="/events-katha/festivals-celebration" element={<Navigate to={ROUTES.eventsKatha.festivals} replace />} />
                   <Route path={ROUTES.eventsKatha.festivals} element={<EventsFestivalsPage />} />
                   <Route path={ROUTES.eventsKatha.guruPurnima} element={<EventsGuruPurnimaPage />} />
                   <Route path={ROUTES.eventsKatha.annakut} element={<EventsAnnakutPage />} />

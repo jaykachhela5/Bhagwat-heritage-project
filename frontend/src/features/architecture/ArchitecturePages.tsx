@@ -523,13 +523,6 @@ const DISASTER_FEATURES = [
   },
 ];
 
-const DISASTER_QUICK_HIGHLIGHTS = [
-  { title: "Emergency Relief Hotline", value: "+91 98765 43210", note: "Primary disaster support coordination line" },
-  { title: "Volunteer Response Teams", value: "500+", note: "Ground volunteers available for rapid deployment" },
-  { title: "Relief Coverage Zones", value: "22", note: "Priority districts and outreach clusters" },
-  { title: "Average Activation Time", value: "< 4 hrs", note: "Response window after field verification" },
-];
-
 const DISASTER_IMPACT_STATS = [
   { value: "12,000+", label: "Relief Kits Delivered" },
   { value: "80+", label: "Emergency Camps Supported" },
@@ -2172,108 +2165,106 @@ export const SevaDisasterReliefPage = memo(function SevaDisasterReliefPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0b2230]">
+    <div className="min-h-screen bg-[#0B2230]">
       <HeroSection
         title="Disaster Relief Seva"
-        subtitle="Emergency Response and Compassionate Support for Families in Crisis"
+        subtitle="Relief with care, support with heart"
+        subtitleClassName="text-[18px] font-semibold leading-tight text-white sm:text-[24px] md:text-[34px]"
+        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772911110/disaster-relief_lg6qcp.webp"
         boxed
         heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-black/55"
       >
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
           <Link
             to={ROUTES.donate}
-            className="inline-flex items-center bg-[#ff8a00] hover:bg-[#e97b00] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+            className="inline-flex items-center rounded-lg bg-[#f3a11f] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(243,161,31,0.28)] transition-colors hover:bg-[#ffaf31]"
           >
             Donate for Relief
           </Link>
           <Link
             to={ROUTES.involved.volunteer}
-            className="inline-flex items-center bg-white text-[#0f5a98] hover:bg-[#eef4ff] font-semibold px-6 py-3 rounded-lg transition-colors"
+            className="inline-flex items-center rounded-lg bg-[#0f7994] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(15,121,148,0.28)] transition-colors hover:bg-[#1492b1]"
           >
             Join Relief Team
           </Link>
         </div>
       </HeroSection>
 
-      <section className="-mt-10 relative z-20 pb-6">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
-            {DISASTER_QUICK_HIGHLIGHTS.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/15 bg-[#143446]/95 backdrop-blur-sm p-4 shadow-lg">
-                <p className="text-[#ffb06a] text-xs uppercase tracking-wide">{item.title}</p>
-                <p className="text-white text-2xl font-black mt-1">{item.value}</p>
-                <p className="text-[#c7d7e1] text-sm mt-1">{item.note}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-gradient-to-b from-[#0d2f43] via-[#0c2a3a] to-[#0a2534] py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-8">About Disaster Relief</h2>
-          <p className="max-w-4xl mx-auto text-center text-[#d7e3ea] text-2xl leading-relaxed">
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">About Disaster Relief</p>
+          <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Emergency response with compassion and discipline</h2>
+          <p className="mt-5 text-base leading-7 text-white md:text-lg">
             Disaster Relief Seva is the trust's emergency response mission for communities facing floods, fire incidents,
             storms, displacement, and sudden humanitarian distress.
           </p>
-          <p className="max-w-4xl mx-auto text-center text-[#d7e3ea] text-2xl leading-relaxed mt-5">
+          <p className="mt-4 text-base leading-7 text-white md:text-lg">
             This page is built around action: join the field seva team, donate relief materials, sponsor recovery support,
             and help families rebuild with dignity.
           </p>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-10">
+          <div className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-3">
             {DISASTER_FEATURES.map((item) => (
-              <div key={item.title} className="rounded-3xl border border-white/10 bg-[#1b3646]/80 p-8 text-center">
-                <h3 className="text-3xl font-black text-white mb-3">{item.title}</h3>
-                <p className="text-[#c8d6df] text-xl">{item.desc}</p>
+              <div
+                key={item.title}
+                className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
+              >
+                <h3 className="text-[24px] font-black text-white">{item.title}</h3>
+                <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#0a2534] py-12">
+      <section className="relative z-20 mt-[10px] pb-6">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {DISASTER_IMPACT_STATS.map((item) => (
-              <div key={item.label} className="rounded-2xl border border-white/10 bg-[#153346] p-5 text-center">
-                <p className="text-[#ffb06a] text-4xl font-black">{item.value}</p>
-                <p className="text-[#c7d7e1] text-base mt-2">{item.label}</p>
+              <div key={item.label} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+                <p className="text-[20px] font-black uppercase tracking-wide text-[#ef9a1e] md:text-[24px]">* {item.label}</p>
+                <p className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.value}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-r from-[#0b2130] via-[#0d2f43] to-[#0b2130] py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-10">How Disaster Relief Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Relief Process</p>
+          <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">How Disaster Relief Works</h2>
+          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
             {DISASTER_PROCESS.map((item) => (
-              <div key={item.step} className="rounded-2xl border border-white/10 bg-[#17384b] p-6">
-                <h3 className="text-white text-2xl font-black mb-3">{item.step}</h3>
-                <p className="text-[#d4e1e8] text-lg">{item.desc}</p>
+              <div key={item.step} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+                <h3 className="text-[24px] font-black text-white">{item.step}</h3>
+                <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#0a2534] py-16">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="rounded-3xl border border-white/10 bg-[#1b3646]/80 p-8">
-            <h3 className="text-4xl font-black text-white mb-5">Join and Support Relief Seva</h3>
-            <p className="text-[#d4e1e8] text-xl leading-relaxed">
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Relief Seva Support</p>
+            <h3 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Join and Support Relief Seva</h3>
+            <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">
               You can serve by joining field response teams, supporting logistics and camp setup, donating supplies, or
               sponsoring emergency and recovery assistance for affected families.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-6">
+            <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-3">
               {DISASTER_JOIN_OPTIONS.map((item) => (
-                <div key={item.title} className={`rounded-2xl p-5 shadow-sm ${item.tone}`}>
-                  <h4 className="text-xl font-black">{item.title}</h4>
-                  <p className="mt-2 text-sm leading-6 text-white/90">{item.desc}</p>
-                  <Link to={item.href} className="mt-4 inline-block rounded-xl bg-white/15 px-4 py-2 text-sm font-semibold text-white">
+                <div key={item.title} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+                  <h4 className="text-xl font-black text-white">{item.title}</h4>
+                  <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{item.desc}</p>
+                  <Link
+                    to={item.href}
+                    className="mt-5 inline-flex rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                  >
                     {item.cta}
                   </Link>
                 </div>
@@ -2281,26 +2272,27 @@ export const SevaDisasterReliefPage = memo(function SevaDisasterReliefPage() {
             </div>
           </div>
 
-          <div className="rounded-3xl bg-gradient-to-r from-[#0f5a98] to-[#0d8f91] p-6 text-white shadow-sm">
-            <h3 className="text-4xl font-black mb-4">Emergency Donation Support</h3>
-            <p className="text-xl text-white/95 mb-6">
+          <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 text-white shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Donation Options</p>
+            <h3 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Emergency Donation Support</h3>
+            <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">
               Contributions help the trust mobilize emergency food, water, medicine, shelter essentials, and rehabilitation
               support when families face sudden crisis.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+            <div className="my-6 grid grid-cols-1 gap-3 md:grid-cols-3">
               {DISASTER_DONATION_TIERS.map((tier) => (
-                <div key={tier.label} className="rounded-xl bg-white/15 p-4 text-center">
-                  <p className="text-base font-semibold">{tier.label}</p>
-                  <p className="text-2xl font-black mt-1">{tier.amount}</p>
-                  <p className="text-sm text-white/85 mt-2">{tier.note}</p>
+                <div key={tier.label} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+                  <p className="text-xl font-black text-white">{tier.label}</p>
+                  <p className="mt-2 text-2xl font-black text-[#ef9a1e]">{tier.amount}</p>
+                  <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{tier.note}</p>
                 </div>
               ))}
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link to={ROUTES.donate} className="inline-block bg-white text-[#cf4f00] font-semibold px-6 py-3 rounded-xl">
+              <Link to={ROUTES.donate} className="inline-flex rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]">
                 Donate Now
               </Link>
-              <Link to={ROUTES.involved.volunteer} className="inline-block bg-[#11283a] text-white font-semibold px-6 py-3 rounded-xl">
+              <Link to={ROUTES.involved.volunteer} className="inline-flex rounded-xl bg-[#0c5871] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#18495e]">
                 Become Volunteer
               </Link>
             </div>
@@ -2308,28 +2300,30 @@ export const SevaDisasterReliefPage = memo(function SevaDisasterReliefPage() {
         </div>
       </section>
 
-      <section className="bg-gradient-to-r from-[#0b2130] via-[#0d2f43] to-[#0b2130] py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-10">Relief Stories</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Relief Stories</p>
+          <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Compassion in action</h2>
+          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
             {DISASTER_STORIES.map((item) => (
-              <div key={item.name} className="rounded-2xl border border-white/10 bg-[#17384b] p-6">
-                <p className="text-[#dbe7ee] text-xl leading-relaxed">"{item.quote}"</p>
-                <p className="text-[#ffb06a] font-semibold text-lg mt-4">{item.name}</p>
+              <div key={item.name} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+                <p className="text-base leading-7 text-[#dce7ec] md:text-lg">&quot;{item.quote}&quot;</p>
+                <p className="mt-4 text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">{item.name}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#0a2534] py-16">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-8">Frequently Asked Questions</h2>
-          <div className="space-y-3">
+      <section className="max-w-5xl mx-auto px-4 py-10">
+        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Help Desk</p>
+          <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Frequently Asked Questions</h2>
+          <div className="mt-8 space-y-3">
             {DISASTER_FAQS.map((item) => (
-              <details key={item.q} className="rounded-xl border border-white/10 bg-[#163548] p-5">
-                <summary className="cursor-pointer text-white text-xl font-semibold">{item.q}</summary>
-                <p className="text-[#d4e1e8] text-lg mt-3">{item.a}</p>
+              <details key={item.q} className="rounded-[20px] border border-white/10 bg-[#0c5871] p-5">
+                <summary className="cursor-pointer text-xl font-black text-white">{item.q}</summary>
+                <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.a}</p>
               </details>
             ))}
           </div>
@@ -3319,24 +3313,27 @@ export const KnowledgeStudyResourcesPage = memo(function KnowledgeStudyResources
   );
 
   return (
-    <div className="min-h-screen bg-[#0b2230]">
+    <div className="min-h-screen bg-[#0B2230]">
       <HeroSection
         title="Bhagwat Study Resources"
         subtitle="Structured scripture learning, guided notes, and deeper study tools for devotees and learners"
-        backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772914297/bhagwatstudy_iyhfj2.jpg"
+        subtitleClassName="text-[18px] font-semibold leading-tight text-white sm:text-[24px] md:text-[34px]"
+        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
+        backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1775569184/bhagwatdhamstudy_ky9jf3.avif"
         boxed
         heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-black/55"
       >
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
           <Link
             to={ROUTES.knowledge.library}
-            className="inline-flex items-center bg-[#ff8a00] hover:bg-[#e97b00] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+            className="inline-flex items-center rounded-lg bg-[#f3a11f] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(243,161,31,0.28)] transition-colors hover:bg-[#ffaf31]"
           >
             Explore Library
           </Link>
           <Link
             to={ROUTES.knowledge.pathshala}
-            className="inline-flex items-center bg-white text-[#0f5a98] hover:bg-[#eef4ff] font-semibold px-6 py-3 rounded-lg transition-colors"
+            className="inline-flex items-center rounded-lg bg-[#0f7994] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(15,121,148,0.28)] transition-colors hover:bg-[#1492b1]"
           >
             Join Study Path
           </Link>
@@ -3576,24 +3573,27 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0b2230]">
+    <div className="min-h-screen bg-[#0B2230]">
       <HeroSection
         title="Children Spiritual Learning"
         subtitle="Bal sanskar, joyful devotion, family participation, and age-wise spiritual growth for children"
+        subtitleClassName="text-[18px] font-semibold leading-tight text-white sm:text-[24px] md:text-[34px]"
+        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772915579/children_hrarip.jpg"
         boxed
         heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-black/55"
       >
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
           <Link
             to={ROUTES.knowledge.pathshala}
-            className="inline-flex items-center bg-[#ff8a00] hover:bg-[#e97b00] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+            className="inline-flex items-center rounded-lg bg-[#f3a11f] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(243,161,31,0.28)] transition-colors hover:bg-[#ffaf31]"
           >
             Join Bal Sanskar Path
           </Link>
           <Link
             to={ROUTES.contact}
-            className="inline-flex items-center bg-white text-[#0f5a98] hover:bg-[#eef4ff] font-semibold px-6 py-3 rounded-lg transition-colors"
+            className="inline-flex items-center rounded-lg bg-[#0f7994] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(15,121,148,0.28)] transition-colors hover:bg-[#1492b1]"
           >
             Connect With Mentor
           </Link>
@@ -3893,31 +3893,34 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
   );
 
   return (
-    <div className="min-h-screen bg-[#0b2230]">
+    <div className="min-h-screen bg-[#0B2230]">
       <HeroSection
         title="Daily Spiritual Quotes"
         subtitle="Daily reflections, admin-managed quote publishing, and a public archive for disciplined spiritual remembrance"
+        subtitleClassName="text-[18px] font-semibold leading-tight text-white sm:text-[24px] md:text-[34px]"
+        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="/images/spiritual1.png"
         boxed
         heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-black/55"
       >
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
           <Link
             to={ROUTES.knowledge.dailyQuotesToday}
-            className="inline-flex items-center bg-[#ff8a00] hover:bg-[#e97b00] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+            className="inline-flex items-center rounded-lg bg-[#f3a11f] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(243,161,31,0.28)] transition-colors hover:bg-[#ffaf31]"
           >
             View Today&apos;s Quote
           </Link>
           <a
             href="#quote-archive"
-            className="inline-flex items-center bg-white text-[#0f5a98] hover:bg-[#eef4ff] font-semibold px-6 py-3 rounded-lg transition-colors"
+            className="inline-flex items-center rounded-lg bg-[#0f7994] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(15,121,148,0.28)] transition-colors hover:bg-[#1492b1]"
           >
             Open Quote Archive
           </a>
         </div>
       </HeroSection>
 
-      <section className="-mt-10 relative z-20 pb-6">
+      <section className="relative z-20 mt-[10px] pb-6">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
             {[
@@ -3926,44 +3929,44 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
               { title: "Themes", value: `${Math.max(availableThemes.length - 1, 1)}`, note: "Theme filters help devotees browse by reflection type" },
               { title: "Admin Flow", value: isAdmin ? "Active" : "View Only", note: "Admins can publish directly; all visitors can read the results" },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/15 bg-[#143446]/95 p-4 shadow-lg backdrop-blur-sm">
-                <p className="text-[#ffb06a] text-xs uppercase tracking-wide">{item.title}</p>
-                <p className="text-white text-2xl font-black mt-1">{item.value}</p>
-                <p className="text-[#c7d7e1] text-sm mt-1">{item.note}</p>
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+                <p className="text-[20px] font-black uppercase tracking-wide text-[#ef9a1e] md:text-[24px]">* {item.title}</p>
+                <p className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.value}</p>
+                <p className="mt-1 text-base leading-7 text-[#dce7ec] md:text-lg">{item.note}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-b from-[#0d2f43] via-[#0c2a3a] to-[#0a2534] py-16" id="todays-quote">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-6">
-          <div className="rounded-3xl border border-white/10 bg-[#153446] p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Featured Daily Reflection</p>
-            <h2 className="mt-3 text-4xl font-black text-white">Today&apos;s Spiritual Quote</h2>
-            <p className="mt-4 text-3xl leading-relaxed text-[#edf6fb]">
+      <section className="max-w-7xl mx-auto px-4 py-10" id="todays-quote">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Featured Daily Reflection</p>
+            <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Today&apos;s Spiritual Quote</h2>
+            <p className="mt-5 text-base leading-7 text-white md:text-lg">
               &quot;{featuredQuote?.text || "A new quote will appear here once it is published."}&quot;
             </p>
             <div className="mt-6 flex flex-wrap gap-3 text-sm">
-              <span className="rounded-full bg-[#ffb06a] px-4 py-2 font-bold text-[#17384b]">
+              <span className="rounded-full bg-[#ef9a1e]/15 px-4 py-2 font-bold text-[#ef9a1e]">
                 {featuredQuote?.theme || "Daily Reflection"}
               </span>
-              <span className="rounded-full bg-white/10 px-4 py-2 font-semibold text-[#d4e1e8]">
+              <span className="rounded-full bg-white/10 px-4 py-2 font-semibold text-[#dce7ec]">
                 {featuredQuote?.publishDate || today}
               </span>
-              <span className="rounded-full bg-white/10 px-4 py-2 font-semibold text-[#d4e1e8]">
+              <span className="rounded-full bg-white/10 px-4 py-2 font-semibold text-[#dce7ec]">
                 {featuredQuote?.author || "Bhagwat Heritage Service Foundation Trust"}
               </span>
             </div>
-            <p className="mt-6 text-lg leading-7 text-[#d4e1e8]">
+            <p className="mt-6 text-base leading-7 text-[#dce7ec] md:text-lg">
               I upgraded this page into a working quote publishing system so the trust can post a new daily reflection and
               every visitor sees the updated quote stream immediately on this route.
             </p>
           </div>
 
-          <div className="rounded-3xl bg-gradient-to-br from-[#0f5a98] to-[#0d8f91] p-8 text-white">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/80">How It Works</p>
-            <h3 className="mt-3 text-4xl font-black">Daily Quote Publishing Flow</h3>
+          <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 text-white shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">How It Works</p>
+            <h3 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Daily Quote Publishing Flow</h3>
             <div className="mt-6 space-y-4">
               {[
                 "Admin writes and publishes a new quote with date, theme, and author details.",
@@ -3971,9 +3974,9 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
                 "Older quotes remain in the archive so devotees can revisit earlier reflections.",
                 "Theme filters help users browse bhakti, seva, discipline, and dharma-oriented quotes.",
               ].map((line, index) => (
-                <div key={line} className="rounded-2xl bg-white/12 p-4">
-                  <p className="text-sm font-bold uppercase tracking-wide text-white/75">Step {index + 1}</p>
-                  <p className="mt-1 text-lg text-white/95">{line}</p>
+                <div key={line} className="rounded-2xl border border-white/10 bg-[#0c5871] p-4">
+                  <p className="text-sm font-bold uppercase tracking-wide text-[#ef9a1e]">Step {index + 1}</p>
+                  <p className="mt-1 text-base leading-7 text-[#dce7ec] md:text-lg">{line}</p>
                 </div>
               ))}
             </div>
@@ -3981,12 +3984,12 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
         </div>
       </section>
 
-      <section className="bg-[#0a2534] py-16">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-6">
-          <div className="rounded-3xl border border-white/10 bg-[#17384b] p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">New Feature</p>
-            <h2 className="mt-2 text-4xl font-black text-white">Admin Quote Publisher</h2>
-            <p className="mt-4 text-lg leading-7 text-[#d4e1e8]">
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">New Feature</p>
+            <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Admin Quote Publisher</h2>
+            <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">
               Only admin users can publish a new quote here. For other visitors, this panel explains the publishing flow
               and keeps the page useful without exposing editing controls.
             </p>
@@ -4002,7 +4005,7 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
                     value={form.text}
                     onChange={(event) => setForm((current) => ({ ...current, text: event.target.value }))}
                     rows={5}
-                    className="w-full rounded-2xl border border-white/10 bg-[#0d2b3c] px-4 py-3 text-white outline-none transition focus:border-[#ffb06a]"
+                    className="w-full rounded-2xl border border-white/10 bg-[#0c5871] px-4 py-3 text-white outline-none transition focus:border-[#ef9a1e]"
                     placeholder="Write the spiritual quote for today"
                   />
                 </div>
@@ -4015,7 +4018,7 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
                       id="quote-author"
                       value={form.author}
                       onChange={(event) => setForm((current) => ({ ...current, author: event.target.value }))}
-                      className="w-full rounded-2xl border border-white/10 bg-[#0d2b3c] px-4 py-3 text-white outline-none transition focus:border-[#ffb06a]"
+                      className="w-full rounded-2xl border border-white/10 bg-[#0c5871] px-4 py-3 text-white outline-none transition focus:border-[#ef9a1e]"
                       placeholder="Bhagwat Heritage Service Foundation Trust"
                     />
                   </div>
@@ -4027,7 +4030,7 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
                       id="quote-theme"
                       value={form.theme}
                       onChange={(event) => setForm((current) => ({ ...current, theme: event.target.value }))}
-                      className="w-full rounded-2xl border border-white/10 bg-[#0d2b3c] px-4 py-3 text-white outline-none transition focus:border-[#ffb06a]"
+                      className="w-full rounded-2xl border border-white/10 bg-[#0c5871] px-4 py-3 text-white outline-none transition focus:border-[#ef9a1e]"
                       placeholder="Bhakti"
                     />
                   </div>
@@ -4041,33 +4044,33 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
                     type="date"
                     value={form.publishDate}
                     onChange={(event) => setForm((current) => ({ ...current, publishDate: event.target.value }))}
-                    className="w-full rounded-2xl border border-white/10 bg-[#0d2b3c] px-4 py-3 text-white outline-none transition focus:border-[#ffb06a]"
+                    className="w-full rounded-2xl border border-white/10 bg-[#0c5871] px-4 py-3 text-white outline-none transition focus:border-[#ef9a1e]"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="inline-flex items-center rounded-2xl bg-[#ff8a00] px-6 py-3 font-bold text-white transition hover:bg-[#e97b00]"
+                  className="inline-flex items-center rounded-2xl bg-[#ef9a1e] px-6 py-3 font-bold text-white transition hover:bg-[#de930a]"
                 >
                   Publish Quote
                 </button>
                 {status ? <p className="text-sm font-medium text-[#ffcf9a]">{status}</p> : null}
               </form>
             ) : (
-              <div className="mt-8 rounded-2xl bg-[#0d2b3c] p-5 text-[#d4e1e8]">
+              <div className="mt-8 rounded-2xl border border-white/10 bg-[#0c5871] p-5 text-[#dce7ec]">
                 <p className="text-lg font-semibold text-white">Admin access required</p>
                 <p className="mt-2 leading-7">
                   Log in with an admin account to publish the daily quote. All published quotes remain visible to every visitor.
                 </p>
-                <Link to={ROUTES.login} className="mt-4 inline-flex rounded-xl bg-white px-5 py-3 font-semibold text-[#0f5a98]">
+                <Link to={ROUTES.login} className="mt-4 inline-flex rounded-xl bg-[#ef9a1e] px-5 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]">
                   Go to Login
                 </Link>
               </div>
             )}
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-[#153446] p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Reader Tools</p>
-            <h2 className="mt-2 text-4xl font-black text-white">Quote Reading Features</h2>
+          <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Reader Tools</p>
+            <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Quote Reading Features</h2>
             <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
                 {
@@ -4087,9 +4090,9 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
                   desc: "This page is structured so trust admins manage content while all devotees simply receive it.",
                 },
               ].map((item) => (
-                <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0f2c3d] p-5">
+                <div key={item.title} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
                   <h3 className="text-xl font-black text-white">{item.title}</h3>
-                  <p className="mt-2 text-[#d4e1e8] leading-7">{item.desc}</p>
+                  <p className="mt-2 text-base leading-7 text-[#dce7ec] md:text-lg">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -4097,13 +4100,13 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
         </div>
       </section>
 
-      <section className="bg-gradient-to-b from-[#09202d] to-[#081925] py-16" id="quote-archive">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="max-w-7xl mx-auto px-4 py-10" id="quote-archive">
+        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Public Archive</p>
-              <h2 className="mt-2 text-5xl font-black text-white">Daily Quote Archive</h2>
-              <p className="mt-3 max-w-3xl text-[#d4e1e8] text-lg leading-7">
+              <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Public Archive</p>
+              <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Daily Quote Archive</h2>
+              <p className="mt-3 max-w-3xl text-base leading-7 text-[#dce7ec] md:text-lg">
                 All visitors can browse the published quotes here. Theme filtering keeps the archive useful as it grows over time.
               </p>
             </div>
@@ -4117,8 +4120,8 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
                     onClick={() => setActiveTheme(theme)}
                     className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                       active
-                        ? "bg-[#ffb06a] text-[#17384b]"
-                        : "border border-white/10 bg-[#17384b] text-[#d4e1e8] hover:border-[#ffb06a]/40"
+                        ? "bg-[#ef9a1e] text-white"
+                        : "border border-white/10 bg-[#0c5871] text-[#dce7ec] hover:border-[#ef9a1e]/40"
                     }`}
                   >
                     {theme}
@@ -4130,20 +4133,20 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5">
             {visibleQuotes.map((item) => (
-              <div key={item.id} className="rounded-2xl border border-white/10 bg-[#17384b] p-6">
+              <div key={item.id} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-[#ffb06a] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#17384b]">
+                  <span className="rounded-full bg-[#ef9a1e]/15 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#ef9a1e]">
                     {item.theme}
                   </span>
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#d4e1e8]">
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#dce7ec]">
                     {item.publishDate}
                   </span>
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#d4e1e8]">
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#dce7ec]">
                     {item.createdBy}
                   </span>
                 </div>
-                <p className="mt-4 text-2xl leading-relaxed text-white">&quot;{item.text}&quot;</p>
-                <p className="mt-4 text-sm font-semibold uppercase tracking-wide text-[#c8d6df]">{item.author}</p>
+                <p className="mt-4 text-base leading-7 text-white md:text-lg">&quot;{item.text}&quot;</p>
+                <p className="mt-4 text-sm font-semibold uppercase tracking-wide text-[#dce7ec]">{item.author}</p>
               </div>
             ))}
           </div>

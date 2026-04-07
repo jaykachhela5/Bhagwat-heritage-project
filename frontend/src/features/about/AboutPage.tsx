@@ -73,19 +73,16 @@ export default memo(function AboutPage() {
       {/* ── Hero ─────────────────────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-4 pt-8 md:pt-10">
         <div
-          className="relative overflow-hidden rounded-[28px] text-center text-white px-5 py-14 md:px-12 md:py-20 shadow-[0_18px_40px_rgba(0,0,0,0.28)]"
+          className="relative flex min-h-[420px] flex-col justify-end overflow-hidden rounded-[28px] px-5 py-8 text-center text-white shadow-[0_18px_40px_rgba(0,0,0,0.28)] md:min-h-[520px] md:px-12 md:py-12"
           style={{
             backgroundImage:
-              "linear-gradient(135deg, rgba(11,34,48,0.9) 0%, rgba(11,34,48,0.7) 45%, rgba(245,158,11,0.28) 100%), url('https://res.cloudinary.com/der8zinu8/image/upload/v1771413474/itcm84f9dnqpzgawp7ak.png')",
+              "linear-gradient(180deg, rgba(11,34,48,0.08) 0%, rgba(11,34,48,0.34) 42%, rgba(11,34,48,0.92) 100%), url('https://res.cloudinary.com/der8zinu8/image/upload/v1771413474/itcm84f9dnqpzgawp7ak.png')",
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(245,158,11,0.18),transparent_42%)]" />
           <div className="relative z-10">
-            <p className="inline-flex items-center rounded-full border border-white/20 px-4 py-1 text-sm mb-6 bg-white/10">
-              {t("about.heroBadge")}
-            </p>
             <h1 className={`${ABOUT_HERO_TITLE_CLASS} mb-4`}>{t("aboutPage.heroTitle")}</h1>
             <p className={`${ABOUT_HERO_SUBTITLE_CLASS} max-w-3xl mx-auto text-white/90`}>
               {t("aboutPage.heroTagline")}
@@ -196,7 +193,6 @@ export default memo(function AboutPage() {
         <div className="text-center mb-10">
           <p className={`${SECTION_LABEL} mb-3`}>{t("aboutPage.coreAreasEyebrow")}</p>
           <h2 className={`${SECTION_HEADING} mb-3`}>{t("aboutPage.coreAreasHeading")}</h2>
-          <p className={`${ABOUT_BODY_CLASS} max-w-2xl mx-auto text-white/70`}>{t("aboutPage.coreAreasSubtitle")}</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {coreAreas.map((area, i) => (
@@ -213,7 +209,6 @@ export default memo(function AboutPage() {
         {/* Humanitarian initiatives list */}
         <div className="mt-8 rounded-2xl bg-[#0e2a3a] border border-white/10 p-6 md:p-8">
           <h3 className={`${CARD_TITLE} mb-4`}>{t("aboutPage.humanitarianHeading")}</h3>
-          <p className={`${CARD_BODY} mb-5 text-white/70`}>{t("aboutPage.humanitarianDesc")}</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {humanitarianItems.map((item) => (
               <div key={item} className="flex items-start gap-2 bg-[#12394A] rounded-lg px-4 py-3 border border-white/10">

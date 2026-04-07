@@ -31,7 +31,7 @@ export default memo(function KanyaPage() {
     <div className="min-h-screen bg-[#0B2230]">
       <HeroSection
         title="Kanyadaan Seva"
-        subtitle="Supporting daughters with respect, dignity, and blessings"
+        subtitle="Respect daughters, uplift society"
         subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
         contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="/images/kanyadan.png"
@@ -75,9 +75,6 @@ export default memo(function KanyaPage() {
           <h2 className={SEVA_SECTION_HEADING_CLASS}>Support rooted in dignity and family care</h2>
           <p className="mt-5 text-base leading-7 text-white md:text-lg">
             Kanyadaan Seva supports underprivileged daughters with dignified marriage assistance through transparent and compassionate community support.
-          </p>
-          <p className="mt-4 text-base leading-7 text-white md:text-lg">
-            The page now follows a stronger seva experience with focused service categories, sponsor pathways, and clear support actions for families and donors.
           </p>
         </div>
       </section>

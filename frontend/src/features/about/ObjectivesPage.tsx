@@ -5,7 +5,6 @@ import { usePageMeta } from "../../hooks/usePageMeta";
 import {
   ABOUT_BODY_CLASS,
   ABOUT_CARD_TITLE_CLASS,
-  ABOUT_HERO_SUBTITLE_CLASS,
   ABOUT_SECTION_HEADING_CLASS,
   ABOUT_SECTION_LABEL_CLASS,
 } from "./aboutTypography";
@@ -23,12 +22,6 @@ type ObjectiveStream = {
   points: string[];
 };
 
-type RelatedAction = {
-  label: string;
-  note: string;
-  href: string;
-};
-
 type ObjectiveSignal = {
   title: string;
   note: string;
@@ -38,7 +31,7 @@ const SECTION_LABEL = `${ABOUT_SECTION_LABEL_CLASS} text-[#ef9a1e]`;
 const SECTION_HEADING = `${ABOUT_SECTION_HEADING_CLASS} text-white`;
 const SECTION_BODY = `mt-4 ${ABOUT_BODY_CLASS} text-[#dce7ec]`;
 const CARD_LABEL = `${ABOUT_SECTION_LABEL_CLASS} text-[#ef9a1e]`;
-const CARD_TITLE = `mt-4 ${ABOUT_CARD_TITLE_CLASS} text-white`;
+const CARD_TITLE = `${ABOUT_CARD_TITLE_CLASS} text-white`;
 const CARD_BODY = `mt-4 ${ABOUT_BODY_CLASS} text-[#dce7ec]`;
 const SECTION_SHELL =
   "rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,#0d6179_0%,#0c5871_100%)] p-6 shadow-[0_14px_30px_rgba(0,0,0,0.2)] md:p-8";
@@ -64,6 +57,13 @@ const OBJECTIVE_POINTS: ObjectivePoint[] = [
       "Build study pathways, digital access, and learning spaces that help seekers, families, and youth engage with spiritual knowledge regularly.",
     href: ROUTES.knowledge.index,
     accent: "from-[#7fd0e7]/26 via-[#4db7d4]/10 to-transparent",
+  },
+  {
+    title: "Strengthen family and youth spiritual formation",
+    description:
+      "Guide children, youth, and families through Bal Sanskar, mentorship, and regular devotional practice that supports character and continuity.",
+    href: ROUTES.knowledge.children,
+    accent: "from-[#d7a7ff]/24 via-[#8b5cf6]/10 to-transparent",
   },
   {
     title: "Support education and cultural awareness",
@@ -109,29 +109,6 @@ const OBJECTIVE_STREAMS: ObjectiveStream[] = [
   },
 ];
 
-const RELATED_ACTIONS: RelatedAction[] = [
-  {
-    label: "Sanstha Parichay",
-    note: "Read the foundation introduction and trust identity.",
-    href: ROUTES.about.sansthaParichay,
-  },
-  {
-    label: "Vision & Mission",
-    note: "Understand the larger direction behind these objectives.",
-    href: ROUTES.about.visionMission,
-  },
-  {
-    label: "Trust Activities",
-    note: "See how objectives become visible work on the ground.",
-    href: ROUTES.about.activities,
-  },
-  {
-    label: "Sant Shri Manish Bhaiji Maharaj",
-    note: "Explore the founder's spiritual role in shaping trust direction.",
-    href: ROUTES.about.founder,
-  },
-];
-
 const OBJECTIVE_SIGNALS: ObjectiveSignal[] = [
   {
     title: "Core Objectives",
@@ -158,7 +135,7 @@ const OBJECTIVE_SIGNALS: ObjectiveSignal[] = [
 export default memo(function ObjectivesPage() {
   usePageMeta(
     "Objectives",
-    "Objectives of the trust including Bhagwat teachings, spiritual learning, education, cultural awareness, social welfare, and sacred centers.",
+    "Objectives of the trust including Bhagwat teachings, spiritual learning, family and youth formation, education, cultural awareness, social welfare, and sacred centers.",
   );
 
   return (
@@ -187,9 +164,23 @@ export default memo(function ObjectivesPage() {
               <h1 className="mb-[10px] text-4xl font-bold leading-tight text-white md:text-5xl">
                 Objectives
               </h1>
-              <p className={`mx-auto max-w-4xl ${ABOUT_HERO_SUBTITLE_CLASS} text-[#dce7ec]`}>
-                The trust&apos;s objectives are rooted in Bhagwat teachings and expressed through learning, culture, seva, and sacred institution-building.
+              <p className="mx-auto max-w-3xl text-[18px] font-semibold leading-7 text-[#dce7ec] md:text-[24px]">
+                Promoting learning, seva, and sacred values
               </p>
+              <div className="mt-6 flex flex-wrap justify-center gap-3">
+                <Link
+                  to={ROUTES.donate}
+                  className="inline-flex items-center justify-center rounded-[18px] bg-[#ef9a1e] px-6 py-3 text-[15px] font-bold text-white shadow-[0_12px_24px_rgba(239,154,30,0.24)] transition-colors hover:bg-[#d98916]"
+                >
+                  Donate
+                </Link>
+                <Link
+                  to={ROUTES.involved.sponsor}
+                  className="inline-flex items-center justify-center rounded-[18px] border border-white/20 bg-white/10 px-6 py-3 text-[15px] font-bold text-white transition-colors hover:bg-white/16"
+                >
+                  Sponsor
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -210,23 +201,17 @@ export default memo(function ObjectivesPage() {
         <div className={DARK_SECTION_SHELL}>
           <div className="max-w-3xl">
             <p className={SECTION_LABEL}>Objective Framework</p>
-            <h2 className={SECTION_HEADING}>Five Core Objectives of the Trust</h2>
-            <p className={SECTION_BODY}>
-              These objective statements define the trust&apos;s working direction and show how spiritual purpose is carried into public service and cultural continuity.
-            </p>
+            <h2 className={SECTION_HEADING}>Six Core Objectives of the Trust</h2>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {OBJECTIVE_POINTS.map((item, index) => (
+            {OBJECTIVE_POINTS.map((item) => (
               <article
                 key={item.title}
                 className="group relative flex h-full overflow-hidden rounded-[28px] border border-white/10 bg-[#0c5871] shadow-[0_12px_26px_rgba(0,0,0,0.16)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_34px_rgba(0,0,0,0.22)]"
               >
                 <div className={`absolute inset-0 bg-[linear-gradient(180deg,var(--tw-gradient-stops))] ${item.accent}`} />
                 <div className="relative flex h-full flex-1 flex-col p-6">
-                  <div className="inline-flex rounded-full border border-[#f0c34a]/25 bg-[#f0c34a]/10 px-3 py-1 text-[15px] font-black text-[#ffd790]">
-                    0{index + 1}
-                  </div>
                   <h3 className={CARD_TITLE}>{item.title}</h3>
                   <p className={`${CARD_BODY} flex-1`}>{item.description}</p>
                   <Link to={item.href} className={`mt-6 self-start ${BUTTON_CLASS}`}>
@@ -259,6 +244,7 @@ export default memo(function ObjectivesPage() {
               {[
                 "Bhagwat knowledge should reach society in a living form.",
                 "Spiritual learning should be structured, accessible, and lasting.",
+                "Families and youth should receive guided sanskar-based formation.",
                 "Education and culture should reinforce each other.",
                 "Seva should remain practical, compassionate, and disciplined.",
                 "Sacred centers should become spaces of devotion and learning.",
@@ -278,9 +264,6 @@ export default memo(function ObjectivesPage() {
           <div className="max-w-3xl">
             <p className={SECTION_LABEL}>Three Working Streams</p>
             <h2 className={SECTION_HEADING}>How the Objectives Become Action</h2>
-            <p className={SECTION_BODY}>
-              The trust advances its objectives across three connected streams so visitors can understand how ideals become work.
-            </p>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -297,33 +280,6 @@ export default memo(function ObjectivesPage() {
                   ))}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 pb-10">
-        <div className={DARK_SECTION_SHELL}>
-          <div className="max-w-3xl">
-            <p className={SECTION_LABEL}>Continue Through About</p>
-            <h2 className={SECTION_HEADING}>Related Pages for Deeper Understanding</h2>
-            <p className={SECTION_BODY}>
-              These links connect the objectives page with the trust&apos;s introduction, direction, activities, and founder guidance.
-            </p>
-          </div>
-
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {RELATED_ACTIONS.map((item) => (
-              <Link
-                key={item.label}
-                to={item.href}
-                className="group rounded-[24px] border border-white/10 bg-[#0c5871] px-5 py-5 transition-all hover:border-[#ef9a1e]/50 hover:bg-[#13384a]"
-              >
-                <p className="text-[22px] font-black text-white transition-colors group-hover:text-[#ef9a1e] md:text-[24px]">
-                  {item.label}
-                </p>
-                <p className={`mt-2 ${SECTION_BODY}`}>{item.note}</p>
-              </Link>
             ))}
           </div>
         </div>

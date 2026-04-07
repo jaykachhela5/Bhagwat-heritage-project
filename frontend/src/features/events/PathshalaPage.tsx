@@ -1,4 +1,7 @@
 ﻿import { memo, useState, type FormEvent } from "react";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../../app/routes/routes";
+import { HeroSection } from "../../components/ui/HeroSection";
 import { pathshalaApi } from "../../services/api/misc";
 
 const COURSES = [
@@ -101,18 +104,18 @@ const FAQS = [
 ];
 
 const sectionTitleClass = "mb-5 text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]";
-const surfaceMetaClass = "text-sm font-semibold uppercase tracking-[0.18em] text-[#0e83bc]";
-const surfaceCardTitleClass = "text-xl font-black text-[#173b57]";
-const surfaceCardBodyClass = "mt-3 text-sm leading-7 text-[#4d5c67]";
-const darkMetaClass = "text-sm font-semibold uppercase tracking-[0.18em] text-[#9de0ff]";
+const surfaceMetaClass = "text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]";
+const surfaceCardTitleClass = "text-xl font-black text-white";
+const surfaceCardBodyClass = "mt-3 text-sm leading-7 text-[#dce7ec]";
+const darkMetaClass = "text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]";
 const darkCardTitleClass = "mt-2 text-xl font-black text-white";
-const darkCardBodyClass = "mt-3 text-sm leading-7 text-white/85";
-const surfaceSectionClass = "rounded-3xl border border-[#dce6ef] bg-white p-6 md:p-8 shadow-[0_8px_22px_rgba(24,55,84,0.07)]";
-const darkSectionClass = "rounded-3xl bg-gradient-to-r from-[#0f3456] to-[#0f5e71] p-6 text-white md:p-8";
+const darkCardBodyClass = "mt-3 text-sm leading-7 text-[#dce7ec]";
+const surfaceSectionClass = "rounded-[30px] border border-white/10 bg-[#12394A] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
+const darkSectionClass = "rounded-[30px] border border-white/10 bg-[#12394A] p-6 text-white shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
 const lightCardClass =
-  "rounded-2xl border border-[#d9e6f2] bg-[linear-gradient(180deg,#f8fcff_0%,#edf6ff_100%)] p-5 shadow-sm";
+  "rounded-[24px] border border-white/10 bg-[#0f3140] p-5 shadow-sm";
 const formFieldClass =
-  "w-full rounded-xl border border-[#d7e1ea] bg-white px-4 py-3 text-base text-[#173b57] placeholder:text-[#6c7b86] focus:outline-none focus:ring-2 focus:ring-[#1d6dab]";
+  "w-full rounded-xl border border-white/10 bg-[#0f3140] px-4 py-3 text-base text-white placeholder:text-[#dce7ec]/70 focus:outline-none focus:ring-2 focus:ring-[#F59E0B]/40";
 
 export default memo(function PathshalaPage() {
   const [form, setForm] = useState({
@@ -156,31 +159,44 @@ export default memo(function PathshalaPage() {
   };
 
   return (
-    <div className="relative overflow-hidden bg-[#084c66] pb-16">
+    <div className="relative overflow-hidden bg-[#0B2230] pb-16">
       <div className="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-[#2d7ed4]/20 blur-3xl" />
       <div className="pointer-events-none absolute top-[520px] -right-24 h-80 w-80 rounded-full bg-[#18b293]/18 blur-3xl" />
       <div className="pointer-events-none absolute bottom-0 left-1/4 h-64 w-64 rounded-full bg-[#ffb347]/16 blur-3xl" />
 
-      <section className="max-w-7xl mx-auto px-4 pt-8 md:pt-10">
-        <div
-          className="relative overflow-hidden rounded-[30px] bg-cover bg-center text-white h-[360px] md:h-[520px] shadow-[0_22px_50px_rgba(15,47,87,0.24)]"
-          style={{ backgroundImage: "url('https://res.cloudinary.com/der8zinu8/image/upload/v1772914626/pathshala_yqh2vq.png')" }}
-        >
-          <div className="absolute inset-0 bg-black/45" />
-          <div className="absolute -top-20 right-8 h-56 w-56 rounded-full border border-white/20" />
-          <div className="absolute -bottom-24 -left-12 h-56 w-56 rounded-full bg-white/10 blur-xl" />
+      <HeroSection
+        title="E-Pathshala"
+        subtitle="Digital Pathshala Foundation for spiritual, cultural, and value-based learning"
+        backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772914626/pathshala_yqh2vq.png"
+        boxed
+        heightClass="h-[360px] md:h-[520px]"
+        contentClassName="flex h-full flex-col justify-end !pb-8 !pt-0 md:!pb-12"
+      >
+        <div className="flex flex-wrap justify-center gap-3">
+          <a
+            href="#admission-form"
+            className="inline-flex items-center rounded-lg bg-[#F59E0B] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
+          >
+            Apply for Admission
+          </a>
+          <Link
+            to={ROUTES.knowledge.studyResources}
+            className="inline-flex items-center rounded-lg bg-[#12394A] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
+          >
+            Explore Study Resources
+          </Link>
         </div>
-      </section>
+      </HeroSection>
 
       <section id="models" className="max-w-6xl mx-auto px-4 pb-10 pt-[20px]">
-        <div className="rounded-3xl border border-[#dce6ef] bg-white p-6 md:p-8 shadow-[0_8px_22px_rgba(24,55,84,0.07)]">
+        <div className={surfaceSectionClass}>
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {LEARNING_MODELS.map((model) => (
               <article
                 key={model.title}
-                className="rounded-2xl border border-[#dce6ef] bg-gradient-to-br from-[#f8fcff] to-[#eaf4ff] p-6 shadow-[0_8px_22px_rgba(24,55,84,0.08)]"
+                className="rounded-[24px] border border-white/10 bg-[#0f3140] p-6 shadow-sm"
               >
-                <p className="mb-3 inline-block rounded-full bg-[#eaf3ff] px-2.5 py-1 text-sm font-semibold uppercase tracking-[0.18em] text-[#1f5c91]">
+                <p className="mb-3 inline-block rounded-full bg-[#F59E0B]/15 px-2.5 py-1 text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">
                   {model.tag}
                 </p>
                 <h3 className={surfaceCardTitleClass}>{model.title}</h3>
@@ -211,9 +227,9 @@ export default memo(function PathshalaPage() {
           <h2 className={sectionTitleClass}>Core Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-5">
             {CORE_FEATURES.map((feature) => (
-              <div key={feature} className="flex items-start gap-3 rounded-xl border border-[#d9e6f2] bg-[#eef7ff] p-4">
-                <span className="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-[#0f7ec2]" />
-                <p className="text-sm font-semibold leading-7 text-[#304657]">{feature}</p>
+              <div key={feature} className="flex items-start gap-3 rounded-xl border border-white/10 bg-[#0f3140] p-4">
+                <span className="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-[#F59E0B]" />
+                <p className="text-sm font-semibold leading-7 text-[#dce7ec]">{feature}</p>
               </div>
             ))}
           </div>
@@ -258,7 +274,7 @@ export default memo(function PathshalaPage() {
             {LEARNING_PATH.map((step) => (
               <article key={step.phase} className={lightCardClass}>
                 <p className={surfaceMetaClass}>{step.phase}</p>
-                <h3 className="mt-2 text-xl font-black text-[#173b57]">{step.title}</h3>
+                <h3 className="mt-2 text-xl font-black text-white">{step.title}</h3>
                 <p className={surfaceCardBodyClass}>{step.desc}</p>
               </article>
             ))}
@@ -286,8 +302,8 @@ export default memo(function PathshalaPage() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {TESTIMONIALS.map((item) => (
               <article key={item.by} className={lightCardClass}>
-                <p className="text-sm leading-7 text-[#3e4f5d]">"{item.quote}"</p>
-                <p className="mt-4 text-sm font-black uppercase tracking-[0.18em] text-[#0f7ec2]">{item.by}</p>
+                <p className="text-sm leading-7 text-[#dce7ec]">"{item.quote}"</p>
+                <p className="mt-4 text-sm font-black uppercase tracking-[0.18em] text-[#F59E0B]">{item.by}</p>
               </article>
             ))}
           </div>
@@ -310,8 +326,8 @@ export default memo(function PathshalaPage() {
 
       <section id="admission-form" className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-6">
-          <div className="rounded-3xl bg-gradient-to-br from-[#0f5fc6] to-[#0f8f8e] text-white p-7 md:p-8 shadow-[0_10px_28px_rgba(10,49,98,0.28)]">
-            <h2 className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#f2b44f]">Admissions Open</h2>
+          <div className="rounded-[30px] border border-white/10 bg-[#12394A] p-7 text-white shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+            <h2 className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">Admissions Open</h2>
             <p className="mt-3 text-base leading-7 text-white/90 md:text-lg">
               Build strong values and confident leadership through guided spiritual and cultural learning.
               Select your preferred course and our admissions team will help with onboarding.
@@ -325,9 +341,9 @@ export default memo(function PathshalaPage() {
 
           <form
             onSubmit={handleSubmit}
-            className="space-y-3 rounded-3xl border border-[#dce6ef] bg-[#f4fbff] p-6 shadow-[0_8px_22px_rgba(24,55,84,0.07)] md:p-7"
+            className="space-y-3 rounded-[30px] border border-white/10 bg-[#12394A] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-7"
           >
-            <h3 className="mb-1 text-[14px] font-black text-[#173b57] md:text-[20px]">Apply for Admission</h3>
+            <h3 className="mb-1 text-[14px] font-black text-white md:text-[20px]">Apply for Admission</h3>
             <input
               type="text"
               placeholder="Student Name"
@@ -394,7 +410,7 @@ export default memo(function PathshalaPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-xl bg-[#ffa114] hover:bg-[#e98f09] text-white font-bold py-3 transition-colors disabled:opacity-70"
+              className="w-full rounded-xl bg-[#F59E0B] py-3 font-bold text-white transition-colors hover:bg-[#de930a] disabled:opacity-70"
             >
               {loading ? "Submitting..." : "Submit Application"}
             </button>

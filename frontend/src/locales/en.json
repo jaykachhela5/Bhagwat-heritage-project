@@ -496,7 +496,7 @@
     },
     "cultural": {
       "title": "Cultural Renaissance",
-      "subtitle": "Preserving Tradition . Celebrating Heritage . Building Values",
+      "subtitle": "Preserve tradition, celebrate heritage, build values",
       "donate": "Donate for Culture",
       "stats": [
         { "label": "Festivals Hosted", "value": "120+" },
@@ -580,8 +580,8 @@
   },
 
   "aboutPage": {
-    "heroTitle": "About Shri Bhagwat Heritage Service Foundation",
-    "heroTagline": "Spiritual Wisdom • Compassionate Service • Cultural Preservation",
+    "heroTitle": "Bhagwat Dham",
+    "heroTagline": "spiritual * social * cultural",
     "supportMission": "Support the Mission",
     "becomeVolunteer": "Become a Volunteer",
     "introEyebrow": "Introduction",
@@ -611,7 +611,6 @@
     "learnAboutFounder": "Learn About Manish Bhaiji",
     "coreAreasEyebrow": "What We Do",
     "coreAreasHeading": "Core Areas of Work",
-    "coreAreasSubtitle": "The foundation carries out its mission through interconnected areas that integrate spirituality with practical service to humanity.",
     "coreAreas": [
       { "title": "Spiritual Education", "desc": "Bhagwat Katha programs, satsang gatherings, spiritual discourses, and study initiatives that help individuals understand the teachings of Shrimad Bhagwat and other sacred scriptures.", "linkLabel": "Explore" },
       { "title": "Humanitarian Service", "desc": "Service to humanity as an expression of devotion — Gau Seva, Ann Seva food distribution, medicine distribution, educational support, scholarship assistance, and disaster relief.", "linkLabel": "Explore" },
@@ -619,7 +618,6 @@
       { "title": "Spiritual Learning Platforms", "desc": "E-Pathshala, digital learning resources, and spiritual study materials making sacred knowledge accessible to people of all ages and backgrounds.", "linkLabel": "Explore" }
     ],
     "humanitarianHeading": "Humanitarian Service Initiatives",
-    "humanitarianDesc": "The foundation believes that service to humanity is an expression of devotion. Various service initiatives support individuals and communities in need:",
     "humanitarianItems": [
       "Gau Seva programs",
       "Ann Seva food distribution",
@@ -687,7 +685,6 @@
     "attendKatha": "Attend Bhagwat Katha",
     "principlesEyebrow": "Core Principles",
     "principlesHeading": "Guiding Philosophy",
-    "principlesSubtitle": "These principles form the foundation of his teachings and continue to guide the activities of the foundation.",
     "principles": [
       { "icon": "🙏", "title": "Devotion (Bhakti)", "desc": "Devotion toward the Divine purifies the heart and brings inner peace. Bhakti connects the individual with divine grace and inspires righteous living." },
       { "icon": "📖", "title": "Wisdom (Jnana)", "desc": "True knowledge helps individuals understand the purpose of life and develop clarity of thought and conduct." },
@@ -752,7 +749,6 @@
     ],
     "devotionTitle": "Moments of Devotion",
     "ctaTitle": "Learn More About the Mission & Join the Spiritual Journey",
-    "ctaDesc": "Be part of a growing movement rooted in devotion, service, and spiritual wisdom.",
     "ctaVolunteer": "Become a Volunteer",
     "ctaSupport": "Support the Mission",
     "ctaPrograms": "Participate in Spiritual Programs"

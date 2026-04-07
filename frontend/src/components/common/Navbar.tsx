@@ -28,7 +28,6 @@ const NAV_ITEMS: NavItemConfig[] = [
       { id: "about-overview", labelKey: "navbar.items.aboutOverview", href: ROUTES.about.index },
       { id: "about-objectives", labelKey: "navbar.items.trustObjectives", href: ROUTES.about.objectives },
       { id: "about-founder", labelKey: "navbar.items.founder", href: ROUTES.about.founder },
-      { id: "about-awards", labelKey: "navbar.items.awards", href: ROUTES.about.awards },
       { id: "about-activities", labelKey: "navbar.items.activities", href: ROUTES.about.activities },
     ],
   },
@@ -62,10 +61,7 @@ const NAV_ITEMS: NavItemConfig[] = [
     labelKey: "navbar.items.events",
     children: [
       { id: "events-bhagwat-katha", labelKey: "navbar.items.bhagwatKatha", href: ROUTES.eventsKatha.bhagwatKatha },
-      { id: "events-spiritual", labelKey: "navbar.items.spiritualEvents", href: ROUTES.eventsKatha.spiritualEvents },
       { id: "events-festivals", labelKey: "navbar.items.festivals", href: ROUTES.eventsKatha.festivals },
-      { id: "events-guru-purnima", labelKey: "navbar.items.guruPurnima", href: ROUTES.eventsKatha.guruPurnima },
-      { id: "events-annakut", labelKey: "navbar.items.annakut", href: ROUTES.eventsKatha.annakut },
       { id: "events-youth", labelKey: "navbar.items.youthPrograms", href: ROUTES.eventsKatha.youthPrograms },
     ],
   },

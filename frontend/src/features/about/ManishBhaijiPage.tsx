@@ -152,7 +152,6 @@ export default memo(function ManishBhaijiPage() {
         <div className="text-center mb-10">
           <p className={`${FOUNDER_LABEL} mb-3`}>{t("founderPage.principlesEyebrow")}</p>
           <h2 className={`${FOUNDER_HEADING} mb-3`}>{t("founderPage.principlesHeading")}</h2>
-          <p className={`${FOUNDER_BODY} mx-auto max-w-2xl`}>{t("founderPage.principlesSubtitle")}</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {principles.map((p) => (
@@ -352,7 +351,6 @@ export default memo(function ManishBhaijiPage() {
       <section className="py-14 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className={`${FOUNDER_HEADING} mb-3`}>{t("founderPage.ctaTitle")}</h2>
-          <p className={`${FOUNDER_BODY} mx-auto mb-8 max-w-2xl`}>{t("founderPage.ctaDesc")}</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to={ROUTES.involved.volunteer} className="inline-block bg-gradient-to-r from-[#ff6a00] to-[#ed9b24] hover:from-[#ed9b24] hover:to-[#fec758] text-white font-bold px-8 py-3.5 rounded-xl transition-all duration-300">
               {t("founderPage.ctaVolunteer")}

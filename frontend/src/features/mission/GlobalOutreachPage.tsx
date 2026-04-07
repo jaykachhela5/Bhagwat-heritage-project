@@ -169,7 +169,7 @@ export default memo(function GlobalOutreachPage() {
     <div className="min-h-screen bg-[#0B2230]">
       <HeroSection
         title="Global Outreach Vision"
-        subtitle="Bhagwat Heritage connects satsang, seva, and Sanatan culture across borders."
+        subtitle="Serving globally, rooted spiritually"
         subtitleClassName={MISSION_HERO_SUBTITLE_CLASS}
         contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage={HERO_IMAGE}
