@@ -1090,18 +1090,148 @@ export const MediaGalleryHubPage = memo(function MediaGalleryHubPage() {
 });
 
 export const DigitalServicesHubPage = memo(function DigitalServicesHubPage() {
+  const digitalCards = [
+    {
+      title: "E-Store",
+      desc: "Books, puja items, and devotional essentials in a clean digital storefront.",
+      href: ROUTES.digital.store,
+    },
+    {
+      title: "Donation System",
+      desc: "Support temple, seva, and trust initiatives through a simple online contribution flow.",
+      href: ROUTES.digital.donation,
+    },
+    {
+      title: "Online Satsang",
+      desc: "Join live discourse, digital darshan, and replay access from anywhere.",
+      href: ROUTES.digital.satsang,
+    },
+    {
+      title: "Membership Portal",
+      desc: "Stay connected with member benefits, registration, and digital identity tools.",
+      href: ROUTES.digital.membership,
+    },
+    {
+      title: "Kundli",
+      desc: "Request traditional kundli guidance with booking, details, and delivery support.",
+      href: ROUTES.digital.kundli,
+    },
+  ];
+
+  usePageMeta(
+    "Digital Services",
+    "Digital services hub for e-store, online donations, satsang access, membership support, and kundli booking.",
+  );
+
   return (
-    <ArchitectureHubPage
-      title="Digital Services"
-      subtitle="Online store, donation system, satsang access, membership portal, and Kundli services."
-      cards={[
-        { title: "E-Store", desc: "Spiritual products and devotional resources.", href: ROUTES.digital.store },
-        { title: "Donation System", desc: "Digital donation channels with transparent support.", href: ROUTES.digital.donation },
-        { title: "Online Satsang", desc: "Virtual satsang and broadcast programs.", href: ROUTES.digital.satsang },
-        { title: "Membership / User Portal", desc: "Member access and personalized resources.", href: ROUTES.digital.membership },
-        { title: "Kundli", desc: "Request spiritual astrology guidance and birth chart consultation.", href: ROUTES.digital.kundli },
-      ]}
-    />
+    <div className="min-h-screen bg-[#0B2230] pb-16">
+      <HeroSection
+        title="Digital Services"
+        subtitle="Devotional access, online seva support, and spiritual tools in one place"
+        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
+        contentClassName={EVENT_SEVA_HERO_CONTENT_CLASS}
+        backgroundImage="/images/spiritual1.png"
+        boxed
+        heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-black/55"
+      >
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <Link to={ROUTES.digital.store} className={EVENT_SEVA_PRIMARY_BUTTON_CLASS}>
+            Visit E-Store
+          </Link>
+          <Link to={ROUTES.digital.satsang} className={EVENT_SEVA_SECONDARY_BUTTON_CLASS}>
+            Join Online Satsang
+          </Link>
+        </div>
+      </HeroSection>
+
+      <section className="relative z-20 mt-[10px] pb-6">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {[
+              {
+                title: "Digital Reach",
+                label: "Daily access for devotees",
+                note: "Simple routes for seva, study, satsang, and spiritual support.",
+              },
+              {
+                title: "Clean Experience",
+                label: "Easy to browse",
+                note: "Each service is organized with clear entry points and focused actions.",
+              },
+              {
+                title: "Connected Seva",
+                label: "Support from anywhere",
+                note: "Donate, join, request, and stay connected through digital channels.",
+              },
+              {
+                title: "Platform Design",
+                label: "Fast and functional",
+                note: "A cleaner visual system inspired by the Gau Seva page style.",
+              },
+            ].map((item) => (
+              <div key={item.title} className={EVENT_SEVA_HIGHLIGHT_CARD_CLASS}>
+                <p className={SEVA_HIGHLIGHT_TITLE_CLASS}>* {item.title}</p>
+                <p className={SEVA_HIGHLIGHT_VALUE_CLASS}>{item.label}</p>
+                <p className={`mt-1 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-10">
+        <div className={EVENT_SEVA_SECTION_CLASS}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Digital Service Routes</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Explore every major online service with the same clean visual language</h2>
+
+          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {digitalCards.map((card) => (
+              <article key={card.href} className={EVENT_SEVA_CARD_CLASS}>
+                <h3 className={SEVA_CARD_TITLE_CLASS}>{card.title}</h3>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{card.desc}</p>
+                <Link to={card.href} className={`mt-5 inline-flex ${EVENT_SEVA_PRIMARY_BUTTON_CLASS}`}>
+                  Open Section
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-10">
+        <div className={`${EVENT_SEVA_SECTION_CLASS} grid grid-cols-1 gap-6 lg:grid-cols-2`}>
+          <div className={EVENT_SEVA_DETAIL_CARD_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Why This Hub Matters</p>
+            <h3 className={SEVA_SECTION_HEADING_CLASS}>A clearer digital entry point for devotees, donors, and families</h3>
+            <p className={`mt-5 ${SEVA_BODY_TEXT_CLASS}`}>
+              The Digital Services area now follows the same structured look as Gau Seva so visitors can move through
+              online sections without facing mismatched fonts, banners, or scattered layouts.
+            </p>
+            <p className={`mt-4 ${SEVA_BODY_TEXT_CLASS}`}>
+              This makes the project feel more polished, more trustworthy, and easier to use across donation, satsang,
+              membership, shopping, and kundli support.
+            </p>
+          </div>
+
+          <div className={EVENT_SEVA_DETAIL_CARD_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Start With These</p>
+            <h3 className={SEVA_SECTION_HEADING_CLASS}>Quick digital actions for common visitor needs</h3>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link to={ROUTES.digital.donation} className={EVENT_SEVA_PRIMARY_BUTTON_CLASS}>
+                Open Donation System
+              </Link>
+              <Link to={ROUTES.digital.membership} className={EVENT_SEVA_SECONDARY_BUTTON_CLASS}>
+                View Membership Portal
+              </Link>
+              <Link to={ROUTES.digital.kundli} className={EVENT_SEVA_SECONDARY_BUTTON_CLASS}>
+                Book Kundli
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 });
 
@@ -6149,38 +6279,54 @@ export const DigitalSatsangPage = memo(function DigitalSatsangPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0b2230] py-10">
-      <div className="mx-auto max-w-7xl px-4">
-        <section className="rounded-[32px] border border-white/10 bg-[linear-gradient(135deg,#12354a_0%,#102d40_44%,#0b2230_100%)] p-6 md:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#ffb06a]">Digital Services</p>
-          <h1 className="mt-3 text-3xl font-black text-white md:text-5xl">Online Satsang</h1>
-          <p className="mt-4 max-w-4xl text-lg leading-8 text-[#d4e1e8]">
-            This page is now built as a real digital satsang access area where devotees can listen, watch, join, book, and stay connected through multiple online platforms.
-          </p>
+    <div className="min-h-screen bg-[#0B2230] pb-16">
+      <HeroSection
+        title="Online Satsang"
+        subtitle="Live discourse, digital darshan, and devotional access from anywhere"
+        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
+        contentClassName={EVENT_SEVA_HERO_CONTENT_CLASS}
+        backgroundImage="/images/kathapravachan.png"
+        boxed
+        heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-black/55"
+      >
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <Link to={ROUTES.media.videos} className={EVENT_SEVA_PRIMARY_BUTTON_CLASS}>
+            Watch Satsang
+          </Link>
+          <Link to={ROUTES.contact} className={EVENT_SEVA_SECONDARY_BUTTON_CLASS}>
+            Book Digital Satsang
+          </Link>
+        </div>
+      </HeroSection>
 
-          <div className="mt-8 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+      <section className="relative z-20 mt-[10px] pb-6">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {[
-              { title: "Access Modes", value: "4", note: "Audio, video, booking, and platform-based digital satsang access" },
-              { title: "Platform Reach", value: "6", note: "YouTube, Facebook, Instagram, WhatsApp, website, and replay access" },
-              { title: "Join Style", value: "Live + Replay", note: "Supports both real-time satsang and later devotional listening" },
-              { title: "Experience", value: "Multi-Device", note: "Useful for mobile, family viewing, and audio-only connection" },
+              { title: "Access Modes", value: "Audio, video, and booking", note: "Flexible online access for daily listening and live participation." },
+              { title: "Platform Reach", value: "Multiple digital channels", note: "YouTube, Facebook, Instagram, WhatsApp, and future trust-controlled routes." },
+              { title: "Join Style", value: "Live and replay", note: "Stay connected in real time or return later for peaceful listening." },
+              { title: "Devotee Experience", value: "Simple and clear", note: "A cleaner layout inspired by the Gau Seva page style." },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#17384b] p-4">
-                <p className="text-xs uppercase tracking-wide text-[#ffb06a]">{item.title}</p>
-                <p className="mt-1 text-2xl font-black text-white">{item.value}</p>
-                <p className="mt-1 text-sm text-[#d4e1e8]">{item.note}</p>
+              <div key={item.title} className={EVENT_SEVA_HIGHLIGHT_CARD_CLASS}>
+                <p className={SEVA_HIGHLIGHT_TITLE_CLASS}>* {item.title}</p>
+                <p className={SEVA_HIGHLIGHT_VALUE_CLASS}>{item.value}</p>
+                <p className={`mt-1 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
               </div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="mt-8 rounded-[32px] border border-white/10 bg-[#153446] p-6 md:p-8">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className={EVENT_SEVA_SECTION_CLASS}>
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Advanced Feature</p>
-              <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Digital Satsang Access Explorer</h2>
-              <p className="mt-3 max-w-3xl text-lg leading-7 text-[#d4e1e8]">
-                Filter the page by access mode so devotees can quickly find the right way to join satsang online.
+              <p className={SEVA_SECTION_LABEL_CLASS}>Digital Satsang Explorer</p>
+              <h2 className={SEVA_SECTION_HEADING_CLASS}>Choose the right way to join satsang online</h2>
+              <p className={`mt-4 max-w-3xl ${SEVA_BODY_TEXT_CLASS}`}>
+                Filter by access mode to quickly find whether you want to listen, watch, request, or join through a platform.
               </p>
             </div>
 
@@ -6194,8 +6340,8 @@ export const DigitalSatsangPage = memo(function DigitalSatsangPage() {
                     onClick={() => setActiveMode(mode)}
                     className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                       active
-                        ? "bg-[#ffb06a] text-[#17384b]"
-                        : "border border-white/10 bg-[#17384b] text-[#d4e1e8] hover:border-[#ffb06a]/40"
+                        ? "bg-[#ef9a1e] text-white shadow-[0_10px_24px_rgba(239,154,30,0.24)]"
+                        : "border border-white/10 bg-[#0c5871] text-[#dce7ec] hover:border-[#ef9a1e]"
                     }`}
                   >
                     {mode}
@@ -6207,107 +6353,113 @@ export const DigitalSatsangPage = memo(function DigitalSatsangPage() {
 
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
             {visibleModes.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#17384b] p-6">
+              <div key={item.title} className={`${EVENT_SEVA_DETAIL_CARD_CLASS} flex h-full flex-col`}>
                 <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full bg-[#ffb06a] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#17384b]">
+                  <span className="rounded-full bg-[#ef9a1e] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-white">
                     {item.category}
                   </span>
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#d4e1e8]">
+                  <span className="rounded-full border border-white/10 bg-[#0d6179] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#dce7ec]">
                     Digital Satsang
                   </span>
                 </div>
-                <h3 className="mt-4 text-2xl font-black text-white">{item.title}</h3>
-                <p className="mt-3 text-lg leading-7 text-[#d4e1e8]">{item.desc}</p>
-                <div className="mt-4 rounded-2xl bg-[#0f2c3d] p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[#ffb06a]">Why It Matters</p>
-                  <p className="mt-2 leading-7 text-[#d4e1e8]">{item.support}</p>
+                <h3 className={`mt-4 ${SEVA_CARD_TITLE_CLASS}`}>{item.title}</h3>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
+                <div className="mt-4 rounded-2xl border border-white/10 bg-[#0d6179] p-4">
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Why It Matters</p>
+                  <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.support}</p>
                 </div>
               </div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-[28px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-            <h2 className="text-3xl font-black text-white md:text-4xl">Listen, Watch, Book, and Join</h2>
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className={`${EVENT_SEVA_SECTION_CLASS} grid grid-cols-1 gap-6 lg:grid-cols-[1.05fr_0.95fr]`}>
+          <div className={`${EVENT_SEVA_DETAIL_CARD_CLASS} flex h-full flex-col`}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>How Devotees Join</p>
+            <h2 className={SEVA_SECTION_HEADING_CLASS}>Listen, watch, request, and revisit satsang with ease</h2>
             <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
               {[
                 {
                   title: "Live Audio Satsang",
-                  desc: "For devotees who want shravan-focused satsang without needing full video streaming.",
+                  desc: "A simple listening route for devotees who want shravan-focused access throughout the day.",
                 },
                 {
-                  title: "Live Video Darshan and Pravachan",
-                  desc: "For devotees who want discourse, stage view, mandir mood, and visual spiritual presence.",
+                  title: "Live Video Darshan",
+                  desc: "A visual satsang route for pravachan, mandir atmosphere, and family participation.",
                 },
                 {
-                  title: "Book a Digital Satsang Slot",
-                  desc: "Supports future booking and request handling for scheduled online satsang sessions.",
+                  title: "Digital Satsang Booking",
+                  desc: "A clear path for requesting scheduled satsang access or future digital sessions.",
                 },
                 {
-                  title: "Replay and Archive Listening",
-                  desc: "Makes it easier for devotees in different time slots to revisit satsang later.",
+                  title: "Replay Support",
+                  desc: "A useful archive option for devotees in different time zones or daily routines.",
                 },
               ].map((item) => (
-                <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0f2c3d] p-5">
-                  <h3 className="text-xl font-black text-white">{item.title}</h3>
-                  <p className="mt-2 leading-7 text-[#d4e1e8]">{item.desc}</p>
+                <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-5">
+                  <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
+                  <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="rounded-[28px] bg-gradient-to-br from-[#0f5a98] to-[#0d8f91] p-6 md:p-8 text-white">
-            <h2 className="text-3xl font-black md:text-4xl">Join Satsang Actions</h2>
+          <div className={`${EVENT_SEVA_DETAIL_CARD_CLASS} flex h-full flex-col`}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Join Satsang Actions</p>
+            <h2 className={SEVA_SECTION_HEADING_CLASS}>Quick steps for today&apos;s digital participation</h2>
             <div className="mt-6 space-y-4">
               {[
-                "Join current satsang through video stream links",
-                "Listen in audio mode for mobile-friendly access",
-                "Request a private or scheduled digital satsang",
-                "Follow replay and archived satsang content later",
+                "Open the current satsang or replay link.",
+                "Choose audio or video based on your situation.",
+                "Contact the trust for special digital satsang requests.",
+                "Return later for archive-based listening and reflection.",
               ].map((line, index) => (
-                <div key={line} className="rounded-2xl bg-white/12 p-4">
-                  <p className="text-sm font-bold uppercase tracking-wide text-white/75">Step {index + 1}</p>
-                  <p className="mt-1 text-lg text-white/95">{line}</p>
+                <div key={line} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4">
+                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">Step {index + 1}</p>
+                  <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{line}</p>
                 </div>
               ))}
             </div>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link to={ROUTES.contact} className="inline-block rounded-xl bg-white px-5 py-3 text-sm font-bold text-[#0f5a98]">
+              <Link to={ROUTES.contact} className={EVENT_SEVA_PRIMARY_BUTTON_CLASS}>
                 Book Satsang
               </Link>
-              <Link to={ROUTES.media.videos} className="inline-block rounded-xl bg-[#11283a] px-5 py-3 text-sm font-semibold text-white">
+              <Link to={ROUTES.media.videos} className={EVENT_SEVA_SECONDARY_BUTTON_CLASS}>
                 Watch Video Satsang
               </Link>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="mt-8 rounded-[32px] border border-white/10 bg-[#153446] p-6 md:p-8">
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className={EVENT_SEVA_SECTION_CLASS}>
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Platform Section</p>
-              <h2 className="mt-2 text-3xl font-black text-white md:text-4xl">Available Platforms for Online Satsang</h2>
+              <p className={SEVA_SECTION_LABEL_CLASS}>Platform Section</p>
+              <h2 className={SEVA_SECTION_HEADING_CLASS}>Available platforms for online satsang</h2>
             </div>
-            <p className="text-sm text-[#d4e1e8]">YouTube, Facebook, Instagram, WhatsApp, and more</p>
+            <p className={SEVA_BODY_TEXT_CLASS}>YouTube, Facebook, Instagram, WhatsApp, and more</p>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
             {platformCards.map((item) => (
-              <article key={item.name} className="overflow-hidden rounded-[24px] border border-white/10 bg-[#17384b]">
+              <article key={item.name} className="flex h-full flex-col overflow-hidden rounded-[24px] border border-white/10 bg-[#0c5871] shadow-sm">
                 <div className={`bg-gradient-to-r ${item.accent} px-5 py-4`}>
                   <p className="text-sm font-bold uppercase tracking-[0.18em] text-white">{item.type}</p>
                   <h3 className="mt-2 text-xl font-black text-white">{item.name}</h3>
                 </div>
-                <div className="p-5">
-                  <p className="text-base leading-7 text-[#d4e1e8]">{item.desc}</p>
+                <div className="flex h-full flex-col p-5">
+                  <p className={`${SEVA_BODY_TEXT_CLASS} flex-1`}>{item.desc}</p>
                   <div className="mt-5 flex flex-wrap gap-2">
                     <a
                       href={item.satsangHref}
                       target={item.satsangHref.startsWith("http") ? "_blank" : undefined}
                       rel={item.satsangHref.startsWith("http") ? "noreferrer" : undefined}
-                      className="rounded-xl bg-[#ff8a00] px-4 py-2 text-sm font-bold text-white"
+                      className={EVENT_SEVA_PRIMARY_BUTTON_CLASS}
                     >
                       Join Satsang
                     </a>
@@ -6315,7 +6467,7 @@ export const DigitalSatsangPage = memo(function DigitalSatsangPage() {
                       href={item.kathaHref}
                       target={item.kathaHref.startsWith("http") ? "_blank" : undefined}
                       rel={item.kathaHref.startsWith("http") ? "noreferrer" : undefined}
-                      className="rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-white"
+                      className={EVENT_SEVA_SECONDARY_BUTTON_CLASS}
                     >
                       Join Katha
                     </a>
@@ -6323,7 +6475,7 @@ export const DigitalSatsangPage = memo(function DigitalSatsangPage() {
                       href={item.eventsHref}
                       target={item.eventsHref.startsWith("http") ? "_blank" : undefined}
                       rel={item.eventsHref.startsWith("http") ? "noreferrer" : undefined}
-                      className="rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-white"
+                      className={EVENT_SEVA_SECONDARY_BUTTON_CLASS}
                     >
                       Join Events
                     </a>
@@ -6332,8 +6484,8 @@ export const DigitalSatsangPage = memo(function DigitalSatsangPage() {
               </article>
             ))}
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 });
@@ -6429,41 +6581,53 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
     "Membership portal for community joining, membership plans, registration, digital membership card, payments, activities, and admin management concepts.",
   );
 
+  const membershipSectionClass = "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
+  const membershipCardClass = "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm";
+  const membershipInputClass =
+    "rounded-2xl border border-white/10 bg-[#0c5871] px-4 py-3 text-white outline-none placeholder:text-[#aac0ca] focus:border-[#ef9a1e]";
+  const membershipButtonClass =
+    "rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]";
+  const membershipSecondaryButtonClass =
+    "rounded-xl border border-white/10 bg-[#0c5871] px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-[#ef9a1e]";
+
   return (
     <div className="min-h-screen bg-[#0B2230] pb-16">
       <HeroSection
         title="Membership Portal"
-        subtitle="Join the Bhagwat Heritage community and stay connected to spiritual programs, seva, events, and digital member benefits"
+        subtitle="Join the Bhagwat Heritage community with a cleaner, Gau Seva-inspired member experience"
+        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
+        contentClassName={EVENT_SEVA_HERO_CONTENT_CLASS}
         backgroundImage="/images/spiritual1.png"
         boxed
         heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-black/55"
       >
-        <div className="flex flex-wrap justify-center gap-3">
-          <a href="#member-registration" className="inline-flex items-center bg-[#F59E0B] hover:bg-[#dd8f0a] text-white font-semibold px-6 py-3 rounded-lg transition-colors">
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <a href="#member-registration" className={EVENT_SEVA_PRIMARY_BUTTON_CLASS}>
             Join Now
           </a>
           <Link
             to={ROUTES.login}
-            className="inline-flex items-center bg-white text-[#0B2230] hover:bg-[#eef4f7] font-semibold px-6 py-3 rounded-lg transition-colors"
+            className={EVENT_SEVA_SECONDARY_BUTTON_CLASS}
           >
             Login
           </Link>
         </div>
       </HeroSection>
 
-      <section className="-mt-10 relative z-20 pb-6">
+      <section className="relative z-20 mt-[10px] pb-6">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {[
-              { title: "Membership Plans", value: "3", note: "Basic, Premium, and Lifetime membership options" },
-              { title: "Member Benefits", value: "Priority + Access", note: "Programs, events, seva opportunities, and recognition" },
-              { title: "Digital Access", value: "Portal Ready", note: "Profile, card, certificate, and participation tracking" },
-              { title: "Payment Methods", value: "4", note: "UPI, credit card, debit card, and net banking" },
+              { title: "Membership Plans", value: "Basic, Premium, and Lifetime", note: "Flexible ways to stay connected with the trust community." },
+              { title: "Member Benefits", value: "Programs, seva, and events", note: "A clean route to participation, updates, and devotional connection." },
+              { title: "Digital Access", value: "Profile, card, and certificate", note: "Useful member tools presented with a clearer visual layout." },
+              { title: "Payment Support", value: "Online contribution ready", note: "Payment-friendly membership flow with simple action points." },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#12394A] p-4 shadow-[0_10px_24px_rgba(0,0,0,0.22)]">
-                <p className="text-xs uppercase tracking-wide text-[#F59E0B]">{item.title}</p>
-                <p className="mt-1 text-2xl font-black text-white">{item.value}</p>
-                <p className="mt-1 text-sm text-[#d9e6ec]">{item.note}</p>
+              <div key={item.title} className={EVENT_SEVA_HIGHLIGHT_CARD_CLASS}>
+                <p className={SEVA_HIGHLIGHT_TITLE_CLASS}>* {item.title}</p>
+                <p className={SEVA_HIGHLIGHT_VALUE_CLASS}>{item.value}</p>
+                <p className={`mt-1 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
               </div>
             ))}
           </div>
@@ -6471,9 +6635,9 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-8">
-        <div className="rounded-[32px] border border-white/10 bg-[#12394A] p-6 md:p-8 shadow-[0_16px_34px_rgba(0,0,0,0.22)]">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">Membership Benefits</p>
-          <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Why Become a Member</h2>
+        <div className={membershipSectionClass}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Membership Benefits</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Why become a member</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-5">
             {[
               { icon: "SP", title: "Spiritual Programs", desc: "Regular access to satsang, discourse, and devotional learning paths." },
@@ -6482,12 +6646,12 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
               { icon: "DC", title: "Digital Certificates", desc: "Receive member documentation and recognition in digital format." },
               { icon: "PP", title: "Priority Participation", desc: "Get preference in Bhagwat events, workshops, and major trust activities." },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0f3140] p-5">
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F59E0B]/15 text-sm font-black text-[#F59E0B]">
+              <div key={item.title} className={membershipCardClass}>
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-sm font-black text-[#ef9a1e]">
                   {item.icon}
                 </div>
-                <h3 className="mt-4 text-xl font-black text-white">{item.title}</h3>
-                <p className="mt-2 leading-7 text-[#d9e6ec]">{item.desc}</p>
+                <h3 className={`mt-4 ${SEVA_CARD_TITLE_CLASS}`}>{item.title}</h3>
+                <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
               </div>
             ))}
           </div>
@@ -6495,19 +6659,19 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-8">
-        <div className="rounded-[32px] border border-white/10 bg-[#12394A] p-6 md:p-8 shadow-[0_16px_34px_rgba(0,0,0,0.22)]">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">Membership Plans</p>
-          <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Choose Your Plan</h2>
+        <div className={membershipSectionClass}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Membership Plans</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Choose your plan</h2>
 
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
             {membershipPlans.map((plan) => (
-              <div key={plan.name} className="rounded-[28px] border border-white/10 bg-[#0f3140] p-6 shadow-sm">
-                <p className="text-sm font-semibold uppercase tracking-wide text-[#F59E0B]">{plan.name}</p>
-                <p className="mt-3 text-3xl font-black text-white">{plan.price}</p>
-                <ul className="mt-5 space-y-3 text-[#d9e6ec]">
+              <div key={plan.name} className={membershipCardClass}>
+                <p className={SEVA_SECTION_LABEL_CLASS}>{plan.name}</p>
+                <p className={`mt-3 ${SEVA_CARD_TITLE_CLASS}`}>{plan.price}</p>
+                <ul className={`mt-5 space-y-3 ${SEVA_BODY_TEXT_CLASS}`}>
                   {plan.benefits.map((benefit) => (
                     <li key={benefit} className="flex gap-3">
-                      <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#F59E0B]" />
+                      <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#ef9a1e]" />
                       <span>{benefit}</span>
                     </li>
                   ))}
@@ -6515,7 +6679,7 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
                 <button
                   type="button"
                   onClick={() => setMembershipForm((current) => ({ ...current, plan: plan.name }))}
-                  className="mt-6 inline-flex rounded-xl bg-[#F59E0B] px-5 py-3 text-sm font-bold text-white hover:bg-[#dd8f0a]"
+                  className={`mt-6 inline-flex ${membershipButtonClass}`}
                 >
                   Join {plan.name}
                 </button>
@@ -6527,33 +6691,33 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
 
       <section id="member-registration" className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-[32px] border border-white/10 bg-[#12394A] p-6 md:p-8 shadow-[0_16px_34px_rgba(0,0,0,0.22)]">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">Member Registration</p>
-            <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Join the Community</h2>
+          <div className={membershipSectionClass}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Member Registration</p>
+            <h2 className={SEVA_SECTION_HEADING_CLASS}>Join the community</h2>
 
             <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
               <input
                 value={membershipForm.fullName}
                 onChange={(event) => setMembershipForm((current) => ({ ...current, fullName: event.target.value }))}
                 placeholder="Full Name"
-                className="rounded-2xl border border-white/10 bg-[#0f3140] px-4 py-3 text-white outline-none placeholder:text-[#aac0ca] focus:border-[#F59E0B]"
+                className={membershipInputClass}
               />
               <input
                 value={membershipForm.email}
                 onChange={(event) => setMembershipForm((current) => ({ ...current, email: event.target.value }))}
                 placeholder="Email"
-                className="rounded-2xl border border-white/10 bg-[#0f3140] px-4 py-3 text-white outline-none placeholder:text-[#aac0ca] focus:border-[#F59E0B]"
+                className={membershipInputClass}
               />
               <input
                 value={membershipForm.phone}
                 onChange={(event) => setMembershipForm((current) => ({ ...current, phone: event.target.value }))}
                 placeholder="Phone Number"
-                className="rounded-2xl border border-white/10 bg-[#0f3140] px-4 py-3 text-white outline-none placeholder:text-[#aac0ca] focus:border-[#F59E0B]"
+                className={membershipInputClass}
               />
               <select
                 value={membershipForm.plan}
                 onChange={(event) => setMembershipForm((current) => ({ ...current, plan: event.target.value }))}
-                className="rounded-2xl border border-white/10 bg-[#0f3140] px-4 py-3 text-white outline-none focus:border-[#F59E0B]"
+                className={membershipInputClass}
               >
                 {membershipPlans.map((plan) => (
                   <option key={plan.name} value={plan.name}>
@@ -6565,87 +6729,87 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
                 value={membershipForm.address}
                 onChange={(event) => setMembershipForm((current) => ({ ...current, address: event.target.value }))}
                 placeholder="Address"
-                className="rounded-2xl border border-white/10 bg-[#0f3140] px-4 py-3 text-white outline-none placeholder:text-[#aac0ca] focus:border-[#F59E0B] md:col-span-2"
+                className={`${membershipInputClass} md:col-span-2`}
               />
               <input
                 value={membershipForm.city}
                 onChange={(event) => setMembershipForm((current) => ({ ...current, city: event.target.value }))}
                 placeholder="City"
-                className="rounded-2xl border border-white/10 bg-[#0f3140] px-4 py-3 text-white outline-none placeholder:text-[#aac0ca] focus:border-[#F59E0B]"
+                className={membershipInputClass}
               />
               <input
                 value={membershipForm.state}
                 onChange={(event) => setMembershipForm((current) => ({ ...current, state: event.target.value }))}
                 placeholder="State"
-                className="rounded-2xl border border-white/10 bg-[#0f3140] px-4 py-3 text-white outline-none placeholder:text-[#aac0ca] focus:border-[#F59E0B]"
+                className={membershipInputClass}
               />
               <input
                 value={membershipForm.country}
                 onChange={(event) => setMembershipForm((current) => ({ ...current, country: event.target.value }))}
                 placeholder="Country"
-                className="rounded-2xl border border-white/10 bg-[#0f3140] px-4 py-3 text-white outline-none placeholder:text-[#aac0ca] focus:border-[#F59E0B] md:col-span-2"
+                className={`${membershipInputClass} md:col-span-2`}
               />
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-              <label className="rounded-2xl border border-dashed border-[#F59E0B]/50 bg-[#0f3140] px-4 py-5 text-sm font-semibold text-white">
+              <label className="rounded-2xl border border-dashed border-[#ef9a1e]/50 bg-[#0c5871] px-4 py-5 text-sm font-semibold text-white">
                 Profile Photo Upload
                 <input type="file" accept="image/*" onChange={handlePhotoChange} className="mt-3 block w-full text-sm text-[#d9e6ec]" />
               </label>
-              <label className="rounded-2xl border border-dashed border-[#F59E0B]/50 bg-[#0f3140] px-4 py-5 text-sm font-semibold text-white">
+              <label className="rounded-2xl border border-dashed border-[#ef9a1e]/50 bg-[#0c5871] px-4 py-5 text-sm font-semibold text-white">
                 ID Proof Upload
                 <input type="file" onChange={handleIdProofChange} className="mt-3 block w-full text-sm text-[#d9e6ec]" />
               </label>
             </div>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <button type="button" className="rounded-xl bg-[#F59E0B] px-6 py-3 text-sm font-bold text-white hover:bg-[#dd8f0a]">
+              <button type="button" className={membershipButtonClass}>
                 Submit Registration
               </button>
-              <button type="button" className="rounded-xl border border-white/10 bg-[#0f3140] px-6 py-3 text-sm font-semibold text-white">
+              <button type="button" className={membershipSecondaryButtonClass}>
                 Save Form Draft
               </button>
             </div>
           </div>
 
           <div className="space-y-6">
-            <div className="rounded-[32px] border border-white/10 bg-[#12394A] p-6 md:p-8 shadow-[0_16px_34px_rgba(0,0,0,0.22)]">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">Digital Membership Card</p>
-              <div className="mt-5 rounded-[28px] border border-white/10 bg-[#0f3140] p-5">
+            <div className={membershipSectionClass}>
+              <p className={SEVA_SECTION_LABEL_CLASS}>Digital Membership Card</p>
+              <div className="mt-5 rounded-[24px] border border-white/10 bg-[#0c5871] p-5">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl bg-[#12394A]">
+                  <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl bg-[#0d6179]">
                     {photoPreview ? (
                       <img src={photoPreview} alt="Member" className="h-full w-full object-cover" />
                     ) : (
-                      <span className="text-sm font-black text-[#F59E0B]">PHOTO</span>
+                      <span className="text-sm font-black text-[#ef9a1e]">PHOTO</span>
                     )}
                   </div>
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-wide text-[#F59E0B]">Bhagwat Heritage Member ID</p>
-                    <h3 className="mt-2 text-2xl font-black text-white">{membershipForm.fullName || "Member Name"}</h3>
+                    <p className={SEVA_SECTION_LABEL_CLASS}>Bhagwat Heritage Member ID</p>
+                    <h3 className={`mt-2 ${SEVA_CARD_TITLE_CLASS}`}>{membershipForm.fullName || "Member Name"}</h3>
                     <p className="mt-1 text-sm text-[#d9e6ec]">{memberId}</p>
                   </div>
                 </div>
                 <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
-                  <div className="rounded-2xl bg-[#12394A] p-3">
-                    <p className="text-xs uppercase tracking-wide text-[#F59E0B]">Membership Type</p>
+                  <div className="rounded-2xl bg-[#0d6179] p-3">
+                    <p className="text-xs uppercase tracking-wide text-[#ef9a1e]">Membership Type</p>
                     <p className="mt-1 font-semibold text-white">{selectedPlan.name}</p>
                   </div>
-                  <div className="rounded-2xl bg-[#12394A] p-3">
-                    <p className="text-xs uppercase tracking-wide text-[#F59E0B]">Join Date</p>
+                  <div className="rounded-2xl bg-[#0d6179] p-3">
+                    <p className="text-xs uppercase tracking-wide text-[#ef9a1e]">Join Date</p>
                     <p className="mt-1 font-semibold text-white">{joinDate}</p>
                   </div>
-                  <div className="rounded-2xl bg-[#12394A] p-3">
-                    <p className="text-xs uppercase tracking-wide text-[#F59E0B]">Status</p>
+                  <div className="rounded-2xl bg-[#0d6179] p-3">
+                    <p className="text-xs uppercase tracking-wide text-[#ef9a1e]">Status</p>
                     <p className="mt-1 font-semibold text-white">Pending Approval</p>
                   </div>
-                  <div className="rounded-2xl bg-[#12394A] p-3">
-                    <p className="text-xs uppercase tracking-wide text-[#F59E0B]">ID Proof</p>
+                  <div className="rounded-2xl bg-[#0d6179] p-3">
+                    <p className="text-xs uppercase tracking-wide text-[#ef9a1e]">ID Proof</p>
                     <p className="mt-1 font-semibold text-white">{idProofName || "Not uploaded"}</p>
                   </div>
                 </div>
                 <div className="mt-5 flex flex-wrap gap-3">
-                  <button type="button" onClick={() => window.print()} className="rounded-xl bg-[#F59E0B] px-5 py-3 text-sm font-bold text-white">
+                  <button type="button" onClick={() => window.print()} className={membershipButtonClass}>
                     Download Card
                   </button>
                   <button
@@ -6653,7 +6817,7 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
                     onClick={() => {
                       void handleShareCard();
                     }}
-                    className="rounded-xl border border-white/10 bg-[#12394A] px-5 py-3 text-sm font-semibold text-white"
+                    className={membershipSecondaryButtonClass}
                   >
                     Share Card
                   </button>
@@ -6661,12 +6825,12 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
               </div>
             </div>
 
-            <div className="rounded-[32px] border border-white/10 bg-[#12394A] p-6 md:p-8 shadow-[0_16px_34px_rgba(0,0,0,0.22)]">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">Payment Integration</p>
-              <h3 className="mt-2 text-3xl font-black text-white">Online Payment Methods</h3>
+            <div className={membershipSectionClass}>
+              <p className={SEVA_SECTION_LABEL_CLASS}>Payment Integration</p>
+              <h3 className={SEVA_SECTION_HEADING_CLASS}>Online payment methods</h3>
               <div className="mt-5 grid grid-cols-2 gap-3">
                 {["UPI", "Credit Card", "Debit Card", "Net Banking"].map((method) => (
-                  <div key={method} className="rounded-2xl border border-white/10 bg-[#0f3140] p-4 text-center text-white font-semibold">
+                  <div key={method} className="rounded-2xl border border-white/10 bg-[#0c5871] p-4 text-center text-white font-semibold">
                     {method}
                   </div>
                 ))}
@@ -6678,9 +6842,9 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
 
       <section className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1fr]">
-          <div className="rounded-[32px] border border-white/10 bg-[#12394A] p-6 md:p-8 shadow-[0_16px_34px_rgba(0,0,0,0.22)]">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">Member Dashboard</p>
-            <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Dashboard Preview After Login</h2>
+          <div className={membershipSectionClass}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Member Dashboard</p>
+            <h2 className={SEVA_SECTION_HEADING_CLASS}>Dashboard preview after login</h2>
             <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
               {[
                 "View profile and edit personal details",
@@ -6688,25 +6852,25 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
                 "See membership ID and status",
                 "Track event participation and activity",
               ].map((item) => (
-                <div key={item} className="rounded-2xl border border-white/10 bg-[#0f3140] p-5 text-white">
+                <div key={item} className="rounded-2xl border border-white/10 bg-[#0c5871] p-5 text-white">
                   {item}
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="rounded-[32px] border border-white/10 bg-[#12394A] p-6 md:p-8 shadow-[0_16px_34px_rgba(0,0,0,0.22)]">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">Member Activity</p>
-            <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Upcoming Activities</h2>
+          <div className={membershipSectionClass}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Member Activity</p>
+            <h2 className={SEVA_SECTION_HEADING_CLASS}>Upcoming activities</h2>
             <div className="mt-8 grid grid-cols-1 gap-4">
               {[
                 { title: "Bhagwat Event Participation", desc: "Priority member invitations for key satsang and festival gatherings." },
                 { title: "Volunteer Programs", desc: "Join seva teams, digital support, and trust-led service activities." },
                 { title: "Spiritual Workshops", desc: "Take part in guided learning, chanting, and dharmic growth sessions." },
               ].map((item) => (
-                <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0f3140] p-5">
-                  <h3 className="text-xl font-black text-white">{item.title}</h3>
-                  <p className="mt-2 text-[#d9e6ec] leading-7">{item.desc}</p>
+                <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0c5871] p-5">
+                  <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
+                  <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -6715,9 +6879,9 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-8">
-        <div className="rounded-[32px] border border-white/10 bg-[#12394A] p-6 md:p-8 shadow-[0_16px_34px_rgba(0,0,0,0.22)]">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">Admin Features Concept</p>
-          <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Admin Management Layer</h2>
+        <div className={membershipSectionClass}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Admin Features Concept</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Admin management layer</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
             {[
               { title: "Approve or Reject Memberships", desc: "Admin review flow for incoming member registrations." },
@@ -6725,9 +6889,9 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
               { title: "Export Member List", desc: "Admin-ready export for reporting and communication workflows." },
               { title: "Send Announcements", desc: "Push notices to members for events, updates, and digital programs." },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0f3140] p-5">
-                <h3 className="text-xl font-black text-white">{item.title}</h3>
-                <p className="mt-2 text-[#d9e6ec] leading-7">{item.desc}</p>
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0c5871] p-5">
+                <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
+                <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
               </div>
             ))}
           </div>

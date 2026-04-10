@@ -1,5 +1,18 @@
 ﻿import { memo, useMemo, useState } from "react";
 import { useCart } from "../../app/providers/CartProvider";
+import { Link } from "react-router-dom";
+import { ROUTES } from "../../app/routes/routes";
+import { HeroSection } from "../../components/ui/HeroSection";
+import { usePageMeta } from "../../hooks/usePageMeta";
+import {
+  SEVA_BODY_TEXT_CLASS,
+  SEVA_CARD_TITLE_CLASS,
+  SEVA_HERO_SUBTITLE_CLASS,
+  SEVA_HIGHLIGHT_TITLE_CLASS,
+  SEVA_HIGHLIGHT_VALUE_CLASS,
+  SEVA_SECTION_HEADING_CLASS,
+  SEVA_SECTION_LABEL_CLASS,
+} from "../seva/sevaTypography";
 
 interface Product {
   id: string;
@@ -181,12 +194,20 @@ const SORT_OPTIONS = [
 ];
 
 export default memo(function StorePage() {
+  usePageMeta("E-Store", "Bhagwat Heritage digital store for books, puja essentials, devotional goods, and wellness items.");
+
   const { addItem, items, removeItem, updateQty, clearCart, total, count } = useCart();
   const [cartVisible, setCartVisible] = useState(false);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [sortBy, setSortBy] = useState("featured");
   const [maxPrice, setMaxPrice] = useState(2000);
+  const sectionClass = "max-w-7xl mx-auto px-4 py-8";
+  const panelClass = "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
+  const cardClass = "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm";
+  const filterInputClass =
+    "w-full rounded-2xl border border-white/10 bg-white px-4 py-3 text-sm text-[#17314a] outline-none transition placeholder:text-[#6b8091] focus:border-[#ef9a1e] focus:ring-2 focus:ring-[#efc06a]";
+  const scrollToProducts = () => document.getElementById("store-products")?.scrollIntoView({ behavior: "smooth", block: "start" });
 
   const filteredProducts = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -216,74 +237,94 @@ export default memo(function StorePage() {
   const grandTotal = cartSubtotal + shipping;
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-b from-[#ebf3ff] via-[#f6fbff] to-[#fff6ea] pb-16">
-      <div className="pointer-events-none absolute -top-20 -left-24 h-72 w-72 rounded-full bg-[#2f79cf]/20 blur-3xl" />
-      <div className="pointer-events-none absolute top-[420px] -right-24 h-72 w-72 rounded-full bg-[#19af8d]/18 blur-3xl" />
+    <div className="min-h-screen bg-[#0B2230] pb-16">
+      <HeroSection
+        title="E-Store"
+        subtitle="Digital spiritual shopping with the same clean Gau Seva-inspired style"
+        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
+        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
+        backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772920428/store_snvng8.avif"
+        boxed
+        heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-black/55"
+      >
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          <button
+            type="button"
+            onClick={() => setCartVisible(true)}
+            className="inline-flex items-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
+          >
+            Open Cart ({count})
+          </button>
+          <button
+            type="button"
+            onClick={scrollToProducts}
+            className="inline-flex items-center rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
+          >
+            Browse Products
+          </button>
+          <Link
+            to={ROUTES.digital.index}
+            className="inline-flex items-center rounded-lg border border-white/35 bg-white/8 px-6 py-3 font-semibold text-white transition-colors hover:bg-white/14"
+          >
+            Digital Services
+          </Link>
+        </div>
+      </HeroSection>
 
-      <section className="max-w-6xl mx-auto px-4 pt-8 md:pt-10">
-        <div
-          className="relative overflow-hidden rounded-[30px] bg-cover bg-center text-white px-6 py-10 md:px-12 md:py-12 shadow-[0_20px_50px_rgba(15,47,87,0.24)]"
-          style={{ backgroundImage: "url('https://res.cloudinary.com/der8zinu8/image/upload/v1772920428/store_snvng8.avif')" }}
-        >
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,28,53,0.86)_0%,rgba(12,54,87,0.72)_45%,rgba(13,84,94,0.56)_100%)]" />
-          <div className="absolute -bottom-20 -right-10 h-56 w-56 rounded-full bg-white/10 blur-xl" />
-          <div className="relative z-10 mx-auto max-w-3xl text-center">
-              <h1 className="max-w-2xl mx-auto text-4xl font-black leading-tight md:text-5xl">Bhagwat Heritage E-Store</h1>
-              <p className="mt-2 text-[34px] font-semibold leading-tight text-gray-200 md:text-[40px]">
-                Digital Spiritual Store
-              </p>
-              <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-white/90 md:text-xl">
-                Browse books, puja essentials, devotional goods, and wellness items in one organized storefront.
-              </p>
-              <div className="mt-7 flex flex-wrap justify-center gap-3">
-                <button
-                  type="button"
-                  onClick={() => setCartVisible(true)}
-                  className="inline-flex items-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
-                >
-                  Open Cart ({count})
-                </button>
-                <button
-                  type="button"
-                  onClick={() => window.scrollTo({ top: 700, behavior: "smooth" })}
-                  className="inline-flex items-center rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
-                >
-                  Browse Products
-                </button>
+      <section className="relative z-20 mt-[10px] pb-6">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+            {[
+              { title: "Store Access", value: "Books and devotional goods", note: "A focused digital storefront for satsang, puja, and home use." },
+              { title: "Shopping Flow", value: "Search, filter, and add", note: "A clean browsing experience for products, pricing, and cart actions." },
+              { title: "Featured Picks", value: "Highlighted daily essentials", note: "Quick access to popular spiritual items and trusted selections." },
+              { title: "User Experience", value: "Fast and functional", note: "Now visually aligned with the Gau Seva banner and typography style." },
+            ].map((item) => (
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+                <p className={SEVA_HIGHLIGHT_TITLE_CLASS}>* {item.title}</p>
+                <p className={SEVA_HIGHLIGHT_VALUE_CLASS}>{item.value}</p>
+                <p className={`mt-1 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
               </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 pb-8">
-        <h2 className="mb-4 text-xl font-black text-[#18324c] md:text-2xl">Store Features</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <section className={sectionClass}>
+        <div className={panelClass}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Store Features</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Simple tools for clean browsing and checkout support</h2>
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {STORE_FEATURES.map((feature) => (
-            <div key={feature} className="rounded-2xl border border-[#dce6ef] bg-white p-3 text-sm font-medium text-[#304657] shadow-sm md:p-4 md:text-[15px]">
+            <div key={feature} className="rounded-2xl border border-white/10 bg-[#0c5871] p-4 text-sm font-medium text-[#dce7ec] shadow-sm md:text-[15px]">
               {feature}
             </div>
           ))}
         </div>
+        </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 pb-8">
-        <h2 className="mb-4 text-xl font-black text-[#18324c] md:text-2xl">Featured Products</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <section className={sectionClass}>
+        <div className={panelClass}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Featured Products</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Popular devotional items and trusted store selections</h2>
+          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
           {featuredProducts.map((product) => (
-            <div key={product.id} className="rounded-2xl overflow-hidden border border-[#dce6ef] bg-white shadow-sm">
+            <div key={product.id} className="overflow-hidden rounded-[24px] border border-white/10 bg-[#0c5871] shadow-sm">
               <img src={product.image} alt={product.name} className="w-full h-40 object-cover" />
               <div className="p-4 md:p-5">
-                <p className="mb-2 inline-block rounded-full bg-[#eaf3ff] px-2 py-1 text-[11px] font-bold text-[#145b95]">
+                <p className="mb-2 inline-block rounded-full bg-[#ef9a1e]/15 px-2 py-1 text-[11px] font-bold text-[#ef9a1e]">
                   {product.tag || "Featured"}
                 </p>
-                <h3 className="font-bold text-[#0f678c] text-base md:text-lg">{product.name}</h3>
-                <p className="mt-1 text-xs text-[#5c6f7d] md:text-sm">{product.description}</p>
+                <h3 className={`${SEVA_CARD_TITLE_CLASS} text-base md:text-lg`}>{product.name}</h3>
+                <p className={`mt-1 text-xs md:text-sm ${SEVA_BODY_TEXT_CLASS}`}>{product.description}</p>
                 <div className="mt-3 flex items-center justify-between">
-                  <span className="font-bold text-[#f29508] text-base md:text-lg">Rs {product.price}</span>
+                  <span className="text-base font-bold text-[#ef9a1e] md:text-lg">Rs {product.price}</span>
                   <button
                     type="button"
                     onClick={() => addItem({ id: product.id, name: product.name, price: product.price, quantity: 1 })}
-                    className="rounded-lg bg-[#0f5fbf] px-3 py-1.5 text-xs text-white transition-colors hover:bg-[#0d55ab] md:text-sm"
+                    className="rounded-lg bg-[#ef9a1e] px-3 py-1.5 text-xs text-white transition-colors hover:bg-[#de930a] md:text-sm"
                   >
                     Add
                   </button>
@@ -291,23 +332,27 @@ export default memo(function StorePage() {
               </div>
             </div>
           ))}
+          </div>
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 pb-8">
-        <div className="rounded-3xl bg-white border border-[#dce6ef] p-5 md:p-6 shadow-sm">
+      <section id="store-products" className={sectionClass}>
+        <div className={panelClass}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Store Catalog</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Browse products by category, price, and search</h2>
+          <div className="mt-8 rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
             <input
               type="text"
               placeholder="Search products"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="md:col-span-2 px-4 py-3 border border-[#d7e1ea] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1d6dab]"
+              className={`md:col-span-2 ${filterInputClass}`}
             />
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="px-4 py-3 border border-[#d7e1ea] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1d6dab]"
+              className={filterInputClass}
             >
               {CATEGORIES.map((c) => (
                 <option key={c} value={c}>
@@ -318,7 +363,7 @@ export default memo(function StorePage() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-3 border border-[#d7e1ea] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#1d6dab]"
+              className={filterInputClass}
             >
               {SORT_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -329,7 +374,7 @@ export default memo(function StorePage() {
           </div>
 
           <div className="mt-4">
-            <div className="flex items-center justify-between text-sm text-[#4d5c67]">
+            <div className="flex items-center justify-between text-sm text-[#dce7ec]">
               <span>Max Price: Rs {maxPrice}</span>
               <span>{filteredProducts.length} products</span>
             </div>
@@ -340,32 +385,33 @@ export default memo(function StorePage() {
               step={50}
               value={maxPrice}
               onChange={(e) => setMaxPrice(Number(e.target.value))}
-              className="w-full mt-2 accent-[#0f5fbf]"
+              className="mt-2 w-full accent-[#ef9a1e]"
             />
           </div>
         </div>
+        </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+      <section className="max-w-7xl mx-auto px-4">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {filteredProducts.map((product) => (
-            <article key={product.id} className="bg-white rounded-2xl border border-[#dce6ef] overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+            <article key={product.id} className="overflow-hidden rounded-[24px] border border-white/10 bg-[#0c5871] shadow-sm transition-shadow hover:shadow-md">
               <img src={product.image} alt={product.name} className="w-full h-36 object-cover md:h-40" />
               <div className="p-4">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs bg-[#0f678c]/10 text-[#0f678c] px-2 py-0.5 rounded">{product.category}</span>
+                  <span className="rounded bg-[#ef9a1e]/15 px-2 py-0.5 text-xs text-[#ef9a1e]">{product.category}</span>
                   {product.stock <= 5 ? (
                     <span className="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded">Low Stock</span>
                   ) : null}
                 </div>
-                <h3 className="mt-2 font-bold text-[#0f678c] text-base">{product.name}</h3>
-                <p className="mt-1 text-xs text-[#5b6d7b] md:text-sm">{product.description}</p>
+                <h3 className={`mt-2 text-base ${SEVA_CARD_TITLE_CLASS}`}>{product.name}</h3>
+                <p className={`mt-1 text-xs md:text-sm ${SEVA_BODY_TEXT_CLASS}`}>{product.description}</p>
                 <div className="mt-3 flex items-center justify-between">
-                  <span className="text-base font-bold text-[#f29508] md:text-lg">Rs {product.price}</span>
+                  <span className="text-base font-bold text-[#ef9a1e] md:text-lg">Rs {product.price}</span>
                   <button
                     type="button"
                     onClick={() => addItem({ id: product.id, name: product.name, price: product.price, quantity: 1 })}
-                    className="rounded-lg bg-[#0f5fbf] px-3 py-1.5 text-xs text-white transition-colors hover:bg-[#0d55ab] md:text-sm"
+                    className="rounded-lg bg-[#ef9a1e] px-3 py-1.5 text-xs text-white transition-colors hover:bg-[#de930a] md:text-sm"
                   >
                     Add to Cart
                   </button>
@@ -379,34 +425,34 @@ export default memo(function StorePage() {
       {cartVisible && (
         <div className="fixed inset-0 z-50">
         <div className="absolute inset-0 bg-black/35" onClick={() => setCartVisible(false)} />
-        <aside className="absolute right-0 top-0 h-full w-full max-w-md bg-white border-l border-[#dce6ef] shadow-2xl p-5 overflow-y-auto">
+        <aside className="absolute right-0 top-0 h-full w-full max-w-md overflow-y-auto border-l border-white/10 bg-[#0B2230] p-5 shadow-2xl">
           <div className="flex items-center justify-between">
-              <h3 className="text-lg font-bold text-[#173b57] md:text-xl">Your Cart ({count})</h3>
+              <h3 className="text-lg font-bold text-white md:text-xl">Your Cart ({count})</h3>
               <button
                 type="button"
                 onClick={() => setCartVisible(false)}
-                className="rounded-lg border border-[#d5e1eb] px-3 py-1.5 text-sm text-[#173b57]"
+                className="rounded-lg border border-white/10 px-3 py-1.5 text-sm text-white"
               >
                 Close
               </button>
             </div>
 
             {items.length === 0 ? (
-              <p className="text-[#5d6f7d] mt-8">Your cart is empty.</p>
+              <p className="mt-8 text-[#dce7ec]">Your cart is empty.</p>
             ) : (
               <>
                 <div className="mt-4 space-y-3">
                   {items.map((item) => (
-                    <div key={item.id} className="rounded-xl border border-[#e1eaf2] p-3">
+                    <div key={item.id} className="rounded-xl border border-white/10 bg-[#0c5871] p-3">
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <p className="font-semibold text-[#0f678c]">{item.name}</p>
-                          <p className="text-sm text-[#607281]">Rs {item.price} each</p>
+                          <p className="font-semibold text-white">{item.name}</p>
+                          <p className="text-sm text-[#dce7ec]">Rs {item.price} each</p>
                         </div>
                         <button
                           type="button"
                           onClick={() => removeItem(item.id)}
-                          className="text-red-600 text-sm"
+                          className="text-sm text-[#ef9a1e]"
                         >
                           Remove
                         </button>
@@ -416,37 +462,37 @@ export default memo(function StorePage() {
                           <button
                             type="button"
                             onClick={() => updateQty(item.id, Math.max(1, item.quantity - 1))}
-                            className="h-8 w-8 rounded-md border border-[#d4e1ec]"
+                            className="h-8 w-8 rounded-md border border-white/10 text-white"
                           >
                             -
                           </button>
-                          <span className="w-6 text-center font-semibold">{item.quantity}</span>
+                          <span className="w-6 text-center font-semibold text-white">{item.quantity}</span>
                           <button
                             type="button"
                             onClick={() => updateQty(item.id, item.quantity + 1)}
-                            className="h-8 w-8 rounded-md border border-[#d4e1ec]"
+                            className="h-8 w-8 rounded-md border border-white/10 text-white"
                           >
                             +
                           </button>
                         </div>
-                        <p className="font-bold text-[#173b57]">Rs {item.price * item.quantity}</p>
+                        <p className="font-bold text-white">Rs {item.price * item.quantity}</p>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="mt-6 rounded-xl bg-[#f5f9fd] border border-[#deebf6] p-4 space-y-2 text-sm">
+                <div className="mt-6 space-y-2 rounded-xl border border-white/10 bg-[#0c5871] p-4 text-sm">
                   <div className="flex items-center justify-between">
-                    <span className="text-[#5c6f7d]">Subtotal</span>
-                    <span className="font-semibold">Rs {cartSubtotal}</span>
+                    <span className="text-[#dce7ec]">Subtotal</span>
+                    <span className="font-semibold text-white">Rs {cartSubtotal}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-[#5c6f7d]">Shipping</span>
-                    <span className="font-semibold">Rs {shipping}</span>
+                    <span className="text-[#dce7ec]">Shipping</span>
+                    <span className="font-semibold text-white">Rs {shipping}</span>
                   </div>
-                  <div className="flex items-center justify-between border-t border-[#d9e8f5] pt-2">
-                    <span className="font-bold text-[#173b57]">Total</span>
-                    <span className="font-bold text-[#173b57]">Rs {grandTotal}</span>
+                  <div className="flex items-center justify-between border-t border-white/10 pt-2">
+                    <span className="font-bold text-white">Total</span>
+                    <span className="font-bold text-white">Rs {grandTotal}</span>
                   </div>
                 </div>
 
@@ -454,13 +500,13 @@ export default memo(function StorePage() {
                   <button
                     type="button"
                     onClick={clearCart}
-                    className="rounded-xl border border-[#d4e1ec] py-2.5 font-semibold text-[#173b57]"
+                    className="rounded-xl border border-white/10 py-2.5 font-semibold text-white"
                   >
                     Clear Cart
                   </button>
                   <button
                     type="button"
-                    className="rounded-xl bg-[#ffa114] hover:bg-[#e78e07] text-white py-2.5 font-semibold transition-colors"
+                    className="rounded-xl bg-[#ef9a1e] py-2.5 font-semibold text-white transition-colors hover:bg-[#de930a]"
                   >
                     Checkout
                   </button>

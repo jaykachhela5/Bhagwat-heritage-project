@@ -1,6 +1,4 @@
-﻿import { memo, useMemo, useState, type FormEvent } from "react";
-import { Link } from "react-router-dom";
-import { ROUTES } from "../../app/routes/routes";
+import { memo, useMemo, useState, type FormEvent } from "react";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { kundliRequestsApi } from "../../services/api/kundli";
 
@@ -10,11 +8,11 @@ type DeliveryPreference = "Email" | "WhatsApp" | "Both";
 type PaymentMethod = "UPI" | "Razorpay" | "Stripe";
 
 type ServiceOption = {
+  id: string;
   title: string;
-  englishTitle: string;
+  label: string;
   pages: number;
   price: number;
-  detail: string;
 };
 
 type KundliFormState = {
@@ -37,83 +35,41 @@ type KundliFormState = {
   consent: boolean;
 };
 
-const SERVICES: ServiceOption[] = [
-  { title: "संपूर्ण विस्तृत कुंडली", englishTitle: "Complete Detailed Kundli", pages: 100, price: 1501, detail: "Full report with complete reading and guidance." },
-  { title: "विशेष विस्तृत कुंडली", englishTitle: "Special Detailed Kundli", pages: 40, price: 701, detail: "Focused kundli guidance with refined insights." },
-  { title: "जन्म कुंडली फलित एवं वर्षफल", englishTitle: "Birth Chart Analysis and Annual Forecast", pages: 30, price: 501, detail: "Birth chart reading with yearly forecast direction." },
-  { title: "जन्म कुंडली फलित", englishTitle: "Birth Chart Analysis", pages: 30, price: 351, detail: "Practical interpretation of the birth chart." },
-  { title: "कृष्णमूर्ति पद्धती कुंडली", englishTitle: "Krishnamurti Paddhati Kundli", pages: 20, price: 351, detail: "KP-based reading for precise timing and clarity." },
-  { title: "वैवाहिक गुण मिलान", englishTitle: "Marriage Compatibility Analysis", pages: 7, price: 301, detail: "Compatibility analysis for marriage guidance." },
-  { title: "वार्षिक कुंडली एवं वर्षफल", englishTitle: "Annual Kundli and Forecast", pages: 8, price: 200, detail: "Yearly reading with forecast points." },
-  { title: "नामकरण कुंडली", englishTitle: "Naming Ceremony Kundli", pages: 4, price: 151, detail: "Kundli support for naming ceremony decisions." },
-  { title: "जन्म टिप्पणी", englishTitle: "Birth Notes", pages: 1, price: 101, detail: "Quick birth note for concise reference." },
+const SERVICES_LEFT: ServiceOption[] = [
+  { id: "complete", title: "Complete Detailed Kundli", label: "संपूर्ण विस्तृत कुंडली", pages: 100, price: 1501 },
+  { id: "special", title: "Special Detailed Kundli", label: "विशेष विस्तृत कुंडली", pages: 40, price: 701 },
+  { id: "forecast", title: "Birth Chart Analysis and Annual Forecast", label: "जन्म कुंडली फलित एवं वर्षफल", pages: 30, price: 501 },
+  { id: "analysis", title: "Birth Chart Analysis", label: "जन्म कुंडली फलित", pages: 30, price: 351 },
+  { id: "kp", title: "Krishnamurti Paddhati Kundli", label: "कृष्णमूर्ति पद्धति कुंडली", pages: 20, price: 351 },
 ];
 
+const SERVICES_RIGHT: ServiceOption[] = [
+  { id: "match", title: "Marriage Compatibility Analysis", label: "वैवाहिक गुण मिलान", pages: 7, price: 301 },
+  { id: "annual", title: "Annual Kundli and Forecast", label: "वार्षिक कुंडली एवं वर्षफल", pages: 8, price: 200 },
+  { id: "naming", title: "Naming Ceremony Kundli", label: "नामकरण कुंडली", pages: 4, price: 151 },
+  { id: "notes", title: "Birth Notes", label: "जन्म टिपण", pages: 1, price: 101 },
+];
+
+const SERVICES = [...SERVICES_LEFT, ...SERVICES_RIGHT];
 const LANGUAGE_OPTIONS: PreferredLanguage[] = ["English", "Hindi", "Marathi", "Gujarati"];
 const DELIVERY_OPTIONS: DeliveryPreference[] = ["Email", "WhatsApp", "Both"];
 const PAYMENT_OPTIONS: PaymentMethod[] = ["UPI", "Razorpay", "Stripe"];
 const GENDER_OPTIONS: Gender[] = ["Male", "Female"];
 const TODAY = new Date().toISOString().slice(0, 10);
 
-const THEME = {
-  page: "min-h-screen bg-[#0B2230] pb-16",
-  heroWrap: "overflow-hidden rounded-[34px] border border-white/10 bg-[#0d6179] shadow-[0_20px_44px_rgba(0,0,0,0.22)]",
-  heroIcon:
-    "flex h-20 w-20 items-center justify-center rounded-[26px] border border-white/10 bg-[#ef9a1e]/15 text-[2.75rem] font-black text-[#ef9a1e] shadow-[0_14px_30px_rgba(0,0,0,0.12)]",
-  heroLabel: "text-[18px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]",
-  heroTitleLine: "mt-2 text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[28px]",
-  heroTitle: "mt-3 text-4xl font-black leading-[0.95] text-white md:text-5xl",
-  heroSubtitle: "mt-3 text-[18px] font-bold text-[#ef9a1e] md:text-[24px]",
-  heroBody: "mt-6 max-w-2xl text-base leading-7 text-[#dce7ec] md:text-lg",
-  heroPrimaryButton:
-    "inline-flex items-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]",
-  heroSecondaryButton:
-    "inline-flex items-center rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]",
-  sidePanel: "border-t border-white/10 bg-[#0c5871] p-6 md:p-8 lg:border-l lg:border-t-0",
-  sideCard: "rounded-[24px] border border-white/10 bg-[#0c5871] p-4 shadow-[0_14px_30px_rgba(0,0,0,0.18)]",
-  label: "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]",
-  heading: "mt-1 text-[14px] font-black text-white md:text-[20px]",
-  note: "mt-2 text-sm leading-6 text-[#dce7ec]",
-  summaryCard: "rounded-[26px] border border-white/10 bg-[#0d6179] p-4 text-white shadow-[0_16px_34px_rgba(0,0,0,0.20)]",
-  summaryLabel: "text-[24px] uppercase tracking-[0.18em] text-[#ef9a1e]",
-  summaryValue: "mt-1 text-[14px] font-black text-white md:text-[20px]",
-  sectionHeader: "mb-6 text-center",
-  sectionLabel: "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]",
-  sectionTitle: "mt-2 text-[14px] font-black text-white md:text-[20px]",
-  sectionNote: "mt-2 text-sm text-[#dce7ec] md:text-base",
-  serviceGrid: "space-y-4 rounded-[30px] border border-white/10 bg-[#0d6179] p-4 shadow-[0_18px_40px_rgba(0,0,0,0.20)] md:p-6",
-  serviceCard:
-    "flex h-full flex-col rounded-[24px] border border-white/10 bg-[#0c5871] p-4 text-left shadow-sm transition hover:border-[#ef9a1e] hover:shadow-[0_14px_30px_rgba(0,0,0,0.24)]",
-  serviceCardSelected:
-    "flex h-full flex-col rounded-[24px] border border-[#ef9a1e] bg-[#123e55] p-4 text-left shadow-[0_14px_30px_rgba(0,0,0,0.24)]",
-  serviceName: "text-[24px] uppercase tracking-[0.18em] text-[#ef9a1e]",
-  serviceTitle: "mt-1 text-[16px] font-black text-white md:text-[20px]",
-  serviceDetail: "mt-3 text-sm leading-6 text-[#dce7ec] md:text-[15px]",
-  serviceMeta: "text-lg font-black text-white",
-  formCard: "space-y-4 rounded-[30px] border border-white/10 bg-[#0d6179] p-5 shadow-[0_18px_40px_rgba(0,0,0,0.20)] md:p-6",
-  formSection: "rounded-[24px] border border-white/10 bg-[#0c5871] p-4",
-  formLabel: "text-[24px] uppercase tracking-[0.18em] text-[#ef9a1e]",
-  formHeading: "mt-1 text-[14px] font-black text-white md:text-[20px]",
-  formNote: "mt-1 text-sm text-[#dce7ec]",
-  formSummaryCard: "rounded-2xl border border-white/10 bg-[#0c5871] p-4",
-  formSummaryText: "mt-1 text-[14px] font-black text-white md:text-[20px]",
-  formSelectedItem:
-    "flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-[#0d6179] px-4 py-3 text-sm text-[#dce7ec]",
-  noticeSuccess: "rounded-2xl bg-green-50 px-4 py-3 text-sm font-semibold text-green-700",
-  noticeError: "rounded-2xl bg-red-50 px-4 py-3 text-sm font-semibold text-red-700",
-  submitButton:
-    "inline-flex w-full items-center justify-center rounded-2xl bg-[#ef9a1e] px-6 py-4 text-base font-bold text-white shadow-[0_18px_34px_rgba(239,154,30,0.28)] transition hover:bg-[#de930a] disabled:cursor-not-allowed disabled:opacity-70",
-  deliveryNote: "rounded-[24px] border border-dashed border-white/10 bg-[#0c5871] p-4",
-  deliveryNoteLabel: "text-[24px] uppercase tracking-[0.18em] text-[#ef9a1e]",
-  deliveryNoteText: "mt-2 text-sm leading-6 text-[#dce7ec]",
-} as const;
-
-const inputClass =
-  "w-full rounded-2xl border border-white/10 bg-white px-4 py-3 text-sm text-[#17314a] outline-none transition placeholder:text-[#6b8091] focus:border-[#ef9a1e] focus:ring-2 focus:ring-[#efc06a]";
-
-function formatAmount(amount: number) {
-  return `INR ${amount.toLocaleString("en-IN")}`;
-}
+const pageClass = "min-h-screen bg-[radial-gradient(circle_at_top,#f7f0e6_0%,#efe4d3_52%,#e5d6c2_100%)] px-4 py-6 md:px-6 md:py-10";
+const paperFrameClass = "mx-auto w-full max-w-6xl rounded-[28px] bg-[#f8efe3] p-2 shadow-[0_18px_60px_rgba(96,39,24,0.18)] md:p-3";
+const paperOuterClass = "rounded-[24px] border-[3px] border-[#bf2a22] bg-[#fffdf8] p-2 md:p-4";
+const paperInnerClass = "rounded-[18px] border-2 border-[#d4483f] p-4 md:p-7";
+const labelClass = "text-[15px] font-semibold text-[#be2d22] md:text-[18px]";
+const fieldClass =
+  "w-full border-b-2 border-[#d65a4f] bg-transparent px-1 py-1 text-[15px] text-[#9b241d] outline-none placeholder:text-[#c77a72] md:text-[17px]";
+const smallFieldClass =
+  "w-full border-b-2 border-[#d65a4f] bg-transparent px-1 py-1 text-sm text-[#9b241d] outline-none placeholder:text-[#c77a72] md:text-base";
+const sectionHeadingClass = "text-center text-[24px] font-black text-[#be2d22] md:text-[34px]";
+const sectionSubheadingClass = "text-center text-[17px] font-bold text-[#be2d22] md:text-[22px]";
+const redBoxButtonBase =
+  "inline-flex items-center justify-center rounded-md border-2 px-3 py-2 text-sm font-semibold transition md:text-base";
 
 function createInitialForm(): KundliFormState {
   return {
@@ -137,16 +93,47 @@ function createInitialForm(): KundliFormState {
   };
 }
 
-function chipClass(selected: boolean) {
-  return `rounded-full px-4 py-2 text-sm font-semibold transition ${
-    selected
-      ? "border border-[#ef9a1e] bg-[#ef9a1e] text-white shadow-[0_10px_24px_rgba(239,154,30,0.24)]"
-      : "border border-white/10 bg-[#0c5871] text-[#dce7ec]"
+function formatAmount(amount: number) {
+  return `INR ${amount.toLocaleString("en-IN")}`;
+}
+
+function squareChoiceClass(selected: boolean) {
+  return `${redBoxButtonBase} ${
+    selected ? "border-[#be2d22] bg-[#be2d22] text-white" : "border-[#d65a4f] bg-transparent text-[#be2d22] hover:bg-[#fff3f1]"
   }`;
 }
 
+function ServiceRow({
+  service,
+  selected,
+  onToggle,
+}: {
+  service: ServiceOption;
+  selected: boolean;
+  onToggle: (title: string) => void;
+}) {
+  return (
+    <label className="flex cursor-pointer items-start gap-3 rounded-xl px-2 py-2 transition hover:bg-[#fff4f1]">
+      <div className="min-w-0 flex-1">
+        <p className="text-[16px] font-semibold leading-6 text-[#b92c24] md:text-[18px]">{service.label}</p>
+        <p className="text-sm text-[#c0483d] md:text-[15px]">{service.title}</p>
+      </div>
+      <div className="shrink-0 text-right">
+        <p className="text-[15px] font-bold text-[#b92c24] md:text-[17px]">({service.pages} Pages)</p>
+        <p className="mt-1 text-[17px] font-black text-[#b92c24] md:text-[20px]">{service.price}/-</p>
+      </div>
+      <input
+        type="checkbox"
+        checked={selected}
+        onChange={() => onToggle(service.title)}
+        className="mt-1 h-5 w-5 shrink-0 rounded-none border-2 border-[#c63a30] accent-[#c63a30]"
+      />
+    </label>
+  );
+}
+
 export default memo(function KundliPage() {
-  usePageMeta("Kundli Booking", "Book traditional computer janam kundli reports with email or WhatsApp delivery.");
+  usePageMeta("Computer Janam Kundli", "Paper-style online kundli booking form based on the trust's traditional format.");
 
   const [form, setForm] = useState<KundliFormState>(createInitialForm);
   const [loading, setLoading] = useState(false);
@@ -156,11 +143,14 @@ export default memo(function KundliPage() {
     () => SERVICES.filter((service) => form.selectedTitles.includes(service.title)),
     [form.selectedTitles],
   );
+
   const totalAmount = useMemo(() => selectedServices.reduce((sum, service) => sum + service.price, 0), [selectedServices]);
   const totalPages = useMemo(() => selectedServices.reduce((sum, service) => sum + service.pages, 0), [selectedServices]);
   const deliverySummary = form.deliveryPreference === "Both" ? "email and WhatsApp" : form.deliveryPreference.toLowerCase();
 
-  const scrollToForm = () => document.getElementById("kundli-booking-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const updateForm = <K extends keyof KundliFormState>(key: K, value: KundliFormState[K]) => {
+    setForm((current) => ({ ...current, [key]: value }));
+  };
 
   const toggleService = (title: string) => {
     setForm((current) => ({
@@ -184,6 +174,7 @@ export default memo(function KundliPage() {
 
     try {
       const paymentReference = `KND-${TODAY.replace(/-/g, "")}-${Math.floor(1000 + Math.random() * 9000)}`;
+
       const { data } = await kundliRequestsApi.create({
         fullName: form.fullName.trim(),
         gender: form.gender,
@@ -209,13 +200,13 @@ export default memo(function KundliPage() {
 
       setNotice({
         type: "success",
-        text: `Order ${data.orderId} has been created. Your Kundli will be shared by ${deliverySummary} within ${data.estimatedDeliveryTime}.`,
+        text: `Order ${data.orderId} created successfully. Your kundli will be shared by ${deliverySummary} within ${data.estimatedDeliveryTime}.`,
       });
       setForm(createInitialForm());
     } catch {
       setNotice({
         type: "error",
-        text: "Something went wrong while submitting the Kundli booking. Please review the form and try again.",
+        text: "Something went wrong while submitting the kundli booking. Please review the form and try again.",
       });
     } finally {
       setLoading(false);
@@ -223,393 +214,313 @@ export default memo(function KundliPage() {
   }
 
   return (
-    <div className={THEME.page}>
-      <section className="mx-auto max-w-7xl px-4 pt-6">
-        <div className={THEME.heroWrap}>
-          <div className="grid gap-0 lg:grid-cols-[1.08fr_0.92fr]">
-            <div className="p-6 md:p-10">
-              <div className="flex flex-wrap items-start gap-4">
-                <div className={THEME.heroIcon}>
+    <div className={pageClass}>
+      <form onSubmit={handleSubmit} className={paperFrameClass}>
+        <div className={paperOuterClass}>
+          <div className={paperInnerClass}>
+            <div className="grid gap-5 md:grid-cols-[180px_minmax(0,1fr)_140px] md:items-start">
+              <div className="flex items-center justify-center md:justify-start">
+                <div className="flex h-[130px] w-[130px] items-center justify-center rounded-[18px] border-[3px] border-[#be2d22] bg-[#fff8f6] text-[64px] font-black leading-none text-[#be2d22]">
                   ॐ
                 </div>
-                <div className="min-w-0 flex-1">
-                  <p className={THEME.heroLabel}>॥ स्वामी श्रीजी ॥</p>
-                  <p className={THEME.heroTitleLine}>
-                    श्री भगवत संस्कृती सेवा प्रतिष्ठान
-                  </p>
-                  <h1 className={THEME.heroTitle}>
-                    कम्प्यूटर जन्म कुंडली
-                  </h1>
-                  <p className={THEME.heroSubtitle}>श्री स्वामीनारायण मंदिर, चंद्रपुर</p>
-                </div>
               </div>
 
-              <p className={THEME.heroBody}>
-                Select the kundli type, enter birth details, and choose how you want the completed report delivered.
-                The report can be sent through email or WhatsApp after preparation.
-              </p>
-
-              <div className="mt-6 flex flex-wrap gap-3">
-                <button
-                  type="button"
-                  onClick={scrollToForm}
-                  className={THEME.heroPrimaryButton}
-                >
-                  Book Kundli
-                </button>
-                <Link
-                  to={ROUTES.contact}
-                  className={THEME.heroSecondaryButton}
-                >
-                  Contact Us
-                </Link>
-                <Link
-                  to={ROUTES.digital.index}
-                  className={THEME.heroSecondaryButton}
-                >
-                  Digital Services
-                </Link>
+              <div className="text-center">
+                <p className="text-[18px] font-bold text-[#be2d22] md:text-[24px]">|| स्वामीश्रीजी ||</p>
+                <p className="mt-1 text-[22px] font-black text-[#be2d22] md:text-[34px]">श्री भागवत संस्कृती सेवा प्रतिष्ठान</p>
+                <h1 className="mt-2 text-[32px] font-black uppercase leading-none text-[#be2d22] md:text-[58px]">
+                  कम्प्यूटर जन्म कुंडली
+                </h1>
+                <p className="mt-2 text-[20px] font-black text-[#be2d22] md:text-[32px]">श्री स्वामिनारायण मंदिर, चंद्रपुर</p>
+                <p className="mt-2 text-sm font-semibold text-[#c0483d] md:text-lg">
+                  Kasturba Road, Hospital Ward, Chandrapur
+                </p>
               </div>
-            </div>
 
-            <div className={THEME.sidePanel}>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-                {[
-                  ["Booking Mode", "Traditional Kundli Form", "Fill your birth details, select kundli types, and receive the prepared report by email or WhatsApp."],
-                  ["Languages", "English, Hindi, Marathi, Gujarati", "Rates are for only one selected language."],
-                  ["Delivery", "Email, WhatsApp, or Both", "The finished Kundli can be delivered by the channel you choose."],
-                  ["Payment", "UPI, Razorpay, Stripe", "Choose the gateway that suits your booking flow."],
-                ].map(([title, value, note]) => (
-                  <article
-                    key={title}
-                    className={THEME.sideCard}
-                  >
-                    <p className={THEME.label}>{title}</p>
-                    <p className={THEME.heading}>{value}</p>
-                    <p className={THEME.note}>{note}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="kundli-booking-form" className="mx-auto mt-8 max-w-7xl px-4">
-        <div className="mb-6 text-center">
-          <p className={THEME.sectionLabel}>Kundli Types</p>
-          <h2 className={THEME.sectionTitle}>Price List and Service Options</h2>
-          <p className={THEME.sectionNote}>Rates are for one language only.</p>
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
-          <div className={THEME.serviceGrid}>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              {SERVICES.map((service) => {
-                const selected = form.selectedTitles.includes(service.title);
-
-                return (
-                  <button
-                    key={service.title}
-                    type="button"
-                    onClick={() => toggleService(service.title)}
-                    className={`flex h-full flex-col rounded-[24px] border p-4 text-left transition ${
-                      selected
-                        ? "border-[#ef9a1e] bg-[#123e55] shadow-[0_14px_30px_rgba(0,0,0,0.24)]"
-                        : "border-white/10 bg-[#0c5871] hover:border-[#ef9a1e]"
-                    }`}
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <p className={THEME.label}>{service.englishTitle}</p>
-                        <h3 className={THEME.serviceTitle}>{service.title}</h3>
-                      </div>
-                      <span
-                        className={`shrink-0 rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] ${
-                          selected
-                            ? "border-[#ef9a1e] bg-[#ef9a1e] text-white"
-                            : "border-white/10 bg-[#0d6179] text-[#dce7ec]"
-                        }`}
-                      >
-                        {selected ? "Selected" : "Select"}
-                      </span>
-                    </div>
-
-                    <p className={THEME.serviceDetail}>{service.detail}</p>
-
-                    <div className="mt-4 flex items-center justify-between border-t border-dashed border-white/10 pt-3">
-                      <span className={THEME.label}>
-                        {service.pages} Pages
-                      </span>
-                      <span className="text-lg font-black text-white">{formatAmount(service.price)}</span>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <form
-            onSubmit={handleSubmit}
-            className={THEME.formCard}
-          >
-            <div>
-              <p className={THEME.sectionLabel}>Traditional Booking Form</p>
-              <h3 className={THEME.sectionTitle}>Complete Kundli Booking Details</h3>
-            </div>
-
-            <div className={THEME.formSection}>
-              <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="space-y-3 md:pt-4">
                 <div>
-                  <p className={THEME.label}>Selected Kundli Types</p>
-                  <h4 className={THEME.heading}>Your report summary</h4>
-                </div>
-                <span className="rounded-full bg-[#ef9a1e] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-white">
-                  {selectedServices.length} Selected
-                </span>
-              </div>
-
-              <div className="mt-4 grid gap-3 md:grid-cols-3">
-                {[
-                  ["Pages", `${totalPages} pages`],
-                  ["Amount", formatAmount(totalAmount)],
-                  ["Delivery", form.deliveryPreference],
-                ].map(([label, value]) => (
-                  <div key={label} className={THEME.formSummaryCard}>
-                    <p className={THEME.label}>{label}</p>
-                    <p className={THEME.heading}>{value}</p>
+                  <p className="text-right text-[14px] font-black text-[#be2d22] md:text-[18px]">101</p>
+                  <div className="mt-1">
+                    <p className="mb-1 text-right text-sm font-semibold text-[#be2d22]">Date / तारीख</p>
+                    <input
+                      type="date"
+                      value={form.orderDate}
+                      onChange={(event) => updateForm("orderDate", event.target.value)}
+                      className={smallFieldClass}
+                    />
                   </div>
-                ))}
-              </div>
-
-              <div className="mt-4 rounded-2xl border border-dashed border-white/10 bg-[#0d6179] p-4">
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Selected items</p>
-                {selectedServices.length > 0 ? (
-                  <ul className="mt-3 space-y-2">
-                    {selectedServices.map((service) => (
-                      <li
-                        key={service.title}
-                        className={THEME.formSelectedItem}
-                      >
-                        <span className="font-semibold text-white">{service.title}</span>
-                        <span className="text-xs uppercase tracking-[0.18em] text-[#ef9a1e]">
-                          {service.pages} Pages | {formatAmount(service.price)}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className={THEME.deliveryNoteText}>
-                    No kundli type selected yet. Choose at least one report from the list.
-                  </p>
-                )}
+                </div>
               </div>
             </div>
 
-            <div className={THEME.formSection}>
-              <p className={THEME.label}>1. Personal Information</p>
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
+            <div className="mt-8 grid gap-4 md:grid-cols-[minmax(0,1.35fr)_260px]">
+              <label className="block">
+                <span className={labelClass}>Name / नाम</span>
                 <input
                   type="text"
-                  placeholder="Full Name"
                   value={form.fullName}
-                  onChange={(e) => setForm((current) => ({ ...current, fullName: e.target.value }))}
+                  onChange={(event) => updateForm("fullName", event.target.value)}
                   required
-                  className={inputClass}
+                  placeholder="Enter full name"
+                  className={fieldClass}
                 />
-                <input
-                  type="date"
-                  value={form.orderDate}
-                  onChange={(e) => setForm((current) => ({ ...current, orderDate: e.target.value }))}
-                  required
-                  className={inputClass}
-                />
-              </div>
-              <div className="mt-4 grid grid-cols-2 gap-2">
-                {GENDER_OPTIONS.map((item) => (
-                  <button
-                    key={item}
-                    type="button"
-                    onClick={() => setForm((current) => ({ ...current, gender: item }))}
-                    className={chipClass(form.gender === item)}
-                  >
-                    {item}
-                  </button>
-                ))}
+              </label>
+
+              <div>
+                <span className={labelClass}>Sex / लिंग</span>
+                <div className="mt-2 flex gap-2">
+                  {GENDER_OPTIONS.map((gender) => (
+                    <button
+                      key={gender}
+                      type="button"
+                      onClick={() => updateForm("gender", gender)}
+                      className={squareChoiceClass(form.gender === gender)}
+                    >
+                      {gender}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className={THEME.formSection}>
-              <p className={THEME.label}>2. Birth Details</p>
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
+            <div className="mt-4 grid gap-4 md:grid-cols-2">
+              <label className="block">
+                <span className={labelClass}>Date of Birth / जन्म तारीख</span>
                 <input
                   type="date"
                   value={form.dateOfBirth}
-                  onChange={(e) => setForm((current) => ({ ...current, dateOfBirth: e.target.value }))}
+                  onChange={(event) => updateForm("dateOfBirth", event.target.value)}
                   required
-                  className={inputClass}
+                  className={fieldClass}
                 />
+              </label>
+
+              <label className="block">
+                <span className={labelClass}>Time of Birth / जन्म समय</span>
                 <input
                   type="time"
                   value={form.timeOfBirth}
-                  onChange={(e) => setForm((current) => ({ ...current, timeOfBirth: e.target.value }))}
+                  onChange={(event) => updateForm("timeOfBirth", event.target.value)}
                   required
-                  className={inputClass}
+                  className={fieldClass}
                 />
+              </label>
+            </div>
+
+            <div className="mt-4 grid gap-4 md:grid-cols-[minmax(0,1.3fr)_0.7fr_0.7fr]">
+              <label className="block">
+                <span className={labelClass}>Place of Birth / जन्म स्थान</span>
                 <input
                   type="text"
-                  placeholder="Place of Birth"
                   value={form.placeOfBirth}
-                  onChange={(e) => setForm((current) => ({ ...current, placeOfBirth: e.target.value }))}
+                  onChange={(event) => updateForm("placeOfBirth", event.target.value)}
                   required
-                  className={inputClass}
+                  className={fieldClass}
                 />
+              </label>
+
+              <label className="block">
+                <span className={labelClass}>Dist. / जिला</span>
                 <input
                   type="text"
-                  placeholder="District"
                   value={form.district}
-                  onChange={(e) => setForm((current) => ({ ...current, district: e.target.value }))}
+                  onChange={(event) => updateForm("district", event.target.value)}
                   required
-                  className={inputClass}
+                  className={fieldClass}
                 />
+              </label>
+
+              <label className="block">
+                <span className={labelClass}>State / राज्य</span>
                 <input
                   type="text"
-                  placeholder="State"
                   value={form.state}
-                  onChange={(e) => setForm((current) => ({ ...current, state: e.target.value }))}
+                  onChange={(event) => updateForm("state", event.target.value)}
                   required
-                  className={inputClass}
+                  className={fieldClass}
                 />
-                <input
-                  type="text"
-                  placeholder="Signature / हस्ताक्षर (optional)"
-                  value={form.signature}
-                  onChange={(e) => setForm((current) => ({ ...current, signature: e.target.value }))}
-                  className={inputClass}
-                />
+              </label>
+            </div>
+
+            <div className="mt-8 border-y-2 border-[#d65a4f] py-4">
+              <h2 className={sectionSubheadingClass}>कुंडलियों के प्रकार</h2>
+              <div className="mt-4 grid gap-4 md:grid-cols-2 md:divide-x-2 md:divide-[#d65a4f]">
+                <div className="space-y-1 md:pr-4">
+                  {SERVICES_LEFT.map((service) => (
+                    <ServiceRow
+                      key={service.id}
+                      service={service}
+                      selected={form.selectedTitles.includes(service.title)}
+                      onToggle={toggleService}
+                    />
+                  ))}
+                </div>
+
+                <div className="space-y-1 md:pl-4">
+                  {SERVICES_RIGHT.map((service) => (
+                    <ServiceRow
+                      key={service.id}
+                      service={service}
+                      selected={form.selectedTitles.includes(service.title)}
+                      onToggle={toggleService}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className={THEME.formSection}>
-              <p className={THEME.label}>3. Preferred Language</p>
-              <p className={THEME.formNote}>Rates are for only one selected language.</p>
-              <div className="mt-4 grid grid-cols-2 gap-2 md:grid-cols-4">
-                {LANGUAGE_OPTIONS.map((item) => (
-                  <button
-                    key={item}
-                    type="button"
-                    onClick={() => setForm((current) => ({ ...current, preferredLanguage: item }))}
-                    className={chipClass(form.preferredLanguage === item)}
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className={THEME.formSection}>
-              <p className={THEME.label}>4. Delivery Preference</p>
-              <p className={THEME.formNote}>Choose how you want the completed Kundli to be shared.</p>
-              <div className="mt-4 grid gap-2 md:grid-cols-3">
-                {DELIVERY_OPTIONS.map((item) => (
-                  <button
-                    key={item}
-                    type="button"
-                    onClick={() => setForm((current) => ({ ...current, deliveryPreference: item }))}
-                    className={chipClass(form.deliveryPreference === item)}
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className={THEME.formSection}>
-              <p className={THEME.label}>5. Contact Details</p>
-              <div className="mt-4 grid gap-4 md:grid-cols-2">
+            <div className="mt-4 grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+              <label className="block">
+                <span className={labelClass}>Mobile / मोबाइल</span>
                 <input
                   type="tel"
-                  placeholder="Mobile Number"
                   value={form.mobileNumber}
-                  onChange={(e) => setForm((current) => ({ ...current, mobileNumber: e.target.value }))}
+                  onChange={(event) => updateForm("mobileNumber", event.target.value)}
                   required
-                  className={inputClass}
+                  className={fieldClass}
                 />
+              </label>
+
+              <label className="block">
+                <span className={labelClass}>Sign / हस्ताक्षर</span>
                 <input
-                  type="email"
-                  placeholder="Email Address"
-                  value={form.email}
-                  onChange={(e) => setForm((current) => ({ ...current, email: e.target.value }))}
+                  type="text"
+                  value={form.signature}
+                  onChange={(event) => updateForm("signature", event.target.value)}
+                  className={fieldClass}
+                />
+              </label>
+            </div>
+
+            <div className="mt-6 border-t-2 border-[#d65a4f] pt-4">
+              <p className="text-center text-[15px] font-bold text-[#be2d22] md:text-[18px]">
+                Note : Rates are for only one language / किसी भी एक भाषा के लिये
+              </p>
+
+              <div className="mt-4 grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+                <div>
+                  <p className={labelClass}>Languages Preferred / भाषा चयन</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {LANGUAGE_OPTIONS.map((language) => (
+                      <button
+                        key={language}
+                        type="button"
+                        onClick={() => updateForm("preferredLanguage", language)}
+                        className={squareChoiceClass(form.preferredLanguage === language)}
+                      >
+                        {language}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <p className={labelClass}>Delivery / डिलीवरी</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {DELIVERY_OPTIONS.map((delivery) => (
+                      <button
+                        key={delivery}
+                        type="button"
+                        onClick={() => updateForm("deliveryPreference", delivery)}
+                        className={squareChoiceClass(form.deliveryPreference === delivery)}
+                      >
+                        {delivery}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 rounded-[18px] border-2 border-dashed border-[#d65a4f] bg-[#fff7f5] p-4 md:p-5">
+              <h2 className={sectionSubheadingClass}>Online Delivery Details</h2>
+
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                <label className="block">
+                  <span className={labelClass}>Email</span>
+                  <input
+                    type="email"
+                    value={form.email}
+                    onChange={(event) => updateForm("email", event.target.value)}
+                    required
+                    className={fieldClass}
+                  />
+                </label>
+
+                <div>
+                  <span className={labelClass}>Payment Method</span>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {PAYMENT_OPTIONS.map((method) => (
+                      <button
+                        key={method}
+                        type="button"
+                        onClick={() => updateForm("paymentMethod", method)}
+                        className={squareChoiceClass(form.paymentMethod === method)}
+                      >
+                        {method}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <label className="block md:col-span-2">
+                  <span className={labelClass}>Address / पता</span>
+                  <textarea
+                    value={form.address}
+                    onChange={(event) => updateForm("address", event.target.value)}
+                    rows={3}
+                    className={`${fieldClass} resize-none border-2 px-3 py-3`}
+                  />
+                </label>
+              </div>
+            </div>
+
+            <div className="mt-6 flex flex-col gap-4 rounded-[18px] border border-[#d65a4f] bg-[#fff8f6] p-4 md:flex-row md:items-center md:justify-between">
+              <div>
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#be2d22]">Selected Summary</p>
+                <p className="mt-1 text-lg font-black text-[#be2d22]">
+                  {selectedServices.length} Kundli Selected | {totalPages} Pages | {formatAmount(totalAmount)}
+                </p>
+              </div>
+              <label className="flex items-start gap-3 text-sm font-semibold text-[#9b241d]">
+                <input
+                  type="checkbox"
+                  checked={form.consent}
+                  onChange={(event) => updateForm("consent", event.target.checked)}
                   required
-                  className={inputClass}
+                  className="mt-1 h-5 w-5 rounded-none border-2 border-[#c63a30] accent-[#c63a30]"
                 />
-                <textarea
-                  placeholder="Address (optional)"
-                  value={form.address}
-                  onChange={(e) => setForm((current) => ({ ...current, address: e.target.value }))}
-                  rows={3}
-                  className={inputClass}
-                />
-              </div>
+                <span>I confirm the information is correct and I agree to the kundli booking process.</span>
+              </label>
             </div>
-
-            <div className={THEME.formSection}>
-              <p className={THEME.label}>6. Payment System</p>
-              <p className={THEME.formNote}>Choose your preferred gateway before submitting the booking.</p>
-              <div className="mt-4 grid gap-2 md:grid-cols-3">
-                {PAYMENT_OPTIONS.map((item) => (
-                  <button
-                    key={item}
-                    type="button"
-                    onClick={() => setForm((current) => ({ ...current, paymentMethod: item }))}
-                    className={chipClass(form.paymentMethod === item)}
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-              <p className={THEME.deliveryNoteText}>Razorpay is included for secure online processing.</p>
-            </div>
-
-            <label className="flex items-start gap-3 rounded-[24px] border border-white/10 bg-[#0c5871] p-4 text-sm text-[#dce7ec]">
-              <input
-                type="checkbox"
-                checked={form.consent}
-                onChange={(e) => setForm((current) => ({ ...current, consent: e.target.checked }))}
-                required
-                className="mt-1 h-4 w-4 rounded border-[#ef9a1e] text-[#ef9a1e] focus:ring-[#ef9a1e]"
-              />
-              <span>I confirm the information above is accurate and I agree to the Kundli booking and payment process.</span>
-            </label>
 
             {notice ? (
-              <p className={`rounded-2xl px-4 py-3 text-sm font-semibold ${notice.type === "success" ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700"}`}>
+              <div
+                className={`mt-4 rounded-[18px] border px-4 py-3 text-sm font-semibold ${
+                  notice.type === "success"
+                    ? "border-green-200 bg-green-50 text-green-700"
+                    : "border-red-200 bg-red-50 text-red-700"
+                }`}
+              >
                 {notice.text}
-              </p>
+              </div>
             ) : null}
 
-            <button
-              type="submit"
-              disabled={loading}
-              className={THEME.submitButton}
-            >
-              {loading ? "Processing..." : `Proceed to Payment & Submit (${formatAmount(totalAmount || 0)})`}
-            </button>
-
-            <div className={THEME.deliveryNote}>
-              <p className={THEME.label}>Delivery Note</p>
-              <p className={THEME.deliveryNoteText}>
-                The completed Kundli will be shared through {deliverySummary} using the contact details you provide.
+            <div className="mt-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <p className="text-sm font-semibold text-[#b92c24]">
+                Completed kundli will be shared by {deliverySummary} after review and confirmation.
               </p>
-              <p className={THEME.deliveryNoteText}>
-                Estimated delivery time is usually 3-5 working days after the booking is reviewed.
-              </p>
+              <button
+                type="submit"
+                disabled={loading}
+                className="inline-flex items-center justify-center rounded-xl bg-[#be2d22] px-6 py-3 text-base font-bold text-white shadow-[0_14px_30px_rgba(190,45,34,0.22)] transition hover:bg-[#a9261f] disabled:cursor-not-allowed disabled:opacity-70"
+              >
+                {loading ? "Processing..." : `Submit Kundli Booking (${formatAmount(totalAmount || 0)})`}
+              </button>
             </div>
-          </form>
+          </div>
         </div>
-      </section>
+      </form>
     </div>
   );
 });
-
-
