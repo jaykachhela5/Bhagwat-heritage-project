@@ -3263,25 +3263,25 @@ export const KnowledgeStudyResourcesPage = memo(function KnowledgeStudyResources
     {
       category: "Foundational" as const,
       title: "Bhagwat Basics",
-      desc: "Introductory notes for understanding core Bhagwat themes, terminology, and devotional context.",
+      desc: "",
       format: "Beginner study sheets",
     },
     {
       category: "Guided" as const,
       title: "Mentor-Led Study Notes",
-      desc: "Structured topic summaries and reflection prompts designed for guided satsang or study groups.",
+      desc: "",
       format: "Annotated notes and references",
     },
     {
       category: "Advanced" as const,
       title: "Thematic Deep Study Modules",
-      desc: "Long-form resources on devotion, dharma, avatar teachings, and philosophical interpretation.",
+      desc: "",
       format: "Advanced resource modules",
     },
     {
       category: "Practice" as const,
       title: "Daily Revision and Reflection",
-      desc: "Short reading plans, memorization prompts, and reflection-based study exercises for consistent practice.",
+      desc: "",
       format: "Daily learning rhythm tools",
     },
   ];
@@ -3298,8 +3298,8 @@ export const KnowledgeStudyResourcesPage = memo(function KnowledgeStudyResources
     <div className="min-h-screen bg-[#0B2230]">
       <HeroSection
         title="Bhagwat Study Resources"
-        subtitle="Structured scripture learning, guided notes, and deeper study tools for devotees and learners"
-        subtitleClassName="text-[18px] font-semibold leading-tight text-white sm:text-[24px] md:text-[34px]"
+        subtitle="Guided knowledge for a deeper spiritual journey"
+        subtitleClassName="text-[18px] font-semibold text-white sm:text-[24px] md:text-[34px]"
         contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1775569184/bhagwatdhamstudy_ky9jf3.avif"
         boxed
@@ -3322,7 +3322,7 @@ export const KnowledgeStudyResourcesPage = memo(function KnowledgeStudyResources
         </div>
       </HeroSection>
 
-      <section className="-mt-10 relative z-20 pb-6">
+      <section className="relative z-20 mt-[10px] pb-6">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
             {[
@@ -3331,27 +3331,19 @@ export const KnowledgeStudyResourcesPage = memo(function KnowledgeStudyResources
               { title: "Daily Practice", value: "365", note: "Consistent reflection and revision opportunities" },
               { title: "Mentor Support", value: "Available", note: "Study-friendly routes linked with Pathshala and satsang" },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/15 bg-[#143446]/95 backdrop-blur-sm p-4 shadow-lg">
-                <p className="text-[#ffb06a] text-xs uppercase tracking-wide">{item.title}</p>
-                <p className="text-white text-2xl font-black mt-1">{item.value}</p>
-                <p className="text-[#c7d7e1] text-sm mt-1">{item.note}</p>
+              <div key={item.title} className={EVENT_SEVA_HIGHLIGHT_CARD_CLASS}>
+                <p className={SEVA_HIGHLIGHT_TITLE_CLASS}>{item.title}</p>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-b from-[#0d2f43] via-[#0c2a3a] to-[#0a2534] py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-8">About Bhagwat Study Resources</h2>
-          <p className="max-w-4xl mx-auto text-center text-[#d7e3ea] text-2xl leading-relaxed">
-            This page is designed for structured scripture study, not just passive reading. It helps learners move from
-            introductory understanding to deeper reflection, guided interpretation, and disciplined revision.
-          </p>
-          <p className="max-w-4xl mx-auto text-center text-[#d7e3ea] text-2xl leading-relaxed mt-5">
-            I added a stronger study-focused structure here because Bhagwat study should feel organized, practical, and
-            progressive for both self-learners and guided devotees.
-          </p>
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className={EVENT_SEVA_SECTION_CLASS}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>About Bhagwat Study Resources</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Organized scripture study for learners, satsang groups, and guided devotees</h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-10">
             {[
@@ -3368,25 +3360,21 @@ export const KnowledgeStudyResourcesPage = memo(function KnowledgeStudyResources
                 desc: "Practice-oriented reading and reflection helps learners build consistency rather than fragmented learning.",
               },
             ].map((item) => (
-              <div key={item.title} className="rounded-3xl border border-white/10 bg-[#1b3646]/80 p-8 text-center">
-                <h3 className="text-3xl font-black text-white mb-3">{item.title}</h3>
-                <p className="text-[#c8d6df] text-xl">{item.desc}</p>
+              <div key={item.title} className={EVENT_SEVA_CARD_CLASS}>
+                <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#0a2534] py-16">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className={EVENT_SEVA_SECTION_CLASS}>
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">New Feature</p>
-              <h2 className="mt-2 text-5xl font-black text-white">Study Resource Explorer</h2>
-              <p className="mt-3 max-w-3xl text-[#d4e1e8] text-lg leading-7">
-                Filter resources by study level and usage style so devotees can find the right kind of material for reading,
-                teaching, revision, or deeper learning.
-              </p>
+              <p className={SEVA_SECTION_LABEL_CLASS}>Study Resource Explorer</p>
+              <h2 className={SEVA_SECTION_HEADING_CLASS}>Filter the right study track for reading, teaching, and deeper learning</h2>
             </div>
             <div className="flex flex-wrap gap-2">
               {(["All", "Foundational", "Guided", "Advanced", "Practice"] as const).map((track) => {
@@ -3398,8 +3386,8 @@ export const KnowledgeStudyResourcesPage = memo(function KnowledgeStudyResources
                     onClick={() => setActiveTrack(track)}
                     className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                       active
-                        ? "bg-[#ffb06a] text-[#17384b]"
-                        : "border border-white/10 bg-[#17384b] text-[#d4e1e8] hover:border-[#ffb06a]/40"
+                        ? "bg-[#ef9a1e] text-white"
+                        : "border border-white/10 bg-[#0c5871] text-[#dce7ec] hover:border-[#ef9a1e]/40"
                     }`}
                   >
                     {track}
@@ -3411,28 +3399,29 @@ export const KnowledgeStudyResourcesPage = memo(function KnowledgeStudyResources
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8">
             {visibleTracks.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#17384b] p-6">
+              <div key={item.title} className={EVENT_SEVA_DETAIL_CARD_CLASS}>
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-[#ffb06a] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#17384b]">
+                  <span className="rounded-full bg-[#ef9a1e]/15 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ef9a1e]">
                     {item.category}
                   </span>
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#d4e1e8]">
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#dce7ec]">
                     {item.format}
                   </span>
                 </div>
-                <h3 className="text-white text-2xl font-black mt-4">{item.title}</h3>
-                <p className="text-[#d4e1e8] mt-3 text-lg leading-7">{item.desc}</p>
+                <h3 className={`mt-4 ${SEVA_CARD_TITLE_CLASS}`}>{item.title}</h3>
+                {item.desc ? <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p> : null}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-r from-[#0b2130] via-[#0d2f43] to-[#0b2130] py-16">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="rounded-3xl border border-white/10 bg-[#1b3646]/80 p-8">
-            <h3 className="text-4xl font-black text-white mb-5">Study Support Features</h3>
-            <ul className="space-y-3 text-[#d4e1e8] text-xl">
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className={`${EVENT_SEVA_SECTION_CLASS} grid grid-cols-1 lg:grid-cols-2 gap-6`}>
+          <div className={EVENT_SEVA_DETAIL_CARD_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Study Support Features</p>
+            <h3 className={SEVA_SECTION_HEADING_CLASS}>Useful tools for disciplined scripture learning</h3>
+            <ul className={`mt-5 space-y-3 ${SEVA_BODY_TEXT_CLASS}`}>
               {[
                 "Topic-wise scripture summaries and guided notes",
                 "Reflection prompts for daily and weekly study circles",
@@ -3447,28 +3436,32 @@ export const KnowledgeStudyResourcesPage = memo(function KnowledgeStudyResources
             </ul>
           </div>
 
-          <div className="rounded-3xl bg-gradient-to-r from-[#0f5a98] to-[#0d8f91] p-6 text-white shadow-sm">
-            <h3 className="text-4xl font-black mb-4">Build a Better Study Path</h3>
-            <p className="text-xl text-white/95 mb-6">
-              Move from reading to understanding through guided learning, digital resources, and mentor-supported study practice.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+          <div className={EVENT_SEVA_DETAIL_CARD_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Build a Better Study Path</p>
+            <h3 className={SEVA_SECTION_HEADING_CLASS}>Move from reading toward understanding and reflection</h3>
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
               {[
                 { label: "Self Study Start", amount: "Open Access" },
                 { label: "Guided Learning", amount: "Mentor Ready" },
                 { label: "Deep Study Route", amount: "Advanced" },
               ].map((tier) => (
-                <div key={tier.label} className="rounded-xl bg-white/15 p-4 text-center">
-                  <p className="text-base font-semibold">{tier.label}</p>
-                  <p className="text-2xl font-black mt-1">{tier.amount}</p>
+                <div key={tier.label} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
+                  <p className="text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">{tier.label}</p>
+                  <p className="mt-2 text-2xl font-black text-white">{tier.amount}</p>
                 </div>
               ))}
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link to={ROUTES.knowledge.library} className="inline-block bg-white text-[#cf4f00] font-semibold px-6 py-3 rounded-xl">
+              <Link
+                to={ROUTES.knowledge.library}
+                className="inline-flex rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+              >
                 Open Library
               </Link>
-              <Link to={ROUTES.knowledge.pathshala} className="inline-block bg-[#11283a] text-white font-semibold px-6 py-3 rounded-xl">
+              <Link
+                to={ROUTES.knowledge.pathshala}
+                className="inline-flex rounded-xl bg-[#0d6179] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#18495e]"
+              >
                 Join Pathshala
               </Link>
             </div>
@@ -3558,8 +3551,8 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
     <div className="min-h-screen bg-[#0B2230]">
       <HeroSection
         title="Children Spiritual Learning"
-        subtitle="Bal sanskar, joyful devotion, family participation, and age-wise spiritual growth for children"
-        subtitleClassName="text-[18px] font-semibold leading-tight text-white sm:text-[24px] md:text-[34px]"
+        subtitle="Bal Sanskar today, strong character tomorrow"
+        subtitleClassName="text-[18px] font-semibold text-white sm:text-[24px] md:text-[34px]"
         contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772915579/children_hrarip.jpg"
         boxed
@@ -3582,7 +3575,7 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
         </div>
       </HeroSection>
 
-      <section className="-mt-10 relative z-20 pb-6">
+      <section className="relative z-20 mt-[10px] pb-6">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
             {[
@@ -3591,28 +3584,19 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
               { title: "Family Role", value: "Active", note: "Parents are included as learning partners and spiritual anchors" },
               { title: "Weekly Rhythm", value: "7 Day", note: "Simple daily habits designed for steady sanskar development" },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/15 bg-[#143446]/95 backdrop-blur-sm p-4 shadow-lg">
-                <p className="text-[#ffb06a] text-xs uppercase tracking-wide">{item.title}</p>
-                <p className="text-white text-2xl font-black mt-1">{item.value}</p>
-                <p className="text-[#c7d7e1] text-sm mt-1">{item.note}</p>
+              <div key={item.title} className={EVENT_SEVA_HIGHLIGHT_CARD_CLASS}>
+                <p className={SEVA_HIGHLIGHT_TITLE_CLASS}>{item.title}</p>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-b from-[#0d2f43] via-[#0c2a3a] to-[#0a2534] py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-8">About Children Spiritual Learning</h2>
-          <p className="max-w-4xl mx-auto text-center text-[#d7e3ea] text-2xl leading-relaxed">
-            This page should help children grow spiritually through joyful learning, respectful habits, temple culture,
-            and family-guided practice. I structured it around how children actually learn best: story, repetition,
-            activity, and loving mentorship.
-          </p>
-          <p className="max-w-4xl mx-auto text-center text-[#d7e3ea] text-2xl leading-relaxed mt-5">
-            Instead of only showing static information, this page now gives age-wise guidance, family participation
-            direction, and a practical daily sanskar rhythm that parents and mentors can actually use.
-          </p>
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className={EVENT_SEVA_SECTION_CLASS}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>About Children Spiritual Learning</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Joyful sanskar learning guided by family, prayer, and daily practice</h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-10">
             {[
@@ -3629,25 +3613,21 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
                 desc: "The page separates early years, school-age learners, and teens so guidance stays practical and relevant.",
               },
             ].map((item) => (
-              <div key={item.title} className="rounded-3xl border border-white/10 bg-[#1b3646]/80 p-8 text-center">
-                <h3 className="text-3xl font-black text-white mb-3">{item.title}</h3>
-                <p className="text-[#c8d6df] text-xl">{item.desc}</p>
+              <div key={item.title} className={EVENT_SEVA_CARD_CLASS}>
+                <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#0a2534] py-16">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className={EVENT_SEVA_SECTION_CLASS}>
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">New Feature</p>
-              <h2 className="mt-2 text-5xl font-black text-white">Children Learning Journey Explorer</h2>
-              <p className="mt-3 max-w-3xl text-[#d4e1e8] text-lg leading-7">
-                Explore the most suitable learning track by age and family role so children can follow a route that feels
-                natural, engaging, and spiritually meaningful.
-              </p>
+              <p className={SEVA_SECTION_LABEL_CLASS}>Children Learning Journey Explorer</p>
+              <h2 className={SEVA_SECTION_HEADING_CLASS}>Choose the most suitable track by age and family role</h2>
             </div>
             <div className="flex flex-wrap gap-2">
               {(["All", "Bal Sanskar", "Primary", "Teens", "Family"] as const).map((track) => {
@@ -3659,8 +3639,8 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
                     onClick={() => setActiveTrack(track)}
                     className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                       active
-                        ? "bg-[#ffb06a] text-[#17384b]"
-                        : "border border-white/10 bg-[#17384b] text-[#d4e1e8] hover:border-[#ffb06a]/40"
+                        ? "bg-[#ef9a1e] text-white"
+                        : "border border-white/10 bg-[#0c5871] text-[#dce7ec] hover:border-[#ef9a1e]/40"
                     }`}
                   >
                     {track}
@@ -3672,33 +3652,28 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8">
             {visibleTracks.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#17384b] p-6">
+              <div key={item.title} className={EVENT_SEVA_DETAIL_CARD_CLASS}>
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-[#ffb06a] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#17384b]">
+                  <span className="rounded-full bg-[#ef9a1e]/15 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ef9a1e]">
                     {item.category}
                   </span>
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#d4e1e8]">
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#dce7ec]">
                     {item.format}
                   </span>
                 </div>
-                <h3 className="text-white text-2xl font-black mt-4">{item.title}</h3>
-                <p className="text-[#d4e1e8] mt-3 text-lg leading-7">{item.desc}</p>
+                <h3 className={`mt-4 ${SEVA_CARD_TITLE_CLASS}`}>{item.title}</h3>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-b from-[#09202d] to-[#081925] py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-6">
-            <div className="rounded-3xl border border-white/10 bg-[#153446] p-8">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Real Use Feature</p>
-              <h2 className="mt-2 text-4xl font-black text-white">Weekly Sanskar Routine</h2>
-              <p className="mt-4 text-lg leading-7 text-[#d4e1e8]">
-                A children spiritual learning page should give parents and teachers a usable routine. This weekly rhythm
-                turns the page into a practical support tool instead of only an information section.
-              </p>
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className={`${EVENT_SEVA_SECTION_CLASS} grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-6`}>
+          <div className={EVENT_SEVA_DETAIL_CARD_CLASS}>
+              <p className={SEVA_SECTION_LABEL_CLASS}>Weekly Sanskar Routine</p>
+              <h2 className={SEVA_SECTION_HEADING_CLASS}>A practical family rhythm for prayer, story, action, and reflection</h2>
 
               <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
@@ -3719,19 +3694,18 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
                     desc: "End with one gratitude thought and a simple parent-child discussion about what was learned.",
                   },
                 ].map((item) => (
-                  <div key={item.step} className="rounded-2xl border border-white/10 bg-[#0f2c3d] p-5">
+                  <div key={item.step} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-5">
                     <h3 className="text-xl font-black text-white">{item.step}</h3>
-                    <p className="mt-2 text-[#d4e1e8] leading-7">{item.desc}</p>
+                    <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
                   </div>
                 ))}
               </div>
-            </div>
+          </div>
 
-            <div className="rounded-3xl bg-gradient-to-br from-[#0f5a98] to-[#0d8f91] p-8 text-white">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/80">Today&apos;s Focus</p>
-              <h3 className="mt-3 text-4xl font-black">{dailyFocus.title}</h3>
-              <p className="mt-2 text-base font-semibold text-white/80">{dailyFocus.day}</p>
-              <p className="mt-5 text-lg leading-8 text-white/95">{dailyFocus.desc}</p>
+          <div className={EVENT_SEVA_DETAIL_CARD_CLASS}>
+              <p className={SEVA_SECTION_LABEL_CLASS}>Today&apos;s Focus</p>
+              <h3 className={SEVA_SECTION_HEADING_CLASS}>{dailyFocus.title}</h3>
+              <p className="mt-4 text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">{dailyFocus.day}</p>
 
               <div className="mt-8 grid grid-cols-1 gap-3">
                 {[
@@ -3739,21 +3713,21 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
                   "Family-friendly and child-safe learning rhythm",
                   "Designed for both beginners and regular satsang families",
                 ].map((line) => (
-                  <div key={line} className="rounded-2xl bg-white/12 px-4 py-3 text-base font-medium">
+                  <div key={line} className="rounded-[20px] border border-white/10 bg-[#0b2230] px-4 py-3 text-base font-semibold text-[#dce7ec]">
                     {line}
                   </div>
                 ))}
               </div>
-            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-r from-[#0b2130] via-[#0d2f43] to-[#0b2130] py-16">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="rounded-3xl border border-white/10 bg-[#1b3646]/80 p-8">
-            <h3 className="text-4xl font-black text-white mb-5">What I Added For This Page</h3>
-            <ul className="space-y-3 text-[#d4e1e8] text-xl">
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className={`${EVENT_SEVA_SECTION_CLASS} grid grid-cols-1 lg:grid-cols-2 gap-6`}>
+          <div className={EVENT_SEVA_DETAIL_CARD_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Page Support</p>
+            <h3 className={SEVA_SECTION_HEADING_CLASS}>What this page adds for children and families</h3>
+            <ul className={`mt-5 space-y-3 ${SEVA_BODY_TEXT_CLASS}`}>
               {[
                 "Age-wise learning tracks for better guidance clarity",
                 "A child-focused explorer instead of a static placeholder section",
@@ -3768,29 +3742,32 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
             </ul>
           </div>
 
-          <div className="rounded-3xl bg-gradient-to-r from-[#0f5a98] to-[#0d8f91] p-6 text-white shadow-sm">
-            <h3 className="text-4xl font-black mb-4">Start Children Learning Support</h3>
-            <p className="text-xl text-white/95 mb-6">
-              Use this page as a bridge between home learning, mentor support, digital resources, and regular spiritual
-              discipline for children.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+          <div className={EVENT_SEVA_DETAIL_CARD_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Start Children Learning Support</p>
+            <h3 className={SEVA_SECTION_HEADING_CLASS}>Connect home learning, mentors, and Pathshala routes</h3>
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
               {[
                 { label: "Home Start", amount: "Family Ready" },
                 { label: "Guided Track", amount: "Mentor Supported" },
                 { label: "Pathshala Route", amount: "Joinable" },
               ].map((tier) => (
-                <div key={tier.label} className="rounded-xl bg-white/15 p-4 text-center">
-                  <p className="text-base font-semibold">{tier.label}</p>
-                  <p className="text-2xl font-black mt-1">{tier.amount}</p>
+                <div key={tier.label} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
+                  <p className="text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">{tier.label}</p>
+                  <p className="mt-2 text-2xl font-black text-white">{tier.amount}</p>
                 </div>
               ))}
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link to={ROUTES.knowledge.pathshala} className="inline-block bg-white text-[#cf4f00] font-semibold px-6 py-3 rounded-xl">
+              <Link
+                to={ROUTES.knowledge.pathshala}
+                className="inline-flex rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+              >
                 Join Pathshala
               </Link>
-              <Link to={ROUTES.knowledge.library} className="inline-block bg-[#11283a] text-white font-semibold px-6 py-3 rounded-xl">
+              <Link
+                to={ROUTES.knowledge.library}
+                className="inline-flex rounded-xl bg-[#0d6179] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#18495e]"
+              >
                 Open Library
               </Link>
             </div>
@@ -3913,8 +3890,7 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
             ].map((item) => (
               <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
                 <p className="text-[20px] font-black uppercase tracking-wide text-[#ef9a1e] md:text-[24px]">* {item.title}</p>
-                <p className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.value}</p>
-                <p className="mt-1 text-base leading-7 text-[#dce7ec] md:text-lg">{item.note}</p>
+                <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.note}</p>
               </div>
             ))}
           </div>
@@ -3922,8 +3898,7 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10" id="todays-quote">
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
             <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Featured Daily Reflection</p>
             <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Today&apos;s Spiritual Quote</h2>
             <p className="mt-5 text-base leading-7 text-white md:text-lg">
@@ -3940,29 +3915,6 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
                 {featuredQuote?.author || "Bhagwat Heritage Service Foundation Trust"}
               </span>
             </div>
-            <p className="mt-6 text-base leading-7 text-[#dce7ec] md:text-lg">
-              I upgraded this page into a working quote publishing system so the trust can post a new daily reflection and
-              every visitor sees the updated quote stream immediately on this route.
-            </p>
-          </div>
-
-          <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 text-white shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">How It Works</p>
-            <h3 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Daily Quote Publishing Flow</h3>
-            <div className="mt-6 space-y-4">
-              {[
-                "Admin writes and publishes a new quote with date, theme, and author details.",
-                "The newest quote becomes available to all users on this page instantly in their browser.",
-                "Older quotes remain in the archive so devotees can revisit earlier reflections.",
-                "Theme filters help users browse bhakti, seva, discipline, and dharma-oriented quotes.",
-              ].map((line, index) => (
-                <div key={line} className="rounded-2xl border border-white/10 bg-[#0c5871] p-4">
-                  <p className="text-sm font-bold uppercase tracking-wide text-[#ef9a1e]">Step {index + 1}</p>
-                  <p className="mt-1 text-base leading-7 text-[#dce7ec] md:text-lg">{line}</p>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
@@ -4088,9 +4040,6 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
             <div>
               <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Public Archive</p>
               <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Daily Quote Archive</h2>
-              <p className="mt-3 max-w-3xl text-base leading-7 text-[#dce7ec] md:text-lg">
-                All visitors can browse the published quotes here. Theme filtering keeps the archive useful as it grows over time.
-              </p>
             </div>
             <div className="flex flex-wrap gap-2">
               {availableThemes.map((theme) => {
@@ -4160,76 +4109,49 @@ export const KnowledgeTodayQuotePage = memo(function KnowledgeTodayQuotePage() {
   );
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,#18495e_0%,#0b2230_46%,#071821_100%)] px-4 py-10 md:py-16">
-      <div className="mx-auto flex min-h-[78vh] max-w-6xl items-center justify-center">
-        <div className="relative w-full overflow-hidden rounded-[36px] border border-white/10 bg-[#0d6179] shadow-[0_30px_90px_rgba(0,0,0,0.35)]">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage:
-                "url(https://res.cloudinary.com/der8zinu8/image/upload/v1774775572/quotes_kdamdm.jpg)",
-            }}
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(7,24,33,0.88)_8%,rgba(13,97,121,0.78)_48%,rgba(239,154,30,0.18)_100%)]" />
-          <div className="absolute -left-16 top-10 h-40 w-40 rounded-full bg-[#ef9a1e]/20 blur-3xl" />
-          <div className="absolute -right-12 bottom-10 h-44 w-44 rounded-full bg-white/10 blur-3xl" />
+    <div className="min-h-screen bg-[#0B2230]">
+      <section className="relative min-h-screen overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "url(https://res.cloudinary.com/der8zinu8/image/upload/v1774775572/quotes_kdamdm.jpg)",
+          }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,15,21,0.72)_0%,rgba(8,31,43,0.7)_45%,rgba(5,18,27,0.82)_100%)]" />
 
-          <div className="relative grid min-h-[640px] grid-cols-1 gap-8 px-6 py-8 md:px-10 md:py-10 lg:grid-cols-[0.8fr_1.2fr] lg:px-14 lg:py-14">
-            <div className="flex flex-col justify-between rounded-[28px] border border-white/10 bg-[#082331]/55 p-6 backdrop-blur-sm md:p-8">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[#ef9a1e]">Today&apos;s Quote</p>
-                <h1 className="mt-4 text-3xl font-black text-white md:text-5xl">Swaminarayan Bhagwan</h1>
-                <p className="mt-5 max-w-md text-base leading-7 text-[#dce7ec] md:text-lg">
-                  A daily remembrance for a peaceful mind, a softer heart, and a steadier connection with Bhagwan.
-                </p>
-              </div>
+        <div className="relative z-10 mx-auto flex min-h-screen max-w-5xl items-center px-4 py-10 md:py-16">
+          <div className="w-full rounded-[32px] border border-white/10 bg-black/40 p-6 text-center shadow-[0_30px_90px_rgba(0,0,0,0.35)] backdrop-blur-sm md:p-10 lg:p-14">
+            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Today&apos;s Spiritual Quote</p>
+            <h1 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Daily Divine Reflection</h1>
 
-              <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                <div className="rounded-[22px] border border-white/10 bg-white/10 px-4 py-4">
-                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#ef9a1e]">Theme</p>
-                  <p className="mt-2 text-lg font-semibold text-white">{featuredQuote?.theme || "Daily Reflection"}</p>
-                </div>
-                <div className="rounded-[22px] border border-white/10 bg-white/10 px-4 py-4">
-                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#ef9a1e]">Date</p>
-                  <p className="mt-2 text-lg font-semibold text-white">{featuredQuote?.publishDate || today}</p>
-                </div>
-                <div className="rounded-[22px] border border-white/10 bg-white/10 px-4 py-4">
-                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#ef9a1e]">Published By</p>
-                  <p className="mt-2 text-lg font-semibold text-white">
-                    {featuredQuote?.author || "Bhagwat Heritage Service Foundation Trust"}
-                  </p>
-                </div>
-              </div>
+            <p className="mx-auto mt-8 max-w-4xl text-3xl font-semibold leading-[1.6] text-white md:text-5xl md:leading-[1.45]">
+              &quot;{featuredQuote?.text || "A new spiritual quote will appear here soon."}&quot;
+            </p>
+
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <span className="rounded-full bg-[#ef9a1e]/15 px-4 py-2 text-sm font-black uppercase tracking-[0.14em] text-[#ef9a1e]">
+                {featuredQuote?.theme || "Daily Reflection"}
+              </span>
+              <span className="rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-[#dce7ec]">
+                {featuredQuote?.publishDate || today}
+              </span>
+              <span className="rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-[#dce7ec]">
+                {featuredQuote?.author || "Bhagwat Heritage Service Foundation Trust"}
+              </span>
             </div>
 
-            <div className="flex flex-col justify-between rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0.06))] p-6 backdrop-blur-sm md:p-8 lg:p-10">
-              <div>
-                <div className="inline-flex rounded-full border border-[#ef9a1e]/40 bg-[#ef9a1e]/12 px-4 py-2 text-xs font-black uppercase tracking-[0.24em] text-[#ffd7a1]">
-                  Divine Reflection
-                </div>
-                <p className="mt-8 text-4xl font-semibold leading-[1.45] text-white md:text-5xl md:leading-[1.35] lg:text-[3.65rem]">
-                  &quot;{featuredQuote?.text || "Swaminarayan Bhagwan"}&quot;
-                </p>
-              </div>
-
-              <div className="mt-10 flex flex-wrap items-center gap-3">
-                <Link
-                  to={ROUTES.knowledge.dailyQuotes}
-                  className="inline-flex items-center rounded-2xl bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition hover:bg-[#de930a]"
-                >
-                  Back to Quotes Page
-                </Link>
-                <Link
-                  to={ROUTES.home}
-                  className="inline-flex items-center rounded-2xl border border-white/15 bg-white/10 px-6 py-3 font-semibold text-white transition hover:bg-white/15"
-                >
-                  Go Home
-                </Link>
-              </div>
+            <div className="mt-8 flex justify-center">
+              <Link
+                to={ROUTES.knowledge.dailyQuotes}
+                className="inline-flex items-center rounded-xl bg-[#ef9a1e] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+              >
+                Back to Quotes Page
+              </Link>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 });

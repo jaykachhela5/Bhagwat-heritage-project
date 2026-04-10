@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
 import { HeroSection } from "../../components/ui/HeroSection";
 import { pathshalaApi } from "../../services/api/misc";
+import {
+  SEVA_BODY_TEXT_CLASS,
+  SEVA_CARD_TITLE_CLASS,
+  SEVA_SECTION_HEADING_CLASS,
+  SEVA_SECTION_LABEL_CLASS,
+} from "../seva/sevaTypography";
 
 const COURSES = [
   "Bhagwat Katha",
@@ -103,19 +109,27 @@ const FAQS = [
   { q: "Can parents participate?", a: "Yes, family modules and parent orientation sessions are included." },
 ];
 
-const sectionTitleClass = "mb-5 text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]";
-const surfaceMetaClass = "text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]";
-const surfaceCardTitleClass = "text-xl font-black text-white";
-const surfaceCardBodyClass = "mt-3 text-sm leading-7 text-[#dce7ec]";
-const darkMetaClass = "text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]";
-const darkCardTitleClass = "mt-2 text-xl font-black text-white";
-const darkCardBodyClass = "mt-3 text-sm leading-7 text-[#dce7ec]";
-const surfaceSectionClass = "rounded-[30px] border border-white/10 bg-[#12394A] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
-const darkSectionClass = "rounded-[30px] border border-white/10 bg-[#12394A] p-6 text-white shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
-const lightCardClass =
-  "rounded-[24px] border border-white/10 bg-[#0f3140] p-5 shadow-sm";
+const PATHSHALA_HERO_SUBTITLE_CLASS = "text-[18px] font-semibold text-white sm:text-[24px] md:text-[34px]";
+const HERO_CONTENT_CLASS = "flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]";
+const HERO_PRIMARY_BUTTON_CLASS =
+  "inline-flex items-center rounded-lg bg-[#f3a11f] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(243,161,31,0.28)] transition-colors hover:bg-[#ffaf31]";
+const HERO_SECONDARY_BUTTON_CLASS =
+  "inline-flex items-center rounded-lg bg-[#0f7994] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(15,121,148,0.28)] transition-colors hover:bg-[#1492b1]";
+const sectionPanelClass = "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
+const cardClass =
+  "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
+const sectionTitleClass = SEVA_SECTION_LABEL_CLASS;
+const surfaceSectionClass = sectionPanelClass;
+const darkSectionClass = sectionPanelClass;
+const lightCardClass = cardClass;
+const surfaceMetaClass = "text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]";
+const surfaceCardTitleClass = SEVA_CARD_TITLE_CLASS;
+const surfaceCardBodyClass = `mt-3 ${SEVA_BODY_TEXT_CLASS}`;
+const darkMetaClass = "text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]";
+const darkCardTitleClass = `mt-2 ${SEVA_CARD_TITLE_CLASS}`;
+const darkCardBodyClass = `mt-3 ${SEVA_BODY_TEXT_CLASS}`;
 const formFieldClass =
-  "w-full rounded-xl border border-white/10 bg-[#0f3140] px-4 py-3 text-base text-white placeholder:text-[#dce7ec]/70 focus:outline-none focus:ring-2 focus:ring-[#F59E0B]/40";
+  "w-full rounded-xl border border-white/10 bg-[#0b2230] px-4 py-3 text-base text-white placeholder:text-[#dce7ec]/70 focus:outline-none focus:ring-2 focus:ring-[#ef9a1e]/40";
 
 export default memo(function PathshalaPage() {
   const [form, setForm] = useState({
