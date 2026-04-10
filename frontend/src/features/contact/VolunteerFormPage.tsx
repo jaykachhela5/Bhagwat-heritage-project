@@ -1,7 +1,6 @@
 ﻿import { memo, useMemo, useState, type FormEvent } from "react";
 import { volunteersApi } from "../../services/api/volunteers";
 import { FeatureHeroSlider } from "../../components/sections/FeatureHeroSlider";
-import { StatStrip } from "../../components/sections/StatStrip";
 import { FAQSection } from "../../components/sections/FAQSection";
 import { PageSectionShell } from "../../components/sections/PageSectionShell";
 import { usePageMeta } from "../../hooks/usePageMeta";
@@ -16,13 +15,6 @@ const SEVA_AREAS = [
   "Administration",
   "Fundraising",
   "Community Outreach",
-];
-
-const IMPACT_METRICS = [
-  { label: "Active Volunteers", value: "320+" },
-  { label: "Monthly Seva Hours", value: "1,500+" },
-  { label: "Events Managed", value: "80+" },
-  { label: "Families Reached", value: "1,200+" },
 ];
 
 const ONBOARDING = [
@@ -155,10 +147,6 @@ export default memo(function VolunteerFormPage() {
     <div className={THEME.page}>
       <PageSectionShell className={THEME.bannerWrap}>
         <FeatureHeroSlider slides={TOP_BANNER_SLIDES} variant="gauseva" />
-      </PageSectionShell>
-
-      <PageSectionShell className="pt-8">
-        <StatStrip items={IMPACT_METRICS} variant="gauseva" />
       </PageSectionShell>
 
       <section className={THEME.section}>

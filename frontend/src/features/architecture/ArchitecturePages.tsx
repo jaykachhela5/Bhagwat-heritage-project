@@ -778,6 +778,8 @@ type EventFaq = {
 
 const EVENT_SEVA_HERO_CONTENT_CLASS =
   "flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]";
+const EVENT_SEVA_HERO_SUBTITLE_WRAP_CLASS =
+  "text-[18px] font-semibold leading-tight text-white sm:text-[24px] md:text-[34px]";
 const EVENT_SEVA_PRIMARY_BUTTON_CLASS =
   "inline-flex items-center rounded-lg bg-[#f3a11f] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(243,161,31,0.28)] transition-colors hover:bg-[#ffaf31]";
 const EVENT_SEVA_SECONDARY_BUTTON_CLASS =
@@ -7002,6 +7004,10 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
   });
   const [profileFileName, setProfileFileName] = useState("");
   const [requestSubmitted, setRequestSubmitted] = useState(false);
+  const partnerInputClass =
+    "rounded-2xl border border-white/10 bg-[#0c5871] px-4 py-3 text-white outline-none placeholder:text-[#aac0ca] focus:border-[#ef9a1e]";
+  const partnerBadgeClass =
+    "rounded-xl bg-[#ef9a1e]/15 px-4 py-2 text-sm font-bold text-[#ef9a1e] transition-colors hover:bg-[#ef9a1e]/20";
 
   const handlePartnerSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -7009,31 +7015,34 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b2230] pb-16">
+    <div className="min-h-screen bg-[#0B2230] pb-16">
       <HeroSection
         title="Partner With Us"
         subtitle="Collaborate with Bhagwat Heritage Service Foundation Trust to expand spiritual education, seva, charity, and community upliftment through purposeful partnership"
         backgroundImage="/images/heritage1.png"
+        subtitleClassName={EVENT_SEVA_HERO_SUBTITLE_WRAP_CLASS}
+        contentClassName={EVENT_SEVA_HERO_CONTENT_CLASS}
         boxed
         heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-black/55"
       >
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
           <a
             href="#partnership-form"
-            className="inline-flex items-center rounded-lg bg-[#d97a18] px-6 py-3 font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[#c86d14]"
+            className={EVENT_SEVA_PRIMARY_BUTTON_CLASS}
           >
             Become a Partner
           </a>
           <Link
             to={ROUTES.contact}
-            className="inline-flex items-center rounded-lg bg-white px-6 py-3 font-semibold text-[#8a4108] transition-all hover:-translate-y-0.5 hover:bg-[#fff2dd]"
+            className={EVENT_SEVA_SECONDARY_BUTTON_CLASS}
           >
             Contact Us
           </Link>
         </div>
       </HeroSection>
 
-      <section className="-mt-10 relative z-20 pb-6">
+      <section className="relative z-20 mt-[10px] pb-6">
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {[
@@ -7044,11 +7053,11 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
             ].map((item) => (
               <div
                 key={item.title}
-                className="rounded-2xl border border-white/15 bg-[#143446]/95 p-4 shadow-lg backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1"
+                className={EVENT_SEVA_HIGHLIGHT_CARD_CLASS}
               >
-                <p className="text-xs uppercase tracking-wide text-[#ffb06a]">{item.title}</p>
-                <p className="mt-1 text-2xl font-black text-white">{item.value}</p>
-                <p className="mt-1 text-sm text-[#c7d7e1]">{item.note}</p>
+                <p className={SEVA_HIGHLIGHT_TITLE_CLASS}>* {item.title}</p>
+                <p className={SEVA_HIGHLIGHT_VALUE_CLASS}>{item.value}</p>
+                <p className={`mt-1 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
               </div>
             ))}
           </div>
@@ -7056,11 +7065,11 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-8">
-        <div className="rounded-[32px] border border-white/10 bg-[#103246] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.24)] md:p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Introduction</p>
-          <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Partnerships Expand the Trust's Real Impact</h2>
+        <div className={EVENT_SEVA_SECTION_CLASS}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Introduction</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Partnerships expand the trust&apos;s real impact</h2>
           <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="space-y-5 text-lg leading-8 text-[#d7e3ea]">
+            <div className={`space-y-5 ${SEVA_BODY_TEXT_CLASS}`}>
               <p>
                 Bhagwat Heritage Service Foundation Trust is focused on spiritual education, devotional gatherings,
                 value-based learning, seva programs, charitable outreach, and community development rooted in dharma.
@@ -7069,10 +7078,6 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
                 Partnerships matter because trust impact grows faster when institutions, communities, and service-minded
                 organizations work together with clarity, shared intent, and disciplined execution.
               </p>
-              <p>
-                This page is designed to turn interest into action: identify the right partnership model, understand the
-                benefit for both sides, submit a proposal, and build collaboration around meaningful social and spiritual work.
-              </p>
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-1">
               {[
@@ -7080,9 +7085,9 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
                 { title: "Charity and Seva", desc: "Gau seva, relief work, medicine support, food seva, and community care initiatives." },
                 { title: "Community Service", desc: "Volunteer mobilization, event support, social campaigns, and local service action." },
               ].map((item) => (
-                <div key={item.title} className="rounded-2xl border border-white/10 bg-[#17384a] p-5 transition-transform duration-300 hover:-translate-y-1">
-                  <h3 className="text-xl font-black text-white">{item.title}</h3>
-                  <p className="mt-2 leading-7 text-[#d4e1e8]">{item.desc}</p>
+                <div key={item.title} className={EVENT_SEVA_CARD_CLASS}>
+                  <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
+                  <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -7091,24 +7096,24 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-8">
-        <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,#103246_0%,#0d2c3d_100%)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.24)] md:p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Types of Partnerships</p>
-          <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Choose the Right Collaboration Path</h2>
+        <div className={EVENT_SEVA_SECTION_CLASS}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Types of Partnerships</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Choose the right collaboration path</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
             {partnershipCategories.map((item) => (
               <article
                 key={item.title}
-                className="rounded-[28px] border border-white/10 bg-[#17384a] p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_36px_rgba(0,0,0,0.26)]"
+                className={EVENT_SEVA_CARD_CLASS}
               >
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ffb06a]/15 text-sm font-black text-[#ffb06a]">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-sm font-black text-[#ef9a1e]">
                   {item.icon}
                 </div>
-                <h3 className="mt-4 text-2xl font-black text-white">{item.title}</h3>
-                <p className="mt-3 leading-7 text-[#d4e1e8]">{item.desc}</p>
-                <p className="mt-3 text-sm leading-6 text-[#a7c0ce]">{item.detail}</p>
+                <h3 className={`mt-4 ${SEVA_CARD_TITLE_CLASS}`}>{item.title}</h3>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
+                <p className="mt-3 text-sm leading-6 text-[#aac0ca]">{item.detail}</p>
                 <a
                   href="#partnership-process"
-                  className="mt-5 inline-flex rounded-xl border border-[#ffb06a]/40 bg-[#ffb06a]/10 px-4 py-2 text-sm font-bold text-[#ffb06a] transition-colors hover:bg-[#ffb06a]/20"
+                  className="mt-5 inline-flex rounded-xl border border-[#ef9a1e]/40 bg-[#ef9a1e]/10 px-4 py-2 text-sm font-bold text-[#ef9a1e] transition-colors hover:bg-[#ef9a1e]/20"
                 >
                   Learn More
                 </a>
@@ -7119,54 +7124,38 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-8">
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_0.95fr]">
-          <div className="rounded-[32px] border border-white/10 bg-[#103246] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.24)] md:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Partnership Benefits</p>
-            <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Why Organizations Partner</h2>
-            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-              {[
-                "Brand visibility across website, programs, and event-level acknowledgements.",
-                "Recognition inside trust-led spiritual and social initiatives.",
-                "Direct contribution to social impact and spiritual outreach.",
-                "Networking with spiritual guides, trustees, and community leaders.",
-                "Participation in large devotional gatherings and organized service campaigns.",
-              ].map((benefit) => (
-                <div key={benefit} className="flex gap-3 rounded-2xl border border-white/10 bg-[#17384a] p-4">
-                  <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#ffb06a]" />
-                  <p className="leading-7 text-[#d7e3ea]">{benefit}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,#13384d_0%,#102f40_100%)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.24)] md:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Our Impact</p>
-            <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Collaboration at Scale</h2>
-            <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {impactStats.map((item) => (
-                <div key={item.label} className="rounded-2xl border border-white/10 bg-[#17384a] p-5 transition-transform duration-300 hover:-translate-y-1">
-                  <p className="text-xs uppercase tracking-wide text-[#ffb06a]">{item.label}</p>
-                  <p className="mt-2 text-3xl font-black text-white">{item.value}</p>
-                  <p className="mt-2 text-sm leading-6 text-[#d4e1e8]">{item.note}</p>
-                </div>
-              ))}
-            </div>
+        <div className={EVENT_SEVA_SECTION_CLASS}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Partnership Benefits</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Why organizations partner</h2>
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+            {[
+              "Brand visibility across website, programs, and event-level acknowledgements.",
+              "Recognition inside trust-led spiritual and social initiatives.",
+              "Direct contribution to social impact and spiritual outreach.",
+              "Networking with spiritual guides, trustees, and community leaders.",
+              "Participation in large devotional gatherings and organized service campaigns.",
+            ].map((benefit) => (
+              <div key={benefit} className="flex gap-3 rounded-2xl border border-white/10 bg-[#0c5871] p-4">
+                <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#ef9a1e]" />
+                <p className={SEVA_BODY_TEXT_CLASS}>{benefit}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-8">
-        <div className="rounded-[32px] border border-white/10 bg-[#103246] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.24)] md:p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Partner Showcase</p>
-          <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Existing Supporters and Collaboration Circles</h2>
+        <div className={EVENT_SEVA_SECTION_CLASS}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Partner Showcase</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Existing supporters and collaboration circles</h2>
           <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
             {partnerShowcase.map((item) => (
               <div
                 key={item}
-                className="flex min-h-[132px] items-center justify-center rounded-[28px] border border-white/10 bg-[#17384a] p-5 text-center shadow-sm transition-transform duration-300 hover:-translate-y-1"
+                className="flex min-h-[132px] items-center justify-center rounded-[24px] border border-white/10 bg-[#0c5871] p-5 text-center shadow-sm transition-transform duration-300 hover:-translate-y-1"
               >
                 <div>
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#ffb06a]/15 text-sm font-black text-[#ffb06a]">
+                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#ef9a1e]/15 text-sm font-black text-[#ef9a1e]">
                     {item
                       .split(" ")
                       .slice(0, 2)
@@ -7183,39 +7172,39 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
 
       <section id="partnership-form" className="mx-auto max-w-7xl px-4 py-8">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-[32px] border border-white/10 bg-[#103246] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.24)] md:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Partnership Application Form</p>
-            <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Submit a Partnership Request</h2>
+          <div className={EVENT_SEVA_SECTION_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Partnership Application Form</p>
+            <h2 className={SEVA_SECTION_HEADING_CLASS}>Submit a partnership request</h2>
 
             <form className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2" onSubmit={handlePartnerSubmit}>
               <input
                 value={partnerForm.organizationName}
                 onChange={(event) => setPartnerForm((current) => ({ ...current, organizationName: event.target.value }))}
                 placeholder="Organization Name"
-                className="rounded-2xl border border-white/10 bg-[#17384a] px-4 py-3 text-white outline-none placeholder:text-[#93afbe] focus:border-[#ffb06a]"
+                className={partnerInputClass}
               />
               <input
                 value={partnerForm.contactName}
                 onChange={(event) => setPartnerForm((current) => ({ ...current, contactName: event.target.value }))}
                 placeholder="Contact Person Name"
-                className="rounded-2xl border border-white/10 bg-[#17384a] px-4 py-3 text-white outline-none placeholder:text-[#93afbe] focus:border-[#ffb06a]"
+                className={partnerInputClass}
               />
               <input
                 value={partnerForm.email}
                 onChange={(event) => setPartnerForm((current) => ({ ...current, email: event.target.value }))}
                 placeholder="Email Address"
-                className="rounded-2xl border border-white/10 bg-[#17384a] px-4 py-3 text-white outline-none placeholder:text-[#93afbe] focus:border-[#ffb06a]"
+                className={partnerInputClass}
               />
               <input
                 value={partnerForm.phone}
                 onChange={(event) => setPartnerForm((current) => ({ ...current, phone: event.target.value }))}
                 placeholder="Phone Number"
-                className="rounded-2xl border border-white/10 bg-[#17384a] px-4 py-3 text-white outline-none placeholder:text-[#93afbe] focus:border-[#ffb06a]"
+                className={partnerInputClass}
               />
               <select
                 value={partnerForm.organizationType}
                 onChange={(event) => setPartnerForm((current) => ({ ...current, organizationType: event.target.value }))}
-                className="rounded-2xl border border-white/10 bg-[#17384a] px-4 py-3 text-white outline-none focus:border-[#ffb06a]"
+                className={partnerInputClass}
               >
                 {["Corporate", "NGO", "Educational Institution", "Community Group", "Event Team"].map((item) => (
                   <option key={item} value={item}>
@@ -7226,7 +7215,7 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
               <select
                 value={partnerForm.partnershipCategory}
                 onChange={(event) => setPartnerForm((current) => ({ ...current, partnershipCategory: event.target.value }))}
-                className="rounded-2xl border border-white/10 bg-[#17384a] px-4 py-3 text-white outline-none focus:border-[#ffb06a]"
+                className={partnerInputClass}
               >
                 {partnershipCategories.map((item) => (
                   <option key={item.title} value={item.title}>
@@ -7239,11 +7228,11 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
                 onChange={(event) => setPartnerForm((current) => ({ ...current, message: event.target.value }))}
                 placeholder="Message / Proposal"
                 rows={5}
-                className="rounded-2xl border border-white/10 bg-[#17384a] px-4 py-3 text-white outline-none placeholder:text-[#93afbe] focus:border-[#ffb06a] md:col-span-2"
+                className={`${partnerInputClass} md:col-span-2`}
               />
-              <label className="flex cursor-pointer items-center justify-between rounded-2xl border border-dashed border-[#ffb06a]/45 bg-[#17384a] px-4 py-3 text-white md:col-span-2">
+              <label className="flex cursor-pointer items-center justify-between rounded-2xl border border-dashed border-[#ef9a1e]/45 bg-[#0c5871] px-4 py-3 text-white md:col-span-2">
                 <span>{profileFileName || "Upload Organization Profile"}</span>
-                <span className="rounded-lg bg-[#ffb06a]/15 px-3 py-1 text-sm font-bold text-[#ffb06a]">Choose File</span>
+                <span className="rounded-lg bg-[#ef9a1e]/15 px-3 py-1 text-sm font-bold text-[#ef9a1e]">Choose File</span>
                 <input
                   type="file"
                   className="hidden"
@@ -7252,23 +7241,23 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
               </label>
               <button
                 type="submit"
-                className="rounded-xl bg-[#ff8a00] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#ea7e00] md:col-span-2"
+                className="rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a] md:col-span-2"
               >
                 Submit Partnership Request
               </button>
             </form>
 
             {requestSubmitted ? (
-              <p className="mt-4 rounded-2xl border border-[#ffb06a]/35 bg-[#17384a] px-4 py-3 text-sm font-medium text-white">
+              <p className="mt-4 rounded-2xl border border-[#ef9a1e]/35 bg-[#0c5871] px-4 py-3 text-sm font-medium text-white">
                 Partnership request drafted successfully. The trust team can now review the proposal and continue the discussion process.
               </p>
             ) : null}
           </div>
 
           <div className="space-y-6">
-            <div id="partnership-process" className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,#13384d_0%,#102f40_100%)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.24)] md:p-8">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Partnership Process</p>
-              <h2 className="mt-2 text-3xl font-black text-white">How Collaboration Moves Forward</h2>
+            <div id="partnership-process" className={EVENT_SEVA_SECTION_CLASS}>
+              <p className={SEVA_SECTION_LABEL_CLASS}>Partnership Process</p>
+              <h2 className={SEVA_SECTION_HEADING_CLASS}>How collaboration moves forward</h2>
               <div className="mt-8 space-y-4">
                 {[
                   "Submit partnership request",
@@ -7277,13 +7266,13 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
                   "Formal partnership agreement",
                   "Collaboration implementation",
                 ].map((step, index) => (
-                  <div key={step} className="flex gap-4 rounded-2xl border border-white/10 bg-[#17384a] p-4">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#ff8a00] text-sm font-black text-white">
+                  <div key={step} className="flex gap-4 rounded-2xl border border-white/10 bg-[#0c5871] p-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#ef9a1e] text-sm font-black text-white">
                       {index + 1}
                     </div>
                     <div>
-                      <p className="text-lg font-black text-white">{step}</p>
-                      <p className="mt-1 text-sm leading-6 text-[#d4e1e8]">
+                      <p className={SEVA_CARD_TITLE_CLASS}>{step}</p>
+                      <p className={`mt-1 text-sm leading-6 ${SEVA_BODY_TEXT_CLASS}`}>
                         Structured review keeps the collaboration aligned, practical, and mission-consistent.
                       </p>
                     </div>
@@ -7292,18 +7281,18 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
               </div>
             </div>
 
-            <div className="rounded-[32px] border border-white/10 bg-[#103246] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.24)] md:p-8">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Contact Section</p>
-              <h2 className="mt-2 text-3xl font-black text-white">Talk to the Partnership Desk</h2>
-              <div className="mt-6 space-y-4 text-[#d7e3ea]">
+            <div className={EVENT_SEVA_SECTION_CLASS}>
+              <p className={SEVA_SECTION_LABEL_CLASS}>Contact Section</p>
+              <h2 className={SEVA_SECTION_HEADING_CLASS}>Talk to the partnership desk</h2>
+              <div className={`mt-6 space-y-4 ${SEVA_BODY_TEXT_CLASS}`}>
                 <p>
-                  <span className="font-black text-white">Email:</span> info@bhagwatheritage.org
+                  <span className="font-black text-white">Email:</span> bhagwatheritage@gmail.com
                 </p>
                 <p>
-                  <span className="font-black text-white">Phone:</span> +91 98765 43210
+                  <span className="font-black text-white">Phone:</span> +91 8668897445
                 </p>
                 <p>
-                  <span className="font-black text-white">Office Address:</span> Bhagwat Heritage Service Foundation Trust Office, Swaminarayan Bhagwat Dham Campus
+                  <span className="font-black text-white">Office Address:</span> Bhagwat Heritage Service Foundation Trust, Swaminarayan Bhagwat Dham Campus, Chandrapur, Kasturaba Road, Maharashtra
                 </p>
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
@@ -7311,7 +7300,7 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
                   href="https://www.instagram.com/bhagwat.heritage"
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-xl bg-[#ffb06a]/12 px-4 py-2 font-semibold text-white transition-colors hover:bg-[#ffb06a]/20"
+                  className={partnerBadgeClass}
                 >
                   Instagram
                 </a>
@@ -7319,7 +7308,7 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
                   href="https://www.facebook.com/share/1AtpQtn1SL/"
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-xl bg-[#ffb06a]/12 px-4 py-2 font-semibold text-white transition-colors hover:bg-[#ffb06a]/20"
+                  className={partnerBadgeClass}
                 >
                   Facebook
                 </a>
@@ -7327,7 +7316,7 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
                   href="https://youtube.com/@bhagwatheritage"
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-xl bg-[#ffb06a]/12 px-4 py-2 font-semibold text-white transition-colors hover:bg-[#ffb06a]/20"
+                  className={partnerBadgeClass}
                 >
                   YouTube
                 </a>
@@ -7335,7 +7324,7 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
                   href="https://wa.me/918668897445"
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-xl bg-[#ffb06a]/12 px-4 py-2 font-semibold text-white transition-colors hover:bg-[#ffb06a]/20"
+                  className={partnerBadgeClass}
                 >
                   WhatsApp
                 </a>
@@ -7347,28 +7336,28 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-8">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_0.95fr]">
-          <div className="rounded-[32px] border border-white/10 bg-[#103246] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.24)] md:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Testimonials</p>
-            <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">What Existing Partners Say</h2>
+          <div className={EVENT_SEVA_SECTION_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Testimonials</p>
+            <h2 className={SEVA_SECTION_HEADING_CLASS}>What existing partners say</h2>
             <div className="mt-8 space-y-4">
               {testimonials.map((item) => (
-                <div key={item.name} className="rounded-2xl border border-white/10 bg-[#17384a] p-5">
-                  <p className="text-lg leading-8 text-[#d7e3ea]">"{item.quote}"</p>
-                  <p className="mt-4 text-lg font-black text-white">{item.name}</p>
-                  <p className="text-sm text-[#ffb06a]">{item.org}</p>
+                <div key={item.name} className="rounded-2xl border border-white/10 bg-[#0c5871] p-5">
+                  <p className={SEVA_BODY_TEXT_CLASS}>&quot;{item.quote}&quot;</p>
+                  <p className={`mt-4 ${SEVA_CARD_TITLE_CLASS}`}>{item.name}</p>
+                  <p className="text-sm text-[#ef9a1e]">{item.org}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,#13384d_0%,#102f40_100%)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.24)] md:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">FAQ</p>
-            <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Common Partnership Questions</h2>
+          <div className={EVENT_SEVA_SECTION_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>FAQ</p>
+            <h2 className={SEVA_SECTION_HEADING_CLASS}>Common partnership questions</h2>
             <div className="mt-8 space-y-4">
               {faqs.map((item) => (
-                <div key={item.question} className="rounded-2xl border border-white/10 bg-[#17384a] p-5">
-                  <h3 className="text-xl font-black text-white">{item.question}</h3>
-                  <p className="mt-2 leading-7 text-[#d7e3ea]">{item.answer}</p>
+                <div key={item.question} className="rounded-2xl border border-white/10 bg-[#0c5871] p-5">
+                  <h3 className={SEVA_CARD_TITLE_CLASS}>{item.question}</h3>
+                  <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.answer}</p>
                 </div>
               ))}
             </div>
@@ -7443,6 +7432,7 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
 
   const visiblePrograms =
     activeTrack === "All" ? sponsorPrograms : sponsorPrograms.filter((item) => item.category === activeTrack);
+  const sponsorInfoCardClass = "rounded-2xl border border-white/10 bg-[#0c5871] p-5";
 
   usePageMeta(
     "Sponsor Programs",
@@ -7450,31 +7440,34 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0b2230]">
+    <div className="min-h-screen bg-[#0B2230] pb-16">
       <HeroSection
         title="Sponsor Programs"
         subtitle="Sponsor meaningful seva, education, mandir development, and spiritual initiatives with structured contribution paths"
         backgroundImage="/images/kathapravachan.png"
+        subtitleClassName={EVENT_SEVA_HERO_SUBTITLE_WRAP_CLASS}
+        contentClassName={EVENT_SEVA_HERO_CONTENT_CLASS}
         boxed
         heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-black/55"
       >
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
           <Link
             to={ROUTES.donate}
-            className="inline-flex items-center bg-[#ff8a00] hover:bg-[#e97b00] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+            className={EVENT_SEVA_PRIMARY_BUTTON_CLASS}
           >
             Sponsor Now
           </Link>
           <Link
             to={ROUTES.contact}
-            className="inline-flex items-center bg-white text-[#0f5a98] hover:bg-[#eef4ff] font-semibold px-6 py-3 rounded-lg transition-colors"
+            className={EVENT_SEVA_SECONDARY_BUTTON_CLASS}
           >
             Talk to Sponsor Team
           </Link>
         </div>
       </HeroSection>
 
-      <section className="-mt-10 relative z-20 pb-6">
+      <section className="relative z-20 mt-[10px] pb-6">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
             {[
@@ -7483,27 +7476,20 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
               { title: "Support Model", value: "Flexible", note: "Sponsor one event, one program, one season, or recurring monthly seva" },
               { title: "Recognition Flow", value: "Transparent", note: "Sponsors support clear causes with visible trust purpose and allocation direction" },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/15 bg-[#143446]/95 p-4 shadow-lg backdrop-blur-sm">
-                <p className="text-[#ffb06a] text-xs uppercase tracking-wide">{item.title}</p>
-                <p className="text-white text-2xl font-black mt-1">{item.value}</p>
-                <p className="text-[#c7d7e1] text-sm mt-1">{item.note}</p>
+              <div key={item.title} className={EVENT_SEVA_HIGHLIGHT_CARD_CLASS}>
+                <p className={SEVA_HIGHLIGHT_TITLE_CLASS}>* {item.title}</p>
+                <p className={SEVA_HIGHLIGHT_VALUE_CLASS}>{item.value}</p>
+                <p className={`mt-1 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-b from-[#0d2f43] via-[#0c2a3a] to-[#0a2534] py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-8">About Sponsor Programs</h2>
-          <p className="max-w-4xl mx-auto text-center text-[#d7e3ea] text-2xl leading-relaxed">
-            A sponsorship page should not feel generic. It should clearly show what can be sponsored, why it matters,
-            and how a sponsor can support the trust with purpose rather than making an unfocused donation.
-          </p>
-          <p className="max-w-4xl mx-auto text-center text-[#d7e3ea] text-2xl leading-relaxed mt-5">
-            I updated this page around practical trust programs so sponsors can connect directly with festivals, gau seva,
-            student support, medicine distribution, Pathshala, mandir work, and recurring seva impact.
-          </p>
+      <section className="mx-auto max-w-7xl px-4 py-8">
+        <div className={EVENT_SEVA_SECTION_CLASS}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>About Sponsor Programs</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>A clearer structure for meaningful sponsorship</h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-10">
             {[
@@ -7520,25 +7506,21 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
                 desc: "Some sponsors want one-time support while others want monthly, seasonal, or annual program participation.",
               },
             ].map((item) => (
-              <div key={item.title} className="rounded-3xl border border-white/10 bg-[#1b3646]/80 p-8 text-center">
-                <h3 className="text-3xl font-black text-white mb-3">{item.title}</h3>
-                <p className="text-[#c8d6df] text-xl">{item.desc}</p>
+              <div key={item.title} className={`${EVENT_SEVA_CARD_CLASS} text-center`}>
+                <h3 className={`mb-3 ${SEVA_CARD_TITLE_CLASS}`}>{item.title}</h3>
+                <p className={SEVA_BODY_TEXT_CLASS}>{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#0a2534] py-16">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="mx-auto max-w-7xl px-4 py-8">
+        <div className={EVENT_SEVA_SECTION_CLASS}>
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">New Feature</p>
-              <h2 className="mt-2 text-5xl font-black text-white">Sponsor Program Explorer</h2>
-              <p className="mt-3 max-w-3xl text-[#d4e1e8] text-lg leading-7">
-                Filter sponsorship opportunities by program category so visitors can quickly find the trust work they want
-                to support most directly.
-              </p>
+              <p className={SEVA_SECTION_LABEL_CLASS}>Sponsor Program Explorer</p>
+              <h2 className={SEVA_SECTION_HEADING_CLASS}>Browse sponsorship opportunities by category</h2>
             </div>
             <div className="flex flex-wrap gap-2">
               {(["All", "Spiritual", "Seva", "Education", "Mandir"] as const).map((track) => {
@@ -7550,8 +7532,8 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
                     onClick={() => setActiveTrack(track)}
                     className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                       active
-                        ? "bg-[#ffb06a] text-[#17384b]"
-                        : "border border-white/10 bg-[#17384b] text-[#d4e1e8] hover:border-[#ffb06a]/40"
+                        ? "bg-[#ef9a1e] text-white shadow-[0_10px_24px_rgba(239,154,30,0.24)]"
+                        : "border border-white/10 bg-[#0c5871] text-[#dce7ec] hover:border-[#ef9a1e]"
                     }`}
                   >
                     {track}
@@ -7563,34 +7545,34 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8">
             {visiblePrograms.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#17384b] p-6">
+              <div key={item.title} className={`${EVENT_SEVA_DETAIL_CARD_CLASS} flex h-full flex-col`}>
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-[#ffb06a] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#17384b]">
+                  <span className="rounded-full bg-[#ef9a1e] px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
                     {item.category}
                   </span>
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#d4e1e8]">
+                  <span className="rounded-full border border-white/10 bg-[#0d6179] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#dce7ec]">
                     Sponsor Route
                   </span>
                 </div>
-                <h3 className="text-white text-2xl font-black mt-4">{item.title}</h3>
-                <p className="text-[#d4e1e8] mt-3 text-lg leading-7">{item.desc}</p>
+                <h3 className={`mt-4 ${SEVA_CARD_TITLE_CLASS}`}>{item.title}</h3>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
                 <div className="mt-4 grid grid-cols-1 gap-3">
-                  <div className="rounded-2xl bg-[#0f2c3d] p-4">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-[#ffb06a]">Impact</p>
-                    <p className="mt-2 text-[#d4e1e8] leading-7">{item.impact}</p>
+                  <div className="rounded-2xl border border-white/10 bg-[#0d6179] p-4">
+                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Impact</p>
+                    <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.impact}</p>
                   </div>
-                  <div className="rounded-2xl bg-[#0f2c3d] p-4">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-[#ffb06a]">What Sponsorship Supports</p>
-                    <p className="mt-2 text-[#d4e1e8] leading-7">{item.support}</p>
+                  <div className="rounded-2xl border border-white/10 bg-[#0d6179] p-4">
+                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">What Sponsorship Supports</p>
+                    <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.support}</p>
                   </div>
                 </div>
                 <div className="mt-5 flex flex-wrap gap-3">
-                  <Link to={ROUTES.donate} className="inline-flex items-center rounded-xl bg-[#ff8a00] px-5 py-3 font-bold text-white transition hover:bg-[#e97b00]">
+                  <Link to={ROUTES.donate} className={EVENT_SEVA_PRIMARY_BUTTON_CLASS}>
                     Sponsor This Program
                   </Link>
                   <Link
                     to={ROUTES.contact}
-                    className="inline-flex items-center rounded-xl border border-white/10 bg-white/10 px-5 py-3 font-bold text-white transition hover:bg-white/15"
+                    className={EVENT_SEVA_SECONDARY_BUTTON_CLASS}
                   >
                     Request Details
                   </Link>
@@ -7601,11 +7583,11 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
         </div>
       </section>
 
-      <section className="bg-gradient-to-b from-[#09202d] to-[#081925] py-16">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6">
-          <div className="rounded-3xl border border-white/10 bg-[#153446] p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Sponsor Seva Ideas</p>
-            <h2 className="mt-2 text-4xl font-black text-white">New Seva Support Added On This Page</h2>
+      <section className="mx-auto max-w-7xl px-4 py-8">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className={EVENT_SEVA_SECTION_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Sponsor Seva Ideas</p>
+            <h2 className={SEVA_SECTION_HEADING_CLASS}>Program ideas sponsors can support directly</h2>
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
                 {
@@ -7625,17 +7607,17 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
                   desc: "Fund health camps, medicine distribution days, and practical wellness seva for families in need.",
                 },
               ].map((item) => (
-                <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0f2c3d] p-5">
-                  <h3 className="text-xl font-black text-white">{item.title}</h3>
-                  <p className="mt-2 text-[#d4e1e8] leading-7">{item.desc}</p>
+                <div key={item.title} className={sponsorInfoCardClass}>
+                  <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
+                  <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="rounded-3xl bg-gradient-to-br from-[#0f5a98] to-[#0d8f91] p-8 text-white">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/80">Sponsor Journey</p>
-            <h3 className="mt-3 text-4xl font-black">How Sponsorship Can Work</h3>
+          <div className={EVENT_SEVA_SECTION_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Sponsor Journey</p>
+            <h3 className={SEVA_SECTION_HEADING_CLASS}>How sponsorship can work</h3>
             <div className="mt-6 space-y-4">
               {[
                 "Choose the trust program or seva area you want to support.",
@@ -7643,9 +7625,9 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
                 "Complete contribution through the donation route or guided sponsor coordination.",
                 "Stay connected with the purpose and continuity of the supported trust work.",
               ].map((line, index) => (
-                <div key={line} className="rounded-2xl bg-white/12 p-4">
-                  <p className="text-sm font-bold uppercase tracking-wide text-white/75">Step {index + 1}</p>
-                  <p className="mt-1 text-lg text-white/95">{line}</p>
+                <div key={line} className="rounded-2xl border border-white/10 bg-[#0c5871] p-4">
+                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">Step {index + 1}</p>
+                  <p className={`mt-1 ${SEVA_BODY_TEXT_CLASS}`}>{line}</p>
                 </div>
               ))}
             </div>
@@ -7653,11 +7635,12 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
         </div>
       </section>
 
-      <section className="bg-gradient-to-r from-[#0b2130] via-[#0d2f43] to-[#0b2130] py-16">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="rounded-3xl border border-white/10 bg-[#1b3646]/80 p-8">
-            <h3 className="text-4xl font-black text-white mb-5">Why This Page Is Better Now</h3>
-            <ul className="space-y-3 text-[#d4e1e8] text-xl">
+      <section className="mx-auto max-w-7xl px-4 py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className={EVENT_SEVA_SECTION_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Why This Page Helps</p>
+            <h3 className={SEVA_SECTION_HEADING_CLASS}>Why this page is better now</h3>
+            <ul className={`mt-6 space-y-3 ${SEVA_BODY_TEXT_CLASS}`}>
               {[
                 "Sponsors can now choose real trust programs instead of reading generic sponsorship text.",
                 "The page includes both seva and spiritual sponsorship routes for broader participation.",
@@ -7665,36 +7648,33 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
                 "It gives a direct path to sponsor now or request details from the trust team.",
               ].map((line) => (
                 <li key={line} className="flex gap-3">
-                  <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#ffb06a]" />
+                  <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#ef9a1e]" />
                   <span>{line}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="rounded-3xl bg-gradient-to-r from-[#0f5a98] to-[#0d8f91] p-6 text-white shadow-sm">
-            <h3 className="text-4xl font-black mb-4">Start Sponsoring Trust Work</h3>
-            <p className="text-xl text-white/95 mb-6">
-              This page is now structured for sponsors who want clear, meaningful, and accountable participation in trust
-              seva, education, mandir development, and spiritual programs.
-            </p>
+          <div className={EVENT_SEVA_SECTION_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Start Sponsoring Trust Work</p>
+            <h3 className={SEVA_SECTION_HEADING_CLASS}>Clear options for sponsor participation</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
               {[
                 { label: "One-Time Support", amount: "Available" },
                 { label: "Monthly Seva", amount: "Possible" },
                 { label: "Festival Sponsor", amount: "Ready" },
               ].map((tier) => (
-                <div key={tier.label} className="rounded-xl bg-white/15 p-4 text-center">
-                  <p className="text-base font-semibold">{tier.label}</p>
-                  <p className="text-2xl font-black mt-1">{tier.amount}</p>
+                <div key={tier.label} className="rounded-xl border border-white/10 bg-[#0c5871] p-4 text-center">
+                  <p className="text-base font-semibold text-[#dce7ec]">{tier.label}</p>
+                  <p className="mt-1 text-2xl font-black text-white">{tier.amount}</p>
                 </div>
               ))}
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link to={ROUTES.donate} className="inline-block bg-white text-[#cf4f00] font-semibold px-6 py-3 rounded-xl">
+              <Link to={ROUTES.donate} className={EVENT_SEVA_PRIMARY_BUTTON_CLASS}>
                 Sponsor Now
               </Link>
-              <Link to={ROUTES.contact} className="inline-block bg-[#11283a] text-white font-semibold px-6 py-3 rounded-xl">
+              <Link to={ROUTES.contact} className={EVENT_SEVA_SECONDARY_BUTTON_CLASS}>
                 Contact Sponsor Desk
               </Link>
             </div>
