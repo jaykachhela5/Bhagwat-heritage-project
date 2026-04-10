@@ -240,7 +240,7 @@ export default memo(function StorePage() {
     <div className="min-h-screen bg-[#0B2230] pb-16">
       <HeroSection
         title="E-Store"
-        subtitle="Digital spiritual shopping with the same clean Gau Seva-inspired style"
+        subtitle="Digital seva, delivered with devotion"
         subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
         contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772920428/store_snvng8.avif"

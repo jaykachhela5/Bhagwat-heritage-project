@@ -6282,7 +6282,7 @@ export const DigitalSatsangPage = memo(function DigitalSatsangPage() {
     <div className="min-h-screen bg-[#0B2230] pb-16">
       <HeroSection
         title="Online Satsang"
-        subtitle="Live discourse, digital darshan, and devotional access from anywhere"
+        subtitle="Digital darshan, real devotion"
         subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
         contentClassName={EVENT_SEVA_HERO_CONTENT_CLASS}
         backgroundImage="/images/kathapravachan.png"
@@ -6594,7 +6594,7 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
     <div className="min-h-screen bg-[#0B2230] pb-16">
       <HeroSection
         title="Membership Portal"
-        subtitle="Join the Bhagwat Heritage community with a cleaner, Gau Seva-inspired member experience"
+        subtitle="Join the Bhagwat Heritage community"
         subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
         contentClassName={EVENT_SEVA_HERO_CONTENT_CLASS}
         backgroundImage="/images/spiritual1.png"

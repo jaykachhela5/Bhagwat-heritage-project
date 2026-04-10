@@ -24,7 +24,7 @@ export default memo(function DonatePage() {
     <div className="min-h-screen bg-[#0B2230] pb-16">
       <HeroSection
         title="Donation System"
-        subtitle="Simple online giving with the same clean Gau Seva-inspired style"
+        subtitle="Give with faith, serve with love"
         subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
         contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="/images/spiritual1.png"
