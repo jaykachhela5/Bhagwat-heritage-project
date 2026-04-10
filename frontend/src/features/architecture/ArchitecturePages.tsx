@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
+﻿import { memo, useEffect, useRef, useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../../app/providers/AuthProvider";
 import { PageSectionShell } from "../../components/sections/PageSectionShell";
@@ -13,6 +13,15 @@ import {
   ABOUT_SECTION_HEADING_CLASS,
   ABOUT_SECTION_LABEL_CLASS,
 } from "../about/aboutTypography";
+import {
+  SEVA_BODY_TEXT_CLASS,
+  SEVA_CARD_TITLE_CLASS,
+  SEVA_HERO_SUBTITLE_CLASS,
+  SEVA_HIGHLIGHT_TITLE_CLASS,
+  SEVA_HIGHLIGHT_VALUE_CLASS,
+  SEVA_SECTION_HEADING_CLASS,
+  SEVA_SECTION_LABEL_CLASS,
+} from "../seva/sevaTypography";
 
 type NavCard = {
   title: string;
@@ -767,6 +776,20 @@ type EventFaq = {
   a: string;
 };
 
+const EVENT_SEVA_HERO_CONTENT_CLASS =
+  "flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]";
+const EVENT_SEVA_PRIMARY_BUTTON_CLASS =
+  "inline-flex items-center rounded-lg bg-[#f3a11f] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(243,161,31,0.28)] transition-colors hover:bg-[#ffaf31]";
+const EVENT_SEVA_SECONDARY_BUTTON_CLASS =
+  "inline-flex items-center rounded-lg bg-[#0f7994] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(15,121,148,0.28)] transition-colors hover:bg-[#1492b1]";
+const EVENT_SEVA_SECTION_CLASS =
+  "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
+const EVENT_SEVA_CARD_CLASS =
+  "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
+const EVENT_SEVA_HIGHLIGHT_CARD_CLASS =
+  "rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]";
+const EVENT_SEVA_DETAIL_CARD_CLASS = "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm";
+
 function EventShowcasePage({
   title,
   subtitle,
@@ -783,6 +806,9 @@ function EventShowcasePage({
   primaryCta,
   secondaryCta,
   extraSection,
+  gauSevaStyle = false,
+  hideHighlightValues = false,
+  supportIntro,
 }: {
   title: string;
   subtitle: string;
@@ -799,6 +825,9 @@ function EventShowcasePage({
   primaryCta: string;
   secondaryCta: string;
   extraSection?: ReactNode;
+  gauSevaStyle?: boolean;
+  hideHighlightValues?: boolean;
+  supportIntro?: string | null;
 }) {
   usePageMeta(title, metaDescription);
 
@@ -807,54 +836,66 @@ function EventShowcasePage({
       <HeroSection
         title={title}
         subtitle={subtitle}
+        subtitleClassName={gauSevaStyle ? SEVA_HERO_SUBTITLE_CLASS : undefined}
+        contentClassName={gauSevaStyle ? EVENT_SEVA_HERO_CONTENT_CLASS : undefined}
         backgroundImage={backgroundImage}
         boxed
         heightClass="h-[360px] md:h-[520px]"
+        overlayClass={gauSevaStyle ? "bg-black/55" : undefined}
       >
         <div className="flex flex-wrap justify-center gap-3">
           <Link
             to={ROUTES.donate}
-            className="inline-flex items-center bg-[#ff8a00] hover:bg-[#e97b00] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+            className={gauSevaStyle ? EVENT_SEVA_PRIMARY_BUTTON_CLASS : "inline-flex items-center bg-[#ff8a00] hover:bg-[#e97b00] text-white font-semibold px-6 py-3 rounded-lg transition-colors"}
           >
             {primaryCta}
           </Link>
           <Link
             to={ROUTES.involved.volunteer}
-            className="inline-flex items-center bg-white text-[#0f5a98] hover:bg-[#eef4ff] font-semibold px-6 py-3 rounded-lg transition-colors"
+            className={gauSevaStyle ? EVENT_SEVA_SECONDARY_BUTTON_CLASS : "inline-flex items-center bg-white text-[#0f5a98] hover:bg-[#eef4ff] font-semibold px-6 py-3 rounded-lg transition-colors"}
           >
             {secondaryCta}
           </Link>
         </div>
       </HeroSection>
 
-      <section className="-mt-10 relative z-20 pb-6">
+      <section className={`${gauSevaStyle ? "relative z-20 mt-[10px]" : "-mt-10 relative z-20"} pb-6`}>
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
             {highlights.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/15 bg-[#143446]/95 backdrop-blur-sm p-4 shadow-lg">
-                <p className="text-[#ffb06a] text-xs uppercase tracking-wide">{item.title}</p>
-                <p className="text-white text-2xl font-black mt-1">{item.value}</p>
-                <p className="text-[#c7d7e1] text-sm mt-1">{item.note}</p>
+              <div
+                key={item.title}
+                className={gauSevaStyle ? EVENT_SEVA_HIGHLIGHT_CARD_CLASS : "rounded-2xl border border-white/15 bg-[#143446]/95 backdrop-blur-sm p-4 shadow-lg"}
+              >
+                <p className={gauSevaStyle ? SEVA_HIGHLIGHT_TITLE_CLASS : "text-[#ffb06a] text-xs uppercase tracking-wide"}>{item.title}</p>
+                {hideHighlightValues ? null : (
+                  <p className={gauSevaStyle ? SEVA_HIGHLIGHT_VALUE_CLASS : "text-white text-2xl font-black mt-1"}>{item.value}</p>
+                )}
+                <p className={gauSevaStyle ? `${hideHighlightValues ? "mt-3" : "mt-1"} ${SEVA_BODY_TEXT_CLASS}` : "text-[#c7d7e1] text-sm mt-1"}>{item.note}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-b from-[#0d2f43] via-[#0c2a3a] to-[#0a2534] py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-8">{aboutTitle}</h2>
+      <section className={`${gauSevaStyle ? "max-w-7xl mx-auto px-4 py-10" : "bg-gradient-to-b from-[#0d2f43] via-[#0c2a3a] to-[#0a2534] py-16"}`}>
+        <div className={gauSevaStyle ? EVENT_SEVA_SECTION_CLASS : "max-w-7xl mx-auto px-4"}>
+          <p className={gauSevaStyle ? SEVA_SECTION_LABEL_CLASS : "hidden"}>{aboutTitle}</p>
+          {gauSevaStyle ? <h2 className={SEVA_SECTION_HEADING_CLASS}>{title}</h2> : <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-8">{aboutTitle}</h2>}
           {aboutParagraphs.map((paragraph) => (
-            <p key={paragraph} className="max-w-4xl mx-auto text-center text-[#d7e3ea] text-2xl leading-relaxed mt-5 first:mt-0">
+            <p
+              key={paragraph}
+              className={gauSevaStyle ? `mt-4 first:mt-5 ${SEVA_BODY_TEXT_CLASS}` : "max-w-4xl mx-auto text-center text-[#d7e3ea] text-2xl leading-relaxed mt-5 first:mt-0"}
+            >
               {paragraph}
             </p>
           ))}
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-10">
             {features.map((item) => (
-              <div key={item.title} className="rounded-3xl border border-white/10 bg-[#1b3646]/80 p-8 text-center">
-                <h3 className="text-3xl font-black text-white mb-3">{item.title}</h3>
-                <p className="text-[#c8d6df] text-xl">{item.desc}</p>
+              <div key={item.title} className={gauSevaStyle ? EVENT_SEVA_CARD_CLASS : "rounded-3xl border border-white/10 bg-[#1b3646]/80 p-8 text-center"}>
+                <h3 className={gauSevaStyle ? SEVA_CARD_TITLE_CLASS : "text-3xl font-black text-white mb-3"}>{item.title}</h3>
+                <p className={gauSevaStyle ? `mt-3 ${SEVA_BODY_TEXT_CLASS}` : "text-[#c8d6df] text-xl"}>{item.desc}</p>
               </div>
             ))}
           </div>
@@ -863,11 +904,12 @@ function EventShowcasePage({
 
       {extraSection}
 
-      <section className="bg-gradient-to-r from-[#0b2130] via-[#0d2f43] to-[#0b2130] py-16">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="rounded-3xl border border-white/10 bg-[#1b3646]/80 p-8">
-            <h3 className="text-4xl font-black text-white mb-5">Event Support Tracks</h3>
-            <ul className="space-y-3 text-[#d4e1e8] text-xl">
+      <section className={`${gauSevaStyle ? "max-w-7xl mx-auto px-4 py-10" : "bg-gradient-to-r from-[#0b2130] via-[#0d2f43] to-[#0b2130] py-16"}`}>
+        <div className={gauSevaStyle ? `${EVENT_SEVA_SECTION_CLASS} grid grid-cols-1 lg:grid-cols-2 gap-6` : "max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-6"}>
+          <div className={gauSevaStyle ? EVENT_SEVA_DETAIL_CARD_CLASS : "rounded-3xl border border-white/10 bg-[#1b3646]/80 p-8"}>
+            {gauSevaStyle ? <p className={SEVA_SECTION_LABEL_CLASS}>Event Support Tracks</p> : null}
+            <h3 className={gauSevaStyle ? SEVA_SECTION_HEADING_CLASS : "text-4xl font-black text-white mb-5"}>Event Support Tracks</h3>
+            <ul className={gauSevaStyle ? `space-y-3 mt-5 ${SEVA_BODY_TEXT_CLASS}` : "space-y-3 text-[#d4e1e8] text-xl"}>
               {supportTracks.map((line) => (
                 <li key={line} className="flex gap-3">
                   <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#ffb06a]" />
@@ -877,25 +919,34 @@ function EventShowcasePage({
             </ul>
           </div>
 
-          <div className="rounded-3xl bg-gradient-to-r from-[#0f5a98] to-[#0d8f91] p-6 text-white shadow-sm">
-            <h3 className="text-4xl font-black mb-4">Join or Support This Event</h3>
-            <p className="text-xl text-white/95 mb-6">
-              Support venue readiness, hospitality, volunteer coordination, digital outreach, and event execution through your seva.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+          <div className={gauSevaStyle ? EVENT_SEVA_DETAIL_CARD_CLASS : "rounded-3xl bg-gradient-to-r from-[#0f5a98] to-[#0d8f91] p-6 text-white shadow-sm"}>
+            {gauSevaStyle ? <p className={SEVA_SECTION_LABEL_CLASS}>Join or Support This Event</p> : null}
+            <h3 className={gauSevaStyle ? SEVA_SECTION_HEADING_CLASS : "text-4xl font-black mb-4"}>Join or Support This Event</h3>
+            {supportIntro !== null ? (
+              <p className={gauSevaStyle ? `mt-4 ${SEVA_BODY_TEXT_CLASS}` : "text-xl text-white/95 mb-6"}>
+                {supportIntro ?? "Support venue readiness, hospitality, volunteer coordination, digital outreach, and event execution through your seva."}
+              </p>
+            ) : null}
+            <div className={`grid grid-cols-1 md:grid-cols-3 gap-3 ${gauSevaStyle ? "mt-6 mb-6" : "mb-6"}`}>
               {donationTiers.map((tier) => (
-                <div key={tier.label} className="rounded-xl bg-white/15 p-4 text-center">
-                  <p className="text-base font-semibold">{tier.label}</p>
-                  <p className="text-2xl font-black mt-1">{tier.amount}</p>
-                  <p className="text-sm text-white/85 mt-2">{tier.note}</p>
+                <div key={tier.label} className={gauSevaStyle ? "rounded-[20px] border border-white/10 bg-[#0b2230] p-4" : "rounded-xl bg-white/15 p-4 text-center"}>
+                  <p className={gauSevaStyle ? "text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]" : "text-base font-semibold"}>{tier.label}</p>
+                  <p className={gauSevaStyle ? "mt-2 text-2xl font-black text-white" : "text-2xl font-black mt-1"}>{tier.amount}</p>
+                  <p className={gauSevaStyle ? `mt-3 ${SEVA_BODY_TEXT_CLASS}` : "text-sm text-white/85 mt-2"}>{tier.note}</p>
                 </div>
               ))}
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link to={ROUTES.donate} className="inline-block bg-white text-[#cf4f00] font-semibold px-6 py-3 rounded-xl">
+              <Link
+                to={ROUTES.donate}
+                className={gauSevaStyle ? "inline-flex rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]" : "inline-block bg-white text-[#cf4f00] font-semibold px-6 py-3 rounded-xl"}
+              >
                 Donate Now
               </Link>
-              <Link to={ROUTES.involved.volunteer} className="inline-block bg-[#11283a] text-white font-semibold px-6 py-3 rounded-xl">
+              <Link
+                to={ROUTES.involved.volunteer}
+                className={gauSevaStyle ? "inline-flex rounded-xl bg-[#0d6179] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#18495e]" : "inline-block bg-[#11283a] text-white font-semibold px-6 py-3 rounded-xl"}
+              >
                 Join Volunteer Team
               </Link>
             </div>
@@ -903,28 +954,30 @@ function EventShowcasePage({
         </div>
       </section>
 
-      <section className="bg-[#0a2534] py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-10">Voices from the Event</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <section className={`${gauSevaStyle ? "max-w-7xl mx-auto px-4 py-10" : "bg-[#0a2534] py-16"}`}>
+        <div className={gauSevaStyle ? EVENT_SEVA_SECTION_CLASS : "max-w-7xl mx-auto px-4"}>
+          {gauSevaStyle ? <p className={SEVA_SECTION_LABEL_CLASS}>Voices from the Event</p> : <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-10">Voices from the Event</h2>}
+          {gauSevaStyle ? <h2 className={SEVA_SECTION_HEADING_CLASS}>Experiences from devotees and volunteers</h2> : null}
+          <div className={`grid grid-cols-1 md:grid-cols-3 gap-5 ${gauSevaStyle ? "mt-8" : ""}`}>
             {testimonials.map((item) => (
-              <div key={item.name} className="rounded-2xl border border-white/10 bg-[#17384b] p-6">
-                <p className="text-[#dbe7ee] text-xl leading-relaxed">"{item.quote}"</p>
-                <p className="text-[#ffb06a] font-semibold text-lg mt-4">{item.name}</p>
+              <div key={item.name} className={gauSevaStyle ? EVENT_SEVA_DETAIL_CARD_CLASS : "rounded-2xl border border-white/10 bg-[#17384b] p-6"}>
+                <p className={gauSevaStyle ? SEVA_BODY_TEXT_CLASS : "text-[#dbe7ee] text-xl leading-relaxed"}>"{item.quote}"</p>
+                <p className={gauSevaStyle ? "mt-4 text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]" : "text-[#ffb06a] font-semibold text-lg mt-4"}>{item.name}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-r from-[#0b2130] via-[#0d2f43] to-[#0b2130] py-16">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-8">Frequently Asked Questions</h2>
+      <section className={`${gauSevaStyle ? "max-w-5xl mx-auto px-4 py-10" : "bg-gradient-to-r from-[#0b2130] via-[#0d2f43] to-[#0b2130] py-16"}`}>
+        <div className={gauSevaStyle ? EVENT_SEVA_SECTION_CLASS : "max-w-5xl mx-auto px-4"}>
+          {gauSevaStyle ? <p className={SEVA_SECTION_LABEL_CLASS}>Frequently Asked Questions</p> : <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-8">Frequently Asked Questions</h2>}
+          {gauSevaStyle ? <h2 className={SEVA_SECTION_HEADING_CLASS}>Helpful answers for visitors, donors, and volunteers</h2> : null}
           <div className="space-y-3">
             {faqs.map((item) => (
-              <details key={item.q} className="rounded-xl border border-white/10 bg-[#163548] p-5">
-                <summary className="cursor-pointer text-white text-xl font-semibold">{item.q}</summary>
-                <p className="text-[#d4e1e8] text-lg mt-3">{item.a}</p>
+              <details key={item.q} className={`rounded-xl border border-white/10 ${gauSevaStyle ? "bg-[#0c5871]" : "bg-[#163548]"} p-5`}>
+                <summary className={gauSevaStyle ? "cursor-pointer text-white text-lg font-black md:text-xl" : "cursor-pointer text-white text-xl font-semibold"}>{item.q}</summary>
+                <p className={gauSevaStyle ? `mt-3 ${SEVA_BODY_TEXT_CLASS}` : "text-[#d4e1e8] text-lg mt-3"}>{item.a}</p>
               </details>
             ))}
           </div>
@@ -2124,7 +2177,7 @@ export const SevaGauSevaPage = memo(function SevaGauSevaPage() {
             <div className="rounded-[30px] border border-white/10 bg-[#12394A] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">Spiritual Message</p>
               <blockquote className="mt-4 text-3xl font-black leading-tight text-white">
-                "गावो विश्वस्य मातरः"
+                "αñùαñ╛αñ╡αÑï αñ╡αñ┐αñ╢αÑìαñ╡αñ╕αÑìαñ» αñ«αñ╛αññαñ░αñâ"
               </blockquote>
               <p className="mt-3 text-lg text-[#F59E0B]">The cows are the mothers of the universe.</p>
               <p className="mt-4 text-base leading-7 text-[#dce7ec]">
@@ -2334,7 +2387,6 @@ export const SevaDisasterReliefPage = memo(function SevaDisasterReliefPage() {
 });
 
 export const EventsBhagwatKathaPage = memo(function EventsBhagwatKathaPage() {
-  const [currentTime, setCurrentTime] = useState(() => new Date());
   const [mahotsavStart] = useState(() => {
     const start = new Date();
     start.setDate(start.getDate() + 12);
@@ -2344,16 +2396,8 @@ export const EventsBhagwatKathaPage = memo(function EventsBhagwatKathaPage() {
 
   usePageMeta(
     "Bhagwat Katha Mahotsav",
-    "Bhagwat Katha program vision, real-time event operations, seva participation, and mahotsav schedule overview.",
+    "Bhagwat Katha program vision, seva participation, and mahotsav schedule overview.",
   );
-
-  useEffect(() => {
-    const intervalId = window.setInterval(() => {
-      setCurrentTime(new Date());
-    }, 60000);
-
-    return () => window.clearInterval(intervalId);
-  }, []);
 
   const heroHighlights = [
     { title: "Live Katha Days", value: "7", note: "Structured discourse, darshan, and seva programming" },
@@ -2447,160 +2491,107 @@ export const EventsBhagwatKathaPage = memo(function EventsBhagwatKathaPage() {
     }),
   );
 
-  const currentSession = sessionSchedule.find((session) => currentTime >= session.start && currentTime <= session.end) ?? null;
-  const nextSession = sessionSchedule.find((session) => currentTime < session.start) ?? null;
-  const eventEnd = sessionSchedule[sessionSchedule.length - 1]?.end ?? mahotsavStart;
-
-  const controlStatus =
-    currentTime < mahotsavStart ? "Countdown Active" : currentTime <= eventEnd ? "Mahotsav Live" : "Completed";
-  const countdownTarget = currentSession ? currentSession.end : nextSession?.start ?? eventEnd;
-  const countdown = formatCountdownParts(countdownTarget.getTime() - currentTime.getTime());
-
   const visibleSchedule = sessionSchedule.slice(0, 9);
-  const liveOperations = [
-    { label: "Current Status", value: controlStatus, note: currentSession ? currentSession.title : nextSession ? "Next session in queue" : "Awaiting next cycle" },
-    {
-      label: currentSession ? "Session Ends In" : nextSession ? "Starts In" : "Since Completion",
-      value: `${countdown.days}d ${countdown.hours}h ${countdown.minutes}m`,
-      note: currentSession ? currentSession.dayLabel : nextSession ? nextSession.dayLabel : "Mahotsav archive mode",
-    },
-    {
-      label: "Live Session",
-      value: currentSession ? currentSession.slot : "Standby",
-      note: currentSession ? currentSession.title : nextSession ? nextSession.title : "Schedule closed",
-    },
-    {
-      label: "Next Activation",
-      value: nextSession ? nextSession.dayLabel : "To be announced",
-      note: nextSession ? nextSession.slot : "Fresh planning cycle pending",
-    },
-  ];
 
   return (
     <div className="min-h-screen bg-[#0b2230]">
       <HeroSection
         title="Bhagwat Katha Mahotsav"
-        subtitle="A structured devotional gathering with live discourse, seva coordination, and spiritual experience"
+        subtitle="Live wisdom, active seva, divine experience"
+        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
+        contentClassName={EVENT_SEVA_HERO_CONTENT_CLASS}
         backgroundImage="/images/kathapravachan.png"
         boxed
         heightClass="h-[360px] md:h-[520px]"
+        overlayClass="bg-black/55"
       >
         <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            to={ROUTES.donate}
-            className="inline-flex items-center bg-[#ff8a00] hover:bg-[#e97b00] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
-          >
+          <Link to={ROUTES.donate} className={EVENT_SEVA_PRIMARY_BUTTON_CLASS}>
             Sponsor Mahotsav
           </Link>
-          <Link
-            to={ROUTES.involved.volunteer}
-            className="inline-flex items-center bg-white text-[#0f5a98] hover:bg-[#eef4ff] font-semibold px-6 py-3 rounded-lg transition-colors"
-          >
+          <Link to={ROUTES.involved.volunteer} className={EVENT_SEVA_SECONDARY_BUTTON_CLASS}>
             Join Katha Seva
           </Link>
         </div>
       </HeroSection>
 
-      <section className="-mt-10 relative z-20 pb-6">
+      <section className="relative z-20 mt-[10px] pb-6">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
             {heroHighlights.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/15 bg-[#143446]/95 backdrop-blur-sm p-4 shadow-lg">
-                <p className="text-[#ffb06a] text-xs uppercase tracking-wide">{item.title}</p>
-                <p className="text-white text-2xl font-black mt-1">{item.value}</p>
-                <p className="text-[#c7d7e1] text-sm mt-1">{item.note}</p>
+              <div key={item.title} className={EVENT_SEVA_HIGHLIGHT_CARD_CLASS}>
+                <p className={SEVA_HIGHLIGHT_TITLE_CLASS}>{item.title}</p>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-b from-[#0d2f43] via-[#0c2a3a] to-[#0a2534] py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-8">About Bhagwat Katha Mahotsav</h2>
-          <p className="max-w-4xl mx-auto text-center text-[#d7e3ea] text-2xl leading-relaxed">
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className={EVENT_SEVA_SECTION_CLASS}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>About Bhagwat Katha Mahotsav</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>A devotional gathering rooted in katha, seva, and spiritual discipline</h2>
+          <p className={`mt-5 ${SEVA_BODY_TEXT_CLASS}`}>
             Bhagwat Katha Mahotsav is envisioned as a disciplined spiritual event where sacred discourse, devotional music,
             seva participation, and community hospitality work together in one integrated devotional ecosystem.
-          </p>
-          <p className="max-w-4xl mx-auto text-center text-[#d7e3ea] text-2xl leading-relaxed mt-5">
-            This page now goes beyond static content. It includes a real-time operations panel, live session status logic,
-            structured schedule visibility, and advanced event support sections.
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-10">
             {featureCards.map((item) => (
-              <div key={item.title} className="rounded-3xl border border-white/10 bg-[#1b3646]/80 p-8 text-center">
-                <h3 className="text-3xl font-black text-white mb-3">{item.title}</h3>
-                <p className="text-[#c8d6df] text-xl">{item.desc}</p>
+              <div key={item.title} className={EVENT_SEVA_CARD_CLASS}>
+                <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#0a2534] py-12">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-            {liveOperations.map((item) => (
-              <div key={item.label} className="rounded-2xl border border-white/10 bg-[#153346] p-5">
-                <p className="text-[#ffb06a] text-sm uppercase tracking-wide">{item.label}</p>
-                <p className="text-white text-3xl font-black mt-2">{item.value}</p>
-                <p className="text-[#c7d7e1] text-sm mt-1">{item.note}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-gradient-to-r from-[#0b2130] via-[#0d2f43] to-[#0b2130] py-16">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-[minmax(0,1.3fr)_minmax(320px,0.7fr)] gap-6">
-          <div className="rounded-3xl border border-white/10 bg-[#1b3646]/80 p-8">
-            <h2 className="text-4xl font-black text-[#ffb06a] mb-5">Live Katha Control Center</h2>
-            <p className="text-[#d4e1e8] text-xl leading-relaxed mb-6">
-              This real-time feature tracks whether the mahotsav is in countdown mode, currently live, or between sessions,
-              and surfaces the next important operational moment for volunteers and devotees.
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className={`${EVENT_SEVA_SECTION_CLASS} grid grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)] gap-6`}>
+          <div className={EVENT_SEVA_DETAIL_CARD_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Mahotsav Experience</p>
+            <h2 className={SEVA_SECTION_HEADING_CLASS}>A devotional rhythm from prayer to discourse and evening aarti</h2>
+            <p className={`mt-4 ${SEVA_BODY_TEXT_CLASS}`}>
+              Each day of the mahotsav is designed around bhajan, Bhagwat discourse, darshan, hospitality seva, and calm devotee guidance.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="rounded-2xl bg-[#143446] border border-white/10 p-5">
-                <p className="text-[#ffb06a] text-xs uppercase tracking-wide">Current Session</p>
-                <p className="text-white text-2xl font-black mt-2">{currentSession ? currentSession.title : "No live session"}</p>
-                <p className="text-[#d4e1e8] mt-2 text-sm">
-                  {currentSession
-                    ? `${currentSession.dayLabel} | ${currentSession.slot}`
-                    : nextSession
-                      ? `Next: ${nextSession.dayLabel} | ${nextSession.slot}`
-                      : "Awaiting the next announced mahotsav cycle"}
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="rounded-[20px] border border-white/10 bg-[#0b2230] p-5">
+                <p className="text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">Daily Flow</p>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>
+                  Morning prayer, afternoon katha, and evening aarti create a complete devotional journey through the day.
                 </p>
               </div>
-              <div className="rounded-2xl bg-[#143446] border border-white/10 p-5">
-                <p className="text-[#ffb06a] text-xs uppercase tracking-wide">Realtime Timer</p>
-                <p className="text-white text-2xl font-black mt-2">{`${countdown.days}d ${countdown.hours}h ${countdown.minutes}m`}</p>
-                <p className="text-[#d4e1e8] mt-2 text-sm">
-                  {currentSession ? "Time remaining in the active discourse block" : "Time remaining until the next key activation"}
+              <div className="rounded-[20px] border border-white/10 bg-[#0b2230] p-5">
+                <p className="text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">Devotee Support</p>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>
+                  Seating, water, prasad, and volunteer guidance help families and devotees participate peacefully.
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="rounded-3xl bg-gradient-to-r from-[#0f5a98] to-[#0d8f91] p-6 text-white shadow-sm">
-            <h3 className="text-4xl font-black mb-4">Join or Sponsor Mahotsav</h3>
-            <p className="text-xl text-white/95 mb-6">
+          <div className={EVENT_SEVA_DETAIL_CARD_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Join or Sponsor Mahotsav</p>
+            <h3 className={SEVA_SECTION_HEADING_CLASS}>Support stage, hospitality, and digital access</h3>
+            <p className={`mt-4 ${SEVA_BODY_TEXT_CLASS}`}>
               Support stage readiness, devotee hospitality, water seva, seating management, and digital access for the Katha Mahotsav.
             </p>
-            <div className="grid grid-cols-1 gap-3 mb-6">
+            <div className="mt-6 grid grid-cols-1 gap-3 mb-6">
               {donationTiers.map((tier) => (
-                <div key={tier.label} className="rounded-xl bg-white/15 p-4">
-                  <p className="text-base font-semibold">{tier.label}</p>
-                  <p className="text-2xl font-black mt-1">{tier.amount}</p>
-                  <p className="text-sm text-white/85 mt-2">{tier.note}</p>
+                <div key={tier.label} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
+                  <p className="text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">{tier.label}</p>
+                  <p className="mt-2 text-2xl font-black text-white">{tier.amount}</p>
+                  <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{tier.note}</p>
                 </div>
               ))}
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link to={ROUTES.donate} className="inline-block bg-white text-[#cf4f00] font-semibold px-6 py-3 rounded-xl">
+              <Link to={ROUTES.donate} className="inline-flex rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]">
                 Donate Now
               </Link>
-              <Link to={ROUTES.involved.volunteer} className="inline-block bg-[#11283a] text-white font-semibold px-6 py-3 rounded-xl">
+              <Link to={ROUTES.involved.volunteer} className="inline-flex rounded-xl bg-[#0d6179] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#18495e]">
                 Join Volunteer Team
               </Link>
             </div>
@@ -2608,34 +2599,26 @@ export const EventsBhagwatKathaPage = memo(function EventsBhagwatKathaPage() {
         </div>
       </section>
 
-      <section className="bg-[#0a2534] py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-10">Mahotsav Schedule Snapshot</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className={EVENT_SEVA_SECTION_CLASS}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Mahotsav Schedule Snapshot</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Day-wise sessions and devotional flow</h2>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
             {visibleSchedule.map((session) => {
-              const isLive = currentTime >= session.start && currentTime <= session.end;
-              const isNext = !isLive && nextSession?.id === session.id;
-
               return (
                 <div
                   key={session.id}
-                  className={`rounded-2xl border p-6 ${
-                    isLive
-                      ? "border-[#ffb06a] bg-[#194257]"
-                      : isNext
-                        ? "border-[#0d8f91] bg-[#17384b]"
-                        : "border-white/10 bg-[#143446]"
-                  }`}
+                  className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm"
                 >
                   <div className="flex items-center justify-between gap-3">
-                    <p className="text-[#ffb06a] text-sm uppercase tracking-wide">{session.dayLabel}</p>
-                    <span className={`rounded-full px-3 py-1 text-xs font-semibold ${isLive ? "bg-[#ffb06a] text-[#17384b]" : isNext ? "bg-[#0d8f91] text-white" : "bg-white/10 text-[#d4e1e8]"}`}>
-                      {isLive ? "Live" : isNext ? "Next" : session.slot}
+                    <p className="text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">{session.dayLabel}</p>
+                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#dce7ec]">
+                      {session.slot}
                     </span>
                   </div>
-                  <h3 className="text-white text-2xl font-black mt-3">{session.title}</h3>
-                  <p className="text-[#d4e1e8] text-sm mt-2">{session.slot}</p>
-                  <p className="text-[#d4e1e8] text-sm mt-1">
+                  <h3 className={`mt-3 ${SEVA_CARD_TITLE_CLASS}`}>{session.title}</h3>
+                  <p className="mt-3 text-sm font-semibold uppercase tracking-[0.12em] text-[#dce7ec]">{session.slot}</p>
+                  <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>
                     {session.start.toLocaleDateString("en-IN", { day: "2-digit", month: "short" })} |{" "}
                     {session.start.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
                   </p>
@@ -2646,11 +2629,12 @@ export const EventsBhagwatKathaPage = memo(function EventsBhagwatKathaPage() {
         </div>
       </section>
 
-      <section className="bg-gradient-to-r from-[#0b2130] via-[#0d2f43] to-[#0b2130] py-16">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="rounded-3xl border border-white/10 bg-[#1b3646]/80 p-8">
-            <h3 className="text-4xl font-black text-white mb-5">Operational Support Tracks</h3>
-            <ul className="space-y-3 text-[#d4e1e8] text-xl">
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className={`${EVENT_SEVA_SECTION_CLASS} grid grid-cols-1 lg:grid-cols-2 gap-6`}>
+          <div className={EVENT_SEVA_DETAIL_CARD_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Operational Support Tracks</p>
+            <h3 className={SEVA_SECTION_HEADING_CLASS}>How seva teams can contribute during the mahotsav</h3>
+            <ul className={`mt-5 space-y-3 ${SEVA_BODY_TEXT_CLASS}`}>
               {supportTracks.map((line) => (
                 <li key={line} className="flex gap-3">
                   <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#ffb06a]" />
@@ -2660,45 +2644,48 @@ export const EventsBhagwatKathaPage = memo(function EventsBhagwatKathaPage() {
             </ul>
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-[#17384b] p-8">
-            <h3 className="text-4xl font-black text-white mb-5">Realtime Event Logic</h3>
-            <div className="space-y-4 text-[#d4e1e8] text-lg">
+          <div className={EVENT_SEVA_DETAIL_CARD_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Mahotsav Participation</p>
+            <h3 className={SEVA_SECTION_HEADING_CLASS}>A welcoming and disciplined experience for all devotees</h3>
+            <div className={`mt-5 space-y-4 ${SEVA_BODY_TEXT_CLASS}`}>
               <p>
-                The page checks current time against the mahotsav session schedule and updates status cards automatically.
+                The mahotsav is organized so families, devotees, and volunteers can participate in katha with peace, order, and devotional focus.
               </p>
               <p>
-                Devotees and volunteers can quickly see countdown, live session state, next activation, and support focus.
+                Seating guidance, darshan flow, hospitality seva, and prayerful discipline help create a calm atmosphere throughout the gathering.
               </p>
               <p>
-                This structure is ready for a future backend upgrade where live attendance, queue status, and broadcast health can plug in.
+                Every session is designed to support scripture listening, devotional music, and respectful participation across the full event.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-[#0a2534] py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-10">Devotee Experience</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <section className="max-w-7xl mx-auto px-4 py-10">
+        <div className={EVENT_SEVA_SECTION_CLASS}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Devotee Experience</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Feedback from volunteers, families, and online viewers</h2>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
             {testimonials.map((item) => (
-              <div key={item.name} className="rounded-2xl border border-white/10 bg-[#17384b] p-6">
-                <p className="text-[#dbe7ee] text-xl leading-relaxed">"{item.quote}"</p>
-                <p className="text-[#ffb06a] font-semibold text-lg mt-4">{item.name}</p>
+              <div key={item.name} className={EVENT_SEVA_DETAIL_CARD_CLASS}>
+                <p className={SEVA_BODY_TEXT_CLASS}>"{item.quote}"</p>
+                <p className="mt-4 text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">{item.name}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-gradient-to-r from-[#0b2130] via-[#0d2f43] to-[#0b2130] py-16">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-8">Frequently Asked Questions</h2>
-          <div className="space-y-3">
+      <section className="max-w-5xl mx-auto px-4 py-10">
+        <div className={EVENT_SEVA_SECTION_CLASS}>
+          <p className={SEVA_SECTION_LABEL_CLASS}>Frequently Asked Questions</p>
+          <h2 className={SEVA_SECTION_HEADING_CLASS}>Helpful answers for donors, devotees, and seva teams</h2>
+          <div className="mt-8 space-y-3">
             {faqs.map((item) => (
-              <details key={item.q} className="rounded-xl border border-white/10 bg-[#163548] p-5">
-                <summary className="cursor-pointer text-white text-xl font-semibold">{item.q}</summary>
-                <p className="text-[#d4e1e8] text-lg mt-3">{item.a}</p>
+              <details key={item.q} className="rounded-xl border border-white/10 bg-[#0c5871] p-5">
+                <summary className="cursor-pointer text-lg font-black text-white md:text-xl">{item.q}</summary>
+                <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.a}</p>
               </details>
             ))}
           </div>
@@ -2926,14 +2913,11 @@ export const EventsFestivalsPage = memo(function EventsFestivalsPage() {
   return (
     <EventShowcasePage
       title="Festivals & Celebrations"
-      subtitle="The annual Swaminarayan Bhagwat Dham devotional festival cycle in one place"
+      subtitle="Tradition, devotion, and joy, celebrated together"
       backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772913533/festival_axzy0v.jpg"
       metaDescription="Annual Swaminarayan Bhagwat Dham festival calendar, utsav planning, seva participation, and celebration support."
       aboutTitle="Annual Festival Vision"
-      aboutParagraphs={[
-        "This section now holds a proper annual festival calendar for Swaminarayan Bhagwat Dham, instead of placeholder text.",
-        "The page is structured to support planning, participation, seva, decoration, prasad, and large-scale celebratory discipline across the year.",
-      ]}
+      aboutParagraphs={[]}
       highlights={[
         { title: "Annual Utsavs", value: "12+", note: "Major devotional celebrations across the year" },
         { title: "Festival Volunteers", value: "700+", note: "Decoration, prasad, hospitality, and discipline teams" },
@@ -2958,6 +2942,9 @@ export const EventsFestivalsPage = memo(function EventsFestivalsPage() {
       ]}
       primaryCta="Sponsor Festival"
       secondaryCta="Join Festival Seva"
+      gauSevaStyle
+      hideHighlightValues
+      supportIntro={null}
       testimonials={[
         { name: "Festival Volunteer", quote: "A well-planned utsav turns devotion into a graceful and joyful experience for every family." },
         { name: "Temple Visitor", quote: "The calendar-based preparation helps us plan our family participation in advance." },
@@ -2969,18 +2956,13 @@ export const EventsFestivalsPage = memo(function EventsFestivalsPage() {
         { q: "Can I sponsor a festival day or major utsav?", a: "Yes. Event-level and season-level support options are included in the page structure." },
       ]}
       extraSection={
-        <section className="bg-[#0a2534] py-16">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(135deg,#13354a_0%,#102d40_45%,#0b2230_100%)] p-6 md:p-10 shadow-[0_24px_60px_rgba(4,18,30,0.3)]">
+        <section className="max-w-7xl mx-auto px-4 py-10">
+          <div className={EVENT_SEVA_SECTION_CLASS}>
+            <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-6 md:p-8 shadow-sm">
               <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-6 items-start">
-                <div className="rounded-[28px] border border-white/10 bg-[#102c3d] p-6 md:p-8">
-                  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#ffb06a]">Year 2026</p>
-                  <h2 className="mt-3 text-4xl md:text-5xl font-black text-white">Annual Swaminarayan Bhagwat Dham Festival Calendar</h2>
-                  <p className="mt-5 text-[#d7e3ea] text-lg leading-8">
-                    This is now a full year-wise festival planning board with exact dates, tithi information, and direct
-                    participation actions. Families can plan darshan, volunteers can choose seva, and donors can support
-                    each utsav individually.
-                  </p>
+                <div className={EVENT_SEVA_DETAIL_CARD_CLASS}>
+                  <p className={SEVA_SECTION_LABEL_CLASS}>Year 2026</p>
+                  <h2 className={SEVA_SECTION_HEADING_CLASS}>Annual Swaminarayan Bhagwat Dham Festival Calendar</h2>
                   <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {[
                       { label: "Festival Days", value: `${annualFestivals.length}` },
@@ -2988,22 +2970,22 @@ export const EventsFestivalsPage = memo(function EventsFestivalsPage() {
                       { label: "Temple Support", value: "Join + Donate" },
                       { label: "Planning Style", value: "Date-Wise" },
                     ].map((item) => (
-                      <div key={item.label} className="rounded-2xl bg-white/6 p-4">
-                        <p className="text-xs uppercase tracking-wide text-[#ffb06a]">{item.label}</p>
-                        <p className="mt-1 text-2xl font-black text-white">{item.value}</p>
+                      <div key={item.label} className="rounded-2xl border border-white/10 bg-[#0b2230] p-4">
+                        <p className="text-[20px] font-black uppercase tracking-wide text-[#ef9a1e] md:text-[24px]">{item.label}</p>
+                        <p className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.value}</p>
                       </div>
                     ))}
                   </div>
                   <div className="mt-8 flex flex-wrap gap-3">
                     <Link
                       to={ROUTES.involved.volunteer}
-                      className="inline-flex items-center bg-white text-[#0f5a98] hover:bg-[#eef4ff] font-semibold px-6 py-3 rounded-lg transition-colors"
+                      className="inline-flex rounded-xl bg-[#0d6179] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#18495e]"
                     >
                       Join Festival Seva
                     </Link>
                     <Link
                       to={ROUTES.donate}
-                      className="inline-flex items-center bg-[#ff8a00] hover:bg-[#e97b00] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+                      className="inline-flex rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
                     >
                       Donate for Festivals
                     </Link>
@@ -3025,9 +3007,9 @@ export const EventsFestivalsPage = memo(function EventsFestivalsPage() {
                       desc: "Support diya, flowers, prasad, mandir decor, and festival arrangements through donation.",
                     },
                   ].map((item) => (
-                    <div key={item.title} className="rounded-2xl border border-white/10 bg-[#17384b] p-5">
-                      <h3 className="text-white text-xl font-black">{item.title}</h3>
-                      <p className="mt-3 text-[#d4e1e8] leading-7">{item.desc}</p>
+                    <div key={item.title} className={EVENT_SEVA_DETAIL_CARD_CLASS}>
+                      <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
+                      <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -3038,34 +3020,34 @@ export const EventsFestivalsPage = memo(function EventsFestivalsPage() {
               {annualFestivals.map((festival) => (
                 <div
                   key={`${festival.dayDate}-${festival.title}`}
-                  className="group rounded-[26px] border border-white/10 bg-[linear-gradient(180deg,#17384b_0%,#102c3d_100%)] p-6 shadow-[0_18px_40px_rgba(5,21,35,0.24)] transition hover:-translate-y-1 hover:border-[#ffb06a]/35"
+                  className="group rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="text-[#ffb06a] text-xs uppercase tracking-[0.22em]">{festival.month}</p>
-                      <p className="mt-2 text-lg font-bold text-white">{festival.dayDate}</p>
+                      <p className="text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">{festival.month}</p>
+                      <p className="mt-2 text-[14px] font-black text-white md:text-[20px]">{festival.dayDate}</p>
                     </div>
-                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#d4e1e8]">
+                    <span className="rounded-full bg-[#ef9a1e]/15 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ef9a1e]">
                       2026
                     </span>
                   </div>
 
-                  <div className="mt-5 rounded-2xl bg-white/5 p-4">
-                    <p className="text-sm font-semibold uppercase tracking-wide text-[#8ec8ff]">{festival.lunar}</p>
-                    <h3 className="mt-3 text-white text-2xl font-black leading-tight">{festival.title}</h3>
-                    <p className="mt-3 text-[#d4e1e8] text-lg leading-7">{festival.focus}</p>
+                  <div className="mt-5 rounded-2xl border border-white/10 bg-[#0b2230] p-4">
+                    <p className="text-sm font-semibold uppercase tracking-wide text-[#dce7ec]">{festival.lunar}</p>
+                    <h3 className={`mt-3 ${SEVA_CARD_TITLE_CLASS}`}>{festival.title}</h3>
+                    <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{festival.focus}</p>
                   </div>
 
                   <div className="mt-6 flex flex-wrap gap-3">
                     <Link
                       to={ROUTES.involved.volunteer}
-                      className="inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-bold text-[#0f5a98] transition hover:bg-[#eef4ff]"
+                      className="inline-flex items-center justify-center rounded-xl bg-[#0d6179] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#18495e]"
                     >
                       Join Us
                     </Link>
                     <Link
                       to={ROUTES.donate}
-                      className="inline-flex items-center justify-center rounded-xl bg-[#ff8a00] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#e97b00]"
+                      className="inline-flex items-center justify-center rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
                     >
                       Donate for Puja
                     </Link>
@@ -3089,9 +3071,9 @@ export const EventsFestivalsPage = memo(function EventsFestivalsPage() {
                   desc: "The donate action on every festival card makes puja, decor, prasad, diya, and celebration support easier to organize year-round.",
                 },
               ].map((item) => (
-                <div key={item.title} className="rounded-2xl border border-white/10 bg-[#143446] p-6">
-                  <h3 className="text-white text-2xl font-black">{item.title}</h3>
-                  <p className="text-[#d4e1e8] mt-3 text-lg">{item.desc}</p>
+                <div key={item.title} className={EVENT_SEVA_DETAIL_CARD_CLASS}>
+                  <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
+                  <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -3213,14 +3195,11 @@ export const EventsYouthProgramsPage = memo(function EventsYouthProgramsPage() {
   return (
     <EventShowcasePage
       title="Youth Programs"
-      subtitle="Youth engagement through values, leadership, culture, and guided seva participation"
+      subtitle="Inspiring youth to lead with purpose"
       backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772913533/youth_xj81l3.jpg"
       metaDescription="Youth event programs, Bal Sanskar, Yuva leadership, cultural growth, and community seva development."
       aboutTitle="About Youth Programs"
-      aboutParagraphs={[
-        "Youth Programs are designed to help children and young adults grow in values, confidence, culture, and service through structured engagement.",
-        "This page now reflects youth-specific event design rather than redirecting to a learning page that does not match the event route.",
-      ]}
+      aboutParagraphs={[]}
       highlights={[
         { title: "Youth Participants", value: "4,000+", note: "Children and youth engaged through annual programs" },
         { title: "Mentor Team", value: "160+", note: "Guides for discipline, leadership, and culture" },
@@ -3245,6 +3224,8 @@ export const EventsYouthProgramsPage = memo(function EventsYouthProgramsPage() {
       ]}
       primaryCta="Support Youth Program"
       secondaryCta="Join Youth Seva"
+      gauSevaStyle
+      hideHighlightValues
       testimonials={[
         { name: "Youth Mentor", quote: "Young people flourish when programs combine responsibility, values, and expression." },
         { name: "Parent Participant", quote: "This kind of structured youth event gives our child both confidence and direction." },
@@ -3256,14 +3237,15 @@ export const EventsYouthProgramsPage = memo(function EventsYouthProgramsPage() {
         { q: "Can I sponsor a youth workshop or annual track?", a: "Yes. Support can be directed to single sessions, workshops, or recurring youth initiatives." },
       ]}
       extraSection={
-        <section className="bg-[#0a2534] py-16">
-          <div className="max-w-7xl mx-auto px-4">
-            <h2 className="text-center text-5xl font-black text-[#ffb06a] mb-10">Youth Growth Tracks</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+        <section className="max-w-7xl mx-auto px-4 py-10">
+          <div className={EVENT_SEVA_SECTION_CLASS}>
+            <p className={SEVA_SECTION_LABEL_CLASS}>Youth Growth Tracks</p>
+            <h2 className={SEVA_SECTION_HEADING_CLASS}>Structured pathways for values, leadership, and seva</h2>
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
               {youthTracks.map((track) => (
-                <div key={track.title} className="rounded-2xl border border-white/10 bg-[#17384b] p-6">
-                  <h3 className="text-white text-2xl font-black">{track.title}</h3>
-                  <p className="text-[#d4e1e8] mt-3 text-lg">{track.focus}</p>
+                <div key={track.title} className={EVENT_SEVA_DETAIL_CARD_CLASS}>
+                  <h3 className={SEVA_CARD_TITLE_CLASS}>{track.title}</h3>
+                  <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{track.focus}</p>
                 </div>
               ))}
             </div>
@@ -4174,42 +4156,77 @@ export const KnowledgeTodayQuotePage = memo(function KnowledgeTodayQuotePage() {
 
   usePageMeta(
     "Today Quote",
-    "Minimal daily quote view focused on the current spiritual reflection for devotees.",
+    "A devotional daily quote view with an immersive featured reflection design for devotees.",
   );
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(180deg,#f8fbff_0%,#f4f8fc_40%,#fff9ef_100%)] px-4 py-12 md:py-20">
-      <div className="mx-auto flex min-h-[70vh] max-w-5xl items-center justify-center">
-        <div className="w-full rounded-[34px] border border-[#d8e5ef] bg-white px-6 py-10 text-center shadow-[0_24px_60px_rgba(13,59,102,0.12)] md:px-12 md:py-16">
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#c47a28]">Today&apos;s Quote</p>
-          <h1 className="mt-4 text-3xl font-black text-[#103b66] md:text-5xl">Swaminarayan Bhagwan</h1>
-          <p className="mx-auto mt-8 max-w-3xl text-3xl font-semibold leading-relaxed text-[#17384b] md:text-5xl">
-            &quot;{featuredQuote?.text || "Swaminarayan Bhagwan"}&quot;
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-sm">
-            <span className="rounded-full bg-[#eef5fb] px-4 py-2 font-semibold text-[#17384b]">
-              {featuredQuote?.theme || "Daily Reflection"}
-            </span>
-            <span className="rounded-full bg-[#fff3e2] px-4 py-2 font-semibold text-[#9a5d13]">
-              {featuredQuote?.publishDate || today}
-            </span>
-            <span className="rounded-full bg-[#eef5fb] px-4 py-2 font-semibold text-[#17384b]">
-              {featuredQuote?.author || "Bhagwat Heritage Service Foundation Trust"}
-            </span>
-          </div>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              to={ROUTES.knowledge.dailyQuotes}
-              className="inline-flex items-center rounded-2xl bg-[#103b66] px-6 py-3 font-semibold text-white transition hover:bg-[#0c2f51]"
-            >
-              Back to Quotes Page
-            </Link>
-            <Link
-              to={ROUTES.home}
-              className="inline-flex items-center rounded-2xl border border-[#d5e1eb] bg-white px-6 py-3 font-semibold text-[#103b66] transition hover:bg-[#f7fbff]"
-            >
-              Go Home
-            </Link>
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,#18495e_0%,#0b2230_46%,#071821_100%)] px-4 py-10 md:py-16">
+      <div className="mx-auto flex min-h-[78vh] max-w-6xl items-center justify-center">
+        <div className="relative w-full overflow-hidden rounded-[36px] border border-white/10 bg-[#0d6179] shadow-[0_30px_90px_rgba(0,0,0,0.35)]">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage:
+                "url(https://res.cloudinary.com/der8zinu8/image/upload/v1774775572/quotes_kdamdm.jpg)",
+            }}
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(7,24,33,0.88)_8%,rgba(13,97,121,0.78)_48%,rgba(239,154,30,0.18)_100%)]" />
+          <div className="absolute -left-16 top-10 h-40 w-40 rounded-full bg-[#ef9a1e]/20 blur-3xl" />
+          <div className="absolute -right-12 bottom-10 h-44 w-44 rounded-full bg-white/10 blur-3xl" />
+
+          <div className="relative grid min-h-[640px] grid-cols-1 gap-8 px-6 py-8 md:px-10 md:py-10 lg:grid-cols-[0.8fr_1.2fr] lg:px-14 lg:py-14">
+            <div className="flex flex-col justify-between rounded-[28px] border border-white/10 bg-[#082331]/55 p-6 backdrop-blur-sm md:p-8">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[#ef9a1e]">Today&apos;s Quote</p>
+                <h1 className="mt-4 text-3xl font-black text-white md:text-5xl">Swaminarayan Bhagwan</h1>
+                <p className="mt-5 max-w-md text-base leading-7 text-[#dce7ec] md:text-lg">
+                  A daily remembrance for a peaceful mind, a softer heart, and a steadier connection with Bhagwan.
+                </p>
+              </div>
+
+              <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                <div className="rounded-[22px] border border-white/10 bg-white/10 px-4 py-4">
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#ef9a1e]">Theme</p>
+                  <p className="mt-2 text-lg font-semibold text-white">{featuredQuote?.theme || "Daily Reflection"}</p>
+                </div>
+                <div className="rounded-[22px] border border-white/10 bg-white/10 px-4 py-4">
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#ef9a1e]">Date</p>
+                  <p className="mt-2 text-lg font-semibold text-white">{featuredQuote?.publishDate || today}</p>
+                </div>
+                <div className="rounded-[22px] border border-white/10 bg-white/10 px-4 py-4">
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-[#ef9a1e]">Published By</p>
+                  <p className="mt-2 text-lg font-semibold text-white">
+                    {featuredQuote?.author || "Bhagwat Heritage Service Foundation Trust"}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-between rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0.06))] p-6 backdrop-blur-sm md:p-8 lg:p-10">
+              <div>
+                <div className="inline-flex rounded-full border border-[#ef9a1e]/40 bg-[#ef9a1e]/12 px-4 py-2 text-xs font-black uppercase tracking-[0.24em] text-[#ffd7a1]">
+                  Divine Reflection
+                </div>
+                <p className="mt-8 text-4xl font-semibold leading-[1.45] text-white md:text-5xl md:leading-[1.35] lg:text-[3.65rem]">
+                  &quot;{featuredQuote?.text || "Swaminarayan Bhagwan"}&quot;
+                </p>
+              </div>
+
+              <div className="mt-10 flex flex-wrap items-center gap-3">
+                <Link
+                  to={ROUTES.knowledge.dailyQuotes}
+                  className="inline-flex items-center rounded-2xl bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition hover:bg-[#de930a]"
+                >
+                  Back to Quotes Page
+                </Link>
+                <Link
+                  to={ROUTES.home}
+                  className="inline-flex items-center rounded-2xl border border-white/15 bg-white/10 px-6 py-3 font-semibold text-white transition hover:bg-white/15"
+                >
+                  Go Home
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -5425,7 +5442,7 @@ export const MediaVideoPlayerPage = memo(function MediaVideoPlayerPage() {
                   <img src={item.image} alt={item.title} className="h-20 w-28 rounded-xl object-cover" />
                   <div className="min-w-0">
                     <p className="text-xs font-semibold uppercase tracking-wide text-white/75">
-                      {item.category} · {item.duration}
+                      {item.category} ┬╖ {item.duration}
                     </p>
                     <h3 className="mt-1 truncate text-lg font-black text-white">{item.title}</h3>
                     <p className="mt-1 text-sm text-white/85">{item.note}</p>
@@ -7616,3 +7633,4 @@ export const NotFoundPage = memo(function NotFoundPage() {
     </div>
   );
 });
+
