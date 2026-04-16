@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { EXTERNAL_RAZORPAY_DONATE_URL, ROUTES } from "../../app/routes/routes";
 import { usePageMeta } from "../../hooks/usePageMeta";
-
 const HOMEPAGE_BANNER_SRC = "/images/homepage/HomePageBanner.jpeg";
 const UPCOMING_EVENT_IMAGE_LEFT = "https://res.cloudinary.com/der8zinu8/image/upload/v1774879635/u0_lxrinw.jpg";
 const UPCOMING_EVENT_IMAGE_RIGHT = "https://res.cloudinary.com/der8zinu8/image/upload/v1774879636/u1_eobmdm.jpg";
