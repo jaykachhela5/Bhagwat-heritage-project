@@ -78,12 +78,14 @@ type VideoGalleryCategory = "Katha" | "Seva" | "Festival" | "Youth";
 type VideoGalleryItem = {
   slug: string;
   category: VideoGalleryCategory;
+  theme: "Gita" | "Avatar Stories" | "Sacred Places" | "Practices" | "Rituals" | "Teachings" | "Heritage";
   title: string;
   duration: string;
   image: string;
   note: string;
   summary: string;
   videoUrl: string;
+  views: string;
 };
 
 const DAILY_QUOTE_STORAGE_KEY = "bh_daily_spiritual_quotes";
@@ -122,62 +124,158 @@ const MEDIA_VIDEO_GALLERY_ITEMS: VideoGalleryItem[] = [
   {
     slug: "shreemad-bhagwat-katha-day-1",
     category: "Katha",
-    title: "Bhagwat Heritage Video 1",
-    duration: "YouTube",
-    image: "/images/kathapravachan.png",
-    note: "Featured katha and devotional discourse",
-    summary: "Featured devotional video from the Bhagwat Heritage YouTube collection, available in the dedicated player page.",
+    theme: "Teachings",
+    title: "Bhagwat Katha: Eternal Leela of Sri Krishna",
+    duration: "8:15",
+    image: "/images/kathaimage.webp",
+    note: "Bhagwat Katha discourse on Sri Krishna's leela, bhakti, and scripture reflection.",
+    summary: "A satsang-centered Bhagwat Katha session introducing Krishna leela, devotion, and scripture-linked reflection for regular listeners.",
     videoUrl: "https://www.youtube.com/watch?v=Z-zaUl-uazk",
+    views: "18.4K",
   },
   {
     slug: "bhagwat-pravachan-clip-series",
     category: "Katha",
-    title: "Bhagwat Heritage Video 2",
-    duration: "YouTube",
-    image: "/images/kathapravachan.png",
-    note: "Pravachan and spiritual guidance session",
-    summary: "A second featured video from the trust collection for satsang listening and reflection.",
+    theme: "Teachings",
+    title: "Bhagwat Katha: Introduction to Shrimad Bhagavatam",
+    duration: "12:20",
+    image: "/images/katha4.jfif",
+    note: "Pravachan introducing Shrimad Bhagavatam listening with spiritual context.",
+    summary: "A guided Bhagwat Katha introduction to Shrimad Bhagavatam for devotees who want structured listening and clear spiritual orientation.",
     videoUrl: "https://www.youtube.com/watch?v=cOFNyxt4MhM",
+    views: "12.8K",
   },
   {
     slug: "gau-seva-field-documentary",
     category: "Seva",
-    title: "Bhagwat Heritage Video 3",
-    duration: "YouTube",
-    image: "/images/kathapravachan.png",
-    note: "Seva-related visual content and devotional outreach",
-    summary: "A featured media selection from the trust's YouTube-linked seva and outreach content.",
+    theme: "Practices",
+    title: "Spiritual Pravachan: Govardhan Leela Explained",
+    duration: "12:20",
+    image: "/images/katha7.jfif",
+    note: "A spiritual pravachan on protection, surrender, and remembrance.",
+    summary: "This devotional spiritual talk connects Govardhan leela with faith, surrender, and practical spiritual discipline in daily life.",
     videoUrl: "https://www.youtube.com/watch?v=wrg8NMrPwOs",
+    views: "10.1K",
   },
   {
     slug: "festival-darshan-atmosphere-reel",
     category: "Festival",
-    title: "Bhagwat Heritage Video 4",
-    duration: "YouTube",
-    image: "/images/kathapravachan.png",
-    note: "Festival and darshan-focused featured video",
-    summary: "A celebration-oriented featured video from the Bhagwat Heritage media collection.",
+    theme: "Heritage",
+    title: "Cultural Heritage Journey Through Vrindavan",
+    duration: "10:05",
+    image: "/images/katha5.jfif",
+    note: "A cultural heritage tour through sacred devotional geography.",
+    summary: "A cultural heritage-focused video exploring Vrindavan atmosphere, pilgrimage value, and visual devotion rooted in sacred memory.",
     videoUrl: "https://www.youtube.com/watch?v=ZYX6zpiY-6w",
+    views: "14.7K",
   },
   {
     slug: "pathshala-youth-session-recap",
     category: "Youth",
-    title: "Bhagwat Heritage Video 5",
-    duration: "YouTube",
-    image: "/images/kathapravachan.png",
-    note: "Youth and spiritual participation video",
-    summary: "A youth-facing trust video designed for devotional engagement and community connection.",
+    theme: "Teachings",
+    title: "Youth Sanskar Session: Creative Values and Discipline",
+    duration: "10:05",
+    image: "/images/manish.PNG",
+    note: "Youth-friendly teaching content combining discipline, guidance, and growth.",
+    summary: "A youth-oriented sanskar session designed to connect modern learning with spiritual grounding, discipline, and mindful progress.",
     videoUrl: "https://www.youtube.com/watch?v=oW_Z8hICrHo",
+    views: "6.9K",
   },
   {
     slug: "aarti-prasad-highlight-film",
     category: "Festival",
-    title: "Bhagwat Heritage Video 6",
-    duration: "YouTube",
-    image: "/images/kathapravachan.png",
-    note: "Aarti, temple atmosphere, and devotional highlight video",
-    summary: "A sixth featured trust video from the shared YouTube set for devotees to watch directly in the player page.",
+    theme: "Avatar Stories",
+    title: "Spiritual Katha: Prahlad and Narasimha",
+    duration: "8:16",
+    image: "/images/spiritual1.png",
+    note: "Avatar katha focused on protection, devotion, and courage.",
+    summary: "A spiritual storytelling video reflecting on Prahlad bhakti, Narasimha protection, and unwavering faith.",
     videoUrl: "https://www.youtube.com/watch?v=Rq5iBnW8UEQ",
+    views: "22.4K",
+  },
+  {
+    slug: "dasha-avatar-ten-divine-forms",
+    category: "Katha",
+    theme: "Avatar Stories",
+    title: "Bhagwat Katha: Dasha Avatar Divine Forms",
+    duration: "8:15",
+    image: "/images/katha6.jfif",
+    note: "A concise Bhagwat Katha overview of divine manifestations and dharmic meaning.",
+    summary: "This video introduces the ten avatar forms and their place in devotional understanding and dharma restoration.",
+    videoUrl: "https://www.youtube.com/watch?v=Z-zaUl-uazk",
+    views: "17.2K",
+  },
+  {
+    slug: "gitas-essence-in-bhagavatam",
+    category: "Katha",
+    theme: "Gita",
+    title: "Gita Wisdom in Bhagwat Katha",
+    duration: "15:30",
+    image: "/images/ram1.webp",
+    note: "A teaching session connecting Gita wisdom with Bhagwat Katha listening.",
+    summary: "A deeper spiritual talk showing how Gita themes of duty, surrender, and wisdom appear in Bhagavatam-centered devotion.",
+    videoUrl: "https://www.youtube.com/watch?v=cOFNyxt4MhM",
+    views: "11.6K",
+  },
+  {
+    slug: "discovering-dwarka-ancient-ruins",
+    category: "Festival",
+    theme: "Sacred Places",
+    title: "Sacred Dwarka Darshan and Cultural History",
+    duration: "10:05",
+    image: "/images/hanuman3.JPG",
+    note: "A sacred geography video with pilgrimage atmosphere and cultural memory.",
+    summary: "A cultural and spiritual exploration video showing Dwarka-linked imagery, sacred location value, and pilgrimage interest for devotees.",
+    videoUrl: "https://www.youtube.com/watch?v=ZYX6zpiY-6w",
+    views: "9.4K",
+  },
+  {
+    slug: "vedic-chants-and-stotras",
+    category: "Katha",
+    theme: "Rituals",
+    title: "Spiritual Chants, Stotras, and Daily Bhakti",
+    duration: "8:15",
+    image: "/images/swaminarayan.jpg",
+    note: "Chanting and recitation for prayerful listening and devotional rhythm.",
+    summary: "A chanting-focused spiritual media piece designed for calm repetition, remembrance, and prayer atmosphere.",
+    videoUrl: "https://www.youtube.com/watch?v=Z-zaUl-uazk",
+    views: "13.1K",
+  },
+  {
+    slug: "rasa-leela-divine-dance",
+    category: "Youth",
+    theme: "Practices",
+    title: "Cultural Rasa Leela and Devotional Dance",
+    duration: "8:15",
+    image: "/images/sanskriti.png",
+    note: "A cultural devotional story suited for younger audiences and family viewers.",
+    summary: "A graceful cultural presentation of rasa leela intended for devotional inspiration, youth engagement, and family viewing.",
+    videoUrl: "https://www.youtube.com/watch?v=oW_Z8hICrHo",
+    views: "15.8K",
+  },
+  {
+    slug: "architectural-marvels-of-bhakti",
+    category: "Festival",
+    theme: "Heritage",
+    title: "Cultural Architecture of Bhakti Heritage",
+    duration: "10:05",
+    image: "/images/hanuman4.JPG",
+    note: "Temple architecture, sacred design, and devotional public space.",
+    summary: "A visual cultural heritage feature exploring temple form, sacred architecture, and bhakti-centered public spiritual design.",
+    videoUrl: "https://www.youtube.com/watch?v=Rq5iBnW8UEQ",
+    views: "8.7K",
+  },
+  {
+    slug: "festivals-of-bhagwat-heritage",
+    category: "Festival",
+    theme: "Heritage",
+    title: "Social and Cultural Festivals of Bhagwat Heritage",
+    duration: "10:05",
+    image: "/images/sanskriti (2).png",
+    note: "Festival color, devotional celebration, and community participation.",
+    summary: "A social and cultural festival highlight video capturing celebration mood, family participation, and devotional togetherness across trust events.",
+    videoUrl: "https://www.youtube.com/watch?v=ZYX6zpiY-6w",
+    views: "19.6K",
   },
 ];
 
@@ -5116,210 +5214,241 @@ export const MandirPilgrimagePage = memo(function MandirPilgrimagePage() {
 });
 
 export const MediaVideoGalleryPage = memo(function MediaVideoGalleryPage() {
-  const [activeTrack, setActiveTrack] = useState<"All" | VideoGalleryCategory>("All");
-
-  const videoTracks = [
-    {
-      category: "Katha" as const,
-      title: "Bhagwat Katha Recordings",
-      desc: "Full-length discourse recordings, themed katha clips, and chapter-based devotional listening paths.",
-      format: "Long-form and segmented playback",
-    },
-    {
-      category: "Seva" as const,
-      title: "Seva Documentary Clips",
-      desc: "Ground-level seva stories showing gau seva, relief response, medicine support, and volunteer effort in action.",
-      format: "Impact reels and field recaps",
-    },
-    {
-      category: "Festival" as const,
-      title: "Festival Celebration Videos",
-      desc: "Curated festival highlights with darshan atmosphere, decor, prasad movement, and family participation moments.",
-      format: "Event recap and devotional montage",
-    },
-    {
-      category: "Youth" as const,
-      title: "Youth and Sanskar Media",
-      desc: "Youth sessions, Pathshala moments, mentor interactions, and disciplined learning snapshots for younger audiences.",
-      format: "Youth-focused content stream",
-    },
-  ];
-
-  const visibleTracks = activeTrack === "All" ? videoTracks : videoTracks.filter((item) => item.category === activeTrack);
-
-  const visibleVideoGallery =
-    activeTrack === "All"
-      ? MEDIA_VIDEO_GALLERY_ITEMS
-      : MEDIA_VIDEO_GALLERY_ITEMS.filter((item) => item.category === activeTrack);
+  const [activeTheme, setActiveTheme] = useState<
+    "All" | "Gita" | "Avatar Stories" | "Sacred Places" | "Practices" | "Rituals" | "Teachings" | "Heritage"
+  >("All");
+  const [activeTopFilter, setActiveTopFilter] = useState<"All" | "Travel" | "Tech" | "Music">("All");
+  const [sortBy, setSortBy] = useState<"Newest" | "Popular" | "Trending">("Newest");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [featuredVideoSlug, setFeaturedVideoSlug] = useState(MEDIA_VIDEO_GALLERY_ITEMS[0]?.slug ?? "");
 
   usePageMeta(
     "Video Gallery",
     "Structured video gallery for katha recordings, seva recaps, festival media, and youth-focused devotional content.",
   );
 
+  const themeOptions = ["All", "Gita", "Avatar Stories", "Sacred Places", "Practices", "Rituals", "Teachings", "Heritage"] as const;
+  const topFilters = ["All", "Travel", "Tech", "Music"] as const;
+  const sortOptions = ["Newest", "Popular", "Trending"] as const;
+  const featuredPlaylists = MEDIA_VIDEO_GALLERY_ITEMS.slice(0, 3);
+
+  const filteredVideos = MEDIA_VIDEO_GALLERY_ITEMS.filter((item) => {
+    const matchesTheme = activeTheme === "All" ? true : item.theme === activeTheme;
+    const haystack = `${item.title} ${item.note} ${item.summary} ${item.theme} ${item.category}`.toLowerCase();
+    const matchesSearch = searchQuery.trim() ? haystack.includes(searchQuery.trim().toLowerCase()) : true;
+    const matchesTopFilter =
+      activeTopFilter === "All"
+        ? true
+        : activeTopFilter === "Travel"
+          ? item.theme === "Sacred Places" || item.theme === "Heritage"
+          : activeTopFilter === "Tech"
+            ? item.category === "Youth"
+            : item.category === "Festival" || item.category === "Katha";
+
+    return matchesTheme && matchesSearch && matchesTopFilter;
+  }).sort((a, b) => {
+    if (sortBy === "Popular") return Number.parseFloat(b.views) - Number.parseFloat(a.views);
+    if (sortBy === "Trending") return b.title.localeCompare(a.title);
+    return MEDIA_VIDEO_GALLERY_ITEMS.findIndex((item) => item.slug === a.slug) - MEDIA_VIDEO_GALLERY_ITEMS.findIndex((item) => item.slug === b.slug);
+  });
+
+  const featuredVideo =
+    filteredVideos.find((item) => item.slug === featuredVideoSlug) ??
+    filteredVideos[0] ??
+    MEDIA_VIDEO_GALLERY_ITEMS[0];
+
+  useEffect(() => {
+    if (!filteredVideos.some((item) => item.slug === featuredVideoSlug)) {
+      setFeaturedVideoSlug(filteredVideos[0]?.slug ?? MEDIA_VIDEO_GALLERY_ITEMS[0]?.slug ?? "");
+    }
+  }, [featuredVideoSlug, filteredVideos]);
+
   return (
-    <div className="min-h-screen bg-[#0b2230] py-10">
-      <div className="mx-auto max-w-7xl px-4">
-        <section className="rounded-[32px] border border-white/10 bg-[linear-gradient(135deg,#12354a_0%,#102d40_44%,#0b2230_100%)] p-6 md:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#ffb06a]">Media Gallery</p>
-          <h1 className="mt-3 text-3xl font-black text-white md:text-5xl">Video Gallery</h1>
-          <p className="mt-4 max-w-4xl text-lg leading-8 text-[#d4e1e8]">
-            This page is now structured as a real trust video hub with category-based navigation, content grouping, and a clearer viewing path for katha, seva, festivals, and youth media.
-          </p>
+    <div className="min-h-screen bg-[linear-gradient(135deg,#F4D06F_0%,#F47C20_45%,#2A9D8F_100%)] text-[#1B5E7A]">
+      <header className="border-b border-white/30 bg-[linear-gradient(180deg,rgba(244,208,111,0.35)_0%,rgba(244,124,32,0.32)_52%,rgba(42,157,143,0.34)_100%)] text-[#F7E8A4] shadow-[0_12px_30px_rgba(31,122,140,0.22)] backdrop-blur-sm">
+        <div className="mx-auto max-w-[1400px] px-6 pb-6 pt-2 text-center">
+          <h1 className="text-[34px] font-black uppercase tracking-wide text-[#F7E8A4] md:text-[56px]">
+            Bhagwat Heritage Video Gallery
+          </h1>
+        </div>
+      </header>
 
-          <div className="mt-8 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
-            {[
-              { title: "Video Streams", value: "4", note: "Katha, seva, festival, and youth media tracks" },
-              { title: "Content Style", value: "Mixed", note: "Long-form recordings and short recap formats" },
-              { title: "Library Logic", value: "Structured", note: "Category-first browsing instead of random uploads" },
-              { title: "Use Case", value: "Archive + Discovery", note: "Built for both repeat viewers and new visitors" },
-            ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#17384b] p-4">
-                <p className="text-xs uppercase tracking-wide text-[#ffb06a]">{item.title}</p>
-                <p className="mt-1 text-2xl font-black text-white">{item.value}</p>
-                <p className="mt-1 text-sm text-[#d4e1e8]">{item.note}</p>
+      <main className="mx-auto max-w-[1400px] px-4 py-6 md:px-6">
+        <div className="grid gap-5 lg:grid-cols-[210px_minmax(0,1fr)]">
+          <aside className="rounded-[18px] border border-white/35 bg-[linear-gradient(180deg,rgba(247,232,164,0.88)_0%,rgba(244,208,111,0.80)_100%)] p-3 text-[#1B5E7A] shadow-[0_18px_30px_rgba(31,122,140,0.16)] backdrop-blur-sm">
+            <div className="space-y-5">
+              <div>
+                <h3 className="text-[15px] font-black text-[#1B5E7A]">Browse Videos</h3>
               </div>
-            ))}
-          </div>
-        </section>
 
-        <section className="mt-8 rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Advanced Feature</p>
-              <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Content Grid Controller</h2>
-              <p className="mt-3 max-w-3xl text-lg leading-7 text-[#d4e1e8]">
-                Filter video content by purpose so devotees can find the right media quickly, whether they want satsang, recap, inspiration, or event memory.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              {(["All", "Katha", "Seva", "Festival", "Youth"] as const).map((track) => {
-                const active = track === activeTrack;
-                return (
-                  <button
-                    key={track}
-                    type="button"
-                    onClick={() => setActiveTrack(track)}
-                    className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                      active
-                        ? "bg-[#ffb06a] text-[#17384b]"
-                        : "border border-white/10 bg-[#17384b] text-[#d4e1e8] hover:border-[#ffb06a]/40"
-                    }`}
-                  >
-                    {track}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
-            {visibleTracks.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#17384b] p-6">
-                <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full bg-[#ffb06a] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#17384b]">
-                    {item.category}
-                  </span>
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#d4e1e8]">
-                    {item.format}
-                  </span>
+              <button
+                type="button"
+                onClick={() => setFeaturedVideoSlug(featuredVideo.slug)}
+                className="block w-full overflow-hidden rounded-[14px] border border-white/30 bg-[linear-gradient(180deg,rgba(42,157,143,0.78)_0%,rgba(31,122,140,0.82)_100%)] text-left shadow-[0_10px_20px_rgba(31,122,140,0.18)] transition duration-300 hover:-translate-y-1"
+              >
+                <img src={featuredVideo.image} alt={featuredVideo.title} className="h-[156px] w-full object-cover" />
+                <div className="bg-[rgba(27,94,122,0.92)] px-3 py-2 text-[#F7E8A4]">
+                  <p className="text-xs font-bold uppercase tracking-[0.16em]">Featured speaker</p>
+                  <p className="mt-1 line-clamp-1 text-sm font-semibold">{featuredVideo.title}</p>
                 </div>
-                <h3 className="mt-4 text-2xl font-black text-white">{item.title}</h3>
-                <p className="mt-3 text-lg leading-7 text-[#d4e1e8]">{item.desc}</p>
+              </button>
+
+              <div>
+                <div className="mt-3 flex gap-2">
+                  {featuredPlaylists.map((item) => (
+                    <button
+                      key={item.slug}
+                      type="button"
+                      onClick={() => setFeaturedVideoSlug(item.slug)}
+                      className={`overflow-hidden rounded-md shadow-sm transition duration-300 hover:-translate-y-0.5 ${
+                        item.slug === featuredVideo.slug ? "ring-2 ring-[#D32F2F]" : ""
+                      }`}
+                    >
+                      <img src={item.image} alt={item.title} className="h-10 w-14 object-cover" />
+                    </button>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
-        </section>
 
-        <section className="mt-8 rounded-[32px] border border-white/10 bg-[#153446] p-6 md:p-8">
-          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Gallery Section</p>
-              <h2 className="mt-2 text-3xl font-black text-white md:text-4xl">Video Gallery Grid</h2>
+              <div>
+                <p className="text-[15px] font-black">Categories</p>
+                <ul className="mt-3 space-y-1 text-[14px]">
+                  {themeOptions.map((item) => (
+                    <li key={item}>
+                      <button
+                        type="button"
+                        onClick={() => setActiveTheme(item)}
+                        className={`flex w-full items-center gap-2 rounded-[6px] px-2 py-1 text-left transition ${
+                          activeTheme === item ? "bg-[#1F7A8C] text-[#F7E8A4]" : "hover:bg-white/35"
+                        }`}
+                      >
+                        <span className="h-2 w-2 rounded-[2px] bg-[#D32F2F]" />
+                        <span>{item}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <p className="text-sm text-[#d4e1e8]">Showing {visibleVideoGallery.length} related videos</p>
-          </div>
+          </aside>
 
-          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {visibleVideoGallery.map((item) => (
-              <article key={item.title} className="overflow-hidden rounded-[24px] border border-white/10 bg-[#0f2c3d]">
-                <div className="relative h-56 overflow-hidden">
-                  <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#071b28] via-[#071b28]/15 to-transparent" />
-                  <span className="absolute left-4 top-4 rounded-full bg-[#ffb06a] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#17384b]">
-                    {item.category}
-                  </span>
-                  <span className="absolute right-4 top-4 rounded-full bg-black/45 px-3 py-1 text-xs font-bold text-white">
-                    {item.duration}
-                  </span>
-                  <div className="absolute inset-x-0 bottom-0 p-4">
-                    <h3 className="text-xl font-black text-white">{item.title}</h3>
-                    <p className="mt-2 text-sm text-white/85">{item.note}</p>
+          <section className="rounded-[20px] border border-white/35 bg-[linear-gradient(180deg,rgba(247,232,164,0.84)_0%,rgba(244,124,32,0.72)_55%,rgba(110,193,228,0.58)_100%)] p-4 shadow-[0_16px_28px_rgba(31,122,140,0.18)] backdrop-blur-sm md:p-5">
+            <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+              <div>
+                <h2 className="text-[32px] font-black uppercase text-[#1B5E7A] md:text-[46px]">Explore Our Videos</h2>
+                <div className="mt-3 flex flex-col gap-3 md:flex-row">
+                  <div>
+                    <p className="mb-1 text-sm font-black text-[#1B5E7A]">Categories</p>
+                    <div className="flex gap-2">
+                      {topFilters.map((item) => (
+                        <button
+                          key={item}
+                          type="button"
+                          onClick={() => setActiveTopFilter(item)}
+                          className={`rounded-md px-3 py-2 text-sm shadow-sm transition ${
+                            activeTopFilter === item ? "bg-[#1F7A8C] text-[#F7E8A4]" : "bg-white/90 text-[#1B5E7A] hover:bg-[#F7E8A4]"
+                          }`}
+                        >
+                          {item}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="mb-1 text-sm font-black text-[#1B5E7A]">Sort by</p>
+                    <div className="flex gap-2">
+                      {sortOptions.map((item) => (
+                        <button
+                          key={item}
+                          type="button"
+                          onClick={() => setSortBy(item)}
+                          className={`rounded-md px-3 py-2 text-sm shadow-sm transition ${
+                            sortBy === item ? "bg-[#1F7A8C] text-[#F7E8A4]" : "bg-white/90 text-[#1B5E7A] hover:bg-[#F7E8A4]"
+                          }`}
+                        >
+                          {item}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-center justify-between px-4 py-4">
-                  <span className="text-sm font-medium text-[#d4e1e8]">Devotional video archive</span>
-                  <Link
-                    to={`${ROUTES.media.videos}/${item.slug}`}
-                    className="rounded-xl bg-[#ff8a00] px-4 py-2 text-sm font-bold text-white"
-                  >
-                    Watch
-                  </Link>
-                </div>
-              </article>
+              </div>
+
+              <label className="w-full max-w-[300px] rounded-lg bg-white px-4 py-3 text-sm text-[#845329] shadow-sm">
+                <input
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder="Search Bhagwat heritage..."
+                  className="w-full bg-transparent text-[#1B5E7A] outline-none placeholder:text-[#2C6E8F]"
+                />
+              </label>
+            </div>
+
+            <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+              {filteredVideos.map((item, index) => (
+                <article
+                  key={item.slug}
+                  className="group"
+                  style={{ transitionDelay: `${index * 20}ms` }}
+                >
+                  <div className="overflow-hidden rounded-[12px] bg-[linear-gradient(180deg,rgba(42,157,143,0.72)_0%,rgba(31,122,140,0.84)_100%)] shadow-[0_10px_18px_rgba(31,122,140,0.16)] transition duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_16px_28px_rgba(31,122,140,0.24)]">
+                    <Link to={`${ROUTES.media.videos}/${item.slug}`} className="relative block">
+                      <img src={item.image} alt={item.title} className="h-[110px] w-full object-cover transition duration-300 group-hover:scale-[1.03]" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#F47C20] text-lg text-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] transition duration-300 group-hover:scale-110">
+                          ▶
+                        </div>
+                      </div>
+                      <span className="absolute left-2 top-2 rounded bg-[#D32F2F] px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
+                        {item.theme}
+                      </span>
+                      <span className="absolute bottom-2 right-2 rounded bg-black/75 px-2 py-1 text-[11px] font-semibold text-white">
+                        {item.duration}
+                      </span>
+                    </Link>
+                  </div>
+                  <h3 className="mt-2 line-clamp-2 text-[15px] font-black leading-5 text-[#1B5E7A]">{item.title}</h3>
+                  <p className="mt-1 text-xs text-[#2C6E8F]">◌ {item.duration} ◌ {item.views} Views</p>
+                  <div className="mt-3 flex gap-2">
+                    <Link
+                      to={`${ROUTES.media.videos}/${item.slug}`}
+                      className="inline-flex items-center rounded-md bg-[#1F7A8C] px-3 py-2 text-xs font-bold uppercase tracking-wide text-[#F7E8A4] transition hover:bg-[#2A9D8F]"
+                    >
+                      Watch
+                    </Link>
+                    <a
+                      href={item.videoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center rounded-md bg-white/90 px-3 py-2 text-xs font-bold uppercase tracking-wide text-[#1B5E7A] transition hover:bg-[#F7E8A4]"
+                    >
+                      YouTube
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer className="bg-[linear-gradient(180deg,rgba(31,122,140,0.88)_0%,rgba(42,157,143,0.92)_100%)] text-[#F7E8A4]">
+        <div className="mx-auto flex max-w-[1400px] flex-col gap-4 px-6 py-4 md:flex-row md:items-center md:justify-between">
+          <p className="text-sm">Copyright © 2026 Bhagwat Heritage. All rights reserved.</p>
+          <div className="flex items-center gap-4">
+            {["f", "t", "i"].map((item) => (
+              <div key={item} className="flex h-8 w-8 items-center justify-center rounded-full border border-[#F7E8A4]/40">
+                {item}
+              </div>
             ))}
           </div>
-        </section>
-
-        <section className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-[28px] border border-white/10 bg-[#153446] p-6 md:p-8">
-            <h2 className="text-3xl font-black text-white md:text-4xl">Video Workflows Added</h2>
-            <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-              {[
-                {
-                  title: "Program-Wise Video Mapping",
-                  desc: "Content can now be imagined and organized by program type instead of living in one flat gallery list.",
-                },
-                {
-                  title: "Watch Intent Clarity",
-                  desc: "Visitors can choose whether they want full discourse, short highlights, seva recaps, or youth-centered media.",
-                },
-                {
-                  title: "Archive Growth Logic",
-                  desc: "This structure supports future expansion without making the page feel cluttered as more videos are added.",
-                },
-                {
-                  title: "Cross-Link Readiness",
-                  desc: "The page now has a stronger base for linking events, satsang, seva pages, and future media uploads.",
-                },
-              ].map((item) => (
-                <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0f2c3d] p-5">
-                  <h3 className="text-xl font-black text-white">{item.title}</h3>
-                  <p className="mt-2 leading-7 text-[#d4e1e8]">{item.desc}</p>
-                </div>
-              ))}
-            </div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm">Newsletter</span>
+            <div className="rounded-md bg-white/20 px-4 py-2 text-sm text-[#F7E8A4]">Sign up to email</div>
           </div>
-
-          <div className="rounded-[28px] bg-gradient-to-br from-[#0f5a98] to-[#0d8f91] p-6 md:p-8 text-white">
-            <h2 className="text-3xl font-black md:text-4xl">Creative Gallery Sections</h2>
-            <div className="mt-6 space-y-4">
-              {[
-                "Featured discourse rail for current satsang season",
-                "Festival memory reels grouped by annual celebration cycle",
-                "Seva impact film section for volunteers and donors",
-                "Youth expression corner for Pathshala and mentoring content",
-              ].map((line, index) => (
-                <div key={line} className="rounded-2xl bg-white/12 p-4">
-                  <p className="text-sm font-bold uppercase tracking-wide text-white/75">Layer {index + 1}</p>
-                  <p className="mt-1 text-lg text-white/95">{line}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      </div>
+        </div>
+      </footer>
     </div>
   );
 });
@@ -5391,9 +5520,9 @@ export const MediaVideoPlayerPage = memo(function MediaVideoPlayerPage() {
         <section className="rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-4xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#ffb06a]">Now Playing</p>
-              <h1 className="mt-3 text-3xl font-black text-white md:text-5xl">{currentVideo.title}</h1>
-              <p className="mt-4 text-lg leading-8 text-[#d4e1e8]">{currentVideo.summary}</p>
+              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Now Playing</p>
+              <h1 className="mt-2 text-[16px] font-black text-white md:text-[22px]">{currentVideo.title}</h1>
+              <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{currentVideo.summary}</p>
             </div>
 
             <Link
@@ -5452,60 +5581,6 @@ export const MediaVideoPlayerPage = memo(function MediaVideoPlayerPage() {
           </div>
         </section>
 
-        <section className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="rounded-[28px] border border-white/10 bg-[#153446] p-6 md:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Player Features</p>
-            <h2 className="mt-2 text-3xl font-black text-white md:text-4xl">Added Video Experience</h2>
-            <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-              {[
-                {
-                  title: "Autoplay on Open",
-                  desc: "The selected video begins playing when the dedicated player page opens.",
-                },
-                {
-                  title: "Pause and Resume",
-                  desc: "Visitors can pause or resume playback using both native controls and the custom action button.",
-                },
-                {
-                  title: "Restart and Mute",
-                  desc: "Playback can be restarted instantly and audio can be muted or restored with one click.",
-                },
-                {
-                  title: "Related Video Rail",
-                  desc: "The page keeps visitors inside the gallery experience by suggesting the next devotional videos to open.",
-                },
-              ].map((item) => (
-                <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0f2c3d] p-5">
-                  <h3 className="text-xl font-black text-white">{item.title}</h3>
-                  <p className="mt-2 leading-7 text-[#d4e1e8]">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="rounded-[28px] bg-gradient-to-br from-[#0f5a98] to-[#0d8f91] p-6 md:p-8 text-white">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/80">Related Videos</p>
-            <h2 className="mt-2 text-3xl font-black md:text-4xl">Continue Watching</h2>
-            <div className="mt-6 space-y-4">
-              {relatedVideos.map((item) => (
-                <Link
-                  key={item.slug}
-                  to={`${ROUTES.media.videos}/${item.slug}`}
-                  className="flex gap-4 rounded-2xl bg-white/12 p-4 transition hover:bg-white/18"
-                >
-                  <img src={item.image} alt={item.title} className="h-20 w-28 rounded-xl object-cover" />
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-white/75">
-                      {item.category} ┬╖ {item.duration}
-                    </p>
-                    <h3 className="mt-1 truncate text-lg font-black text-white">{item.title}</h3>
-                    <p className="mt-1 text-sm text-white/85">{item.note}</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
       </div>
     </div>
   );
@@ -5596,35 +5671,12 @@ export const MediaEventHighlightsPage = memo(function MediaEventHighlightsPage()
   return (
     <div className="min-h-screen bg-[#0b2230] py-10">
       <div className="mx-auto max-w-7xl px-4">
-        <section className="rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#ffb06a]">Media Gallery</p>
-          <h1 className="mt-3 text-3xl font-black text-white md:text-5xl">Event Highlights</h1>
-          <p className="mt-4 max-w-4xl text-lg leading-8 text-[#d4e1e8]">
-            This page is now structured to present event highlights as stories and impact moments, not just a list of old event names or generic recap text.
-          </p>
-
-          <div className="mt-8 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
-            {[
-              { title: "Highlight Streams", value: "4", note: "Spiritual, festival, seva, and youth-focused highlights" },
-              { title: "Editorial Style", value: "Story-Based", note: "Built to capture emotion, movement, and key takeaways" },
-              { title: "Usefulness", value: "High", note: "Useful for recap, donor trust, and public understanding" },
-              { title: "Media Direction", value: "Curated", note: "Highlights now follow a deliberate selection logic" },
-            ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#17384b] p-4">
-                <p className="text-xs uppercase tracking-wide text-[#ffb06a]">{item.title}</p>
-                <p className="mt-1 text-2xl font-black text-white">{item.value}</p>
-                <p className="mt-1 text-sm text-[#d4e1e8]">{item.note}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="mt-8 rounded-[32px] border border-white/10 bg-[#153446] p-6 md:p-8">
+        <section className="rounded-[32px] border border-white/10 bg-[#153446] p-6 md:p-8">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Advanced Feature</p>
-              <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Highlight Storyboard</h2>
-              <p className="mt-3 max-w-3xl text-lg leading-7 text-[#d4e1e8]">
+              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Advanced Feature</p>
+              <h2 className="mt-2 text-[34px] font-black uppercase tracking-wide text-white md:text-[56px]">Highlight Storyboard</h2>
+              <p className="mt-3 max-w-3xl text-base leading-8 text-[#dce7ec] md:text-lg">
                 Filter by event mood and purpose so the page behaves like an editorial highlights board rather than a static news dump.
               </p>
             </div>
@@ -5661,11 +5713,11 @@ export const MediaEventHighlightsPage = memo(function MediaEventHighlightsPage()
                     Highlight Stream
                   </span>
                 </div>
-                <h3 className="mt-4 text-2xl font-black text-white">{item.title}</h3>
-                <p className="mt-3 text-lg leading-7 text-[#d4e1e8]">{item.desc}</p>
+                <h3 className="mt-4 text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">{item.title}</h3>
+                <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{item.desc}</p>
                 <div className="mt-4 rounded-2xl bg-[#0f2c3d] p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[#ffb06a]">Highlight Output</p>
-                  <p className="mt-2 leading-7 text-[#d4e1e8]">{item.output}</p>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[#ef9a1e]">Highlight Output</p>
+                  <p className="mt-2 text-base leading-8 text-[#dce7ec] md:text-lg">{item.output}</p>
                 </div>
               </div>
             ))}
@@ -5675,10 +5727,10 @@ export const MediaEventHighlightsPage = memo(function MediaEventHighlightsPage()
         <section className="mt-8 rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Gallery Section</p>
-              <h2 className="mt-2 text-3xl font-black text-white md:text-4xl">Event Image Gallery</h2>
+              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Gallery Section</p>
+              <h2 className="mt-2 text-[34px] font-black uppercase tracking-wide text-white md:text-[56px]">Event Image Gallery</h2>
             </div>
-            <p className="text-sm text-[#d4e1e8]">Showing {visibleImageHighlights.length} highlight frames</p>
+            <p className="text-base leading-8 text-[#dce7ec] md:text-lg">Showing {visibleImageHighlights.length} highlight frames</p>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -5691,8 +5743,8 @@ export const MediaEventHighlightsPage = memo(function MediaEventHighlightsPage()
                     {item.category}
                   </span>
                   <div className="absolute inset-x-0 bottom-0 p-4">
-                    <h3 className="text-xl font-black text-white">{item.title}</h3>
-                    <p className="mt-2 text-sm text-white/85">{item.note}</p>
+                    <h3 className="text-[24px] font-black uppercase tracking-[0.05em] text-[#F7E8A4]">{item.title}</h3>
+                    <p className="mt-2 text-base leading-8 text-white/90 md:text-lg">{item.note}</p>
                   </div>
                 </div>
               </article>
@@ -5700,10 +5752,10 @@ export const MediaEventHighlightsPage = memo(function MediaEventHighlightsPage()
           </div>
         </section>
 
-        <section className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1fr]">
+        <section className="mt-8">
           <div className="rounded-[28px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-            <h2 className="text-3xl font-black text-white md:text-4xl">Sections Worth Adding Here</h2>
-            <ul className="mt-6 space-y-3 text-lg text-[#d4e1e8]">
+            <h2 className="text-[34px] font-black uppercase tracking-wide text-white md:text-[56px]">Sections Worth Adding Here</h2>
+            <ul className="mt-6 space-y-3 text-base leading-8 text-[#dce7ec] md:text-lg">
               {[
                 "Top highlight reel of the month",
                 "Festival spotlight wall by celebration season",
@@ -5716,13 +5768,6 @@ export const MediaEventHighlightsPage = memo(function MediaEventHighlightsPage()
                 </li>
               ))}
             </ul>
-          </div>
-
-          <div className="rounded-[28px] bg-gradient-to-br from-[#0f5a98] to-[#0d8f91] p-6 md:p-8 text-white">
-            <h2 className="text-3xl font-black md:text-4xl">Creative Highlight Logic</h2>
-            <p className="mt-5 text-lg leading-8 text-white/95">
-              Event highlights work best when they are organized by feeling, impact, and storytelling value. This page now has a stronger foundation for editorial curation instead of a simple event list.
-            </p>
           </div>
         </section>
       </div>
@@ -5818,36 +5863,15 @@ export const MediaPublicationsPage = memo(function MediaPublicationsPage() {
     <div className="min-h-screen bg-[#0b2230] py-10">
       <div className="mx-auto max-w-7xl px-4">
         <section className="rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#ffb06a]">Media Gallery</p>
-          <h1 className="mt-3 text-3xl font-black text-white md:text-5xl">Publications</h1>
-          <p className="mt-4 max-w-4xl text-lg leading-8 text-[#d4e1e8]">
-            This page is now shaped as a publication archive strategy page with issue grouping, audience purpose, and publication logic for reports, brochures, and devotional materials.
-          </p>
-
-          <div className="mt-8 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
-            {[
-              { title: "Publication Types", value: "4", note: "Reports, brochures, study material, and event publications" },
-              { title: "Archive Style", value: "Categorized", note: "Documents are grouped by purpose instead of one flat list" },
-              { title: "Audience Range", value: "Wide", note: "Useful for donors, devotees, families, and institutions" },
-              { title: "Growth Readiness", value: "Expandable", note: "Supports future PDF, booklet, and download integration" },
-            ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#17384b] p-4">
-                <p className="text-xs uppercase tracking-wide text-[#ffb06a]">{item.title}</p>
-                <p className="mt-1 text-2xl font-black text-white">{item.value}</p>
-                <p className="mt-1 text-sm text-[#d4e1e8]">{item.note}</p>
-              </div>
-            ))}
-          </div>
+          <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Media Gallery</p>
+          <h1 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Publications</h1>
         </section>
 
         <section className="mt-8 rounded-[32px] border border-white/10 bg-[#153446] p-6 md:p-8">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Advanced Feature</p>
-              <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Publication Archive Navigator</h2>
-              <p className="mt-3 max-w-3xl text-lg leading-7 text-[#d4e1e8]">
-                Filter publication groups by purpose so the archive feels organized and useful for both trust communication and devotional reading.
-              </p>
+              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Advanced Feature</p>
+              <h2 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Publication Archive Navigator</h2>
             </div>
 
             <div className="flex flex-wrap gap-2">
@@ -5882,11 +5906,11 @@ export const MediaPublicationsPage = memo(function MediaPublicationsPage() {
                     Publication Group
                   </span>
                 </div>
-                <h3 className="mt-4 text-2xl font-black text-white">{item.title}</h3>
-                <p className="mt-3 text-lg leading-7 text-[#d4e1e8]">{item.desc}</p>
+                <h3 className="mt-4 text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">{item.title}</h3>
+                <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{item.desc}</p>
                 <div className="mt-4 rounded-2xl bg-[#0f2c3d] p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[#ffb06a]">Best Use</p>
-                  <p className="mt-2 leading-7 text-[#d4e1e8]">{item.use}</p>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[#ef9a1e]">Best Use</p>
+                  <p className="mt-2 text-base leading-8 text-[#dce7ec] md:text-lg">{item.use}</p>
                 </div>
               </div>
             ))}
@@ -5896,10 +5920,10 @@ export const MediaPublicationsPage = memo(function MediaPublicationsPage() {
         <section className="mt-8 rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Archive Section</p>
-              <h2 className="mt-2 text-3xl font-black text-white md:text-4xl">Publication Gallery</h2>
+              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Archive Section</p>
+              <h2 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Publication Gallery</h2>
             </div>
-            <p className="text-sm text-[#d4e1e8]">Showing {visiblePublicationCards.length} publication cards</p>
+            <p className="text-base leading-8 text-[#dce7ec] md:text-lg">Showing {visiblePublicationCards.length} publication cards</p>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -5907,12 +5931,12 @@ export const MediaPublicationsPage = memo(function MediaPublicationsPage() {
               <article key={item.title} className="rounded-[24px] border border-white/10 bg-[#17384b] p-6">
                 <div className="flex h-40 items-center justify-center rounded-[20px] bg-[linear-gradient(135deg,#244f67_0%,#17384b_100%)]">
                   <div className="text-center">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">{item.category}</p>
-                    <p className="mt-2 text-lg font-black text-white">{item.format}</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">{item.category}</p>
+                    <p className="mt-2 text-[24px] font-black uppercase tracking-[0.05em] text-white">{item.format}</p>
                   </div>
                 </div>
-                <h3 className="mt-5 text-2xl font-black text-white">{item.title}</h3>
-                <p className="mt-3 text-[#d4e1e8] leading-7">{item.note}</p>
+                <h3 className="mt-5 text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">{item.title}</h3>
+                <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{item.note}</p>
                 <div className="mt-5 flex items-center justify-between">
                   <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#d4e1e8]">
                     Archive Ready
@@ -5926,9 +5950,9 @@ export const MediaPublicationsPage = memo(function MediaPublicationsPage() {
           </div>
         </section>
 
-        <section className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+        <section className="mt-8">
           <div className="rounded-[28px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-            <h2 className="text-3xl font-black text-white md:text-4xl">Sections Added For Better Publishing Work</h2>
+            <h2 className="text-[16px] font-black text-white md:text-[22px]">Sections Added For Better Publishing Work</h2>
             <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
               {[
                 { title: "Issue-Based Grouping", desc: "Allows future annual report and seasonal publication stacking." },
@@ -5937,28 +5961,11 @@ export const MediaPublicationsPage = memo(function MediaPublicationsPage() {
                 { title: "Trust Memory Archive", desc: "Helps preserve the long-form documentary identity of the trust." },
               ].map((item) => (
                 <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0f2c3d] p-5">
-                  <h3 className="text-xl font-black text-white">{item.title}</h3>
-                  <p className="mt-2 leading-7 text-[#d4e1e8]">{item.desc}</p>
+                  <h3 className="text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">{item.title}</h3>
+                  <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{item.desc}</p>
                 </div>
               ))}
             </div>
-          </div>
-
-          <div className="rounded-[28px] bg-gradient-to-br from-[#0f5a98] to-[#0d8f91] p-6 md:p-8 text-white">
-            <h2 className="text-3xl font-black md:text-4xl">Creative Publication Layers</h2>
-            <ul className="mt-6 space-y-3 text-lg text-white/95">
-              {[
-                "Featured publication of the season",
-                "Annual report shelf with issue history",
-                "Festival booklet and schedule rack",
-                "Study notes corner connected to learning pages",
-              ].map((line) => (
-                <li key={line} className="flex gap-3">
-                  <span className="mt-2 h-2.5 w-2.5 rounded-full bg-white" />
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ul>
           </div>
         </section>
       </div>
@@ -6044,36 +6051,15 @@ export const MediaSocialFeedPage = memo(function MediaSocialFeedPage() {
     <div className="min-h-screen bg-[#0b2230] py-10">
       <div className="mx-auto max-w-7xl px-4">
         <section className="rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#ffb06a]">Media Gallery</p>
-          <h1 className="mt-3 text-3xl font-black text-white md:text-5xl">Social Media Feed</h1>
-          <p className="mt-4 max-w-4xl text-lg leading-8 text-[#d4e1e8]">
-            This page is now shaped like a communication control area for official updates, festival pulse, seva storytelling, and community-facing trust content.
-          </p>
-
-          <div className="mt-8 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
-            {[
-              { title: "Feed Streams", value: "4", note: "Announcements, festival, seva, and youth communication tracks" },
-              { title: "Tone System", value: "Curated", note: "The feed is organized by purpose rather than raw social embedding" },
-              { title: "Community Use", value: "Active", note: "Supports information, connection, and participation" },
-              { title: "Future Ready", value: "Expandable", note: "Can grow into embedded handles and live post modules later" },
-            ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#17384b] p-4">
-                <p className="text-xs uppercase tracking-wide text-[#ffb06a]">{item.title}</p>
-                <p className="mt-1 text-2xl font-black text-white">{item.value}</p>
-                <p className="mt-1 text-sm text-[#d4e1e8]">{item.note}</p>
-              </div>
-            ))}
-          </div>
+          <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Media Gallery</p>
+          <h1 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Social Media Feed</h1>
         </section>
 
         <section className="mt-8 rounded-[32px] border border-white/10 bg-[#153446] p-6 md:p-8">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Advanced Feature</p>
-              <h2 className="mt-2 text-3xl font-black text-white md:text-5xl">Channel Pulse Board</h2>
-              <p className="mt-3 max-w-3xl text-lg leading-7 text-[#d4e1e8]">
-                Filter the social feed by communication purpose so the page acts like a media operations surface rather than a static list of handle names.
-              </p>
+              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Advanced Feature</p>
+              <h2 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Channel Pulse Board</h2>
             </div>
 
             <div className="flex flex-wrap gap-2">
@@ -6108,11 +6094,11 @@ export const MediaSocialFeedPage = memo(function MediaSocialFeedPage() {
                     Feed Stream
                   </span>
                 </div>
-                <h3 className="mt-4 text-2xl font-black text-white">{item.title}</h3>
-                <p className="mt-3 text-lg leading-7 text-[#d4e1e8]">{item.desc}</p>
+                <h3 className="mt-4 text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">{item.title}</h3>
+                <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{item.desc}</p>
                 <div className="mt-4 rounded-2xl bg-[#0f2c3d] p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[#ffb06a]">Posting Pulse</p>
-                  <p className="mt-2 leading-7 text-[#d4e1e8]">{item.pulse}</p>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[#ef9a1e]">Posting Pulse</p>
+                  <p className="mt-2 text-base leading-8 text-[#dce7ec] md:text-lg">{item.pulse}</p>
                 </div>
               </div>
             ))}
@@ -6122,10 +6108,10 @@ export const MediaSocialFeedPage = memo(function MediaSocialFeedPage() {
         <section className="mt-8 rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb06a]">Feedback Section</p>
-              <h2 className="mt-2 text-3xl font-black text-white md:text-4xl">Instagram, Facebook, WhatsApp and YouTube Feedback</h2>
+              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Feedback Section</p>
+              <h2 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Instagram, Facebook, WhatsApp and YouTube Feedback</h2>
             </div>
-            <p className="text-sm text-[#d4e1e8]">Showing {visibleFeedbackCards.length} platform feedback cards</p>
+            <p className="text-base leading-8 text-[#dce7ec] md:text-lg">Showing {visibleFeedbackCards.length} platform feedback cards</p>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -6133,22 +6119,22 @@ export const MediaSocialFeedPage = memo(function MediaSocialFeedPage() {
               <article key={item.platform} className="overflow-hidden rounded-[24px] border border-white/10 bg-[#17384b]">
                 <div className={`bg-gradient-to-r ${item.accent} px-5 py-4`}>
                   <p className="text-sm font-bold uppercase tracking-[0.18em] text-white">{item.platform}</p>
-                  <h3 className="mt-2 text-xl font-black text-white">{item.title}</h3>
+                  <h3 className="mt-2 text-[24px] font-black uppercase tracking-[0.05em] text-white">{item.title}</h3>
                 </div>
                 <div className="p-5">
                   <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#d4e1e8]">
                     {item.category}
                   </span>
-                  <p className="mt-4 text-base leading-7 text-[#d4e1e8]">{item.feedback}</p>
+                  <p className="mt-4 text-base leading-8 text-[#dce7ec] md:text-lg">{item.feedback}</p>
                 </div>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1fr]">
+        <section className="mt-8">
           <div className="rounded-[28px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-            <h2 className="text-3xl font-black text-white md:text-4xl">Creative Feed Sections Added</h2>
+            <h2 className="text-[16px] font-black text-white md:text-[22px]">Creative Feed Sections Added</h2>
             <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
               {[
                 { title: "Verified Announcement Rail", desc: "For official notices and trusted public communication." },
@@ -6157,28 +6143,11 @@ export const MediaSocialFeedPage = memo(function MediaSocialFeedPage() {
                 { title: "Community Voice Layer", desc: "For reactions, testimonials, and audience-facing trust warmth." },
               ].map((item) => (
                 <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0f2c3d] p-5">
-                  <h3 className="text-xl font-black text-white">{item.title}</h3>
-                  <p className="mt-2 leading-7 text-[#d4e1e8]">{item.desc}</p>
+                  <h3 className="text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">{item.title}</h3>
+                  <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{item.desc}</p>
                 </div>
               ))}
             </div>
-          </div>
-
-          <div className="rounded-[28px] bg-gradient-to-br from-[#0f5a98] to-[#0d8f91] p-6 md:p-8 text-white">
-            <h2 className="text-3xl font-black md:text-4xl">What This Page Should Do</h2>
-            <ul className="mt-6 space-y-3 text-lg text-white/95">
-              {[
-                "Separate official updates from general inspiration posts",
-                "Make festival and seva content easier to discover quickly",
-                "Create a stronger public-facing communication identity",
-                "Prepare for future embedded social handles and live content",
-              ].map((line) => (
-                <li key={line} className="flex gap-3">
-                  <span className="mt-2 h-2.5 w-2.5 rounded-full bg-white" />
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ul>
           </div>
         </section>
       </div>
