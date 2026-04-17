@@ -79,14 +79,17 @@ export default memo(function AboutPage() {
           }}
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(245,158,11,0.18),transparent_42%)]" />
-          <div className="relative z-10">
-            <h1 className={`${ABOUT_HERO_TITLE_CLASS} mb-4 whitespace-nowrap text-[clamp(1.1rem,3.1vw,3.8rem)] leading-tight`}>
+          <div className="relative z-10 flex flex-col items-center justify-end gap-[2px]">
+            <h1 className={`${ABOUT_HERO_TITLE_CLASS} whitespace-nowrap text-[clamp(1.1rem,3.1vw,3.8rem)] leading-tight`}>
               {t("aboutPage.heroTitle")}
             </h1>
-            <p className={`${ABOUT_HERO_SUBTITLE_CLASS} max-w-3xl mx-auto text-white/90`}>
+            <p className={`${ABOUT_HERO_SUBTITLE_CLASS} mx-auto max-w-none whitespace-nowrap text-[clamp(0.9rem,1.35vw,1.5rem)] text-white/90`}>
               {t("aboutPage.heroTagline")}
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <p className={`${ABOUT_HERO_SUBTITLE_CLASS} mx-auto max-w-none whitespace-nowrap text-[clamp(0.9rem,1.35vw,1.5rem)] text-white/85`}>
+              {t("aboutPage.heroSubtagline")}
+            </p>
+            <div className="mt-[2px] flex flex-wrap justify-center gap-[2px]">
               <Link to={ROUTES.donate} className="inline-block bg-[#F59E0B] hover:bg-[#d88908] text-white font-bold px-7 py-3 rounded-xl transition-colors">
                 {t("aboutPage.supportMission")}
               </Link>
