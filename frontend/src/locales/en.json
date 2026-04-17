@@ -580,8 +580,9 @@
   },
 
   "aboutPage": {
-    "heroTitle": "About Shri Bhagwat Hreritage",
-    "heroTagline": "Preserving Faith • Serving Humanity • Reviving Culture",
+    "heroTitle": "About",
+    "heroTagline": "Shri Bhagwat Heritage Service Foundation Trust",
+    "heroSubtagline": "Preserving Faith • Serving Humanity • Reviving Culture",
     "supportMission": "Support the Mission",
     "becomeVolunteer": "Become a Volunteer",
     "introEyebrow": "Introduction",
