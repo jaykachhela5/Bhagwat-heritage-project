@@ -17,7 +17,7 @@ const UPCOMING_EVENT_LIVE_EMBED_URL = "https://www.youtube.com/embed/b0Q8JoU4gI4
 const BLOOD_DONATION_WHATSAPP_URL = "https://wa.me/918668897445";
 const UPCOMING_EVENT_DETAILS =
   "Celebrate Hanuman Janmotsav in the divine presence of Sant Shri Manish Bhaiji Maharaj with aarti, puja, maha abhishek, Sundarkand path, mahaprasad, Hanuman Charitra Gatha, and evening maha aarti.";
-
+ 
 const PRIMARY_BUTTON =
   "inline-flex items-center justify-center rounded-lg bg-[#f1a15c] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#e48d45]";
 const SECONDARY_BUTTON =
