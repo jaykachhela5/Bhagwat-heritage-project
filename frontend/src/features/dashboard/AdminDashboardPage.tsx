@@ -23,7 +23,7 @@ const panel = "rounded-[28px] border border-[#d6e2ea] bg-white p-5 shadow-[0_18p
 const card = "rounded-2xl border border-[#d7e5ef] bg-[#f8fbfe] p-4";
 const input =
   "w-full rounded-xl border border-[#d3dee8] bg-[#f8fbff] px-4 py-3 text-sm text-[#173b57] placeholder:text-[#697988] focus:outline-none focus:ring-2 focus:ring-[#0f678c]/30";
-const label = "text-[13px] font-bold uppercase tracking-[0.18em] text-[#ef9a1e]";
+const label = "text-[13px] font-bold uppercase tracking-[0.18em] text-[var(--campaign-accent)]";
 const actionButton =
   "inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-bold transition";
 const emptyStats: LibraryStats = { totalBooks: 0, totalUsers: 0, studentsBenefited: 0, activeMembers: 0 };
@@ -84,7 +84,7 @@ const Notice = ({ text, tone = "info" }: { text: string; tone?: "info" | "error"
 const SectionHeader = ({ title, description }: { title: string; description: string }) => (
   <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
     <div>
-      <h2 className="text-[13px] font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">{title}</h2>
+      <h2 className="text-[13px] font-bold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">{title}</h2>
       <p className="mt-2 max-w-3xl text-base leading-7 text-[#4f6374]">{description}</p>
     </div>
   </div>
@@ -336,7 +336,7 @@ export default memo(function AdminDashboardPage() {
   const activeSectionDescription = sectionInfo?.description ?? "Manage and monitor your library operations.";
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(180deg,#edf6fb_0%,#f7fbff_100%)]">
+    <div className="min-h-screen bg-[linear-gradient(180deg,#edf6fb_0%,var(--color-surface-hover)_100%)]">
       <div className="border-b border-[#d8e4eb] bg-white px-6 py-4 shadow-sm">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
@@ -377,7 +377,7 @@ export default memo(function AdminDashboardPage() {
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => setSection("books")}
-                  className={`${actionButton} bg-[#ef9a1e] text-white hover:bg-[#d68612]`}
+                  className={`${actionButton} bg-[var(--campaign-accent)] text-white hover:bg-[#d68612]`}
                 >
                   Add Book
                 </button>

@@ -178,7 +178,7 @@ export default memo(function MedicinePage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0B2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <HeroSection
         title="Chikitsa Seva"
         subtitle="Service is the greatest form of healing."
@@ -192,13 +192,13 @@ export default memo(function MedicinePage() {
         <div className="flex flex-wrap justify-center gap-3">
           <Link
             to={ROUTES.donate}
-            className="inline-flex items-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
+            className="inline-flex items-center rounded-lg bg-[var(--campaign-accent)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
           >
             Donate Medicines
           </Link>
           <Link
             to={ROUTES.involved.volunteer}
-            className="inline-flex items-center rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
+            className="inline-flex items-center rounded-lg bg-[var(--campaign-bg)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
           >
             Join Medical Support
           </Link>
@@ -209,10 +209,10 @@ export default memo(function MedicinePage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {QUICK_HIGHLIGHTS.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
-                <p className="text-[24px] font-black uppercase tracking-wide text-[#ef9a1e]">{item.title}</p>
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+                <p className="text-[24px] font-black uppercase tracking-wide text-[var(--campaign-accent)]">{item.title}</p>
                 <p className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.value}</p>
-                <p className="mt-1 text-base leading-7 text-[#dce7ec] md:text-lg">{item.note}</p>
+                <p className="mt-1 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.note}</p>
               </div>
             ))}
           </div>
@@ -221,8 +221,8 @@ export default memo(function MedicinePage() {
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">About Chikitsa Seva</p>
+          <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">About Chikitsa Seva</p>
             <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Medical support with dignity and timely care</h2>
             <p className="mt-5 text-base leading-7 text-white md:text-lg">
               Chikitsa Seva is dedicated to helping low-income families, elderly patients, and medically vulnerable households receive essential
@@ -240,9 +240,9 @@ export default memo(function MedicinePage() {
 
           <div className="grid gap-4">
             {ABOUT_POINTS.map((item) => (
-              <div key={item.title} className="rounded-3xl border border-white/10 bg-[#0d6179] p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1">
+              <div key={item.title} className="rounded-3xl border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1">
                 <h3 className="text-2xl font-black text-white md:text-[1.75rem]">{item.title}</h3>
-                <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{item.desc}</p>
+                <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -250,14 +250,14 @@ export default memo(function MedicinePage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Our Medical Services</p>
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Our Medical Services</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Relief, screening, and care support</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
             {SERVICES.map((item) => (
-              <article key={item.title} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
+              <article key={item.title} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
                 <h3 className="text-[24px] font-black text-white">{item.title}</h3>
-                <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.desc}</p>
+                <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
               </article>
             ))}
           </div>
@@ -265,17 +265,17 @@ export default memo(function MedicinePage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">How Chikitsa Seva Works</p>
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">How Chikitsa Seva Works</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">From medical need to medicine support</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
             {HOW_IT_WORKS.map((item) => (
-              <article key={item.step} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
-                <div className="inline-flex rounded-full bg-[#ef9a1e]/15 px-4 py-2 text-sm font-black tracking-[0.2em] text-[#ef9a1e]">
+              <article key={item.step} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
+                <div className="inline-flex rounded-full bg-[var(--campaign-accent)]/15 px-4 py-2 text-sm font-black tracking-[0.2em] text-[var(--campaign-accent)]">
                   {item.step}
                 </div>
                 <h3 className="mt-4 text-2xl font-black text-white">{item.title}</h3>
-                <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.desc}</p>
+                <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
               </article>
             ))}
           </div>
@@ -283,18 +283,18 @@ export default memo(function MedicinePage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Chikitsa Seva Donation Options</p>
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Chikitsa Seva Donation Options</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Different ways to support medical relief</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
             {DONATION_TIERS.map((item) => (
-              <div key={item.title} className="flex h-full flex-col rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+              <div key={item.title} className="flex h-full flex-col rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
                 <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
-                <p className="mt-2 text-2xl font-black text-[#ef9a1e]">{item.amount}</p>
+                <p className="mt-2 text-2xl font-black text-[var(--campaign-accent)]">{item.amount}</p>
                 <p className={`mt-3 flex-1 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
                 <Link
                   to={ROUTES.donate}
-                  className="mt-5 inline-flex w-fit rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                  className="mt-5 inline-flex w-fit rounded-xl bg-[var(--campaign-accent)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
                 >
                   Donate Now
                 </Link>
@@ -305,14 +305,14 @@ export default memo(function MedicinePage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Support Areas</p>
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Support Areas</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Where medicine relief makes a difference</h2>
           <div className="mt-6 space-y-3">
             {SUPPORT_AREAS.map((item) => (
-              <div key={item} className="flex gap-3 rounded-[20px] border border-white/10 bg-[#0c5871] p-4">
-                <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#ef9a1e]" />
-                <p className="text-base leading-7 text-[#dce7ec] md:text-lg">{item}</p>
+              <div key={item} className="flex gap-3 rounded-[20px] border border-white/10 bg-[var(--campaign-surface)] p-4">
+                <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--campaign-accent)]" />
+                <p className="text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item}</p>
               </div>
             ))}
           </div>
@@ -320,8 +320,8 @@ export default memo(function MedicinePage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Offer Free Medical Support</p>
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Offer Free Medical Support</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Serve the trust through your medical skills</h2>
           <p className="mt-4 text-base leading-7 text-white md:text-lg">
             Doctors, nurses, pharmacists, medical helpers, and service-minded professionals are welcome to offer free support for the trust through
@@ -329,15 +329,15 @@ export default memo(function MedicinePage() {
           </p>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
             {FREE_SEVA_ROLES.map((item) => (
-              <article key={item.title} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
+              <article key={item.title} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
                 <h3 className="text-[24px] font-black text-white">{item.title}</h3>
-                <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.desc}</p>
+                <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
               </article>
             ))}
           </div>
           <Link
             to={ROUTES.involved.volunteer}
-            className="mt-8 inline-flex rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+            className="mt-8 inline-flex rounded-xl bg-[var(--campaign-accent)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
           >
             Offer Free Medical Support
           </Link>
@@ -345,13 +345,13 @@ export default memo(function MedicinePage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Impact Stories</p>
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Impact Stories</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Voices from medical support</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
             {STORIES.map((item) => (
-              <article key={item.name} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
-                <p className="text-base leading-7 text-[#dce7ec] md:text-lg">"{item.quote}"</p>
+              <article key={item.name} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
+                <p className="text-base leading-7 text-[var(--campaign-text)] md:text-lg">"{item.quote}"</p>
                 <p className="mt-4 text-[24px] font-black text-white">{item.name}</p>
               </article>
             ))}
@@ -360,14 +360,14 @@ export default memo(function MedicinePage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Chikitsa Seva FAQ</p>
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Chikitsa Seva FAQ</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Common questions about medicine support</h2>
           <div className="mt-8 space-y-4">
             {FAQS.map((item) => (
-              <details key={item.q} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+              <details key={item.q} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
                 <summary className="cursor-pointer text-[14px] font-black text-white md:text-[20px]">{item.q}</summary>
-                <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.a}</p>
+                <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.a}</p>
               </details>
             ))}
           </div>

@@ -1,4 +1,4 @@
-﻿import { memo, useMemo, useState, type FormEvent } from "react";
+import { memo, useMemo, useState, type FormEvent } from "react";
 import { involvedApi } from "../../services/api/misc";
 import { FeatureHeroSlider } from "../../components/sections/FeatureHeroSlider";
 import { InfoCardGrid } from "../../components/sections/InfoCardGrid";
@@ -143,25 +143,25 @@ const WHAT_WE_DO = [
 ];
 
 const THEME = {
-  page: "min-h-screen bg-[#0B2230] pb-16",
+  page: "min-h-screen bg-[var(--campaign-deep)] pb-16",
   section: "max-w-6xl mx-auto px-4 pt-8",
-  banner: "rounded-[30px] border border-white/10 bg-[#0d6179] p-5 md:p-6 shadow-[0_18px_40px_rgba(0,0,0,0.20)]",
-  bannerText: "text-[16px] leading-7 text-[#dce7ec] md:text-[18px]",
-  label: "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]",
+  banner: "rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-5 md:p-6 shadow-[0_18px_40px_rgba(0,0,0,0.20)]",
+  bannerText: "text-[16px] leading-7 text-[var(--campaign-text)] md:text-[18px]",
+  label: "text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]",
   heading: "mt-2 text-[14px] font-black text-white md:text-[20px]",
-  subheading: "mt-4 text-base leading-7 text-[#dce7ec] md:text-lg",
-  trackCard: "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-[0_14px_30px_rgba(0,0,0,0.18)]",
+  subheading: "mt-4 text-base leading-7 text-[var(--campaign-text)] md:text-lg",
+  trackCard: "rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-[0_14px_30px_rgba(0,0,0,0.18)]",
   trackTitle: "text-[14px] font-black text-white md:text-[20px]",
-  trackText: "mt-2 text-sm leading-6 text-[#dce7ec]",
-  darkPanel: "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 md:p-8 shadow-[0_18px_40px_rgba(0,0,0,0.20)]",
-  darkCard: "rounded-[24px] border border-white/10 bg-[#0c5871] p-4 shadow-[0_14px_30px_rgba(0,0,0,0.18)]",
-  goldCard: "rounded-[24px] border border-[#ef9a1e]/30 bg-[#123e55] p-4 shadow-[0_14px_30px_rgba(0,0,0,0.18)]",
-  formNote: "text-sm leading-6 text-[#dce7ec]",
+  trackText: "mt-2 text-sm leading-6 text-[var(--campaign-text)]",
+  darkPanel: "rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 md:p-8 shadow-[0_18px_40px_rgba(0,0,0,0.20)]",
+  darkCard: "rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-4 shadow-[0_14px_30px_rgba(0,0,0,0.18)]",
+  goldCard: "rounded-[24px] border border-[var(--campaign-accent)]/30 bg-[#123e55] p-4 shadow-[0_14px_30px_rgba(0,0,0,0.18)]",
+  formNote: "text-sm leading-6 text-[var(--campaign-text)]",
   formInput:
-    "rounded-2xl border border-white/10 bg-white px-4 py-3 text-sm text-[#17314a] outline-none transition placeholder:text-[#6b8091] focus:border-[#ef9a1e] focus:ring-2 focus:ring-[#efc06a]",
+    "rounded-2xl border border-white/10 bg-white px-4 py-3 text-sm text-[#17314a] outline-none transition placeholder:text-[#6b8091] focus:border-[var(--campaign-accent)] focus:ring-2 focus:ring-[#efc06a]",
   filterChip: "rounded-full px-3 py-1.5 text-xs font-semibold transition",
-  mutedText: "text-sm text-[#dce7ec]",
-  faqIntro: "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]",
+  mutedText: "text-sm text-[var(--campaign-text)]",
+  faqIntro: "text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]",
 } as const;
 
 export default memo(function GetInvolvedPage() {
@@ -281,7 +281,7 @@ export default memo(function GetInvolvedPage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
             {ONBOARDING_STEPS.map((item, index) => (
               <article key={item.title} className={THEME.darkCard}>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">Step {index + 1}</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Step {index + 1}</p>
                 <h3 className={THEME.heading}>{item.title}</h3>
                 <p className={THEME.trackText}>{item.detail}</p>
               </article>
@@ -377,11 +377,11 @@ export default memo(function GetInvolvedPage() {
               <p className={THEME.formNote}>Use this form to begin Ann Seva or Jal Seva in your city, or support trust coordination.</p>
             </div>
             <div className="min-w-[180px]">
-              <p className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Profile Completion</p>
+              <p className="mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Profile Completion</p>
               <div className="h-2 overflow-hidden rounded-full bg-white/10">
-                <div className="h-full bg-[#ef9a1e] transition-all" style={{ width: `${completion}%` }} />
+                <div className="h-full bg-[var(--campaign-accent)] transition-all" style={{ width: `${completion}%` }} />
               </div>
-              <p className="mt-1 text-xs text-[#dce7ec]">{completion}% complete</p>
+              <p className="mt-1 text-xs text-[var(--campaign-text)]">{completion}% complete</p>
             </div>
           </div>
 
@@ -459,7 +459,7 @@ export default memo(function GetInvolvedPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
             <div className={THEME.darkCard}>
-              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Contribution Mode</p>
+              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Contribution Mode</p>
               <div className="flex gap-2 flex-wrap">
                 {(["Volunteer", "Donate", "Both"] as ContributionMode[]).map((mode) => (
                   <button
@@ -468,8 +468,8 @@ export default memo(function GetInvolvedPage() {
                     onClick={() => setForm((f) => ({ ...f, contributionMode: mode }))}
                     className={`${THEME.filterChip} ${
                       form.contributionMode === mode
-                        ? "bg-[#ef9a1e] text-white"
-                        : "border border-white/10 bg-[#0d6179] text-[#dce7ec]"
+                        ? "bg-[var(--campaign-accent)] text-white"
+                        : "border border-white/10 bg-[var(--campaign-bg)] text-[var(--campaign-text)]"
                     }`}
                   >
                     {mode}
@@ -479,7 +479,7 @@ export default memo(function GetInvolvedPage() {
             </div>
 
             <div className={THEME.darkCard}>
-              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Join Timeline</p>
+              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Join Timeline</p>
               <div className="flex gap-2 flex-wrap">
                 {(["Immediately", "Within 1 Month", "Within 3 Months"] as JoinTimeline[]).map((timeline) => (
                   <button
@@ -488,8 +488,8 @@ export default memo(function GetInvolvedPage() {
                     onClick={() => setForm((f) => ({ ...f, timeline }))}
                     className={`${THEME.filterChip} ${
                       form.timeline === timeline
-                        ? "bg-[#ef9a1e] text-white"
-                        : "border border-white/10 bg-[#0d6179] text-[#dce7ec]"
+                        ? "bg-[var(--campaign-accent)] text-white"
+                        : "border border-white/10 bg-[var(--campaign-bg)] text-[var(--campaign-text)]"
                     }`}
                   >
                     {timeline}
@@ -507,7 +507,7 @@ export default memo(function GetInvolvedPage() {
             className={`${THEME.formInput} mt-4 w-full resize-none`}
           />
 
-          <p className="mt-4 text-sm leading-6 text-[#dce7ec]">
+          <p className="mt-4 text-sm leading-6 text-[var(--campaign-text)]">
             A valid phone number and clear location help the trust team connect with you faster for seva planning.
           </p>
 
@@ -517,7 +517,7 @@ export default memo(function GetInvolvedPage() {
             </p>
           )}
 
-          <button type="submit" disabled={loading} className="mt-4 inline-flex w-full items-center justify-center rounded-2xl bg-[#ef9a1e] px-6 py-4 text-base font-bold text-white shadow-[0_18px_34px_rgba(239,154,30,0.28)] transition hover:bg-[#de930a] disabled:cursor-not-allowed disabled:opacity-70">
+          <button type="submit" disabled={loading} className="mt-4 inline-flex w-full items-center justify-center rounded-2xl bg-[var(--campaign-accent)] px-6 py-4 text-base font-bold text-white shadow-[0_18px_34px_rgba(239,154,30,0.28)] transition hover:bg-[var(--campaign-accent-hover)] disabled:cursor-not-allowed disabled:opacity-70">
             {loading ? "Submitting..." : "Join Seva"}
           </button>
         </form>

@@ -20,17 +20,17 @@ export const Footer = memo(function Footer() {
   const { t } = useTranslation();
 
   return (
-    <footer className="text-white bg-gradient-to-br from-[#0d3b66] via-[#145c71] to-[#1f7a4d]">
+    <footer className="text-white bg-gradient-to-br from-[var(--color-secondary)] via-[var(--color-footer-mid)] to-[var(--color-footer-end)]">
       <div className="max-w-7xl mx-auto px-4 pt-10 pb-6">
         <div className="mb-8 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-sm p-5 md:p-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div>
-            <p className="text-sm text-[#ffe7c7]">{t("footer.ctaEyebrow")}</p>
+            <p className="text-sm text-[var(--color-footer-accent-soft)]">{t("footer.ctaEyebrow")}</p>
             <h3 className="text-2xl font-bold leading-tight">{t("footer.ctaTitle")}</h3>
           </div>
           <div className="flex flex-wrap gap-3">
             <Link
               to={ROUTES.involved.volunteer}
-              className="inline-flex items-center justify-center rounded-lg bg-white text-[#0d3b66] px-5 py-2.5 font-semibold hover:bg-[#f7f7f7] transition-colors"
+              className="inline-flex items-center justify-center rounded-lg bg-white text-[var(--color-secondary)] px-5 py-2.5 font-semibold hover:bg-[var(--color-bg-main)] transition-colors"
             >
               {t("footer.becomeVolunteer")}
             </Link>
@@ -38,7 +38,7 @@ export const Footer = memo(function Footer() {
               href={EXTERNAL_RAZORPAY_DONATE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-lg bg-[#f1a15c] text-white px-5 py-2.5 font-semibold hover:bg-[#e48d45] transition-colors"
+              className="inline-flex items-center justify-center rounded-lg bg-[var(--color-footer-cta)] text-white px-5 py-2.5 font-semibold hover:bg-[var(--color-footer-cta-hover)] transition-colors"
             >
               {t("footer.makeDonation")}
             </a>
@@ -47,7 +47,7 @@ export const Footer = memo(function Footer() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-lg font-bold mb-3 text-[#ffd08a]">{t("footer.aboutTitle")}</h3>
+            <h3 className="text-lg font-bold mb-3 text-[var(--color-footer-accent)]">{t("footer.aboutTitle")}</h3>
             <p className="text-sm text-white/85 leading-relaxed">{t("footer.aboutText")}</p>
             <p className="mt-4 text-sm text-white/75">
               {t("footer.templeTiming")}
@@ -59,7 +59,7 @@ export const Footer = memo(function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold mb-3 text-[#ffd08a]">{t("footer.contactInfo")}</h3>
+            <h3 className="text-lg font-bold mb-3 text-[var(--color-footer-accent)]">{t("footer.contactInfo")}</h3>
             <ul className="space-y-2 text-sm text-white/85">
               <li>
                 <i className="fas fa-map-marker-alt mr-2" />
@@ -78,7 +78,7 @@ export const Footer = memo(function Footer() {
               href="https://maps.google.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center mt-4 text-sm text-[#ffe7c7] hover:text-white transition-colors"
+              className="inline-flex items-center mt-4 text-sm text-[var(--color-footer-accent-soft)] hover:text-white transition-colors"
             >
               <i className="fas fa-location-arrow mr-2" />
               {t("footer.openLocation")}
@@ -86,11 +86,11 @@ export const Footer = memo(function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold mb-3 text-[#ffd08a]">{t("footer.quickLinks")}</h3>
+            <h3 className="text-lg font-bold mb-3 text-[var(--color-footer-accent)]">{t("footer.quickLinks")}</h3>
             <ul className="space-y-2 text-sm">
               {QUICK_LINKS.map((item) => (
                 <li key={item.href}>
-                  <Link to={item.href} className="text-white/85 hover:text-[#ffe7c7] transition-colors">
+                  <Link to={item.href} className="text-white/85 hover:text-[var(--color-footer-accent-soft)] transition-colors">
                     {t(item.key)}
                   </Link>
                 </li>
@@ -99,7 +99,7 @@ export const Footer = memo(function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold mb-3 text-[#ffd08a]">{t("footer.followUs")}</h3>
+            <h3 className="text-lg font-bold mb-3 text-[var(--color-footer-accent)]">{t("footer.followUs")}</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <a
@@ -108,10 +108,10 @@ export const Footer = memo(function Footer() {
                   rel="noopener noreferrer"
                   className="text-white/90 hover:text-white flex items-center gap-2.5 transition-colors"
                 >
-                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#1877F2] text-white">
+                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-social-facebook)] text-white">
                     <i className="fab fa-facebook-f text-xs" />
                   </span>
-                  <span className="font-semibold tracking-wide text-[#EAF4FF]">Facebook</span>
+                  <span className="font-semibold tracking-wide text-[var(--color-social-facebook-soft)]">Facebook</span>
                 </a>
               </li>
               <li>
@@ -121,10 +121,10 @@ export const Footer = memo(function Footer() {
                   rel="noopener noreferrer"
                   className="text-white/90 hover:text-white flex items-center gap-2.5 transition-colors"
                 >
-                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white">
+                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-tr from-[var(--color-social-instagram-start)] via-[var(--color-social-instagram-mid)] to-[var(--color-social-instagram-end)] text-white">
                     <i className="fab fa-instagram text-xs" />
                   </span>
-                  <span className="font-semibold tracking-wide text-[#FFEAF5]">Instagram</span>
+                  <span className="font-semibold tracking-wide text-[var(--color-social-instagram-soft)]">Instagram</span>
                 </a>
               </li>
               <li>
@@ -134,10 +134,10 @@ export const Footer = memo(function Footer() {
                   rel="noopener noreferrer"
                   className="text-white/90 hover:text-white flex items-center gap-2.5 transition-colors"
                 >
-                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#25D366] text-white">
+                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-social-whatsapp)] text-white">
                     <i className="fab fa-whatsapp text-xs" />
                   </span>
-                  <span className="font-semibold tracking-wide text-[#E9FFE9]">WhatsApp</span>
+                  <span className="font-semibold tracking-wide text-[var(--color-social-whatsapp-soft)]">WhatsApp</span>
                 </a>
               </li>
               <li>
@@ -147,10 +147,10 @@ export const Footer = memo(function Footer() {
                   rel="noopener noreferrer"
                   className="text-white/90 hover:text-white flex items-center gap-2.5 transition-colors"
                 >
-                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#FF0000] text-white">
+                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-social-youtube)] text-white">
                     <i className="fab fa-youtube text-xs" />
                   </span>
-                  <span className="font-semibold tracking-wide text-[#FFEAEA]">YouTube</span>
+                  <span className="font-semibold tracking-wide text-[var(--color-social-youtube-soft)]">YouTube</span>
                 </a>
               </li>
             </ul>

@@ -71,7 +71,7 @@ export default memo(function ManishBhaijiPage() {
   return (
     <div className="min-h-screen bg-[#fff8f0]">
 
-      {/* ── Hero: Photo + Introduction ────────────────────────────────── */}
+      {/* â”€â”€ Hero: Photo + Introduction â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="w-full px-4 pt-8 md:pt-10 pb-10">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -106,7 +106,7 @@ export default memo(function ManishBhaijiPage() {
 
       {divider}
 
-      {/* ── Impact Stats ──────────────────────────────────────────────── */}
+      {/* â”€â”€ Impact Stats â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section
         id="guidance-services"
         ref={servicesRef}
@@ -139,7 +139,7 @@ export default memo(function ManishBhaijiPage() {
                   />
                 </div>
               </div>
-              <h3 className={`mt-6 text-center ${FOUNDER_CARD_TITLE} text-[#0d3b66]`}>{item.title}</h3>
+              <h3 className={`mt-6 text-center ${FOUNDER_CARD_TITLE} text-[var(--color-secondary)]`}>{item.title}</h3>
               {item.desc ? (
                 <p className={`mt-3 flex-1 text-center ${ABOUT_BODY_CLASS} text-[#5a6872]`}>{item.desc}</p>
               ) : (
@@ -159,7 +159,7 @@ export default memo(function ManishBhaijiPage() {
 
       {divider}
 
-      {/* ── Spiritual Inspiration ─────────────────────────────────────── */}
+      {/* â”€â”€ Spiritual Inspiration â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="py-14 max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div className="rounded-2xl overflow-hidden">
@@ -179,7 +179,7 @@ export default memo(function ManishBhaijiPage() {
 
       {divider}
 
-      {/* ── Bhagwat Katha and Spiritual Teaching ──────────────────────── */}
+      {/* â”€â”€ Bhagwat Katha and Spiritual Teaching â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="py-14 bg-[#fff3e8]">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
@@ -204,7 +204,7 @@ export default memo(function ManishBhaijiPage() {
 
       {divider}
 
-      {/* ── Guiding Philosophy ────────────────────────────────────────── */}
+      {/* â”€â”€ Guiding Philosophy â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="py-14 max-w-6xl mx-auto px-4">
         <div className="text-center mb-10">
           <p className={`${FOUNDER_LABEL} mb-3`}>{t("founderPage.principlesEyebrow")}</p>
@@ -242,7 +242,7 @@ export default memo(function ManishBhaijiPage() {
 
       {divider}
 
-      {/* ── Inspiration Behind the Foundation ────────────────────────── */}
+      {/* â”€â”€ Inspiration Behind the Foundation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="py-14 bg-[#fff3e8]">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
@@ -260,13 +260,13 @@ export default memo(function ManishBhaijiPage() {
               <div className="space-y-3">
                 {objectives.map((obj) => (
                   <div key={obj} className="flex items-start gap-3 bg-white rounded-xl border border-[#f1dcc0] px-4 py-3">
-                    <span className="text-[#ff6a00] font-bold mt-0.5 shrink-0">✦</span>
+                    <span className="text-[#ff6a00] font-bold mt-0.5 shrink-0">âœ¦</span>
                     <span className={FOUNDER_BODY}>{obj}</span>
                   </div>
                 ))}
               </div>
               <Link to={ROUTES.about.index} className="inline-block mt-6 bg-white border border-[#d2deea] text-[#0d4e85] font-semibold px-6 py-3 rounded-xl hover:bg-[#f2f6fa] transition-colors">
-                {t("founderPage.learnFoundation")} →
+                {t("founderPage.learnFoundation")} â†’
               </Link>
             </div>
           </div>
@@ -275,7 +275,7 @@ export default memo(function ManishBhaijiPage() {
 
       {divider}
 
-      {/* ── Social & Spiritual Service ────────────────────────────────── */}
+      {/* â”€â”€ Social & Spiritual Service â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="py-14 max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div className="rounded-2xl overflow-hidden">
@@ -298,12 +298,12 @@ export default memo(function ManishBhaijiPage() {
 
       {divider}
 
-      {/* ── Youth Inspiration & Cultural Vision ───────────────────────── */}
+      {/* â”€â”€ Youth Inspiration & Cultural Vision â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="py-14 bg-[#fff3e8]">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white rounded-2xl border border-[#f1dcc0] p-6 md:p-8">
-              <div className="text-3xl mb-3">🌱</div>
+              <div className="text-3xl mb-3">ðŸŒ±</div>
               <p className={`${FOUNDER_LABEL} mb-2`}>{t("founderPage.youthEyebrow")}</p>
               <h2 className={`${FOUNDER_HEADING} mb-4 leading-tight`}>{t("founderPage.youthHeading")}</h2>
               <div className={`space-y-3 ${FOUNDER_BODY}`}>
@@ -313,7 +313,7 @@ export default memo(function ManishBhaijiPage() {
               </div>
             </div>
             <div className="bg-white rounded-2xl border border-[#f1dcc0] p-6 md:p-8">
-              <div className="text-3xl mb-3">🏛️</div>
+              <div className="text-3xl mb-3">ðŸ›ï¸</div>
               <p className={`${FOUNDER_LABEL} mb-2`}>{t("founderPage.culturalEyebrow")}</p>
               <h2 className={`${FOUNDER_HEADING} mb-4 leading-tight`}>{t("founderPage.culturalHeading")}</h2>
               <div className={`space-y-3 ${FOUNDER_BODY}`}>
@@ -328,7 +328,7 @@ export default memo(function ManishBhaijiPage() {
 
       {divider}
 
-      {/* ── Message to Society ────────────────────────────────────────── */}
+      {/* â”€â”€ Message to Society â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="py-14 max-w-4xl mx-auto px-4 text-center">
         <p className={`${FOUNDER_LABEL} mb-3`}>{t("founderPage.messageEyebrow")}</p>
         <h2 className={`${FOUNDER_HEADING} mb-8`}>{t("founderPage.messageHeading")}</h2>
@@ -341,18 +341,18 @@ export default memo(function ManishBhaijiPage() {
           <p className={`${FOUNDER_BODY} italic font-medium text-[#7a4f1f]`}>
             &ldquo;{t("founderPage.messageQuote")}&rdquo;
           </p>
-          <footer className={`mt-2 ${ABOUT_BODY_CLASS} font-semibold text-[#f09100]`}>— {t("founderPage.messageQuoteAuthor")}</footer>
+          <footer className={`mt-2 ${ABOUT_BODY_CLASS} font-semibold text-[#f09100]`}>â€” {t("founderPage.messageQuoteAuthor")}</footer>
         </blockquote>
       </section>
 
       {divider}
 
-      {/* ── Services / Connect ────────────────────────────────────────── */}
+      {/* â”€â”€ Services / Connect â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       
 
       {divider}
 
-      {/* ── Continuing the Journey ────────────────────────────────────── */}
+      {/* â”€â”€ Continuing the Journey â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="py-14 bg-[#fff3e8]">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
@@ -379,7 +379,7 @@ export default memo(function ManishBhaijiPage() {
 
       {divider}
 
-      {/* ── Gallery ───────────────────────────────────────────────────── */}
+      {/* â”€â”€ Gallery â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="py-14 max-w-6xl mx-auto px-4">
         <h2 className={`${FOUNDER_HEADING} mb-8 text-center`}>{t("founderPage.devotionTitle")}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -398,7 +398,7 @@ export default memo(function ManishBhaijiPage() {
 
       {divider}
 
-      {/* ── CTA ───────────────────────────────────────────────────────── */}
+      {/* â”€â”€ CTA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="py-14 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className={`${FOUNDER_HEADING} mb-3`}>{t("founderPage.ctaTitle")}</h2>

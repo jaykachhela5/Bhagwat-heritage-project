@@ -152,7 +152,7 @@ export default memo(function VyasanPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0B2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <HeroSection
         title="Vyasanmukti Seva"
         subtitle="Break addiction, rebuild life."
@@ -167,19 +167,19 @@ export default memo(function VyasanPage() {
         <div className="flex flex-wrap justify-center gap-3">
           <Link
             to={ROUTES.donate}
-            className="rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
+            className="rounded-lg bg-[var(--campaign-accent)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
           >
             Donate for Recovery
           </Link>
           <Link
             to={ROUTES.involved.sponsor}
-            className="rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
+            className="rounded-lg bg-[var(--campaign-bg)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
           >
             Sponsor Treatment
           </Link>
           <Link
             to={ROUTES.involved.sponsor}
-            className="rounded-lg bg-[#0b2230] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#15384b]"
+            className="rounded-lg bg-[var(--campaign-deep)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-deep-hover)]"
           >
             Sponsor Awareness Camp
           </Link>
@@ -190,7 +190,7 @@ export default memo(function VyasanPage() {
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {MONTHLY_METRICS.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
                 <p className={SEVA_HIGHLIGHT_TITLE_CLASS}>{item.title}</p>
                 <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
               </div>
@@ -200,12 +200,12 @@ export default memo(function VyasanPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <p className={SEVA_SECTION_LABEL_CLASS}>Addiction We Address</p>
           <h2 className={SEVA_SECTION_HEADING_CLASS}>Understanding the forms of dependency</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
             {ADDICTION_TYPES.map((item) => (
-              <div key={item.title} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
+              <div key={item.title} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
                 <img
                   src={item.image}
                   alt={item.title}
@@ -216,7 +216,7 @@ export default memo(function VyasanPage() {
                 <button
                   type="button"
                   onClick={() => setActiveLearnMore((prev) => (prev === item.title ? null : item.title))}
-                  className="mt-4 inline-flex rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                  className="mt-4 inline-flex rounded-xl bg-[var(--campaign-accent)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
                 >
                   Learn More
                 </button>
@@ -230,13 +230,13 @@ export default memo(function VyasanPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <p className={SEVA_SECTION_LABEL_CLASS}>Recovery Pillars</p>
           <h2 className={SEVA_SECTION_HEADING_CLASS}>Key areas supporting healing and reintegration</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
             {RECOVERY_PILLARS.map((item) => (
-              <div key={item.title} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 text-center shadow-sm">
-                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-xl font-black text-[#ef9a1e]">
+              <div key={item.title} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 text-center shadow-sm">
+                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--campaign-accent)]/15 text-xl font-black text-[var(--campaign-accent)]">
                   {item.icon}
                 </div>
                 <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
@@ -248,16 +248,16 @@ export default memo(function VyasanPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <p className={SEVA_SECTION_LABEL_CLASS}>Rehabilitation Process</p>
           <h2 className={SEVA_SECTION_HEADING_CLASS}>Step-by-step recovery and support journey</h2>
           <div className="mt-8 space-y-4">
             {REHABILITATION_STEPS.map((step, i) => (
-              <div key={step} className="flex items-start gap-4 rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
-                <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#0b2230] text-sm font-black text-white">
+              <div key={step} className="flex items-start gap-4 rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
+                <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[var(--campaign-deep)] text-sm font-black text-white">
                   {i + 1}
                 </span>
-                <p className="text-base leading-7 text-[#dce7ec] md:text-lg">{step}</p>
+                <p className="text-base leading-7 text-[var(--campaign-text)] md:text-lg">{step}</p>
               </div>
             ))}
           </div>
@@ -265,13 +265,13 @@ export default memo(function VyasanPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <p className={SEVA_SECTION_LABEL_CLASS}>Recovery Stories</p>
           <h2 className={SEVA_SECTION_HEADING_CLASS}>Voices of change, trust, and healing</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
             {TESTIMONIALS.map((item) => (
-              <div key={item.name} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
-                <p className="text-base leading-7 text-[#dce7ec]">"{item.quote}"</p>
+              <div key={item.name} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
+                <p className="text-base leading-7 text-[var(--campaign-text)]">"{item.quote}"</p>
                 <p className="mt-4 text-[14px] font-black text-white md:text-[20px]">{item.name}</p>
               </div>
             ))}
@@ -280,31 +280,31 @@ export default memo(function VyasanPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <p className={SEVA_SECTION_LABEL_CLASS}>Support Recovery Programs</p>
           <h2 className={SEVA_SECTION_HEADING_CLASS}>Ways to sponsor treatment and awareness support</h2>
-          <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">
+          <p className="mt-4 text-base leading-7 text-[var(--campaign-text)] md:text-lg">
             Choose a direct donation or sponsor a focused support track to help someone move from addiction toward recovery, discipline, and hope.
           </p>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
             {RECOVERY_SUPPORT_OPTIONS.map((tier) => (
-              <div key={tier.label} className="flex h-full flex-col rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
-                <span className="inline-flex w-fit rounded-full bg-[#ef9a1e]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#ef9a1e]">
+              <div key={tier.label} className="flex h-full flex-col rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
+                <span className="inline-flex w-fit rounded-full bg-[var(--campaign-accent)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--campaign-accent)]">
                   {tier.badge}
                 </span>
                 <h3 className={`mt-4 ${SEVA_CARD_TITLE_CLASS}`}>{tier.label}</h3>
-                <p className="mt-2 text-[14px] font-black text-[#ef9a1e] md:text-[20px]">{tier.amount}</p>
+                <p className="mt-2 text-[14px] font-black text-[var(--campaign-accent)] md:text-[20px]">{tier.amount}</p>
                 <p className={`mt-3 flex-1 ${SEVA_BODY_TEXT_CLASS}`}>{tier.note}</p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <Link
                     to={ROUTES.donate}
-                    className="inline-flex items-center rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                    className="inline-flex items-center rounded-xl bg-[var(--campaign-accent)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
                   >
                     Donate Now
                   </Link>
                   <Link
                     to={ROUTES.involved.sponsor}
-                    className="inline-flex items-center rounded-xl bg-[#0b2230] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#15384b]"
+                    className="inline-flex items-center rounded-xl bg-[var(--campaign-deep)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-deep-hover)]"
                   >
                     Sponsor
                   </Link>
@@ -316,13 +316,13 @@ export default memo(function VyasanPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <p className={SEVA_SECTION_LABEL_CLASS}>Frequently Asked Questions</p>
           <div className="mt-8 space-y-3">
             {FAQ.map((item) => (
-              <details key={item.q} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5">
+              <details key={item.q} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5">
                 <summary className="cursor-pointer text-[14px] font-black text-white md:text-[20px]">{item.q}</summary>
-                <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.a}</p>
+                <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.a}</p>
               </details>
             ))}
           </div>
@@ -330,38 +330,38 @@ export default memo(function VyasanPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
-            <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm lg:col-span-1">
+            <div className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm lg:col-span-1">
               <p className={SEVA_SECTION_LABEL_CLASS}>Early Warning Signs</p>
-              <ul className="mt-5 space-y-3 text-base leading-7 text-[#dce7ec] md:text-lg">
+              <ul className="mt-5 space-y-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">
                 {WARNING_SIGNS.map((line) => (
                   <li key={line} className="flex gap-3">
-                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#ef9a1e]" />
+                    <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--campaign-accent)]" />
                     <span>{line}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 text-white shadow-sm lg:col-span-3">
+            <div className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 text-white shadow-sm lg:col-span-3">
               <p className={SEVA_SECTION_LABEL_CLASS}>Need Immediate Help?</p>
               <h2 className={SEVA_SECTION_HEADING_CLASS}>Connect for confidential recovery guidance</h2>
-              <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">
+              <p className="mt-4 text-base leading-7 text-[var(--campaign-text)] md:text-lg">
                 Connect with our Vyasanmukti support team for confidential guidance, counseling, and the right recovery path.
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
-                <Link to={ROUTES.contact} className="rounded-xl bg-[#0b2230] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#15384b]">
+                <Link to={ROUTES.contact} className="rounded-xl bg-[var(--campaign-deep)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-deep-hover)]">
                   Contact Counselor
                 </Link>
                 <Link
                   to={ROUTES.involved.sponsor}
-                  className="rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                  className="rounded-xl bg-[var(--campaign-accent)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
                 >
                   Sponsor Treatment
                 </Link>
                 <Link
                   to={ROUTES.donate}
-                  className="rounded-xl bg-[#0b2230] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#15384b]"
+                  className="rounded-xl bg-[var(--campaign-deep)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-deep-hover)]"
                 >
                   Donate Now
                 </Link>

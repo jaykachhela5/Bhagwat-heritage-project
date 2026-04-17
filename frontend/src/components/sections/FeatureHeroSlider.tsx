@@ -27,7 +27,7 @@ export const FeatureHeroSlider = memo(function FeatureHeroSlider({ slides, class
 
   const rootClass =
     variant === "gauseva"
-      ? `relative h-[260px] md:h-[430px] rounded-[34px] overflow-hidden border border-white/10 bg-[#0d6179] shadow-[0_20px_44px_rgba(0,0,0,0.22)] ${className}`
+      ? `relative h-[260px] md:h-[430px] rounded-[34px] overflow-hidden border border-white/10 bg-[var(--campaign-bg)] shadow-[0_20px_44px_rgba(0,0,0,0.22)] ${className}`
       : `relative h-[260px] md:h-[430px] rounded-[28px] overflow-hidden border border-[#dbe7f4] shadow-[0_14px_35px_rgba(13,59,102,0.22)] ${className}`;
 
   const contentClass =
@@ -35,7 +35,7 @@ export const FeatureHeroSlider = memo(function FeatureHeroSlider({ slides, class
 
   const titleClass = variant === "gauseva" ? "text-3xl md:text-6xl font-black leading-tight" : "text-3xl md:text-6xl font-black leading-tight";
 
-  const subtitleClass = variant === "gauseva" ? "mt-2 text-[15px] md:text-lg text-[#ef9a1e] font-medium" : "mt-2 md:text-lg text-white/95";
+  const subtitleClass = variant === "gauseva" ? "mt-2 text-[15px] md:text-lg text-[var(--campaign-accent)] font-medium" : "mt-2 md:text-lg text-white/95";
 
   return (
     <div className={rootClass}>

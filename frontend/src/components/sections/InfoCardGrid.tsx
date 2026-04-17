@@ -1,4 +1,4 @@
-﻿import { memo } from "react";
+import { memo } from "react";
 
 export interface SectionCardItem {
   title: string;
@@ -21,23 +21,23 @@ export const InfoCardGrid = memo(function InfoCardGrid({
 }: InfoCardGridProps) {
   const titleClass =
     variant === "gauseva"
-      ? "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] text-center mb-5"
+      ? "text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] text-center mb-5"
       : "text-2xl md:text-4xl font-black text-[#0c5b7d] text-center mb-5";
 
   const articleClass =
     variant === "gauseva"
-      ? "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-[0_14px_30px_rgba(0,0,0,0.18)]"
+      ? "rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-[0_14px_30px_rgba(0,0,0,0.18)]"
       : "rounded-2xl border border-[#dce8f5] bg-white p-5 shadow-sm hover:shadow-md transition";
 
   const iconClass =
     variant === "gauseva"
-      ? "mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#ef9a1e]/15 text-[#ef9a1e]"
+      ? "mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]"
       : "mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#fff0da] text-[#a85b10]";
 
   const headingClass =
     variant === "gauseva" ? "text-[14px] font-black text-white md:text-[20px]" : "text-xl font-black text-[#0c5b7d]";
 
-  const descClass = variant === "gauseva" ? "text-sm leading-6 text-[#dce7ec] mt-2" : "text-sm text-[#4f6272] mt-2";
+  const descClass = variant === "gauseva" ? "text-sm leading-6 text-[var(--campaign-text)] mt-2" : "text-sm text-[#4f6272] mt-2";
 
   return (
     <div>

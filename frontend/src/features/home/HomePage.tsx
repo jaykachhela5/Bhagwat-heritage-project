@@ -1,9 +1,9 @@
-import { memo, useCallback, useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { EXTERNAL_RAZORPAY_DONATE_URL, ROUTES } from "../../app/routes/routes";
+import { HeroSection, type HeroSlide } from "../../components/ui/HeroSection";
 import { usePageMeta } from "../../hooks/usePageMeta";
-const HOMEPAGE_BANNER_SRC = "/images/homepage/HomePageBanner.jpeg";
 const UPCOMING_EVENT_IMAGE_LEFT = "https://res.cloudinary.com/der8zinu8/image/upload/v1774879635/u0_lxrinw.jpg";
 const UPCOMING_EVENT_IMAGE_RIGHT = "https://res.cloudinary.com/der8zinu8/image/upload/v1774879636/u1_eobmdm.jpg";
 const UPCOMING_EVENT_TITLE = "Shri Maharashtra Kashtbhanjan Hanuman Janmotsav 2026";
@@ -19,10 +19,10 @@ const UPCOMING_EVENT_DETAILS =
   "Celebrate Hanuman Janmotsav in the divine presence of Sant Shri Manish Bhaiji Maharaj with aarti, puja, maha abhishek, Sundarkand path, mahaprasad, Hanuman Charitra Gatha, and evening maha aarti.";
 
 const PRIMARY_BUTTON =
-  "inline-flex items-center justify-center rounded-lg bg-[#f1a15c] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#e48d45]";
+  "inline-flex items-center justify-center rounded-lg bg-[var(--color-footer-cta)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-footer-cta-hover)]";
 const SECONDARY_BUTTON =
   "inline-flex items-center justify-center rounded-lg border border-[#d4a270] bg-white px-6 py-3 text-sm font-semibold text-[#9a5310] transition-colors hover:bg-[#fff7ef]";
-const HOME_SECTION_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]";
+const HOME_SECTION_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]";
 const HOME_SECTION_HEADING = "mt-2 text-[14px] font-black leading-tight text-[#12394c] md:text-[20px]";
 const HOME_BODY = "text-base leading-7 text-[#38505f] md:text-lg";
 const HOME_CARD_TITLE = "text-2xl font-black text-[#12394c] md:text-[1.75rem]";
@@ -167,7 +167,7 @@ function UpcomingEventModal({ onClose }: { onClose: () => void }) {
             <p className={`mt-6 max-w-2xl ${HOME_BODY}`}>{UPCOMING_EVENT_DETAILS}</p>
 
             <div className="mt-6 rounded-[24px] border border-[#f1ddca] bg-[#fff9f3] p-5">
-              <p className="text-base font-black uppercase tracking-[0.18em] text-[#ef9a1e]">Quick Highlights</p>
+              <p className="text-base font-black uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Quick Highlights</p>
               <ul className="mt-4 space-y-3 text-base leading-7 text-[#38505f]">
                 <li>5:30 AM - Janmotsav Aarti</li>
                 <li>8:00 AM - Puja, Maha Abhishek, Shringar, and Mandal Puja</li>
@@ -209,6 +209,59 @@ export default memo(function HomePage() {
   usePageMeta(t("home.meta.title"), t("home.meta.description"));
   const [showUpcomingModal, setShowUpcomingModal] = useState(true);
 
+  const heroSlides = useMemo<HeroSlide[]>(
+    () => [
+      {
+        id: 1,
+        image: "https://res.cloudinary.com/der8zinu8/image/upload/v1774802023/swami_r7ypl0.jpg",
+        title: t("home.heroSlides.foundationTitle", { defaultValue: "Bhagwat Heritage" }),
+        subtitle: t("home.heroSlides.foundationSubtitle", {
+          defaultValue: "Spiritual wisdom, seva, and cultural awakening",
+        }),
+        link: ROUTES.about.index,
+      },
+      {
+        id: 2,
+        image: "https://res.cloudinary.com/der8zinu8/image/upload/v1774588045/worldspiritual_smnrog.png",
+        title: t("home.heroSlides.founderTitle", {
+          defaultValue: "Sant Shri Manish Bhaiji Maharaj",
+        }),
+        subtitle: t("home.heroSlides.founderSubtitle", {
+          defaultValue: "Guiding lives through devotion and service",
+        }),
+        link: ROUTES.about.founder,
+      },
+      {
+        id: 3,
+        image: "https://res.cloudinary.com/der8zinu8/image/upload/v1772647455/hero2_eenipn.png",
+        title: t("home.heroSlides.sevaTitle", { defaultValue: "Seva Initiatives" }),
+        subtitle: t("home.heroSlides.sevaSubtitle", {
+          defaultValue: "Join compassionate service for humanity",
+        }),
+        link: ROUTES.seva.index,
+      },
+      {
+        id: 4,
+        image: "https://res.cloudinary.com/der8zinu8/image/upload/v1771999936/hanuman5_yhct8y.jpg",
+        title: t("home.heroSlides.mandirTitle", { defaultValue: "Mandir & Teerth" }),
+        subtitle: t("home.heroSlides.mandirSubtitle", {
+          defaultValue: "Explore sacred heritage and spiritual vision",
+        }),
+        link: ROUTES.mandirTeerth.index,
+      },
+      {
+        id: 5,
+        image: "/images/homepage/HomePageBanner.jpeg",
+        title: t("home.heroSlides.foundationTitle", { defaultValue: "Bhagwat Heritage" }),
+        subtitle: t("home.heroSlides.foundationSubtitle", {
+          defaultValue: "Spiritual wisdom, seva, and cultural awakening",
+        }),
+        link: ROUTES.about.index,
+      },
+    ],
+    [t],
+  );
+
   const closeUpcomingModal = useCallback(() => {
     setShowUpcomingModal(false);
   }, []);
@@ -226,20 +279,12 @@ export default memo(function HomePage() {
         }}
       >
         <section className="w-full pt-0">
-          <div className="relative h-[38vw] max-h-[85vh] min-h-[200px] w-full overflow-hidden sm:h-[42vw] md:h-[min(68vh,800px)]">
-            <img
-              src={HOMEPAGE_BANNER_SRC}
-              alt=""
-              className="block h-full w-full object-cover object-center"
-              fetchPriority="high"
-              decoding="async"
-            />
-          </div>
-          <div className="w-full px-4 pb-2 pt-4 text-center sm:px-5 sm:pt-5 md:px-6 md:pt-6">
-            <h1 className="mx-auto max-w-5xl text-2xl font-bold leading-tight text-[#0d3b66] sm:text-3xl md:text-4xl lg:text-5xl">
-              {t("home.heroTitle")}
-            </h1>
-          </div>
+          <HeroSection
+            title={t("home.heroTitle")}
+            slides={heroSlides}
+            autoplayDelayMs={5600}
+            heightClass="h-[calc(58vh+40px)] min-h-[360px] max-h-[800px] sm:h-[calc(62vh+40px)] md:h-[calc(68vh+40px)] lg:h-[calc(72vh+40px)]"
+          />
         </section>
 
         <section className="px-4 py-16">

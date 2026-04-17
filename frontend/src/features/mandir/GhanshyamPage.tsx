@@ -1,4 +1,4 @@
-﻿import { memo, useState, type FormEvent } from "react";
+import { memo, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 
 const HERO_STATS = [
@@ -229,11 +229,11 @@ This aarti honors Shri Swaminarayan Bhagwan with devotion, gratitude, and rememb
 
 It is offered as a prayer of surrender, service, and spiritual discipline.`;
 const sectionShellClass =
-  "rounded-3xl border border-white/10 bg-[#0d6179] p-6 md:p-8 shadow-[0_18px_40px_rgba(0,0,0,0.18)]";
+  "rounded-3xl border border-white/10 bg-[var(--campaign-bg)] p-6 md:p-8 shadow-[0_18px_40px_rgba(0,0,0,0.18)]";
 const sectionEyebrowClass =
-  "text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]";
+  "text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]";
 const sectionTitleClass = "mt-2 text-[16px] font-black text-white md:text-[22px]";
-const sectionBodyClass = "text-base leading-8 text-[#dce7ec] md:text-lg";
+const sectionBodyClass = "text-base leading-8 text-[var(--campaign-text)] md:text-lg";
 const sectionCardClass =
   "rounded-2xl border border-white/10 bg-[#156b86] p-5 shadow-[0_12px_24px_rgba(0,0,0,0.15)]";
 
@@ -269,13 +269,13 @@ export default memo(function GhanshyamPage() {
           <div className="flex flex-wrap justify-center gap-3">
             <Link
               to="/get-involved"
-              className="inline-flex items-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
+              className="inline-flex items-center rounded-lg bg-[var(--campaign-accent)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
             >
               Join Satsang Service
             </Link>
             <Link
               to="/donate"
-              className="inline-flex items-center rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
+              className="inline-flex items-center rounded-lg bg-[var(--campaign-bg)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
             >
               Donate for Mandir Service
             </Link>
@@ -293,9 +293,9 @@ export default memo(function GhanshyamPage() {
         <div className="mx-auto max-w-6xl px-4">
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {HERO_STATS.map((item) => (
-              <div key={item.label} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
-                <p className="text-[24px] font-black uppercase tracking-wide text-[#ef9a1e]">{item.label}</p>
-                <p className="mt-1 text-base leading-7 text-[#dce7ec] md:text-lg">{item.note}</p>
+              <div key={item.label} className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+                <p className="text-[24px] font-black uppercase tracking-wide text-[var(--campaign-accent)]">{item.label}</p>
+                <p className="mt-1 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.note}</p>
               </div>
             ))}
           </div>
@@ -336,8 +336,8 @@ export default memo(function GhanshyamPage() {
               },
             ].map((item) => (
               <div key={item.title} className={sectionCardClass}>
-                <h3 className="text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">{item.title}</h3>
-                <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{item.desc}</p>
+                <h3 className="text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">{item.title}</h3>
+                <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -365,7 +365,7 @@ export default memo(function GhanshyamPage() {
                     onClick={() => setActiveProjectFocus(focus)}
                     className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                       active
-                        ? "bg-[#ef9a1e] text-white"
+                        ? "bg-[var(--campaign-accent)] text-white"
                         : "border border-white/15 bg-white/10 text-white hover:bg-white/15"
                     }`}
                   >
@@ -380,15 +380,15 @@ export default memo(function GhanshyamPage() {
             {visibleProjectAreas.map((item) => (
               <div key={item.title} className={sectionCardClass}>
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-[#ef9a1e] px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
+                  <span className="rounded-full bg-[var(--campaign-accent)] px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
                     {item.category}
                   </span>
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#dce7ec]">
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[var(--campaign-text)]">
                     Project Insight
                   </span>
                 </div>
-                <h3 className="mt-4 text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">{item.title}</h3>
-                <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{item.desc}</p>
+                <h3 className="mt-4 text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">{item.title}</h3>
+                <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
                 <div className="mt-4 rounded-2xl border border-white/10 bg-white/10 p-4">
                   <p className="text-sm font-semibold uppercase tracking-[0.12em] text-white/75">Feature Focus</p>
                   <p className="mt-2 text-base leading-8 text-white md:text-lg">{item.feature}</p>
@@ -408,8 +408,8 @@ export default memo(function GhanshyamPage() {
               {PROJECT_DEVELOPMENT_PHASES.map((phase, index) => (
                 <div key={phase.title} className={sectionCardClass}>
                   <p className="text-sm font-bold uppercase tracking-[0.14em] text-white/75">Stage {index + 1}</p>
-                  <h3 className="mt-2 text-[22px] font-black text-[#ef9a1e] md:text-[24px]">{phase.title}</h3>
-                  <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{phase.desc}</p>
+                  <h3 className="mt-2 text-[22px] font-black text-[var(--campaign-accent)] md:text-[24px]">{phase.title}</h3>
+                  <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{phase.desc}</p>
                 </div>
               ))}
             </div>
@@ -419,8 +419,8 @@ export default memo(function GhanshyamPage() {
             <h2 className={sectionTitleClass}>Where Support Can Help</h2>
             <ul className="mt-6 space-y-3">
               {PROJECT_SUPPORT_TRACKS.map((line) => (
-                <li key={line} className="flex gap-3 text-base leading-8 text-[#dce7ec] md:text-lg">
-                  <span className="mt-3 h-2.5 w-2.5 rounded-full bg-[#ef9a1e]" />
+                <li key={line} className="flex gap-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">
+                  <span className="mt-3 h-2.5 w-2.5 rounded-full bg-[var(--campaign-accent)]" />
                   <span>{line}</span>
                 </li>
               ))}
@@ -429,7 +429,7 @@ export default memo(function GhanshyamPage() {
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
               <Link
                 to="/donate"
-                className="inline-flex items-center justify-center rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white hover:bg-[#de930a] transition"
+                className="inline-flex items-center justify-center rounded-xl bg-[var(--campaign-accent)] px-5 py-3 text-sm font-bold text-white hover:bg-[var(--campaign-accent-hover)] transition"
               >
                 Support Project
               </Link>
@@ -457,7 +457,7 @@ export default memo(function GhanshyamPage() {
               onClick={() => setActiveAartiLang((prev) => (prev === "hindi" ? null : "hindi"))}
               className={`rounded-lg px-4 py-2.5 text-sm font-semibold transition ${
                 activeAartiLang === "hindi"
-                  ? "bg-[#ef9a1e] text-white"
+                  ? "bg-[var(--campaign-accent)] text-white"
                   : "border border-white/15 bg-white/10 text-white hover:bg-white/15"
               }`}
             >
@@ -468,7 +468,7 @@ export default memo(function GhanshyamPage() {
               onClick={() => setActiveAartiLang((prev) => (prev === "marathi" ? null : "marathi"))}
               className={`rounded-lg px-4 py-2.5 text-sm font-semibold transition ${
                 activeAartiLang === "marathi"
-                  ? "bg-[#ef9a1e] text-white"
+                  ? "bg-[var(--campaign-accent)] text-white"
                   : "border border-white/15 bg-white/10 text-white hover:bg-white/15"
               }`}
             >
@@ -479,7 +479,7 @@ export default memo(function GhanshyamPage() {
               onClick={() => setActiveAartiLang((prev) => (prev === "gujarati" ? null : "gujarati"))}
               className={`rounded-lg px-4 py-2.5 text-sm font-semibold transition ${
                 activeAartiLang === "gujarati"
-                  ? "bg-[#ef9a1e] text-white"
+                  ? "bg-[var(--campaign-accent)] text-white"
                   : "border border-white/15 bg-white/10 text-white hover:bg-white/15"
               }`}
             >
@@ -490,7 +490,7 @@ export default memo(function GhanshyamPage() {
               onClick={() => setActiveAartiLang((prev) => (prev === "english" ? null : "english"))}
               className={`rounded-lg px-4 py-2.5 text-sm font-semibold transition ${
                 activeAartiLang === "english"
-                  ? "bg-[#ef9a1e] text-white"
+                  ? "bg-[var(--campaign-accent)] text-white"
                   : "border border-white/15 bg-white/10 text-white hover:bg-white/15"
               }`}
             >
@@ -518,7 +518,7 @@ export default memo(function GhanshyamPage() {
                   required
                   value={kundaliForm.fullName}
                   onChange={(e) => setKundaliForm((prev) => ({ ...prev, fullName: e.target.value }))}
-                  className="mt-2 w-full rounded-lg border border-white/15 bg-white px-3 py-2 text-[#173b57] outline-none focus:border-[#ef9a1e]"
+                  className="mt-2 w-full rounded-lg border border-white/15 bg-white px-3 py-2 text-[#173b57] outline-none focus:border-[var(--campaign-accent)]"
                 />
               </div>
 
@@ -526,7 +526,7 @@ export default memo(function GhanshyamPage() {
                 <label className="text-sm font-semibold text-white">Sex (Male / Female)</label>
                 <div className="mt-2 flex gap-3">
                   {["Male", "Female"].map((sex) => (
-                    <label key={sex} className="inline-flex items-center gap-2 text-sm text-[#dce7ec]">
+                    <label key={sex} className="inline-flex items-center gap-2 text-sm text-[var(--campaign-text)]">
                       <input
                         type="radio"
                         name="sex"
@@ -546,7 +546,7 @@ export default memo(function GhanshyamPage() {
                   required
                   value={kundaliForm.dateOfBirth}
                   onChange={(e) => setKundaliForm((prev) => ({ ...prev, dateOfBirth: e.target.value }))}
-                  className="mt-2 w-full rounded-lg border border-white/15 bg-white px-3 py-2 text-[#173b57] outline-none focus:border-[#ef9a1e]"
+                  className="mt-2 w-full rounded-lg border border-white/15 bg-white px-3 py-2 text-[#173b57] outline-none focus:border-[var(--campaign-accent)]"
                 />
               </div>
 
@@ -557,7 +557,7 @@ export default memo(function GhanshyamPage() {
                   required
                   value={kundaliForm.timeOfBirth}
                   onChange={(e) => setKundaliForm((prev) => ({ ...prev, timeOfBirth: e.target.value }))}
-                  className="mt-2 w-full rounded-lg border border-white/15 bg-white px-3 py-2 text-[#173b57] outline-none focus:border-[#ef9a1e]"
+                  className="mt-2 w-full rounded-lg border border-white/15 bg-white px-3 py-2 text-[#173b57] outline-none focus:border-[var(--campaign-accent)]"
                 />
               </div>
 
@@ -567,7 +567,7 @@ export default memo(function GhanshyamPage() {
                   required
                   value={kundaliForm.placeOfBirth}
                   onChange={(e) => setKundaliForm((prev) => ({ ...prev, placeOfBirth: e.target.value }))}
-                  className="mt-2 w-full rounded-lg border border-white/15 bg-white px-3 py-2 text-[#173b57] outline-none focus:border-[#ef9a1e]"
+                  className="mt-2 w-full rounded-lg border border-white/15 bg-white px-3 py-2 text-[#173b57] outline-none focus:border-[var(--campaign-accent)]"
                 />
               </div>
 
@@ -577,13 +577,13 @@ export default memo(function GhanshyamPage() {
                   required
                   value={kundaliForm.district}
                   onChange={(e) => setKundaliForm((prev) => ({ ...prev, district: e.target.value }))}
-                  className="mt-2 w-full rounded-lg border border-white/15 bg-white px-3 py-2 text-[#173b57] outline-none focus:border-[#ef9a1e]"
+                  className="mt-2 w-full rounded-lg border border-white/15 bg-white px-3 py-2 text-[#173b57] outline-none focus:border-[var(--campaign-accent)]"
                 />
               </div>
             </div>
 
             <div>
-              <h3 className="mb-3 text-[22px] font-black text-[#ef9a1e]">Kundali Types</h3>
+              <h3 className="mb-3 text-[22px] font-black text-[var(--campaign-accent)]">Kundali Types</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {ENGLISH_KUNDALI_TYPES.map((item) => (
                   <label
@@ -596,14 +596,14 @@ export default memo(function GhanshyamPage() {
                       onChange={() => toggleSelection("kundaliTypes", item)}
                     />
                     <span className="text-base leading-7 text-white md:text-lg">{item}</span>
-                    <span>â˜¸ {item}</span>
+                    <span>Ã¢ËœÂ¸ {item}</span>
                   </label>
                 ))}
               </div>
             </div>
 
             <div>
-              <h3 className="mb-3 text-[22px] font-black text-[#ef9a1e]">Extra Kundali Reports</h3>
+              <h3 className="mb-3 text-[22px] font-black text-[var(--campaign-accent)]">Extra Kundali Reports</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {ENGLISH_EXTRA_KUNDALI_REPORTS.map((item) => (
                   <label
@@ -616,22 +616,22 @@ export default memo(function GhanshyamPage() {
                       onChange={() => toggleSelection("extraReports", item)}
                     />
                     <span className="text-base leading-7 text-white md:text-lg">{item}</span>
-                    <span>ðŸ”¯ {item}</span>
+                    <span>Ã°Å¸â€Â¯ {item}</span>
                   </label>
                 ))}
               </div>
             </div>
 
             <div>
-              <h3 className="mb-3 text-[22px] font-black text-[#ef9a1e]">Language Preference</h3>
+              <h3 className="mb-3 text-[22px] font-black text-[var(--campaign-accent)]">Language Preference</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 {(["english", "hindi", "marathi", "gujarati"] as KundaliLanguage[]).map((lang) => (
                   <label
                     key={lang}
                     className={`rounded-xl border px-4 py-3 flex items-center gap-2 text-sm font-semibold capitalize cursor-pointer transition ${
                       kundaliForm.language === lang
-                        ? "border-[#ef9a1e] bg-[#ef9a1e]/10 text-white"
-                        : "border-white/10 bg-[#156b86] text-[#dce7ec]"
+                        ? "border-[var(--campaign-accent)] bg-[var(--campaign-accent)]/10 text-white"
+                        : "border-white/10 bg-[#156b86] text-[var(--campaign-text)]"
                     }`}
                   >
                     <input
@@ -649,7 +649,7 @@ export default memo(function GhanshyamPage() {
             <div className="text-center">
               <button
                 type="submit"
-                className="rounded-xl bg-[#ef9a1e] px-6 py-3 font-bold text-white transition hover:bg-[#de930a] shadow-[0_8px_18px_rgba(0,0,0,0.22)]"
+                className="rounded-xl bg-[var(--campaign-accent)] px-6 py-3 font-bold text-white transition hover:bg-[var(--campaign-accent-hover)] shadow-[0_8px_18px_rgba(0,0,0,0.22)]"
               >
                 Request a Kundali
               </button>
@@ -657,7 +657,7 @@ export default memo(function GhanshyamPage() {
           </form>
 
           {showPayment && (
-            <div className="mt-6 rounded-2xl border border-[#ef9a1e]/40 bg-[#ef9a1e]/10 p-5">
+            <div className="mt-6 rounded-2xl border border-[var(--campaign-accent)]/40 bg-[var(--campaign-accent)]/10 p-5">
               <p className="text-center font-semibold text-white">
                 Your Kundali request will be processed only after successful payment.
               </p>
@@ -694,13 +694,13 @@ export default memo(function GhanshyamPage() {
               <p className={sectionEyebrowClass}>Daily Rhythm</p>
               <h2 className={sectionTitleClass}>Swaminarayan Darshan Schedule</h2>
             </div>
-            <p className="text-sm text-[#dce7ec] md:text-base">Structured daily flow for darshan, aarti, and bhakti.</p>
+            <p className="text-sm text-[var(--campaign-text)] md:text-base">Structured daily flow for darshan, aarti, and bhakti.</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-3">
             {DAILY_SCHEDULE.map((item) => (
               <article key={item.title} className={sectionCardClass}>
-                <h3 className="text-[22px] font-black text-[#ef9a1e]">{item.title}</h3>
+                <h3 className="text-[22px] font-black text-[var(--campaign-accent)]">{item.title}</h3>
                 <p className="mt-2 text-base text-white md:text-lg">{item.time}</p>
               </article>
             ))}
@@ -722,15 +722,15 @@ export default memo(function GhanshyamPage() {
 
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
             <article className={sectionCardClass}>
-              <h3 className="mb-4 text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">Daily Worship Services</h3>
+              <h3 className="mb-4 text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">Daily Worship Services</h3>
               <div className="space-y-3">
                 {ENGLISH_DAILY_PUJA_SERVICES.map((item) => (
                   <div key={item.name} className="rounded-xl border border-white/10 bg-white/10 p-4 transition hover:bg-white/15">
                     <div className="flex items-start justify-between gap-2">
                       <p className="text-lg font-black text-white">{item.name}</p>
-                      <span className="rounded-full bg-[#ef9a1e] px-3 py-1 text-xs font-bold text-white">{item.price}</span>
+                      <span className="rounded-full bg-[var(--campaign-accent)] px-3 py-1 text-xs font-bold text-white">{item.price}</span>
                     </div>
-                    <p className="mt-2 text-sm text-[#dce7ec]">Timing: {item.timing}</p>
+                    <p className="mt-2 text-sm text-[var(--campaign-text)]">Timing: {item.timing}</p>
                     <div className="mt-3 flex gap-2">
                       <Link
                         to="/get-involved"
@@ -751,15 +751,15 @@ export default memo(function GhanshyamPage() {
             </article>
 
             <article className={sectionCardClass}>
-              <h3 className="mb-4 text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">Special Worship and Ritual Services</h3>
+              <h3 className="mb-4 text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">Special Worship and Ritual Services</h3>
               <div className="space-y-3">
                 {ENGLISH_SPECIAL_PUJA_SERVICES.map((item) => (
                   <div key={item.name} className="rounded-xl border border-white/10 bg-white/10 p-4 transition hover:bg-white/15">
                     <div className="flex items-start justify-between gap-2">
                       <p className="text-lg font-black text-white">{item.name}</p>
-                      <span className="rounded-full bg-[#ef9a1e] px-3 py-1 text-xs font-bold text-white">{item.price}</span>
+                      <span className="rounded-full bg-[var(--campaign-accent)] px-3 py-1 text-xs font-bold text-white">{item.price}</span>
                     </div>
-                    <p className="mt-2 text-sm text-[#dce7ec]">Timing: {item.timing}</p>
+                    <p className="mt-2 text-sm text-[var(--campaign-text)]">Timing: {item.timing}</p>
                     <div className="mt-3 flex gap-2">
                       <Link
                         to="/get-involved"
@@ -801,7 +801,7 @@ export default memo(function GhanshyamPage() {
               >
                 <summary className="list-none cursor-pointer">
                   <div className="flex items-center justify-between gap-3">
-                    <h3 className="text-base font-black text-[#ef9a1e] md:text-lg">{group.name}</h3>
+                    <h3 className="text-base font-black text-[var(--campaign-accent)] md:text-lg">{group.name}</h3>
                     <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-white">
                       {group.items.length} Services
                     </span>
@@ -810,13 +810,13 @@ export default memo(function GhanshyamPage() {
                     {group.items.slice(0, 4).map((feature) => (
                       <span
                         key={feature}
-                        className="rounded-full border border-white/10 bg-white/10 px-2.5 py-1 text-xs text-[#dce7ec]"
+                        className="rounded-full border border-white/10 bg-white/10 px-2.5 py-1 text-xs text-[var(--campaign-text)]"
                       >
                         {feature}
                       </span>
                     ))}
                     {group.items.length > 4 && (
-                      <span className="rounded-full border border-white/10 bg-white/10 px-2.5 py-1 text-xs text-[#dce7ec]">
+                      <span className="rounded-full border border-white/10 bg-white/10 px-2.5 py-1 text-xs text-[var(--campaign-text)]">
                         +{group.items.length - 4} more
                       </span>
                     )}

@@ -1,4 +1,4 @@
-﻿import { memo, useEffect, useRef, useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
+import { memo, useEffect, useRef, useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../../app/providers/AuthProvider";
 import { PageSectionShell } from "../../components/sections/PageSectionShell";
@@ -817,7 +817,7 @@ function ArchitecturePlaceholderPage({
     <div className="pb-12">
       <PageSectionShell className="pt-8 md:pt-10">
         <div className="rounded-3xl border border-[#dce8f5] bg-white p-6 md:p-8 shadow-sm">
-          <p className="inline-flex rounded-full border border-[#d8e4f2] bg-[#f5f9ff] px-3 py-1 text-xs font-semibold text-[#1d4d75]">
+          <p className="inline-flex rounded-full border border-[var(--color-border-nav)] bg-[#f5f9ff] px-3 py-1 text-xs font-semibold text-[#1d4d75]">
             Content Placeholder
           </p>
           <h1 className="mt-3 text-3xl md:text-5xl font-black text-[#123753]">{title}</h1>
@@ -836,7 +836,7 @@ function ArchitecturePlaceholderPage({
           <ul className="space-y-2 text-[#4f6272]">
             {bullets.map((line) => (
               <li key={line} className="flex gap-2">
-                <span className="mt-2 inline-block h-2 w-2 rounded-full bg-[#0d3b66]" />
+                <span className="mt-2 inline-block h-2 w-2 rounded-full bg-[var(--color-secondary)]" />
                 <span>{line}</span>
               </li>
             ))}
@@ -883,12 +883,12 @@ const EVENT_SEVA_PRIMARY_BUTTON_CLASS =
 const EVENT_SEVA_SECONDARY_BUTTON_CLASS =
   "inline-flex items-center rounded-lg bg-[#0f7994] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(15,121,148,0.28)] transition-colors hover:bg-[#1492b1]";
 const EVENT_SEVA_SECTION_CLASS =
-  "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
+  "rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
 const EVENT_SEVA_CARD_CLASS =
-  "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
+  "rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
 const EVENT_SEVA_HIGHLIGHT_CARD_CLASS =
-  "rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]";
-const EVENT_SEVA_DETAIL_CARD_CLASS = "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm";
+  "rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]";
+const EVENT_SEVA_DETAIL_CARD_CLASS = "rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm";
 
 function EventShowcasePage({
   title,
@@ -932,7 +932,7 @@ function EventShowcasePage({
   usePageMeta(title, metaDescription);
 
   return (
-    <div className="min-h-screen bg-[#0b2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <HeroSection
         title={title}
         subtitle={subtitle}
@@ -1029,8 +1029,8 @@ function EventShowcasePage({
             ) : null}
             <div className={`grid grid-cols-1 md:grid-cols-3 gap-3 ${gauSevaStyle ? "mt-6 mb-6" : "mb-6"}`}>
               {donationTiers.map((tier) => (
-                <div key={tier.label} className={gauSevaStyle ? "rounded-[20px] border border-white/10 bg-[#0b2230] p-4" : "rounded-xl bg-white/15 p-4 text-center"}>
-                  <p className={gauSevaStyle ? "text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]" : "text-base font-semibold"}>{tier.label}</p>
+                <div key={tier.label} className={gauSevaStyle ? "rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] p-4" : "rounded-xl bg-white/15 p-4 text-center"}>
+                  <p className={gauSevaStyle ? "text-sm font-black uppercase tracking-[0.12em] text-[var(--campaign-accent)]" : "text-base font-semibold"}>{tier.label}</p>
                   <p className={gauSevaStyle ? "mt-2 text-2xl font-black text-white" : "text-2xl font-black mt-1"}>{tier.amount}</p>
                   <p className={gauSevaStyle ? `mt-3 ${SEVA_BODY_TEXT_CLASS}` : "text-sm text-white/85 mt-2"}>{tier.note}</p>
                 </div>
@@ -1039,13 +1039,13 @@ function EventShowcasePage({
             <div className="flex flex-wrap gap-3">
               <Link
                 to={ROUTES.donate}
-                className={gauSevaStyle ? "inline-flex rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]" : "inline-block bg-white text-[#cf4f00] font-semibold px-6 py-3 rounded-xl"}
+                className={gauSevaStyle ? "inline-flex rounded-xl bg-[var(--campaign-accent)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]" : "inline-block bg-white text-[#cf4f00] font-semibold px-6 py-3 rounded-xl"}
               >
                 Donate Now
               </Link>
               <Link
                 to={ROUTES.involved.volunteer}
-                className={gauSevaStyle ? "inline-flex rounded-xl bg-[#0d6179] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#18495e]" : "inline-block bg-[#11283a] text-white font-semibold px-6 py-3 rounded-xl"}
+                className={gauSevaStyle ? "inline-flex rounded-xl bg-[var(--campaign-bg)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]" : "inline-block bg-[#11283a] text-white font-semibold px-6 py-3 rounded-xl"}
               >
                 Join Volunteer Team
               </Link>
@@ -1062,7 +1062,7 @@ function EventShowcasePage({
             {testimonials.map((item) => (
               <div key={item.name} className={gauSevaStyle ? EVENT_SEVA_DETAIL_CARD_CLASS : "rounded-2xl border border-white/10 bg-[#17384b] p-6"}>
                 <p className={gauSevaStyle ? SEVA_BODY_TEXT_CLASS : "text-[#dbe7ee] text-xl leading-relaxed"}>"{item.quote}"</p>
-                <p className={gauSevaStyle ? "mt-4 text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]" : "text-[#ffb06a] font-semibold text-lg mt-4"}>{item.name}</p>
+                <p className={gauSevaStyle ? "mt-4 text-sm font-black uppercase tracking-[0.12em] text-[var(--campaign-accent)]" : "text-[#ffb06a] font-semibold text-lg mt-4"}>{item.name}</p>
               </div>
             ))}
           </div>
@@ -1075,7 +1075,7 @@ function EventShowcasePage({
           {gauSevaStyle ? <h2 className={SEVA_SECTION_HEADING_CLASS}>Helpful answers for visitors, donors, and volunteers</h2> : null}
           <div className="space-y-3">
             {faqs.map((item) => (
-              <details key={item.q} className={`rounded-xl border border-white/10 ${gauSevaStyle ? "bg-[#0c5871]" : "bg-[#163548]"} p-5`}>
+              <details key={item.q} className={`rounded-xl border border-white/10 ${gauSevaStyle ? "bg-[var(--campaign-surface)]" : "bg-[#163548]"} p-5`}>
                 <summary className={gauSevaStyle ? "cursor-pointer text-white text-lg font-black md:text-xl" : "cursor-pointer text-white text-xl font-semibold"}>{item.q}</summary>
                 <p className={gauSevaStyle ? `mt-3 ${SEVA_BODY_TEXT_CLASS}` : "text-[#d4e1e8] text-lg mt-3"}>{item.a}</p>
               </details>
@@ -1224,7 +1224,7 @@ export const DigitalServicesHubPage = memo(function DigitalServicesHubPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0B2230] pb-16">
+    <div className="min-h-screen bg-[var(--campaign-deep)] pb-16">
       <HeroSection
         title="Digital Services"
         subtitle="Devotional access, online seva support, and spiritual tools in one place"
@@ -1352,14 +1352,14 @@ export const GetInvolvedHubPage = memo(function GetInvolvedHubPage() {
 
 export const AboutAwardsPage = memo(function AboutAwardsPage() {
   const [activeFilter, setActiveFilter] = useState<RecognitionCategory>("All");
-  const awardsLabel = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]";
+  const awardsLabel = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]";
   const awardsHeading = "text-[14px] font-black text-white md:text-[20px]";
-  const awardsBody = "text-base leading-7 text-[#dce7ec] md:text-lg";
+  const awardsBody = "text-base leading-7 text-[var(--campaign-text)] md:text-lg";
   const awardsCardTitle = "text-2xl font-black text-white md:text-[1.75rem]";
   const awardsPanel =
-    "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
+    "rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
   const awardsCardPanel =
-    "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
+    "rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
 
   usePageMeta(
     "Awards & Recognition",
@@ -1372,7 +1372,7 @@ export const AboutAwardsPage = memo(function AboutAwardsPage() {
       : RECOGNITION_ITEMS.filter((item) => item.category === activeFilter);
 
   return (
-    <div className="min-h-screen bg-[#0B2230] pb-12">
+    <div className="min-h-screen bg-[var(--campaign-deep)] pb-12">
       <section className="max-w-7xl mx-auto px-4 pt-8 pb-10 md:pt-10">
         <section className={awardsPanel}>
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
@@ -1452,7 +1452,7 @@ export const AboutAwardsPage = memo(function AboutAwardsPage() {
                       onClick={() => setActiveFilter(filter)}
                       className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                         active
-                          ? "bg-[#ef9a1e] text-white shadow-sm"
+                          ? "bg-[var(--campaign-accent)] text-white shadow-sm"
                           : "border border-white/15 bg-white/10 text-white hover:border-white/25 hover:bg-white/15"
                       }`}
                     >
@@ -1472,16 +1472,16 @@ export const AboutAwardsPage = memo(function AboutAwardsPage() {
                   <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                     <div>
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="rounded-full bg-[#ef9a1e]/15 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#ef9a1e]">
+                        <span className="rounded-full bg-[var(--campaign-accent)]/15 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[var(--campaign-accent)]">
                           {item.category}
                         </span>
-                        <span className="text-sm font-semibold text-[#dce7ec]">{item.year}</span>
+                        <span className="text-sm font-semibold text-[var(--campaign-text)]">{item.year}</span>
                       </div>
                       <h3 className={`mt-3 ${awardsCardTitle}`}>{item.title}</h3>
-                      <p className="mt-1 text-sm font-semibold text-[#ef9a1e]">{item.presenter}</p>
+                      <p className="mt-1 text-sm font-semibold text-[var(--campaign-accent)]">{item.presenter}</p>
                     </div>
 
-                    <div className="rounded-2xl border border-white/10 bg-[#0d6179] px-4 py-3 md:max-w-[240px]">
+                    <div className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] px-4 py-3 md:max-w-[240px]">
                       <p className={awardsLabel}>Outcome</p>
                       <p className={`mt-2 ${awardsBody}`}>{item.impact}</p>
                     </div>
@@ -1497,13 +1497,13 @@ export const AboutAwardsPage = memo(function AboutAwardsPage() {
             <section className={awardsPanel}>
               <h2 className={awardsHeading}>Recognition Focus</h2>
               <ul className={`mt-4 space-y-3 ${awardsBody}`}>
-                <li className="rounded-2xl bg-[#0c5871] px-4 py-3">
+                <li className="rounded-2xl bg-[var(--campaign-surface)] px-4 py-3">
                   Seva programs are evaluated on continuity, discipline, and measurable community relief.
                 </li>
-                <li className="rounded-2xl bg-[#0c5871] px-4 py-3">
+                <li className="rounded-2xl bg-[var(--campaign-surface)] px-4 py-3">
                   Educational support recognitions highlight long-term child and youth development impact.
                 </li>
-                <li className="rounded-2xl bg-[#0c5871] px-4 py-3">
+                <li className="rounded-2xl bg-[var(--campaign-surface)] px-4 py-3">
                   Cultural honors reflect preservation of devotion, heritage, and spiritual participation.
                 </li>
               </ul>
@@ -1593,19 +1593,19 @@ export const AboutActivitiesOverviewPage = memo(function AboutActivitiesOverview
 
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:w-[440px]">
               <div className="rounded-2xl border border-white/70 bg-white/85 p-4">
-                <p className="text-2xl font-black text-[#0d3b66]">{liveCount}</p>
+                <p className="text-2xl font-black text-[var(--color-secondary)]">{liveCount}</p>
                 <p className="mt-1 text-xs uppercase tracking-wide text-[#6a7f90]">Live Now</p>
               </div>
               <div className="rounded-2xl border border-white/70 bg-white/85 p-4">
-                <p className="text-2xl font-black text-[#0d3b66]">{upcomingCount}</p>
+                <p className="text-2xl font-black text-[var(--color-secondary)]">{upcomingCount}</p>
                 <p className="mt-1 text-xs uppercase tracking-wide text-[#6a7f90]">Upcoming Today</p>
               </div>
               <div className="rounded-2xl border border-white/70 bg-white/85 p-4">
-                <p className="text-2xl font-black text-[#0d3b66]">{TRUST_ACTIVITY_ITEMS.length}</p>
+                <p className="text-2xl font-black text-[var(--color-secondary)]">{TRUST_ACTIVITY_ITEMS.length}</p>
                 <p className="mt-1 text-xs uppercase tracking-wide text-[#6a7f90]">Tracked Programs</p>
               </div>
               <div className="rounded-2xl border border-white/70 bg-white/85 p-4">
-                <p className="text-2xl font-black text-[#0d3b66]">4</p>
+                <p className="text-2xl font-black text-[var(--color-secondary)]">4</p>
                 <p className="mt-1 text-xs uppercase tracking-wide text-[#6a7f90]">Work Streams</p>
               </div>
             </div>
@@ -1626,10 +1626,10 @@ export const AboutActivitiesOverviewPage = memo(function AboutActivitiesOverview
                 </p>
               </div>
 
-              <div className="rounded-2xl border border-[#e1ebf5] bg-[#f7fbff] px-4 py-3 text-right">
+              <div className="rounded-2xl border border-[#e1ebf5] bg-[var(--color-surface-hover)] px-4 py-3 text-right">
                 <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#6a7f90]">Live Snapshot</p>
                 <p className="mt-1 text-lg font-black text-[#123753]">{formattedTime}</p>
-                <p className="text-sm text-[#60758c]">{weekdayName}, {formattedDate}</p>
+                <p className="text-sm text-[var(--color-text-soft)]">{weekdayName}, {formattedDate}</p>
               </div>
             </div>
 
@@ -1645,7 +1645,7 @@ export const AboutActivitiesOverviewPage = memo(function AboutActivitiesOverview
                     className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                       active
                         ? "bg-[#123753] text-white shadow-sm"
-                        : "border border-[#d7e5f2] bg-[#f7fbff] text-[#36526b] hover:border-[#b7cfe3] hover:bg-white"
+                        : "border border-[#d7e5f2] bg-[var(--color-surface-hover)] text-[#36526b] hover:border-[#b7cfe3] hover:bg-white"
                     }`}
                   >
                     {stream}
@@ -1698,9 +1698,9 @@ export const AboutActivitiesOverviewPage = memo(function AboutActivitiesOverview
             <section className="rounded-3xl border border-[#dce8f5] bg-white p-6 shadow-sm">
               <h2 className="text-2xl font-black text-[#123753]">Operational Signals</h2>
               <ul className="mt-4 space-y-3 text-sm leading-6 text-[#4f6272]">
-                <li className="rounded-2xl bg-[#f7fbff] px-4 py-3">Spiritual programs maintain daily rhythm and anchor community participation.</li>
+                <li className="rounded-2xl bg-[var(--color-surface-hover)] px-4 py-3">Spiritual programs maintain daily rhythm and anchor community participation.</li>
                 <li className="rounded-2xl bg-[#fff7ea] px-4 py-3">Seva teams operate through scheduled coordination blocks for consistency and accountability.</li>
-                <li className="rounded-2xl bg-[#f7fbff] px-4 py-3">Education and cultural activities are timed to maximize youth and family participation.</li>
+                <li className="rounded-2xl bg-[var(--color-surface-hover)] px-4 py-3">Education and cultural activities are timed to maximize youth and family participation.</li>
               </ul>
             </section>
 
@@ -1848,7 +1848,7 @@ export const MissionGlobalOutreachPage = memo(function MissionGlobalOutreachPage
     activeTrack === "All" ? globalMissions : globalMissions.filter((mission) => mission.track === activeTrack);
 
   return (
-    <div className="min-h-screen bg-[#0B2230] pb-12">
+    <div className="min-h-screen bg-[var(--campaign-deep)] pb-12">
       <PageSectionShell className="pt-8 md:pt-10">
         <div className="rounded-[2rem] border border-white/10 bg-[#12394A] p-6 md:p-8 shadow-[0_18px_36px_rgba(0,0,0,0.24)]">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
@@ -2201,7 +2201,7 @@ export const SevaGauSevaPage = memo(function SevaGauSevaPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0B2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <HeroSection
         title="Gau Seva - Kamdhenu Ashram"
         subtitle="Protecting and Serving Sacred Cows with Love and Devotion"
@@ -2212,13 +2212,13 @@ export const SevaGauSevaPage = memo(function SevaGauSevaPage() {
         <div className="flex flex-wrap justify-center gap-3">
           <Link
             to={ROUTES.donate}
-            className="inline-flex items-center rounded-lg bg-[#F59E0B] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
+            className="inline-flex items-center rounded-lg bg-[#F59E0B] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
           >
             Donate for Gau Seva
           </Link>
           <Link
             to={ROUTES.donate}
-            className="inline-flex items-center rounded-lg bg-[#12394A] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
+            className="inline-flex items-center rounded-lg bg-[#12394A] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
           >
             Sponsor a Cow
           </Link>
@@ -2237,7 +2237,7 @@ export const SevaGauSevaPage = memo(function SevaGauSevaPage() {
               <div key={item.title} className="rounded-2xl border border-white/10 bg-[#12394A] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
                 <p className="text-xs uppercase tracking-wide text-[#F59E0B]">{item.title}</p>
                 <p className="mt-1 text-2xl font-black text-white">{item.value}</p>
-                <p className="mt-1 text-sm text-[#dce7ec]">{item.note}</p>
+                <p className="mt-1 text-sm text-[var(--campaign-text)]">{item.note}</p>
               </div>
             ))}
           </div>
@@ -2276,7 +2276,7 @@ export const SevaGauSevaPage = memo(function SevaGauSevaPage() {
             ].map((item) => (
               <div key={item.title} className="rounded-3xl border border-white/10 bg-[#12394A] p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1">
                 <h3 className="text-2xl font-black text-white">{item.title}</h3>
-                <p className="mt-3 leading-7 text-[#dce7ec]">{item.desc}</p>
+                <p className="mt-3 leading-7 text-[var(--campaign-text)]">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -2294,7 +2294,7 @@ export const SevaGauSevaPage = memo(function SevaGauSevaPage() {
                   {item.icon}
                 </div>
                 <h3 className="mt-4 text-xl font-black text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{item.desc}</p>
+                <p className="mt-3 text-sm leading-7 text-[var(--campaign-text)]">{item.desc}</p>
               </article>
             ))}
           </div>
@@ -2310,10 +2310,10 @@ export const SevaGauSevaPage = memo(function SevaGauSevaPage() {
               <div key={item.title} className="rounded-[24px] border border-white/10 bg-[#0f3140] p-5 shadow-sm">
                 <h3 className="text-xl font-black text-white">{item.title}</h3>
                 <p className="mt-2 text-2xl font-black text-[#F59E0B]">{item.amount}</p>
-                <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{item.desc}</p>
+                <p className="mt-3 text-sm leading-7 text-[var(--campaign-text)]">{item.desc}</p>
                 <Link
                   to={ROUTES.donate}
-                  className="mt-5 inline-flex rounded-xl bg-[#F59E0B] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                  className="mt-5 inline-flex rounded-xl bg-[#F59E0B] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
                 >
                   Donate
                 </Link>
@@ -2339,10 +2339,10 @@ export const SevaGauSevaPage = memo(function SevaGauSevaPage() {
                     </span>
                   </div>
                   <p className="mt-3 text-sm font-semibold text-[#F59E0B]">{cow.status}</p>
-                  <p className="mt-2 text-sm leading-7 text-[#dce7ec]">{cow.note}</p>
+                  <p className="mt-2 text-sm leading-7 text-[var(--campaign-text)]">{cow.note}</p>
                   <Link
                     to={ROUTES.donate}
-                    className="mt-5 inline-flex rounded-xl bg-[#F59E0B] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                    className="mt-5 inline-flex rounded-xl bg-[#F59E0B] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
                   >
                     Sponsor Now
                   </Link>
@@ -2390,14 +2390,14 @@ export const SevaGauSevaPage = memo(function SevaGauSevaPage() {
             </p>
             <ul className="mt-6 space-y-3">
               {volunteerPoints.map((item) => (
-                <li key={item} className="rounded-2xl bg-[#0f3140] px-4 py-3 text-[#dce7ec] shadow-sm">
+                <li key={item} className="rounded-2xl bg-[#0f3140] px-4 py-3 text-[var(--campaign-text)] shadow-sm">
                   {item}
                 </li>
               ))}
             </ul>
             <Link
               to={ROUTES.involved.volunteer}
-              className="mt-6 inline-flex rounded-xl bg-[#F59E0B] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+              className="mt-6 inline-flex rounded-xl bg-[#F59E0B] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
             >
               Volunteer Registration
             </Link>
@@ -2407,10 +2407,10 @@ export const SevaGauSevaPage = memo(function SevaGauSevaPage() {
             <div className="rounded-[30px] border border-white/10 bg-[#12394A] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">Spiritual Message</p>
               <blockquote className="mt-4 text-3xl font-black leading-tight text-white">
-                "αñùαñ╛αñ╡αÑï αñ╡αñ┐αñ╢αÑìαñ╡αñ╕αÑìαñ» αñ«αñ╛αññαñ░αñâ"
+                "Î±Ã±Ã¹Î±Ã±â•›Î±Ã±â•¡Î±Ã‘Ã¯ Î±Ã±â•¡Î±Ã±â”Î±Ã±â•¢Î±Ã‘Ã¬Î±Ã±â•¡Î±Ã±â••Î±Ã‘Ã¬Î±Ã±Â» Î±Ã±Â«Î±Ã±â•›Î±Ã±Ã±Î±Ã±â–‘Î±Ã±Ã¢"
               </blockquote>
               <p className="mt-3 text-lg text-[#F59E0B]">The cows are the mothers of the universe.</p>
-              <p className="mt-4 text-base leading-7 text-[#dce7ec]">
+              <p className="mt-4 text-base leading-7 text-[var(--campaign-text)]">
                 Gau Mata represents nourishment, gentleness, and sacred abundance. Serving her is an offering of gratitude,
                 protection, and dharmic responsibility.
               </p>
@@ -2419,14 +2419,14 @@ export const SevaGauSevaPage = memo(function SevaGauSevaPage() {
             <div className="rounded-[30px] border border-white/10 bg-[#12394A] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">Contact Kamdhenu Ashram</p>
               <h2 className="mt-2 text-3xl font-black text-white">Visit or Connect</h2>
-              <div className="mt-5 space-y-4 text-[#dce7ec]">
+              <div className="mt-5 space-y-4 text-[var(--campaign-text)]">
                 <p><span className="font-black text-white">Address:</span> Kamdhenu Ashram, Bhagwat Heritage Service Foundation Trust Campus, Swaminarayan Bhagwat Dham</p>
                 <p><span className="font-black text-white">Phone:</span> +91 98765 43210</p>
                 <p><span className="font-black text-white">Email:</span> info@bhagwatheritage.org</p>
                 <p><span className="font-black text-white">Map Location:</span> Available through the contact desk for visitor guidance and ashram visit planning.</p>
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Link to={ROUTES.contact} className="inline-flex rounded-xl bg-[#F59E0B] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]">
+                <Link to={ROUTES.contact} className="inline-flex rounded-xl bg-[#F59E0B] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]">
                   Contact Ashram
                 </Link>
                 <Link to={ROUTES.contact} className="inline-flex rounded-xl border border-white/10 bg-[#0f3140] px-5 py-3 text-sm font-semibold text-white">
@@ -2448,7 +2448,7 @@ export const SevaDisasterReliefPage = memo(function SevaDisasterReliefPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0B2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <HeroSection
         title="Disaster Relief Seva"
         subtitle="Relief with care, support with heart"
@@ -2476,8 +2476,8 @@ export const SevaDisasterReliefPage = memo(function SevaDisasterReliefPage() {
       </HeroSection>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">About Disaster Relief</p>
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">About Disaster Relief</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Emergency response with compassion and discipline</h2>
           <p className="mt-5 text-base leading-7 text-white md:text-lg">
             Disaster Relief Seva is the trust's emergency response mission for communities facing floods, fire incidents,
@@ -2492,10 +2492,10 @@ export const SevaDisasterReliefPage = memo(function SevaDisasterReliefPage() {
             {DISASTER_FEATURES.map((item) => (
               <div
                 key={item.title}
-                className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
+                className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
               >
                 <h3 className="text-[24px] font-black text-white">{item.title}</h3>
-                <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.desc}</p>
+                <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -2506,8 +2506,8 @@ export const SevaDisasterReliefPage = memo(function SevaDisasterReliefPage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {DISASTER_IMPACT_STATS.map((item) => (
-              <div key={item.label} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
-                <p className="text-[20px] font-black uppercase tracking-wide text-[#ef9a1e] md:text-[24px]">* {item.label}</p>
+              <div key={item.label} className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+                <p className="text-[20px] font-black uppercase tracking-wide text-[var(--campaign-accent)] md:text-[24px]">* {item.label}</p>
                 <p className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.value}</p>
               </div>
             ))}
@@ -2516,14 +2516,14 @@ export const SevaDisasterReliefPage = memo(function SevaDisasterReliefPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Relief Process</p>
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Relief Process</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">How Disaster Relief Works</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
             {DISASTER_PROCESS.map((item) => (
-              <div key={item.step} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+              <div key={item.step} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
                 <h3 className="text-[24px] font-black text-white">{item.step}</h3>
-                <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.desc}</p>
+                <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -2532,21 +2532,21 @@ export const SevaDisasterReliefPage = memo(function SevaDisasterReliefPage() {
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Relief Seva Support</p>
+          <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Relief Seva Support</p>
             <h3 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Join and Support Relief Seva</h3>
-            <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">
+            <p className="mt-4 text-base leading-7 text-[var(--campaign-text)] md:text-lg">
               You can serve by joining field response teams, supporting logistics and camp setup, donating supplies, or
               sponsoring emergency and recovery assistance for affected families.
             </p>
             <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-3">
               {DISASTER_JOIN_OPTIONS.map((item) => (
-                <div key={item.title} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+                <div key={item.title} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
                   <h4 className="text-xl font-black text-white">{item.title}</h4>
-                  <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{item.desc}</p>
+                  <p className="mt-3 text-sm leading-7 text-[var(--campaign-text)]">{item.desc}</p>
                   <Link
                     to={item.href}
-                    className="mt-5 inline-flex rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                    className="mt-5 inline-flex rounded-xl bg-[var(--campaign-accent)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
                   >
                     {item.cta}
                   </Link>
@@ -2555,27 +2555,27 @@ export const SevaDisasterReliefPage = memo(function SevaDisasterReliefPage() {
             </div>
           </div>
 
-          <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 text-white shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Donation Options</p>
+          <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 text-white shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Donation Options</p>
             <h3 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Emergency Donation Support</h3>
-            <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">
+            <p className="mt-4 text-base leading-7 text-[var(--campaign-text)] md:text-lg">
               Contributions help the trust mobilize emergency food, water, medicine, shelter essentials, and rehabilitation
               support when families face sudden crisis.
             </p>
             <div className="my-6 grid grid-cols-1 gap-3 md:grid-cols-3">
               {DISASTER_DONATION_TIERS.map((tier) => (
-                <div key={tier.label} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+                <div key={tier.label} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
                   <p className="text-xl font-black text-white">{tier.label}</p>
-                  <p className="mt-2 text-2xl font-black text-[#ef9a1e]">{tier.amount}</p>
-                  <p className="mt-3 text-sm leading-7 text-[#dce7ec]">{tier.note}</p>
+                  <p className="mt-2 text-2xl font-black text-[var(--campaign-accent)]">{tier.amount}</p>
+                  <p className="mt-3 text-sm leading-7 text-[var(--campaign-text)]">{tier.note}</p>
                 </div>
               ))}
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link to={ROUTES.donate} className="inline-flex rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]">
+              <Link to={ROUTES.donate} className="inline-flex rounded-xl bg-[var(--campaign-accent)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]">
                 Donate Now
               </Link>
-              <Link to={ROUTES.involved.volunteer} className="inline-flex rounded-xl bg-[#0c5871] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#18495e]">
+              <Link to={ROUTES.involved.volunteer} className="inline-flex rounded-xl bg-[var(--campaign-surface)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]">
                 Become Volunteer
               </Link>
             </div>
@@ -2584,14 +2584,14 @@ export const SevaDisasterReliefPage = memo(function SevaDisasterReliefPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Relief Stories</p>
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Relief Stories</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Compassion in action</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
             {DISASTER_STORIES.map((item) => (
-              <div key={item.name} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
-                <p className="text-base leading-7 text-[#dce7ec] md:text-lg">&quot;{item.quote}&quot;</p>
-                <p className="mt-4 text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">{item.name}</p>
+              <div key={item.name} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
+                <p className="text-base leading-7 text-[var(--campaign-text)] md:text-lg">&quot;{item.quote}&quot;</p>
+                <p className="mt-4 text-sm font-black uppercase tracking-[0.12em] text-[var(--campaign-accent)]">{item.name}</p>
               </div>
             ))}
           </div>
@@ -2599,14 +2599,14 @@ export const SevaDisasterReliefPage = memo(function SevaDisasterReliefPage() {
       </section>
 
       <section className="max-w-5xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Help Desk</p>
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Help Desk</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Frequently Asked Questions</h2>
           <div className="mt-8 space-y-3">
             {DISASTER_FAQS.map((item) => (
-              <details key={item.q} className="rounded-[20px] border border-white/10 bg-[#0c5871] p-5">
+              <details key={item.q} className="rounded-[20px] border border-white/10 bg-[var(--campaign-surface)] p-5">
                 <summary className="cursor-pointer text-xl font-black text-white">{item.q}</summary>
-                <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.a}</p>
+                <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.a}</p>
               </details>
             ))}
           </div>
@@ -2724,7 +2724,7 @@ export const EventsBhagwatKathaPage = memo(function EventsBhagwatKathaPage() {
   const visibleSchedule = sessionSchedule.slice(0, 9);
 
   return (
-    <div className="min-h-screen bg-[#0b2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <HeroSection
         title="Bhagwat Katha Mahotsav"
         subtitle="Live wisdom, active seva, divine experience"
@@ -2787,14 +2787,14 @@ export const EventsBhagwatKathaPage = memo(function EventsBhagwatKathaPage() {
               Each day of the mahotsav is designed around bhajan, Bhagwat discourse, darshan, hospitality seva, and calm devotee guidance.
             </p>
             <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="rounded-[20px] border border-white/10 bg-[#0b2230] p-5">
-                <p className="text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">Daily Flow</p>
+              <div className="rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] p-5">
+                <p className="text-sm font-black uppercase tracking-[0.12em] text-[var(--campaign-accent)]">Daily Flow</p>
                 <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>
                   Morning prayer, afternoon katha, and evening aarti create a complete devotional journey through the day.
                 </p>
               </div>
-              <div className="rounded-[20px] border border-white/10 bg-[#0b2230] p-5">
-                <p className="text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">Devotee Support</p>
+              <div className="rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] p-5">
+                <p className="text-sm font-black uppercase tracking-[0.12em] text-[var(--campaign-accent)]">Devotee Support</p>
                 <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>
                   Seating, water, prasad, and volunteer guidance help families and devotees participate peacefully.
                 </p>
@@ -2810,18 +2810,18 @@ export const EventsBhagwatKathaPage = memo(function EventsBhagwatKathaPage() {
             </p>
             <div className="mt-6 grid grid-cols-1 gap-3 mb-6">
               {donationTiers.map((tier) => (
-                <div key={tier.label} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
-                  <p className="text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">{tier.label}</p>
+                <div key={tier.label} className="rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] p-4">
+                  <p className="text-sm font-black uppercase tracking-[0.12em] text-[var(--campaign-accent)]">{tier.label}</p>
                   <p className="mt-2 text-2xl font-black text-white">{tier.amount}</p>
                   <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{tier.note}</p>
                 </div>
               ))}
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link to={ROUTES.donate} className="inline-flex rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]">
+              <Link to={ROUTES.donate} className="inline-flex rounded-xl bg-[var(--campaign-accent)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]">
                 Donate Now
               </Link>
-              <Link to={ROUTES.involved.volunteer} className="inline-flex rounded-xl bg-[#0d6179] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#18495e]">
+              <Link to={ROUTES.involved.volunteer} className="inline-flex rounded-xl bg-[var(--campaign-bg)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]">
                 Join Volunteer Team
               </Link>
             </div>
@@ -2838,16 +2838,16 @@ export const EventsBhagwatKathaPage = memo(function EventsBhagwatKathaPage() {
               return (
                 <div
                   key={session.id}
-                  className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm"
+                  className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm"
                 >
                   <div className="flex items-center justify-between gap-3">
-                    <p className="text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">{session.dayLabel}</p>
-                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#dce7ec]">
+                    <p className="text-sm font-black uppercase tracking-[0.12em] text-[var(--campaign-accent)]">{session.dayLabel}</p>
+                    <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[var(--campaign-text)]">
                       {session.slot}
                     </span>
                   </div>
                   <h3 className={`mt-3 ${SEVA_CARD_TITLE_CLASS}`}>{session.title}</h3>
-                  <p className="mt-3 text-sm font-semibold uppercase tracking-[0.12em] text-[#dce7ec]">{session.slot}</p>
+                  <p className="mt-3 text-sm font-semibold uppercase tracking-[0.12em] text-[var(--campaign-text)]">{session.slot}</p>
                   <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>
                     {session.start.toLocaleDateString("en-IN", { day: "2-digit", month: "short" })} |{" "}
                     {session.start.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })}
@@ -2900,7 +2900,7 @@ export const EventsBhagwatKathaPage = memo(function EventsBhagwatKathaPage() {
             {testimonials.map((item) => (
               <div key={item.name} className={EVENT_SEVA_DETAIL_CARD_CLASS}>
                 <p className={SEVA_BODY_TEXT_CLASS}>"{item.quote}"</p>
-                <p className="mt-4 text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">{item.name}</p>
+                <p className="mt-4 text-sm font-black uppercase tracking-[0.12em] text-[var(--campaign-accent)]">{item.name}</p>
               </div>
             ))}
           </div>
@@ -2913,7 +2913,7 @@ export const EventsBhagwatKathaPage = memo(function EventsBhagwatKathaPage() {
           <h2 className={SEVA_SECTION_HEADING_CLASS}>Helpful answers for donors, devotees, and seva teams</h2>
           <div className="mt-8 space-y-3">
             {faqs.map((item) => (
-              <details key={item.q} className="rounded-xl border border-white/10 bg-[#0c5871] p-5">
+              <details key={item.q} className="rounded-xl border border-white/10 bg-[var(--campaign-surface)] p-5">
                 <summary className="cursor-pointer text-lg font-black text-white md:text-xl">{item.q}</summary>
                 <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.a}</p>
               </details>
@@ -3188,7 +3188,7 @@ export const EventsFestivalsPage = memo(function EventsFestivalsPage() {
       extraSection={
         <section className="max-w-7xl mx-auto px-4 py-10">
           <div className={EVENT_SEVA_SECTION_CLASS}>
-            <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-6 md:p-8 shadow-sm">
+            <div className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-6 md:p-8 shadow-sm">
               <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-6 items-start">
                 <div className={EVENT_SEVA_DETAIL_CARD_CLASS}>
                   <p className={SEVA_SECTION_LABEL_CLASS}>Year 2026</p>
@@ -3200,8 +3200,8 @@ export const EventsFestivalsPage = memo(function EventsFestivalsPage() {
                       { label: "Temple Support", value: "Join + Donate" },
                       { label: "Planning Style", value: "Date-Wise" },
                     ].map((item) => (
-                      <div key={item.label} className="rounded-2xl border border-white/10 bg-[#0b2230] p-4">
-                        <p className="text-[20px] font-black uppercase tracking-wide text-[#ef9a1e] md:text-[24px]">{item.label}</p>
+                      <div key={item.label} className="rounded-2xl border border-white/10 bg-[var(--campaign-deep)] p-4">
+                        <p className="text-[20px] font-black uppercase tracking-wide text-[var(--campaign-accent)] md:text-[24px]">{item.label}</p>
                         <p className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.value}</p>
                       </div>
                     ))}
@@ -3209,13 +3209,13 @@ export const EventsFestivalsPage = memo(function EventsFestivalsPage() {
                   <div className="mt-8 flex flex-wrap gap-3">
                     <Link
                       to={ROUTES.involved.volunteer}
-                      className="inline-flex rounded-xl bg-[#0d6179] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#18495e]"
+                      className="inline-flex rounded-xl bg-[var(--campaign-bg)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
                     >
                       Join Festival Seva
                     </Link>
                     <Link
                       to={ROUTES.donate}
-                      className="inline-flex rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                      className="inline-flex rounded-xl bg-[var(--campaign-accent)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
                     >
                       Donate for Festivals
                     </Link>
@@ -3250,20 +3250,20 @@ export const EventsFestivalsPage = memo(function EventsFestivalsPage() {
               {annualFestivals.map((festival) => (
                 <div
                   key={`${festival.dayDate}-${festival.title}`}
-                  className="group rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
+                  className="group rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">{festival.month}</p>
+                      <p className="text-sm font-black uppercase tracking-[0.12em] text-[var(--campaign-accent)]">{festival.month}</p>
                       <p className="mt-2 text-[14px] font-black text-white md:text-[20px]">{festival.dayDate}</p>
                     </div>
-                    <span className="rounded-full bg-[#ef9a1e]/15 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ef9a1e]">
+                    <span className="rounded-full bg-[var(--campaign-accent)]/15 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[var(--campaign-accent)]">
                       2026
                     </span>
                   </div>
 
-                  <div className="mt-5 rounded-2xl border border-white/10 bg-[#0b2230] p-4">
-                    <p className="text-sm font-semibold uppercase tracking-wide text-[#dce7ec]">{festival.lunar}</p>
+                  <div className="mt-5 rounded-2xl border border-white/10 bg-[var(--campaign-deep)] p-4">
+                    <p className="text-sm font-semibold uppercase tracking-wide text-[var(--campaign-text)]">{festival.lunar}</p>
                     <h3 className={`mt-3 ${SEVA_CARD_TITLE_CLASS}`}>{festival.title}</h3>
                     <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{festival.focus}</p>
                   </div>
@@ -3271,13 +3271,13 @@ export const EventsFestivalsPage = memo(function EventsFestivalsPage() {
                   <div className="mt-6 flex flex-wrap gap-3">
                     <Link
                       to={ROUTES.involved.volunteer}
-                      className="inline-flex items-center justify-center rounded-xl bg-[#0d6179] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#18495e]"
+                      className="inline-flex items-center justify-center rounded-xl bg-[var(--campaign-bg)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
                     >
                       Join Us
                     </Link>
                     <Link
                       to={ROUTES.donate}
-                      className="inline-flex items-center justify-center rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                      className="inline-flex items-center justify-center rounded-xl bg-[var(--campaign-accent)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
                     >
                       Donate for Puja
                     </Link>
@@ -3525,7 +3525,7 @@ export const KnowledgeStudyResourcesPage = memo(function KnowledgeStudyResources
   );
 
   return (
-    <div className="min-h-screen bg-[#0B2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <HeroSection
         title="Bhagwat Study Resources"
         subtitle="Guided knowledge for a deeper spiritual journey"
@@ -3616,8 +3616,8 @@ export const KnowledgeStudyResourcesPage = memo(function KnowledgeStudyResources
                     onClick={() => setActiveTrack(track)}
                     className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                       active
-                        ? "bg-[#ef9a1e] text-white"
-                        : "border border-white/10 bg-[#0c5871] text-[#dce7ec] hover:border-[#ef9a1e]/40"
+                        ? "bg-[var(--campaign-accent)] text-white"
+                        : "border border-white/10 bg-[var(--campaign-surface)] text-[var(--campaign-text)] hover:border-[var(--campaign-accent)]/40"
                     }`}
                   >
                     {track}
@@ -3631,10 +3631,10 @@ export const KnowledgeStudyResourcesPage = memo(function KnowledgeStudyResources
             {visibleTracks.map((item) => (
               <div key={item.title} className={EVENT_SEVA_DETAIL_CARD_CLASS}>
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-[#ef9a1e]/15 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ef9a1e]">
+                  <span className="rounded-full bg-[var(--campaign-accent)]/15 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[var(--campaign-accent)]">
                     {item.category}
                   </span>
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#dce7ec]">
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[var(--campaign-text)]">
                     {item.format}
                   </span>
                 </div>
@@ -3675,8 +3675,8 @@ export const KnowledgeStudyResourcesPage = memo(function KnowledgeStudyResources
                 { label: "Guided Learning", amount: "Mentor Ready" },
                 { label: "Deep Study Route", amount: "Advanced" },
               ].map((tier) => (
-                <div key={tier.label} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
-                  <p className="text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">{tier.label}</p>
+                <div key={tier.label} className="rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] p-4">
+                  <p className="text-sm font-black uppercase tracking-[0.12em] text-[var(--campaign-accent)]">{tier.label}</p>
                   <p className="mt-2 text-2xl font-black text-white">{tier.amount}</p>
                 </div>
               ))}
@@ -3684,13 +3684,13 @@ export const KnowledgeStudyResourcesPage = memo(function KnowledgeStudyResources
             <div className="flex flex-wrap gap-3">
               <Link
                 to={ROUTES.knowledge.library}
-                className="inline-flex rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                className="inline-flex rounded-xl bg-[var(--campaign-accent)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
               >
                 Open Library
               </Link>
               <Link
                 to={ROUTES.knowledge.pathshala}
-                className="inline-flex rounded-xl bg-[#0d6179] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#18495e]"
+                className="inline-flex rounded-xl bg-[var(--campaign-bg)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
               >
                 Join Pathshala
               </Link>
@@ -3778,7 +3778,7 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0B2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <HeroSection
         title="Children Spiritual Learning"
         subtitle="Bal Sanskar today, strong character tomorrow"
@@ -3869,8 +3869,8 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
                     onClick={() => setActiveTrack(track)}
                     className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                       active
-                        ? "bg-[#ef9a1e] text-white"
-                        : "border border-white/10 bg-[#0c5871] text-[#dce7ec] hover:border-[#ef9a1e]/40"
+                        ? "bg-[var(--campaign-accent)] text-white"
+                        : "border border-white/10 bg-[var(--campaign-surface)] text-[var(--campaign-text)] hover:border-[var(--campaign-accent)]/40"
                     }`}
                   >
                     {track}
@@ -3884,10 +3884,10 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
             {visibleTracks.map((item) => (
               <div key={item.title} className={EVENT_SEVA_DETAIL_CARD_CLASS}>
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-[#ef9a1e]/15 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ef9a1e]">
+                  <span className="rounded-full bg-[var(--campaign-accent)]/15 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[var(--campaign-accent)]">
                     {item.category}
                   </span>
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#dce7ec]">
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[var(--campaign-text)]">
                     {item.format}
                   </span>
                 </div>
@@ -3924,7 +3924,7 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
                     desc: "End with one gratitude thought and a simple parent-child discussion about what was learned.",
                   },
                 ].map((item) => (
-                  <div key={item.step} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-5">
+                  <div key={item.step} className="rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] p-5">
                     <h3 className="text-xl font-black text-white">{item.step}</h3>
                     <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
                   </div>
@@ -3935,7 +3935,7 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
           <div className={EVENT_SEVA_DETAIL_CARD_CLASS}>
               <p className={SEVA_SECTION_LABEL_CLASS}>Today&apos;s Focus</p>
               <h3 className={SEVA_SECTION_HEADING_CLASS}>{dailyFocus.title}</h3>
-              <p className="mt-4 text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">{dailyFocus.day}</p>
+              <p className="mt-4 text-sm font-black uppercase tracking-[0.12em] text-[var(--campaign-accent)]">{dailyFocus.day}</p>
 
               <div className="mt-8 grid grid-cols-1 gap-3">
                 {[
@@ -3943,7 +3943,7 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
                   "Family-friendly and child-safe learning rhythm",
                   "Designed for both beginners and regular satsang families",
                 ].map((line) => (
-                  <div key={line} className="rounded-[20px] border border-white/10 bg-[#0b2230] px-4 py-3 text-base font-semibold text-[#dce7ec]">
+                  <div key={line} className="rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] px-4 py-3 text-base font-semibold text-[var(--campaign-text)]">
                     {line}
                   </div>
                 ))}
@@ -3981,8 +3981,8 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
                 { label: "Guided Track", amount: "Mentor Supported" },
                 { label: "Pathshala Route", amount: "Joinable" },
               ].map((tier) => (
-                <div key={tier.label} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
-                  <p className="text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">{tier.label}</p>
+                <div key={tier.label} className="rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] p-4">
+                  <p className="text-sm font-black uppercase tracking-[0.12em] text-[var(--campaign-accent)]">{tier.label}</p>
                   <p className="mt-2 text-2xl font-black text-white">{tier.amount}</p>
                 </div>
               ))}
@@ -3990,13 +3990,13 @@ export const KnowledgeChildrenPage = memo(function KnowledgeChildrenPage() {
             <div className="flex flex-wrap gap-3">
               <Link
                 to={ROUTES.knowledge.pathshala}
-                className="inline-flex rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                className="inline-flex rounded-xl bg-[var(--campaign-accent)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
               >
                 Join Pathshala
               </Link>
               <Link
                 to={ROUTES.knowledge.library}
-                className="inline-flex rounded-xl bg-[#0d6179] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#18495e]"
+                className="inline-flex rounded-xl bg-[var(--campaign-bg)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
               >
                 Open Library
               </Link>
@@ -4082,7 +4082,7 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
   );
 
   return (
-    <div className="min-h-screen bg-[#0B2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <HeroSection
         title="Daily Spiritual Quotes"
         subtitle="Daily reflections, admin-managed quote publishing, and a public archive for disciplined spiritual remembrance"
@@ -4118,9 +4118,9 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
               { title: "Themes", value: `${Math.max(availableThemes.length - 1, 1)}`, note: "Theme filters help devotees browse by reflection type" },
               { title: "Admin Flow", value: isAdmin ? "Active" : "View Only", note: "Admins can publish directly; all visitors can read the results" },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
-                <p className="text-[20px] font-black uppercase tracking-wide text-[#ef9a1e] md:text-[24px]">* {item.title}</p>
-                <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.note}</p>
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+                <p className="text-[20px] font-black uppercase tracking-wide text-[var(--campaign-accent)] md:text-[24px]">* {item.title}</p>
+                <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.note}</p>
               </div>
             ))}
           </div>
@@ -4128,20 +4128,20 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10" id="todays-quote">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Featured Daily Reflection</p>
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Featured Daily Reflection</p>
             <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Today&apos;s Spiritual Quote</h2>
             <p className="mt-5 text-base leading-7 text-white md:text-lg">
               &quot;{featuredQuote?.text || "A new quote will appear here once it is published."}&quot;
             </p>
             <div className="mt-6 flex flex-wrap gap-3 text-sm">
-              <span className="rounded-full bg-[#ef9a1e]/15 px-4 py-2 font-bold text-[#ef9a1e]">
+              <span className="rounded-full bg-[var(--campaign-accent)]/15 px-4 py-2 font-bold text-[var(--campaign-accent)]">
                 {featuredQuote?.theme || "Daily Reflection"}
               </span>
-              <span className="rounded-full bg-white/10 px-4 py-2 font-semibold text-[#dce7ec]">
+              <span className="rounded-full bg-white/10 px-4 py-2 font-semibold text-[var(--campaign-text)]">
                 {featuredQuote?.publishDate || today}
               </span>
-              <span className="rounded-full bg-white/10 px-4 py-2 font-semibold text-[#dce7ec]">
+              <span className="rounded-full bg-white/10 px-4 py-2 font-semibold text-[var(--campaign-text)]">
                 {featuredQuote?.author || "Bhagwat Heritage Service Foundation Trust"}
               </span>
             </div>
@@ -4150,10 +4150,10 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">New Feature</p>
+          <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">New Feature</p>
             <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Admin Quote Publisher</h2>
-            <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">
+            <p className="mt-4 text-base leading-7 text-[var(--campaign-text)] md:text-lg">
               Only admin users can publish a new quote here. For other visitors, this panel explains the publishing flow
               and keeps the page useful without exposing editing controls.
             </p>
@@ -4169,7 +4169,7 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
                     value={form.text}
                     onChange={(event) => setForm((current) => ({ ...current, text: event.target.value }))}
                     rows={5}
-                    className="w-full rounded-2xl border border-white/10 bg-[#0c5871] px-4 py-3 text-white outline-none transition focus:border-[#ef9a1e]"
+                    className="w-full rounded-2xl border border-white/10 bg-[var(--campaign-surface)] px-4 py-3 text-white outline-none transition focus:border-[var(--campaign-accent)]"
                     placeholder="Write the spiritual quote for today"
                   />
                 </div>
@@ -4182,7 +4182,7 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
                       id="quote-author"
                       value={form.author}
                       onChange={(event) => setForm((current) => ({ ...current, author: event.target.value }))}
-                      className="w-full rounded-2xl border border-white/10 bg-[#0c5871] px-4 py-3 text-white outline-none transition focus:border-[#ef9a1e]"
+                      className="w-full rounded-2xl border border-white/10 bg-[var(--campaign-surface)] px-4 py-3 text-white outline-none transition focus:border-[var(--campaign-accent)]"
                       placeholder="Bhagwat Heritage Service Foundation Trust"
                     />
                   </div>
@@ -4194,7 +4194,7 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
                       id="quote-theme"
                       value={form.theme}
                       onChange={(event) => setForm((current) => ({ ...current, theme: event.target.value }))}
-                      className="w-full rounded-2xl border border-white/10 bg-[#0c5871] px-4 py-3 text-white outline-none transition focus:border-[#ef9a1e]"
+                      className="w-full rounded-2xl border border-white/10 bg-[var(--campaign-surface)] px-4 py-3 text-white outline-none transition focus:border-[var(--campaign-accent)]"
                       placeholder="Bhakti"
                     />
                   </div>
@@ -4208,32 +4208,32 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
                     type="date"
                     value={form.publishDate}
                     onChange={(event) => setForm((current) => ({ ...current, publishDate: event.target.value }))}
-                    className="w-full rounded-2xl border border-white/10 bg-[#0c5871] px-4 py-3 text-white outline-none transition focus:border-[#ef9a1e]"
+                    className="w-full rounded-2xl border border-white/10 bg-[var(--campaign-surface)] px-4 py-3 text-white outline-none transition focus:border-[var(--campaign-accent)]"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="inline-flex items-center rounded-2xl bg-[#ef9a1e] px-6 py-3 font-bold text-white transition hover:bg-[#de930a]"
+                  className="inline-flex items-center rounded-2xl bg-[var(--campaign-accent)] px-6 py-3 font-bold text-white transition hover:bg-[var(--campaign-accent-hover)]"
                 >
                   Publish Quote
                 </button>
                 {status ? <p className="text-sm font-medium text-[#ffcf9a]">{status}</p> : null}
               </form>
             ) : (
-              <div className="mt-8 rounded-2xl border border-white/10 bg-[#0c5871] p-5 text-[#dce7ec]">
+              <div className="mt-8 rounded-2xl border border-white/10 bg-[var(--campaign-surface)] p-5 text-[var(--campaign-text)]">
                 <p className="text-lg font-semibold text-white">Admin access required</p>
                 <p className="mt-2 leading-7">
                   Log in with an admin account to publish the daily quote. All published quotes remain visible to every visitor.
                 </p>
-                <Link to={ROUTES.login} className="mt-4 inline-flex rounded-xl bg-[#ef9a1e] px-5 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]">
+                <Link to={ROUTES.login} className="mt-4 inline-flex rounded-xl bg-[var(--campaign-accent)] px-5 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]">
                   Go to Login
                 </Link>
               </div>
             )}
           </div>
 
-          <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Reader Tools</p>
+          <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Reader Tools</p>
             <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Quote Reading Features</h2>
             <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
@@ -4254,9 +4254,9 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
                   desc: "This page is structured so trust admins manage content while all devotees simply receive it.",
                 },
               ].map((item) => (
-                <div key={item.title} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+                <div key={item.title} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
                   <h3 className="text-xl font-black text-white">{item.title}</h3>
-                  <p className="mt-2 text-base leading-7 text-[#dce7ec] md:text-lg">{item.desc}</p>
+                  <p className="mt-2 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -4265,10 +4265,10 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10" id="quote-archive">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Public Archive</p>
+              <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Public Archive</p>
               <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Daily Quote Archive</h2>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -4281,8 +4281,8 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
                     onClick={() => setActiveTheme(theme)}
                     className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                       active
-                        ? "bg-[#ef9a1e] text-white"
-                        : "border border-white/10 bg-[#0c5871] text-[#dce7ec] hover:border-[#ef9a1e]/40"
+                        ? "bg-[var(--campaign-accent)] text-white"
+                        : "border border-white/10 bg-[var(--campaign-surface)] text-[var(--campaign-text)] hover:border-[var(--campaign-accent)]/40"
                     }`}
                   >
                     {theme}
@@ -4294,20 +4294,20 @@ export const KnowledgeDailyQuotesPage = memo(function KnowledgeDailyQuotesPage()
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5">
             {visibleQuotes.map((item) => (
-              <div key={item.id} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+              <div key={item.id} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-[#ef9a1e]/15 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#ef9a1e]">
+                  <span className="rounded-full bg-[var(--campaign-accent)]/15 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[var(--campaign-accent)]">
                     {item.theme}
                   </span>
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#dce7ec]">
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[var(--campaign-text)]">
                     {item.publishDate}
                   </span>
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#dce7ec]">
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[var(--campaign-text)]">
                     {item.createdBy}
                   </span>
                 </div>
                 <p className="mt-4 text-base leading-7 text-white md:text-lg">&quot;{item.text}&quot;</p>
-                <p className="mt-4 text-sm font-semibold uppercase tracking-wide text-[#dce7ec]">{item.author}</p>
+                <p className="mt-4 text-sm font-semibold uppercase tracking-wide text-[var(--campaign-text)]">{item.author}</p>
               </div>
             ))}
           </div>
@@ -4339,7 +4339,7 @@ export const KnowledgeTodayQuotePage = memo(function KnowledgeTodayQuotePage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0B2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <section className="relative min-h-screen overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -4352,7 +4352,7 @@ export const KnowledgeTodayQuotePage = memo(function KnowledgeTodayQuotePage() {
 
         <div className="relative z-10 mx-auto flex min-h-screen max-w-5xl items-center px-4 py-10 md:py-16">
           <div className="w-full rounded-[32px] border border-white/10 bg-black/40 p-6 text-center shadow-[0_30px_90px_rgba(0,0,0,0.35)] backdrop-blur-sm md:p-10 lg:p-14">
-            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Today&apos;s Spiritual Quote</p>
+            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Today&apos;s Spiritual Quote</p>
             <h1 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Daily Divine Reflection</h1>
 
             <p className="mx-auto mt-8 max-w-4xl text-3xl font-semibold leading-[1.6] text-white md:text-5xl md:leading-[1.45]">
@@ -4360,13 +4360,13 @@ export const KnowledgeTodayQuotePage = memo(function KnowledgeTodayQuotePage() {
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <span className="rounded-full bg-[#ef9a1e]/15 px-4 py-2 text-sm font-black uppercase tracking-[0.14em] text-[#ef9a1e]">
+              <span className="rounded-full bg-[var(--campaign-accent)]/15 px-4 py-2 text-sm font-black uppercase tracking-[0.14em] text-[var(--campaign-accent)]">
                 {featuredQuote?.theme || "Daily Reflection"}
               </span>
-              <span className="rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-[#dce7ec]">
+              <span className="rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-[var(--campaign-text)]">
                 {featuredQuote?.publishDate || today}
               </span>
-              <span className="rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-[#dce7ec]">
+              <span className="rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-[var(--campaign-text)]">
                 {featuredQuote?.author || "Bhagwat Heritage Service Foundation Trust"}
               </span>
             </div>
@@ -4374,7 +4374,7 @@ export const KnowledgeTodayQuotePage = memo(function KnowledgeTodayQuotePage() {
             <div className="mt-8 flex justify-center">
               <Link
                 to={ROUTES.knowledge.dailyQuotes}
-                className="inline-flex items-center rounded-xl bg-[#ef9a1e] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                className="inline-flex items-center rounded-xl bg-[var(--campaign-accent)] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
               >
                 Back to Quotes Page
               </Link>
@@ -4443,7 +4443,7 @@ export const MandirAvatarsPage = memo(function MandirAvatarsPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0b2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <HeroSection
         title="24 Avatars Installation"
         subtitle="A sacred installation concept designed to guide devotees through divine manifestations, darshan meaning, and spiritual reflection"
@@ -4733,7 +4733,7 @@ export const MandirConstructionPage = memo(function MandirConstructionPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0b2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <HeroSection
         title="Temple Construction Updates"
         subtitle="Construction progress, mandir development phases, milestone tracking, and support pathways for Bhagwat Dham"
@@ -4979,7 +4979,7 @@ export const MandirPilgrimagePage = memo(function MandirPilgrimagePage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0b2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <HeroSection
         title="Pilgrimage Information"
         subtitle="Travel guidance, darshan support, family-ready pilgrimage planning, and visitor assistance for devotees coming to Bhagwat Dham"
@@ -5397,7 +5397,7 @@ export const MediaVideoGalleryPage = memo(function MediaVideoGalleryPage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#F47C20] text-lg text-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] transition duration-300 group-hover:scale-110">
-                          ▶
+                          â–¶
                         </div>
                       </div>
                       <span className="absolute left-2 top-2 rounded bg-[#D32F2F] px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
@@ -5409,7 +5409,7 @@ export const MediaVideoGalleryPage = memo(function MediaVideoGalleryPage() {
                     </Link>
                   </div>
                   <h3 className="mt-2 line-clamp-2 text-[15px] font-black leading-5 text-[#1B5E7A]">{item.title}</h3>
-                  <p className="mt-1 text-xs text-[#2C6E8F]">◌ {item.duration} ◌ {item.views} Views</p>
+                  <p className="mt-1 text-xs text-[#2C6E8F]">â—Œ {item.duration} â—Œ {item.views} Views</p>
                   <div className="mt-3 flex gap-2">
                     <Link
                       to={`${ROUTES.media.videos}/${item.slug}`}
@@ -5435,7 +5435,7 @@ export const MediaVideoGalleryPage = memo(function MediaVideoGalleryPage() {
 
       <footer className="bg-[linear-gradient(180deg,rgba(31,122,140,0.88)_0%,rgba(42,157,143,0.92)_100%)] text-[#F7E8A4]">
         <div className="mx-auto flex max-w-[1400px] flex-col gap-4 px-6 py-4 md:flex-row md:items-center md:justify-between">
-          <p className="text-sm">Copyright © 2026 Bhagwat Heritage. All rights reserved.</p>
+          <p className="text-sm">Copyright Â© 2026 Bhagwat Heritage. All rights reserved.</p>
           <div className="flex items-center gap-4">
             {["f", "t", "i"].map((item) => (
               <div key={item} className="flex h-8 w-8 items-center justify-center rounded-full border border-[#F7E8A4]/40">
@@ -5515,14 +5515,14 @@ export const MediaVideoPlayerPage = memo(function MediaVideoPlayerPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0b2230] py-10">
+    <div className="min-h-screen bg-[var(--campaign-deep)] py-10">
       <div className="mx-auto max-w-7xl px-4">
         <section className="rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div className="max-w-4xl">
-              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Now Playing</p>
+              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Now Playing</p>
               <h1 className="mt-2 text-[16px] font-black text-white md:text-[22px]">{currentVideo.title}</h1>
-              <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{currentVideo.summary}</p>
+              <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{currentVideo.summary}</p>
             </div>
 
             <Link
@@ -5669,14 +5669,14 @@ export const MediaEventHighlightsPage = memo(function MediaEventHighlightsPage()
   );
 
   return (
-    <div className="min-h-screen bg-[#0b2230] py-10">
+    <div className="min-h-screen bg-[var(--campaign-deep)] py-10">
       <div className="mx-auto max-w-7xl px-4">
         <section className="rounded-[32px] border border-white/10 bg-[#153446] p-6 md:p-8">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Advanced Feature</p>
+              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Advanced Feature</p>
               <h2 className="mt-2 text-[34px] font-black uppercase tracking-wide text-white md:text-[56px]">Highlight Storyboard</h2>
-              <p className="mt-3 max-w-3xl text-base leading-8 text-[#dce7ec] md:text-lg">
+              <p className="mt-3 max-w-3xl text-base leading-8 text-[var(--campaign-text)] md:text-lg">
                 Filter by event mood and purpose so the page behaves like an editorial highlights board rather than a static news dump.
               </p>
             </div>
@@ -5713,11 +5713,11 @@ export const MediaEventHighlightsPage = memo(function MediaEventHighlightsPage()
                     Highlight Stream
                   </span>
                 </div>
-                <h3 className="mt-4 text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">{item.title}</h3>
-                <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{item.desc}</p>
+                <h3 className="mt-4 text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">{item.title}</h3>
+                <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
                 <div className="mt-4 rounded-2xl bg-[#0f2c3d] p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[#ef9a1e]">Highlight Output</p>
-                  <p className="mt-2 text-base leading-8 text-[#dce7ec] md:text-lg">{item.output}</p>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--campaign-accent)]">Highlight Output</p>
+                  <p className="mt-2 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.output}</p>
                 </div>
               </div>
             ))}
@@ -5727,10 +5727,10 @@ export const MediaEventHighlightsPage = memo(function MediaEventHighlightsPage()
         <section className="mt-8 rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Gallery Section</p>
+              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Gallery Section</p>
               <h2 className="mt-2 text-[34px] font-black uppercase tracking-wide text-white md:text-[56px]">Event Image Gallery</h2>
             </div>
-            <p className="text-base leading-8 text-[#dce7ec] md:text-lg">Showing {visibleImageHighlights.length} highlight frames</p>
+            <p className="text-base leading-8 text-[var(--campaign-text)] md:text-lg">Showing {visibleImageHighlights.length} highlight frames</p>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -5755,7 +5755,7 @@ export const MediaEventHighlightsPage = memo(function MediaEventHighlightsPage()
         <section className="mt-8">
           <div className="rounded-[28px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
             <h2 className="text-[34px] font-black uppercase tracking-wide text-white md:text-[56px]">Sections Worth Adding Here</h2>
-            <ul className="mt-6 space-y-3 text-base leading-8 text-[#dce7ec] md:text-lg">
+            <ul className="mt-6 space-y-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">
               {[
                 "Top highlight reel of the month",
                 "Festival spotlight wall by celebration season",
@@ -5860,17 +5860,17 @@ export const MediaPublicationsPage = memo(function MediaPublicationsPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0b2230] py-10">
+    <div className="min-h-screen bg-[var(--campaign-deep)] py-10">
       <div className="mx-auto max-w-7xl px-4">
         <section className="rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-          <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Media Gallery</p>
+          <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Media Gallery</p>
           <h1 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Publications</h1>
         </section>
 
         <section className="mt-8 rounded-[32px] border border-white/10 bg-[#153446] p-6 md:p-8">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Advanced Feature</p>
+              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Advanced Feature</p>
               <h2 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Publication Archive Navigator</h2>
             </div>
 
@@ -5906,11 +5906,11 @@ export const MediaPublicationsPage = memo(function MediaPublicationsPage() {
                     Publication Group
                   </span>
                 </div>
-                <h3 className="mt-4 text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">{item.title}</h3>
-                <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{item.desc}</p>
+                <h3 className="mt-4 text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">{item.title}</h3>
+                <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
                 <div className="mt-4 rounded-2xl bg-[#0f2c3d] p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[#ef9a1e]">Best Use</p>
-                  <p className="mt-2 text-base leading-8 text-[#dce7ec] md:text-lg">{item.use}</p>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--campaign-accent)]">Best Use</p>
+                  <p className="mt-2 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.use}</p>
                 </div>
               </div>
             ))}
@@ -5920,10 +5920,10 @@ export const MediaPublicationsPage = memo(function MediaPublicationsPage() {
         <section className="mt-8 rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Archive Section</p>
+              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Archive Section</p>
               <h2 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Publication Gallery</h2>
             </div>
-            <p className="text-base leading-8 text-[#dce7ec] md:text-lg">Showing {visiblePublicationCards.length} publication cards</p>
+            <p className="text-base leading-8 text-[var(--campaign-text)] md:text-lg">Showing {visiblePublicationCards.length} publication cards</p>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -5931,12 +5931,12 @@ export const MediaPublicationsPage = memo(function MediaPublicationsPage() {
               <article key={item.title} className="rounded-[24px] border border-white/10 bg-[#17384b] p-6">
                 <div className="flex h-40 items-center justify-center rounded-[20px] bg-[linear-gradient(135deg,#244f67_0%,#17384b_100%)]">
                   <div className="text-center">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">{item.category}</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">{item.category}</p>
                     <p className="mt-2 text-[24px] font-black uppercase tracking-[0.05em] text-white">{item.format}</p>
                   </div>
                 </div>
-                <h3 className="mt-5 text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">{item.title}</h3>
-                <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{item.note}</p>
+                <h3 className="mt-5 text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">{item.title}</h3>
+                <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.note}</p>
                 <div className="mt-5 flex items-center justify-between">
                   <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#d4e1e8]">
                     Archive Ready
@@ -5961,8 +5961,8 @@ export const MediaPublicationsPage = memo(function MediaPublicationsPage() {
                 { title: "Trust Memory Archive", desc: "Helps preserve the long-form documentary identity of the trust." },
               ].map((item) => (
                 <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0f2c3d] p-5">
-                  <h3 className="text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">{item.title}</h3>
-                  <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{item.desc}</p>
+                  <h3 className="text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">{item.title}</h3>
+                  <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -6048,17 +6048,17 @@ export const MediaSocialFeedPage = memo(function MediaSocialFeedPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0b2230] py-10">
+    <div className="min-h-screen bg-[var(--campaign-deep)] py-10">
       <div className="mx-auto max-w-7xl px-4">
         <section className="rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-          <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Media Gallery</p>
+          <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Media Gallery</p>
           <h1 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Social Media Feed</h1>
         </section>
 
         <section className="mt-8 rounded-[32px] border border-white/10 bg-[#153446] p-6 md:p-8">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Advanced Feature</p>
+              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Advanced Feature</p>
               <h2 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Channel Pulse Board</h2>
             </div>
 
@@ -6094,11 +6094,11 @@ export const MediaSocialFeedPage = memo(function MediaSocialFeedPage() {
                     Feed Stream
                   </span>
                 </div>
-                <h3 className="mt-4 text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">{item.title}</h3>
-                <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{item.desc}</p>
+                <h3 className="mt-4 text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">{item.title}</h3>
+                <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
                 <div className="mt-4 rounded-2xl bg-[#0f2c3d] p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[#ef9a1e]">Posting Pulse</p>
-                  <p className="mt-2 text-base leading-8 text-[#dce7ec] md:text-lg">{item.pulse}</p>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--campaign-accent)]">Posting Pulse</p>
+                  <p className="mt-2 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.pulse}</p>
                 </div>
               </div>
             ))}
@@ -6108,10 +6108,10 @@ export const MediaSocialFeedPage = memo(function MediaSocialFeedPage() {
         <section className="mt-8 rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div>
-              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Feedback Section</p>
+              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Feedback Section</p>
               <h2 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Instagram, Facebook, WhatsApp and YouTube Feedback</h2>
             </div>
-            <p className="text-base leading-8 text-[#dce7ec] md:text-lg">Showing {visibleFeedbackCards.length} platform feedback cards</p>
+            <p className="text-base leading-8 text-[var(--campaign-text)] md:text-lg">Showing {visibleFeedbackCards.length} platform feedback cards</p>
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -6125,7 +6125,7 @@ export const MediaSocialFeedPage = memo(function MediaSocialFeedPage() {
                   <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#d4e1e8]">
                     {item.category}
                   </span>
-                  <p className="mt-4 text-base leading-8 text-[#dce7ec] md:text-lg">{item.feedback}</p>
+                  <p className="mt-4 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.feedback}</p>
                 </div>
               </article>
             ))}
@@ -6143,8 +6143,8 @@ export const MediaSocialFeedPage = memo(function MediaSocialFeedPage() {
                 { title: "Community Voice Layer", desc: "For reactions, testimonials, and audience-facing trust warmth." },
               ].map((item) => (
                 <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0f2c3d] p-5">
-                  <h3 className="text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">{item.title}</h3>
-                  <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">{item.desc}</p>
+                  <h3 className="text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">{item.title}</h3>
+                  <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -6250,7 +6250,7 @@ export const DigitalSatsangPage = memo(function DigitalSatsangPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0B2230] pb-16">
+    <div className="min-h-screen bg-[var(--campaign-deep)] pb-16">
       <HeroSection
         title="Online Satsang"
         subtitle="Digital darshan, real devotion"
@@ -6311,8 +6311,8 @@ export const DigitalSatsangPage = memo(function DigitalSatsangPage() {
                     onClick={() => setActiveMode(mode)}
                     className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                       active
-                        ? "bg-[#ef9a1e] text-white shadow-[0_10px_24px_rgba(239,154,30,0.24)]"
-                        : "border border-white/10 bg-[#0c5871] text-[#dce7ec] hover:border-[#ef9a1e]"
+                        ? "bg-[var(--campaign-accent)] text-white shadow-[0_10px_24px_rgba(239,154,30,0.24)]"
+                        : "border border-white/10 bg-[var(--campaign-surface)] text-[var(--campaign-text)] hover:border-[var(--campaign-accent)]"
                     }`}
                   >
                     {mode}
@@ -6326,17 +6326,17 @@ export const DigitalSatsangPage = memo(function DigitalSatsangPage() {
             {visibleModes.map((item) => (
               <div key={item.title} className={`${EVENT_SEVA_DETAIL_CARD_CLASS} flex h-full flex-col`}>
                 <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full bg-[#ef9a1e] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-white">
+                  <span className="rounded-full bg-[var(--campaign-accent)] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-white">
                     {item.category}
                   </span>
-                  <span className="rounded-full border border-white/10 bg-[#0d6179] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[#dce7ec]">
+                  <span className="rounded-full border border-white/10 bg-[var(--campaign-bg)] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-[var(--campaign-text)]">
                     Digital Satsang
                   </span>
                 </div>
                 <h3 className={`mt-4 ${SEVA_CARD_TITLE_CLASS}`}>{item.title}</h3>
                 <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
-                <div className="mt-4 rounded-2xl border border-white/10 bg-[#0d6179] p-4">
-                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Why It Matters</p>
+                <div className="mt-4 rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4">
+                  <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Why It Matters</p>
                   <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.support}</p>
                 </div>
               </div>
@@ -6369,7 +6369,7 @@ export const DigitalSatsangPage = memo(function DigitalSatsangPage() {
                   desc: "A useful archive option for devotees in different time zones or daily routines.",
                 },
               ].map((item) => (
-                <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-5">
+                <div key={item.title} className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-5">
                   <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
                   <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
                 </div>
@@ -6387,8 +6387,8 @@ export const DigitalSatsangPage = memo(function DigitalSatsangPage() {
                 "Contact the trust for special digital satsang requests.",
                 "Return later for archive-based listening and reflection.",
               ].map((line, index) => (
-                <div key={line} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4">
-                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">Step {index + 1}</p>
+                <div key={line} className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4">
+                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Step {index + 1}</p>
                   <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{line}</p>
                 </div>
               ))}
@@ -6418,7 +6418,7 @@ export const DigitalSatsangPage = memo(function DigitalSatsangPage() {
 
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
             {platformCards.map((item) => (
-              <article key={item.name} className="flex h-full flex-col overflow-hidden rounded-[24px] border border-white/10 bg-[#0c5871] shadow-sm">
+              <article key={item.name} className="flex h-full flex-col overflow-hidden rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] shadow-sm">
                 <div className={`bg-gradient-to-r ${item.accent} px-5 py-4`}>
                   <p className="text-sm font-bold uppercase tracking-[0.18em] text-white">{item.type}</p>
                   <h3 className="mt-2 text-xl font-black text-white">{item.name}</h3>
@@ -6552,17 +6552,17 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
     "Membership portal for community joining, membership plans, registration, digital membership card, payments, activities, and admin management concepts.",
   );
 
-  const membershipSectionClass = "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
-  const membershipCardClass = "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm";
+  const membershipSectionClass = "rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
+  const membershipCardClass = "rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm";
   const membershipInputClass =
-    "rounded-2xl border border-white/10 bg-[#0c5871] px-4 py-3 text-white outline-none placeholder:text-[#aac0ca] focus:border-[#ef9a1e]";
+    "rounded-2xl border border-white/10 bg-[var(--campaign-surface)] px-4 py-3 text-white outline-none placeholder:text-[#aac0ca] focus:border-[var(--campaign-accent)]";
   const membershipButtonClass =
-    "rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]";
+    "rounded-xl bg-[var(--campaign-accent)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]";
   const membershipSecondaryButtonClass =
-    "rounded-xl border border-white/10 bg-[#0c5871] px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-[#ef9a1e]";
+    "rounded-xl border border-white/10 bg-[var(--campaign-surface)] px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-[var(--campaign-accent)]";
 
   return (
-    <div className="min-h-screen bg-[#0B2230] pb-16">
+    <div className="min-h-screen bg-[var(--campaign-deep)] pb-16">
       <HeroSection
         title="Membership Portal"
         subtitle="Join the Bhagwat Heritage community"
@@ -6618,7 +6618,7 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
               { icon: "PP", title: "Priority Participation", desc: "Get preference in Bhagwat events, workshops, and major trust activities." },
             ].map((item) => (
               <div key={item.title} className={membershipCardClass}>
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-sm font-black text-[#ef9a1e]">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--campaign-accent)]/15 text-sm font-black text-[var(--campaign-accent)]">
                   {item.icon}
                 </div>
                 <h3 className={`mt-4 ${SEVA_CARD_TITLE_CLASS}`}>{item.title}</h3>
@@ -6642,7 +6642,7 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
                 <ul className={`mt-5 space-y-3 ${SEVA_BODY_TEXT_CLASS}`}>
                   {plan.benefits.map((benefit) => (
                     <li key={benefit} className="flex gap-3">
-                      <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#ef9a1e]" />
+                      <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--campaign-accent)]" />
                       <span>{benefit}</span>
                     </li>
                   ))}
@@ -6723,11 +6723,11 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-              <label className="rounded-2xl border border-dashed border-[#ef9a1e]/50 bg-[#0c5871] px-4 py-5 text-sm font-semibold text-white">
+              <label className="rounded-2xl border border-dashed border-[var(--campaign-accent)]/50 bg-[var(--campaign-surface)] px-4 py-5 text-sm font-semibold text-white">
                 Profile Photo Upload
                 <input type="file" accept="image/*" onChange={handlePhotoChange} className="mt-3 block w-full text-sm text-[#d9e6ec]" />
               </label>
-              <label className="rounded-2xl border border-dashed border-[#ef9a1e]/50 bg-[#0c5871] px-4 py-5 text-sm font-semibold text-white">
+              <label className="rounded-2xl border border-dashed border-[var(--campaign-accent)]/50 bg-[var(--campaign-surface)] px-4 py-5 text-sm font-semibold text-white">
                 ID Proof Upload
                 <input type="file" onChange={handleIdProofChange} className="mt-3 block w-full text-sm text-[#d9e6ec]" />
               </label>
@@ -6746,13 +6746,13 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
           <div className="space-y-6">
             <div className={membershipSectionClass}>
               <p className={SEVA_SECTION_LABEL_CLASS}>Digital Membership Card</p>
-              <div className="mt-5 rounded-[24px] border border-white/10 bg-[#0c5871] p-5">
+              <div className="mt-5 rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl bg-[#0d6179]">
+                  <div className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl bg-[var(--campaign-bg)]">
                     {photoPreview ? (
                       <img src={photoPreview} alt="Member" className="h-full w-full object-cover" />
                     ) : (
-                      <span className="text-sm font-black text-[#ef9a1e]">PHOTO</span>
+                      <span className="text-sm font-black text-[var(--campaign-accent)]">PHOTO</span>
                     )}
                   </div>
                   <div>
@@ -6762,20 +6762,20 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
                   </div>
                 </div>
                 <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
-                  <div className="rounded-2xl bg-[#0d6179] p-3">
-                    <p className="text-xs uppercase tracking-wide text-[#ef9a1e]">Membership Type</p>
+                  <div className="rounded-2xl bg-[var(--campaign-bg)] p-3">
+                    <p className="text-xs uppercase tracking-wide text-[var(--campaign-accent)]">Membership Type</p>
                     <p className="mt-1 font-semibold text-white">{selectedPlan.name}</p>
                   </div>
-                  <div className="rounded-2xl bg-[#0d6179] p-3">
-                    <p className="text-xs uppercase tracking-wide text-[#ef9a1e]">Join Date</p>
+                  <div className="rounded-2xl bg-[var(--campaign-bg)] p-3">
+                    <p className="text-xs uppercase tracking-wide text-[var(--campaign-accent)]">Join Date</p>
                     <p className="mt-1 font-semibold text-white">{joinDate}</p>
                   </div>
-                  <div className="rounded-2xl bg-[#0d6179] p-3">
-                    <p className="text-xs uppercase tracking-wide text-[#ef9a1e]">Status</p>
+                  <div className="rounded-2xl bg-[var(--campaign-bg)] p-3">
+                    <p className="text-xs uppercase tracking-wide text-[var(--campaign-accent)]">Status</p>
                     <p className="mt-1 font-semibold text-white">Pending Approval</p>
                   </div>
-                  <div className="rounded-2xl bg-[#0d6179] p-3">
-                    <p className="text-xs uppercase tracking-wide text-[#ef9a1e]">ID Proof</p>
+                  <div className="rounded-2xl bg-[var(--campaign-bg)] p-3">
+                    <p className="text-xs uppercase tracking-wide text-[var(--campaign-accent)]">ID Proof</p>
                     <p className="mt-1 font-semibold text-white">{idProofName || "Not uploaded"}</p>
                   </div>
                 </div>
@@ -6801,7 +6801,7 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
               <h3 className={SEVA_SECTION_HEADING_CLASS}>Online payment methods</h3>
               <div className="mt-5 grid grid-cols-2 gap-3">
                 {["UPI", "Credit Card", "Debit Card", "Net Banking"].map((method) => (
-                  <div key={method} className="rounded-2xl border border-white/10 bg-[#0c5871] p-4 text-center text-white font-semibold">
+                  <div key={method} className="rounded-2xl border border-white/10 bg-[var(--campaign-surface)] p-4 text-center text-white font-semibold">
                     {method}
                   </div>
                 ))}
@@ -6823,7 +6823,7 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
                 "See membership ID and status",
                 "Track event participation and activity",
               ].map((item) => (
-                <div key={item} className="rounded-2xl border border-white/10 bg-[#0c5871] p-5 text-white">
+                <div key={item} className="rounded-2xl border border-white/10 bg-[var(--campaign-surface)] p-5 text-white">
                   {item}
                 </div>
               ))}
@@ -6839,7 +6839,7 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
                 { title: "Volunteer Programs", desc: "Join seva teams, digital support, and trust-led service activities." },
                 { title: "Spiritual Workshops", desc: "Take part in guided learning, chanting, and dharmic growth sessions." },
               ].map((item) => (
-                <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0c5871] p-5">
+                <div key={item.title} className="rounded-2xl border border-white/10 bg-[var(--campaign-surface)] p-5">
                   <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
                   <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
                 </div>
@@ -6860,7 +6860,7 @@ export const DigitalMembershipPage = memo(function DigitalMembershipPage() {
               { title: "Export Member List", desc: "Admin-ready export for reporting and communication workflows." },
               { title: "Send Announcements", desc: "Push notices to members for events, updates, and digital programs." },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0c5871] p-5">
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-[var(--campaign-surface)] p-5">
                 <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
                 <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
               </div>
@@ -6974,9 +6974,9 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
   const [profileFileName, setProfileFileName] = useState("");
   const [requestSubmitted, setRequestSubmitted] = useState(false);
   const partnerInputClass =
-    "rounded-2xl border border-white/10 bg-[#0c5871] px-4 py-3 text-white outline-none placeholder:text-[#aac0ca] focus:border-[#ef9a1e]";
+    "rounded-2xl border border-white/10 bg-[var(--campaign-surface)] px-4 py-3 text-white outline-none placeholder:text-[#aac0ca] focus:border-[var(--campaign-accent)]";
   const partnerBadgeClass =
-    "rounded-xl bg-[#ef9a1e]/15 px-4 py-2 text-sm font-bold text-[#ef9a1e] transition-colors hover:bg-[#ef9a1e]/20";
+    "rounded-xl bg-[var(--campaign-accent)]/15 px-4 py-2 text-sm font-bold text-[var(--campaign-accent)] transition-colors hover:bg-[var(--campaign-accent)]/20";
 
   const handlePartnerSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -6984,7 +6984,7 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B2230] pb-16">
+    <div className="min-h-screen bg-[var(--campaign-deep)] pb-16">
       <HeroSection
         title="Partner With Us"
         subtitle="Collaborate with Bhagwat Heritage Service Foundation Trust to expand spiritual education, seva, charity, and community upliftment through purposeful partnership"
@@ -7074,7 +7074,7 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
                 key={item.title}
                 className={EVENT_SEVA_CARD_CLASS}
               >
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-sm font-black text-[#ef9a1e]">
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--campaign-accent)]/15 text-sm font-black text-[var(--campaign-accent)]">
                   {item.icon}
                 </div>
                 <h3 className={`mt-4 ${SEVA_CARD_TITLE_CLASS}`}>{item.title}</h3>
@@ -7082,7 +7082,7 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
                 <p className="mt-3 text-sm leading-6 text-[#aac0ca]">{item.detail}</p>
                 <a
                   href="#partnership-process"
-                  className="mt-5 inline-flex rounded-xl border border-[#ef9a1e]/40 bg-[#ef9a1e]/10 px-4 py-2 text-sm font-bold text-[#ef9a1e] transition-colors hover:bg-[#ef9a1e]/20"
+                  className="mt-5 inline-flex rounded-xl border border-[var(--campaign-accent)]/40 bg-[var(--campaign-accent)]/10 px-4 py-2 text-sm font-bold text-[var(--campaign-accent)] transition-colors hover:bg-[var(--campaign-accent)]/20"
                 >
                   Learn More
                 </a>
@@ -7104,8 +7104,8 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
               "Networking with spiritual guides, trustees, and community leaders.",
               "Participation in large devotional gatherings and organized service campaigns.",
             ].map((benefit) => (
-              <div key={benefit} className="flex gap-3 rounded-2xl border border-white/10 bg-[#0c5871] p-4">
-                <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#ef9a1e]" />
+              <div key={benefit} className="flex gap-3 rounded-2xl border border-white/10 bg-[var(--campaign-surface)] p-4">
+                <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--campaign-accent)]" />
                 <p className={SEVA_BODY_TEXT_CLASS}>{benefit}</p>
               </div>
             ))}
@@ -7121,10 +7121,10 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
             {partnerShowcase.map((item) => (
               <div
                 key={item}
-                className="flex min-h-[132px] items-center justify-center rounded-[24px] border border-white/10 bg-[#0c5871] p-5 text-center shadow-sm transition-transform duration-300 hover:-translate-y-1"
+                className="flex min-h-[132px] items-center justify-center rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 text-center shadow-sm transition-transform duration-300 hover:-translate-y-1"
               >
                 <div>
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#ef9a1e]/15 text-sm font-black text-[#ef9a1e]">
+                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[var(--campaign-accent)]/15 text-sm font-black text-[var(--campaign-accent)]">
                     {item
                       .split(" ")
                       .slice(0, 2)
@@ -7199,9 +7199,9 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
                 rows={5}
                 className={`${partnerInputClass} md:col-span-2`}
               />
-              <label className="flex cursor-pointer items-center justify-between rounded-2xl border border-dashed border-[#ef9a1e]/45 bg-[#0c5871] px-4 py-3 text-white md:col-span-2">
+              <label className="flex cursor-pointer items-center justify-between rounded-2xl border border-dashed border-[var(--campaign-accent)]/45 bg-[var(--campaign-surface)] px-4 py-3 text-white md:col-span-2">
                 <span>{profileFileName || "Upload Organization Profile"}</span>
-                <span className="rounded-lg bg-[#ef9a1e]/15 px-3 py-1 text-sm font-bold text-[#ef9a1e]">Choose File</span>
+                <span className="rounded-lg bg-[var(--campaign-accent)]/15 px-3 py-1 text-sm font-bold text-[var(--campaign-accent)]">Choose File</span>
                 <input
                   type="file"
                   className="hidden"
@@ -7210,14 +7210,14 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
               </label>
               <button
                 type="submit"
-                className="rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a] md:col-span-2"
+                className="rounded-xl bg-[var(--campaign-accent)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)] md:col-span-2"
               >
                 Submit Partnership Request
               </button>
             </form>
 
             {requestSubmitted ? (
-              <p className="mt-4 rounded-2xl border border-[#ef9a1e]/35 bg-[#0c5871] px-4 py-3 text-sm font-medium text-white">
+              <p className="mt-4 rounded-2xl border border-[var(--campaign-accent)]/35 bg-[var(--campaign-surface)] px-4 py-3 text-sm font-medium text-white">
                 Partnership request drafted successfully. The trust team can now review the proposal and continue the discussion process.
               </p>
             ) : null}
@@ -7235,8 +7235,8 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
                   "Formal partnership agreement",
                   "Collaboration implementation",
                 ].map((step, index) => (
-                  <div key={step} className="flex gap-4 rounded-2xl border border-white/10 bg-[#0c5871] p-4">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#ef9a1e] text-sm font-black text-white">
+                  <div key={step} className="flex gap-4 rounded-2xl border border-white/10 bg-[var(--campaign-surface)] p-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--campaign-accent)] text-sm font-black text-white">
                       {index + 1}
                     </div>
                     <div>
@@ -7310,10 +7310,10 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
             <h2 className={SEVA_SECTION_HEADING_CLASS}>What existing partners say</h2>
             <div className="mt-8 space-y-4">
               {testimonials.map((item) => (
-                <div key={item.name} className="rounded-2xl border border-white/10 bg-[#0c5871] p-5">
+                <div key={item.name} className="rounded-2xl border border-white/10 bg-[var(--campaign-surface)] p-5">
                   <p className={SEVA_BODY_TEXT_CLASS}>&quot;{item.quote}&quot;</p>
                   <p className={`mt-4 ${SEVA_CARD_TITLE_CLASS}`}>{item.name}</p>
-                  <p className="text-sm text-[#ef9a1e]">{item.org}</p>
+                  <p className="text-sm text-[var(--campaign-accent)]">{item.org}</p>
                 </div>
               ))}
             </div>
@@ -7324,7 +7324,7 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
             <h2 className={SEVA_SECTION_HEADING_CLASS}>Common partnership questions</h2>
             <div className="mt-8 space-y-4">
               {faqs.map((item) => (
-                <div key={item.question} className="rounded-2xl border border-white/10 bg-[#0c5871] p-5">
+                <div key={item.question} className="rounded-2xl border border-white/10 bg-[var(--campaign-surface)] p-5">
                   <h3 className={SEVA_CARD_TITLE_CLASS}>{item.question}</h3>
                   <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.answer}</p>
                 </div>
@@ -7401,7 +7401,7 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
 
   const visiblePrograms =
     activeTrack === "All" ? sponsorPrograms : sponsorPrograms.filter((item) => item.category === activeTrack);
-  const sponsorInfoCardClass = "rounded-2xl border border-white/10 bg-[#0c5871] p-5";
+  const sponsorInfoCardClass = "rounded-2xl border border-white/10 bg-[var(--campaign-surface)] p-5";
 
   usePageMeta(
     "Sponsor Programs",
@@ -7409,7 +7409,7 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0B2230] pb-16">
+    <div className="min-h-screen bg-[var(--campaign-deep)] pb-16">
       <HeroSection
         title="Sponsor Programs"
         subtitle="Sponsor meaningful seva, education, mandir development, and spiritual initiatives with structured contribution paths"
@@ -7501,8 +7501,8 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
                     onClick={() => setActiveTrack(track)}
                     className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                       active
-                        ? "bg-[#ef9a1e] text-white shadow-[0_10px_24px_rgba(239,154,30,0.24)]"
-                        : "border border-white/10 bg-[#0c5871] text-[#dce7ec] hover:border-[#ef9a1e]"
+                        ? "bg-[var(--campaign-accent)] text-white shadow-[0_10px_24px_rgba(239,154,30,0.24)]"
+                        : "border border-white/10 bg-[var(--campaign-surface)] text-[var(--campaign-text)] hover:border-[var(--campaign-accent)]"
                     }`}
                   >
                     {track}
@@ -7516,22 +7516,22 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
             {visiblePrograms.map((item) => (
               <div key={item.title} className={`${EVENT_SEVA_DETAIL_CARD_CLASS} flex h-full flex-col`}>
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="rounded-full bg-[#ef9a1e] px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
+                  <span className="rounded-full bg-[var(--campaign-accent)] px-3 py-1 text-xs font-bold uppercase tracking-wide text-white">
                     {item.category}
                   </span>
-                  <span className="rounded-full border border-white/10 bg-[#0d6179] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#dce7ec]">
+                  <span className="rounded-full border border-white/10 bg-[var(--campaign-bg)] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[var(--campaign-text)]">
                     Sponsor Route
                   </span>
                 </div>
                 <h3 className={`mt-4 ${SEVA_CARD_TITLE_CLASS}`}>{item.title}</h3>
                 <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
                 <div className="mt-4 grid grid-cols-1 gap-3">
-                  <div className="rounded-2xl border border-white/10 bg-[#0d6179] p-4">
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Impact</p>
+                  <div className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4">
+                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Impact</p>
                     <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.impact}</p>
                   </div>
-                  <div className="rounded-2xl border border-white/10 bg-[#0d6179] p-4">
-                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">What Sponsorship Supports</p>
+                  <div className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4">
+                    <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">What Sponsorship Supports</p>
                     <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.support}</p>
                   </div>
                 </div>
@@ -7594,8 +7594,8 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
                 "Complete contribution through the donation route or guided sponsor coordination.",
                 "Stay connected with the purpose and continuity of the supported trust work.",
               ].map((line, index) => (
-                <div key={line} className="rounded-2xl border border-white/10 bg-[#0c5871] p-4">
-                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">Step {index + 1}</p>
+                <div key={line} className="rounded-2xl border border-white/10 bg-[var(--campaign-surface)] p-4">
+                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Step {index + 1}</p>
                   <p className={`mt-1 ${SEVA_BODY_TEXT_CLASS}`}>{line}</p>
                 </div>
               ))}
@@ -7617,7 +7617,7 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
                 "It gives a direct path to sponsor now or request details from the trust team.",
               ].map((line) => (
                 <li key={line} className="flex gap-3">
-                  <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#ef9a1e]" />
+                  <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--campaign-accent)]" />
                   <span>{line}</span>
                 </li>
               ))}
@@ -7633,8 +7633,8 @@ export const InvolvedSponsorPage = memo(function InvolvedSponsorPage() {
                 { label: "Monthly Seva", amount: "Possible" },
                 { label: "Festival Sponsor", amount: "Ready" },
               ].map((tier) => (
-                <div key={tier.label} className="rounded-xl border border-white/10 bg-[#0c5871] p-4 text-center">
-                  <p className="text-base font-semibold text-[#dce7ec]">{tier.label}</p>
+                <div key={tier.label} className="rounded-xl border border-white/10 bg-[var(--campaign-surface)] p-4 text-center">
+                  <p className="text-base font-semibold text-[var(--campaign-text)]">{tier.label}</p>
                   <p className="mt-1 text-2xl font-black text-white">{tier.amount}</p>
                 </div>
               ))}

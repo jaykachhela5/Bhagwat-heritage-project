@@ -126,15 +126,15 @@ function SevaIcon({
 function toneClasses(icon: SevaVisualKey) {
   switch (icon) {
     case "meal":
-      return "bg-[#ef9a1e]/15 text-[#ef9a1e]";
+      return "bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]";
     case "shield":
-      return "bg-[#ef9a1e]/15 text-[#ef9a1e]";
+      return "bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]";
     case "community":
-      return "bg-[#ef9a1e]/15 text-[#ef9a1e]";
+      return "bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]";
     case "spark":
-      return "bg-[#ef9a1e]/15 text-[#ef9a1e]";
+      return "bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]";
     default:
-      return "bg-[#ef9a1e]/15 text-[#ef9a1e]";
+      return "bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]";
   }
 }
 
@@ -146,23 +146,23 @@ function ProgramCard({
   program: ProgramCardContent;
 }) {
   return (
-    <article className="group flex h-full flex-col rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
-      <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-[#ef9a1e]">
+    <article className="group flex h-full flex-col rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
+      <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]">
         <MealIcon />
       </div>
       <h4 className="mt-4 text-2xl font-black leading-tight text-white">{program.title}</h4>
-      <p className="mt-3 flex-1 text-base leading-7 text-[#dce7ec] md:text-lg">{program.description}</p>
-      <div className="mt-5 rounded-2xl border border-white/10 bg-[#0d6179] px-4 py-3">
-        <p className="text-xs uppercase tracking-[0.16em] text-[#ef9a1e]">Cost</p>
-        <p className="mt-1 text-lg font-black text-[#ef9a1e]">{program.cost}</p>
+      <p className="mt-3 flex-1 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{program.description}</p>
+      <div className="mt-5 rounded-2xl border border-white/10 bg-[var(--campaign-bg)] px-4 py-3">
+        <p className="text-xs uppercase tracking-[0.16em] text-[var(--campaign-accent)]">Cost</p>
+        <p className="mt-1 text-lg font-black text-[var(--campaign-accent)]">{program.cost}</p>
       </div>
       {program.impact ? (
-        <div className="mt-4 rounded-2xl border border-white/10 bg-[#0d6179] px-4 py-3">
-          <p className="text-xs uppercase tracking-[0.16em] text-[#ef9a1e]">Impact</p>
-          <p className="mt-1 text-base font-semibold leading-7 text-[#dce7ec]">{program.impact}</p>
+        <div className="mt-4 rounded-2xl border border-white/10 bg-[var(--campaign-bg)] px-4 py-3">
+          <p className="text-xs uppercase tracking-[0.16em] text-[var(--campaign-accent)]">Impact</p>
+          <p className="mt-1 text-base font-semibold leading-7 text-[var(--campaign-text)]">{program.impact}</p>
         </div>
       ) : null}
-      <button type="button" onClick={onDonate} className="mt-6 inline-flex items-center justify-center rounded-xl bg-[#ef9a1e] px-5 py-3 font-bold text-white transition-colors hover:bg-[#de930a]">
+      <button type="button" onClick={onDonate} className="mt-6 inline-flex items-center justify-center rounded-xl bg-[var(--campaign-accent)] px-5 py-3 font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]">
         Donate Now
       </button>
     </article>
@@ -171,32 +171,32 @@ function ProgramCard({
 
 function HighlightCard({ item }: { item: SevaHighlight }) {
   return (
-    <article className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
+    <article className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
       <div className="flex items-start justify-between gap-4">
         <div className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ${toneClasses(item.icon)}`}>
           <SevaIcon icon={item.icon} />
         </div>
-        <span className="rounded-full bg-[#ef9a1e]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-[#ef9a1e]">
+        <span className="rounded-full bg-[var(--campaign-accent)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-[var(--campaign-accent)]">
           {item.badge}
         </span>
       </div>
       <h3 className="mt-4 text-2xl font-black text-white">{item.title}</h3>
-      <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.description}</p>
+      <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.description}</p>
     </article>
   );
 }
 
 function CatalogCard({ item }: { item: SevaCatalogItem }) {
   return (
-    <article className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
+    <article className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
       <div className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl ${toneClasses(item.icon)}`}>
         <SevaIcon icon={item.icon} className="h-6 w-6" />
       </div>
       <h4 className="mt-4 text-2xl font-black leading-tight text-white">{item.title}</h4>
-      <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.description}</p>
-      <div className="mt-4 rounded-2xl border border-white/10 bg-[#0d6179] px-4 py-3">
-        <p className="text-xs uppercase tracking-[0.18em] text-[#ef9a1e]">Support Focus</p>
-        <p className="mt-1 text-base font-semibold text-[#dce7ec]">{item.supportLine}</p>
+      <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.description}</p>
+      <div className="mt-4 rounded-2xl border border-white/10 bg-[var(--campaign-bg)] px-4 py-3">
+        <p className="text-xs uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Support Focus</p>
+        <p className="mt-1 text-base font-semibold text-[var(--campaign-text)]">{item.supportLine}</p>
       </div>
     </article>
   );
@@ -204,13 +204,13 @@ function CatalogCard({ item }: { item: SevaCatalogItem }) {
 
 function ReachCard({ item }: { item: SevaReachItem }) {
   return (
-    <article className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+    <article className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
       <div className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ${toneClasses(item.icon)}`}>
         <SevaIcon icon={item.icon} />
       </div>
-      <p className="mt-4 text-xs font-bold uppercase tracking-[0.22em] text-[#ef9a1e]">{item.focus}</p>
+      <p className="mt-4 text-xs font-bold uppercase tracking-[0.22em] text-[var(--campaign-accent)]">{item.focus}</p>
       <h3 className="mt-3 text-2xl font-black text-white">{item.title}</h3>
-      <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.description}</p>
+      <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.description}</p>
     </article>
   );
 }
@@ -225,7 +225,7 @@ function FaqCard({
   onToggle: () => void;
 }) {
   return (
-    <article className="overflow-hidden rounded-[24px] border border-white/10 bg-[#0c5871] shadow-sm">
+    <article className="overflow-hidden rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] shadow-sm">
       <button
         type="button"
         onClick={onToggle}
@@ -233,13 +233,13 @@ function FaqCard({
         className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left"
       >
         <span className="text-[14px] font-black leading-7 text-white md:text-[20px]">{item.question}</span>
-        <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-[#ef9a1e] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}>
+        <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}>
           <ChevronIcon />
         </span>
       </button>
       <div className={`grid transition-all duration-300 ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
         <div className="overflow-hidden">
-          <p className="px-5 pb-5 text-base leading-7 text-[#dce7ec] md:text-lg">{item.answer}</p>
+          <p className="px-5 pb-5 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.answer}</p>
         </div>
       </div>
     </article>
@@ -257,7 +257,7 @@ export default memo(function AnnSevaPage() {
   );
 
   return (
-    <div className="bg-[#0B2230] px-4 pb-24 pt-6 md:px-6 md:pb-28 md:pt-8">
+    <div className="bg-[var(--campaign-deep)] px-4 pb-24 pt-6 md:px-6 md:pb-28 md:pt-8">
       <style>{`@keyframes sevaFadeInUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}`}</style>
 
       <HeroSection
@@ -274,42 +274,42 @@ export default memo(function AnnSevaPage() {
           <button
             type="button"
             onClick={() => navigate(ROUTES.donate)}
-            className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[#ef9a1e] px-7 py-4 text-base font-bold text-white transition-colors hover:bg-[#de930a]"
+            className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[var(--campaign-accent)] px-7 py-4 text-base font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
           >
             <span>Donate Now</span>
           </button>
           <button
             type="button"
             onClick={() => navigate(ROUTES.involved.index)}
-            className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[#0d6179] px-7 py-4 text-base font-bold text-white transition-colors hover:bg-[#18495e]"
+            className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[var(--campaign-bg)] px-7 py-4 text-base font-bold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
           >
             <span>Join Seva</span>
           </button>
         </div>
       </HeroSection>
 
-      <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[#0d6179] px-6 py-10 text-center shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8">
+      <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] px-6 py-10 text-center shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8">
         <div className="mx-auto max-w-4xl">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-[#ef9a1e]">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]">
             <MealIcon className="h-8 w-8" />
           </div>
-          <p className="mt-5 text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Spiritual Foundation</p>
+          <p className="mt-5 text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Spiritual Foundation</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Why Ann Seva</h2>
-          <div className="mt-6 space-y-3 text-base leading-7 text-[#dce7ec] md:text-lg">
+          <div className="mt-6 space-y-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">
             <p>Offering food is regarded as one of the highest forms of giving in Indian spiritual tradition.</p>
             <p>A respectfully served meal can restore both physical strength and emotional hope.</p>
             <p>Food support is not only charity. It is compassionate protection of dignity and life.</p>
           </div>
-          <div className="mt-8 rounded-[24px] border border-white/10 bg-[#0c5871] px-6 py-6 shadow-sm">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-[#ef9a1e]"><HeartIcon className="h-8 w-8" /></div>
+          <div className="mt-8 rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] px-6 py-6 shadow-sm">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]"><HeartIcon className="h-8 w-8" /></div>
             <p className="mt-4 text-base font-black italic leading-7 text-white md:text-lg">"When a meal is served with dignity, it nourishes not only the body but also the heart."</p>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[#0d6179] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8" style={{ animation: "sevaFadeInUp 0.85s ease-out both" }}>
+      <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8" style={{ animation: "sevaFadeInUp 0.85s ease-out both" }}>
         <div className="text-center">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Ann Seva Highlights</p>
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Ann Seva Highlights</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Dedicated food support for nourishment, dignity, and care</h2>
         </div>
 
@@ -320,9 +320,9 @@ export default memo(function AnnSevaPage() {
         </div>
       </section>
 
-      <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[#0d6179] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8">
+      <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8">
         <div className="text-center">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Ann Seva Programs</p>
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Ann Seva Programs</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Ways to sponsor meal support</h2>
         </div>
 
@@ -333,9 +333,9 @@ export default memo(function AnnSevaPage() {
         </div>
       </section>
 
-      <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[#0d6179] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8">
+      <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8">
         <div className="text-center">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Occasion-Based Meal Offering</p>
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Occasion-Based Meal Offering</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Select the meal offering you want</h2>
         </div>
 
@@ -350,48 +350,48 @@ export default memo(function AnnSevaPage() {
                 onClick={() => setSelectedOccasion(option.id)}
                 className={`rounded-[28px] border p-6 text-left transition-all duration-300 ${
                   isSelected
-                    ? "border-[#ef9a1e] bg-[#0c5871] shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
-                    : "border-white/10 bg-[#0c5871] shadow-sm hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
+                    ? "border-[var(--campaign-accent)] bg-[var(--campaign-surface)] shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
+                    : "border-white/10 bg-[var(--campaign-surface)] shadow-sm hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
                 }`}
               >
                 <div className="flex items-start justify-between gap-4">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-[#ef9a1e]">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]">
                     <MealIcon />
                   </div>
                   <span className={`rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] ${
-                    isSelected ? "bg-[#ef9a1e] text-white" : "bg-[#ef9a1e]/15 text-[#ef9a1e]"
+                    isSelected ? "bg-[var(--campaign-accent)] text-white" : "bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]"
                   }`}>
                     {isSelected ? "Selected" : "Select"}
                   </span>
                 </div>
                 <h3 className="mt-4 text-2xl font-black text-white">{option.title}</h3>
-                <p className="mt-2 text-sm font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">{option.label}</p>
-                <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{option.description}</p>
+                <p className="mt-2 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">{option.label}</p>
+                <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{option.description}</p>
               </button>
             );
           })}
         </div>
 
-        <div className="mt-8 rounded-[24px] border border-white/10 bg-[#0c5871] px-6 py-6 shadow-sm">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Selected Service</p>
+        <div className="mt-8 rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] px-6 py-6 shadow-sm">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Selected Service</p>
           <p className="mt-2 text-[14px] font-black text-white md:text-[20px]">
             {OCCASION_OPTIONS.find((option) => option.id === selectedOccasion)?.title}
           </p>
-          <p className="mt-3 max-w-3xl text-base leading-7 text-[#dce7ec] md:text-lg">
+          <p className="mt-3 max-w-3xl text-base leading-7 text-[var(--campaign-text)] md:text-lg">
             This meal offering selection can be used for your family offering, devotional remembrance, or occasion-based support.
           </p>
           <div className="mt-5 flex flex-col gap-3 sm:flex-row">
             <button
               type="button"
               onClick={() => navigate(ROUTES.donate)}
-              className="inline-flex items-center justify-center rounded-xl bg-[#ef9a1e] px-6 py-4 font-bold text-white transition-colors hover:bg-[#de930a]"
+              className="inline-flex items-center justify-center rounded-xl bg-[var(--campaign-accent)] px-6 py-4 font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
             >
               Donate for Selected Occasion
             </button>
             <button
               type="button"
               onClick={() => navigate(ROUTES.contact)}
-              className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-[#0d6179] px-6 py-4 font-bold text-white transition-colors hover:bg-[#18495e]"
+              className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-[var(--campaign-bg)] px-6 py-4 font-bold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
             >
               Contact for Ann Seva
             </button>
@@ -399,9 +399,9 @@ export default memo(function AnnSevaPage() {
         </div>
       </section>
 
-      <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[#0d6179] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8">
+      <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8">
         <div className="text-center">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Complete Ann Seva Services</p>
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Complete Ann Seva Services</p>
         </div>
 
         <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -411,28 +411,28 @@ export default memo(function AnnSevaPage() {
         </div>
       </section>
 
-      <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[#0d6179] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8">
+      <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8">
         <div className="text-center">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">How Ann Seva Works</p>
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">How Ann Seva Works</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">From food need to dignified meal delivery</h2>
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
           {ANN_FLOW_STEPS.map((step) => (
-            <article key={step.step} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
-              <div className="inline-flex rounded-full bg-[#ef9a1e]/15 px-4 py-2 text-sm font-black tracking-[0.2em] text-[#ef9a1e]">
+            <article key={step.step} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
+              <div className="inline-flex rounded-full bg-[var(--campaign-accent)]/15 px-4 py-2 text-sm font-black tracking-[0.2em] text-[var(--campaign-accent)]">
                 {step.step}
               </div>
               <h3 className="mt-4 text-2xl font-black text-white">{step.title}</h3>
-              <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{step.description}</p>
+              <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{step.description}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[#0d6179] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8">
+      <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8">
         <div className="text-center">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Where Ann Seva Reaches</p>
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Where Ann Seva Reaches</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Communities and lives nourished through meal support</h2>
         </div>
 
@@ -445,9 +445,9 @@ export default memo(function AnnSevaPage() {
 
       <JalSevaDonationHub mode="ann" />
 
-      <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[#0d6179] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8">
+      <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8">
         <div className="text-center">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Ann Seva FAQ</p>
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Ann Seva FAQ</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Common questions about food support</h2>
         </div>
 

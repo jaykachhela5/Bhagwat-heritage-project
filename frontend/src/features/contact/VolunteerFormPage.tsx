@@ -1,4 +1,4 @@
-﻿import { memo, useMemo, useState, type FormEvent } from "react";
+import { memo, useMemo, useState, type FormEvent } from "react";
 import { volunteersApi } from "../../services/api/volunteers";
 import { FeatureHeroSlider } from "../../components/sections/FeatureHeroSlider";
 import { FAQSection } from "../../components/sections/FAQSection";
@@ -58,24 +58,24 @@ const TOP_BANNER_SLIDES = [
 ];
 
 const THEME = {
-  page: "min-h-screen bg-[#0B2230] pb-16",
+  page: "min-h-screen bg-[var(--campaign-deep)] pb-16",
   bannerWrap: "pt-8 md:pt-10",
   section: "max-w-6xl mx-auto px-4 pt-8",
-  darkPanel: "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 md:p-8 shadow-[0_18px_40px_rgba(0,0,0,0.20)]",
-  darkCard: "rounded-[24px] border border-white/10 bg-[#0c5871] p-4 shadow-[0_14px_30px_rgba(0,0,0,0.18)]",
-  label: "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]",
+  darkPanel: "rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 md:p-8 shadow-[0_18px_40px_rgba(0,0,0,0.20)]",
+  darkCard: "rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-4 shadow-[0_14px_30px_rgba(0,0,0,0.18)]",
+  label: "text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]",
   heading: "mt-2 text-[14px] font-black text-white md:text-[20px]",
-  formNote: "text-sm leading-6 text-[#dce7ec]",
+  formNote: "text-sm leading-6 text-[var(--campaign-text)]",
   formInput:
-    "w-full rounded-2xl border border-white/10 bg-white px-4 py-3 text-sm text-[#17314a] outline-none transition placeholder:text-[#6b8091] focus:border-[#ef9a1e] focus:ring-2 focus:ring-[#efc06a]",
+    "w-full rounded-2xl border border-white/10 bg-white px-4 py-3 text-sm text-[#17314a] outline-none transition placeholder:text-[#6b8091] focus:border-[var(--campaign-accent)] focus:ring-2 focus:ring-[#efc06a]",
   filterChip: "rounded-full px-3 py-1.5 text-xs font-semibold transition",
-  sliderWrap: "rounded-[24px] border border-white/10 bg-[#0c5871] p-4",
-  sliderLabel: "mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]",
-  sliderValue: "mt-1 text-xs text-[#dce7ec]",
-  progressLabel: "mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]",
-  progressValue: "mt-1 text-xs text-[#dce7ec]",
+  sliderWrap: "rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-4",
+  sliderLabel: "mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]",
+  sliderValue: "mt-1 text-xs text-[var(--campaign-text)]",
+  progressLabel: "mb-1 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]",
+  progressValue: "mt-1 text-xs text-[var(--campaign-text)]",
   button:
-    "mt-4 inline-flex w-full items-center justify-center rounded-2xl bg-[#ef9a1e] px-6 py-4 text-base font-bold text-white shadow-[0_18px_34px_rgba(239,154,30,0.28)] transition hover:bg-[#de930a] disabled:cursor-not-allowed disabled:opacity-70",
+    "mt-4 inline-flex w-full items-center justify-center rounded-2xl bg-[var(--campaign-accent)] px-6 py-4 text-base font-bold text-white shadow-[0_18px_34px_rgba(239,154,30,0.28)] transition hover:bg-[var(--campaign-accent-hover)] disabled:cursor-not-allowed disabled:opacity-70",
 } as const;
 
 export default memo(function VolunteerFormPage() {
@@ -153,15 +153,15 @@ export default memo(function VolunteerFormPage() {
         <div className={THEME.darkPanel}>
           <p className={THEME.label}>Volunteer Onboarding Journey</p>
           <h2 className={THEME.heading}>Register, Screen, Orient, and Start Seva</h2>
-          <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">
+          <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">
             Complete the steps below to begin guided volunteer onboarding with the trust team.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
             {ONBOARDING.map((item, index) => (
               <article key={item.title} className={THEME.darkCard}>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">Step {index + 1}</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Step {index + 1}</p>
                 <h3 className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.title}</h3>
-                <p className="mt-1 text-sm leading-6 text-[#dce7ec]">{item.detail}</p>
+                <p className="mt-1 text-sm leading-6 text-[var(--campaign-text)]">{item.detail}</p>
               </article>
             ))}
           </div>
@@ -179,7 +179,7 @@ export default memo(function VolunteerFormPage() {
             <div className="min-w-[180px]">
               <p className={THEME.progressLabel}>Profile Completion</p>
               <div className="h-2 overflow-hidden rounded-full bg-white/10">
-                <div className="h-full bg-[#ef9a1e] transition-all" style={{ width: `${completion}%` }} />
+                <div className="h-full bg-[var(--campaign-accent)] transition-all" style={{ width: `${completion}%` }} />
               </div>
               <p className={THEME.progressValue}>{completion}% complete</p>
             </div>
@@ -243,7 +243,7 @@ export default memo(function VolunteerFormPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
             <div className={THEME.darkCard}>
-              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Availability</p>
+              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Availability</p>
               <div className="flex flex-wrap gap-2">
                 {(["Weekdays", "Weekends", "Flexible"] as Availability[]).map((slot) => (
                   <button
@@ -252,8 +252,8 @@ export default memo(function VolunteerFormPage() {
                     onClick={() => setForm((f) => ({ ...f, availability: slot }))}
                     className={`${THEME.filterChip} ${
                       form.availability === slot
-                        ? "bg-[#ef9a1e] text-white"
-                        : "border border-white/10 bg-[#0d6179] text-[#dce7ec]"
+                        ? "bg-[var(--campaign-accent)] text-white"
+                        : "border border-white/10 bg-[var(--campaign-bg)] text-[var(--campaign-text)]"
                     }`}
                   >
                     {slot}

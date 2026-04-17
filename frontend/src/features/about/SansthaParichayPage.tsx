@@ -1,4 +1,4 @@
-﻿import { memo } from "react";
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
 import { usePageMeta } from "../../hooks/usePageMeta";
@@ -34,14 +34,14 @@ type QuickLink = {
   href: string;
 };
 
-const SECTION_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]";
+const SECTION_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]";
 const SECTION_HEADING = "mt-2 text-[14px] font-black text-white md:text-[20px]";
-const SECTION_BODY = "mt-4 text-base leading-7 text-[#dce7ec] md:text-lg";
-const CARD_LABEL = "text-[22px] font-semibold uppercase tracking-[0.12em] text-[#ef9a1e]";
+const SECTION_BODY = "mt-4 text-base leading-7 text-[var(--campaign-text)] md:text-lg";
+const CARD_LABEL = "text-[22px] font-semibold uppercase tracking-[0.12em] text-[var(--campaign-accent)]";
 const CARD_TITLE = "mt-4 text-[22px] font-black text-white md:text-[24px]";
-const CARD_BODY = "mt-4 text-base leading-7 text-[#dce7ec] md:text-lg";
+const CARD_BODY = "mt-4 text-base leading-7 text-[var(--campaign-text)] md:text-lg";
 const BUTTON_CLASS =
-  "inline-flex items-center justify-center rounded-[18px] bg-[#ef9a1e] px-5 py-3 text-[15px] font-bold text-white transition-colors hover:bg-[#d98916]";
+  "inline-flex items-center justify-center rounded-[18px] bg-[var(--campaign-accent)] px-5 py-3 text-[15px] font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]";
 
 const FOUNDATION_SNAPSHOT: SnapshotPoint[] = [
   {
@@ -69,7 +69,7 @@ const FOCUS_AREAS: FocusArea[] = [
       "Bhagwat Katha, satsang, devotional guidance, and scripture-centered gatherings that strengthen faith and understanding.",
     image: "/images/kathapravachan.png",
     href: ROUTES.eventsKatha.bhagwatKatha,
-    accent: "from-[#ef9a1e]/40 via-[#ef9a1e]/16 to-transparent",
+    accent: "from-[var(--campaign-accent)]/40 via-[var(--campaign-accent)]/16 to-transparent",
   },
   {
     title: "Educational Initiatives",
@@ -202,7 +202,7 @@ export default memo(function SansthaParichayPage() {
               <h1 className="mb-[10px] text-4xl font-bold leading-tight text-white md:text-5xl">
                 Sanstha Parichay
               </h1>
-              <p className="mx-auto max-w-4xl text-base leading-7 text-[#dce7ec] md:text-lg">
+              <p className="mx-auto max-w-4xl text-base leading-7 text-[var(--campaign-text)] md:text-lg">
                 A spiritual and humanitarian organization devoted to Bhagwat teachings, compassionate service, and value-based community upliftment.
               </p>
             </div>
@@ -212,10 +212,10 @@ export default memo(function SansthaParichayPage() {
 
       <section className="mx-auto max-w-6xl px-4 py-10 md:py-14">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.12fr_0.88fr]">
-          <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,#0d6179_0%,#0c5871_100%)] p-6 shadow-[0_14px_30px_rgba(0,0,0,0.2)] md:p-8">
+          <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,var(--campaign-bg)_0%,var(--campaign-surface)_100%)] p-6 shadow-[0_14px_30px_rgba(0,0,0,0.2)] md:p-8">
             <p className={SECTION_LABEL}>Sanstha Parichay</p>
             <h2 className={SECTION_HEADING}>About the Foundation</h2>
-            <div className="mt-6 space-y-5 text-base leading-7 text-[#dce7ec] md:text-lg">
+            <div className="mt-6 space-y-5 text-base leading-7 text-[var(--campaign-text)] md:text-lg">
               <p>
                 Shri Bhagwat Heritage Service Foundation is a spiritual and humanitarian organization devoted to spreading the teachings of Shrimad Bhagwat Mahapuran and promoting values of compassion, devotion, and service.
               </p>
@@ -268,7 +268,7 @@ export default memo(function SansthaParichayPage() {
             {FOCUS_AREAS.map((item) => (
               <article
                 key={item.title}
-                className="group relative overflow-hidden rounded-[26px] border border-white/10 bg-[#0d6179] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-[#ef9a1e]/40"
+                className="group relative overflow-hidden rounded-[26px] border border-white/10 bg-[var(--campaign-bg)] shadow-[0_14px_28px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--campaign-accent)]/40"
               >
                 <div className={`absolute inset-0 bg-[linear-gradient(180deg,var(--tw-gradient-stops))] ${item.accent}`} />
                 <div className="relative p-4">
@@ -299,7 +299,7 @@ export default memo(function SansthaParichayPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pb-10">
-        <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,#0d6179_0%,#0c5871_100%)] p-6 shadow-[0_14px_30px_rgba(0,0,0,0.2)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,var(--campaign-bg)_0%,var(--campaign-surface)_100%)] p-6 shadow-[0_14px_30px_rgba(0,0,0,0.2)] md:p-8">
           <div className="max-w-3xl">
             <p className={SECTION_LABEL}>Foundation Framework</p>
             <h2 className={SECTION_HEADING}>How the Mission Moves Forward</h2>
@@ -310,7 +310,7 @@ export default memo(function SansthaParichayPage() {
 
           <div className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-3">
             {FOUNDATION_FRAMEWORK.map((item) => (
-              <div key={item.step} className="relative rounded-[26px] border border-white/10 bg-[#0c5871] p-5 shadow-md">
+              <div key={item.step} className="relative rounded-[26px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-md">
                 <div className="inline-flex rounded-full border border-[#f0c34a]/25 bg-[#f0c34a]/10 px-3 py-1 text-[15px] font-black text-[#ffd790]">
                   {item.step}
                 </div>
@@ -330,14 +330,14 @@ export default memo(function SansthaParichayPage() {
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {FOUNDATION_VALUES.map((item) => (
                 <div key={item.title} className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm">
-                  <h3 className="text-[22px] font-black text-[#ef9a1e] md:text-[24px]">{item.title}</h3>
+                  <h3 className="text-[22px] font-black text-[var(--campaign-accent)] md:text-[24px]">{item.title}</h3>
                   <p className={CARD_BODY}>{item.description}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,#0d6179_0%,#0c5871_100%)] p-6 shadow-[0_14px_30px_rgba(0,0,0,0.2)] md:p-8">
+          <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,var(--campaign-bg)_0%,var(--campaign-surface)_100%)] p-6 shadow-[0_14px_30px_rgba(0,0,0,0.2)] md:p-8">
             <p className={SECTION_LABEL}>Explore Further</p>
             <h2 className={SECTION_HEADING}>Continue Through the About Section</h2>
             <p className={SECTION_BODY}>
@@ -349,15 +349,15 @@ export default memo(function SansthaParichayPage() {
                 <Link
                   key={item.label}
                   to={item.href}
-                  className="group flex items-start justify-between gap-4 rounded-[22px] border border-white/10 bg-[#0c5871] px-5 py-4 transition-all hover:border-[#ef9a1e]/50 hover:bg-[#13384a]"
+                  className="group flex items-start justify-between gap-4 rounded-[22px] border border-white/10 bg-[var(--campaign-surface)] px-5 py-4 transition-all hover:border-[var(--campaign-accent)]/50 hover:bg-[#13384a]"
                 >
                   <div>
-                    <p className="text-[22px] font-black text-white transition-colors group-hover:text-[#ef9a1e] md:text-[24px]">
+                    <p className="text-[22px] font-black text-white transition-colors group-hover:text-[var(--campaign-accent)] md:text-[24px]">
                       {item.label}
                     </p>
-                    <p className="mt-2 text-base leading-7 text-[#dce7ec] md:text-lg">{item.note}</p>
+                    <p className="mt-2 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.note}</p>
                   </div>
-                  <span className="mt-2 text-[15px] font-bold text-[#ef9a1e] transition-transform group-hover:translate-x-1">
+                  <span className="mt-2 text-[15px] font-bold text-[var(--campaign-accent)] transition-transform group-hover:translate-x-1">
                     Explore
                   </span>
                 </Link>
@@ -366,7 +366,7 @@ export default memo(function SansthaParichayPage() {
 
             <div className="mt-8 rounded-[24px] border border-[#f0c34a]/15 bg-[linear-gradient(135deg,rgba(245,158,11,0.14)_0%,rgba(245,158,11,0.05)_100%)] p-5">
               <h3 className="text-[22px] font-black text-white md:text-[24px]">Support the Foundation's Work</h3>
-              <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">
+              <p className="mt-4 text-base leading-7 text-[var(--campaign-text)] md:text-lg">
                 Connect with the trust for seva, guidance, participation, or support toward spiritual and humanitarian initiatives.
               </p>
               <div className="mt-5 flex flex-wrap gap-3">

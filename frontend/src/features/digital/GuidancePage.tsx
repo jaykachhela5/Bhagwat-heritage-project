@@ -314,7 +314,7 @@ export default memo(function GuidancePage() {
                 className="group rounded-[24px] border border-[#e6edf4] bg-[linear-gradient(180deg,#ffffff_0%,#f9fbfd_100%)] p-5 transition-all duration-200 hover:-translate-y-1 hover:border-[#f0b15d] hover:shadow-[0_16px_30px_rgba(13,45,78,0.10)]"
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#d07a13]">{item.label}</p>
-                <h3 className="mt-2 text-xl font-bold text-[#0d3b66]">{item.title}</h3>
+                <h3 className="mt-2 text-xl font-bold text-[var(--color-secondary)]">{item.title}</h3>
                 <p className="mt-2 text-sm leading-7 text-[#60707d]">{item.description}</p>
                 <div className="mt-4 inline-flex rounded-full bg-[#fff3e2] px-3 py-1 text-xs font-semibold text-[#b35f11]">
                   {item.href}

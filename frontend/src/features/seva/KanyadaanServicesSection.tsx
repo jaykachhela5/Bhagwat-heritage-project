@@ -133,16 +133,16 @@ const KanyadaanServiceCard = memo(function KanyadaanServiceCard({
 }) {
   return (
     <article
-      className="group relative flex h-full flex-col rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
+      className="group relative flex h-full flex-col rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
       style={{ transitionDelay: `${index * 55}ms` }}
     >
       {service.tag ? (
-        <span className="absolute right-5 top-5 rounded-full bg-[#ef9a1e]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#ef9a1e]">
+        <span className="absolute right-5 top-5 rounded-full bg-[var(--campaign-accent)]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--campaign-accent)]">
           {service.tag}
         </span>
       ) : null}
 
-      <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-[#ef9a1e] transition-all duration-300 group-hover:bg-[#ef9a1e] group-hover:text-white">
+      <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)] transition-all duration-300 group-hover:bg-[var(--campaign-accent)] group-hover:text-white">
         {service.icon}
       </div>
 
@@ -152,20 +152,20 @@ const KanyadaanServiceCard = memo(function KanyadaanServiceCard({
       <div className="mt-5 flex flex-wrap gap-3">
         <Link
           to={ROUTES.donate}
-          className="inline-flex items-center rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+          className="inline-flex items-center rounded-xl bg-[var(--campaign-accent)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
         >
           Donate Now
         </Link>
         <Link
           to={ROUTES.involved.sponsor}
-          className="inline-flex items-center rounded-xl bg-[#0b2230] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#15384b]"
+          className="inline-flex items-center rounded-xl bg-[var(--campaign-deep)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-deep-hover)]"
         >
           Sponsor
         </Link>
         <button
           type="button"
           onClick={onToggle}
-          className="inline-flex items-center rounded-xl px-1 py-2 text-sm font-bold text-[#ef9a1e] transition-colors hover:text-white"
+          className="inline-flex items-center rounded-xl px-1 py-2 text-sm font-bold text-[var(--campaign-accent)] transition-colors hover:text-white"
         >
           Learn More
         </button>
@@ -173,7 +173,7 @@ const KanyadaanServiceCard = memo(function KanyadaanServiceCard({
 
       <div className={`grid transition-all duration-300 ${isOpen ? "mt-5 grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
         <div className="overflow-hidden">
-          <div className={`rounded-[20px] border border-white/10 bg-[#0b2230] px-4 py-4 ${SEVA_BODY_TEXT_CLASS}`}>
+          <div className={`rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] px-4 py-4 ${SEVA_BODY_TEXT_CLASS}`}>
             {service.details}
           </div>
         </div>
@@ -187,7 +187,7 @@ export const KanyadaanServicesSection = memo(function KanyadaanServicesSection()
 
   return (
     <RevealSection className="max-w-7xl mx-auto px-4 py-10">
-      <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+      <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <div className="mx-auto max-w-3xl text-center">
             <p className={SEVA_SECTION_LABEL_CLASS}>Kanyadaan Services</p>
             <h2 className={SEVA_SECTION_HEADING_CLASS}>Dignified support for daughters and families</h2>

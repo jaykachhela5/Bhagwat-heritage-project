@@ -215,17 +215,17 @@ const TESTIMONIALS: Testimonial[] = [
   },
 ];
 
-const ACTIVITIES_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]";
+const ACTIVITIES_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]";
 const ACTIVITIES_HEADING = "text-[14px] font-black text-white md:text-[20px]";
-const ACTIVITIES_BODY = "text-base leading-7 text-[#dce7ec] md:text-lg";
+const ACTIVITIES_BODY = "text-base leading-7 text-[var(--campaign-text)] md:text-lg";
 const ACTIVITIES_CARD_TITLE = "text-2xl font-black text-white md:text-[1.75rem]";
 const ACTIVITIES_LIST_TITLE = "text-lg font-black text-white md:text-xl";
-const ACTIVITIES_TOP_CARD_TITLE = "text-[20px] font-black uppercase tracking-wide text-[#ef9a1e] md:text-[24px]";
+const ACTIVITIES_TOP_CARD_TITLE = "text-[20px] font-black uppercase tracking-wide text-[var(--campaign-accent)] md:text-[24px]";
 const ACTIVITIES_TOP_CARD_VALUE = "mt-1 text-[14px] font-black text-white md:text-[20px]";
 const SECTION_PANEL =
-  "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
+  "rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
 const CARD_PANEL =
-  "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
+  "rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
 
 export default memo(function AboutActivitiesOverviewPage() {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -246,7 +246,7 @@ export default memo(function AboutActivitiesOverviewPage() {
   const activeGalleryItem = GALLERY_SLIDES[activeSlide];
 
   return (
-    <div className="min-h-screen bg-[#0B2230] pb-16 text-white">
+    <div className="min-h-screen bg-[var(--campaign-deep)] pb-16 text-white">
       <HeroSection
         title="Trust Activities Overview"
         subtitle="Mission in Action"
@@ -283,7 +283,7 @@ export default memo(function AboutActivitiesOverviewPage() {
           {topStats.map((item) => (
             <div
               key={item.title}
-              className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]"
+              className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]"
             >
               <p className={ACTIVITIES_TOP_CARD_TITLE}>* {item.title}</p>
               <p className={ACTIVITIES_TOP_CARD_VALUE}>{item.label}</p>
@@ -350,7 +350,7 @@ export default memo(function AboutActivitiesOverviewPage() {
             {ACTIVITY_CATEGORIES.map((item) => (
               <article
                 key={item.title}
-                className="group overflow-hidden rounded-[24px] border border-white/10 bg-[#0c5871] shadow-[0_14px_32px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-[#F59E0B]/45"
+                className="group overflow-hidden rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] shadow-[0_14px_32px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1 hover:border-[#F59E0B]/45"
               >
                 <div className="relative h-52 overflow-hidden">
                   <img
@@ -359,7 +359,7 @@ export default memo(function AboutActivitiesOverviewPage() {
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className={`absolute inset-0 bg-gradient-to-t ${item.accent} via-transparent to-transparent`} />
-                  <div className="absolute left-4 top-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0B2230]/80 text-sm font-black text-[#ffd08a]">
+                  <div className="absolute left-4 top-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--campaign-deep)]/80 text-sm font-black text-[var(--color-footer-accent)]">
                     {item.badge}
                   </div>
                 </div>
@@ -368,7 +368,7 @@ export default memo(function AboutActivitiesOverviewPage() {
                   <p className={`mt-3 ${ACTIVITIES_BODY}`}>{item.description}</p>
                   <Link
                     to={item.href}
-                    className="mt-5 inline-flex rounded-xl border border-[#F59E0B]/35 bg-[#F59E0B]/10 px-4 py-2.5 text-sm font-bold text-[#ffd08a] transition-colors hover:bg-[#F59E0B]/20"
+                    className="mt-5 inline-flex rounded-xl border border-[#F59E0B]/35 bg-[#F59E0B]/10 px-4 py-2.5 text-sm font-bold text-[var(--color-footer-accent)] transition-colors hover:bg-[#F59E0B]/20"
                   >
                     Learn More
                   </Link>
@@ -398,11 +398,11 @@ export default memo(function AboutActivitiesOverviewPage() {
             {RECENT_ACTIVITIES.map((item) => (
               <article
                 key={`${item.title}-${item.date}`}
-                className="overflow-hidden rounded-[24px] border border-white/10 bg-[#0c5871] shadow-[0_14px_32px_rgba(0,0,0,0.18)]"
+                className="overflow-hidden rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] shadow-[0_14px_32px_rgba(0,0,0,0.18)]"
               >
                 <img src={item.image} alt={item.title} className="h-56 w-full object-cover" />
                 <div className="p-6">
-                  <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#ffd08a]">
+                  <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-footer-accent)]">
                     <span>{item.date}</span>
                     <span className="text-white/35">|</span>
                     <span>{item.location}</span>
@@ -418,14 +418,14 @@ export default memo(function AboutActivitiesOverviewPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-8">
         <div className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
-          <div className="overflow-hidden rounded-[30px] border border-white/10 bg-[#0d6179] shadow-[0_16px_34px_rgba(0,0,0,0.24)]">
+          <div className="overflow-hidden rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] shadow-[0_16px_34px_rgba(0,0,0,0.24)]">
             <div className="relative">
               <img
                 src={activeGalleryItem.image}
                 alt={activeGalleryItem.title}
                 className="h-[320px] w-full object-cover md:h-[420px]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0b2230] via-[#0b2230]/25 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--campaign-deep)] via-[var(--campaign-deep)]/25 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
                 <p className={ACTIVITIES_LABEL}>Photo Gallery Preview</p>
                 <h2 className={`mt-3 ${ACTIVITIES_CARD_TITLE}`}>{activeGalleryItem.title}</h2>
@@ -449,7 +449,7 @@ export default memo(function AboutActivitiesOverviewPage() {
                     className={`flex items-center gap-4 rounded-2xl border p-3 text-left transition-all ${
                       isActive
                         ? "border-[#F59E0B]/40 bg-[#F59E0B]/10"
-                        : "border-white/10 bg-[#0c5871] hover:border-white/20"
+                        : "border-white/10 bg-[var(--campaign-surface)] hover:border-white/20"
                     }`}
                   >
                     <img src={slide.image} alt={slide.title} className="h-16 w-20 rounded-xl object-cover" />
@@ -510,7 +510,7 @@ export default memo(function AboutActivitiesOverviewPage() {
             </Link>
             <Link
               to={ROUTES.donate}
-              className="inline-flex rounded-xl border border-[#F59E0B]/35 bg-[#F59E0B]/10 px-6 py-3 font-semibold text-[#ffd08a] transition-all hover:-translate-y-0.5 hover:bg-[#F59E0B]/20"
+              className="inline-flex rounded-xl border border-[#F59E0B]/35 bg-[#F59E0B]/10 px-6 py-3 font-semibold text-[var(--color-footer-accent)] transition-all hover:-translate-y-0.5 hover:bg-[#F59E0B]/20"
             >
               Donate to the Trust
             </Link>
@@ -526,12 +526,12 @@ export default memo(function AboutActivitiesOverviewPage() {
             {TESTIMONIALS.map((item) => (
               <blockquote
                 key={`${item.name}-${item.role}`}
-                className="rounded-[24px] border border-white/10 bg-[#0c5871] p-6 shadow-[0_14px_32px_rgba(0,0,0,0.18)]"
+                className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-6 shadow-[0_14px_32px_rgba(0,0,0,0.18)]"
               >
                 <p className="text-lg leading-8 text-[#edf5f9]">&ldquo;{item.quote}&rdquo;</p>
                 <footer className="mt-6 border-t border-white/10 pt-4">
                   <p className="font-black text-white">{item.name}</p>
-                  <p className="mt-1 text-sm uppercase tracking-[0.16em] text-[#ffd08a]">{item.role}</p>
+                  <p className="mt-1 text-sm uppercase tracking-[0.16em] text-[var(--color-footer-accent)]">{item.role}</p>
                 </footer>
               </blockquote>
             ))}

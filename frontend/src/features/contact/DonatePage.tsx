@@ -21,7 +21,7 @@ export default memo(function DonatePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0B2230] pb-16">
+    <div className="min-h-screen bg-[var(--campaign-deep)] pb-16">
       <HeroSection
         title="Donation System"
         subtitle="Give with faith, serve with love"
@@ -37,13 +37,13 @@ export default memo(function DonatePage() {
             href={EXTERNAL_RAZORPAY_DONATE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
+            className="inline-flex items-center rounded-lg bg-[var(--campaign-accent)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
           >
             Open Payment Link
           </a>
           <Link
             to={ROUTES.digital.index}
-            className="inline-flex items-center rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
+            className="inline-flex items-center rounded-lg bg-[var(--campaign-bg)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
           >
             Digital Services
           </Link>
@@ -59,7 +59,7 @@ export default memo(function DonatePage() {
               { title: "Clean Experience", value: "Simple and direct", note: "A clear page design reduces confusion before donation begins." },
               { title: "Visual Match", value: "Aligned with Gau Seva", note: "Hero banner, font rhythm, and section style now follow the same family." },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
                 <p className={SEVA_HIGHLIGHT_TITLE_CLASS}>* {item.title}</p>
                 <p className={SEVA_HIGHLIGHT_VALUE_CLASS}>{item.value}</p>
                 <p className={`mt-1 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
@@ -71,7 +71,7 @@ export default memo(function DonatePage() {
 
       <section className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
             <p className={SEVA_SECTION_LABEL_CLASS}>Donation Access</p>
             <h2 className={SEVA_SECTION_HEADING_CLASS}>The payment page opens automatically in a new tab</h2>
             <p className={`mt-5 ${SEVA_BODY_TEXT_CLASS}`}>
@@ -83,14 +83,14 @@ export default memo(function DonatePage() {
                 href={EXTERNAL_RAZORPAY_DONATE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
+                className="inline-flex items-center rounded-lg bg-[var(--campaign-accent)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
               >
                 Open Payment Link Again
               </a>
             </div>
           </div>
 
-          <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
             <p className={SEVA_SECTION_LABEL_CLASS}>Support Routes</p>
             <h2 className={SEVA_SECTION_HEADING_CLASS}>Continue browsing after donation if needed</h2>
             <div className="mt-6 grid grid-cols-1 gap-4">
@@ -99,7 +99,7 @@ export default memo(function DonatePage() {
                 { title: "Explore Gau Seva", href: ROUTES.seva.gau },
                 { title: "Contact the Trust", href: ROUTES.contact },
               ].map((item) => (
-                <Link key={item.href} to={item.href} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5">
+                <Link key={item.href} to={item.href} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5">
                   <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
                 </Link>
               ))}

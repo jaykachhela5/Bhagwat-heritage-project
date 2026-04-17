@@ -57,11 +57,11 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[#0a5375] via-[#1788ac] to-[#8fc65b] px-4">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-[var(--color-secondary)] via-[#1788ac] to-[#8fc65b] px-4">
       <div className="w-full max-w-md rounded-2xl border border-white/60 bg-white/95 p-8 shadow-[0_24px_48px_rgba(10,83,117,0.18)] backdrop-blur-sm">
         <div className="mb-8 text-center">
           <img src="/images/logo.jpg" alt="Logo" className="mx-auto mb-3 h-16 w-16 rounded-full object-cover" />
-          <h2 className="text-2xl font-bold text-[#0a5375]">
+          <h2 className="text-2xl font-bold text-[var(--color-secondary)]">
             {mode === "login" ? "Welcome Back" : "Create Account"}
           </h2>
           <p className="mt-1 text-sm text-[#5d7f8b]">Bhagwat Heritage Service Foundation Trust</p>
@@ -75,7 +75,7 @@ export default function LoginPage() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full rounded-lg border border-[#dce9ee] bg-[#fffdf7] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ef9a1e]"
+              className="w-full rounded-lg border border-[var(--color-surface-utility-border)] bg-[var(--color-surface-utility)] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--campaign-accent)]"
             />
           )}
           <input
@@ -84,7 +84,7 @@ export default function LoginPage() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full rounded-lg border border-[#dce9ee] bg-[#fffdf7] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ef9a1e]"
+            className="w-full rounded-lg border border-[var(--color-surface-utility-border)] bg-[var(--color-surface-utility)] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--campaign-accent)]"
           />
           <input
             type="password"
@@ -92,7 +92,7 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full rounded-lg border border-[#dce9ee] bg-[#fffdf7] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#ef9a1e]"
+            className="w-full rounded-lg border border-[var(--color-surface-utility-border)] bg-[var(--color-surface-utility)] px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--campaign-accent)]"
           />
 
           {msg && (
@@ -104,7 +104,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#0f678c] py-3 font-semibold text-white transition-colors hover:bg-[#0a5375] disabled:opacity-50"
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#0f678c] py-3 font-semibold text-white transition-colors hover:bg-[var(--color-secondary)] disabled:opacity-50"
           >
             {loading ? <LoadingSpinner size="sm" /> : null}
             {mode === "login" ? "Login" : "Sign Up"}

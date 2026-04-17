@@ -6,7 +6,7 @@ export const MarqueeBar = memo(function MarqueeBar() {
   const message = t("marquee.message");
 
   return (
-    <div className="overflow-hidden bg-gradient-to-r from-[#0a5375] via-[#1788ac] to-[#ef9a1e] py-2 text-white">
+    <div className="overflow-hidden bg-gradient-to-r from-[var(--color-secondary)] via-[var(--color-footer-mid)] to-[var(--campaign-accent)] py-2 text-white">
       <div className="marquee-wrapper">
         <p className="animate-marquee whitespace-nowrap font-bold text-sm tracking-wide inline-block">
           {message} &nbsp;&nbsp;&nbsp;&nbsp; {message}

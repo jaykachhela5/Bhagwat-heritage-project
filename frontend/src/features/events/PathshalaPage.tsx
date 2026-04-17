@@ -1,4 +1,4 @@
-﻿import { memo, useState, type FormEvent } from "react";
+import { memo, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
 import { HeroSection } from "../../components/ui/HeroSection";
@@ -115,21 +115,21 @@ const HERO_PRIMARY_BUTTON_CLASS =
   "inline-flex items-center rounded-lg bg-[#f3a11f] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(243,161,31,0.28)] transition-colors hover:bg-[#ffaf31]";
 const HERO_SECONDARY_BUTTON_CLASS =
   "inline-flex items-center rounded-lg bg-[#0f7994] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(15,121,148,0.28)] transition-colors hover:bg-[#1492b1]";
-const sectionPanelClass = "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
+const sectionPanelClass = "rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
 const cardClass =
-  "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
+  "rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
 const sectionTitleClass = SEVA_SECTION_LABEL_CLASS;
 const surfaceSectionClass = sectionPanelClass;
 const darkSectionClass = sectionPanelClass;
 const lightCardClass = cardClass;
-const surfaceMetaClass = "text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]";
+const surfaceMetaClass = "text-sm font-black uppercase tracking-[0.12em] text-[var(--campaign-accent)]";
 const surfaceCardTitleClass = SEVA_CARD_TITLE_CLASS;
 const surfaceCardBodyClass = `mt-3 ${SEVA_BODY_TEXT_CLASS}`;
-const darkMetaClass = "text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]";
+const darkMetaClass = "text-sm font-black uppercase tracking-[0.12em] text-[var(--campaign-accent)]";
 const darkCardTitleClass = `mt-2 ${SEVA_CARD_TITLE_CLASS}`;
 const darkCardBodyClass = `mt-3 ${SEVA_BODY_TEXT_CLASS}`;
 const formFieldClass =
-  "w-full rounded-xl border border-white/10 bg-[#0b2230] px-4 py-3 text-base text-white placeholder:text-[#dce7ec]/70 focus:outline-none focus:ring-2 focus:ring-[#ef9a1e]/40";
+  "w-full rounded-xl border border-white/10 bg-[var(--campaign-deep)] px-4 py-3 text-base text-white placeholder:text-[var(--campaign-text)]/70 focus:outline-none focus:ring-2 focus:ring-[var(--campaign-accent)]/40";
 
 export default memo(function PathshalaPage() {
   const [form, setForm] = useState({
@@ -173,7 +173,7 @@ export default memo(function PathshalaPage() {
   };
 
   return (
-    <div className="relative overflow-hidden bg-[#0B2230] pb-16">
+    <div className="relative overflow-hidden bg-[var(--campaign-deep)] pb-16">
       <div className="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-[#2d7ed4]/20 blur-3xl" />
       <div className="pointer-events-none absolute top-[520px] -right-24 h-80 w-80 rounded-full bg-[#18b293]/18 blur-3xl" />
       <div className="pointer-events-none absolute bottom-0 left-1/4 h-64 w-64 rounded-full bg-[#ffb347]/16 blur-3xl" />
@@ -189,13 +189,13 @@ export default memo(function PathshalaPage() {
         <div className="flex flex-wrap justify-center gap-3">
           <a
             href="#admission-form"
-            className="inline-flex items-center rounded-lg bg-[#F59E0B] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
+            className="inline-flex items-center rounded-lg bg-[#F59E0B] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
           >
             Apply for Admission
           </a>
           <Link
             to={ROUTES.knowledge.studyResources}
-            className="inline-flex items-center rounded-lg bg-[#12394A] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
+            className="inline-flex items-center rounded-lg bg-[#12394A] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
           >
             Explore Study Resources
           </Link>
@@ -243,7 +243,7 @@ export default memo(function PathshalaPage() {
             {CORE_FEATURES.map((feature) => (
               <div key={feature} className="flex items-start gap-3 rounded-xl border border-white/10 bg-[#0f3140] p-4">
                 <span className="mt-1 inline-block h-2.5 w-2.5 rounded-full bg-[#F59E0B]" />
-                <p className="text-sm font-semibold leading-7 text-[#dce7ec]">{feature}</p>
+                <p className="text-sm font-semibold leading-7 text-[var(--campaign-text)]">{feature}</p>
               </div>
             ))}
           </div>
@@ -316,7 +316,7 @@ export default memo(function PathshalaPage() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {TESTIMONIALS.map((item) => (
               <article key={item.by} className={lightCardClass}>
-                <p className="text-sm leading-7 text-[#dce7ec]">"{item.quote}"</p>
+                <p className="text-sm leading-7 text-[var(--campaign-text)]">"{item.quote}"</p>
                 <p className="mt-4 text-sm font-black uppercase tracking-[0.18em] text-[#F59E0B]">{item.by}</p>
               </article>
             ))}
@@ -424,7 +424,7 @@ export default memo(function PathshalaPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-xl bg-[#F59E0B] py-3 font-bold text-white transition-colors hover:bg-[#de930a] disabled:opacity-70"
+              className="w-full rounded-xl bg-[#F59E0B] py-3 font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)] disabled:opacity-70"
             >
               {loading ? "Submitting..." : "Submit Application"}
             </button>

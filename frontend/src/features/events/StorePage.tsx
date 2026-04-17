@@ -1,4 +1,4 @@
-﻿import { memo, useMemo, useState } from "react";
+import { memo, useMemo, useState } from "react";
 import { useCart } from "../../app/providers/CartProvider";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
@@ -203,10 +203,10 @@ export default memo(function StorePage() {
   const [sortBy, setSortBy] = useState("featured");
   const [maxPrice, setMaxPrice] = useState(2000);
   const sectionClass = "max-w-7xl mx-auto px-4 py-8";
-  const panelClass = "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
-  const cardClass = "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm";
+  const panelClass = "rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
+  const cardClass = "rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm";
   const filterInputClass =
-    "w-full rounded-2xl border border-white/10 bg-white px-4 py-3 text-sm text-[#17314a] outline-none transition placeholder:text-[#6b8091] focus:border-[#ef9a1e] focus:ring-2 focus:ring-[#efc06a]";
+    "w-full rounded-2xl border border-white/10 bg-white px-4 py-3 text-sm text-[#17314a] outline-none transition placeholder:text-[#6b8091] focus:border-[var(--campaign-accent)] focus:ring-2 focus:ring-[#efc06a]";
   const scrollToProducts = () => document.getElementById("store-products")?.scrollIntoView({ behavior: "smooth", block: "start" });
 
   const filteredProducts = useMemo(() => {
@@ -237,7 +237,7 @@ export default memo(function StorePage() {
   const grandTotal = cartSubtotal + shipping;
 
   return (
-    <div className="min-h-screen bg-[#0B2230] pb-16">
+    <div className="min-h-screen bg-[var(--campaign-deep)] pb-16">
       <HeroSection
         title="E-Store"
         subtitle="Digital seva, delivered with devotion"
@@ -252,14 +252,14 @@ export default memo(function StorePage() {
           <button
             type="button"
             onClick={() => setCartVisible(true)}
-            className="inline-flex items-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
+            className="inline-flex items-center rounded-lg bg-[var(--campaign-accent)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
           >
             Open Cart ({count})
           </button>
           <button
             type="button"
             onClick={scrollToProducts}
-            className="inline-flex items-center rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
+            className="inline-flex items-center rounded-lg bg-[var(--campaign-bg)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
           >
             Browse Products
           </button>
@@ -281,7 +281,7 @@ export default memo(function StorePage() {
               { title: "Featured Picks", value: "Highlighted daily essentials", note: "Quick access to popular spiritual items and trusted selections." },
               { title: "User Experience", value: "Fast and functional", note: "Now visually aligned with the Gau Seva banner and typography style." },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
                 <p className={SEVA_HIGHLIGHT_TITLE_CLASS}>* {item.title}</p>
                 <p className={SEVA_HIGHLIGHT_VALUE_CLASS}>{item.value}</p>
                 <p className={`mt-1 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
@@ -297,7 +297,7 @@ export default memo(function StorePage() {
           <h2 className={SEVA_SECTION_HEADING_CLASS}>Simple tools for clean browsing and checkout support</h2>
           <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {STORE_FEATURES.map((feature) => (
-            <div key={feature} className="rounded-2xl border border-white/10 bg-[#0c5871] p-4 text-sm font-medium text-[#dce7ec] shadow-sm md:text-[15px]">
+            <div key={feature} className="rounded-2xl border border-white/10 bg-[var(--campaign-surface)] p-4 text-sm font-medium text-[var(--campaign-text)] shadow-sm md:text-[15px]">
               {feature}
             </div>
           ))}
@@ -311,20 +311,20 @@ export default memo(function StorePage() {
           <h2 className={SEVA_SECTION_HEADING_CLASS}>Popular devotional items and trusted store selections</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
           {featuredProducts.map((product) => (
-            <div key={product.id} className="overflow-hidden rounded-[24px] border border-white/10 bg-[#0c5871] shadow-sm">
+            <div key={product.id} className="overflow-hidden rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] shadow-sm">
               <img src={product.image} alt={product.name} className="w-full h-40 object-cover" />
               <div className="p-4 md:p-5">
-                <p className="mb-2 inline-block rounded-full bg-[#ef9a1e]/15 px-2 py-1 text-[11px] font-bold text-[#ef9a1e]">
+                <p className="mb-2 inline-block rounded-full bg-[var(--campaign-accent)]/15 px-2 py-1 text-[11px] font-bold text-[var(--campaign-accent)]">
                   {product.tag || "Featured"}
                 </p>
                 <h3 className={`${SEVA_CARD_TITLE_CLASS} text-base md:text-lg`}>{product.name}</h3>
                 <p className={`mt-1 text-xs md:text-sm ${SEVA_BODY_TEXT_CLASS}`}>{product.description}</p>
                 <div className="mt-3 flex items-center justify-between">
-                  <span className="text-base font-bold text-[#ef9a1e] md:text-lg">Rs {product.price}</span>
+                  <span className="text-base font-bold text-[var(--campaign-accent)] md:text-lg">Rs {product.price}</span>
                   <button
                     type="button"
                     onClick={() => addItem({ id: product.id, name: product.name, price: product.price, quantity: 1 })}
-                    className="rounded-lg bg-[#ef9a1e] px-3 py-1.5 text-xs text-white transition-colors hover:bg-[#de930a] md:text-sm"
+                    className="rounded-lg bg-[var(--campaign-accent)] px-3 py-1.5 text-xs text-white transition-colors hover:bg-[var(--campaign-accent-hover)] md:text-sm"
                   >
                     Add
                   </button>
@@ -340,7 +340,7 @@ export default memo(function StorePage() {
         <div className={panelClass}>
           <p className={SEVA_SECTION_LABEL_CLASS}>Store Catalog</p>
           <h2 className={SEVA_SECTION_HEADING_CLASS}>Browse products by category, price, and search</h2>
-          <div className="mt-8 rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+          <div className="mt-8 rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
             <input
               type="text"
@@ -374,7 +374,7 @@ export default memo(function StorePage() {
           </div>
 
           <div className="mt-4">
-            <div className="flex items-center justify-between text-sm text-[#dce7ec]">
+            <div className="flex items-center justify-between text-sm text-[var(--campaign-text)]">
               <span>Max Price: Rs {maxPrice}</span>
               <span>{filteredProducts.length} products</span>
             </div>
@@ -385,7 +385,7 @@ export default memo(function StorePage() {
               step={50}
               value={maxPrice}
               onChange={(e) => setMaxPrice(Number(e.target.value))}
-              className="mt-2 w-full accent-[#ef9a1e]"
+              className="mt-2 w-full accent-[var(--campaign-accent)]"
             />
           </div>
         </div>
@@ -395,11 +395,11 @@ export default memo(function StorePage() {
       <section className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {filteredProducts.map((product) => (
-            <article key={product.id} className="overflow-hidden rounded-[24px] border border-white/10 bg-[#0c5871] shadow-sm transition-shadow hover:shadow-md">
+            <article key={product.id} className="overflow-hidden rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] shadow-sm transition-shadow hover:shadow-md">
               <img src={product.image} alt={product.name} className="w-full h-36 object-cover md:h-40" />
               <div className="p-4">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="rounded bg-[#ef9a1e]/15 px-2 py-0.5 text-xs text-[#ef9a1e]">{product.category}</span>
+                  <span className="rounded bg-[var(--campaign-accent)]/15 px-2 py-0.5 text-xs text-[var(--campaign-accent)]">{product.category}</span>
                   {product.stock <= 5 ? (
                     <span className="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded">Low Stock</span>
                   ) : null}
@@ -407,11 +407,11 @@ export default memo(function StorePage() {
                 <h3 className={`mt-2 text-base ${SEVA_CARD_TITLE_CLASS}`}>{product.name}</h3>
                 <p className={`mt-1 text-xs md:text-sm ${SEVA_BODY_TEXT_CLASS}`}>{product.description}</p>
                 <div className="mt-3 flex items-center justify-between">
-                  <span className="text-base font-bold text-[#ef9a1e] md:text-lg">Rs {product.price}</span>
+                  <span className="text-base font-bold text-[var(--campaign-accent)] md:text-lg">Rs {product.price}</span>
                   <button
                     type="button"
                     onClick={() => addItem({ id: product.id, name: product.name, price: product.price, quantity: 1 })}
-                    className="rounded-lg bg-[#ef9a1e] px-3 py-1.5 text-xs text-white transition-colors hover:bg-[#de930a] md:text-sm"
+                    className="rounded-lg bg-[var(--campaign-accent)] px-3 py-1.5 text-xs text-white transition-colors hover:bg-[var(--campaign-accent-hover)] md:text-sm"
                   >
                     Add to Cart
                   </button>
@@ -425,7 +425,7 @@ export default memo(function StorePage() {
       {cartVisible && (
         <div className="fixed inset-0 z-50">
         <div className="absolute inset-0 bg-black/35" onClick={() => setCartVisible(false)} />
-        <aside className="absolute right-0 top-0 h-full w-full max-w-md overflow-y-auto border-l border-white/10 bg-[#0B2230] p-5 shadow-2xl">
+        <aside className="absolute right-0 top-0 h-full w-full max-w-md overflow-y-auto border-l border-white/10 bg-[var(--campaign-deep)] p-5 shadow-2xl">
           <div className="flex items-center justify-between">
               <h3 className="text-lg font-bold text-white md:text-xl">Your Cart ({count})</h3>
               <button
@@ -438,21 +438,21 @@ export default memo(function StorePage() {
             </div>
 
             {items.length === 0 ? (
-              <p className="mt-8 text-[#dce7ec]">Your cart is empty.</p>
+              <p className="mt-8 text-[var(--campaign-text)]">Your cart is empty.</p>
             ) : (
               <>
                 <div className="mt-4 space-y-3">
                   {items.map((item) => (
-                    <div key={item.id} className="rounded-xl border border-white/10 bg-[#0c5871] p-3">
+                    <div key={item.id} className="rounded-xl border border-white/10 bg-[var(--campaign-surface)] p-3">
                       <div className="flex items-start justify-between gap-2">
                         <div>
                           <p className="font-semibold text-white">{item.name}</p>
-                          <p className="text-sm text-[#dce7ec]">Rs {item.price} each</p>
+                          <p className="text-sm text-[var(--campaign-text)]">Rs {item.price} each</p>
                         </div>
                         <button
                           type="button"
                           onClick={() => removeItem(item.id)}
-                          className="text-sm text-[#ef9a1e]"
+                          className="text-sm text-[var(--campaign-accent)]"
                         >
                           Remove
                         </button>
@@ -481,13 +481,13 @@ export default memo(function StorePage() {
                   ))}
                 </div>
 
-                <div className="mt-6 space-y-2 rounded-xl border border-white/10 bg-[#0c5871] p-4 text-sm">
+                <div className="mt-6 space-y-2 rounded-xl border border-white/10 bg-[var(--campaign-surface)] p-4 text-sm">
                   <div className="flex items-center justify-between">
-                    <span className="text-[#dce7ec]">Subtotal</span>
+                    <span className="text-[var(--campaign-text)]">Subtotal</span>
                     <span className="font-semibold text-white">Rs {cartSubtotal}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-[#dce7ec]">Shipping</span>
+                    <span className="text-[var(--campaign-text)]">Shipping</span>
                     <span className="font-semibold text-white">Rs {shipping}</span>
                   </div>
                   <div className="flex items-center justify-between border-t border-white/10 pt-2">
@@ -506,7 +506,7 @@ export default memo(function StorePage() {
                   </button>
                   <button
                     type="button"
-                    className="rounded-xl bg-[#ef9a1e] py-2.5 font-semibold text-white transition-colors hover:bg-[#de930a]"
+                    className="rounded-xl bg-[var(--campaign-accent)] py-2.5 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
                   >
                     Checkout
                   </button>

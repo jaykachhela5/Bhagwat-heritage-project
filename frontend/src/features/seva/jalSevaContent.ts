@@ -574,7 +574,7 @@ export const TESTIMONIALS: TestimonialStory[] = [
     name: "",
     role: "Seva Volunteer",
     quote: "The biggest lesson from the water camps was that even one pot of water can bring immediate relief to someone in need.",
-    accent: "from-[#fff8e8] to-[#fffdf7]",
+    accent: "from-[#fff8e8] to-[var(--color-surface-utility)]",
   },
 ];
 
@@ -589,7 +589,7 @@ export const JAL_TESTIMONIALS: TestimonialStory[] = [
     name: "",
     role: "Volunteer Coordinator",
     quote: "Even a simple water point becomes a blessing when it is organised with care and reached at the right place and time.",
-    accent: "from-[#fff8e8] to-[#fffdf7]",
+    accent: "from-[#fff8e8] to-[var(--color-surface-utility)]",
   },
   {
     name: "",
@@ -610,7 +610,7 @@ export const ANN_TESTIMONIALS: TestimonialStory[] = [
     name: "",
     role: "Meal Distribution Volunteer",
     quote: "Serving food with dignity reminds us that compassion is not abstract. It reaches people one meal at a time.",
-    accent: "from-[#fff8e8] to-[#fffdf7]",
+    accent: "from-[#fff8e8] to-[var(--color-surface-utility)]",
   },
   {
     name: "",

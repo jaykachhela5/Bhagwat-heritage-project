@@ -1,5 +1,5 @@
 import { lazy, Suspense, useState, useRef, useEffect, useLayoutEffect, type RefObject } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { AuthProvider } from "./app/providers/AuthProvider";
 import { CartProvider } from "./app/providers/CartProvider";
 import { ErrorBoundary } from "./components/common/ErrorBoundary";
@@ -114,6 +114,48 @@ function SiteHeader({ headerRef }: { headerRef: RefObject<HTMLDivElement | null>
   );
 }
 
+const THEME_CLASS_NAMES = ["home-theme", "seva-theme", "donation-theme", "events-theme"] as const;
+
+function resolveThemeClass(pathname: string) {
+  if (pathname === ROUTES.home) {
+    return "home-theme";
+  }
+
+  if (
+    pathname === ROUTES.donate ||
+    pathname === ROUTES.digital.donation ||
+    pathname === ROUTES.involved.donor
+  ) {
+    return "donation-theme";
+  }
+
+  if (pathname.startsWith("/seva")) {
+    return "seva-theme";
+  }
+
+  if (pathname.startsWith("/events-katha") || pathname.startsWith("/events")) {
+    return "events-theme";
+  }
+
+  return "home-theme";
+}
+
+function ThemeClassController() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const themeClass = resolveThemeClass(location.pathname);
+    document.body.classList.remove(...THEME_CLASS_NAMES);
+    document.body.classList.add(themeClass);
+
+    return () => {
+      document.body.classList.remove(themeClass);
+    };
+  }, [location.pathname]);
+
+  return null;
+}
+
 export default function App() {
   const headerRef = useRef<HTMLDivElement | null>(null);
   const [headerHeight, setHeaderHeight] = useState(128);
@@ -138,6 +180,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <ThemeClassController />
       <ErrorBoundary>
         <AuthProvider>
           <CartProvider>

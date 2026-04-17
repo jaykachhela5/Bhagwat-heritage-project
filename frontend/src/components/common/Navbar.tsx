@@ -129,7 +129,7 @@ const DropdownItem = memo(function DropdownItem({ item, t }: { item: NavItemConf
       <li>
         <Link
           to={item.href ?? ROUTES.home}
-          className="block whitespace-nowrap rounded-lg px-2.5 2xl:px-3 py-2 text-[13px] 2xl:text-[14px] text-[#0d3b66] font-semibold hover:text-[#f4a261] hover:bg-[#f7fbff] transition-colors"
+          className="block whitespace-nowrap rounded-lg px-2.5 2xl:px-3 py-2 text-[13px] 2xl:text-[14px] text-[var(--color-secondary)] font-semibold hover:text-[var(--color-primary)] hover:bg-[var(--color-surface-hover)] transition-colors"
         >
           {t(item.labelKey)}
         </Link>
@@ -142,15 +142,15 @@ const DropdownItem = memo(function DropdownItem({ item, t }: { item: NavItemConf
 
   return (
     <li className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
-      <button className="flex items-center gap-1 whitespace-nowrap rounded-lg px-2.5 2xl:px-3 py-2 text-[13px] 2xl:text-[14px] text-[#0d3b66] font-semibold hover:text-[#f4a261] hover:bg-[#f7fbff] transition-colors">
+      <button className="flex items-center gap-1 whitespace-nowrap rounded-lg px-2.5 2xl:px-3 py-2 text-[13px] 2xl:text-[14px] text-[var(--color-secondary)] font-semibold hover:text-[var(--color-primary)] hover:bg-[var(--color-surface-hover)] transition-colors">
         {t(item.labelKey)}
         <i className="fas fa-chevron-down text-xs mt-0.5" />
       </button>
 
       {open ? (
-        <div className="absolute top-full left-0 z-50 mt-1 w-[350px] rounded-xl border border-[#d8e4f2] bg-white p-2 shadow-xl">
+        <div className="absolute top-full left-0 z-50 mt-1 w-[350px] rounded-xl border border-[var(--color-border-nav)] bg-white p-2 shadow-xl">
           {showDropdownTitle ? (
-            <p className="px-3 py-1.5 text-[11px] uppercase tracking-wide text-[#56708a] font-semibold">
+            <p className="px-3 py-1.5 text-[11px] uppercase tracking-wide text-[var(--color-text-soft-strong)] font-semibold">
               {t(item.labelKey)}
             </p>
           ) : null}
@@ -159,7 +159,7 @@ const DropdownItem = memo(function DropdownItem({ item, t }: { item: NavItemConf
               <li key={child.id}>
                 <Link
                   to={child.href}
-                  className="block rounded-md px-3 py-2 text-[13px] text-[#0d3b66] hover:bg-[#f3f8ff] hover:text-[#f4a261] transition-colors leading-snug"
+                  className="block rounded-md px-3 py-2 text-[13px] text-[var(--color-secondary)] hover:bg-[var(--color-surface-hover-soft)] hover:text-[var(--color-primary)] transition-colors leading-snug"
                 >
                   {t(child.labelKey)}
                 </Link>
@@ -201,9 +201,9 @@ export const Navbar = memo(function Navbar() {
             <img src="/images/logo.jpg" alt={t("brand.logoAlt")} className="h-full w-full object-contain" />
           </div>
           <div className="min-w-0 leading-none">
-            <p className="text-[0.82rem] sm:text-[0.98rem] lg:text-[1.22rem] text-[#0d3b66] font-extrabold leading-tight whitespace-normal">
+            <p className="text-[0.82rem] sm:text-[0.98rem] lg:text-[1.22rem] text-[var(--color-secondary)] font-extrabold leading-tight whitespace-normal">
               <span className="block">{t("brand.title")}</span>
-              <span className="block text-[12px] sm:text-[13px] lg:text-[14px] font-semibold text-[#60758c]">
+              <span className="block text-[12px] sm:text-[13px] lg:text-[14px] font-semibold text-[var(--color-text-soft)]">
                 {t("brand.subtitle")}
               </span>
             </p>
@@ -226,7 +226,7 @@ export const Navbar = memo(function Navbar() {
               </Link>
               <button
                 onClick={handleLogout}
-                className="px-4 py-2 text-sm whitespace-nowrap text-[#0d3b66] border border-[#0d3b66] rounded-md hover:bg-gray-50"
+                className="px-4 py-2 text-sm whitespace-nowrap text-[var(--color-secondary)] border border-[var(--color-secondary)] rounded-md hover:bg-gray-50"
               >
                 {t("navbar.logout")}
               </button>
@@ -247,7 +247,7 @@ export const Navbar = memo(function Navbar() {
         <div className="xl:hidden ml-auto flex items-center gap-2">
           <LanguageSwitcher compact className="px-2.5 py-1.3 text-xs" />
           <button
-            className="p-2 text-[#0d3b66]"
+            className="p-2 text-[var(--color-secondary)]"
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-label={t("navbar.toggleMenu")}
           >
@@ -263,14 +263,14 @@ export const Navbar = memo(function Navbar() {
               <Link
                 key={item.id}
                 to={item.href}
-                className="block py-2 text-[#0d3b66] font-semibold"
+                className="block py-2 text-[var(--color-secondary)] font-semibold"
                 onClick={() => setMobileOpen(false)}
               >
                 {t(item.labelKey)}
               </Link>
             ) : (
-              <div key={item.id} className="rounded-lg border border-[#e4edf7] p-2">
-                <p className="px-1 py-1 text-xs uppercase tracking-wide text-[#56708a] font-semibold">
+              <div key={item.id} className="rounded-lg border border-[var(--color-border-nav-soft)] p-2">
+                <p className="px-1 py-1 text-xs uppercase tracking-wide text-[var(--color-text-soft-strong)] font-semibold">
                   {t(item.labelKey)}
                 </p>
                 <div className="space-y-0.5">
@@ -278,7 +278,7 @@ export const Navbar = memo(function Navbar() {
                     <Link
                       key={child.id}
                       to={child.href}
-                      className="block py-1.5 px-2 text-[#0d3b66] text-sm rounded hover:bg-[#f3f8ff]"
+                      className="block py-1.5 px-2 text-[var(--color-secondary)] text-sm rounded hover:bg-[var(--color-surface-hover-soft)]"
                       onClick={() => setMobileOpen(false)}
                     >
                       {t(child.labelKey)}

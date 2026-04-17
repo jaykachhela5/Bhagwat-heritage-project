@@ -16,7 +16,7 @@ type IconName =
   | "contact";
 
 const sectionClass =
-  "rounded-3xl border border-white/10 bg-[#0d6179] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.18)] md:p-8";
+  "rounded-3xl border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.18)] md:p-8";
 const cardClass =
   "rounded-2xl border border-white/10 bg-[#156b86] p-5 shadow-[0_12px_24px_rgba(0,0,0,0.15)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_32px_rgba(0,0,0,0.22)]";
 
@@ -49,7 +49,7 @@ function renderIcon(name: IconName) {
 
 function IconBadge({ name }: { name: IconName }) {
   return (
-    <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/10 text-[#ef9a1e] shadow-[0_10px_24px_rgba(0,0,0,0.12)]">
+    <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/10 text-[var(--campaign-accent)] shadow-[0_10px_24px_rgba(0,0,0,0.12)]">
       {renderIcon(name)}
     </span>
   );
@@ -60,9 +60,9 @@ function SectionHeader({ icon, eyebrow, title, description }: { icon: IconName; 
     <div className="mb-7 flex items-start gap-4 md:gap-5">
       <IconBadge name={icon} />
       <div>
-        <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">{eyebrow}</p>
+        <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">{eyebrow}</p>
         <h2 className="mt-2 text-[16px] font-black text-white md:text-[22px]">{title}</h2>
-        {description ? <p className="mt-3 max-w-3xl text-base leading-8 text-[#dce7ec] md:text-lg">{description}</p> : null}
+        {description ? <p className="mt-3 max-w-3xl text-base leading-8 text-[var(--campaign-text)] md:text-lg">{description}</p> : null}
       </div>
     </div>
   );
@@ -73,9 +73,9 @@ function InfoCard({ icon, title, children }: { icon: IconName; title: string; ch
     <div className={cardClass}>
       <div className="flex items-center gap-3">
         <IconBadge name={icon} />
-        <h3 className="text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">{title}</h3>
+        <h3 className="text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">{title}</h3>
       </div>
-      <div className="mt-4 text-base leading-8 text-[#dce7ec] md:text-lg">{children}</div>
+      <div className="mt-4 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{children}</div>
     </div>
   );
 }
@@ -126,7 +126,7 @@ export default memo(function PilgrimageInfoPage() {
                 </div>
               </div>
 
-              <div className="rounded-3xl border border-white/15 bg-[#0d6179]/85 p-6 shadow-[0_18px_44px_rgba(0,0,0,0.18)] backdrop-blur-md">
+              <div className="rounded-3xl border border-white/15 bg-[var(--campaign-bg)]/85 p-6 shadow-[0_18px_44px_rgba(0,0,0,0.18)] backdrop-blur-md">
                 <SectionHeader icon="clock" eyebrow="Temple Rhythm" title="Darshan Snapshot" />
                 <div className="grid gap-3">
                   {[
@@ -135,7 +135,7 @@ export default memo(function PilgrimageInfoPage() {
                     { title: "Thursday Prasad", text: "11:00 AM" },
                   ].map((item) => (
                     <div key={item.title} className="rounded-2xl border border-white/10 bg-[#156b86] p-4 shadow-sm">
-                      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#ef9a1e]">{item.title}</p>
+                      <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--campaign-accent)]">{item.title}</p>
                       <p className="mt-2 text-[24px] font-black text-white md:text-[28px]">{item.text}</p>
                     </div>
                   ))}
@@ -169,9 +169,9 @@ export default memo(function PilgrimageInfoPage() {
             <SectionHeader icon="location" eyebrow="Map Placeholder" title="Temple Location Preview" />
             <div className="flex aspect-[4/3] items-center justify-center rounded-2xl border border-white/10 bg-[#156b86] text-center">
               <div>
-                <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-[24px]">Map Preview</p>
+                <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Map Preview</p>
                 <p className="mt-2 text-[24px] font-black text-white md:text-[28px]">Bhagwat Dham Chandrapur</p>
-                <p className="mt-2 text-base leading-8 text-[#dce7ec] md:text-lg">Kasturba Road, Chandrapur, Maharashtra</p>
+                <p className="mt-2 text-base leading-8 text-[var(--campaign-text)] md:text-lg">Kasturba Road, Chandrapur, Maharashtra</p>
               </div>
             </div>
           </div>
@@ -227,7 +227,7 @@ export default memo(function PilgrimageInfoPage() {
               <div className={cardClass}>
                 <div className="flex items-center gap-3">
                   <IconBadge name="online" />
-                  <h3 className="text-[24px] font-black uppercase tracking-[0.05em] text-[#ef9a1e]">Live Darshan Available</h3>
+                  <h3 className="text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">Live Darshan Available</h3>
                 </div>
                 <a
                   href="https://youtu.be/4x8P9owQTms"
@@ -248,7 +248,7 @@ export default memo(function PilgrimageInfoPage() {
                     href="https://youtu.be/4x8P9owQTms"
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#de930a]"
+                    className="inline-flex items-center rounded-xl bg-[var(--campaign-accent)] px-5 py-3 text-sm font-bold text-white transition hover:bg-[var(--campaign-accent-hover)]"
                   >
                     Open Live Darshan
                   </a>
@@ -285,9 +285,9 @@ export default memo(function PilgrimageInfoPage() {
               <InfoCard icon="contact" title="Email">bhagwatheritage@gmail.com</InfoCard>
             </div>
           </div>
-          <div className="rounded-3xl border border-white/10 bg-[#0d6179] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.18)] md:p-8">
+          <div className="rounded-3xl border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.18)] md:p-8">
             <SectionHeader icon="temple" eyebrow="Footer Quote" title="A sacred journey towards devotion, discipline, and divine peace." />
-            <p className="text-base leading-8 text-[#dce7ec] md:text-lg">
+            <p className="text-base leading-8 text-[var(--campaign-text)] md:text-lg">
               Bhagwat Dham Chandrapur welcomes every devotee with reverence, spiritual warmth, and a peaceful path of darshan, seva, and satsang inspired by Shree Swaminarayan Bhagwan.
             </p>
           </div>

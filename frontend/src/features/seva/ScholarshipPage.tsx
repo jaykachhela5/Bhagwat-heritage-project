@@ -175,7 +175,7 @@ export default memo(function ScholarshipPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0B2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <HeroSection
         title="Scholarship Seva"
         subtitle="Supporting dreams, shaping futures."
@@ -190,19 +190,19 @@ export default memo(function ScholarshipPage() {
         <div className="flex flex-wrap justify-center gap-3">
           <Link
             to={ROUTES.donate}
-            className="inline-flex items-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
+            className="inline-flex items-center rounded-lg bg-[var(--campaign-accent)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
           >
             Sponsor a Student
           </Link>
           <Link
             to={ROUTES.involved.volunteer}
-            className="inline-flex items-center rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
+            className="inline-flex items-center rounded-lg bg-[var(--campaign-bg)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
           >
             Become Mentor
           </Link>
           <Link
             to={ROUTES.contact}
-            className="inline-flex items-center rounded-lg bg-[#0b2230] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#15384b]"
+            className="inline-flex items-center rounded-lg bg-[var(--campaign-deep)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-deep-hover)]"
           >
             Contact for Support
           </Link>
@@ -213,7 +213,7 @@ export default memo(function ScholarshipPage() {
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {QUICK_HIGHLIGHTS.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
                 <p className={SEVA_HIGHLIGHT_TITLE_CLASS}>{item.title}</p>
                 <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
               </div>
@@ -223,9 +223,9 @@ export default memo(function ScholarshipPage() {
       </section>
 
       <RevealSection className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <div className="grid gap-5 lg:grid-cols-[1.12fr_0.88fr]">
-            <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+            <div className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
               <p className={SEVA_SECTION_LABEL_CLASS}>Scholarship Program</p>
               <h2 className={SEVA_SECTION_HEADING_CLASS}>Scholarship Program</h2>
               <p className="mt-5 text-base leading-7 text-white md:text-lg">
@@ -238,13 +238,13 @@ export default memo(function ScholarshipPage() {
               <div className="mt-5 flex flex-wrap gap-3">
                 <Link
                   to={ROUTES.donate}
-                  className="inline-flex items-center rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                  className="inline-flex items-center rounded-xl bg-[var(--campaign-accent)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
                 >
                   Donate for Scholarship
                 </Link>
                 <Link
                   to={ROUTES.involved.volunteer}
-                  className="inline-flex items-center rounded-xl bg-[#0b2230] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#15384b]"
+                  className="inline-flex items-center rounded-xl bg-[var(--campaign-deep)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-deep-hover)]"
                 >
                   Join as Guide
                 </Link>
@@ -253,7 +253,7 @@ export default memo(function ScholarshipPage() {
 
             <div className="grid gap-4">
               {SCHOLARSHIP_PILLARS.map((item) => (
-                <div key={item.title} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
+                <div key={item.title} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
                   <h3 className={SEVA_CARD_TITLE_CLASS}>{item.title}</h3>
                   <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
                 </div>
@@ -264,7 +264,7 @@ export default memo(function ScholarshipPage() {
       </RevealSection>
 
       <RevealSection className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <div className="mx-auto max-w-3xl text-center">
             <p className={SEVA_SECTION_LABEL_CLASS}>Scholarship Pathways</p>
             <h2 className={SEVA_SECTION_HEADING_CLASS}>Choose the support journey</h2>
@@ -278,8 +278,8 @@ export default memo(function ScholarshipPage() {
                 onClick={() => setActivePathwayIndex(index)}
                 className={`rounded-xl px-4 py-2 text-sm font-bold transition-colors ${
                   activePathwayIndex === index
-                    ? "bg-[#ef9a1e] text-white"
-                    : "bg-[#0b2230] text-white hover:bg-[#15384b]"
+                    ? "bg-[var(--campaign-accent)] text-white"
+                    : "bg-[var(--campaign-deep)] text-white hover:bg-[var(--campaign-deep-hover)]"
                 }`}
               >
                 {item.shortLabel}
@@ -288,30 +288,30 @@ export default memo(function ScholarshipPage() {
           </div>
 
           <div className="mt-8 grid gap-6 lg:grid-cols-[0.92fr_1.08fr]">
-            <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+            <div className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
               <p className={SEVA_SECTION_LABEL_CLASS}>Selected Support Area</p>
               <h3 className="mt-2 text-[14px] font-black text-white md:text-[20px]">{activePathway.title}</h3>
-              <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">{activePathway.audience}</p>
-              <div className="mt-5 rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">What the trust supports</p>
+              <p className="mt-4 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{activePathway.audience}</p>
+              <div className="mt-5 rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] p-4">
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">What the trust supports</p>
                 <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{activePathway.support}</p>
               </div>
-              <div className="mt-4 rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">Scholarship impact</p>
+              <div className="mt-4 rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] p-4">
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Scholarship impact</p>
                 <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{activePathway.impact}</p>
               </div>
             </div>
 
-            <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 text-white shadow-sm">
+            <div className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 text-white shadow-sm">
               <p className={SEVA_SECTION_LABEL_CLASS}>Sponsor education continuity</p>
-              <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">
+              <p className="mt-4 text-base leading-7 text-[var(--campaign-text)] md:text-lg">
                 Your contribution can help a deserving student continue school or higher studies without losing momentum due to financial barriers.
               </p>
 
               <div className="mt-7 grid grid-cols-1 gap-3 md:grid-cols-3">
                 {SUPPORT_TIERS.map((tier) => (
-                  <div key={tier.label} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:bg-[#15384b]">
-                    <p className="text-sm font-bold uppercase tracking-[0.12em] text-[#ef9a1e]">{tier.label}</p>
+                  <div key={tier.label} className="rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:bg-[var(--campaign-deep-hover)]">
+                    <p className="text-sm font-bold uppercase tracking-[0.12em] text-[var(--campaign-accent)]">{tier.label}</p>
                     <p className="mt-2 text-[14px] font-black text-white md:text-[20px]">{tier.amount}</p>
                     <p className={`mt-2 ${SEVA_BODY_TEXT_CLASS}`}>{tier.note}</p>
                   </div>
@@ -321,13 +321,13 @@ export default memo(function ScholarshipPage() {
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link
                   to={ROUTES.donate}
-                  className="inline-flex items-center rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                  className="inline-flex items-center rounded-xl bg-[var(--campaign-accent)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
                 >
                   {activePathway.sponsorLabel}
                 </Link>
                 <Link
                   to={ROUTES.contact}
-                  className="inline-flex items-center rounded-xl bg-[#0b2230] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#15384b]"
+                  className="inline-flex items-center rounded-xl bg-[var(--campaign-deep)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-deep-hover)]"
                 >
                   Contact for Scholarship Help
                 </Link>
@@ -338,11 +338,11 @@ export default memo(function ScholarshipPage() {
       </RevealSection>
 
       <RevealSection className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <p className={SEVA_SECTION_LABEL_CLASS}>Scholarship Process</p>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
             {APPLICATION_STEPS.map((item) => (
-              <div key={item.step} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
+              <div key={item.step} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
                 <h3 className={SEVA_CARD_TITLE_CLASS}>{item.step}</h3>
                 <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{item.desc}</p>
               </div>
@@ -352,12 +352,12 @@ export default memo(function ScholarshipPage() {
       </RevealSection>
 
       <RevealSection className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <p className={SEVA_SECTION_LABEL_CLASS}>Impact Stories</p>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
             {STORIES.map((item) => (
-              <div key={item.name} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
-                <p className="text-base leading-7 text-[#dce7ec]">"{item.quote}"</p>
+              <div key={item.name} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
+                <p className="text-base leading-7 text-[var(--campaign-text)]">"{item.quote}"</p>
                 <p className="mt-4 text-[14px] font-black text-white md:text-[20px]">{item.name}</p>
               </div>
             ))}
@@ -366,27 +366,27 @@ export default memo(function ScholarshipPage() {
       </RevealSection>
 
       <RevealSection className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <p className={SEVA_SECTION_LABEL_CLASS}>Frequently Asked Questions</p>
           <div className="mt-8 space-y-3">
             {FAQS.map((item, index) => {
               const isOpen = openFaqIndex === index;
 
               return (
-                <div key={item.q} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+                <div key={item.q} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
                   <button
                     type="button"
                     onClick={() => setOpenFaqIndex(isOpen ? -1 : index)}
                     className="flex w-full items-center justify-between gap-4 text-left"
                   >
                     <span className="text-[14px] font-black text-white md:text-[20px]">{item.q}</span>
-                    <span className={`inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#0b2230] text-xl text-white transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
+                    <span className={`inline-flex h-10 w-10 items-center justify-center rounded-full bg-[var(--campaign-deep)] text-xl text-white transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}>
                       +
                     </span>
                   </button>
                   <div className={`grid transition-all duration-300 ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
                     <div className="overflow-hidden">
-                      <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.a}</p>
+                      <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.a}</p>
                     </div>
                   </div>
                 </div>
@@ -397,30 +397,30 @@ export default memo(function ScholarshipPage() {
       </RevealSection>
 
       <RevealSection className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 text-white shadow-sm">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <div className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 text-white shadow-sm">
             <p className={SEVA_SECTION_LABEL_CLASS}>Final Scholarship CTA</p>
             <h3 className={SEVA_SECTION_HEADING_CLASS}>Support talent, responsibility, and a brighter future</h3>
-            <p className="mt-4 max-w-4xl text-base leading-7 text-[#dce7ec] md:text-lg">
+            <p className="mt-4 max-w-4xl text-base leading-7 text-[var(--campaign-text)] md:text-lg">
               Bhagwat Heritage Service Foundation Trust aims to help sincere students continue their educational journey with stability,
               values, and meaningful encouragement. Every scholarship contribution can become a turning point in a student's life.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Link
                 to={ROUTES.donate}
-                className="inline-flex items-center rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                className="inline-flex items-center rounded-xl bg-[var(--campaign-accent)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
               >
                 Donate for Scholarship
               </Link>
               <Link
                 to={ROUTES.contact}
-                className="inline-flex items-center rounded-xl bg-[#0b2230] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#15384b]"
+                className="inline-flex items-center rounded-xl bg-[var(--campaign-deep)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-deep-hover)]"
               >
                 Contact for Educational Help
               </Link>
               <Link
                 to={ROUTES.involved.volunteer}
-                className="inline-flex items-center rounded-xl bg-[#0b2230] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#15384b]"
+                className="inline-flex items-center rounded-xl bg-[var(--campaign-deep)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-deep-hover)]"
               >
                 Mentor a Learner
               </Link>

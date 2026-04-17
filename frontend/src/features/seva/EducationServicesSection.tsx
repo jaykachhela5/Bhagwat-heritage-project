@@ -135,10 +135,10 @@ const EducationServiceCard = memo(function EducationServiceCard({
 }) {
   return (
     <article
-      className="group flex h-full flex-col rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
+      className="group flex h-full flex-col rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
       style={{ transitionDelay: `${index * 60}ms` }}
     >
-      <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-[#ef9a1e] transition-all duration-300 group-hover:bg-[#ef9a1e] group-hover:text-white">
+      <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)] transition-all duration-300 group-hover:bg-[var(--campaign-accent)] group-hover:text-white">
         {service.icon}
       </div>
       <h3 className={`mt-4 ${SEVA_CARD_TITLE_CLASS}`}>{service.title}</h3>
@@ -146,13 +146,13 @@ const EducationServiceCard = memo(function EducationServiceCard({
       <div className="mt-5 flex flex-wrap gap-3">
         <Link
           to={ROUTES.donate}
-          className="inline-flex items-center rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+          className="inline-flex items-center rounded-xl bg-[var(--campaign-accent)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
         >
           Donate
         </Link>
         <Link
           to={ROUTES.involved.sponsor}
-          className="inline-flex items-center rounded-xl bg-[#0b2230] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#15384b]"
+          className="inline-flex items-center rounded-xl bg-[var(--campaign-deep)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-deep-hover)]"
         >
           Sponsor
         </Link>
@@ -164,7 +164,7 @@ const EducationServiceCard = memo(function EducationServiceCard({
 export const EducationServicesSection = memo(function EducationServicesSection() {
   return (
     <RevealSection className="max-w-7xl mx-auto px-4 py-10">
-      <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+      <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <div className="mx-auto max-w-3xl text-center">
             <p className={SEVA_SECTION_LABEL_CLASS}>Education Services</p>
             <h2 className={SEVA_SECTION_HEADING_CLASS}>Support learning through focused educational seva</h2>

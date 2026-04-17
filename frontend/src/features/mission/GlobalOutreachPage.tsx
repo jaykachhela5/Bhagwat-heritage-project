@@ -146,12 +146,12 @@ const EXPANSION_ROADMAP = [
 ];
 
 const SECTION_SHELL =
-  "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
+  "rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
 const SECTION_LABEL = MISSION_SECTION_LABEL_CLASS;
 const SECTION_HEADING = MISSION_SECTION_HEADING_CLASS;
 const SECTION_BODY = MISSION_SECTION_BODY_CLASS;
 const CARD_SHELL =
-  "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
+  "rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
 
 export default memo(function GlobalOutreachPage() {
   const [activeTrack, setActiveTrack] = useState<(typeof OUTREACH_TRACKS)[number]["label"]>("All");
@@ -166,7 +166,7 @@ export default memo(function GlobalOutreachPage() {
     activeTrack === "All" ? GLOBAL_MISSIONS : GLOBAL_MISSIONS.filter((mission) => mission.track === activeTrack);
 
   return (
-    <div className="min-h-screen bg-[#0B2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <HeroSection
         title="Global Outreach Vision"
         subtitle="Serving globally, rooted spiritually"
@@ -180,13 +180,13 @@ export default memo(function GlobalOutreachPage() {
         <div className="flex flex-wrap justify-center gap-3">
           <Link
             to={ROUTES.digital.satsang}
-            className="inline-flex items-center justify-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
+            className="inline-flex items-center justify-center rounded-lg bg-[var(--campaign-accent)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
           >
             Explore Digital Satsang
           </Link>
           <Link
             to={ROUTES.involved.partner}
-            className="inline-flex items-center justify-center rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
+            className="inline-flex items-center justify-center rounded-lg bg-[var(--campaign-bg)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
           >
             Partner Globally
           </Link>
@@ -197,7 +197,7 @@ export default memo(function GlobalOutreachPage() {
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {GLOBAL_SIGNALS.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
                 <p className={MISSION_HIGHLIGHT_TITLE_CLASS}>{item.title}</p>
                 <p className={MISSION_HIGHLIGHT_VALUE_CLASS}>{item.value}</p>
                 <p className={`mt-1 ${MISSION_BODY_TEXT_CLASS}`}>{item.note}</p>
@@ -232,7 +232,7 @@ export default memo(function GlobalOutreachPage() {
       <section className="mx-auto max-w-7xl px-4 py-10">
         <div className={SECTION_SHELL}>
           <div className="grid gap-5 xl:grid-cols-[minmax(0,1.45fr)_minmax(300px,0.78fr)]">
-            <section className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+            <section className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
               <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                 <div>
                   <p className={SECTION_LABEL}>Mission Explorer</p>
@@ -243,8 +243,8 @@ export default memo(function GlobalOutreachPage() {
                   </p>
                 </div>
 
-                <div className="rounded-[20px] border border-white/10 bg-[#0b2230] px-5 py-4 md:max-w-[320px]">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">Active Vision Track</p>
+                <div className="rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] px-5 py-4 md:max-w-[320px]">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Active Vision Track</p>
                   <p className="mt-1 text-[14px] font-black text-white md:text-[20px]">{activeTrackContent.title}</p>
                   <p className={`mt-2 ${MISSION_BODY_TEXT_CLASS}`}>{activeTrackContent.summary}</p>
                 </div>
@@ -260,7 +260,7 @@ export default memo(function GlobalOutreachPage() {
                       type="button"
                       onClick={() => setActiveTrack(track.label)}
                       className={`rounded-xl px-4 py-2 text-sm font-bold transition-colors ${
-                        active ? "bg-[#ef9a1e] text-white" : "bg-[#0b2230] text-white hover:bg-[#15384b]"
+                        active ? "bg-[var(--campaign-accent)] text-white" : "bg-[var(--campaign-deep)] text-white hover:bg-[var(--campaign-deep-hover)]"
                       }`}
                     >
                       {track.label}
@@ -271,14 +271,14 @@ export default memo(function GlobalOutreachPage() {
 
               <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
                 {visibleMissions.map((mission) => (
-                  <article key={`${mission.track}-${mission.mission}`} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
-                    <p className="text-sm font-bold uppercase tracking-[0.16em] text-[#ef9a1e]">{mission.track}</p>
+                  <article key={`${mission.track}-${mission.mission}`} className="rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] p-4">
+                    <p className="text-sm font-bold uppercase tracking-[0.16em] text-[var(--campaign-accent)]">{mission.track}</p>
                     <h3 className={`mt-3 ${MISSION_CARD_TITLE_CLASS}`}>{mission.mission}</h3>
-                    <p className="mt-3 text-sm font-semibold text-[#ef9a1e]">{mission.region}</p>
+                    <p className="mt-3 text-sm font-semibold text-[var(--campaign-accent)]">{mission.region}</p>
                     <p className={`mt-4 ${MISSION_BODY_TEXT_CLASS}`}>{mission.details}</p>
                     <Link
                       to={mission.href}
-                      className="mt-5 inline-flex items-center justify-center rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                      className="mt-5 inline-flex items-center justify-center rounded-xl bg-[var(--campaign-accent)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
                     >
                       Explore
                     </Link>
@@ -288,7 +288,7 @@ export default memo(function GlobalOutreachPage() {
             </section>
 
             <aside className="space-y-5">
-              <section className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+              <section className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
                 <p className={SECTION_LABEL}>Global Intention</p>
                 <h2 className={SECTION_HEADING}>What this vision protects</h2>
                 <div className="mt-5 space-y-3">
@@ -298,20 +298,20 @@ export default memo(function GlobalOutreachPage() {
                     "Seva can be coordinated across borders through aligned trust networks.",
                     "Youth should inherit culture through modern, relevant, and value-led engagement.",
                   ].map((item) => (
-                    <div key={item} className="rounded-[20px] border border-white/10 bg-[#0b2230] px-4 py-3">
+                    <div key={item} className="rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] px-4 py-3">
                       <span className={MISSION_BODY_TEXT_CLASS}>{item}</span>
                     </div>
                   ))}
                 </div>
               </section>
 
-              <section className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+              <section className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
                 <p className={SECTION_LABEL}>Expansion Path</p>
                 <h2 className={SECTION_HEADING}>Roadmap overview</h2>
                 <div className="mt-5 space-y-4">
                   {EXPANSION_ROADMAP.map((item) => (
-                    <div key={item.phase} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
-                      <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#ef9a1e]">{item.phase}</p>
+                    <div key={item.phase} className="rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] p-4">
+                      <p className="text-xs font-bold uppercase tracking-[0.16em] text-[var(--campaign-accent)]">{item.phase}</p>
                       <h3 className={`mt-2 ${MISSION_CARD_TITLE_CLASS}`}>{item.title}</h3>
                       <p className={`mt-2 ${MISSION_BODY_TEXT_CLASS}`}>{item.desc}</p>
                     </div>
@@ -325,7 +325,7 @@ export default memo(function GlobalOutreachPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-10">
         <div className={SECTION_SHELL}>
-          <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 text-white shadow-sm">
+          <div className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 text-white shadow-sm">
             <p className={SECTION_LABEL}>Take This Further</p>
             <h2 className={SECTION_HEADING}>Build a global devotional and service-led network</h2>
             <p className={SECTION_BODY}>
@@ -336,13 +336,13 @@ export default memo(function GlobalOutreachPage() {
             <div className="mt-5 flex flex-wrap gap-3">
               <Link
                 to={ROUTES.involved.partner}
-                className="inline-flex items-center justify-center rounded-xl bg-[#0b2230] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#15384b]"
+                className="inline-flex items-center justify-center rounded-xl bg-[var(--campaign-deep)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-deep-hover)]"
               >
                 Partner With the Trust
               </Link>
               <Link
                 to={ROUTES.donate}
-                className="inline-flex items-center justify-center rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                className="inline-flex items-center justify-center rounded-xl bg-[var(--campaign-accent)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
               >
                 Support Global Outreach
               </Link>

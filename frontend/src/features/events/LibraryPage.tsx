@@ -150,7 +150,7 @@ export default memo(function LibraryPage() {
   };
 
   return (
-    <div className="relative overflow-hidden bg-[#0B2230] pb-16">
+    <div className="relative overflow-hidden bg-[var(--campaign-deep)] pb-16">
       <HeroSection
         title="Library & Learning Center"
         subtitle="Gyaan Sabke Liye"
@@ -162,13 +162,13 @@ export default memo(function LibraryPage() {
         <div className="flex flex-wrap justify-center gap-3">
           <a
             href="#books"
-            className="inline-flex items-center rounded-lg bg-[#F59E0B] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
+            className="inline-flex items-center rounded-lg bg-[#F59E0B] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
           >
             Explore Books
           </a>
           <a
             href="#membership"
-            className="inline-flex items-center rounded-lg bg-[#12394A] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
+            className="inline-flex items-center rounded-lg bg-[#12394A] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
           >
             Join Library
           </a>
@@ -233,10 +233,10 @@ export default memo(function LibraryPage() {
                   {book.available ? "Available" : "Issued"}
                 </p>
                 <div className="mt-5 flex gap-3">
-                  <button onClick={() => setSelectedBookId(book.id)} className="rounded-xl bg-[#12394A] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#18495e]">
+                  <button onClick={() => setSelectedBookId(book.id)} className="rounded-xl bg-[#12394A] px-4 py-2 text-sm font-bold text-white transition hover:bg-[var(--campaign-mid-hover)]">
                     View Details
                   </button>
-                  <a href="#request" onClick={() => handleBookRequest(book.title)} className="rounded-xl bg-[#F59E0B] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#de930a]">
+                  <a href="#request" onClick={() => handleBookRequest(book.title)} className="rounded-xl bg-[#F59E0B] px-4 py-2 text-sm font-bold text-white transition hover:bg-[var(--campaign-accent-hover)]">
                     Request Book
                   </a>
                 </div>
@@ -262,7 +262,7 @@ export default memo(function LibraryPage() {
               <input type="tel" placeholder="Mobile" value={membershipForm.mobile} onChange={(e) => setMembershipForm((form) => ({ ...form, mobile: e.target.value }))} required className={inputClass} />
               <textarea placeholder="Address" value={membershipForm.address} onChange={(e) => setMembershipForm((form) => ({ ...form, address: e.target.value }))} rows={4} required className={`${inputClass} resize-none`} />
               {membershipMsg ? <p className="text-sm text-green-300">{membershipMsg}</p> : null}
-              <button type="submit" className="w-full rounded-xl bg-[#F59E0B] py-3 font-bold text-white transition hover:bg-[#de930a]">Join Library</button>
+              <button type="submit" className="w-full rounded-xl bg-[#F59E0B] py-3 font-bold text-white transition hover:bg-[var(--campaign-accent-hover)]">Join Library</button>
             </form>
           </div>
 
@@ -275,7 +275,7 @@ export default memo(function LibraryPage() {
               <input type="text" placeholder="Book Title" value={requestForm.bookTitle} onChange={(e) => setRequestForm((form) => ({ ...form, bookTitle: e.target.value }))} required className={inputClass} />
               <textarea placeholder="Why do you need this book?" value={requestForm.reason} onChange={(e) => setRequestForm((form) => ({ ...form, reason: e.target.value }))} rows={4} className={`${inputClass} resize-none`} />
               {requestMsg ? <p className="text-sm text-green-300">{requestMsg}</p> : null}
-              <button type="submit" className="w-full rounded-xl bg-[#12394A] py-3 font-bold text-white transition hover:bg-[#18495e]">Submit Request</button>
+              <button type="submit" className="w-full rounded-xl bg-[#12394A] py-3 font-bold text-white transition hover:bg-[var(--campaign-mid-hover)]">Submit Request</button>
             </form>
           </div>
         </div>
@@ -297,10 +297,10 @@ export default memo(function LibraryPage() {
           <h2 className={sectionTitleClass}>Donation Section</h2>
           <p className="mb-5 max-w-3xl text-sm leading-7 text-white/90">Support the library by donating books, sponsoring learning material, or helping expand reading access for rural and needy students.</p>
           <div className="flex flex-wrap gap-3">
-            <Link to={ROUTES.donate} className="rounded-xl bg-[#12394A] px-6 py-3 font-bold text-white transition hover:bg-[#18495e]">
+            <Link to={ROUTES.donate} className="rounded-xl bg-[#12394A] px-6 py-3 font-bold text-white transition hover:bg-[var(--campaign-mid-hover)]">
               Donate Books
             </Link>
-            <Link to={ROUTES.involved.sponsor} className="rounded-xl bg-[#F59E0B] px-6 py-3 font-bold text-white transition hover:bg-[#de930a]">
+            <Link to={ROUTES.involved.sponsor} className="rounded-xl bg-[#F59E0B] px-6 py-3 font-bold text-white transition hover:bg-[var(--campaign-accent-hover)]">
               Sponsor Library
             </Link>
           </div>

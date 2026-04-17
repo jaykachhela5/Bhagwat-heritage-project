@@ -153,7 +153,7 @@ export default memo(function ContactPage() {
               className="rounded-2xl border border-[#dce8f5] bg-white p-5 shadow-sm hover:shadow-md transition"
             >
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-[#eff5fb] text-[#0d3b66] flex items-center justify-center">
+                <div className="h-10 w-10 rounded-full bg-[#eff5fb] text-[var(--color-secondary)] flex items-center justify-center">
                   <i className={item.icon} />
                 </div>
                 <div>
@@ -186,7 +186,7 @@ export default memo(function ContactPage() {
                 value={form.name}
                 onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
                 required
-                className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+                className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
               />
               <input
                 type="email"
@@ -194,21 +194,21 @@ export default memo(function ContactPage() {
                 value={form.email}
                 onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
                 required
-                className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+                className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
               />
               <input
                 type="tel"
                 placeholder="Phone"
                 value={form.phone}
                 onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
-                className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+                className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
               />
               <input
                 type="text"
                 placeholder="City"
                 value={form.city}
                 onChange={(e) => setForm((f) => ({ ...f, city: e.target.value }))}
-                className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+                className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
               />
             </div>
 
@@ -216,7 +216,7 @@ export default memo(function ContactPage() {
               <select
                 value={form.contactType}
                 onChange={(e) => setForm((f) => ({ ...f, contactType: e.target.value as ContactType }))}
-                className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+                className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
               >
                 {(["General Inquiry", "Seva Support", "Event & Katha", "Donation Help", "Volunteer Coordination"] as ContactType[]).map((item) => (
                   <option key={item} value={item}>
@@ -227,7 +227,7 @@ export default memo(function ContactPage() {
               <select
                 value={form.preferredContact}
                 onChange={(e) => setForm((f) => ({ ...f, preferredContact: e.target.value as PreferredContact }))}
-                className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+                className="px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
               >
                 {(["Phone Call", "WhatsApp", "Email"] as PreferredContact[]).map((item) => (
                   <option key={item} value={item}>
@@ -242,7 +242,7 @@ export default memo(function ContactPage() {
               placeholder="Subject"
               value={form.subject}
               onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))}
-              className="w-full mt-4 px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66]"
+              className="w-full mt-4 px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)]"
             />
 
             <textarea
@@ -251,7 +251,7 @@ export default memo(function ContactPage() {
               onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
               required
               rows={5}
-              className="w-full mt-4 px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0d3b66] resize-none"
+              className="w-full mt-4 px-4 py-3 border border-[#d5e2f0] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-secondary)] resize-none"
             />
 
             {msg && (
@@ -268,19 +268,19 @@ export default memo(function ContactPage() {
             <h2 className="text-2xl md:text-3xl font-black text-[#123753] mb-4">Find Us</h2>
             <ul className="space-y-4 text-[#4f6272]">
               <li className="flex items-start gap-3">
-                <i className="fas fa-map-marker-alt text-[#0d3b66] mt-1" />
+                <i className="fas fa-map-marker-alt text-[var(--color-secondary)] mt-1" />
                 <span>Bhagwat Heritage Campus, Kasturba Road, Chandrapur, Maharashtra, India</span>
               </li>
               <li className="flex items-center gap-3">
-                <i className="fas fa-envelope text-[#0d3b66]" />
+                <i className="fas fa-envelope text-[var(--color-secondary)]" />
                 <span>info@bhagwatheritage.org</span>
               </li>
               <li className="flex items-center gap-3">
-                <i className="fas fa-phone text-[#0d3b66]" />
+                <i className="fas fa-phone text-[var(--color-secondary)]" />
                 <span>+91 8668897445</span>
               </li>
               <li className="flex items-center gap-3">
-                <i className="fas fa-clock text-[#0d3b66]" />
+                <i className="fas fa-clock text-[var(--color-secondary)]" />
                 <span>Mon-Sun: 09:00 AM - 08:00 PM</span>
               </li>
             </ul>

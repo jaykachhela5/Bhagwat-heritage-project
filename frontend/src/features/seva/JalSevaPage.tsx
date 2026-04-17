@@ -102,20 +102,20 @@ function SevaIcon({
 function toneClasses(icon: SevaVisualKey) {
   switch (icon) {
     case "water":
-      return "bg-[#ef9a1e]/15 text-[#ef9a1e]";
+      return "bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]";
     case "shield":
-      return "bg-[#ef9a1e]/15 text-[#ef9a1e]";
+      return "bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]";
     case "community":
-      return "bg-[#ef9a1e]/15 text-[#ef9a1e]";
+      return "bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]";
     case "spark":
-      return "bg-[#ef9a1e]/15 text-[#ef9a1e]";
+      return "bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]";
     default:
-      return "bg-[#ef9a1e]/15 text-[#ef9a1e]";
+      return "bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]";
   }
 }
 
 const JAL_SECTION_SHELL =
-  "mx-auto mt-8 max-w-7xl rounded-[30px] border border-white/10 bg-[#0d6179] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8";
+  "mx-auto mt-8 max-w-7xl rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8";
 
 const JAL_SECTION_LABEL = SEVA_SECTION_LABEL_CLASS;
 const JAL_SECTION_HEADING = SEVA_SECTION_HEADING_CLASS;
@@ -129,23 +129,23 @@ function ProgramCard({
   program: ProgramCardContent;
 }) {
   return (
-    <article className="group flex h-full flex-col rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
-      <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-[#ef9a1e]">
+    <article className="group flex h-full flex-col rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
+      <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]">
         <WaterIcon />
       </div>
       <h4 className="mt-4 text-2xl font-black leading-tight text-white">{program.title}</h4>
-      <p className="mt-3 flex-1 text-base leading-7 text-[#dce7ec] md:text-lg">{program.description}</p>
-      <div className="mt-4 rounded-2xl border border-white/10 bg-[#0d6179] px-4 py-3">
-        <p className="text-xs uppercase tracking-[0.16em] text-[#ef9a1e]">Cost</p>
-        <p className="mt-1 text-2xl font-black text-[#ef9a1e]">{program.cost}</p>
+      <p className="mt-3 flex-1 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{program.description}</p>
+      <div className="mt-4 rounded-2xl border border-white/10 bg-[var(--campaign-bg)] px-4 py-3">
+        <p className="text-xs uppercase tracking-[0.16em] text-[var(--campaign-accent)]">Cost</p>
+        <p className="mt-1 text-2xl font-black text-[var(--campaign-accent)]">{program.cost}</p>
       </div>
       {program.impact ? (
-        <div className="mt-4 rounded-2xl border border-white/10 bg-[#0d6179] px-4 py-3">
-          <p className="text-xs uppercase tracking-[0.16em] text-[#ef9a1e]">Impact</p>
-          <p className="mt-1 text-base font-semibold leading-7 text-[#dce7ec] md:text-lg">{program.impact}</p>
+        <div className="mt-4 rounded-2xl border border-white/10 bg-[var(--campaign-bg)] px-4 py-3">
+          <p className="text-xs uppercase tracking-[0.16em] text-[var(--campaign-accent)]">Impact</p>
+          <p className="mt-1 text-base font-semibold leading-7 text-[var(--campaign-text)] md:text-lg">{program.impact}</p>
         </div>
       ) : null}
-      <button type="button" onClick={onDonate} className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-[#ef9a1e] px-5 py-3 text-base font-bold text-white transition-colors hover:bg-[#de930a] md:text-lg">
+      <button type="button" onClick={onDonate} className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-[var(--campaign-accent)] px-5 py-3 text-base font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)] md:text-lg">
         Donate Now
       </button>
     </article>
@@ -154,28 +154,28 @@ function ProgramCard({
 
 function HighlightCard({ item }: { item: SevaHighlight }) {
   return (
-    <article className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
+    <article className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
       <div className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ${toneClasses(item.icon)}`}>
         <SevaIcon icon={item.icon} />
       </div>
-      <p className="mt-4 text-[24px] font-black uppercase tracking-wide text-[#ef9a1e]">{item.badge}</p>
+      <p className="mt-4 text-[24px] font-black uppercase tracking-wide text-[var(--campaign-accent)]">{item.badge}</p>
       <h3 className="mt-1 text-[14px] font-black leading-tight text-white md:text-[20px]">{item.title}</h3>
-      <p className="mt-1 text-base leading-7 text-[#dce7ec] md:text-lg">{item.description}</p>
+      <p className="mt-1 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.description}</p>
     </article>
   );
 }
 
 function CatalogCard({ item }: { item: SevaCatalogItem }) {
   return (
-    <article className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
+    <article className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
       <div className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl ${toneClasses(item.icon)}`}>
         <SevaIcon icon={item.icon} className="h-6 w-6" />
       </div>
       <h4 className="mt-4 text-2xl font-black leading-tight text-white">{item.title}</h4>
-      <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.description}</p>
-      <div className="mt-4 rounded-2xl border border-white/10 bg-[#0d6179] px-4 py-3">
-        <p className="text-xs uppercase tracking-[0.18em] text-[#ef9a1e]">Support Focus</p>
-        <p className="mt-1 text-base font-semibold text-[#dce7ec] md:text-lg">{item.supportLine}</p>
+      <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.description}</p>
+      <div className="mt-4 rounded-2xl border border-white/10 bg-[var(--campaign-bg)] px-4 py-3">
+        <p className="text-xs uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Support Focus</p>
+        <p className="mt-1 text-base font-semibold text-[var(--campaign-text)] md:text-lg">{item.supportLine}</p>
       </div>
     </article>
   );
@@ -183,13 +183,13 @@ function CatalogCard({ item }: { item: SevaCatalogItem }) {
 
 function ReachCard({ item }: { item: SevaReachItem }) {
   return (
-    <article className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+    <article className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
       <div className={`inline-flex h-12 w-12 items-center justify-center rounded-2xl ${toneClasses(item.icon)}`}>
         <SevaIcon icon={item.icon} />
       </div>
-      <p className="mt-4 text-base font-semibold uppercase tracking-[0.18em] text-[#ef9a1e] md:text-lg">{item.focus}</p>
+      <p className="mt-4 text-base font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-lg">{item.focus}</p>
       <h3 className="mt-3 text-2xl font-black text-white">{item.title}</h3>
-      <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.description}</p>
+      <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.description}</p>
     </article>
   );
 }
@@ -204,7 +204,7 @@ function FaqCard({
   onToggle: () => void;
 }) {
   return (
-    <article className="overflow-hidden rounded-[24px] border border-white/10 bg-[#0c5871] shadow-sm">
+    <article className="overflow-hidden rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] shadow-sm">
       <button
         type="button"
         onClick={onToggle}
@@ -212,13 +212,13 @@ function FaqCard({
         className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left"
       >
         <span className="text-[14px] font-black leading-7 text-white md:text-[20px]">{item.question}</span>
-        <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-[#ef9a1e] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}>
+        <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}>
           <ChevronIcon />
         </span>
       </button>
       <div className={`grid transition-all duration-300 ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
         <div className="overflow-hidden">
-          <p className="px-5 pb-5 text-base leading-7 text-[#dce7ec] md:text-lg">{item.answer}</p>
+          <p className="px-5 pb-5 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.answer}</p>
         </div>
       </div>
     </article>
@@ -235,7 +235,7 @@ export default memo(function JalSevaPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0B2230] px-4 pb-24 pt-6 md:px-6 md:pb-28 md:pt-8">
+    <div className="min-h-screen bg-[var(--campaign-deep)] px-4 pb-24 pt-6 md:px-6 md:pb-28 md:pt-8">
       <style>{`@keyframes sevaFadeInUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}`}</style>
 
       <HeroSection
@@ -252,14 +252,14 @@ export default memo(function JalSevaPage() {
           <button
             type="button"
             onClick={() => navigate(ROUTES.donate)}
-            className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[#ef9a1e] px-7 py-4 text-base font-bold text-white transition-colors hover:bg-[#de930a]"
+            className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[var(--campaign-accent)] px-7 py-4 text-base font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
           >
             <span>Donate Now</span>
           </button>
           <button
             type="button"
             onClick={() => navigate(ROUTES.involved.index)}
-            className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[#0d6179] px-7 py-4 text-base font-bold text-white transition-colors hover:bg-[#18495e]"
+            className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[var(--campaign-bg)] px-7 py-4 text-base font-bold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
           >
             <span>Join Seva</span>
           </button>
@@ -268,18 +268,18 @@ export default memo(function JalSevaPage() {
 
       <section className={`${JAL_SECTION_SHELL} text-center`}>
         <div className="mx-auto max-w-4xl">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-[#ef9a1e]">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]">
             <WaterIcon className="h-8 w-8" />
           </div>
-          <p className="mt-5 text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Spiritual Foundation</p>
+          <p className="mt-5 text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Spiritual Foundation</p>
           <h2 className={JAL_SECTION_HEADING}>Why Jal Seva</h2>
-          <div className="mt-6 space-y-3 text-base leading-7 text-[#dce7ec] md:text-lg">
+          <div className="mt-6 space-y-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">
             <p>Jal Seva means saving lives with immediate compassion.</p>
             <p>Safe drinking water brings comfort, dignity, and hope to people in moments of real need.</p>
             <p>Water offered with humility becomes both humanitarian support and spiritual service.</p>
           </div>
-          <div className="mt-8 rounded-[24px] border border-white/10 bg-[#0c5871] px-6 py-6 shadow-sm">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#ef9a1e]/15 text-[#ef9a1e]"><HeartIcon className="h-8 w-8" /></div>
+          <div className="mt-8 rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] px-6 py-6 shadow-sm">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]"><HeartIcon className="h-8 w-8" /></div>
             <p className="mt-4 text-base font-black italic leading-7 text-white md:text-lg">"A single sip of water can bring immediate relief to an exhausted life."</p>
           </div>
         </div>
@@ -305,20 +305,20 @@ export default memo(function JalSevaPage() {
 
         <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
           {JAL_FLOW_STEPS.map((step) => (
-            <article key={step.step} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
-              <div className="inline-flex rounded-full bg-[#ef9a1e]/15 px-4 py-2 text-sm font-black tracking-[0.2em] text-[#ef9a1e]">
+            <article key={step.step} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
+              <div className="inline-flex rounded-full bg-[var(--campaign-accent)]/15 px-4 py-2 text-sm font-black tracking-[0.2em] text-[var(--campaign-accent)]">
                 {step.step}
               </div>
               <h3 className="mt-4 text-2xl font-black text-white">{step.title}</h3>
-              <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{step.description}</p>
+              <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{step.description}</p>
             </article>
           ))}
         </div>
 
-        <div className="mt-8 rounded-[30px] border border-white/10 bg-[#0c5871] px-6 py-7 text-white shadow-sm md:px-8">
+        <div className="mt-8 rounded-[30px] border border-white/10 bg-[var(--campaign-surface)] px-6 py-7 text-white shadow-sm md:px-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-3xl">
-              <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Emergency & Need Support</p>
+              <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Emergency & Need Support</p>
               <h3 className="mt-2 text-[14px] font-black md:text-[20px]">Need Jal Seva support at a location?</h3>
               <p className="mt-4 text-base leading-7 text-white/88 md:text-lg">Use the contact page for water-related need reporting, or visit Get Involved to begin Jal Seva in your city.</p>
             </div>
@@ -326,14 +326,14 @@ export default memo(function JalSevaPage() {
               <button
                 type="button"
                 onClick={() => navigate(ROUTES.contact)}
-                className="inline-flex items-center justify-center rounded-xl bg-[#ef9a1e] px-6 py-4 font-black text-white transition-colors hover:bg-[#de930a]"
+                className="inline-flex items-center justify-center rounded-xl bg-[var(--campaign-accent)] px-6 py-4 font-black text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
               >
                 Contact the Trust
               </button>
               <button
                 type="button"
                 onClick={() => navigate(ROUTES.involved.index)}
-                className="inline-flex items-center justify-center rounded-xl bg-[#0d6179] px-6 py-4 font-black text-white transition-colors hover:bg-[#18495e]"
+                className="inline-flex items-center justify-center rounded-xl bg-[var(--campaign-bg)] px-6 py-4 font-black text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
               >
                 Start Jal Seva
               </button>

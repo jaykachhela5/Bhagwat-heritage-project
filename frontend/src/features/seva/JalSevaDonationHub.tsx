@@ -232,23 +232,23 @@ export const JalSevaDonationHub = memo(function JalSevaDonationHub({
 
   return (
     <>
-      <section className={`mx-auto mt-8 max-w-[1180px] rounded-[30px] px-6 py-10 md:px-8 md:py-8 ${isAnn ? "border border-white/10 bg-[#0d6179] shadow-[0_16px_34px_rgba(0,0,0,0.22)]" : "border border-[#dceaf1] bg-[linear-gradient(180deg,#fafdff_0%,#eef8fd_100%)] shadow-[0_18px_40px_rgba(15,103,140,0.08)]"}`}>
+      <section className={`mx-auto mt-8 max-w-[1180px] rounded-[30px] px-6 py-10 md:px-8 md:py-8 ${isAnn ? "border border-white/10 bg-[var(--campaign-bg)] shadow-[0_16px_34px_rgba(0,0,0,0.22)]" : "border border-[#dceaf1] bg-[linear-gradient(180deg,#fafdff_0%,#eef8fd_100%)] shadow-[0_18px_40px_rgba(15,103,140,0.08)]"}`}>
         <div className="text-center">
-          <p className={`text-[24px] font-semibold uppercase tracking-[0.18em] ${isAnn ? "text-[#ef9a1e]" : "text-[#1b799d]"}`}>Adopt a Seva</p>
+          <p className={`text-[24px] font-semibold uppercase tracking-[0.18em] ${isAnn ? "text-[var(--campaign-accent)]" : "text-[#1b799d]"}`}>Adopt a Seva</p>
           <h2 className={`mt-2 text-[14px] font-black md:text-[20px] ${isAnn ? "text-white" : "text-[#0f678c]"}`}>{config.sponsorHeading}</h2>
-          {config.description ? <p className={`mx-auto mt-4 max-w-3xl text-base leading-7 md:text-lg ${isAnn ? "text-[#dce7ec]" : "text-[#586670]"}`}>{config.description}</p> : null}
+          {config.description ? <p className={`mx-auto mt-4 max-w-3xl text-base leading-7 md:text-lg ${isAnn ? "text-[var(--campaign-text)]" : "text-[#586670]"}`}>{config.description}</p> : null}
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
           {config.supportOptions.map((option) => (
-            <article key={option.title} className={`flex h-full flex-col rounded-[24px] p-5 ${isAnn ? "border border-white/10 bg-[#0c5871] shadow-sm" : "border border-[#d9e8ef] bg-white shadow-[0_14px_30px_rgba(15,103,140,0.08)]"}`}>
-              <div className={`flex h-14 w-14 items-center justify-center rounded-2xl ${isAnn ? "bg-[#ef9a1e]/15 text-[#ef9a1e]" : "bg-[#eef9ff] text-[#0f678c]"}`}>
+            <article key={option.title} className={`flex h-full flex-col rounded-[24px] p-5 ${isAnn ? "border border-white/10 bg-[var(--campaign-surface)] shadow-sm" : "border border-[#d9e8ef] bg-white shadow-[0_14px_30px_rgba(15,103,140,0.08)]"}`}>
+              <div className={`flex h-14 w-14 items-center justify-center rounded-2xl ${isAnn ? "bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]" : "bg-[#eef9ff] text-[#0f678c]"}`}>
                 <HeartIcon className="h-8 w-8" />
               </div>
               <h3 className={`mt-4 text-2xl font-black ${isAnn ? "text-white" : "text-[#0f678c]"}`}>{option.title}</h3>
-              <p className={`mt-2 text-2xl font-black ${isAnn ? "text-[#ef9a1e]" : "text-[#1b799d]"}`}>{formatCurrency(option.amount)}</p>
-              <p className={`mt-3 flex-1 text-base leading-7 md:text-lg ${isAnn ? "text-[#dce7ec]" : "text-[#586670]"}`}>{option.impact}</p>
-              <button type="button" onClick={goToDonate} className={`mt-6 inline-flex w-full items-center justify-center rounded-2xl px-5 py-3 text-base font-bold text-white transition md:text-lg ${isAnn ? "bg-[#ef9a1e] hover:bg-[#de930a]" : "bg-[#0f678c] hover:bg-[#0b5775]"}`}>
+              <p className={`mt-2 text-2xl font-black ${isAnn ? "text-[var(--campaign-accent)]" : "text-[#1b799d]"}`}>{formatCurrency(option.amount)}</p>
+              <p className={`mt-3 flex-1 text-base leading-7 md:text-lg ${isAnn ? "text-[var(--campaign-text)]" : "text-[#586670]"}`}>{option.impact}</p>
+              <button type="button" onClick={goToDonate} className={`mt-6 inline-flex w-full items-center justify-center rounded-2xl px-5 py-3 text-base font-bold text-white transition md:text-lg ${isAnn ? "bg-[var(--campaign-accent)] hover:bg-[var(--campaign-accent-hover)]" : "bg-[#0f678c] hover:bg-[#0b5775]"}`}>
                 Sponsor Now
               </button>
             </article>

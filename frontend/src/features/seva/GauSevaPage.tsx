@@ -143,22 +143,22 @@ const bottomButtons = [
   {
     label: "Donate for Gau Seva",
     to: ROUTES.donate,
-    className: "bg-[#ef9a1e] text-white hover:bg-[#de930a]",
+    className: "bg-[var(--campaign-accent)] text-white hover:bg-[var(--campaign-accent-hover)]",
   },
   {
     label: "Sponsor a Cow",
     to: ROUTES.donate,
-    className: "bg-[#0d6179] text-white hover:bg-[#18495e]",
+    className: "bg-[var(--campaign-bg)] text-white hover:bg-[var(--campaign-mid-hover)]",
   },
   {
     label: "Volunteer for Gau Seva",
     to: ROUTES.involved.volunteer,
-    className: "bg-[#0c5871] text-white hover:bg-[#0a4f66]",
+    className: "bg-[var(--campaign-surface)] text-white hover:bg-[#0a4f66]",
   },
   {
     label: "Contact for Gau Seva",
     to: ROUTES.contact,
-    className: "bg-[#12394c] text-white hover:bg-[#18495e]",
+    className: "bg-[#12394c] text-white hover:bg-[var(--campaign-mid-hover)]",
   },
 ];
 
@@ -169,7 +169,7 @@ export default memo(function GauSevaPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0B2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <HeroSection
         title="Gau Seva"
         subtitle="Kamdhenu Ashram"
@@ -205,10 +205,10 @@ export default memo(function GauSevaPage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {topStats.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
-                <p className="text-[20px] font-black uppercase tracking-wide text-[#ef9a1e] md:text-[24px]">* {item.title}</p>
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+                <p className="text-[20px] font-black uppercase tracking-wide text-[var(--campaign-accent)] md:text-[24px]">* {item.title}</p>
                 <p className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.label}</p>
-                <p className="mt-1 text-base leading-7 text-[#dce7ec] md:text-lg">{item.note}</p>
+                <p className="mt-1 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.note}</p>
               </div>
             ))}
           </div>
@@ -217,8 +217,8 @@ export default memo(function GauSevaPage() {
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">About Gau Seva</p>
+          <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+            <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">About Gau Seva</p>
             <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">
               A Sacred Space for Gau Mata Protection in Sanatan Dharma
             </h2>
@@ -233,15 +233,15 @@ export default memo(function GauSevaPage() {
           </div>
 
           <div className="grid gap-4">
-            <div className="rounded-3xl border border-white/10 bg-[#0d6179] p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1">
+            <div className="rounded-3xl border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1">
               <h3 className="text-2xl font-black text-white md:text-[1.75rem]">Mission</h3>
-              <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">
+              <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">
                 Food, medical care, shelter, and devotional service rooted in Sanatan values.
               </p>
             </div>
-            <div className="rounded-3xl border border-white/10 bg-[#0d6179] p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1">
+            <div className="rounded-3xl border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1">
               <h3 className="text-2xl font-black text-white md:text-[1.75rem]">Vision</h3>
-              <p className="mt-3 text-base leading-8 text-[#dce7ec] md:text-lg">
+              <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">
                 A compassionate, clean, and spiritually grounded gaushala where every cow is served with dignity.
               </p>
             </div>
@@ -250,20 +250,20 @@ export default memo(function GauSevaPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Our Gau Seva Activities</p>
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Our Gau Seva Activities</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Service Through Gau Seva</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
             {sevaActivities.map((item) => (
               <article
                 key={item.title}
-                className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
+                className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
               >
-                <div className="inline-flex rounded-full bg-[#ef9a1e]/15 px-4 py-2 text-sm font-black tracking-[0.2em] text-[#ef9a1e]">
+                <div className="inline-flex rounded-full bg-[var(--campaign-accent)]/15 px-4 py-2 text-sm font-black tracking-[0.2em] text-[var(--campaign-accent)]">
                   {item.icon}
                 </div>
                 <h3 className="mt-4 text-[24px] font-black text-white">{item.title}</h3>
-                <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{item.desc}</p>
+                <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
               </article>
             ))}
           </div>
@@ -271,18 +271,18 @@ export default memo(function GauSevaPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Gau Seva Donation Options</p>
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Gau Seva Donation Options</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Different ways to contribute</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-5">
             {donationOptions.map((item) => (
-              <div key={item.title} className="flex h-full flex-col rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+              <div key={item.title} className="flex h-full flex-col rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
                 <h3 className="text-xl font-black text-white">{item.title}</h3>
-                <p className="mt-2 text-2xl font-black text-[#ef9a1e]">{item.amount}</p>
-                <p className="mt-3 flex-1 text-sm leading-7 text-[#dce7ec]">{item.desc}</p>
+                <p className="mt-2 text-2xl font-black text-[var(--campaign-accent)]">{item.amount}</p>
+                <p className="mt-3 flex-1 text-sm leading-7 text-[var(--campaign-text)]">{item.desc}</p>
                 <Link
                   to={ROUTES.donate}
-                  className="mt-5 inline-flex w-fit rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                  className="mt-5 inline-flex w-fit rounded-xl bg-[var(--campaign-accent)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
                 >
                   Donate Now
                 </Link>
@@ -293,12 +293,12 @@ export default memo(function GauSevaPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Sponsor a Cow Program</p>
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Sponsor a Cow Program</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Adopt care with devotion</h2>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
             {sponsorCows.map((cow) => (
-              <article key={cow.name} className="overflow-hidden rounded-[24px] border border-white/10 bg-[#0c5871] shadow-sm">
+              <article key={cow.name} className="overflow-hidden rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] shadow-sm">
                 <img
                   src={cow.image}
                   alt={cow.name}
@@ -308,15 +308,15 @@ export default memo(function GauSevaPage() {
                 <div className="p-5">
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <h3 className="text-xl font-black text-white md:text-[1.75rem]">{cow.name}</h3>
-                    <span className="rounded-full bg-[#ef9a1e]/15 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[#ef9a1e]">
+                    <span className="rounded-full bg-[var(--campaign-accent)]/15 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-[var(--campaign-accent)]">
                       Sponsor
                     </span>
                   </div>
-                  <p className="mt-2 text-sm font-black uppercase tracking-[0.12em] text-[#ef9a1e]">{cow.status}</p>
-                  <p className="mt-3 text-base leading-7 text-[#dce7ec] md:text-lg">{cow.note}</p>
+                  <p className="mt-2 text-sm font-black uppercase tracking-[0.12em] text-[var(--campaign-accent)]">{cow.status}</p>
+                  <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{cow.note}</p>
                   <Link
                     to={ROUTES.donate}
-                    className="mt-5 inline-flex rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                    className="mt-5 inline-flex rounded-xl bg-[var(--campaign-accent)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
                   >
                     Sponsor Now
                   </Link>
@@ -328,8 +328,8 @@ export default memo(function GauSevaPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Volunteer for Gau Seva</p>
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Volunteer for Gau Seva</p>
           <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Visit and serve at the ashram</h2>
           <p className="mt-4 text-base leading-7 text-white md:text-lg">
             Devotees, families, youth groups, and service-minded volunteers are welcome to participate in practical Gau Seva through feeding,
@@ -338,27 +338,27 @@ export default memo(function GauSevaPage() {
 
           <div className="mt-6 flex flex-wrap gap-3">
             {volunteerAreas.map((item) => (
-              <div key={item} className="rounded-[20px] border border-white/10 bg-[#0c5871] px-4 py-3 text-base font-semibold text-[#dce7ec]">
+              <div key={item} className="rounded-[20px] border border-white/10 bg-[var(--campaign-surface)] px-4 py-3 text-base font-semibold text-[var(--campaign-text)]">
                 {item}
               </div>
             ))}
           </div>
 
           <div className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-2">
-            <article className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
-              <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Spiritual Message</p>
+            <article className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
+              <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Spiritual Message</p>
               <h3 className="mt-2 text-[14px] font-black text-white md:text-[20px]">"Gavo vishvasya matarah."</h3>
               <p className="mt-4 text-base font-semibold text-white md:text-lg">The cows are the mothers of the universe.</p>
-              <p className="mt-4 text-base leading-7 text-[#dce7ec] md:text-lg">
+              <p className="mt-4 text-base leading-7 text-[var(--campaign-text)] md:text-lg">
                 Gau Mata represents nourishment, gentleness, and sacred abundance. Serving her is an offering of gratitude, protection, and
                 dharmic responsibility.
               </p>
             </article>
 
-            <article className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
-              <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]">Contact for Gau Seva</p>
+            <article className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
+              <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Contact for Gau Seva</p>
               <h3 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Visit or Connect</h3>
-              <div className="mt-5 space-y-4 text-base leading-7 text-[#dce7ec] md:text-lg">
+              <div className="mt-5 space-y-4 text-base leading-7 text-[var(--campaign-text)] md:text-lg">
                 <p>
                   <span className="font-black text-white">Address:</span> Bhagwat Niketan Ashram, Mul Road, Shree Kshetra Chichpalli,
                   District - Chandrapur (Maharashtra)
@@ -377,13 +377,13 @@ export default memo(function GauSevaPage() {
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
                   to={ROUTES.involved.volunteer}
-                  className="inline-flex rounded-xl bg-[#ef9a1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                  className="inline-flex rounded-xl bg-[var(--campaign-accent)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
                 >
                   Volunteer Registration
                 </Link>
                 <Link
                   to={ROUTES.contact}
-                  className="inline-flex rounded-xl bg-[#0d6179] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#18495e]"
+                  className="inline-flex rounded-xl bg-[var(--campaign-bg)] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
                 >
                   Contact Ashram
                 </Link>

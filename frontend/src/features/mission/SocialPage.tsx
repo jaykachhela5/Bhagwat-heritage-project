@@ -161,12 +161,12 @@ const FILTERS: { key: MissionCategory; label: string }[] = [
 ];
 
 const SECTION_SHELL =
-  "rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
+  "rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8";
 const SECTION_LABEL = MISSION_SECTION_LABEL_CLASS;
 const SECTION_HEADING = MISSION_SECTION_HEADING_CLASS;
 const SECTION_BODY = MISSION_SECTION_BODY_CLASS;
 const CARD_SHELL =
-  "rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
+  "rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]";
 
 export default memo(function SocialPage() {
   const [activeCategory, setActiveCategory] = useState<MissionCategory>("all");
@@ -196,7 +196,7 @@ export default memo(function SocialPage() {
   const serviceNote = DAILY_SERVICE_NOTES[now.getDay()] ?? DAILY_SERVICE_NOTES[0];
 
   return (
-    <div className="min-h-screen bg-[#0B2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <HeroSection
         title="Social Service Mission"
         subtitle="Spirituality lives in compassion and service"
@@ -210,13 +210,13 @@ export default memo(function SocialPage() {
         <div className="flex flex-wrap justify-center gap-3">
           <Link
             to={ROUTES.donate}
-            className="inline-flex items-center justify-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]"
+            className="inline-flex items-center justify-center rounded-lg bg-[var(--campaign-accent)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
           >
             Support the Mission
           </Link>
           <Link
             to={ROUTES.involved.volunteer}
-            className="inline-flex items-center justify-center rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]"
+            className="inline-flex items-center justify-center rounded-lg bg-[var(--campaign-bg)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
           >
             Join Seva
           </Link>
@@ -227,7 +227,7 @@ export default memo(function SocialPage() {
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {IMPACT_SIGNALS.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
                 <p className={MISSION_HIGHLIGHT_TITLE_CLASS}>{item.title}</p>
                 <p className={MISSION_HIGHLIGHT_VALUE_CLASS}>{item.value}</p>
                 <p className={`mt-1 ${MISSION_BODY_TEXT_CLASS}`}>{item.note}</p>
@@ -240,7 +240,7 @@ export default memo(function SocialPage() {
       <section className="mx-auto max-w-7xl px-4 py-10">
         <div className={SECTION_SHELL}>
           <div className="grid gap-5 lg:grid-cols-[1.12fr_0.88fr]">
-            <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+            <div className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
               <p className={SECTION_LABEL}>Mission Write-up</p>
               <h2 className={SECTION_HEADING}>Social service as an expression of devotion</h2>
               <div className="mt-5 space-y-4 text-base leading-7 text-white md:text-lg">
@@ -268,7 +268,7 @@ export default memo(function SocialPage() {
             </div>
 
             <div className="space-y-5">
-              <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+              <div className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
                 <p className={SECTION_LABEL}>Social Intention</p>
                 <h2 className={SECTION_HEADING}>What this mission protects</h2>
                 <div className="mt-5 space-y-3">
@@ -278,18 +278,18 @@ export default memo(function SocialPage() {
                     "Seva should strengthen social trust, not only provide temporary relief.",
                     "Compassion must become organized, disciplined, and collective action.",
                   ].map((item) => (
-                    <div key={item} className="rounded-[20px] border border-white/10 bg-[#0b2230] px-4 py-3">
+                    <div key={item} className="rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] px-4 py-3">
                       <span className={MISSION_BODY_TEXT_CLASS}>{item}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+              <div className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
                 <p className={SECTION_LABEL}>Today&apos;s Seva Note</p>
                 <h2 className={SECTION_HEADING}>Daily direction for social service</h2>
                 <p className={SECTION_BODY}>{serviceNote}</p>
-                <p className="mt-5 text-sm leading-7 text-[#dce7ec]">
+                <p className="mt-5 text-sm leading-7 text-[var(--campaign-text)]">
                   Updated on{" "}
                   {now.toLocaleDateString("en-IN", {
                     weekday: "long",
@@ -324,8 +324,8 @@ export default memo(function SocialPage() {
                 onClick={() => setActiveCategory(item.key)}
                 className={`rounded-xl px-4 py-2 text-sm font-bold transition-colors ${
                   activeCategory === item.key
-                    ? "bg-[#ef9a1e] text-white"
-                    : "bg-[#0b2230] text-white hover:bg-[#15384b]"
+                    ? "bg-[var(--campaign-accent)] text-white"
+                    : "bg-[var(--campaign-deep)] text-white hover:bg-[var(--campaign-deep-hover)]"
                 }`}
               >
                 {item.label}
@@ -338,13 +338,13 @@ export default memo(function SocialPage() {
               <article key={item.title} className={CARD_SHELL}>
                 <h3 className={MISSION_CARD_TITLE_CLASS}>{item.title}</h3>
                 <p className={`mt-3 ${MISSION_BODY_TEXT_CLASS}`}>{item.description}</p>
-                <div className="mt-4 rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
-                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">Social Impact</p>
+                <div className="mt-4 rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] p-4">
+                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Social Impact</p>
                   <p className={`mt-3 ${MISSION_BODY_TEXT_CLASS}`}>{item.impact}</p>
                 </div>
                 <Link
                   to={item.href}
-                  className="mt-5 inline-flex items-center justify-center rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                  className="mt-5 inline-flex items-center justify-center rounded-xl bg-[var(--campaign-accent)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
                 >
                   Explore
                 </Link>
@@ -357,12 +357,12 @@ export default memo(function SocialPage() {
       <section className="mx-auto max-w-7xl px-4 py-10">
         <div className={SECTION_SHELL}>
           <div className="grid gap-5 lg:grid-cols-2">
-            <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+            <div className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
               <p className={SECTION_LABEL}>Social Values</p>
               <h2 className={SECTION_HEADING}>Values behind long-term transformation</h2>
               <div className="mt-5 grid gap-4 sm:grid-cols-2">
                 {VALUE_PILLARS.map((item) => (
-                  <div key={item.title} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
+                  <div key={item.title} className="rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] p-4">
                     <h3 className={MISSION_CARD_TITLE_CLASS}>{item.title}</h3>
                     <p className={`mt-3 ${MISSION_BODY_TEXT_CLASS}`}>{item.description}</p>
                   </div>
@@ -370,7 +370,7 @@ export default memo(function SocialPage() {
               </div>
             </div>
 
-            <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+            <div className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
               <p className={SECTION_LABEL}>Operations Board</p>
               <h2 className={SECTION_HEADING}>Live service rhythm</h2>
               <div className="mt-5 space-y-4">
@@ -379,20 +379,20 @@ export default memo(function SocialPage() {
                   const isNext = !isActive && (nextWindowIndex === index || (nextWindowIndex === -1 && index === 0));
 
                   return (
-                    <div key={item.title} className="rounded-[20px] border border-white/10 bg-[#0b2230] p-4">
+                    <div key={item.title} className="rounded-[20px] border border-white/10 bg-[var(--campaign-deep)] p-4">
                       <div className="flex flex-wrap items-start justify-between gap-3">
                         <div>
                           <h3 className={MISSION_CARD_TITLE_CLASS}>{item.title}</h3>
                           <p className={`mt-2 ${MISSION_BODY_TEXT_CLASS}`}>{item.detail}</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-sm font-semibold text-[#ef9a1e]">{item.window}</p>
+                          <p className="text-sm font-semibold text-[var(--campaign-accent)]">{item.window}</p>
                           <p
                             className={`mt-3 inline-flex rounded-full px-3 py-1 text-xs font-bold uppercase tracking-[0.14em] ${
                               isActive
-                                ? "bg-[#ef9a1e] text-white"
+                                ? "bg-[var(--campaign-accent)] text-white"
                                 : isNext
-                                  ? "bg-white text-[#0b2230]"
+                                  ? "bg-white text-[var(--campaign-deep)]"
                                   : "bg-white/10 text-white/78"
                             }`}
                           >
@@ -411,7 +411,7 @@ export default memo(function SocialPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-10">
         <div className={SECTION_SHELL}>
-          <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 text-white shadow-sm">
+          <div className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 text-white shadow-sm">
             <p className={SECTION_LABEL}>Participate</p>
             <h2 className={SECTION_HEADING}>Become part of a compassionate and harmonious society</h2>
             <p className={SECTION_BODY}>
@@ -422,13 +422,13 @@ export default memo(function SocialPage() {
             <div className="mt-5 flex flex-wrap gap-3">
               <Link
                 to={ROUTES.involved.volunteer}
-                className="inline-flex items-center justify-center rounded-xl bg-[#0b2230] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#15384b]"
+                className="inline-flex items-center justify-center rounded-xl bg-[var(--campaign-deep)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-deep-hover)]"
               >
                 Become a Volunteer
               </Link>
               <Link
                 to={ROUTES.donate}
-                className="inline-flex items-center justify-center rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]"
+                className="inline-flex items-center justify-center rounded-xl bg-[var(--campaign-accent)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
               >
                 Support Social Seva
               </Link>

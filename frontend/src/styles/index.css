@@ -2,16 +2,16 @@
 @import "./theme.css";
 
 @theme {
-  --color-brand-blue: #2F4A66;
-  --color-brand-blue-light: #5F6C7B;
+  --color-brand-blue: var(--color-secondary);
+  --color-brand-blue-light: var(--color-text);
   --color-brand-green: #A9CAD1;
-  --color-brand-green-light: #F7F9FB;
-  --color-brand-yellow: #E89A3C;
-  --color-brand-yellow-light: #FDF6ED;
-  --color-brand-orange: #D9822B;
-  --color-brand-orange-light: #FFF7ED;
-  --color-brand-red: #2F4A66;
-  --color-brand-red-light: #8A97A6;
+  --color-brand-green-light: var(--color-bg-main);
+  --color-brand-yellow: var(--color-primary);
+  --color-brand-yellow-light: var(--color-bg-soft);
+  --color-brand-orange: var(--color-primary-hover);
+  --color-brand-orange-light: var(--color-bg-cream);
+  --color-brand-red: var(--color-secondary);
+  --color-brand-red-light: var(--color-text-muted);
 }
 
 @layer base {
@@ -22,9 +22,9 @@
   }
 
   body {
-    font-family: "Poppins", sans-serif;
-    color: var(--text-body);
-    background: var(--bg-main);
+    font-family: var(--font-family);
+    color: var(--color-text);
+    background: var(--color-bg-main);
     overflow-x: hidden;
   }
 
@@ -60,7 +60,7 @@
   }
 
   .section-title {
-    color: var(--text-heading);
+    color: var(--color-heading);
     @apply text-3xl font-bold text-center mb-8;
   }
 }

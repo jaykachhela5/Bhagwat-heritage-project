@@ -19,20 +19,20 @@ type MissionPath = {
   image: string;
 };
 
-const SECTION_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#ef9a1e]";
+const SECTION_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]";
 const SECTION_HEADING = "mt-2 text-[14px] font-black text-white md:text-[20px]";
-const SECTION_BODY = "mt-4 text-base leading-7 text-[#dce7ec] md:text-lg";
-const CARD_LABEL = "text-[22px] font-semibold uppercase tracking-[0.12em] text-[#ef9a1e]";
+const SECTION_BODY = "mt-4 text-base leading-7 text-[var(--campaign-text)] md:text-lg";
+const CARD_LABEL = "text-[22px] font-semibold uppercase tracking-[0.12em] text-[var(--campaign-accent)]";
 const CARD_TITLE = "mt-4 text-[22px] font-black text-white md:text-[24px]";
-const CARD_BODY = "mt-4 text-base leading-7 text-[#dce7ec] md:text-lg";
+const CARD_BODY = "mt-4 text-base leading-7 text-[var(--campaign-text)] md:text-lg";
 const SECTION_SHELL =
-  "rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,#0d6179_0%,#0c5871_100%)] p-6 shadow-[0_14px_30px_rgba(0,0,0,0.2)] md:p-8";
+  "rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,var(--campaign-bg)_0%,var(--campaign-surface)_100%)] p-6 shadow-[0_14px_30px_rgba(0,0,0,0.2)] md:p-8";
 const DARK_SECTION_SHELL =
   "rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,#102d3e_0%,#0c2634_100%)] p-6 shadow-[0_14px_30px_rgba(0,0,0,0.2)] md:p-8";
 const CARD_SHELL =
   "rounded-[24px] border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm";
 const BUTTON_CLASS =
-  "inline-flex items-center justify-center rounded-[18px] bg-[#ef9a1e] px-5 py-3 text-[15px] font-bold text-white transition-colors hover:bg-[#d98916]";
+  "inline-flex items-center justify-center rounded-[18px] bg-[var(--campaign-accent)] px-5 py-3 text-[15px] font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]";
 const SECONDARY_BUTTON =
   "inline-flex items-center justify-center rounded-[18px] bg-[#0f678c] px-5 py-3 text-[15px] font-bold text-white transition-colors hover:bg-[#0b5879]";
 const GHOST_BUTTON =
@@ -173,7 +173,7 @@ export default memo(function VisionMissionPage() {
               <h1 className="mb-[10px] text-4xl font-bold leading-tight text-white md:text-5xl">
                 Vision &amp; Mission
               </h1>
-              <p className="mx-auto max-w-4xl text-base leading-7 text-[#dce7ec] md:text-lg">
+              <p className="mx-auto max-w-4xl text-base leading-7 text-[var(--campaign-text)] md:text-lg">
                 Building a spiritually awakened society through Bhagwat wisdom, spiritual education, cultural preservation, humanitarian service, and dharmic youth inspiration.
               </p>
               <div className="mt-5 flex flex-wrap items-center justify-center gap-[10px]">
@@ -195,7 +195,7 @@ export default memo(function VisionMissionPage() {
             <p className={SECTION_LABEL}>Vision</p>
             <h2 className={SECTION_HEADING}>Where the Trust Aims to Lead</h2>
             <div className="mt-6 rounded-[24px] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm">
-              <p className="text-base leading-7 text-[#dce7ec] md:text-lg">
+              <p className="text-base leading-7 text-[var(--campaign-text)] md:text-lg">
                 To create a spiritually awakened society guided by the eternal wisdom of Shrimad Bhagwat.
               </p>
             </div>
@@ -210,7 +210,7 @@ export default memo(function VisionMissionPage() {
                   <div className="inline-flex rounded-full border border-[#f0c34a]/25 bg-[#f0c34a]/10 px-3 py-1 text-[15px] font-black text-[#ffd790]">
                     0{index + 1}
                   </div>
-                  <p className="mt-4 text-base font-semibold leading-7 text-[#dce7ec] md:text-lg">{item}</p>
+                  <p className="mt-4 text-base font-semibold leading-7 text-[var(--campaign-text)] md:text-lg">{item}</p>
                 </div>
               ))}
             </div>
@@ -257,7 +257,7 @@ export default memo(function VisionMissionPage() {
                 <div className="inline-flex rounded-full border border-[#f0c34a]/25 bg-[#f0c34a]/10 px-3 py-1 text-[15px] font-black text-[#ffd790]">
                   0{index + 1}
                 </div>
-                <p className="mt-4 text-base font-bold leading-7 text-[#dce7ec] md:text-lg">{item}</p>
+                <p className="mt-4 text-base font-bold leading-7 text-[var(--campaign-text)] md:text-lg">{item}</p>
               </div>
             ))}
           </div>
@@ -283,8 +283,8 @@ export default memo(function VisionMissionPage() {
                   onClick={() => setActivePillar(pillar)}
                   className={`rounded-[22px] border px-5 py-4 text-left transition-all ${
                     activePillar.id === pillar.id
-                      ? "border-[#ef9a1e]/45 bg-[#13384a] text-white shadow-[0_16px_28px_rgba(0,0,0,0.18)]"
-                      : "border-white/10 bg-[#0c5871] text-[#dce7ec] hover:border-[#ef9a1e]/30 hover:bg-[#13384a]"
+                      ? "border-[var(--campaign-accent)]/45 bg-[#13384a] text-white shadow-[0_16px_28px_rgba(0,0,0,0.18)]"
+                      : "border-white/10 bg-[var(--campaign-surface)] text-[var(--campaign-text)] hover:border-[var(--campaign-accent)]/30 hover:bg-[#13384a]"
                   }`}
                 >
                   <p className="text-base font-bold md:text-lg">{pillar.title}</p>
@@ -295,7 +295,7 @@ export default memo(function VisionMissionPage() {
             <div
               className={`rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] ${activePillar.accent} p-[1px] shadow-[0_16px_34px_rgba(0,0,0,0.16)]`}
             >
-              <div className="rounded-[27px] bg-[#0c5871]/95 p-6 backdrop-blur-sm md:p-8">
+              <div className="rounded-[27px] bg-[var(--campaign-surface)]/95 p-6 backdrop-blur-sm md:p-8">
                 <p className={SECTION_LABEL}>Selected Focus</p>
                 <h3 className={CARD_TITLE}>{activePillar.title}</h3>
                 <p className={CARD_BODY}>{activePillar.description}</p>
@@ -328,7 +328,7 @@ export default memo(function VisionMissionPage() {
             {MISSION_PATHS.map((path) => (
               <article
                 key={path.title}
-                className="group overflow-hidden rounded-[26px] border border-white/10 bg-[#0c5871] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(0,0,0,0.18)]"
+                className="group overflow-hidden rounded-[26px] border border-white/10 bg-[var(--campaign-surface)] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(0,0,0,0.18)]"
               >
                 <div className="overflow-hidden">
                   <img
@@ -352,7 +352,7 @@ export default memo(function VisionMissionPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pb-10">
-        <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(135deg,#0a5375_0%,#1788ac_52%,#ef9a1e_100%)] p-6 text-white shadow-[0_18px_42px_rgba(0,0,0,0.18)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(135deg,var(--color-secondary)_0%,#1788ac_52%,var(--campaign-accent)_100%)] p-6 text-white shadow-[0_18px_42px_rgba(0,0,0,0.18)] md:p-8">
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
             <div>
               <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-white/80">Take the Next Step</p>
@@ -368,7 +368,7 @@ export default memo(function VisionMissionPage() {
               </Link>
               <Link
                 to={ROUTES.donate}
-                className="inline-flex items-center justify-center rounded-[18px] bg-white px-5 py-3 text-[15px] font-bold text-[#0a5375] transition-colors hover:bg-[#fff9ef]"
+                className="inline-flex items-center justify-center rounded-[18px] bg-white px-5 py-3 text-[15px] font-bold text-[var(--color-secondary)] transition-colors hover:bg-[#fff9ef]"
               >
                 Support the Mission
               </Link>

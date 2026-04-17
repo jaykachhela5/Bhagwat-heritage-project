@@ -51,7 +51,7 @@ export default memo(function EducationPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#0B2230]">
+    <div className="min-h-screen bg-[var(--campaign-deep)]">
       <HeroSection
         title="Education Seva"
         subtitle="Lighting lives through learning."
@@ -63,10 +63,10 @@ export default memo(function EducationPage() {
         overlayClass="bg-black/55"
       >
         <div className="flex flex-wrap justify-center gap-3">
-          <Link to={ROUTES.donate} className="inline-flex items-center rounded-lg bg-[#ef9a1e] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#de930a]">
+          <Link to={ROUTES.donate} className="inline-flex items-center rounded-lg bg-[var(--campaign-accent)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]">
             Support Education
           </Link>
-          <Link to={ROUTES.involved.volunteer} className="inline-flex items-center rounded-lg bg-[#0d6179] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#18495e]">
+          <Link to={ROUTES.involved.volunteer} className="inline-flex items-center rounded-lg bg-[var(--campaign-bg)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]">
             Become Mentor
           </Link>
         </div>
@@ -76,7 +76,7 @@ export default memo(function EducationPage() {
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
             {QUICK_HIGHLIGHTS.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0d6179] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+              <div key={item.title} className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
                 <p className={SEVA_HIGHLIGHT_TITLE_CLASS}>{item.title}</p>
                 <p className={SEVA_HIGHLIGHT_VALUE_CLASS}>{item.value}</p>
                 <p className={`mt-1 ${SEVA_BODY_TEXT_CLASS}`}>{item.note}</p>
@@ -87,7 +87,7 @@ export default memo(function EducationPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <p className={SEVA_SECTION_LABEL_CLASS}>About Education Seva</p>
           <h2 className={SEVA_SECTION_HEADING_CLASS}>Learning support with guidance and continuity</h2>
           <p className="mt-5 text-base leading-7 text-white md:text-lg">
@@ -103,12 +103,12 @@ export default memo(function EducationPage() {
       <EducationServicesSection />
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <p className={SEVA_SECTION_LABEL_CLASS}>How Education Seva Works</p>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
             {MODEL_STEPS.map((step, idx) => (
-              <div key={step.title} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
-                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#ef9a1e]">Step {idx + 1}</p>
+              <div key={step.title} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]">
+                <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Step {idx + 1}</p>
                 <h3 className={`mt-3 ${SEVA_CARD_TITLE_CLASS}`}>{step.title}</h3>
                 <p className={`mt-3 ${SEVA_BODY_TEXT_CLASS}`}>{step.desc}</p>
               </div>
@@ -118,12 +118,12 @@ export default memo(function EducationPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
           <p className={SEVA_SECTION_LABEL_CLASS}>Education Stories</p>
           <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
             {STORIES.map((item) => (
-              <div key={item.name} className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
-                <p className="text-base leading-7 text-[#dce7ec]">"{item.quote}"</p>
+              <div key={item.name} className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
+                <p className="text-base leading-7 text-[var(--campaign-text)]">"{item.quote}"</p>
                 <p className="mt-4 text-[14px] font-black text-white md:text-[20px]">{item.name}</p>
               </div>
             ))}
@@ -132,18 +132,18 @@ export default memo(function EducationPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
-        <div className="rounded-[30px] border border-white/10 bg-[#0d6179] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
-          <div className="rounded-[24px] border border-white/10 bg-[#0c5871] p-5 shadow-sm">
+        <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
+          <div className="rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] p-5 shadow-sm">
             <p className={SEVA_SECTION_LABEL_CLASS}>Monthly Education Support Drive</p>
             <p className={`mt-4 ${SEVA_BODY_TEXT_CLASS}`}>
               Each month the trust supports students through learning materials, school continuity help,
               mentorship guidance, and digital education assistance so children can keep moving forward.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <Link to={ROUTES.donate} className="rounded-xl bg-[#ef9a1e] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#de930a]">
+              <Link to={ROUTES.donate} className="rounded-xl bg-[var(--campaign-accent)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]">
                 Donate Now
               </Link>
-              <Link to={ROUTES.involved.volunteer} className="rounded-xl bg-[#0b2230] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#15384b]">
+              <Link to={ROUTES.involved.volunteer} className="rounded-xl bg-[var(--campaign-deep)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--campaign-deep-hover)]">
                 Volunteer as Teacher
               </Link>
             </div>

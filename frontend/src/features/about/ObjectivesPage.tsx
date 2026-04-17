@@ -27,19 +27,19 @@ type ObjectiveSignal = {
   note: string;
 };
 
-const SECTION_LABEL = `${ABOUT_SECTION_LABEL_CLASS} text-[#ef9a1e]`;
+const SECTION_LABEL = `${ABOUT_SECTION_LABEL_CLASS} text-[var(--campaign-accent)]`;
 const SECTION_HEADING = `${ABOUT_SECTION_HEADING_CLASS} text-white`;
-const SECTION_BODY = `mt-4 ${ABOUT_BODY_CLASS} text-[#dce7ec]`;
-const CARD_LABEL = `${ABOUT_SECTION_LABEL_CLASS} text-[#ef9a1e]`;
+const SECTION_BODY = `mt-4 ${ABOUT_BODY_CLASS} text-[var(--campaign-text)]`;
+const CARD_LABEL = `${ABOUT_SECTION_LABEL_CLASS} text-[var(--campaign-accent)]`;
 const CARD_TITLE = `${ABOUT_CARD_TITLE_CLASS} text-white`;
-const CARD_BODY = `mt-4 ${ABOUT_BODY_CLASS} text-[#dce7ec]`;
+const CARD_BODY = `mt-4 ${ABOUT_BODY_CLASS} text-[var(--campaign-text)]`;
 const SECTION_SHELL =
-  "rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,#0d6179_0%,#0c5871_100%)] p-6 shadow-[0_14px_30px_rgba(0,0,0,0.2)] md:p-8";
+  "rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,var(--campaign-bg)_0%,var(--campaign-surface)_100%)] p-6 shadow-[0_14px_30px_rgba(0,0,0,0.2)] md:p-8";
 const DARK_SECTION_SHELL =
   "rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,#102d3e_0%,#0c2634_100%)] p-6 shadow-[0_14px_30px_rgba(0,0,0,0.2)] md:p-8";
 const CARD_SHELL = "rounded-[24px] border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm";
 const BUTTON_CLASS =
-  "inline-flex items-center justify-center rounded-[18px] bg-[#ef9a1e] px-5 py-3 text-[15px] font-bold text-white transition-colors hover:bg-[#d98916]";
+  "inline-flex items-center justify-center rounded-[18px] bg-[var(--campaign-accent)] px-5 py-3 text-[15px] font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]";
 const GHOST_BUTTON =
   "inline-flex items-center justify-center rounded-[18px] border border-white/14 bg-white/8 px-5 py-3 text-[15px] font-bold text-white transition-colors hover:bg-white/14";
 
@@ -49,7 +49,7 @@ const OBJECTIVE_POINTS: ObjectivePoint[] = [
     description:
       "Advance Bhagwat Katha, satsang, and scripture-centered explanation so devotion is understood, practiced, and shared with clarity.",
     href: ROUTES.eventsKatha.bhagwatKatha,
-    accent: "from-[#ef9a1e]/28 via-[#ef9a1e]/10 to-transparent",
+    accent: "from-[var(--campaign-accent)]/28 via-[var(--campaign-accent)]/10 to-transparent",
   },
   {
     title: "Develop spiritual learning platforms",
@@ -164,13 +164,13 @@ export default memo(function ObjectivesPage() {
               <h1 className="mb-[10px] text-4xl font-bold leading-tight text-white md:text-5xl">
                 Objectives
               </h1>
-              <p className="mx-auto max-w-3xl text-[18px] font-semibold leading-7 text-[#dce7ec] md:text-[24px]">
+              <p className="mx-auto max-w-3xl text-[18px] font-semibold leading-7 text-[var(--campaign-text)] md:text-[24px]">
                 Promoting learning, seva, and sacred values
               </p>
               <div className="mt-6 flex flex-wrap justify-center gap-3">
                 <Link
                   to={ROUTES.donate}
-                  className="inline-flex items-center justify-center rounded-[18px] bg-[#ef9a1e] px-6 py-3 text-[15px] font-bold text-white shadow-[0_12px_24px_rgba(239,154,30,0.24)] transition-colors hover:bg-[#d98916]"
+                  className="inline-flex items-center justify-center rounded-[18px] bg-[var(--campaign-accent)] px-6 py-3 text-[15px] font-bold text-white shadow-[0_12px_24px_rgba(239,154,30,0.24)] transition-colors hover:bg-[var(--campaign-accent-hover)]"
                 >
                   Donate
                 </Link>
@@ -208,7 +208,7 @@ export default memo(function ObjectivesPage() {
             {OBJECTIVE_POINTS.map((item) => (
               <article
                 key={item.title}
-                className="group relative flex h-full overflow-hidden rounded-[28px] border border-white/10 bg-[#0c5871] shadow-[0_12px_26px_rgba(0,0,0,0.16)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_34px_rgba(0,0,0,0.22)]"
+                className="group relative flex h-full overflow-hidden rounded-[28px] border border-white/10 bg-[var(--campaign-surface)] shadow-[0_12px_26px_rgba(0,0,0,0.16)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_34px_rgba(0,0,0,0.22)]"
               >
                 <div className={`absolute inset-0 bg-[linear-gradient(180deg,var(--tw-gradient-stops))] ${item.accent}`} />
                 <div className="relative flex h-full flex-1 flex-col p-6">
@@ -274,7 +274,7 @@ export default memo(function ObjectivesPage() {
                 <div className="mt-6 space-y-3">
                   {item.points.map((point) => (
                     <div key={point} className="flex items-start gap-3 rounded-[20px] border border-white/10 bg-white/[0.04] px-4 py-3">
-                      <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#ef9a1e]" />
+                      <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--campaign-accent)]" />
                       <span className={CARD_BODY}>{point}</span>
                     </div>
                   ))}
@@ -286,7 +286,7 @@ export default memo(function ObjectivesPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pb-10">
-        <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(135deg,#0a5375_0%,#c98d1f_52%,#ef9a1e_100%)] p-6 text-white shadow-[0_18px_40px_rgba(0,0,0,0.16)] md:p-8">
+        <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(135deg,var(--color-secondary)_0%,#c98d1f_52%,var(--campaign-accent)_100%)] p-6 text-white shadow-[0_18px_40px_rgba(0,0,0,0.16)] md:p-8">
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
               <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-white/75">Support the Objectives</p>
@@ -302,7 +302,7 @@ export default memo(function ObjectivesPage() {
               </Link>
               <Link
                 to={ROUTES.donate}
-                className="inline-flex items-center justify-center rounded-[18px] bg-white px-5 py-3 text-[15px] font-bold text-[#0a5375] transition-colors hover:bg-[#fffaf2]"
+                className="inline-flex items-center justify-center rounded-[18px] bg-white px-5 py-3 text-[15px] font-bold text-[var(--color-secondary)] transition-colors hover:bg-[#fffaf2]"
               >
                 Support the Mission
               </Link>
