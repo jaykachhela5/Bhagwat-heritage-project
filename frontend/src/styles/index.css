@@ -1,16 +1,17 @@
 @import "tailwindcss";
+@import "./theme.css";
 
 @theme {
-  --color-brand-blue: #1166a3;
-  --color-brand-blue-light: #4abdca;
-  --color-brand-green: #8abe51;
-  --color-brand-green-light: #d2d183;
-  --color-brand-yellow: #ed9b24;
-  --color-brand-yellow-light: #edca56;
-  --color-brand-orange: #ff6a00;
-  --color-brand-orange-light: #fec758;
-  --color-brand-red: #b32e22;
-  --color-brand-red-light: #e03a24;
+  --color-brand-blue: #2F4A66;
+  --color-brand-blue-light: #5F6C7B;
+  --color-brand-green: #A9CAD1;
+  --color-brand-green-light: #F7F9FB;
+  --color-brand-yellow: #E89A3C;
+  --color-brand-yellow-light: #FDF6ED;
+  --color-brand-orange: #D9822B;
+  --color-brand-orange-light: #FFF7ED;
+  --color-brand-red: #2F4A66;
+  --color-brand-red-light: #8A97A6;
 }
 
 @layer base {
@@ -22,7 +23,8 @@
 
   body {
     font-family: "Poppins", sans-serif;
-    @apply text-gray-900 bg-white;
+    color: var(--text-body);
+    background: var(--bg-main);
     overflow-x: hidden;
   }
 
@@ -33,14 +35,32 @@
 
 @layer components {
   .btn-primary {
-    @apply inline-block bg-[#0d3b66] text-white px-5 py-2 rounded-md font-semibold hover:bg-[#1a5276] transition-colors duration-200;
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+    border-radius: var(--radius-button);
+    box-shadow: var(--shadow-button);
+    @apply inline-flex items-center justify-center px-5 py-3 font-semibold transition-all duration-200;
+  }
+
+  .btn-primary:hover {
+    background: var(--btn-primary-hover);
   }
 
   .btn-secondary {
-    @apply inline-block bg-[#f4a261] text-white px-5 py-2 rounded-md font-semibold hover:bg-[#e08c4c] transition-colors duration-200;
+    background: var(--btn-secondary-bg);
+    color: var(--btn-secondary-text);
+    border: 1px solid var(--btn-secondary-border);
+    border-radius: var(--radius-button);
+    @apply inline-flex items-center justify-center px-5 py-3 font-semibold transition-all duration-200;
+  }
+
+  .btn-secondary:hover {
+    background: var(--btn-secondary-hover-bg);
+    color: var(--btn-secondary-hover-text);
   }
 
   .section-title {
-    @apply text-3xl font-bold text-[#0d3b66] text-center mb-8;
+    color: var(--text-heading);
+    @apply text-3xl font-bold text-center mb-8;
   }
 }
