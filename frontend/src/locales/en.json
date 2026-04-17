@@ -690,7 +690,8 @@
       { "icon": "📖", "title": "Wisdom (Jnana)", "desc": "True knowledge helps individuals understand the purpose of life and develop clarity of thought and conduct." },
       { "icon": "🤲", "title": "Service (Seva)", "desc": "Service to humanity is a sacred duty. Helping others with compassion and sincerity reflects the true spirit of spirituality." },
       { "icon": "🕉️", "title": "Discipline (Sadhana)", "desc": "Spiritual growth requires discipline, reflection, and dedication to spiritual practice." },
-      { "icon": "🎭", "title": "Cultural Responsibility", "desc": "Preserving and honoring cultural heritage strengthens identity and inspires future generations." }
+      { "icon": "🎭", "title": "Cultural Responsibility", "desc": "Preserving and honoring cultural heritage strengthens identity and inspires future generations." },
+      { "icon": "💛", "title": "Compassion (Karuna)", "desc": "Compassion softens the heart, deepens human connection, and turns spiritual values into loving action for all." }
     ],
     "foundationEyebrow": "The Vision",
     "foundationHeading": "Inspiration Behind the Foundation",
@@ -732,9 +733,9 @@
     "servicesEyebrow": "Guidance & Services",
     "servicesHeading": "Connect with Manish Bhaiji Maharaj",
     "services": [
-      { "title": "Bhagwat Katha", "desc": "Request Shrimad Bhagwat Katha by Manish Bhaiji Maharaj for spiritual gatherings, religious events, and community programs.", "button": "Contact for Bhagwat Katha" },
-      { "title": "Vastu Guidance", "desc": "Traditional Vastu Shastra consultation for homes, temples, offices, and spiritual spaces to promote harmony, positivity, and prosperity.", "button": "Contact for Vastu Consultation" },
-      { "title": "Astrology Guidance", "desc": "Jyotish consultation for life guidance, spiritual growth, career decisions, and personal well-being.", "button": "Contact for Astrology Consultation" }
+      { "title": "Bhagwat Katha", "desc": "", "button": "Contact for Bhagwat Katha" },
+      { "title": "Vastu Guidance", "desc": "", "button": "Contact for Vastu Consultation" },
+      { "title": "Astrology Guidance", "desc": "", "button": "Contact for Astrology Consultation" }
     ],
     "journeyEyebrow": "The Path Ahead",
     "journeyHeading": "Continuing the Spiritual Journey",

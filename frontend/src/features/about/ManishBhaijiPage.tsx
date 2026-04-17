@@ -24,6 +24,12 @@ interface Principle { icon: string; title: string; desc: string; }
 interface Service { title: string; desc: string; button: string; }
 interface FocusItem { icon: string; label: string; }
 
+const SERVICE_IMAGES: Record<string, string> = {
+  "Bhagwat Katha": "https://res.cloudinary.com/dalug9cfc/image/upload/v1776429635/bhagwat_uv7p9u.png",
+  "Vastu Guidance": "https://res.cloudinary.com/dalug9cfc/image/upload/v1776429328/vastuimage_kkeny3.jpg",
+  "Astrology Guidance": "https://res.cloudinary.com/dalug9cfc/image/upload/v1776429327/astrologyimage_bxbwbl.webp",
+};
+
 const divider = (
   <div className="max-w-6xl mx-auto px-4 pb-4">
     <div className="bg-gradient-to-r from-[#ff6a00] to-[#fec758] h-1 w-full rounded-full my-4" />
@@ -89,6 +95,9 @@ export default memo(function ManishBhaijiPage() {
                 <Link to={ROUTES.donate} className="inline-block bg-white border border-[#d2deea] text-[#0d4e85] font-bold px-6 py-3 rounded-xl hover:bg-[#f2f6fa] transition-colors">
                   {t("founderPage.donateNow")}
                 </Link>
+                <Link to="/get-involved/invite-maharaj-ji" className="inline-block bg-[#0d4e85] text-white font-bold px-6 py-3 rounded-xl hover:bg-[#0a3f6b] transition-colors">
+                  Invite Maharaj Ji
+                </Link>
               </div>
             </div>
           </div>
@@ -98,7 +107,55 @@ export default memo(function ManishBhaijiPage() {
       {divider}
 
       {/* ── Impact Stats ──────────────────────────────────────────────── */}
-      <ImpactCounter items={impactItems} />
+      <section
+        id="guidance-services"
+        ref={servicesRef}
+        className="mx-auto max-w-6xl px-4 py-16"
+      >
+        <div className="relative overflow-hidden rounded-[36px] border border-[#f2d7b2] bg-[radial-gradient(circle_at_top,_#fff7ea_0%,_#fff2de_42%,_#ffe7c2_100%)] px-6 py-10 shadow-[0_24px_60px_rgba(179,46,34,0.10)] md:px-10 md:py-14">
+          <div className="pointer-events-none absolute -left-16 top-0 h-40 w-40 rounded-full bg-[#ffd18a]/45 blur-3xl" />
+          <div className="pointer-events-none absolute -right-10 bottom-0 h-48 w-48 rounded-full bg-[#f5b56c]/35 blur-3xl" />
+          <div className="relative text-center mb-10 md:mb-12">
+            <p className={`${FOUNDER_LABEL} mb-3`}>{t("founderPage.servicesEyebrow")}</p>
+            <h2 className={`${FOUNDER_HEADING} mb-4`}>{t("founderPage.servicesHeading")}</h2>
+          </div>
+          <div className="relative grid grid-cols-1 gap-6 md:grid-cols-3">
+          {services.map((item, index) => (
+            <article
+              key={item.title}
+              className={`group relative flex h-full flex-col overflow-hidden rounded-[30px] border border-white/70 bg-[linear-gradient(180deg,_rgba(255,255,255,0.98)_0%,_rgba(255,248,239,0.98)_100%)] p-7 shadow-[0_18px_40px_rgba(13,59,102,0.10)] transition-all duration-500 hover:-translate-y-3 hover:shadow-[0_24px_50px_rgba(179,46,34,0.16)] hover:border-[#f1c07a] ${
+                servicesVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+              }`}
+              style={{ transitionDelay: `${index * 120}ms` }}
+            >
+              <div className="absolute inset-x-0 top-0 h-28 bg-[linear-gradient(180deg,_rgba(255,188,103,0.28)_0%,_rgba(255,255,255,0)_100%)]" />
+              <div className="relative flex justify-center">
+                <div className="rounded-full bg-white/90 p-2 shadow-[0_16px_30px_rgba(13,59,102,0.12)] ring-4 ring-[#fff0d9] transition-transform duration-500 group-hover:scale-105">
+                  <img
+                    src={SERVICE_IMAGES[item.title]}
+                    alt={item.title}
+                    className="h-24 w-24 rounded-full object-cover md:h-28 md:w-28"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              <h3 className={`mt-6 text-center ${FOUNDER_CARD_TITLE} text-[#0d3b66]`}>{item.title}</h3>
+              {item.desc ? (
+                <p className={`mt-3 flex-1 text-center ${ABOUT_BODY_CLASS} text-[#5a6872]`}>{item.desc}</p>
+              ) : (
+                <div className="flex-1" />
+              )}
+              <Link
+                to={ROUTES.contact}
+                className="mt-6 inline-flex min-h-[54px] w-full items-center justify-center rounded-2xl bg-[linear-gradient(90deg,_#b32e22_0%,_#f07e1f_52%,_#f6b74b_100%)] px-5 py-3 text-center text-sm font-bold text-white shadow-[0_16px_30px_rgba(179,46,34,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_20px_34px_rgba(179,46,34,0.24)]"
+              >
+                {item.button}
+              </Link>
+            </article>
+          ))}
+          </div>
+        </div>
+      </section>
 
       {divider}
 
@@ -153,12 +210,31 @@ export default memo(function ManishBhaijiPage() {
           <p className={`${FOUNDER_LABEL} mb-3`}>{t("founderPage.principlesEyebrow")}</p>
           <h2 className={`${FOUNDER_HEADING} mb-3`}>{t("founderPage.principlesHeading")}</h2>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {principles.map((p) => (
-            <div key={p.title} className="bg-white rounded-2xl border border-[#f1dcc0] p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
-              <div className="text-3xl mb-3">{p.icon}</div>
+            <div
+              key={p.title}
+              className="group flex h-full flex-col rounded-[28px] border border-[#f1dcc0] bg-[linear-gradient(180deg,_#fffefb_0%,_#fff6eb_100%)] p-6 shadow-[0_12px_28px_rgba(13,59,102,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_34px_rgba(179,46,34,0.12)]"
+            >
+              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#fff0da] text-3xl shadow-[inset_0_0_0_1px_rgba(240,145,0,0.12)]">
+                {p.icon}
+              </div>
               <h3 className={`${FOUNDER_CARD_TITLE} mb-2`}>{p.title}</h3>
-              <p className={FOUNDER_BODY}>{p.desc}</p>
+              <p className={`flex-1 ${FOUNDER_BODY}`}>{p.desc}</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                <Link
+                  to={ROUTES.involved.volunteer}
+                  className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#ff6a00] to-[#ed9b24] px-4 py-2 text-xs font-bold text-white transition-all duration-300 hover:from-[#ed9b24] hover:to-[#fec758]"
+                >
+                  Join
+                </Link>
+                <Link
+                  to={ROUTES.contact}
+                  className="inline-flex items-center justify-center rounded-full border border-[#d8c1a2] bg-white px-4 py-2 text-xs font-bold text-[#0d4e85] transition-colors hover:bg-[#f8efe4]"
+                >
+                  Contact
+                </Link>
+              </div>
             </div>
           ))}
         </div>
@@ -272,32 +348,7 @@ export default memo(function ManishBhaijiPage() {
       {divider}
 
       {/* ── Services / Connect ────────────────────────────────────────── */}
-      <section ref={servicesRef} className="py-14 max-w-6xl mx-auto px-4">
-        <div className="text-center mb-10">
-          <p className={`${FOUNDER_LABEL} mb-3`}>{t("founderPage.servicesEyebrow")}</p>
-          <h2 className={FOUNDER_HEADING}>{t("founderPage.servicesHeading")}</h2>
-        </div>
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-          {services.map((item, index) => (
-            <article
-              key={item.title}
-              className={`flex h-full flex-col rounded-[24px] border border-[#efd6b4] bg-white p-6 shadow-[0_10px_24px_rgba(13,59,102,0.08)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_18px_36px_rgba(13,59,102,0.14)] hover:border-[#f0b15d] ${
-                servicesVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-              }`}
-              style={{ transitionDelay: `${index * 120}ms` }}
-            >
-              <h3 className={`mt-2 ${FOUNDER_CARD_TITLE} text-[#0d3b66]`}>{item.title}</h3>
-              <p className={`mt-3 flex-1 ${ABOUT_BODY_CLASS} text-[#5a6872]`}>{item.desc}</p>
-              <Link
-                to={ROUTES.contact}
-                className="mt-6 inline-flex min-h-[52px] w-full items-center justify-center rounded-xl bg-gradient-to-r from-[#ff6a00] to-[#ed9b24] hover:from-[#ed9b24] hover:to-[#fec758] px-5 py-3 text-center text-sm font-bold text-white transition-all duration-300"
-              >
-                {item.button}
-              </Link>
-            </article>
-          ))}
-        </div>
-      </section>
+      
 
       {divider}
 
@@ -364,6 +415,10 @@ export default memo(function ManishBhaijiPage() {
           </div>
         </div>
       </section>
+
+      {divider}
+
+      <ImpactCounter items={impactItems} />
 
     </div>
   );
