@@ -11,6 +11,7 @@ import te from "./locales/te.json";
 import kn from "./locales/kn.json";
 import pa from "./locales/pa.json";
 import sa from "./locales/sa.json";
+import { DEFAULT_LANGUAGE, LANGUAGE_STORAGE_KEY, normalizeLanguage, setStoredLanguage } from "./utils/language";
 
 const resources = {
   en: { translation: en },
@@ -25,20 +26,42 @@ const resources = {
   sa: { translation: sa },
 };
 
+const LEGACY_LANGUAGE_STORAGE_KEY = "bhagwat-language";
+
+const migrateLegacyLanguage = () => {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  const activeStoredLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+
+  if (activeStoredLanguage) {
+    return;
+  }
+
+  const legacyLanguage = window.localStorage.getItem(LEGACY_LANGUAGE_STORAGE_KEY);
+
+  if (legacyLanguage) {
+    setStoredLanguage(legacyLanguage);
+  }
+};
+
 const syncDocumentLanguage = (language) => {
   if (typeof document === "undefined") {
     return;
   }
 
-  document.documentElement.lang = (language ?? "hi").split("-")[0];
+  document.documentElement.lang = normalizeLanguage(language ?? DEFAULT_LANGUAGE);
 };
+
+migrateLegacyLanguage();
 
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: "hi",
+    fallbackLng: DEFAULT_LANGUAGE,
     supportedLngs: ["en", "hi", "mr", "gu", "bn", "ta", "te", "kn", "pa", "sa"],
     load: "languageOnly",
     interpolation: {
@@ -47,7 +70,7 @@ i18n
     detection: {
       order: ["localStorage", "htmlTag"],
       caches: ["localStorage"],
-      lookupLocalStorage: "bhagwat-language",
+      lookupLocalStorage: LANGUAGE_STORAGE_KEY,
     },
     react: {
       useSuspense: false,
@@ -56,5 +79,6 @@ i18n
 
 syncDocumentLanguage(i18n.resolvedLanguage ?? i18n.language);
 i18n.on("languageChanged", syncDocumentLanguage);
+i18n.on("languageChanged", setStoredLanguage);
 
 export default i18n;
