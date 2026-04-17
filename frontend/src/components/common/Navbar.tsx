@@ -138,6 +138,7 @@ const DropdownItem = memo(function DropdownItem({ item, t }: { item: NavItemConf
   }
 
   const twoColumn = item.children.length > 6;
+  const showDropdownTitle = item.id !== "about-dropdown";
 
   return (
     <li className="relative" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
@@ -148,9 +149,11 @@ const DropdownItem = memo(function DropdownItem({ item, t }: { item: NavItemConf
 
       {open ? (
         <div className="absolute top-full left-0 z-50 mt-1 w-[350px] rounded-xl border border-[#d8e4f2] bg-white p-2 shadow-xl">
-          <p className="px-3 py-1.5 text-[11px] uppercase tracking-wide text-[#56708a] font-semibold">
-            {t(item.labelKey)}
-          </p>
+          {showDropdownTitle ? (
+            <p className="px-3 py-1.5 text-[11px] uppercase tracking-wide text-[#56708a] font-semibold">
+              {t(item.labelKey)}
+            </p>
+          ) : null}
           <ul className={`${twoColumn ? "grid grid-cols-2 gap-1" : "space-y-0.5"} max-h-[380px] overflow-y-auto pr-1`}>
             {item.children.map((child) => (
               <li key={child.id}>
