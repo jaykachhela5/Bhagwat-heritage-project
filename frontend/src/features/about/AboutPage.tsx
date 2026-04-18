@@ -57,11 +57,15 @@ const SECTION_SHELL_GOLD =
 const SECTION_SHELL_BLUE =
   "rounded-[30px] border border-[#D8E4E5] bg-[linear-gradient(180deg,rgba(230,241,240,0.85)_0%,rgba(255,252,247,0.98)_56%,rgba(250,241,225,0.9)_100%)] shadow-[0_22px_52px_rgba(29,79,99,0.08)]";
 const PRIMARY_BUTTON =
-  "inline-flex items-center justify-center rounded-xl bg-[#1D5B72] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(29,91,114,0.22)] transition-all hover:-translate-y-0.5 hover:bg-[#27657A]";
+  "inline-flex items-center justify-center rounded-xl bg-[#F9F2A9] px-6 py-3 font-semibold text-[#33210F] shadow-[0_14px_28px_rgba(244,206,90,0.22)] transition-all hover:-translate-y-0.5 hover:bg-[#F4CE5A]";
 const SECONDARY_BUTTON =
   "inline-flex items-center justify-center rounded-xl bg-[#E4B45E] px-6 py-3 font-semibold text-[#33210F] shadow-[0_14px_28px_rgba(212,150,63,0.22)] transition-all hover:-translate-y-0.5 hover:bg-[#D08A32]";
 const TERTIARY_BUTTON =
-  "inline-flex items-center justify-center rounded-xl bg-[#B8502D] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(184,80,45,0.18)] transition-all hover:-translate-y-0.5 hover:bg-[#983f22]";
+  "inline-flex items-center justify-center rounded-xl bg-[#A9CAD1] px-6 py-3 font-semibold text-[#1D4F63] shadow-[0_14px_28px_rgba(169,202,209,0.24)] transition-all hover:-translate-y-0.5 hover:bg-[#8fb9c2]";
+const LIGHT_GOLD_BUTTON =
+  "inline-flex items-center justify-center rounded-lg bg-[#F9F2A9] px-4 py-2 text-sm font-semibold text-[#33210F] shadow-[0_10px_20px_rgba(244,206,90,0.18)] transition-all hover:-translate-y-0.5 hover:bg-[#F4CE5A]";
+const NAVY_BUTTON =
+  "inline-flex items-center justify-center rounded-xl bg-[#A9CAD1] px-6 py-3 font-semibold text-[#1D4F63] shadow-[0_14px_28px_rgba(169,202,209,0.24)] transition-all hover:-translate-y-0.5 hover:bg-[#8fb9c2]";
 
 const divider = (
   <div className="max-w-6xl mx-auto px-4 py-2">
@@ -98,7 +102,7 @@ export default memo(function AboutPage() {
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(245,158,11,0.18),transparent_42%)]" />
           <div className="relative z-10 flex flex-col items-center justify-end gap-[2px]">
-            <h1 className={`${ABOUT_HERO_TITLE_CLASS} whitespace-nowrap text-[clamp(1.1rem,3.1vw,3.8rem)] leading-tight text-white`}>
+            <h1 className={`${ABOUT_HERO_TITLE_CLASS} whitespace-nowrap text-[clamp(1.1rem,3.1vw,3.8rem)] leading-tight text-[#F9F2A9]`}>
               {t("aboutPage.heroTitle")}
             </h1>
             <p className="mx-auto max-w-none whitespace-nowrap text-[40px] font-bold leading-tight text-white/95">
@@ -111,7 +115,7 @@ export default memo(function AboutPage() {
               <Link to={ROUTES.donate} className={TERTIARY_BUTTON}>
                 {t("aboutPage.supportMission")}
               </Link>
-              <Link to={ROUTES.involved.volunteer} className={PRIMARY_BUTTON}>
+              <Link to={ROUTES.involved.volunteer} className={NAVY_BUTTON}>
                 {t("aboutPage.becomeVolunteer")}
               </Link>
             </div>
@@ -152,8 +156,8 @@ export default memo(function AboutPage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className={`${SECTION_SHELL_GOLD} p-6 md:p-8`}>
             <div className="text-center mb-10">
-              <p className={`${SECTION_LABEL} mb-3`}>{t("aboutPage.coreAreasEyebrow")}</p>
-              <h2 className={`${SECTION_HEADING} mb-3`}>{t("aboutPage.coreAreasHeading")}</h2>
+              {t("aboutPage.coreAreasEyebrow") ? <p className={`${SECTION_LABEL} mb-3`}>{t("aboutPage.coreAreasEyebrow")}</p> : null}
+              {t("aboutPage.coreAreasHeading") ? <h2 className={`${SECTION_HEADING} mb-3`}>{t("aboutPage.coreAreasHeading")}</h2> : null}
             </div>
             <div className={`mb-2 w-full rounded-2xl ${FOOTER_CARD_BG_SOFT} ${CARD_SHELL} ${CARD_HOVER} p-6 text-center md:p-8`}>
               <h3 className={`${CARD_TITLE} mb-4`}>{t("aboutPage.whoWeAreHeading")}</h3>
@@ -246,9 +250,9 @@ export default memo(function AboutPage() {
                 <p className={`text-base font-semibold ${PALE_CARD_TEXT}`}>{item.title}</p>
                 <Link
                   to={item.href}
-                className={`${PRIMARY_BUTTON} mt-4 rounded-lg px-4 py-2 text-sm shadow-[0_10px_20px_rgba(31,115,160,0.14)]`}
+                  className={`${LIGHT_GOLD_BUTTON} mt-4`}
                 >
-                  Related Page
+                  Read More
                 </Link>
               </div>
             ))}
@@ -298,7 +302,7 @@ export default memo(function AboutPage() {
                 <Link to={ROUTES.media.videos} className={`${SECONDARY_BUTTON} shrink-0`}>
                   {t("aboutPage.watchPravachan")}
                 </Link>
-                <Link to={ROUTES.digital.guidance} className={`${TERTIARY_BUTTON} shrink-0`}>
+                <Link to={ROUTES.digital.guidance} className={`${NAVY_BUTTON} shrink-0`}>
                   {t("aboutPage.seekGuidance")}
                 </Link>
               </div>
