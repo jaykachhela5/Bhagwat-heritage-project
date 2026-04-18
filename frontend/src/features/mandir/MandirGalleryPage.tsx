@@ -2,6 +2,7 @@ import { memo, useEffect, useMemo, useState } from "react";
 import { useApi } from "../../hooks/useApi";
 import { galleryApi } from "../../services/api/media";
 import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
+import { Card } from "../../components/ui/Card";
 import type { GalleryImage } from "../../types";
 
 type Category = "All" | "Bhagwat Katha" | "Temple Activities" | "Social Work" | "Trust Members" | "Events";
@@ -148,22 +149,23 @@ export default memo(function MandirGalleryPage() {
 
   return (
     <div className="pb-14">
-      <section className="max-w-6xl mx-auto px-4 pt-8 md:pt-10">
-        <div className="rounded-3xl border border-[#f1c999] bg-gradient-to-r from-[#fff8ef] via-[#fff5e8] to-[#fff1df] p-6 md:p-8 shadow-[0_14px_30px_rgba(172,85,22,0.16)]">
-          <h1 className="text-3xl md:text-5xl font-black text-[#8a3d06]">Mandir Photo Gallery</h1>
-          <p className="mt-3 text-[#7a4d28] md:text-lg">
+      <section className="py-6">
+        <div className="rounded-[30px] border border-borderBeige bg-[linear-gradient(180deg,rgba(255,245,225,0.92)_0%,rgba(255,252,247,0.98)_48%,rgba(245,232,204,0.95)_100%)] p-6 shadow-[0_22px_52px_rgba(101,71,35,0.09)] md:p-8">
+          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-saffron">Media Gallery</p>
+          <h1 className="mt-2 text-3xl font-black tracking-tight text-tealDeep md:text-5xl">Photo Gallery</h1>
+          <p className="mt-3 text-brownSoft md:text-lg">
             Explore the divine moments of Bhagwat Heritage events, Bhagwat Katha, temple activities, and social services.
           </p>
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 pt-6">
-        <div className="rounded-2xl border border-[#f0c89d] bg-white p-4 shadow-sm">
+      <section className="py-6">
+        <Card className="hover:scale-100">
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search photos..."
-            className="w-full rounded-xl border border-[#f3d7b7] px-4 py-2.5 text-sm outline-none focus:border-[#cb7422]"
+            className="w-full rounded-xl border border-borderCard bg-white px-4 py-2.5 text-sm text-brown outline-none focus:border-gold"
           />
           <div className="mt-4 flex flex-wrap gap-2">
             {CATEGORIES.map((category) => (
@@ -173,28 +175,28 @@ export default memo(function MandirGalleryPage() {
                 onClick={() => setActiveCategory(category)}
                 className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                   activeCategory === category
-                    ? "bg-[#cb7422] text-white"
-                    : "bg-[#fff4e7] text-[#8b4e1d] border border-[#f0c89d] hover:bg-[#ffe9d1]"
+                    ? "bg-tealPrimary text-white"
+                    : "border border-borderCard bg-bgSoft text-brownSoft hover:border-gold hover:bg-sand"
                 }`}
               >
                 {category}
               </button>
             ))}
           </div>
-        </div>
+        </Card>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 pt-6">
+      <section className="py-6">
         {loading && allPhotos.length === 0 ? (
           <div className="flex justify-center py-12">
             <LoadingSpinner size="lg" />
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {visiblePhotos.map((photo, index) => (
-            <article
+            <Card
               key={photo.id}
-              className="group relative overflow-hidden rounded-xl border border-[#f0d4b6] bg-white shadow-sm hover:shadow-lg transition-all duration-300 animate-[fadeIn_350ms_ease-out]"
+              className="group relative overflow-hidden p-0 animate-[fadeIn_350ms_ease-out]"
               style={{ animationDelay: `${(index % 8) * 40}ms` }}
               onClick={() => openLightbox(photo.id)}
             >
@@ -202,13 +204,15 @@ export default memo(function MandirGalleryPage() {
                 src={photo.imageUrl}
                 alt={photo.title}
                 loading="lazy"
-                className="h-40 md:h-48 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                className="h-64 w-full rounded-t-xl object-cover transition-transform duration-300 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/45 transition-colors duration-300" />
-              <div className="absolute inset-x-0 bottom-0 p-3 text-white">
-                <p className="text-xs md:text-sm font-semibold drop-shadow-md">{photo.title}</p>
+              <div className="p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-saffron">{photo.category}</p>
+                <h3 className="mt-2 text-xl font-semibold text-tealCard">{photo.title}</h3>
+                <p className="mt-2 text-brownSoft">{photo.location}</p>
+                <p className="mt-1 text-sm text-brownSoft">{formatDate(photo.date)}</p>
               </div>
-            </article>
+            </Card>
           ))}
           </div>
         )}
@@ -218,7 +222,7 @@ export default memo(function MandirGalleryPage() {
             <button
               type="button"
               onClick={() => setVisibleCount((prev) => prev + PAGE_SIZE)}
-              className="rounded-xl bg-[#b85b12] px-6 py-2.5 text-white font-semibold hover:bg-[#9e4a0c] transition shadow-[0_8px_18px_rgba(153,74,12,0.26)]"
+              className="spiritual-btn-secondary"
             >
               Load More Photos
             </button>
@@ -259,8 +263,8 @@ export default memo(function MandirGalleryPage() {
             onTouchEnd={onTouchEnd}
           >
             <img src={currentPhoto.imageUrl} alt={currentPhoto.title} className="w-full max-h-[72vh] object-contain rounded-xl" />
-            <div className="mt-3 rounded-xl bg-white/10 border border-white/20 p-4 text-white">
-              <h3 className="text-lg md:text-xl font-bold">{currentPhoto.title}</h3>
+            <div className="mt-3 rounded-xl border border-white/20 bg-white/10 p-4 text-white">
+              <h3 className="text-lg font-bold md:text-xl">{currentPhoto.title}</h3>
               <p className="text-sm text-white/80 mt-1">
                 {formatDate(currentPhoto.date)} | {currentPhoto.location}
               </p>
@@ -271,7 +275,7 @@ export default memo(function MandirGalleryPage() {
                   download
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-lg bg-[#cb7422] px-3 py-1.5 text-sm font-semibold hover:bg-[#af611a] transition"
+                  className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#33210F] transition hover:bg-white/90"
                 >
                   Download Image
                 </a>
@@ -279,7 +283,7 @@ export default memo(function MandirGalleryPage() {
                   href={`https://wa.me/?text=${encodeURIComponent(currentPhoto.imageUrl)}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-lg bg-[#25D366] px-3 py-1.5 text-sm font-semibold text-white"
+                  className="rounded-full border border-white/70 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white hover:text-[#33210F]"
                 >
                   WhatsApp
                 </a>
@@ -287,14 +291,14 @@ export default memo(function MandirGalleryPage() {
                   href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentPhoto.imageUrl)}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="rounded-lg bg-[#1877F2] px-3 py-1.5 text-sm font-semibold text-white"
+                  className="rounded-full border border-white/70 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white hover:text-[#33210F]"
                 >
                   Facebook
                 </a>
                 <button
                   type="button"
                   onClick={copyLink}
-                  className="rounded-lg bg-[#f3f3f3] px-3 py-1.5 text-sm font-semibold text-[#1d1d1d]"
+                  className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#33210F]"
                 >
                   Copy link
                 </button>

@@ -1,8 +1,10 @@
-import { memo, useEffect, useRef, useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
+import { memo, useEffect, useMemo, useRef, useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
 import { Link, useParams } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import { useAuth } from "../../app/providers/AuthProvider";
 import { PageSectionShell } from "../../components/sections/PageSectionShell";
 import { HeroSection } from "../../components/ui/HeroSection";
+import { Card } from "../../components/ui/Card";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { ROUTES } from "../../app/routes/routes";
 import {
@@ -5213,245 +5215,476 @@ export const MandirPilgrimagePage = memo(function MandirPilgrimagePage() {
   );
 });
 
-export const MediaVideoGalleryPage = memo(function MediaVideoGalleryPage() {
-  const [activeTheme, setActiveTheme] = useState<
-    "All" | "Gita" | "Avatar Stories" | "Sacred Places" | "Practices" | "Rituals" | "Teachings" | "Heritage"
-  >("All");
-  const [activeTopFilter, setActiveTopFilter] = useState<"All" | "Travel" | "Tech" | "Music">("All");
-  const [sortBy, setSortBy] = useState<"Newest" | "Popular" | "Trending">("Newest");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [featuredVideoSlug, setFeaturedVideoSlug] = useState(MEDIA_VIDEO_GALLERY_ITEMS[0]?.slug ?? "");
+type MediaVideoFilter = "All" | "Pravachan" | "Bhajan" | "Events" | "Live Darshan";
 
-  usePageMeta(
-    "Video Gallery",
-    "Structured video gallery for katha recordings, seva recaps, festival media, and youth-focused devotional content.",
-  );
+const MEDIA_VIDEO_FILTERS: MediaVideoFilter[] = ["All", "Pravachan", "Bhajan", "Events", "Live Darshan"];
 
-  const themeOptions = ["All", "Gita", "Avatar Stories", "Sacred Places", "Practices", "Rituals", "Teachings", "Heritage"] as const;
-  const topFilters = ["All", "Travel", "Tech", "Music"] as const;
-  const sortOptions = ["Newest", "Popular", "Trending"] as const;
-  const featuredPlaylists = MEDIA_VIDEO_GALLERY_ITEMS.slice(0, 3);
+function getMediaVideoFilter(item: VideoGalleryItem): MediaVideoFilter {
+  if (item.category === "Festival") return "Events";
+  if (item.theme === "Rituals") return "Live Darshan";
+  if (item.theme === "Practices" || item.theme === "Heritage") return "Bhajan";
+  return "Pravachan";
+}
 
-  const filteredVideos = MEDIA_VIDEO_GALLERY_ITEMS.filter((item) => {
-    const matchesTheme = activeTheme === "All" ? true : item.theme === activeTheme;
-    const haystack = `${item.title} ${item.note} ${item.summary} ${item.theme} ${item.category}`.toLowerCase();
-    const matchesSearch = searchQuery.trim() ? haystack.includes(searchQuery.trim().toLowerCase()) : true;
-    const matchesTopFilter =
-      activeTopFilter === "All"
-        ? true
-        : activeTopFilter === "Travel"
-          ? item.theme === "Sacred Places" || item.theme === "Heritage"
-          : activeTopFilter === "Tech"
-            ? item.category === "Youth"
-            : item.category === "Festival" || item.category === "Katha";
+function parseViews(views: string) {
+  return Number.parseFloat(views.replace(/K/i, ""));
+}
 
-    return matchesTheme && matchesSearch && matchesTopFilter;
-  }).sort((a, b) => {
-    if (sortBy === "Popular") return Number.parseFloat(b.views) - Number.parseFloat(a.views);
-    if (sortBy === "Trending") return b.title.localeCompare(a.title);
-    return MEDIA_VIDEO_GALLERY_ITEMS.findIndex((item) => item.slug === a.slug) - MEDIA_VIDEO_GALLERY_ITEMS.findIndex((item) => item.slug === b.slug);
-  });
+function buildVideoMeta(item: VideoGalleryItem, index: number) {
+  const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"][index % 6];
+  return `${month} ${index + 5}, 2024`;
+}
 
-  const featuredVideo =
-    filteredVideos.find((item) => item.slug === featuredVideoSlug) ??
-    filteredVideos[0] ??
-    MEDIA_VIDEO_GALLERY_ITEMS[0];
+type MediaVideoModalProps = {
+  video: VideoGalleryItem | null;
+  onClose: () => void;
+};
 
+const MediaVideoModal = memo(function MediaVideoModal({ video, onClose }: MediaVideoModalProps) {
   useEffect(() => {
-    if (!filteredVideos.some((item) => item.slug === featuredVideoSlug)) {
-      setFeaturedVideoSlug(filteredVideos[0]?.slug ?? MEDIA_VIDEO_GALLERY_ITEMS[0]?.slug ?? "");
-    }
-  }, [featuredVideoSlug, filteredVideos]);
+    if (!video) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [video, onClose]);
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(135deg,#F4D06F_0%,#F47C20_45%,#2A9D8F_100%)] text-[#1B5E7A]">
-      <header className="border-b border-white/30 bg-[linear-gradient(180deg,rgba(244,208,111,0.35)_0%,rgba(244,124,32,0.32)_52%,rgba(42,157,143,0.34)_100%)] text-[#F7E8A4] shadow-[0_12px_30px_rgba(31,122,140,0.22)] backdrop-blur-sm">
-        <div className="mx-auto max-w-[1400px] px-6 pb-6 pt-2 text-center">
-          <h1 className="text-[34px] font-black uppercase tracking-wide text-[#F7E8A4] md:text-[56px]">
-            Bhagwat Heritage Video Gallery
-          </h1>
-        </div>
-      </header>
-
-      <main className="mx-auto max-w-[1400px] px-4 py-6 md:px-6">
-        <div className="grid gap-5 lg:grid-cols-[210px_minmax(0,1fr)]">
-          <aside className="rounded-[18px] border border-white/35 bg-[linear-gradient(180deg,rgba(247,232,164,0.88)_0%,rgba(244,208,111,0.80)_100%)] p-3 text-[#1B5E7A] shadow-[0_18px_30px_rgba(31,122,140,0.16)] backdrop-blur-sm">
-            <div className="space-y-5">
+    <AnimatePresence>
+      {video ? (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#102332]/70 px-4 py-8 backdrop-blur-md"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+        >
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="video-modal-title"
+            className="w-full max-w-5xl overflow-hidden rounded-[30px] border border-white/20 bg-[#0f2331] shadow-[0_28px_70px_rgba(16,35,50,0.42)]"
+            initial={{ opacity: 0, scale: 0.94, y: 24 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.96, y: 18 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-center justify-between border-b border-white/10 px-5 py-4 md:px-8">
               <div>
-                <h3 className="text-[15px] font-black text-[#1B5E7A]">Browse Videos</h3>
+                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#F4CE5A]">{getMediaVideoFilter(video)}</p>
+                <h2 id="video-modal-title" className="mt-2 text-xl font-bold text-white md:text-2xl">
+                  {video.title}
+                </h2>
               </div>
-
               <button
                 type="button"
-                onClick={() => setFeaturedVideoSlug(featuredVideo.slug)}
-                className="block w-full overflow-hidden rounded-[14px] border border-white/30 bg-[linear-gradient(180deg,rgba(42,157,143,0.78)_0%,rgba(31,122,140,0.82)_100%)] text-left shadow-[0_10px_20px_rgba(31,122,140,0.18)] transition duration-300 hover:-translate-y-1"
+                aria-label="Close video modal"
+                onClick={onClose}
+                className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white hover:text-[#102332]"
               >
-                <img src={featuredVideo.image} alt={featuredVideo.title} className="h-[156px] w-full object-cover" />
-                <div className="bg-[rgba(27,94,122,0.92)] px-3 py-2 text-[#F7E8A4]">
-                  <p className="text-xs font-bold uppercase tracking-[0.16em]">Featured speaker</p>
-                  <p className="mt-1 line-clamp-1 text-sm font-semibold">{featuredVideo.title}</p>
-                </div>
+                Close
               </button>
+            </div>
 
-              <div>
-                <div className="mt-3 flex gap-2">
-                  {featuredPlaylists.map((item) => (
+            <div className="grid gap-0 lg:grid-cols-[minmax(0,1.45fr)_360px]">
+              <div className="bg-black">
+                <iframe
+                  title={video.title}
+                  src={getYouTubeEmbedUrl(video.videoUrl)}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="h-[260px] w-full md:h-[460px]"
+                />
+              </div>
+              <div className="bg-[linear-gradient(180deg,rgba(31,115,160,0.18)_0%,rgba(16,35,50,0.92)_100%)] px-5 py-5 text-white md:px-6 md:py-6">
+                <p className="text-sm leading-7 text-white/85">{video.summary}</p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {["Like", "Share", "Save"].map((action) => (
                     <button
-                      key={item.slug}
+                      key={action}
                       type="button"
-                      onClick={() => setFeaturedVideoSlug(item.slug)}
-                      className={`overflow-hidden rounded-md shadow-sm transition duration-300 hover:-translate-y-0.5 ${
-                        item.slug === featuredVideo.slug ? "ring-2 ring-[#D32F2F]" : ""
-                      }`}
+                      className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white hover:text-[#102332]"
                     >
-                      <img src={item.image} alt={item.title} className="h-10 w-14 object-cover" />
+                      {action}
                     </button>
                   ))}
                 </div>
-              </div>
-
-              <div>
-                <p className="text-[15px] font-black">Categories</p>
-                <ul className="mt-3 space-y-1 text-[14px]">
-                  {themeOptions.map((item) => (
-                    <li key={item}>
-                      <button
-                        type="button"
-                        onClick={() => setActiveTheme(item)}
-                        className={`flex w-full items-center gap-2 rounded-[6px] px-2 py-1 text-left transition ${
-                          activeTheme === item ? "bg-[#1F7A8C] text-[#F7E8A4]" : "hover:bg-white/35"
-                        }`}
-                      >
-                        <span className="h-2 w-2 rounded-[2px] bg-[#D32F2F]" />
-                        <span>{item}</span>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </aside>
-
-          <section className="rounded-[20px] border border-white/35 bg-[linear-gradient(180deg,rgba(247,232,164,0.84)_0%,rgba(244,124,32,0.72)_55%,rgba(110,193,228,0.58)_100%)] p-4 shadow-[0_16px_28px_rgba(31,122,140,0.18)] backdrop-blur-sm md:p-5">
-            <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
-              <div>
-                <h2 className="text-[32px] font-black uppercase text-[#1B5E7A] md:text-[46px]">Explore Our Videos</h2>
-                <div className="mt-3 flex flex-col gap-3 md:flex-row">
-                  <div>
-                    <p className="mb-1 text-sm font-black text-[#1B5E7A]">Categories</p>
-                    <div className="flex gap-2">
-                      {topFilters.map((item) => (
-                        <button
-                          key={item}
-                          type="button"
-                          onClick={() => setActiveTopFilter(item)}
-                          className={`rounded-md px-3 py-2 text-sm shadow-sm transition ${
-                            activeTopFilter === item ? "bg-[#1F7A8C] text-[#F7E8A4]" : "bg-white/90 text-[#1B5E7A] hover:bg-[#F7E8A4]"
-                          }`}
-                        >
-                          {item}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <p className="mb-1 text-sm font-black text-[#1B5E7A]">Sort by</p>
-                    <div className="flex gap-2">
-                      {sortOptions.map((item) => (
-                        <button
-                          key={item}
-                          type="button"
-                          onClick={() => setSortBy(item)}
-                          className={`rounded-md px-3 py-2 text-sm shadow-sm transition ${
-                            sortBy === item ? "bg-[#1F7A8C] text-[#F7E8A4]" : "bg-white/90 text-[#1B5E7A] hover:bg-[#F7E8A4]"
-                          }`}
-                        >
-                          {item}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                <div className="mt-6 space-y-3 text-sm text-white/75">
+                  <p>Duration: {video.duration}</p>
+                  <p>Views: {video.views}</p>
+                  <p>Theme: {video.theme}</p>
                 </div>
-              </div>
-
-              <label className="w-full max-w-[300px] rounded-lg bg-white px-4 py-3 text-sm text-[#845329] shadow-sm">
-                <input
-                  value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}
-                  placeholder="Search Bhagwat heritage..."
-                  className="w-full bg-transparent text-[#1B5E7A] outline-none placeholder:text-[#2C6E8F]"
-                />
-              </label>
-            </div>
-
-            <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
-              {filteredVideos.map((item, index) => (
-                <article
-                  key={item.slug}
-                  className="group"
-                  style={{ transitionDelay: `${index * 20}ms` }}
+                <Link
+                  to={`${ROUTES.media.videos}/${video.slug}`}
+                  className="mt-6 inline-flex items-center rounded-full bg-[linear-gradient(135deg,#F4CE5A_0%,#E9932D_100%)] px-5 py-3 text-sm font-bold text-[#102332] shadow-[0_18px_30px_rgba(233,147,45,0.28)] transition hover:-translate-y-0.5"
                 >
-                  <div className="overflow-hidden rounded-[12px] bg-[linear-gradient(180deg,rgba(42,157,143,0.72)_0%,rgba(31,122,140,0.84)_100%)] shadow-[0_10px_18px_rgba(31,122,140,0.16)] transition duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_16px_28px_rgba(31,122,140,0.24)]">
-                    <Link to={`${ROUTES.media.videos}/${item.slug}`} className="relative block">
-                      <img src={item.image} alt={item.title} className="h-[110px] w-full object-cover transition duration-300 group-hover:scale-[1.03]" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#F47C20] text-lg text-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] transition duration-300 group-hover:scale-110">
-                          â–¶
-                        </div>
-                      </div>
-                      <span className="absolute left-2 top-2 rounded bg-[#D32F2F] px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
-                        {item.theme}
-                      </span>
-                      <span className="absolute bottom-2 right-2 rounded bg-black/75 px-2 py-1 text-[11px] font-semibold text-white">
-                        {item.duration}
-                      </span>
-                    </Link>
-                  </div>
-                  <h3 className="mt-2 line-clamp-2 text-[15px] font-black leading-5 text-[#1B5E7A]">{item.title}</h3>
-                  <p className="mt-1 text-xs text-[#2C6E8F]">â—Œ {item.duration} â—Œ {item.views} Views</p>
-                  <div className="mt-3 flex gap-2">
-                    <Link
-                      to={`${ROUTES.media.videos}/${item.slug}`}
-                      className="inline-flex items-center rounded-md bg-[#1F7A8C] px-3 py-2 text-xs font-bold uppercase tracking-wide text-[#F7E8A4] transition hover:bg-[#2A9D8F]"
-                    >
-                      Watch
-                    </Link>
-                    <a
-                      href={item.videoUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center rounded-md bg-white/90 px-3 py-2 text-xs font-bold uppercase tracking-wide text-[#1B5E7A] transition hover:bg-[#F7E8A4]"
-                    >
-                      YouTube
-                    </a>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-        </div>
-      </main>
-
-      <footer className="bg-[linear-gradient(180deg,rgba(31,122,140,0.88)_0%,rgba(42,157,143,0.92)_100%)] text-[#F7E8A4]">
-        <div className="mx-auto flex max-w-[1400px] flex-col gap-4 px-6 py-4 md:flex-row md:items-center md:justify-between">
-          <p className="text-sm">Copyright Â© 2026 Bhagwat Heritage. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            {["f", "t", "i"].map((item) => (
-              <div key={item} className="flex h-8 w-8 items-center justify-center rounded-full border border-[#F7E8A4]/40">
-                {item}
+                  Open Dedicated Player
+                </Link>
               </div>
-            ))}
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-sm">Newsletter</span>
-            <div className="rounded-md bg-white/20 px-4 py-2 text-sm text-[#F7E8A4]">Sign up to email</div>
-          </div>
-        </div>
-      </footer>
+            </div>
+          </motion.div>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
+  );
+});
+
+type MediaVideoFilterBarProps = {
+  activeFilter: MediaVideoFilter;
+  onFilterChange: (filter: MediaVideoFilter) => void;
+  searchQuery: string;
+  onSearchChange: (value: string) => void;
+};
+
+const MediaVideoFilterBar = memo(function MediaVideoFilterBar({
+  activeFilter,
+  onFilterChange,
+  searchQuery,
+  onSearchChange,
+}: MediaVideoFilterBarProps) {
+  return (
+    <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <div className="grid grid-cols-2 gap-2 rounded-[22px] border border-[#e8dcc7] bg-white/95 p-2 shadow-[0_14px_35px_rgba(31,115,160,0.08)] sm:flex sm:flex-wrap">
+        {MEDIA_VIDEO_FILTERS.map((item) => (
+          <button
+            key={item}
+            type="button"
+            onClick={() => onFilterChange(item)}
+            className={`rounded-2xl px-5 py-3 text-sm font-semibold transition-all duration-300 ${
+              activeFilter === item
+                ? "bg-[linear-gradient(135deg,#F4CE5A_0%,#E9932D_100%)] text-[#17344A] shadow-[0_14px_24px_rgba(233,147,45,0.25)]"
+                : "text-[#33586d] hover:bg-[#fff8e4]"
+            }`}
+          >
+            {item}
+          </button>
+        ))}
+      </div>
+
+      <label className="relative block w-full lg:max-w-[320px]">
+        <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-lg text-[#529CB0]">⌕</span>
+        <input
+          value={searchQuery}
+          onChange={(event) => onSearchChange(event.target.value)}
+          placeholder="Search videos..."
+          className="w-full rounded-[22px] border border-[#e8dcc7] bg-white/95 py-3 pl-12 pr-5 text-sm text-[#33586d] shadow-[0_14px_35px_rgba(31,115,160,0.08)] outline-none transition focus:border-[#F4CE5A]"
+        />
+      </label>
     </div>
   );
 });
+
+type MediaVideoCardProps = {
+  item: VideoGalleryItem;
+  index: number;
+  onOpen: (item: VideoGalleryItem) => void;
+};
+
+const MediaVideoCard = memo(function MediaVideoCard({ item, index, onOpen }: MediaVideoCardProps) {
+  const category = getMediaVideoFilter(item);
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 22 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.35, delay: Math.min(index * 0.05, 0.25) }}
+      whileHover={{ y: -8 }}
+      className="group overflow-hidden rounded-[24px] border border-[#e7d9c2] bg-white/95 shadow-[0_18px_40px_rgba(31,115,160,0.08)]"
+    >
+      <button type="button" onClick={() => onOpen(item)} className="block w-full text-left">
+        <div className="relative overflow-hidden">
+          <img
+            src={item.image}
+            alt={item.title}
+            loading="lazy"
+            className="h-60 w-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(16,35,50,0.05)_0%,rgba(16,35,50,0.58)_100%)]" />
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center"
+            animate={{ scale: [1, 1.06, 1] }}
+            transition={{ duration: 2.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+          >
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(24,31,39,0.54)] text-xl font-semibold text-white shadow-[0_0_0_10px_rgba(255,255,255,0.10)]">
+              ▶
+            </div>
+          </motion.div>
+          <span className="absolute left-4 top-4 rounded-full bg-white/92 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#1F73A0]">
+            {category}
+          </span>
+          <span className="absolute bottom-4 right-4 rounded-full bg-black/70 px-3 py-1 text-xs font-semibold text-white">
+            {item.duration}
+          </span>
+          <div className="absolute inset-x-4 bottom-0 h-1 overflow-hidden rounded-t-full bg-white/20">
+            <div className="h-full rounded-t-full bg-[linear-gradient(90deg,#F4CE5A_0%,#E9932D_100%)]" style={{ width: `${36 + (index % 5) * 10}%` }} />
+          </div>
+        </div>
+      </button>
+
+      <div className="space-y-3 px-5 py-5">
+        <h3 className="line-clamp-2 text-xl font-semibold leading-snug text-[#17344A]">{item.title}</h3>
+        <p className="line-clamp-2 text-sm leading-7 text-[#5d6f79]">{item.note}</p>
+        <div className="flex flex-wrap items-center gap-3 text-sm text-[#70848d]">
+          <span>{item.duration}</span>
+          <span className="h-1.5 w-1.5 rounded-full bg-[#E9932D]" />
+          <span>{buildVideoMeta(item, index)}</span>
+          <span className="h-1.5 w-1.5 rounded-full bg-[#A9CAD1]" />
+          <span>{item.views} views</span>
+        </div>
+        <div className="flex flex-wrap items-center gap-3 pt-1">
+          <button
+            type="button"
+            onClick={() => onOpen(item)}
+            className="rounded-full bg-[linear-gradient(135deg,#F4CE5A_0%,#E9932D_100%)] px-5 py-2.5 text-sm font-bold text-[#17344A] shadow-[0_16px_28px_rgba(233,147,45,0.22)] transition hover:-translate-y-0.5"
+          >
+            Watch
+          </button>
+          <Link
+            to={`${ROUTES.media.videos}/${item.slug}`}
+            className="rounded-full border border-[#d9e7eb] px-5 py-2.5 text-sm font-semibold text-[#1F73A0] transition hover:border-[#F4CE5A] hover:bg-[#fff9e8]"
+          >
+            Details
+          </Link>
+        </div>
+      </div>
+    </motion.article>
+  );
+});
+
+export const MediaVideoGalleryPage = memo(function MediaVideoGalleryPage() {
+  const [activeFilter, setActiveFilter] = useState<MediaVideoFilter>("All");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [visibleCount, setVisibleCount] = useState(6);
+  const [selectedVideo, setSelectedVideo] = useState<VideoGalleryItem | null>(null);
+  const [popularIndex, setPopularIndex] = useState(0);
+
+  usePageMeta(
+    "Video Gallery",
+    "Premium spiritual video gallery featuring pravachan, bhajan, event moments, and divine media from Bhagwat Heritage.",
+  );
+
+  const filteredVideos = useMemo(() => {
+    return MEDIA_VIDEO_GALLERY_ITEMS.filter((item) => {
+      const matchesFilter = activeFilter === "All" ? true : getMediaVideoFilter(item) === activeFilter;
+      const haystack = `${item.title} ${item.note} ${item.summary} ${item.theme} ${item.category}`.toLowerCase();
+      const matchesSearch = searchQuery.trim() ? haystack.includes(searchQuery.trim().toLowerCase()) : true;
+      return matchesFilter && matchesSearch;
+    }).sort((a, b) => MEDIA_VIDEO_GALLERY_ITEMS.findIndex((item) => item.slug === a.slug) - MEDIA_VIDEO_GALLERY_ITEMS.findIndex((item) => item.slug === b.slug));
+  }, [activeFilter, searchQuery]);
+
+  const featuredVideo = filteredVideos[0] ?? MEDIA_VIDEO_GALLERY_ITEMS[0];
+  const latestVideos = filteredVideos.slice(0, visibleCount);
+  const popularVideos = useMemo(
+    () => [...MEDIA_VIDEO_GALLERY_ITEMS].sort((a, b) => parseViews(b.views) - parseViews(a.views)).slice(0, 6),
+    [],
+  );
+
+  useEffect(() => {
+    setVisibleCount(6);
+  }, [activeFilter, searchQuery]);
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      setPopularIndex((current) => (current + 1) % Math.max(popularVideos.length, 1));
+    }, 4200);
+    return () => window.clearInterval(intervalId);
+  }, [popularVideos.length]);
+
+  const visiblePopular = popularVideos.length
+    ? [popularVideos[popularIndex], popularVideos[(popularIndex + 1) % popularVideos.length], popularVideos[(popularIndex + 2) % popularVideos.length]]
+    : [];
+
+  return (
+    <div className="pb-14">
+      <motion.section
+        initial={{ opacity: 0, y: 28 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="relative overflow-hidden rounded-[34px] border border-[#efe1cf] bg-[url('/images/spiritual1.png')] bg-cover bg-center shadow-[0_26px_62px_rgba(31,115,160,0.10)]"
+      >
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(21,47,71,0.58)_0%,rgba(21,47,71,0.30)_38%,rgba(244,206,90,0.10)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(249,242,169,0.22),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(233,147,45,0.18),transparent_28%)]" />
+        <div className="relative px-6 py-16 md:px-10 md:py-24">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.1 }}
+            className="max-w-3xl text-4xl font-semibold tracking-tight text-white md:text-6xl"
+          >
+            Video Gallery
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.18 }}
+            className="mt-5 max-w-2xl text-lg leading-8 text-white md:text-2xl md:leading-10"
+          >
+            Explore Pravachan, Bhajan, Events & Divine Moments
+          </motion.p>
+        </div>
+      </motion.section>
+
+      <motion.section
+        initial={{ opacity: 0, y: 26 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.55, delay: 0.2 }}
+        className="mt-[5px] px-2 md:px-5"
+      >
+        <div className="rounded-[30px] border border-[#efe1cf] bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(255,251,245,0.98)_100%)] p-5 shadow-[0_22px_54px_rgba(31,115,160,0.08)] md:p-6">
+          <MediaVideoFilterBar
+            activeFilter={activeFilter}
+            onFilterChange={setActiveFilter}
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+          />
+        </div>
+      </motion.section>
+
+      <motion.section
+        initial={{ opacity: 0, y: 28 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.18 }}
+        transition={{ duration: 0.55 }}
+        className="mt-8"
+      >
+        <div className="overflow-hidden rounded-[32px] border border-[#ead7bb] bg-[linear-gradient(135deg,rgba(21,47,71,0.92)_0%,rgba(31,115,160,0.80)_42%,rgba(233,147,45,0.34)_100%)] shadow-[0_24px_60px_rgba(31,115,160,0.12)]">
+          <div className="grid lg:grid-cols-[minmax(0,1fr)_1.12fr]">
+            <div className="relative flex flex-col justify-center px-6 py-8 text-white md:px-8 md:py-10">
+              <span className="mb-5 inline-flex w-fit rounded-full bg-[#e76648] px-4 py-1.5 text-sm font-bold uppercase tracking-[0.18em] text-white">
+                Featured
+              </span>
+              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#F9F2A9]">Featured Video</p>
+              <h2 className="mt-4 max-w-xl text-3xl font-semibold leading-tight text-white md:text-5xl">{featuredVideo.title}</h2>
+              <p className="mt-5 max-w-xl text-base leading-8 text-white/85 md:text-lg">{featuredVideo.summary}</p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <button
+                  type="button"
+                  onClick={() => setSelectedVideo(featuredVideo)}
+                  className="rounded-2xl bg-[linear-gradient(135deg,#F4CE5A_0%,#E9932D_100%)] px-6 py-3 text-base font-bold text-[#17344A] shadow-[0_20px_36px_rgba(233,147,45,0.30)] transition hover:-translate-y-0.5"
+                >
+                  Watch Now
+                </button>
+                <Link
+                  to={`${ROUTES.media.videos}/${featuredVideo.slug}`}
+                  className="rounded-2xl border border-white/25 bg-white/10 px-6 py-3 text-base font-semibold text-white transition hover:bg-white hover:text-[#17344A]"
+                >
+                  Open Player
+                </Link>
+              </div>
+            </div>
+
+            <div className="relative min-h-[320px] overflow-hidden">
+              <img src={featuredVideo.image} alt={featuredVideo.title} className="h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(15,31,44,0.08)_0%,rgba(15,31,44,0.00)_40%,rgba(15,31,44,0.30)_100%)]" />
+              <motion.button
+                type="button"
+                onClick={() => setSelectedVideo(featuredVideo)}
+                whileHover={{ scale: 1.08 }}
+                animate={{ scale: [1, 1.04, 1] }}
+                transition={{ duration: 2.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+                className="absolute left-1/2 top-1/2 flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[rgba(41,24,7,0.35)] text-3xl text-white shadow-[0_0_0_14px_rgba(255,255,255,0.12)] backdrop-blur-sm"
+              >
+                ▶
+              </motion.button>
+              <span className="absolute bottom-6 right-6 rounded-2xl bg-black/58 px-4 py-2 text-sm font-semibold text-white">
+                {featuredVideo.duration}
+              </span>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
+      <section className="mt-12">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <h2 className="text-4xl font-semibold tracking-tight text-[#17344A]">Latest Videos</h2>
+            <p className="mt-3 max-w-2xl text-base leading-8 text-[#5d6f79]">
+              Graceful pravachan, bhajan, and event media arranged in a premium devotional gallery with clean search and smooth interaction.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-6 rounded-[28px] border border-[#efe1cf] bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(255,250,244,0.92)_100%)] p-5 shadow-[0_20px_48px_rgba(31,115,160,0.07)] md:p-6">
+          <MediaVideoFilterBar
+            activeFilter={activeFilter}
+            onFilterChange={setActiveFilter}
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+          />
+        </div>
+
+        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {latestVideos.map((item, index) => (
+            <MediaVideoCard key={item.slug} item={item} index={index} onOpen={setSelectedVideo} />
+          ))}
+        </div>
+
+        {visibleCount < filteredVideos.length ? (
+          <div className="mt-10 flex justify-center">
+            <motion.button
+              type="button"
+              whileHover={{ y: -3 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setVisibleCount((current) => current + 3)}
+              className="rounded-2xl bg-[linear-gradient(135deg,#F4CE5A_0%,#E9932D_100%)] px-8 py-4 text-base font-bold text-[#17344A] shadow-[0_22px_34px_rgba(233,147,45,0.28)] transition"
+            >
+              Load More
+            </motion.button>
+          </div>
+        ) : null}
+      </section>
+
+      <section className="mt-16">
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <h2 className="text-4xl font-semibold tracking-tight text-[#17344A]">Popular Videos</h2>
+            <p className="mt-3 text-base leading-8 text-[#5d6f79]">Most-viewed devotional media from the Bhagwat Heritage library.</p>
+          </div>
+          <div className="flex gap-3">
+            <button
+              type="button"
+              aria-label="Previous popular videos"
+              onClick={() => setPopularIndex((current) => (current - 1 + popularVideos.length) % popularVideos.length)}
+              className="rounded-full border border-[#d8e8ec] bg-white px-4 py-3 text-[#1F73A0] shadow-[0_10px_24px_rgba(31,115,160,0.08)] transition hover:border-[#F4CE5A] hover:bg-[#fff9e8]"
+            >
+              ←
+            </button>
+            <button
+              type="button"
+              aria-label="Next popular videos"
+              onClick={() => setPopularIndex((current) => (current + 1) % popularVideos.length)}
+              className="rounded-full border border-[#d8e8ec] bg-white px-4 py-3 text-[#1F73A0] shadow-[0_10px_24px_rgba(31,115,160,0.08)] transition hover:border-[#F4CE5A] hover:bg-[#fff9e8]"
+            >
+              →
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
+          <AnimatePresence mode="popLayout">
+            {visiblePopular.map((item, index) => (
+              <motion.div
+                key={`${item.slug}-${popularIndex}-${index}`}
+                initial={{ opacity: 0, x: 26 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -26 }}
+                transition={{ duration: 0.35 }}
+              >
+                <MediaVideoCard item={item} index={index} onOpen={setSelectedVideo} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+      </section>
+
+      <MediaVideoModal video={selectedVideo} onClose={() => setSelectedVideo(null)} />
+    </div>
+  );
+});
+
 
 export const MediaVideoPlayerPage = memo(function MediaVideoPlayerPage() {
   const { videoId } = useParams();
@@ -5669,107 +5902,61 @@ export const MediaEventHighlightsPage = memo(function MediaEventHighlightsPage()
   );
 
   return (
-    <div className="min-h-screen bg-[var(--campaign-deep)] py-10">
-      <div className="mx-auto max-w-7xl px-4">
-        <section className="rounded-[32px] border border-white/10 bg-[#153446] p-6 md:p-8">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Advanced Feature</p>
-              <h2 className="mt-2 text-[34px] font-black uppercase tracking-wide text-white md:text-[56px]">Highlight Storyboard</h2>
-              <p className="mt-3 max-w-3xl text-base leading-8 text-[var(--campaign-text)] md:text-lg">
-                Filter by event mood and purpose so the page behaves like an editorial highlights board rather than a static news dump.
-              </p>
-            </div>
+    <div className="space-y-6 pb-12">
+      <section className="rounded-[30px] border border-borderBeige bg-[linear-gradient(180deg,rgba(255,245,225,0.92)_0%,rgba(255,252,247,0.98)_48%,rgba(245,232,204,0.95)_100%)] p-6 shadow-[0_22px_52px_rgba(101,71,35,0.09)] md:p-8">
+        <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-saffron">Media Gallery</p>
+        <h1 className="mt-2 text-3xl font-black tracking-tight text-tealDeep md:text-5xl">Event Highlights</h1>
+        <p className="mt-3 max-w-3xl text-brownSoft md:text-lg">Story-led highlights and event memory cards presented with the same calm layout, warm palette, and premium spacing as the About page.</p>
+      </section>
 
-            <div className="flex flex-wrap gap-2">
-              {(["All", "Spiritual", "Festival", "Seva", "Youth"] as const).map((stream) => {
-                const active = stream === activeHighlight;
-                return (
-                  <button
-                    key={stream}
-                    type="button"
-                    onClick={() => setActiveHighlight(stream)}
-                    className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                      active
-                        ? "bg-[#ffb06a] text-[#17384b]"
-                        : "border border-white/10 bg-[#17384b] text-[#d4e1e8] hover:border-[#ffb06a]/40"
-                    }`}
-                  >
-                    {stream}
-                  </button>
-                );
-              })}
-            </div>
+      <Card className="hover:scale-100">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-saffron">Filter Highlights</p>
+            <h2 className="mt-2 text-2xl font-black tracking-tight text-tealDeep md:text-4xl">Highlight Storyboard</h2>
           </div>
-
-          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
-            {visibleHighlights.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#17384b] p-6">
-                <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full bg-[#ffb06a] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#17384b]">
-                    {item.category}
-                  </span>
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#d4e1e8]">
-                    Highlight Stream
-                  </span>
-                </div>
-                <h3 className="mt-4 text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">{item.title}</h3>
-                <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
-                <div className="mt-4 rounded-2xl bg-[#0f2c3d] p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--campaign-accent)]">Highlight Output</p>
-                  <p className="mt-2 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.output}</p>
-                </div>
-              </div>
+          <div className="flex flex-wrap gap-2">
+            {(["All", "Spiritual", "Festival", "Seva", "Youth"] as const).map((stream) => (
+              <button
+                key={stream}
+                type="button"
+                onClick={() => setActiveHighlight(stream)}
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition ${activeHighlight === stream ? "bg-tealPrimary text-white" : "border border-borderCard bg-bgSoft text-brownSoft hover:border-gold hover:bg-sand"}`}
+              >
+                {stream}
+              </button>
             ))}
           </div>
-        </section>
+        </div>
+      </Card>
 
-        <section className="mt-8 rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Gallery Section</p>
-              <h2 className="mt-2 text-[34px] font-black uppercase tracking-wide text-white md:text-[56px]">Event Image Gallery</h2>
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {visibleImageHighlights.map((item) => (
+          <Card key={item.title} className="group p-0">
+            <div className="overflow-hidden rounded-t-2xl">
+              <img src={item.image} alt={item.title} className="h-64 w-full object-cover transition-transform duration-300 group-hover:scale-110" />
             </div>
-            <p className="text-base leading-8 text-[var(--campaign-text)] md:text-lg">Showing {visibleImageHighlights.length} highlight frames</p>
-          </div>
+            <div className="p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-saffron">{item.category}</p>
+              <h3 className="mt-2 text-xl font-semibold text-tealCard">{item.title}</h3>
+              <p className="mt-2 text-brownSoft">{item.note}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
 
-          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {visibleImageHighlights.map((item) => (
-              <article key={item.title} className="overflow-hidden rounded-[24px] border border-white/10 bg-[#17384b]">
-                <div className="relative h-60 overflow-hidden">
-                  <img src={item.image} alt={item.title} className="h-full w-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#071b28] via-[#071b28]/10 to-transparent" />
-                  <span className="absolute left-4 top-4 rounded-full bg-[#ffb06a] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#17384b]">
-                    {item.category}
-                  </span>
-                  <div className="absolute inset-x-0 bottom-0 p-4">
-                    <h3 className="text-[24px] font-black uppercase tracking-[0.05em] text-[#F7E8A4]">{item.title}</h3>
-                    <p className="mt-2 text-base leading-8 text-white/90 md:text-lg">{item.note}</p>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="mt-8">
-          <div className="rounded-[28px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-            <h2 className="text-[34px] font-black uppercase tracking-wide text-white md:text-[56px]">Sections Worth Adding Here</h2>
-            <ul className="mt-6 space-y-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">
-              {[
-                "Top highlight reel of the month",
-                "Festival spotlight wall by celebration season",
-                "Seva before-and-after impact moments",
-                "Devotee reaction and atmosphere highlights",
-              ].map((line) => (
-                <li key={line} className="flex gap-3">
-                  <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#ffb06a]" />
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {visibleHighlights.map((item) => (
+          <Card key={item.title}>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-saffron">{item.category}</p>
+            <h3 className="mt-3 text-xl font-semibold text-tealCard">{item.title}</h3>
+            <p className="mt-2 text-brownSoft">{item.desc}</p>
+            <div className="mt-4 rounded-xl bg-sand p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-saffron">Highlight Output</p>
+              <p className="mt-2 text-brownSoft">{item.output}</p>
+            </div>
+          </Card>
+        ))}
       </div>
     </div>
   );
@@ -5860,114 +6047,60 @@ export const MediaPublicationsPage = memo(function MediaPublicationsPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[var(--campaign-deep)] py-10">
-      <div className="mx-auto max-w-7xl px-4">
-        <section className="rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-          <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Media Gallery</p>
-          <h1 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Publications</h1>
-        </section>
+    <div className="space-y-6 pb-12">
+      <section className="rounded-[30px] border border-borderBeige bg-[linear-gradient(180deg,rgba(255,245,225,0.92)_0%,rgba(255,252,247,0.98)_48%,rgba(245,232,204,0.95)_100%)] p-6 shadow-[0_22px_52px_rgba(101,71,35,0.09)] md:p-8">
+        <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-saffron">Media Gallery</p>
+        <h1 className="mt-2 text-3xl font-black tracking-tight text-tealDeep md:text-5xl">Publications</h1>
+        <p className="mt-3 max-w-3xl text-brownSoft md:text-lg">Reports, brochures, study notes, and festival documents arranged with the same warm hierarchy and card rhythm as the About page.</p>
+      </section>
 
-        <section className="mt-8 rounded-[32px] border border-white/10 bg-[#153446] p-6 md:p-8">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Advanced Feature</p>
-              <h2 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Publication Archive Navigator</h2>
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              {(["All", "Reports", "Brochures", "Study", "Festival Notes"] as const).map((group) => {
-                const active = group === activePublication;
-                return (
-                  <button
-                    key={group}
-                    type="button"
-                    onClick={() => setActivePublication(group)}
-                    className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                      active
-                        ? "bg-[#ffb06a] text-[#17384b]"
-                        : "border border-white/10 bg-[#17384b] text-[#d4e1e8] hover:border-[#ffb06a]/40"
-                    }`}
-                  >
-                    {group}
-                  </button>
-                );
-              })}
-            </div>
+      <Card className="hover:scale-100">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-saffron">Archive Navigator</p>
+            <h2 className="mt-2 text-2xl font-black tracking-tight text-tealDeep md:text-4xl">Browse Publication Types</h2>
           </div>
-
-          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
-            {visiblePublications.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#17384b] p-6">
-                <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full bg-[#ffb06a] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#17384b]">
-                    {item.category}
-                  </span>
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#d4e1e8]">
-                    Publication Group
-                  </span>
-                </div>
-                <h3 className="mt-4 text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">{item.title}</h3>
-                <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
-                <div className="mt-4 rounded-2xl bg-[#0f2c3d] p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--campaign-accent)]">Best Use</p>
-                  <p className="mt-2 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.use}</p>
-                </div>
-              </div>
+          <div className="flex flex-wrap gap-2">
+            {(["All", "Reports", "Brochures", "Study", "Festival Notes"] as const).map((group) => (
+              <button
+                key={group}
+                type="button"
+                onClick={() => setActivePublication(group)}
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition ${activePublication === group ? "bg-tealPrimary text-white" : "border border-borderCard bg-bgSoft text-brownSoft hover:border-gold hover:bg-sand"}`}
+              >
+                {group}
+              </button>
             ))}
           </div>
-        </section>
+        </div>
+      </Card>
 
-        <section className="mt-8 rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Archive Section</p>
-              <h2 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Publication Gallery</h2>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {visiblePublications.map((item) => (
+          <Card key={item.title}>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-saffron">{item.category}</p>
+            <h3 className="mt-3 text-xl font-semibold text-tealCard">{item.title}</h3>
+            <p className="mt-2 text-brownSoft">{item.desc}</p>
+            <div className="mt-4 rounded-xl bg-sand p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-saffron">Best Use</p>
+              <p className="mt-2 text-brownSoft">{item.use}</p>
             </div>
-            <p className="text-base leading-8 text-[var(--campaign-text)] md:text-lg">Showing {visiblePublicationCards.length} publication cards</p>
-          </div>
+          </Card>
+        ))}
+      </div>
 
-          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {visiblePublicationCards.map((item) => (
-              <article key={item.title} className="rounded-[24px] border border-white/10 bg-[#17384b] p-6">
-                <div className="flex h-40 items-center justify-center rounded-[20px] bg-[linear-gradient(135deg,#244f67_0%,#17384b_100%)]">
-                  <div className="text-center">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">{item.category}</p>
-                    <p className="mt-2 text-[24px] font-black uppercase tracking-[0.05em] text-white">{item.format}</p>
-                  </div>
-                </div>
-                <h3 className="mt-5 text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">{item.title}</h3>
-                <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.note}</p>
-                <div className="mt-5 flex items-center justify-between">
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#d4e1e8]">
-                    Archive Ready
-                  </span>
-                  <button type="button" className="rounded-xl bg-[#ff8a00] px-4 py-2 text-sm font-bold text-white">
-                    Open
-                  </button>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="mt-8">
-          <div className="rounded-[28px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-            <h2 className="text-[16px] font-black text-white md:text-[22px]">Sections Added For Better Publishing Work</h2>
-            <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-              {[
-                { title: "Issue-Based Grouping", desc: "Allows future annual report and seasonal publication stacking." },
-                { title: "Audience Logic", desc: "Separates public intro material from deeper devotional or institutional documents." },
-                { title: "Download-Ready Layout", desc: "Prepares the page for future PDFs, flipbooks, and archive links." },
-                { title: "Trust Memory Archive", desc: "Helps preserve the long-form documentary identity of the trust." },
-              ].map((item) => (
-                <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0f2c3d] p-5">
-                  <h3 className="text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">{item.title}</h3>
-                  <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
-                </div>
-              ))}
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {visiblePublicationCards.map((item) => (
+          <Card key={item.title}>
+            <div className="rounded-xl bg-sand p-6 text-center">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-saffron">{item.category}</p>
+              <p className="mt-2 text-xl font-semibold text-tealCard">{item.format}</p>
             </div>
-          </div>
-        </section>
+            <h3 className="mt-5 text-xl font-semibold text-tealCard">{item.title}</h3>
+            <p className="mt-2 text-brownSoft">{item.note}</p>
+            <button type="button" className="spiritual-btn mt-5">Open Publication</button>
+          </Card>
+        ))}
       </div>
     </div>
   );
@@ -6048,108 +6181,59 @@ export const MediaSocialFeedPage = memo(function MediaSocialFeedPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[var(--campaign-deep)] py-10">
-      <div className="mx-auto max-w-7xl px-4">
-        <section className="rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-          <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Media Gallery</p>
-          <h1 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Social Media Feed</h1>
-        </section>
+    <div className="space-y-6 pb-12">
+      <section className="rounded-[30px] border border-borderBeige bg-[linear-gradient(180deg,rgba(255,245,225,0.92)_0%,rgba(255,252,247,0.98)_48%,rgba(245,232,204,0.95)_100%)] p-6 shadow-[0_22px_52px_rgba(101,71,35,0.09)] md:p-8">
+        <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-saffron">Media Gallery</p>
+        <h1 className="mt-2 text-3xl font-black tracking-tight text-tealDeep md:text-5xl">Social Feed</h1>
+        <p className="mt-3 max-w-3xl text-brownSoft md:text-lg">Official updates, festival pulse, seva motion, and community voices expressed through the same About-page card language and warm structure.</p>
+      </section>
 
-        <section className="mt-8 rounded-[32px] border border-white/10 bg-[#153446] p-6 md:p-8">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Advanced Feature</p>
-              <h2 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Channel Pulse Board</h2>
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              {(["All", "Announcements", "Festival", "Seva", "Youth"] as const).map((channel) => {
-                const active = channel === activeChannel;
-                return (
-                  <button
-                    key={channel}
-                    type="button"
-                    onClick={() => setActiveChannel(channel)}
-                    className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                      active
-                        ? "bg-[#ffb06a] text-[#17384b]"
-                        : "border border-white/10 bg-[#17384b] text-[#d4e1e8] hover:border-[#ffb06a]/40"
-                    }`}
-                  >
-                    {channel}
-                  </button>
-                );
-              })}
-            </div>
+      <Card className="hover:scale-100">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-saffron">Channel Filter</p>
+            <h2 className="mt-2 text-2xl font-black tracking-tight text-tealDeep md:text-4xl">Channel Pulse Board</h2>
           </div>
-
-          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">
-            {visibleChannels.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[#17384b] p-6">
-                <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full bg-[#ffb06a] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#17384b]">
-                    {item.category}
-                  </span>
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#d4e1e8]">
-                    Feed Stream
-                  </span>
-                </div>
-                <h3 className="mt-4 text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">{item.title}</h3>
-                <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
-                <div className="mt-4 rounded-2xl bg-[#0f2c3d] p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--campaign-accent)]">Posting Pulse</p>
-                  <p className="mt-2 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.pulse}</p>
-                </div>
-              </div>
+          <div className="flex flex-wrap gap-2">
+            {(["All", "Announcements", "Festival", "Seva", "Youth"] as const).map((channel) => (
+              <button
+                key={channel}
+                type="button"
+                onClick={() => setActiveChannel(channel)}
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition ${activeChannel === channel ? "bg-tealPrimary text-white" : "border border-borderCard bg-bgSoft text-brownSoft hover:border-gold hover:bg-sand"}`}
+              >
+                {channel}
+              </button>
             ))}
           </div>
-        </section>
+        </div>
+      </Card>
 
-        <section className="mt-8 rounded-[32px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Feedback Section</p>
-              <h2 className="mt-2 text-[16px] font-black text-white md:text-[22px]">Instagram, Facebook, WhatsApp and YouTube Feedback</h2>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {visibleChannels.map((item) => (
+          <Card key={item.title}>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-saffron">{item.category}</p>
+            <h3 className="mt-3 text-xl font-semibold text-tealCard">{item.title}</h3>
+            <p className="mt-2 text-brownSoft">{item.desc}</p>
+            <div className="mt-4 rounded-xl bg-sand p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-saffron">Posting Pulse</p>
+              <p className="mt-2 text-brownSoft">{item.pulse}</p>
             </div>
-            <p className="text-base leading-8 text-[var(--campaign-text)] md:text-lg">Showing {visibleFeedbackCards.length} platform feedback cards</p>
-          </div>
+          </Card>
+        ))}
+      </div>
 
-          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {visibleFeedbackCards.map((item) => (
-              <article key={item.platform} className="overflow-hidden rounded-[24px] border border-white/10 bg-[#17384b]">
-                <div className={`bg-gradient-to-r ${item.accent} px-5 py-4`}>
-                  <p className="text-sm font-bold uppercase tracking-[0.18em] text-white">{item.platform}</p>
-                  <h3 className="mt-2 text-[24px] font-black uppercase tracking-[0.05em] text-white">{item.title}</h3>
-                </div>
-                <div className="p-5">
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#d4e1e8]">
-                    {item.category}
-                  </span>
-                  <p className="mt-4 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.feedback}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="mt-8">
-          <div className="rounded-[28px] border border-white/10 bg-[#102d3f] p-6 md:p-8">
-            <h2 className="text-[16px] font-black text-white md:text-[22px]">Creative Feed Sections Added</h2>
-            <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
-              {[
-                { title: "Verified Announcement Rail", desc: "For official notices and trusted public communication." },
-                { title: "Festival Live Counter", desc: "For time-sensitive celebration mood and attendance updates." },
-                { title: "Seva in Motion", desc: "For volunteer-led real-world service snapshots and field narratives." },
-                { title: "Community Voice Layer", desc: "For reactions, testimonials, and audience-facing trust warmth." },
-              ].map((item) => (
-                <div key={item.title} className="rounded-2xl border border-white/10 bg-[#0f2c3d] p-5">
-                  <h3 className="text-[24px] font-black uppercase tracking-[0.05em] text-[var(--campaign-accent)]">{item.title}</h3>
-                  <p className="mt-3 text-base leading-8 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
-                </div>
-              ))}
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {visibleFeedbackCards.map((item) => (
+          <Card key={item.platform}>
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-saffron">{item.platform}</span>
+              <span className="rounded-full bg-sand px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-tealDeep">{item.category}</span>
             </div>
-          </div>
-        </section>
+            <h3 className="mt-4 text-xl font-semibold text-tealCard">{item.title}</h3>
+            <p className="mt-2 text-brownSoft">{item.feedback}</p>
+          </Card>
+        ))}
       </div>
     </div>
   );
