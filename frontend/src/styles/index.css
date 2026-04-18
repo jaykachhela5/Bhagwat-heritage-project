@@ -1,7 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 @import "tailwindcss";
 @import "./theme.css";
 
 @theme {
+  --color-bgIvory: #FFF9F1;
+  --color-bgSoft: #FFFDF8;
+  --color-sand: #F6EAD4;
+  --color-borderBeige: #E7D3B5;
+  --color-borderCard: #D8C3A2;
+  --color-borderAqua: #D8E4E5;
+  --color-tealDeep: #1D4F63;
+  --color-tealPrimary: #1D5B72;
+  --color-tealCard: #27657A;
+  --color-tealMuted: #529CB0;
+  --color-saffron: #C46D1A;
+  --color-saffronBright: #F59E0B;
+  --color-gold: #E4B45E;
+  --color-goldHover: #D08A32;
+  --color-brown: #51463C;
+  --color-brownSoft: #5E5247;
+  --color-textDark: #33210F;
+  --color-rust: #B8502D;
+  --color-rustHover: #983F22;
   --color-brand-blue: var(--color-secondary);
   --color-brand-blue-light: var(--color-text);
   --color-brand-green: #A9CAD1;

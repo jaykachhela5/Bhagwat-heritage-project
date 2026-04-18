@@ -27,8 +27,8 @@ export const FeatureHeroSlider = memo(function FeatureHeroSlider({ slides, class
 
   const rootClass =
     variant === "gauseva"
-      ? `relative h-[260px] md:h-[430px] rounded-[34px] overflow-hidden border border-white/10 bg-[var(--campaign-bg)] shadow-[0_20px_44px_rgba(0,0,0,0.22)] ${className}`
-      : `relative h-[260px] md:h-[430px] rounded-[28px] overflow-hidden border border-[#dbe7f4] shadow-[0_14px_35px_rgba(13,59,102,0.22)] ${className}`;
+      ? `feature-hero-slider relative h-[260px] md:h-[430px] rounded-[34px] overflow-hidden border border-white/10 bg-[var(--campaign-bg)] shadow-[0_20px_44px_rgba(0,0,0,0.22)] ${className}`
+      : `feature-hero-slider relative h-[260px] md:h-[430px] rounded-[28px] overflow-hidden border border-borderCard bg-bgSoft shadow-[0_18px_40px_rgba(101,71,35,0.12)] ${className}`;
 
   const contentClass =
     variant === "gauseva" ? "px-5 pb-7 md:px-10 md:pb-10 text-white max-w-3xl" : "px-5 pb-7 md:px-10 md:pb-10 text-white max-w-3xl";

@@ -39,25 +39,29 @@ interface FutureCard { title: string; desc: string; }
 const VISION_ICONS = ["🕉️", "🌱", "🌏"];
 const FUTURE_ICONS = ["🛕", "📡", "🌟"];
 
-const SECTION_LABEL = `${ABOUT_SECTION_LABEL_CLASS} text-[#E9932D]`;
-const SECTION_HEADING = `${ABOUT_SECTION_HEADING_CLASS} text-[#1F73A0]`;
-const BODY_TEXT = `${ABOUT_BODY_CLASS} text-[#333333]`;
-const CARD_TITLE = `${ABOUT_CARD_TITLE_CLASS} text-[#529CB0]`;
-const CARD_BODY = `${ABOUT_BODY_CLASS} text-[#333333]`;
-const FOOTER_CARD_BG = "bg-[#FFFFFF]";
-const FOOTER_CARD_BG_SOFT = "bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(169,202,209,0.12)_100%)]";
-const PALE_CARD_TEXT = "text-[#1F73A0]";
-const PALE_CARD_MUTED = "text-[#333333]";
+const SECTION_LABEL = `${ABOUT_SECTION_LABEL_CLASS} text-[#C46D1A]`;
+const SECTION_HEADING = `${ABOUT_SECTION_HEADING_CLASS} text-[#1D4F63]`;
+const BODY_TEXT = `${ABOUT_BODY_CLASS} text-[#51463C]`;
+const CARD_TITLE = `${ABOUT_CARD_TITLE_CLASS} text-[#27657A]`;
+const CARD_BODY = `${ABOUT_BODY_CLASS} text-[#51463C]`;
+const FOOTER_CARD_BG = "bg-[linear-gradient(180deg,rgba(255,252,245,0.98)_0%,rgba(255,247,233,0.98)_100%)]";
+const FOOTER_CARD_BG_SOFT = "bg-[linear-gradient(180deg,rgba(255,248,236,0.98)_0%,rgba(243,232,214,0.86)_100%)]";
+const PALE_CARD_TEXT = "text-[#1D4F63]";
+const PALE_CARD_MUTED = "text-[#5E5247]";
+const CARD_SHELL =
+  "border border-[#D8C3A2] shadow-[0_18px_38px_rgba(101,71,35,0.08)]";
+const CARD_HOVER =
+  "transition-all duration-300 hover:-translate-y-1 hover:border-[#D08A32] hover:shadow-[0_22px_42px_rgba(196,109,26,0.14)]";
 const SECTION_SHELL_GOLD =
-  "rounded-[30px] border border-[#A9CAD1]/55 bg-[linear-gradient(180deg,rgba(249,242,169,0.28)_0%,rgba(255,255,255,0.98)_100%)] shadow-[0_18px_40px_rgba(31,115,160,0.08)]";
+  "rounded-[30px] border border-[#E7D3B5] bg-[linear-gradient(180deg,rgba(255,245,225,0.92)_0%,rgba(255,252,247,0.98)_48%,rgba(245,232,204,0.95)_100%)] shadow-[0_22px_52px_rgba(101,71,35,0.09)]";
 const SECTION_SHELL_BLUE =
-  "rounded-[30px] border border-[#A9CAD1]/55 bg-[linear-gradient(180deg,rgba(169,202,209,0.18)_0%,rgba(255,255,255,0.98)_100%)] shadow-[0_18px_40px_rgba(31,115,160,0.08)]";
+  "rounded-[30px] border border-[#D8E4E5] bg-[linear-gradient(180deg,rgba(230,241,240,0.85)_0%,rgba(255,252,247,0.98)_56%,rgba(250,241,225,0.9)_100%)] shadow-[0_22px_52px_rgba(29,79,99,0.08)]";
 const PRIMARY_BUTTON =
-  "inline-flex items-center justify-center rounded-xl bg-[#1F73A0] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(31,115,160,0.2)] transition-all hover:-translate-y-0.5 hover:bg-[#529CB0]";
+  "inline-flex items-center justify-center rounded-xl bg-[#1D5B72] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(29,91,114,0.22)] transition-all hover:-translate-y-0.5 hover:bg-[#27657A]";
 const SECONDARY_BUTTON =
-  "inline-flex items-center justify-center rounded-xl bg-[#F4CE5A] px-6 py-3 font-semibold text-black shadow-[0_14px_28px_rgba(244,206,90,0.24)] transition-all hover:-translate-y-0.5 hover:bg-[#E9932D]";
+  "inline-flex items-center justify-center rounded-xl bg-[#E4B45E] px-6 py-3 font-semibold text-[#33210F] shadow-[0_14px_28px_rgba(212,150,63,0.22)] transition-all hover:-translate-y-0.5 hover:bg-[#D08A32]";
 const TERTIARY_BUTTON =
-  "inline-flex items-center justify-center rounded-xl bg-[#D1352B] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(209,53,43,0.18)] transition-all hover:-translate-y-0.5 hover:bg-[#aa2b23]";
+  "inline-flex items-center justify-center rounded-xl bg-[#B8502D] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(184,80,45,0.18)] transition-all hover:-translate-y-0.5 hover:bg-[#983f22]";
 
 const divider = (
   <div className="max-w-6xl mx-auto px-4 py-2">
@@ -79,7 +83,7 @@ export default memo(function AboutPage() {
   const introPara3 = t("aboutPage.introPara3");
 
   return (
-    <div className="bg-[radial-gradient(circle_at_top_right,_rgba(244,206,90,0.16)_0%,_rgba(244,206,90,0)_28%),radial-gradient(circle_at_left_center,_rgba(169,202,209,0.14)_0%,_rgba(169,202,209,0)_26%),linear-gradient(180deg,_#FFFFFF_0%,_#FFFFFF_46%,_rgba(249,242,169,0.22)_100%)] text-[#1F73A0]">
+    <div className="bg-[radial-gradient(circle_at_top_right,_rgba(228,180,94,0.22)_0%,_rgba(228,180,94,0)_30%),radial-gradient(circle_at_left_center,_rgba(39,101,122,0.12)_0%,_rgba(39,101,122,0)_28%),linear-gradient(180deg,_#FFF9F1_0%,_#FFFDF8_44%,_#F6EAD4_100%)] text-[#1D4F63]">
 
       {/* ── Hero ─────────────────────────────────────────────────────── */}
       <section className="max-w-6xl mx-auto px-4 pt-8 md:pt-10">
@@ -94,13 +98,13 @@ export default memo(function AboutPage() {
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(245,158,11,0.18),transparent_42%)]" />
           <div className="relative z-10 flex flex-col items-center justify-end gap-[2px]">
-            <h1 className={`${ABOUT_HERO_TITLE_CLASS} whitespace-nowrap text-[clamp(1.1rem,3.1vw,3.8rem)] leading-tight`}>
+            <h1 className={`${ABOUT_HERO_TITLE_CLASS} whitespace-nowrap text-[clamp(1.1rem,3.1vw,3.8rem)] leading-tight text-white`}>
               {t("aboutPage.heroTitle")}
             </h1>
             <p className="mx-auto max-w-none whitespace-nowrap text-[40px] font-bold leading-tight text-white/95">
               {t("aboutPage.heroTagline")}
             </p>
-            <p className={`${ABOUT_HERO_SUBTITLE_CLASS} mx-auto max-w-none whitespace-nowrap text-[clamp(0.9rem,1.35vw,1.5rem)] text-white/85`}>
+            <p className={`${ABOUT_HERO_SUBTITLE_CLASS} mx-auto max-w-none whitespace-nowrap text-[clamp(0.9rem,1.35vw,1.5rem)] text-white/90`}>
               {t("aboutPage.heroSubtagline")}
             </p>
             <div className="mt-[2px] flex flex-wrap justify-center gap-[8px]">
@@ -120,14 +124,14 @@ export default memo(function AboutPage() {
       <section className="py-12 md:py-16 max-w-6xl mx-auto px-4">
         <div className={`${SECTION_SHELL_GOLD} p-5 md:p-8`}>
           <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[0.95fr_1.05fr] md:gap-10">
-            <div className={`rounded-2xl ${FOOTER_CARD_BG} p-3 border border-[#A9CAD1] shadow-[0_16px_30px_rgba(82,156,176,0.12)]`}>
+            <div className={`rounded-2xl ${FOOTER_CARD_BG} ${CARD_SHELL} p-3`}>
               <img
                 src="https://res.cloudinary.com/der8zinu8/image/upload/v1771583759/kathapravachan_fp8leo.png"
                 alt={t("aboutPage.introHeading")}
                 className="w-full h-[260px] md:h-[340px] object-cover rounded-xl"
               />
             </div>
-            <div className={`rounded-2xl ${FOOTER_CARD_BG} border border-[#A9CAD1] p-6 shadow-[0_16px_30px_rgba(82,156,176,0.1)] md:p-8`}>
+            <div className={`rounded-2xl ${FOOTER_CARD_BG} ${CARD_SHELL} p-6 md:p-8`}>
               <p className={`${SECTION_LABEL} mb-3`}>{t("aboutPage.introEyebrow")}</p>
               <h2 className={`${SECTION_HEADING} mb-5 leading-tight`}>{t("aboutPage.introHeading")}</h2>
               <div className={`space-y-4 ${ABOUT_BODY_CLASS} ${PALE_CARD_MUTED}`}>
@@ -151,7 +155,7 @@ export default memo(function AboutPage() {
               <p className={`${SECTION_LABEL} mb-3`}>{t("aboutPage.coreAreasEyebrow")}</p>
               <h2 className={`${SECTION_HEADING} mb-3`}>{t("aboutPage.coreAreasHeading")}</h2>
             </div>
-            <div className={`mb-2 w-full rounded-2xl border border-[#A9CAD1] ${FOOTER_CARD_BG} p-6 text-center shadow-[0_16px_34px_rgba(82,156,176,0.12)] transition-all duration-300 hover:bg-[#F9F2A9] md:p-8`}>
+            <div className={`mb-2 w-full rounded-2xl ${FOOTER_CARD_BG_SOFT} ${CARD_SHELL} ${CARD_HOVER} p-6 text-center md:p-8`}>
               <h3 className={`${CARD_TITLE} mb-4`}>{t("aboutPage.whoWeAreHeading")}</h3>
               <div className={`space-y-4 ${BODY_TEXT}`}>
                 <p>{t("aboutPage.whoWeArePara1")}</p>
@@ -171,7 +175,7 @@ export default memo(function AboutPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {visionCards.map((v, i) => (
-              <div key={v.title} className={`${FOOTER_CARD_BG} rounded-2xl p-6 border border-[#A9CAD1] shadow-[0_16px_32px_rgba(82,156,176,0.1)] transition-all duration-300 hover:bg-[#F9F2A9] hover:border-[#529CB0]`}>
+              <div key={v.title} className={`${FOOTER_CARD_BG} ${CARD_SHELL} ${CARD_HOVER} rounded-2xl p-6`}>
                 <div className="text-4xl mb-4">{VISION_ICONS[i]}</div>
                 <h3 className={`${CARD_TITLE} mb-3`}>{v.title}</h3>
                 <p className={`${ABOUT_BODY_CLASS} ${PALE_CARD_MUTED}`}>{v.desc}</p>
@@ -190,9 +194,9 @@ export default memo(function AboutPage() {
             <p>{t("aboutPage.inspirationPara2")}</p>
             <p>{t("aboutPage.inspirationPara3")}</p>
           </div>
-          <div className={`mt-8 inline-flex items-center gap-3 rounded-2xl border border-[#A9CAD1] ${FOOTER_CARD_BG} px-6 py-4 shadow-[0_14px_28px_rgba(82,156,176,0.12)]`}>
+          <div className={`mt-8 inline-flex items-center gap-3 rounded-2xl ${FOOTER_CARD_BG_SOFT} ${CARD_SHELL} px-6 py-4`}>
             <span className="text-3xl">📜</span>
-            <p className="text-[#E9932D] font-semibold italic text-base md:text-lg text-left">
+            <p className="text-[#C46D1A] font-semibold italic text-base md:text-lg text-left">
               {t("aboutPage.inspirationQuote")}
             </p>
           </div>
@@ -202,7 +206,7 @@ export default memo(function AboutPage() {
       {/* ── The Vision ────────────────────────────────────────────────── */}
       <section className="py-14 md:py-16 max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          <div className={`rounded-2xl ${FOOTER_CARD_BG} p-3 border border-[#A9CAD1] shadow-[0_16px_30px_rgba(82,156,176,0.12)]`}>
+          <div className={`rounded-2xl ${FOOTER_CARD_BG} ${CARD_SHELL} p-3`}>
             <img
               src="https://res.cloudinary.com/der8zinu8/image/upload/v1771583756/jal_ymllgv.png"
               alt={t("aboutPage.buildingCultureHeading")}
@@ -229,7 +233,7 @@ export default memo(function AboutPage() {
       </section>
 
       <section className="max-w-6xl mx-auto px-4 py-14 md:py-16">
-        <div className={`rounded-2xl border border-[#A9CAD1] ${FOOTER_CARD_BG} p-6 shadow-[0_18px_38px_rgba(82,156,176,0.12)] md:p-8`}>
+        <div className={`rounded-2xl ${FOOTER_CARD_BG_SOFT} ${CARD_SHELL} p-6 md:p-8`}>
           <div className="text-center">
             <p className={`${SECTION_LABEL} mb-3`}>{t("aboutPage.whatWeDoHeading")}</p>
           </div>
@@ -237,7 +241,7 @@ export default memo(function AboutPage() {
             {WHAT_WE_DO_ITEMS.map((item) => (
               <div
                 key={item.title}
-                className={`flex flex-col rounded-2xl border border-[#A9CAD1] ${FOOTER_CARD_BG} px-5 py-5 text-center shadow-[0_14px_28px_rgba(82,156,176,0.1)] transition-all duration-300 hover:bg-[#F9F2A9] hover:border-[#529CB0]`}
+                className={`flex flex-col rounded-2xl ${FOOTER_CARD_BG} ${CARD_SHELL} ${CARD_HOVER} px-5 py-5 text-center`}
               >
                 <p className={`text-base font-semibold ${PALE_CARD_TEXT}`}>{item.title}</p>
                 <Link
@@ -299,7 +303,7 @@ export default memo(function AboutPage() {
                 </Link>
               </div>
             </div>
-            <div className={`order-1 md:order-1 rounded-2xl ${FOOTER_CARD_BG} p-3 border border-[#A9CAD1] shadow-[0_16px_32px_rgba(82,156,176,0.12)]`}>
+            <div className={`order-1 md:order-1 rounded-2xl ${FOOTER_CARD_BG} ${CARD_SHELL} p-3`}>
               <img
                 src="/images/manish2.PNG"
                 alt={t("aboutPage.santRoleHeading")}
@@ -380,8 +384,8 @@ export default memo(function AboutPage() {
           <h2 className={`${SECTION_LABEL} text-center mb-10`}>{t("aboutPage.journeyTitle")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {milestones.map((step) => (
-              <div key={`${step.year}-${step.title}`} className={`rounded-xl ${FOOTER_CARD_BG} border border-[#A9CAD1] p-5 flex gap-4 shadow-[0_14px_28px_rgba(82,156,176,0.1)] transition-all duration-300 hover:bg-[#F9F2A9]`}>
-                <p className="text-[#E9932D] font-black text-lg shrink-0 w-12">{step.year}</p>
+              <div key={`${step.year}-${step.title}`} className={`rounded-xl ${FOOTER_CARD_BG} ${CARD_SHELL} ${CARD_HOVER} p-5 flex gap-4`}>
+                <p className="text-[#C46D1A] font-black text-lg shrink-0 w-12">{step.year}</p>
                 <div>
                   <h3 className={`font-bold text-base ${PALE_CARD_TEXT}`}>{step.title}</h3>
                   <p className={`${ABOUT_BODY_CLASS} mt-1 ${PALE_CARD_MUTED}`}>{step.desc}</p>
@@ -401,7 +405,7 @@ export default memo(function AboutPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             {futureCards.map((f, i) => (
-              <div key={f.title} className={`${FOOTER_CARD_BG} rounded-2xl p-6 border border-[#A9CAD1] shadow-[0_14px_26px_rgba(82,156,176,0.1)] transition-all duration-300 hover:bg-[#F9F2A9] hover:border-[#529CB0]`}>
+              <div key={f.title} className={`${FOOTER_CARD_BG} ${CARD_SHELL} ${CARD_HOVER} rounded-2xl p-6`}>
                 <div className="text-4xl mb-3">{FUTURE_ICONS[i]}</div>
                 <h3 className={`${CARD_TITLE} mb-2`}>{f.title}</h3>
                 <p className={`${ABOUT_BODY_CLASS} ${PALE_CARD_MUTED}`}>{f.desc}</p>
@@ -424,7 +428,7 @@ export default memo(function AboutPage() {
         <div className={`space-y-4 ${BODY_TEXT}`}>
           <p>{t("aboutPage.invitationPara1")}</p>
           <p>{t("aboutPage.invitationPara2")}</p>
-          <p className="text-[#E9932D] font-semibold italic text-lg">
+          <p className="text-[#C46D1A] font-semibold italic text-lg">
             &ldquo;{t("aboutPage.invitationQuote")}&rdquo;
           </p>
         </div>
@@ -432,8 +436,8 @@ export default memo(function AboutPage() {
 
       {/* ── CTA ───────────────────────────────────────────────────────── */}
       <section className="pb-16 px-4">
-        <div className={`max-w-5xl mx-auto rounded-2xl border border-[#A9CAD1] ${SECTION_SHELL_GOLD} p-8 md:p-10 text-center`}>
-          <h2 className={`${ABOUT_SECTION_HEADING_CLASS} mb-2 text-[#1F73A0]`}>{t("aboutPage.ctaTitle")}</h2>
+        <div className={`max-w-5xl mx-auto rounded-2xl ${SECTION_SHELL_GOLD} p-8 md:p-10 text-center`}>
+          <h2 className={`${ABOUT_SECTION_HEADING_CLASS} mb-2 text-[#1D4F63]`}>{t("aboutPage.ctaTitle")}</h2>
           <p className={`${ABOUT_BODY_CLASS} ${PALE_CARD_MUTED} max-w-3xl mx-auto mb-8 mt-3`}>{t("aboutPage.ctaDesc")}</p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link to={ROUTES.involved.volunteer} className={PRIMARY_BUTTON}>

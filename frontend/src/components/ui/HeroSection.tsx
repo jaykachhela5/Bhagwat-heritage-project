@@ -91,17 +91,17 @@ export const HeroSection = memo(function HeroSection({
     <>
       <div className={`absolute inset-0 ${overlayClass}`} />
       <div
-        className={`relative z-10 text-center text-white px-4 mx-auto py-16 ${
+        className={`inner-hero relative z-10 text-center text-white px-4 mx-auto py-16 ${
           singleLine ? "max-w-[95vw]" : "max-w-3xl"
         } ${contentClassName ?? ""}`}
       >
         {eyebrow && (
-          <p className={`text-[20px] font-semibold text-gray-200 md:text-[24px] ${eyebrowClassName ?? ""}`}>
+          <p className={`hero-eyebrow text-[20px] font-semibold text-white/80 md:text-[24px] ${eyebrowClassName ?? ""}`}>
             {eyebrow}
           </p>
         )}
         <h1
-          className={`font-bold mb-4 leading-tight ${
+          className={`hero-title font-bold mb-4 leading-tight ${
             singleLine ? "whitespace-nowrap text-[clamp(1.1rem,3vw,3rem)]" : "text-4xl md:text-5xl"
           }`}
         >
@@ -109,14 +109,14 @@ export const HeroSection = memo(function HeroSection({
         </h1>
         {subtitle && (
           <p
-            className={`text-gray-200 mb-8 ${
+            className={`hero-subtitle text-white/90 mb-8 ${
               singleLine ? "whitespace-nowrap text-[clamp(0.9rem,1.8vw,1.5rem)]" : "text-lg md:text-xl"
             } ${subtitleClassName ?? ""}`}
           >
             {subtitle}
           </p>
         )}
-        {children}
+        {children ? <div className="hero-actions mt-6 flex flex-wrap items-center justify-center gap-4">{children}</div> : null}
       </div>
     </>
   );
@@ -197,7 +197,7 @@ export const HeroSection = memo(function HeroSection({
     return (
       <section className="px-4 md:px-6 pt-6 md:pt-8">
         <div
-          className={`relative w-full max-w-[1240px] mx-auto ${hasSlides ? "rounded-2xl overflow-hidden" : "rounded-2xl overflow-hidden bg-cover"} ${backgroundPositionClass} ${currentHeightClass}`}
+          className={`inner-hero relative w-full max-w-[1240px] mx-auto ${hasSlides ? "rounded-2xl overflow-hidden" : "rounded-2xl overflow-hidden bg-cover"} ${backgroundPositionClass} ${currentHeightClass}`}
           style={rootStyle}
         >
           {rootContent}
@@ -208,7 +208,7 @@ export const HeroSection = memo(function HeroSection({
 
   return (
     <section
-      className={`relative flex items-center justify-center ${hasSlides ? "overflow-hidden" : "bg-cover"} ${backgroundPositionClass} ${currentHeightClass}`}
+      className={`inner-hero relative flex items-center justify-center ${hasSlides ? "overflow-hidden" : "bg-cover"} ${backgroundPositionClass} ${currentHeightClass}`}
       style={rootStyle}
     >
       {rootContent}

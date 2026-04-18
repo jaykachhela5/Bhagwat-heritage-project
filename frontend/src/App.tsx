@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState, useRef, useEffect, useLayoutEffect, type RefObject } from "react";
+import { lazy, Suspense, useState, useRef, useEffect, useLayoutEffect, type ReactElement, type RefObject } from "react";
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { AuthProvider } from "./app/providers/AuthProvider";
 import { CartProvider } from "./app/providers/CartProvider";
@@ -9,6 +9,7 @@ import { Navbar } from "./components/common/Navbar";
 import { Footer } from "./components/common/Footer";
 import { MarqueeBar } from "./components/common/MarqueeBar";
 import { LoadingSpinner } from "./components/ui/LoadingSpinner";
+import { InnerPageLayout } from "./components/layout/InnerPageLayout";
 import {
   AboutAwardsPage,
   DigitalMembershipPage,
@@ -114,31 +115,13 @@ function SiteHeader({ headerRef }: { headerRef: RefObject<HTMLDivElement | null>
   );
 }
 
-const THEME_CLASS_NAMES = ["home-theme", "seva-theme", "donation-theme", "events-theme"] as const;
+const THEME_CLASS_NAMES = ["home-theme", "inner-theme"] as const;
 
 function resolveThemeClass(pathname: string) {
-  if (pathname === ROUTES.home) {
-    return "home-theme";
-  }
-
-  if (
-    pathname === ROUTES.donate ||
-    pathname === ROUTES.digital.donation ||
-    pathname === ROUTES.involved.donor
-  ) {
-    return "donation-theme";
-  }
-
-  if (pathname.startsWith("/seva")) {
-    return "seva-theme";
-  }
-
-  if (pathname.startsWith("/events-katha") || pathname.startsWith("/events")) {
-    return "events-theme";
-  }
-
-  return "home-theme";
+  return pathname === ROUTES.home ? "home-theme" : "inner-theme";
 }
+
+const withInnerPageLayout = (element: ReactElement) => <InnerPageLayout>{element}</InnerPageLayout>;
 
 function ThemeClassController() {
   const location = useLocation();
@@ -190,90 +173,90 @@ export default function App() {
                 <Routes>
                   <Route path={ROUTES.home} element={<HomePage />} />
                   <Route path={ROUTES.login} element={<LoginPage />} />
-                  <Route path={ROUTES.contact} element={<ContactPage />} />
-                  <Route path={ROUTES.donate} element={<DonatePage />} />
-                  <Route path={ROUTES.volunteer} element={<VolunteerFormPage />} />
+                  <Route path={ROUTES.contact} element={withInnerPageLayout(<ContactPage />)} />
+                  <Route path={ROUTES.donate} element={withInnerPageLayout(<DonatePage />)} />
+                  <Route path={ROUTES.volunteer} element={withInnerPageLayout(<VolunteerFormPage />)} />
                   <Route path="/events" element={<Navigate to={ROUTES.eventsKatha.index} replace />} />
                   <Route path="/media" element={<Navigate to={ROUTES.media.index} replace />} />
                   <Route path="/media/videos" element={<Navigate to={ROUTES.media.videos} replace />} />
                   <Route path={ROUTES.about.founderAlias} element={<Navigate to={ROUTES.about.founder} replace />} />
-                  <Route path={ROUTES.digital.guidance} element={<GuidancePage />} />
+                  <Route path={ROUTES.digital.guidance} element={withInnerPageLayout(<GuidancePage />)} />
                   <Route path="/get-involved/invite-maharaj-ji" element={<Navigate to={ROUTES.contact} replace />} />
                   <Route path="/help-request" element={<Navigate to={ROUTES.contact} replace />} />
 
-                  <Route path={ROUTES.about.index} element={<AboutPage />} />
-                  <Route path={ROUTES.about.sansthaParichay} element={<SansthaParichayPage />} />
-                  <Route path={ROUTES.about.visionMission} element={<VisionMissionPage />} />
-                  <Route path={ROUTES.about.objectives} element={<ObjectivesPage />} />
-                  <Route path={ROUTES.about.founder} element={<ManishBhaijiPage />} />
-                  <Route path={ROUTES.about.awards} element={<AboutAwardsPage />} />
-                  <Route path={ROUTES.about.activities} element={<AboutActivitiesOverviewPage />} />
+                  <Route path={ROUTES.about.index} element={withInnerPageLayout(<AboutPage />)} />
+                  <Route path={ROUTES.about.sansthaParichay} element={withInnerPageLayout(<SansthaParichayPage />)} />
+                  <Route path={ROUTES.about.visionMission} element={withInnerPageLayout(<VisionMissionPage />)} />
+                  <Route path={ROUTES.about.objectives} element={withInnerPageLayout(<ObjectivesPage />)} />
+                  <Route path={ROUTES.about.founder} element={withInnerPageLayout(<ManishBhaijiPage />)} />
+                  <Route path={ROUTES.about.awards} element={withInnerPageLayout(<AboutAwardsPage />)} />
+                  <Route path={ROUTES.about.activities} element={withInnerPageLayout(<AboutActivitiesOverviewPage />)} />
 
-                  <Route path={ROUTES.mission.index} element={<MissionHubPage />} />
-                  <Route path={ROUTES.mission.spiritual} element={<SpiritualPage />} />
-                  <Route path={ROUTES.mission.social} element={<SocialPage />} />
-                  <Route path={ROUTES.mission.cultural} element={<CulturalPage />} />
-                  <Route path={ROUTES.mission.global} element={<GlobalOutreachPage />} />
+                  <Route path={ROUTES.mission.index} element={withInnerPageLayout(<MissionHubPage />)} />
+                  <Route path={ROUTES.mission.spiritual} element={withInnerPageLayout(<SpiritualPage />)} />
+                  <Route path={ROUTES.mission.social} element={withInnerPageLayout(<SocialPage />)} />
+                  <Route path={ROUTES.mission.cultural} element={withInnerPageLayout(<CulturalPage />)} />
+                  <Route path={ROUTES.mission.global} element={withInnerPageLayout(<GlobalOutreachPage />)} />
 
-                  <Route path={ROUTES.seva.index} element={<SevaHubPage />} />
-                  <Route path={ROUTES.seva.gau} element={<GauSevaPage />} />
-                  <Route path={ROUTES.seva.jal} element={<JalSevaPage />} />
-                  <Route path={ROUTES.seva.ann} element={<AnnSevaPage />} />
+                  <Route path={ROUTES.seva.index} element={withInnerPageLayout(<SevaHubPage />)} />
+                  <Route path={ROUTES.seva.gau} element={withInnerPageLayout(<GauSevaPage />)} />
+                  <Route path={ROUTES.seva.jal} element={withInnerPageLayout(<JalSevaPage />)} />
+                  <Route path={ROUTES.seva.ann} element={withInnerPageLayout(<AnnSevaPage />)} />
                   <Route path={ROUTES.seva.annJal} element={<Navigate to={ROUTES.seva.index} replace />} />
-                  <Route path={ROUTES.seva.medicine} element={<MedicinePage />} />
-                  <Route path={ROUTES.seva.education} element={<EducationPage />} />
-                  <Route path={ROUTES.seva.scholarship} element={<ScholarshipPage />} />
-                  <Route path={ROUTES.seva.kanyadaan} element={<KanyaPage />} />
-                  <Route path={ROUTES.seva.vyasanmukti} element={<VyasanPage />} />
-                  <Route path={ROUTES.seva.disasterRelief} element={<SevaDisasterReliefPage />} />
-                  <Route path={ROUTES.seva.volunteerPrograms} element={<VolunteerFormPage />} />
+                  <Route path={ROUTES.seva.medicine} element={withInnerPageLayout(<MedicinePage />)} />
+                  <Route path={ROUTES.seva.education} element={withInnerPageLayout(<EducationPage />)} />
+                  <Route path={ROUTES.seva.scholarship} element={withInnerPageLayout(<ScholarshipPage />)} />
+                  <Route path={ROUTES.seva.kanyadaan} element={withInnerPageLayout(<KanyaPage />)} />
+                  <Route path={ROUTES.seva.vyasanmukti} element={withInnerPageLayout(<VyasanPage />)} />
+                  <Route path={ROUTES.seva.disasterRelief} element={withInnerPageLayout(<SevaDisasterReliefPage />)} />
+                  <Route path={ROUTES.seva.volunteerPrograms} element={withInnerPageLayout(<VolunteerFormPage />)} />
 
-                  <Route path={ROUTES.eventsKatha.index} element={<EventsKathaHubPage />} />
-                  <Route path={ROUTES.eventsKatha.bhagwatKatha} element={<EventsBhagwatKathaPage />} />
-                  <Route path={ROUTES.eventsKatha.spiritualEvents} element={<EventsSpiritualPage />} />
+                  <Route path={ROUTES.eventsKatha.index} element={withInnerPageLayout(<EventsKathaHubPage />)} />
+                  <Route path={ROUTES.eventsKatha.bhagwatKatha} element={withInnerPageLayout(<EventsBhagwatKathaPage />)} />
+                  <Route path={ROUTES.eventsKatha.spiritualEvents} element={withInnerPageLayout(<EventsSpiritualPage />)} />
                   <Route path="/events-katha/festivals-celebration" element={<Navigate to={ROUTES.eventsKatha.festivals} replace />} />
-                  <Route path={ROUTES.eventsKatha.festivals} element={<EventsFestivalsPage />} />
-                  <Route path={ROUTES.eventsKatha.guruPurnima} element={<EventsGuruPurnimaPage />} />
-                  <Route path={ROUTES.eventsKatha.annakut} element={<EventsAnnakutPage />} />
-                  <Route path={ROUTES.eventsKatha.youthPrograms} element={<EventsYouthProgramsPage />} />
+                  <Route path={ROUTES.eventsKatha.festivals} element={withInnerPageLayout(<EventsFestivalsPage />)} />
+                  <Route path={ROUTES.eventsKatha.guruPurnima} element={withInnerPageLayout(<EventsGuruPurnimaPage />)} />
+                  <Route path={ROUTES.eventsKatha.annakut} element={withInnerPageLayout(<EventsAnnakutPage />)} />
+                  <Route path={ROUTES.eventsKatha.youthPrograms} element={withInnerPageLayout(<EventsYouthProgramsPage />)} />
 
-                  <Route path={ROUTES.knowledge.index} element={<KnowledgeHubPage />} />
-                  <Route path={ROUTES.knowledge.pathshala} element={<PathshalaPage />} />
-                  <Route path={ROUTES.knowledge.library} element={<LibraryPage />} />
-                  <Route path={ROUTES.knowledge.studyResources} element={<KnowledgeStudyResourcesPage />} />
-                  <Route path={ROUTES.knowledge.children} element={<KnowledgeChildrenPage />} />
-                  <Route path={ROUTES.knowledge.dailyQuotes} element={<KnowledgeDailyQuotesPage />} />
-                  <Route path={ROUTES.knowledge.dailyQuotesToday} element={<KnowledgeTodayQuotePage />} />
+                  <Route path={ROUTES.knowledge.index} element={withInnerPageLayout(<KnowledgeHubPage />)} />
+                  <Route path={ROUTES.knowledge.pathshala} element={withInnerPageLayout(<PathshalaPage />)} />
+                  <Route path={ROUTES.knowledge.library} element={withInnerPageLayout(<LibraryPage />)} />
+                  <Route path={ROUTES.knowledge.studyResources} element={withInnerPageLayout(<KnowledgeStudyResourcesPage />)} />
+                  <Route path={ROUTES.knowledge.children} element={withInnerPageLayout(<KnowledgeChildrenPage />)} />
+                  <Route path={ROUTES.knowledge.dailyQuotes} element={withInnerPageLayout(<KnowledgeDailyQuotesPage />)} />
+                  <Route path={ROUTES.knowledge.dailyQuotesToday} element={withInnerPageLayout(<KnowledgeTodayQuotePage />)} />
 
-                  <Route path={ROUTES.mandirTeerth.index} element={<MandirTeerthHubPage />} />
-                  <Route path={ROUTES.mandirTeerth.bhagwatDham} element={<GhanshyamPage />} />
-                  <Route path={ROUTES.mandirTeerth.mahamandir} element={<MahamandirPage />} />
-                  <Route path={ROUTES.mandirTeerth.avatars} element={<MandirAvatarsPage />} />
-                  <Route path={ROUTES.mandirTeerth.hanuman} element={<MahamandirPage />} />
-                  <Route path={ROUTES.mandirTeerth.construction} element={<MandirConstructionPage />} />
-                  <Route path={ROUTES.mandirTeerth.pilgrimage} element={<PilgrimageInfoPage />} />
+                  <Route path={ROUTES.mandirTeerth.index} element={withInnerPageLayout(<MandirTeerthHubPage />)} />
+                  <Route path={ROUTES.mandirTeerth.bhagwatDham} element={withInnerPageLayout(<GhanshyamPage />)} />
+                  <Route path={ROUTES.mandirTeerth.mahamandir} element={withInnerPageLayout(<MahamandirPage />)} />
+                  <Route path={ROUTES.mandirTeerth.avatars} element={withInnerPageLayout(<MandirAvatarsPage />)} />
+                  <Route path={ROUTES.mandirTeerth.hanuman} element={withInnerPageLayout(<MahamandirPage />)} />
+                  <Route path={ROUTES.mandirTeerth.construction} element={withInnerPageLayout(<MandirConstructionPage />)} />
+                  <Route path={ROUTES.mandirTeerth.pilgrimage} element={withInnerPageLayout(<PilgrimageInfoPage />)} />
 
-                  <Route path={ROUTES.media.index} element={<MediaGalleryHubPage />} />
-                  <Route path={ROUTES.media.photos} element={<MandirGalleryPage />} />
-                  <Route path={ROUTES.media.videos} element={<MediaVideoGalleryPage />} />
-                  <Route path={`${ROUTES.media.videos}/:videoId`} element={<MediaVideoPlayerPage />} />
-                  <Route path={ROUTES.media.highlights} element={<MediaEventHighlightsPage />} />
-                  <Route path={ROUTES.media.publications} element={<MediaPublicationsPage />} />
-                  <Route path={ROUTES.media.socialFeed} element={<MediaSocialFeedPage />} />
+                  <Route path={ROUTES.media.index} element={withInnerPageLayout(<MediaGalleryHubPage />)} />
+                  <Route path={ROUTES.media.photos} element={withInnerPageLayout(<MandirGalleryPage />)} />
+                  <Route path={ROUTES.media.videos} element={withInnerPageLayout(<MediaVideoGalleryPage />)} />
+                  <Route path={`${ROUTES.media.videos}/:videoId`} element={withInnerPageLayout(<MediaVideoPlayerPage />)} />
+                  <Route path={ROUTES.media.highlights} element={withInnerPageLayout(<MediaEventHighlightsPage />)} />
+                  <Route path={ROUTES.media.publications} element={withInnerPageLayout(<MediaPublicationsPage />)} />
+                  <Route path={ROUTES.media.socialFeed} element={withInnerPageLayout(<MediaSocialFeedPage />)} />
 
-                  <Route path={ROUTES.digital.index} element={<DigitalServicesHubPage />} />
-                  <Route path={ROUTES.digital.store} element={<StorePage />} />
-                  <Route path={ROUTES.digital.donation} element={<DonatePage />} />
-                  <Route path={ROUTES.digital.satsang} element={<DigitalSatsangPage />} />
-                  <Route path={ROUTES.digital.membership} element={<DigitalMembershipPage />} />
-                  <Route path={ROUTES.digital.kundli} element={<KundliPage />} />
+                  <Route path={ROUTES.digital.index} element={withInnerPageLayout(<DigitalServicesHubPage />)} />
+                  <Route path={ROUTES.digital.store} element={withInnerPageLayout(<StorePage />)} />
+                  <Route path={ROUTES.digital.donation} element={withInnerPageLayout(<DonatePage />)} />
+                  <Route path={ROUTES.digital.satsang} element={withInnerPageLayout(<DigitalSatsangPage />)} />
+                  <Route path={ROUTES.digital.membership} element={withInnerPageLayout(<DigitalMembershipPage />)} />
+                  <Route path={ROUTES.digital.kundli} element={withInnerPageLayout(<KundliPage />)} />
 
-                  <Route path={ROUTES.involved.index} element={<GetInvolvedPage />} />
-                  <Route path={ROUTES.involved.volunteer} element={<VolunteerFormPage />} /> 
-                  <Route path={ROUTES.involved.donor} element={<DonatePage />} />
-                  <Route path={ROUTES.involved.partner} element={<InvolvedPartnerPage />} />
-                  <Route path={ROUTES.involved.sponsor} element={<InvolvedSponsorPage />} />
-                  <Route path="/get-involved/overview" element={<GetInvolvedHubPage />} />
+                  <Route path={ROUTES.involved.index} element={withInnerPageLayout(<GetInvolvedPage />)} />
+                  <Route path={ROUTES.involved.volunteer} element={withInnerPageLayout(<VolunteerFormPage />)} /> 
+                  <Route path={ROUTES.involved.donor} element={withInnerPageLayout(<DonatePage />)} />
+                  <Route path={ROUTES.involved.partner} element={withInnerPageLayout(<InvolvedPartnerPage />)} />
+                  <Route path={ROUTES.involved.sponsor} element={withInnerPageLayout(<InvolvedSponsorPage />)} />
+                  <Route path="/get-involved/overview" element={withInnerPageLayout(<GetInvolvedHubPage />)} />
 
                   <Route
                     path={ROUTES.dashboards.root}
@@ -329,7 +312,7 @@ export default function App() {
                   <Route path={LEGACY_ROUTES.galleryOldPublic} element={<Navigate to={ROUTES.media.photos} replace />} />
                   <Route path={LEGACY_ROUTES.galleryOldAdmin} element={<Navigate to={ROUTES.dashboards.galleryAdmin} replace />} />
 
-                  <Route path="*" element={<NotFoundPage />} />
+                  <Route path="*" element={withInnerPageLayout(<NotFoundPage />)} />
                 </Routes>
               </Suspense>
             </main>
