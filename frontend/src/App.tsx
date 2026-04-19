@@ -139,6 +139,16 @@ function ThemeClassController() {
   return null;
 }
 
+function ScrollToTopController() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [location.pathname]);
+
+  return null;
+}
+
 export default function App() {
   const headerRef = useRef<HTMLDivElement | null>(null);
   const [headerHeight, setHeaderHeight] = useState(128);
@@ -164,6 +174,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <ThemeClassController />
+      <ScrollToTopController />
       <ErrorBoundary>
         <AuthProvider>
           <CartProvider>

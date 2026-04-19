@@ -1,4 +1,4 @@
-import { memo, useEffect, useMemo, useRef, useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
+import { memo, useEffect, useMemo, useRef, useState, type ChangeEvent, type FormEvent, type MouseEvent, type ReactNode } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAuth } from "../../app/providers/AuthProvider";
@@ -2832,9 +2832,9 @@ export const SevaGauSevaPage = memo(function SevaGauSevaPage() {
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#F59E0B]">Contact Kamdhenu Ashram</p>
               <h2 className="mt-2 text-3xl font-black text-white">Visit or Connect</h2>
               <div className="mt-5 space-y-4 text-[var(--campaign-text)]">
-                <p><span className="font-black text-white">Address:</span> Kamdhenu Ashram, Bhagwat Heritage Service Foundation Trust Campus, Swaminarayan Bhagwat Dham</p>
-                <p><span className="font-black text-white">Phone:</span> +91 98765 43210</p>
-                <p><span className="font-black text-white">Email:</span> info@bhagwatheritage.org</p>
+                <p><span className="font-black text-white">Address:</span> Bhagwat Dham - Shree Swaminarayan Mandir, Kasturba Rd, Hospital ward, Chandrapur, Maharashtra 442402</p>
+                <p><span className="font-black text-white">Phone:</span> +91-866-889-7445</p>
+                <p><span className="font-black text-white">Email:</span> join@bhagwatheritage.org</p>
                 <p><span className="font-black text-white">Map Location:</span> Available through the contact desk for visitor guidance and ashram visit planning.</p>
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
@@ -5679,7 +5679,7 @@ const MediaVideoModal = memo(function MediaVideoModal({ video, onClose }: MediaV
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 18 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            onClick={(event) => event.stopPropagation()}
+            onClick={(event: MouseEvent<HTMLDivElement>) => event.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-white/10 px-5 py-4 md:px-8">
               <div>
@@ -7749,13 +7749,13 @@ export const InvolvedPartnerPage = memo(function InvolvedPartnerPage() {
               <h2 className={SEVA_SECTION_HEADING_CLASS}>Talk to the partnership desk</h2>
               <div className={`mt-6 space-y-4 ${SEVA_BODY_TEXT_CLASS}`}>
                 <p>
-                  <span className="font-black text-white">Email:</span> bhagwatheritage@gmail.com
+                  <span className="font-black text-white">Email:</span> join@bhagwatheritage.org
                 </p>
                 <p>
-                  <span className="font-black text-white">Phone:</span> +91 8668897445
+                  <span className="font-black text-white">Phone:</span> +91-866-889-7445
                 </p>
                 <p>
-                  <span className="font-black text-white">Office Address:</span> Bhagwat Heritage Service Foundation Trust, Swaminarayan Bhagwat Dham Campus, Chandrapur, Kasturaba Road, Maharashtra
+                  <span className="font-black text-white">Office Address:</span> Bhagwat Dham - Shree Swaminarayan Mandir, Kasturba Rd, Hospital ward, Chandrapur, Maharashtra 442402
                 </p>
               </div>
               <div className="mt-6 flex flex-wrap gap-3">

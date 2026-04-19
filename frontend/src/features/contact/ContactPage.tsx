@@ -43,9 +43,9 @@ const WHAT_WE_DO = [
 ];
 
 const QUICK_CONTACT = [
-  { title: "Call Us", value: "+91 8668897445", icon: "fas fa-phone", href: "tel:+918668897445" },
-  { title: "WhatsApp", value: "+91 8668897445", icon: "fab fa-whatsapp", href: "https://wa.me/918668897445" },
-  { title: "Email", value: "info@bhagwatheritage.org", icon: "fas fa-envelope", href: "mailto:info@bhagwatheritage.org" },
+  { title: "Call Us", value: "+91-866-889-7445", icon: "fas fa-phone", href: "tel:+918668897445" },
+  { title: "WhatsApp", value: "+91-866-889-7445", icon: "fab fa-whatsapp", href: "https://wa.me/918668897445" },
+  { title: "Email", value: "join@bhagwatheritage.org", icon: "fas fa-envelope", href: "mailto:join@bhagwatheritage.org" },
 ];
 
 const FAQS = [
@@ -269,15 +269,15 @@ export default memo(function ContactPage() {
             <ul className="space-y-4 text-[#4f6272]">
               <li className="flex items-start gap-3">
                 <i className="fas fa-map-marker-alt text-[var(--color-secondary)] mt-1" />
-                <span>Bhagwat Heritage Campus, Kasturba Road, Chandrapur, Maharashtra, India</span>
+                <span>Bhagwat Dham - Shree Swaminarayan Mandir, Kasturba Rd, Hospital ward, Chandrapur, Maharashtra 442402</span>
               </li>
               <li className="flex items-center gap-3">
                 <i className="fas fa-envelope text-[var(--color-secondary)]" />
-                <span>info@bhagwatheritage.org</span>
+                <span>join@bhagwatheritage.org</span>
               </li>
               <li className="flex items-center gap-3">
                 <i className="fas fa-phone text-[var(--color-secondary)]" />
-                <span>+91 8668897445</span>
+                <span>+91-866-889-7445</span>
               </li>
               <li className="flex items-center gap-3">
                 <i className="fas fa-clock text-[var(--color-secondary)]" />

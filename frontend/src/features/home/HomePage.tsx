@@ -1,4 +1,4 @@
-import { memo, useMemo } from "react";
+import { memo, useEffect, useMemo, useRef } from "react";
 
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
@@ -25,6 +25,33 @@ const GOLD_CTA =
   "inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#f4ce5a] via-[#f8db81] to-[#e9932d] px-7 py-3 text-sm font-semibold text-[#12394c] shadow-[0_18px_34px_rgba(233,147,45,0.22)] transition duration-300 hover:scale-[1.03] hover:shadow-[0_24px_44px_rgba(233,147,45,0.30)]";
 const MISSION_BAR_BUTTON =
   "mt-8 inline-flex w-full items-center justify-center rounded-[18px] bg-gradient-to-r from-[#c53e22] via-[#df6927] to-[#f0af3d] px-6 py-4 text-base font-semibold text-white shadow-[0_16px_30px_rgba(223,105,39,0.22)] transition duration-300 group-hover:scale-[1.01] group-hover:shadow-[0_20px_34px_rgba(223,105,39,0.30)]";
+const SPIRITUAL_MISSION_CARD =
+  "border-[#f1d9b3] bg-[radial-gradient(circle_at_top,rgba(255,251,242,0.98),rgba(255,245,226,0.96))] shadow-[0_24px_54px_rgba(233,147,45,0.18)] hover:shadow-[0_30px_64px_rgba(233,147,45,0.26)]";
+const SPIRITUAL_MISSION_GLOW = "bg-[radial-gradient(circle_at_top_right,rgba(233,147,45,0.16),transparent_38%)]";
+const SPIRITUAL_ICON_WRAP =
+  "border-[#f9e8cf] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.98),rgba(255,248,236,0.98))] shadow-[0_20px_42px_rgba(233,147,45,0.24)]";
+const SPIRITUAL_TITLE = "text-[#8f4d10]";
+const SPIRITUAL_BODY = "text-[#71594a]";
+const SPIRITUAL_BUTTON =
+  "bg-gradient-to-r from-[#d66a1f] via-[#e9932d] to-[#f4b13c] shadow-[0_18px_32px_rgba(233,147,45,0.26)] group-hover:shadow-[0_22px_38px_rgba(233,147,45,0.34)]";
+const SOCIAL_MISSION_CARD =
+  "border-[#d7e7bf] bg-[radial-gradient(circle_at_top,rgba(251,255,245,0.98),rgba(241,248,227,0.96))] shadow-[0_24px_54px_rgba(158,190,112,0.18)] hover:shadow-[0_30px_64px_rgba(158,190,112,0.26)]";
+const SOCIAL_MISSION_GLOW = "bg-[radial-gradient(circle_at_top_right,rgba(158,190,112,0.18),transparent_38%)]";
+const SOCIAL_ICON_WRAP =
+  "border-[#e3eed0] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.98),rgba(247,252,238,0.98))] shadow-[0_20px_42px_rgba(158,190,112,0.24)]";
+const SOCIAL_TITLE = "text-[#5d7430]";
+const SOCIAL_BODY = "text-[#5d6652]";
+const SOCIAL_BUTTON =
+  "shadow-[0_18px_32px_rgba(158,190,112,0.26)] group-hover:shadow-[0_22px_38px_rgba(158,190,112,0.34)]";
+const CULTURAL_MISSION_CARD =
+  "border-[#c8e3ea] bg-[radial-gradient(circle_at_top,rgba(249,253,255,0.98),rgba(235,247,250,0.96))] shadow-[0_24px_54px_rgba(82,156,176,0.18)] hover:shadow-[0_30px_64px_rgba(82,156,176,0.26)]";
+const CULTURAL_MISSION_GLOW = "bg-[radial-gradient(circle_at_top_right,rgba(82,156,176,0.18),transparent_38%)]";
+const CULTURAL_ICON_WRAP =
+  "border-[#d8ecf1] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.98),rgba(241,250,252,0.98))] shadow-[0_20px_42px_rgba(82,156,176,0.24)]";
+const CULTURAL_TITLE = "text-[#2f6f84]";
+const CULTURAL_BODY = "text-[#526774]";
+const CULTURAL_BUTTON =
+  "shadow-[0_18px_32px_rgba(82,156,176,0.26)] group-hover:shadow-[0_22px_38px_rgba(82,156,176,0.34)]";
 const SEVA_SCROLL_CARD =
   "group relative block min-w-[18rem] max-w-[18rem] snap-start overflow-hidden rounded-[1.6rem] shadow-lg shadow-[#c98a2b]/10 transition duration-300 md:min-w-[19.5rem] md:max-w-[19.5rem] xl:min-w-[20rem] xl:max-w-[20rem]";
 const INVOLVED_CARD =
@@ -58,9 +85,49 @@ function PartnerIcon() {
   );
 }
 
+function CarouselChevron({ direction }: { direction: "left" | "right" }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={`h-6 w-6 ${direction === "left" ? "rotate-180" : ""}`}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m7 5 7 7-7 7" />
+      <path d="m13 5 7 7-7 7" />
+    </svg>
+  );
+}
+
 export default memo(function HomePage() {
   const { t } = useTranslation();
+  const sevaScrollRef = useRef<HTMLDivElement | null>(null);
+  const sevaAutoScrollPausedRef = useRef(false);
+  const sevaAutoScrollResumeTimerRef = useRef<number | null>(null);
   usePageMeta(t("home.meta.title"), t("home.meta.description"));
+
+  const scrollSevaRail = (direction: "left" | "right") => {
+    const rail = sevaScrollRef.current;
+    if (!rail) return;
+
+    if (sevaAutoScrollResumeTimerRef.current) {
+      window.clearTimeout(sevaAutoScrollResumeTimerRef.current);
+    }
+
+    sevaAutoScrollPausedRef.current = true;
+
+    const amount = Math.min(rail.clientWidth * 0.9, 460);
+    rail.scrollBy({ left: direction === "right" ? amount : -amount, behavior: "smooth" });
+
+    sevaAutoScrollResumeTimerRef.current = window.setTimeout(() => {
+      sevaAutoScrollPausedRef.current = false;
+      sevaAutoScrollResumeTimerRef.current = null;
+    }, 1400);
+  };
 
   const heroSlides = useMemo<HeroSlide[]>(
     () => [
@@ -123,6 +190,12 @@ export default memo(function HomePage() {
           "Spreading the teachings of Shrimad Bhagavat through Katha, Satsang, and spiritual guidance.",
         image: "https://res.cloudinary.com/der8zinu8/image/upload/v1771829450/sanskriti_3_bhvx6q.png",
         buttonLabel: "Explore Spiritual Mission",
+        cardClassName: SPIRITUAL_MISSION_CARD,
+        glowClassName: SPIRITUAL_MISSION_GLOW,
+        iconWrapClassName: SPIRITUAL_ICON_WRAP,
+        titleClassName: SPIRITUAL_TITLE,
+        bodyClassName: SPIRITUAL_BODY,
+        buttonClassName: SPIRITUAL_BUTTON,
       },
       {
         title: "Social Service",
@@ -130,6 +203,12 @@ export default memo(function HomePage() {
           "Serving society through Annadaan, Gau Seva, disaster relief, and humanitarian initiatives.",
         image: "https://res.cloudinary.com/der8zinu8/image/upload/v1776586564/sa2_v3ugrc.png",
         buttonLabel: "Explore Social Service",
+        cardClassName: SOCIAL_MISSION_CARD,
+        glowClassName: SOCIAL_MISSION_GLOW,
+        iconWrapClassName: SOCIAL_ICON_WRAP,
+        titleClassName: SOCIAL_TITLE,
+        bodyClassName: SOCIAL_BODY,
+        buttonClassName: SOCIAL_BUTTON,
       },
       {
         title: "Cultural Renaissance",
@@ -137,6 +216,12 @@ export default memo(function HomePage() {
           "Preserving Indian traditions, values, and spiritual heritage for future generations.",
         image: "https://res.cloudinary.com/der8zinu8/image/upload/v1776586564/sa1_fug3jm.png",
         buttonLabel: "Explore Cultural Heritage",
+        cardClassName: CULTURAL_MISSION_CARD,
+        glowClassName: CULTURAL_MISSION_GLOW,
+        iconWrapClassName: CULTURAL_ICON_WRAP,
+        titleClassName: CULTURAL_TITLE,
+        bodyClassName: CULTURAL_BODY,
+        buttonClassName: CULTURAL_BUTTON,
       },
     ],
     [],
@@ -192,6 +277,68 @@ export default memo(function HomePage() {
     ],
     [],
   );
+
+  const loopingSevaItems = useMemo(() => [...sevaItems, ...sevaItems, ...sevaItems], [sevaItems]);
+
+  useEffect(() => {
+    const rail = sevaScrollRef.current;
+    if (!rail) return;
+
+    const widthPerSet = rail.scrollWidth / 3;
+    rail.scrollLeft = widthPerSet;
+    let animationFrameId = 0;
+    let lastTimestamp = 0;
+
+    const handleLoopScroll = () => {
+      const currentRail = sevaScrollRef.current;
+      if (!currentRail) return;
+
+      const segmentWidth = currentRail.scrollWidth / 3;
+      if (currentRail.scrollLeft <= segmentWidth * 0.5) {
+        currentRail.scrollLeft += segmentWidth;
+      } else if (currentRail.scrollLeft >= segmentWidth * 1.5) {
+        currentRail.scrollLeft -= segmentWidth;
+      }
+    };
+
+    const handlePointerEnter = () => {
+      sevaAutoScrollPausedRef.current = true;
+    };
+
+    const handlePointerLeave = () => {
+      sevaAutoScrollPausedRef.current = false;
+    };
+
+    const autoScroll = (timestamp: number) => {
+      if (!lastTimestamp) {
+        lastTimestamp = timestamp;
+      }
+
+      const delta = timestamp - lastTimestamp;
+      lastTimestamp = timestamp;
+
+      if (!sevaAutoScrollPausedRef.current) {
+        rail.scrollLeft += delta * 0.03;
+      }
+
+      animationFrameId = window.requestAnimationFrame(autoScroll);
+    };
+
+    rail.addEventListener("scroll", handleLoopScroll, { passive: true });
+    rail.addEventListener("pointerenter", handlePointerEnter);
+    rail.addEventListener("pointerleave", handlePointerLeave);
+    animationFrameId = window.requestAnimationFrame(autoScroll);
+
+    return () => {
+      if (sevaAutoScrollResumeTimerRef.current) {
+        window.clearTimeout(sevaAutoScrollResumeTimerRef.current);
+      }
+      rail.removeEventListener("scroll", handleLoopScroll);
+      rail.removeEventListener("pointerenter", handlePointerEnter);
+      rail.removeEventListener("pointerleave", handlePointerLeave);
+      window.cancelAnimationFrame(animationFrameId);
+    };
+  }, [loopingSevaItems]);
 
   const involvedItems = useMemo(
     () => [
@@ -288,12 +435,12 @@ export default memo(function HomePage() {
           "radial-gradient(circle at top left, rgba(89,166,215,0.24) 0%, rgba(89,166,215,0) 42%), radial-gradient(circle at top right, rgba(133,196,234,0.26) 0%, rgba(133,196,234,0) 40%), radial-gradient(circle at bottom left, rgba(207,232,250,0.46) 0%, rgba(207,232,250,0) 44%), radial-gradient(circle at bottom right, rgba(185,223,245,0.34) 0%, rgba(185,223,245,0) 46%), linear-gradient(135deg, #f7fbff 0%, #edf7ff 46%, #e5f3ff 100%)",
       }}
     >
-      <section className="w-full px-4 pt-0 sm:px-6 md:px-10 lg:px-[50px]">
+      <section className="w-full pt-0">
         <HeroSection
           title={t("home.heroTitle")}
           slides={heroSlides}
           autoplayDelayMs={5600}
-          heightClass="h-[calc(58vh+40px)] min-h-[360px] max-h-[800px] sm:h-[calc(62vh+40px)] md:h-[calc(68vh+40px)] lg:h-[calc(72vh+40px)]"
+          heightClass="h-[calc(58vh+90px)] min-h-[410px] max-h-[850px] sm:h-[calc(62vh+90px)] md:h-[calc(68vh+90px)] lg:h-[calc(72vh+90px)]"
         />
       </section>
 
@@ -355,7 +502,7 @@ export default memo(function HomePage() {
         <div aria-hidden="true" className="absolute bottom-8 right-[-4rem] h-48 w-48 rounded-full bg-[#8bc9ea]/24 blur-3xl" />
 
         <div className="relative w-full">
-          <div className="rounded-[40px] border border-[#f1d7ab] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.88),rgba(255,246,228,0.92)),linear-gradient(135deg,#fffaf0_0%,#fff2d3_100%)] px-6 py-12 shadow-[0_28px_80px_rgba(233,147,45,0.12)] sm:px-10 lg:px-14 lg:py-16">
+          <div className="rounded-[40px] border border-[#f1dfb3] bg-white px-6 py-12 shadow-[0_28px_80px_rgba(233,147,45,0.12)] sm:px-10 lg:px-14 lg:py-16">
             <motion.div
               initial={{ opacity: 0, y: 26 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -364,7 +511,6 @@ export default memo(function HomePage() {
               className="mx-auto max-w-3xl text-center"
             >
               <p className={HOME_SECTION_LABEL}>Our Core Mission</p>
-              <h2 className={HOME_LIGHT_HEADING}>Our Core Mission</h2>
               <p className={`${HOME_LIGHT_BODY} mt-4`}>Guided by Dharma, Service, and Heritage</p>
             </motion.div>
 
@@ -372,27 +518,40 @@ export default memo(function HomePage() {
               {missionItems.map((item, index) => {
                 return (
                   <motion.div
-                    key={item.title}
+                    key={`${item.title}-${index}`}
                     initial={{ opacity: 0, y: 34 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.25 }}
                     transition={{ duration: 0.65, delay: index * 0.12, ease: "easeOut" }}
                     whileHover={{ y: -8, scale: 1.02 }}
-                    className={MISSION_CARD}
+                    className={`${MISSION_CARD} ${item.cardClassName}`}
                   >
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(244,206,90,0.14),transparent_36%)] opacity-0 transition duration-300 group-hover:opacity-100" />
+                    <div
+                      className={`absolute inset-0 ${item.glowClassName || "bg-[radial-gradient(circle_at_top_right,rgba(244,206,90,0.14),transparent_36%)]"} opacity-0 transition duration-300 group-hover:opacity-100`}
+                    />
                     <div className="relative">
                       <motion.div
-                        className={MISSION_ICON_WRAP}
-                        animate={{ rotate: [0, 4, 0], scale: [1, 1.04, 1] }}
+                        className={`${MISSION_ICON_WRAP} ${item.iconWrapClassName}`}
+                        animate={{ scale: [1, 1.04, 1] }}
                         transition={{ duration: 4.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: index * 0.2 }}
                       >
                         <img src={item.image} alt={item.title} className="h-full w-full object-contain" loading="lazy" />
                       </motion.div>
 
-                      <h3 className={HOME_LIGHT_HEADING}>{item.title}</h3>
-                      <p className={`${HOME_LIGHT_BODY} mt-4 min-h-[96px]`}>{item.description}</p>
-                      <div className={MISSION_BAR_BUTTON}>{item.buttonLabel}</div>
+                      <h3 className={`${HOME_LIGHT_HEADING} ${item.titleClassName}`}>{item.title}</h3>
+                      <p className={`${HOME_LIGHT_BODY} ${item.bodyClassName} mt-4 min-h-[96px]`}>{item.description}</p>
+                      <div
+                        className={`${MISSION_BAR_BUTTON} ${item.buttonClassName}`}
+                        style={
+                          item.title === "Social Service"
+                            ? { backgroundImage: "linear-gradient(90deg, #6f8f3f 0%, #9EBE70 52%, #bfd593 100%)" }
+                            : item.title === "Cultural Renaissance"
+                              ? { backgroundImage: "linear-gradient(90deg, #327b92 0%, #529CB0 52%, #79bdd0 100%)" }
+                            : undefined
+                        }
+                      >
+                        {item.buttonLabel}
+                      </div>
                     </div>
                   </motion.div>
                 );
@@ -448,27 +607,40 @@ export default memo(function HomePage() {
             <p className={`${HOME_LIGHT_BODY} mt-4`}>Serving Humanity Through Selfless Actions</p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.55, delay: 0.12, ease: "easeOut" }}
-            className="mt-6 flex items-center justify-end gap-2 text-sm font-semibold text-[#9a6a3f]"
-          >
-            <span>Scroll</span>
-            <motion.span animate={{ x: [0, 6, 0] }} transition={{ duration: 1.4, repeat: Number.POSITIVE_INFINITY }}>
-              →
-            </motion.span>
-          </motion.div>
-
           <div className="relative mt-8">
-            <div aria-hidden="true" className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-10 bg-gradient-to-r from-[#fff6e7] to-transparent md:w-16" />
-            <div aria-hidden="true" className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-10 bg-gradient-to-l from-[#fffdf8] to-transparent md:w-16" />
-            <div className="w-full overflow-x-auto pl-1 pr-1 [scrollbar-width:none] md:pl-2 md:pr-2 [&::-webkit-scrollbar]:hidden">
+            <motion.button
+              type="button"
+              onClick={() => scrollSevaRail("left")}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.45, delay: 0.08, ease: "easeOut" }}
+              className="absolute -top-14 left-0 z-20 inline-flex h-11 w-11 items-center justify-center text-[#163a63] transition-colors hover:text-[#0f2c4b]"
+              aria-label="Scroll seva cards left"
+            >
+              <CarouselChevron direction="left" />
+            </motion.button>
+            <motion.button
+              type="button"
+              onClick={() => scrollSevaRail("right")}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.45, delay: 0.12, ease: "easeOut" }}
+              className="absolute -top-14 right-0 z-20 inline-flex h-11 w-11 items-center justify-center text-[#163a63] transition-colors hover:text-[#0f2c4b]"
+              aria-label="Scroll seva cards right"
+            >
+              <motion.span animate={{ x: [0, 5, 0] }} transition={{ duration: 1.4, repeat: Number.POSITIVE_INFINITY }}>
+                <CarouselChevron direction="right" />
+              </motion.span>
+            </motion.button>
+            <div aria-hidden="true" className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-10 bg-gradient-to-r from-[#eef7ff] via-[#eef7ff]/72 to-transparent md:w-16" />
+            <div aria-hidden="true" className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-10 bg-gradient-to-l from-[#f6fbff] via-[#f6fbff]/72 to-transparent md:w-16" />
+            <div ref={sevaScrollRef} className="w-full overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               <div className="flex w-max snap-x snap-mandatory gap-5 pb-3 md:gap-6">
-                {sevaItems.map((item, index) => (
+                {loopingSevaItems.map((item, index) => (
                   <motion.div
-                    key={item.title}
+                    key={`${item.title}-${index}`}
                     initial={{ opacity: 0, y: 28 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.15 }}
@@ -491,7 +663,7 @@ export default memo(function HomePage() {
                           transition={{ duration: 0.3 }}
                           className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5"
                         >
-                          <h3 className={`max-w-[12rem] ${HOME_DARK_HEADING}`}>{item.title}</h3>
+                          <h3 className={`max-w-[12rem] ${HOME_DARK_HEADING} !text-[#F9F2A9]`}>{item.title}</h3>
                           <span className="inline-flex items-center gap-1 text-sm font-semibold text-white/92">
                             Explore
                             <span aria-hidden="true">→</span>
@@ -534,7 +706,7 @@ export default memo(function HomePage() {
 
               return (
                 <motion.div
-                  key={item.title}
+                  key={`${item.title}-${index}`}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
@@ -575,7 +747,7 @@ export default memo(function HomePage() {
             </p>
           </motion.div>
 
-          <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-[1.25fr_0.75fr]">
+          <div className="mt-12 grid grid-cols-1 items-start gap-6 xl:grid-cols-[1.25fr_0.75fr]">
             <motion.div
               initial={{ opacity: 0, y: 26, scale: 0.98 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -604,10 +776,10 @@ export default memo(function HomePage() {
               </Link>
             </motion.div>
 
-            <div className="grid gap-6">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-1">
               {mediaItems.slice(1, 3).map((item, index) => (
                 <motion.div
-                  key={item.title}
+                  key={`${item.title}-${index}`}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
@@ -620,7 +792,7 @@ export default memo(function HomePage() {
                       loading="lazy"
                       whileHover={{ scale: 1.06 }}
                       transition={{ duration: 0.4, ease: "easeOut" }}
-                      className="h-[16rem] w-full object-cover"
+                      className="h-[16rem] w-full object-cover sm:h-[17rem] xl:h-[16rem]"
                     />
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,26,36,0.04),rgba(11,26,36,0.18)_36%,rgba(11,26,36,0.84)_100%)] transition duration-300 group-hover:bg-[linear-gradient(180deg,rgba(11,26,36,0.08),rgba(11,26,36,0.24)_30%,rgba(11,26,36,0.9)_100%)]" />
                     <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5">
@@ -638,37 +810,72 @@ export default memo(function HomePage() {
             </div>
           </div>
 
-          <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-5">
-            {mediaItems.slice(3).map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 22, scale: 0.98 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, delay: index * 0.06, ease: "easeOut" }}
-              >
-                <Link to={item.link} className="group relative block overflow-hidden rounded-[24px] border border-[#f1d7ab] shadow-[0_16px_36px_rgba(233,147,45,0.12)]">
-                  <motion.img
-                    src={item.image}
-                    alt={item.title}
-                    loading="lazy"
-                    whileHover={{ scale: 1.08 }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
-                    className="h-[14rem] w-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,26,36,0.04),rgba(11,26,36,0.14)_30%,rgba(11,26,36,0.82)_100%)] transition duration-300 group-hover:bg-[linear-gradient(180deg,rgba(11,26,36,0.08),rgba(11,26,36,0.22)_26%,rgba(11,26,36,0.9)_100%)]" />
-                  <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4">
-                    <div>
-                      <span className="inline-flex rounded-full border border-[#f6dfb4] bg-white/90 px-2.5 py-1 text-sm font-semibold text-[#d08a32]">
-                        {item.tag}
-                      </span>
-                      <h3 className={`mt-2 ${HOME_DARK_HEADING}`}>{item.title}</h3>
+          <div className="mt-6 grid grid-cols-1 items-start gap-6 xl:grid-cols-[1.25fr_0.75fr]">
+            <div className="grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {mediaItems.slice(3, 6).map((item, index) => (
+                <motion.div
+                  key={`${item.title}-${index}`}
+                  initial={{ opacity: 0, y: 22, scale: 0.98 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: index * 0.06, ease: "easeOut" }}
+                >
+                  <Link to={item.link} className="group relative block overflow-hidden rounded-[24px] border border-[#f1d7ab] shadow-[0_16px_36px_rgba(233,147,45,0.12)]">
+                    <motion.img
+                      src={item.image}
+                      alt={item.title}
+                      loading="lazy"
+                      whileHover={{ scale: 1.08 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                      className="h-[14rem] w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,26,36,0.04),rgba(11,26,36,0.14)_30%,rgba(11,26,36,0.82)_100%)] transition duration-300 group-hover:bg-[linear-gradient(180deg,rgba(11,26,36,0.08),rgba(11,26,36,0.22)_26%,rgba(11,26,36,0.9)_100%)]" />
+                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4">
+                      <div>
+                        <span className="inline-flex rounded-full border border-[#f6dfb4] bg-white/90 px-2.5 py-1 text-sm font-semibold text-[#d08a32]">
+                          {item.tag}
+                        </span>
+                        <h3 className={`mt-2 ${HOME_DARK_HEADING}`}>{item.title}</h3>
+                      </div>
+                      <span className="text-xs font-semibold text-white/88">→</span>
                     </div>
-                    <span className="text-xs font-semibold text-white/88">→</span>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 items-start gap-6 sm:grid-cols-2">
+              {mediaItems.slice(6).map((item, index) => (
+                <motion.div
+                  key={`${item.title}-${index + 3}`}
+                  initial={{ opacity: 0, y: 22, scale: 0.98 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.5, delay: index * 0.06, ease: "easeOut" }}
+                >
+                  <Link to={item.link} className="group relative block overflow-hidden rounded-[24px] border border-[#f1d7ab] shadow-[0_16px_36px_rgba(233,147,45,0.12)]">
+                    <motion.img
+                      src={item.image}
+                      alt={item.title}
+                      loading="lazy"
+                      whileHover={{ scale: 1.08 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                      className="h-[14rem] w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,26,36,0.04),rgba(11,26,36,0.14)_30%,rgba(11,26,36,0.82)_100%)] transition duration-300 group-hover:bg-[linear-gradient(180deg,rgba(11,26,36,0.08),rgba(11,26,36,0.22)_26%,rgba(11,26,36,0.9)_100%)]" />
+                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4">
+                      <div>
+                        <span className="inline-flex rounded-full border border-[#f6dfb4] bg-white/90 px-2.5 py-1 text-sm font-semibold text-[#d08a32]">
+                          {item.tag}
+                        </span>
+                        <h3 className={`mt-2 ${HOME_DARK_HEADING}`}>{item.title}</h3>
+                      </div>
+                      <span className="text-xs font-semibold text-white/88">→</span>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
           <motion.div
@@ -688,3 +895,4 @@ export default memo(function HomePage() {
     </div>
   );
 });
+

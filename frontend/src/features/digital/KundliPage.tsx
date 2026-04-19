@@ -233,7 +233,7 @@ export default memo(function KundliPage() {
                 </h1>
                 <p className="mt-2 text-[20px] font-black text-[#1f7a8c] md:text-[32px]">श्री स्वामिनारायण मंदिर, चंद्रपुर</p>
                 <p className="mt-2 text-sm font-semibold text-[#3d7c98] md:text-lg">
-                  Kasturba Road, Hospital Ward, Chandrapur
+                  Kasturba Rd, Hospital ward, Chandrapur, Maharashtra 442402
                 </p>
               </div>
 

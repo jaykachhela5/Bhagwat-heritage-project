@@ -360,14 +360,14 @@ export default memo(function GauSevaPage() {
               <h3 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Visit or Connect</h3>
               <div className="mt-5 space-y-4 text-base leading-7 text-[var(--campaign-text)] md:text-lg">
                 <p>
-                  <span className="font-black text-white">Address:</span> Bhagwat Niketan Ashram, Mul Road, Shree Kshetra Chichpalli,
-                  District - Chandrapur (Maharashtra)
+                  <span className="font-black text-white">Address:</span> Bhagwat Dham - Shree Swaminarayan Mandir, Kasturba Rd, Hospital ward,
+                  Chandrapur, Maharashtra 442402
                 </p>
                 <p>
-                  <span className="font-black text-white">Phone:</span> +91 8668897445
+                  <span className="font-black text-white">Phone:</span> +91-866-889-7445
                 </p>
                 <p>
-                  <span className="font-black text-white">Email:</span> bhagwatheritage@gmail.com
+                  <span className="font-black text-white">Email:</span> join@bhagwatheritage.org
                 </p>
                 <p>
                   <span className="font-black text-white">Visitor Help:</span> Contact the trust desk for darshan timing, map guidance, and

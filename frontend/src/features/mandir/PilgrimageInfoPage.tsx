@@ -160,9 +160,9 @@ export default memo(function PilgrimageInfoPage() {
           <div className={sectionClass}>
             <SectionHeader icon="location" eyebrow="Location and Travel" title="Reach Bhagwat Dham with Clarity" />
             <div className="grid gap-4 md:grid-cols-3">
-              <InfoCard icon="location" title="Location">Chandrapur, Maharashtra</InfoCard>
+              <InfoCard icon="location" title="Location">Bhagwat Dham - Shree Swaminarayan Mandir, Kasturba Rd, Hospital ward, Chandrapur, Maharashtra 442402</InfoCard>
               <InfoCard icon="location" title="Nearest Railway Station">Chandrapur Railway Station</InfoCard>
-              <InfoCard icon="location" title="Landmark">Kasturba Road, Chandrapur</InfoCard>
+              <InfoCard icon="location" title="Landmark">Shree Swaminarayan Mandir, Kasturba Rd</InfoCard>
             </div>
           </div>
           <div className={sectionClass}>
@@ -171,7 +171,7 @@ export default memo(function PilgrimageInfoPage() {
               <div>
                 <p className="text-[22px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)] md:text-[24px]">Map Preview</p>
                 <p className="mt-2 text-[24px] font-black text-white md:text-[28px]">Bhagwat Dham Chandrapur</p>
-                <p className="mt-2 text-base leading-8 text-[var(--campaign-text)] md:text-lg">Kasturba Road, Chandrapur, Maharashtra</p>
+                <p className="mt-2 text-base leading-8 text-[var(--campaign-text)] md:text-lg">Bhagwat Dham - Shree Swaminarayan Mandir, Kasturba Rd, Hospital ward, Chandrapur, Maharashtra 442402</p>
               </div>
             </div>
           </div>
@@ -281,8 +281,8 @@ export default memo(function PilgrimageInfoPage() {
           <div className={sectionClass}>
             <SectionHeader icon="contact" eyebrow="Contact" title="Connect with Bhagwat Dham" />
             <div className="grid gap-4">
-              <InfoCard icon="contact" title="Phone">+91 8668897445</InfoCard>
-              <InfoCard icon="contact" title="Email">bhagwatheritage@gmail.com</InfoCard>
+              <InfoCard icon="contact" title="Phone">+91-866-889-7445</InfoCard>
+              <InfoCard icon="contact" title="Email">join@bhagwatheritage.org</InfoCard>
             </div>
           </div>
           <div className="rounded-3xl border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.18)] md:p-8">

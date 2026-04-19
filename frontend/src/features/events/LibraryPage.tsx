@@ -285,7 +285,7 @@ export default memo(function LibraryPage() {
         <div className={sectionPanelClass}>
           <h2 className={sectionTitleClass}>Reading Center Info</h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            <article className="rounded-[24px] border border-white/10 bg-[#0f3140] p-5 text-white shadow-sm"><h3 className="text-xl font-black">Location</h3><p className="mt-3 text-sm leading-7 text-white/90">Bhagwat Heritage Service Foundation Trust Campus, Chichpalli, Chandrapur.</p></article>
+            <article className="rounded-[24px] border border-white/10 bg-[#0f3140] p-5 text-white shadow-sm"><h3 className="text-xl font-black">Location</h3><p className="mt-3 text-sm leading-7 text-white/90">Bhagwat Dham - Shree Swaminarayan Mandir, Kasturba Rd, Hospital ward, Chandrapur, Maharashtra 442402.</p></article>
             <article className="rounded-[24px] border border-white/10 bg-[#0f3140] p-5 text-white shadow-sm"><h3 className="text-xl font-black">Timing</h3><p className="mt-3 text-sm leading-7 text-white/90">Monday to Saturday, 9:00 AM to 6:00 PM.</p></article>
             <article className="rounded-[24px] border border-white/10 bg-[#0f3140] p-5 text-white shadow-sm"><h3 className="text-xl font-black">Seating Capacity</h3><p className="mt-3 text-sm leading-7 text-white/90">Comfortable reading space for 40 learners at a time.</p></article>
           </div>
