@@ -9,28 +9,28 @@ import { usePageMeta } from "../../hooks/usePageMeta";
 const PRIMARY_BUTTON =
   "inline-flex items-center justify-center rounded-lg bg-[var(--color-footer-cta)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-footer-cta-hover)]";
 const SECONDARY_BUTTON =
-  "inline-flex items-center justify-center rounded-lg border border-[#d4a270] bg-white px-6 py-3 text-sm font-semibold text-[#9a5310] transition-colors hover:bg-[#fff7ef]";
-const HOME_SECTION_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]";
-const HOME_SECTION_HEADING = "mt-2 text-[14px] font-black leading-tight text-[#12394c] md:text-[20px]";
-const HOME_BODY = "text-base leading-7 text-[#38505f] md:text-lg";
-const HOME_LIGHT_HEADING = "mt-2 text-[14px] font-black leading-tight text-[#12394c] md:text-[20px]";
-const HOME_LIGHT_BODY = "text-base leading-7 text-[#38505f] md:text-lg";
-const HOME_DARK_HEADING = "mt-2 text-[14px] font-black leading-tight text-[#12394c] md:text-[20px]";
-const HOME_DARK_BODY = "text-base leading-7 text-[#38505f] md:text-lg";
+  "inline-flex items-center justify-center rounded-lg border border-white/35 bg-white/12 px-6 py-3 text-sm font-semibold text-[#F8FCFF] transition-colors hover:bg-white/18";
+const HOME_SECTION_LABEL = "text-[24px] font-semibold uppercase tracking-[0.18em] text-[#FFF2D6]";
+const HOME_SECTION_HEADING = "mt-2 text-[14px] font-black leading-tight text-[#F8FCFF] md:text-[20px]";
+const HOME_BODY = "text-base leading-7 text-[#F4FAFF] md:text-lg";
+const HOME_LIGHT_HEADING = "mt-2 text-[14px] font-black leading-tight text-[#F8FCFF] md:text-[20px]";
+const HOME_LIGHT_BODY = "text-base leading-7 text-[#F4FAFF] md:text-lg";
+const HOME_DARK_HEADING = "mt-2 text-[14px] font-black leading-tight text-[#F8FCFF] md:text-[20px]";
+const HOME_DARK_BODY = "text-base leading-7 text-[#F4FAFF] md:text-lg";
 const MISSION_CARD =
-  "group relative overflow-hidden rounded-[32px] border border-white/80 bg-white/88 p-8 text-center shadow-[0_24px_54px_rgba(233,147,45,0.12)] backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:shadow-[0_30px_64px_rgba(233,147,45,0.20)]";
+  "group relative overflow-hidden rounded-[32px] border border-white/30 bg-[#EAF7FD]/36 p-8 text-center shadow-[0_24px_54px_rgba(54,112,147,0.14)] backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:bg-[#F2FBFF]/42 hover:shadow-[0_30px_64px_rgba(54,112,147,0.20)]";
 const MISSION_ICON_WRAP =
-  "mx-auto mb-7 flex h-[18.125rem] w-[18.125rem] items-center justify-center rounded-full border-[6px] border-[#fff8ee] bg-white p-2 shadow-[0_18px_36px_rgba(233,147,45,0.18)]";
+  "mx-auto mb-7 flex h-[18.125rem] w-[18.125rem] items-center justify-center rounded-full border-[6px] border-white/50 bg-[#F5FCFF] p-2 shadow-[0_18px_36px_rgba(84,151,190,0.16)]";
 const GOLD_CTA =
-  "inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#f4ce5a] via-[#f8db81] to-[#e9932d] px-7 py-3 text-sm font-semibold text-[#12394c] shadow-[0_18px_34px_rgba(233,147,45,0.22)] transition duration-300 hover:scale-[1.03] hover:shadow-[0_24px_44px_rgba(233,147,45,0.30)]";
+  "inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#dff2fb] via-[#bfe3f5] to-[#8fc2dd] px-7 py-3 text-sm font-semibold text-[#12394c] shadow-[0_18px_34px_rgba(84,151,190,0.24)] transition duration-300 hover:scale-[1.03] hover:shadow-[0_24px_44px_rgba(84,151,190,0.30)]";
 const MISSION_BAR_BUTTON =
-  "mt-8 inline-flex w-full items-center justify-center rounded-[18px] bg-gradient-to-r from-[#c53e22] via-[#df6927] to-[#f0af3d] px-6 py-4 text-base font-semibold text-white shadow-[0_16px_30px_rgba(223,105,39,0.22)] transition duration-300 group-hover:scale-[1.01] group-hover:shadow-[0_20px_34px_rgba(223,105,39,0.30)]";
+  "mt-8 inline-flex w-full items-center justify-center rounded-[18px] bg-gradient-to-r from-[#7fb9d8] via-[#6caacd] to-[#579abf] px-6 py-4 text-base font-semibold text-[#F8FCFF] shadow-[0_16px_30px_rgba(84,151,190,0.24)] transition duration-300 group-hover:scale-[1.01] group-hover:shadow-[0_20px_34px_rgba(84,151,190,0.30)]";
 const SEVA_SCROLL_CARD =
-  "group relative block min-w-[18rem] max-w-[18rem] snap-start overflow-hidden rounded-[1.6rem] shadow-lg shadow-[#c98a2b]/10 transition duration-300 md:min-w-[19.5rem] md:max-w-[19.5rem] xl:min-w-[20rem] xl:max-w-[20rem]";
+  "group relative block min-w-[18rem] max-w-[18rem] snap-start overflow-hidden rounded-[1.6rem] border border-white/26 shadow-lg shadow-[#4a89b4]/16 transition duration-300 md:min-w-[19.5rem] md:max-w-[19.5rem] xl:min-w-[20rem] xl:max-w-[20rem]";
 const INVOLVED_CARD =
-  "group rounded-[28px] border border-[#f1d7ab] bg-white/88 p-8 text-center shadow-[0_20px_50px_rgba(233,147,45,0.12)] backdrop-blur-xl transition duration-300 hover:scale-[1.05] hover:border-[#f4ce5a]/70 hover:shadow-[0_26px_56px_rgba(244,206,90,0.18)]";
+  "group rounded-[28px] border border-white/30 bg-[#EAF7FD]/34 p-8 text-center shadow-[0_20px_50px_rgba(54,112,147,0.14)] backdrop-blur-xl transition duration-300 hover:scale-[1.05] hover:border-white/42 hover:bg-[#F2FBFF]/40 hover:shadow-[0_26px_56px_rgba(54,112,147,0.20)]";
 const CTA_PRIMARY =
-  "inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#f4ce5a] via-[#f8db81] to-[#e9932d] px-8 py-3 text-sm font-semibold text-black shadow-[0_18px_34px_rgba(233,147,45,0.26)] transition duration-300 hover:scale-[1.04] hover:shadow-[0_24px_40px_rgba(233,147,45,0.34)]";
+  "inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#dff2fb] via-[#bfe3f5] to-[#8fc2dd] px-8 py-3 text-sm font-semibold text-[#12394c] shadow-[0_18px_34px_rgba(84,151,190,0.26)] transition duration-300 hover:scale-[1.04] hover:shadow-[0_24px_40px_rgba(84,151,190,0.34)]";
 
 function VolunteerIcon() {
   return (
@@ -114,6 +114,7 @@ export default memo(function HomePage() {
     ],
     [t],
   );
+
   const missionItems = useMemo(
     () => [
       {
@@ -279,14 +280,9 @@ export default memo(function HomePage() {
   );
 
   return (
-    <div
-      className="min-h-screen"
-      style={{
-        backgroundColor: "#eaf4f1",
-        backgroundImage:
-          "radial-gradient(circle at top left, rgba(47,127,115,0.35) 0%, rgba(47,127,115,0) 42%), radial-gradient(circle at top right, rgba(19,126,181,0.28) 0%, rgba(19,126,181,0) 40%), radial-gradient(circle at bottom left, rgba(252,182,48,0.22) 0%, rgba(252,182,48,0) 44%), radial-gradient(circle at bottom right, rgba(148,197,88,0.22) 0%, rgba(148,197,88,0) 46%), linear-gradient(135deg, #f7fcfa 0%, #edf8f2 45%, #fff7e6 100%)",
-      }}
-    >
+    <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-l from-[#1F73A0] via-[#529CB0] to-[#A9CAD1]">
+      <div aria-hidden="true" className="absolute right-0 top-0 h-[400px] w-[400px] rounded-full bg-blue-300/20 blur-3xl" />
+      <div aria-hidden="true" className="absolute bottom-0 left-0 h-[340px] w-[340px] rounded-full bg-white/10 blur-3xl" />
       <section className="w-full pt-0">
         <HeroSection
           title={t("home.heroTitle")}
@@ -297,7 +293,7 @@ export default memo(function HomePage() {
       </section>
 
       <section className="w-full px-4 py-16 sm:px-6 md:px-10 md:py-24 lg:px-16 lg:py-28 xl:px-24">
-        <div className="w-full rounded-[30px] border border-[#d8e5ea] bg-white/90 px-6 py-10 text-center shadow-[0_16px_34px_rgba(0,0,0,0.10)] backdrop-blur-sm sm:px-10 md:px-16 md:py-12 lg:px-20 xl:px-28">
+        <div className="w-full rounded-[30px] border border-white/28 bg-[#EAF7FD]/28 px-6 py-10 text-center shadow-[0_16px_34px_rgba(31,115,160,0.12)] backdrop-blur-sm sm:px-10 md:px-16 md:py-12 lg:px-20 xl:px-28">
           <p className={`mb-3 ${HOME_SECTION_LABEL}`}>{t("home.aboutEyebrow")}</p>
           <h2 className={`mx-auto mb-4 max-w-4xl ${HOME_SECTION_HEADING}`}>{t("home.aboutTitle")}</h2>
           <p className={`mx-auto mb-7 max-w-4xl ${HOME_BODY}`}>{t("home.aboutText")}</p>
@@ -308,10 +304,10 @@ export default memo(function HomePage() {
       </section>
 
       <section className="w-full px-4 py-6 sm:px-6 md:px-10 md:py-10 lg:px-16 lg:py-12 xl:px-24">
-        <div className="w-full rounded-[30px] border border-[#d8e5ea] bg-white/90 px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.10)] backdrop-blur-sm sm:px-10 md:px-16 lg:px-20 xl:px-28">
+        <div className="w-full rounded-[30px] border border-white/28 bg-[#EAF7FD]/28 px-6 py-10 shadow-[0_16px_34px_rgba(31,115,160,0.12)] backdrop-blur-sm sm:px-10 md:px-16 lg:px-20 xl:px-28">
           <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-[220px_1fr] md:gap-8">
             <div className="mx-auto w-full max-w-[220px]">
-              <div className="rounded-2xl border border-[#e0e8f0] bg-[#f6f8fb] p-2 shadow-sm">
+              <div className="rounded-2xl border border-white/35 bg-[#F5FCFF]/82 p-2 shadow-sm">
                 <img
                   src="/images/manish2.PNG"
                   alt={t("home.founderTitle")}
@@ -344,13 +340,13 @@ export default memo(function HomePage() {
       <section className="relative w-full overflow-hidden px-4 py-16 sm:px-6 md:px-10 md:py-24 lg:px-16 lg:py-32 xl:px-24">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(244,206,90,0.20),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(82,156,176,0.16),transparent_32%),linear-gradient(135deg,#fefcf6_0%,#f5fbff_46%,#fff7eb_100%)]"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.12),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(31,115,160,0.10),transparent_32%)]"
         />
-        <div aria-hidden="true" className="absolute left-[-5rem] top-12 h-40 w-40 rounded-full bg-[#f4ce5a]/20 blur-3xl" />
-        <div aria-hidden="true" className="absolute bottom-8 right-[-4rem] h-48 w-48 rounded-full bg-[#529cb0]/16 blur-3xl" />
+        <div aria-hidden="true" className="absolute left-[-5rem] top-12 h-40 w-40 rounded-full bg-white/14 blur-3xl" />
+        <div aria-hidden="true" className="absolute bottom-8 right-[-4rem] h-48 w-48 rounded-full bg-[#529cb0]/18 blur-3xl" />
 
         <div className="relative w-full">
-          <div className="rounded-[40px] border border-[#f1d7ab] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.88),rgba(255,246,228,0.92)),linear-gradient(135deg,#fffaf0_0%,#fff2d3_100%)] px-6 py-12 shadow-[0_28px_80px_rgba(233,147,45,0.12)] sm:px-10 lg:px-14 lg:py-16">
+          <div className="rounded-[40px] border border-white/28 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.24),rgba(255,255,255,0.10)),linear-gradient(135deg,#9fcae1_0%,#82b7d3_100%)] px-6 py-12 shadow-[0_28px_80px_rgba(54,112,147,0.14)] sm:px-10 lg:px-14 lg:py-16">
             <motion.div
               initial={{ opacity: 0, y: 26 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -359,41 +355,39 @@ export default memo(function HomePage() {
               className="mx-auto max-w-3xl text-center"
             >
               <p className={HOME_SECTION_LABEL}>Our Core Mission</p>
-              <h2 className={HOME_LIGHT_HEADING}>
-                Our Core Mission
-              </h2>
+              <h2 className={HOME_LIGHT_HEADING}>Our Core Mission</h2>
               <p className={`${HOME_LIGHT_BODY} mt-4`}>Guided by Dharma, Service, and Heritage</p>
             </motion.div>
 
             <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-3">
-            {missionItems.map((item, index) => {
-              return (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 34 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.25 }}
-                  transition={{ duration: 0.65, delay: index * 0.12, ease: "easeOut" }}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className={MISSION_CARD}
-                >
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(244,206,90,0.14),transparent_36%)] opacity-0 transition duration-300 group-hover:opacity-100" />
-                  <div className="relative">
-                    <motion.div
-                      className={MISSION_ICON_WRAP}
-                      animate={{ rotate: [0, 4, 0], scale: [1, 1.04, 1] }}
-                      transition={{ duration: 4.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: index * 0.2 }}
-                    >
-                      <img src={item.image} alt={item.title} className="h-full w-full object-contain" loading="lazy" />
-                    </motion.div>
+              {missionItems.map((item, index) => {
+                return (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 34 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.25 }}
+                    transition={{ duration: 0.65, delay: index * 0.12, ease: "easeOut" }}
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    className={MISSION_CARD}
+                  >
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(223,242,251,0.16),transparent_36%)] opacity-0 transition duration-300 group-hover:opacity-100" />
+                    <div className="relative">
+                      <motion.div
+                        className={MISSION_ICON_WRAP}
+                        animate={{ rotate: [0, 4, 0], scale: [1, 1.04, 1] }}
+                        transition={{ duration: 4.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut", delay: index * 0.2 }}
+                      >
+                        <img src={item.image} alt={item.title} className="h-full w-full object-contain" loading="lazy" />
+                      </motion.div>
 
-                    <h3 className={HOME_LIGHT_HEADING}>{item.title}</h3>
-                    <p className={`${HOME_LIGHT_BODY} mt-4 min-h-[96px]`}>{item.description}</p>
-                    <div className={MISSION_BAR_BUTTON}>{item.buttonLabel}</div>
-                  </div>
-                </motion.div>
-              );
-            })}
+                      <h3 className={HOME_LIGHT_HEADING}>{item.title}</h3>
+                      <p className={`${HOME_LIGHT_BODY} mt-4 min-h-[96px]`}>{item.description}</p>
+                      <div className={MISSION_BAR_BUTTON}>{item.buttonLabel}</div>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
 
             <motion.div
@@ -414,7 +408,7 @@ export default memo(function HomePage() {
       <section className="relative w-full overflow-hidden px-4 py-16 sm:px-6 md:px-10 md:py-24 lg:px-16 lg:py-32 xl:px-24">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(244,206,90,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(221,124,55,0.10),transparent_26%),linear-gradient(135deg,#fffbf4_0%,#fff6e6_38%,#fffdf8_100%)]"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.10),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(31,115,160,0.08),transparent_26%)]"
         />
         <motion.div
           aria-hidden="true"
@@ -422,7 +416,7 @@ export default memo(function HomePage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="absolute left-[-4rem] top-12 h-40 w-40 rounded-full bg-[#f4ce5a]/20 blur-3xl"
+          className="absolute left-[-4rem] top-12 h-40 w-40 rounded-full bg-white/12 blur-3xl"
         />
         <motion.div
           aria-hidden="true"
@@ -430,7 +424,7 @@ export default memo(function HomePage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-          className="absolute bottom-10 right-[-3rem] h-52 w-52 rounded-full bg-[#d86f33]/14 blur-3xl"
+          className="absolute bottom-10 right-[-3rem] h-52 w-52 rounded-full bg-[#529cb0]/16 blur-3xl"
         />
 
         <div className="relative w-full">
@@ -450,7 +444,7 @@ export default memo(function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.55, delay: 0.12, ease: "easeOut" }}
-            className="mt-6 flex items-center justify-end gap-2 text-sm font-semibold text-[#9a6a3f]"
+            className="mt-6 flex items-center justify-end gap-2 text-sm font-semibold text-[#F4FAFF]"
           >
             <span>Scroll</span>
             <motion.span animate={{ x: [0, 6, 0] }} transition={{ duration: 1.4, repeat: Number.POSITIVE_INFINITY }}>
@@ -459,45 +453,45 @@ export default memo(function HomePage() {
           </motion.div>
 
           <div className="relative mt-8">
-            <div aria-hidden="true" className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-10 bg-gradient-to-r from-[#fff6e7] to-transparent md:w-16" />
-            <div aria-hidden="true" className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-10 bg-gradient-to-l from-[#fffdf8] to-transparent md:w-16" />
+            <div aria-hidden="true" className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-10 bg-gradient-to-r from-[#83b7d3] to-transparent md:w-16" />
+            <div aria-hidden="true" className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-10 bg-gradient-to-l from-[#6fa9c9] to-transparent md:w-16" />
             <div className="w-full overflow-x-auto pl-1 pr-1 [scrollbar-width:none] md:pl-2 md:pr-2 [&::-webkit-scrollbar]:hidden">
               <div className="flex w-max snap-x snap-mandatory gap-5 pb-3 md:gap-6">
-              {sevaItems.map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.55, delay: index * 0.06, ease: "easeOut" }}
-                  className="flex-shrink-0"
-                >
-                  <Link to={item.link} className={SEVA_SCROLL_CARD}>
-                    <motion.div whileHover={{ y: -8 }} transition={{ type: "spring", stiffness: 220, damping: 18 }} className="relative h-[23rem]">
-                      <motion.img
-                        src={item.image}
-                        alt={item.title}
-                        loading="lazy"
-                        whileHover={{ scale: 1.07 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        className="h-full w-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,26,36,0.04),rgba(11,26,36,0.16)_35%,rgba(11,26,36,0.82)_100%)] transition duration-300 group-hover:bg-[linear-gradient(180deg,rgba(11,26,36,0.08),rgba(11,26,36,0.22)_34%,rgba(11,26,36,0.9)_100%)]" />
-                      <motion.div
-                        whileHover={{ y: -2 }}
-                        transition={{ duration: 0.3 }}
-                        className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5"
-                      >
-                        <h3 className={`max-w-[12rem] ${HOME_DARK_HEADING}`}>{item.title}</h3>
-                        <span className="inline-flex items-center gap-1 text-sm font-semibold text-white/92">
-                          Explore
-                          <span aria-hidden="true">→</span>
-                        </span>
+                {sevaItems.map((item, index) => (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, y: 28 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.15 }}
+                    transition={{ duration: 0.55, delay: index * 0.06, ease: "easeOut" }}
+                    className="flex-shrink-0"
+                  >
+                    <Link to={item.link} className={SEVA_SCROLL_CARD}>
+                      <motion.div whileHover={{ y: -8 }} transition={{ type: "spring", stiffness: 220, damping: 18 }} className="relative h-[23rem]">
+                        <motion.img
+                          src={item.image}
+                          alt={item.title}
+                          loading="lazy"
+                          whileHover={{ scale: 1.07 }}
+                          transition={{ duration: 0.4, ease: "easeOut" }}
+                          className="h-full w-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,26,36,0.04),rgba(11,26,36,0.16)_35%,rgba(11,26,36,0.82)_100%)] transition duration-300 group-hover:bg-[linear-gradient(180deg,rgba(11,26,36,0.08),rgba(11,26,36,0.22)_34%,rgba(11,26,36,0.9)_100%)]" />
+                        <motion.div
+                          whileHover={{ y: -2 }}
+                          transition={{ duration: 0.3 }}
+                          className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5"
+                        >
+                          <h3 className={`max-w-[12rem] ${HOME_DARK_HEADING}`}>{item.title}</h3>
+                          <span className="inline-flex items-center gap-1 text-sm font-semibold text-white/92">
+                            Explore
+                            <span aria-hidden="true">→</span>
+                          </span>
+                        </motion.div>
                       </motion.div>
-                    </motion.div>
-                  </Link>
-                </motion.div>
-              ))}
+                    </Link>
+                  </motion.div>
+                ))}
               </div>
             </div>
           </div>
@@ -505,10 +499,10 @@ export default memo(function HomePage() {
       </section>
 
       <section className="relative w-full overflow-hidden px-4 py-16 sm:px-6 md:px-10 md:py-24 lg:px-16 lg:py-32 xl:px-24">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,206,90,0.18),transparent_26%),linear-gradient(135deg,#fffbf4_0%,#fff6e6_42%,#fffdf8_100%)]" />
-        <div aria-hidden="true" className="absolute left-[-4rem] top-16 h-52 w-52 rounded-full bg-[#f4ce5a]/18 blur-3xl" />
-        <div aria-hidden="true" className="absolute right-[-4rem] top-28 h-48 w-48 rounded-full bg-[#529cb0]/12 blur-3xl" />
-        <div aria-hidden="true" className="absolute bottom-8 left-1/3 h-44 w-44 rounded-full bg-[#e9932d]/10 blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.10),transparent_26%)]" />
+        <div aria-hidden="true" className="absolute left-[-4rem] top-16 h-52 w-52 rounded-full bg-white/12 blur-3xl" />
+        <div aria-hidden="true" className="absolute right-[-4rem] top-28 h-48 w-48 rounded-full bg-[#529cb0]/14 blur-3xl" />
+        <div aria-hidden="true" className="absolute bottom-8 left-1/3 h-44 w-44 rounded-full bg-[#d9f0fb]/10 blur-3xl" />
 
         <div className="relative">
           <motion.div
@@ -538,7 +532,7 @@ export default memo(function HomePage() {
                   transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
                 >
                   <Link to={item.link} className={INVOLVED_CARD}>
-                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-[#f6dfb4] bg-white text-[#d08a32] shadow-[0_0_30px_rgba(244,206,90,0.14)]">
+                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-white/30 bg-[#dff2fb] text-[#1f73a0] shadow-[0_0_30px_rgba(84,151,190,0.18)]">
                       <Icon />
                     </div>
                     <h3 className={`mt-6 ${HOME_DARK_HEADING}`}>{item.title}</h3>
@@ -548,15 +542,14 @@ export default memo(function HomePage() {
               );
             })}
           </div>
-
         </div>
       </section>
 
       <section className="relative w-full overflow-hidden px-4 py-16 sm:px-6 md:px-10 md:py-24 lg:px-16 lg:py-32 xl:px-24">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,206,90,0.16),transparent_24%),linear-gradient(135deg,#fefcf6_0%,#f5fbff_44%,#fff7eb_100%)]" />
-        <div aria-hidden="true" className="absolute left-[-4rem] top-16 h-52 w-52 rounded-full bg-[#f4ce5a]/16 blur-3xl" />
-        <div aria-hidden="true" className="absolute right-[-3rem] top-10 h-44 w-44 rounded-full bg-[#529cb0]/12 blur-3xl" />
-        <div aria-hidden="true" className="absolute bottom-8 left-1/3 h-40 w-40 rounded-full bg-[#e9932d]/10 blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.10),transparent_24%)]" />
+        <div aria-hidden="true" className="absolute left-[-4rem] top-16 h-52 w-52 rounded-full bg-white/12 blur-3xl" />
+        <div aria-hidden="true" className="absolute right-[-3rem] top-10 h-44 w-44 rounded-full bg-[#529cb0]/14 blur-3xl" />
+        <div aria-hidden="true" className="absolute bottom-8 left-1/3 h-40 w-40 rounded-full bg-[#d9f0fb]/10 blur-3xl" />
 
         <div className="relative">
           <motion.div
@@ -580,7 +573,7 @@ export default memo(function HomePage() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.65, ease: "easeOut" }}
             >
-              <Link to={mediaItems[0].link} className="group relative block overflow-hidden rounded-[28px] border border-[#f1d7ab] shadow-[0_22px_54px_rgba(233,147,45,0.14)]">
+              <Link to={mediaItems[0].link} className="group relative block overflow-hidden rounded-[28px] border border-white/28 shadow-[0_22px_54px_rgba(54,112,147,0.14)]">
                 <motion.img
                   src={mediaItems[0].image}
                   alt={mediaItems[0].title}
@@ -592,7 +585,7 @@ export default memo(function HomePage() {
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,26,36,0.04),rgba(11,26,36,0.16)_40%,rgba(11,26,36,0.82)_100%)] transition duration-300 group-hover:bg-[linear-gradient(180deg,rgba(11,26,36,0.08),rgba(11,26,36,0.24)_34%,rgba(11,26,36,0.9)_100%)]" />
                 <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
                   <div>
-                    <span className="inline-flex rounded-full border border-[#f6dfb4] bg-white/90 px-3 py-1 text-sm font-semibold text-[#d08a32]">
+                    <span className="inline-flex rounded-full border border-white/34 bg-[#F5FCFF]/94 px-3 py-1 text-sm font-semibold text-[#1f73a0]">
                       {mediaItems[0].tag}
                     </span>
                     <h3 className={`mt-4 ${HOME_DARK_HEADING}`}>{mediaItems[0].title}</h3>
@@ -611,7 +604,7 @@ export default memo(function HomePage() {
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.55, delay: index * 0.08, ease: "easeOut" }}
                 >
-                  <Link to={item.link} className="group relative block overflow-hidden rounded-[28px] border border-[#f1d7ab] shadow-[0_18px_42px_rgba(233,147,45,0.12)]">
+                  <Link to={item.link} className="group relative block overflow-hidden rounded-[28px] border border-white/28 shadow-[0_18px_42px_rgba(54,112,147,0.13)]">
                     <motion.img
                       src={item.image}
                       alt={item.title}
@@ -623,7 +616,7 @@ export default memo(function HomePage() {
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,26,36,0.04),rgba(11,26,36,0.18)_36%,rgba(11,26,36,0.84)_100%)] transition duration-300 group-hover:bg-[linear-gradient(180deg,rgba(11,26,36,0.08),rgba(11,26,36,0.24)_30%,rgba(11,26,36,0.9)_100%)]" />
                     <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5">
                       <div>
-                        <span className="inline-flex rounded-full border border-[#f6dfb4] bg-white/90 px-3 py-1 text-sm font-semibold text-[#d08a32]">
+                        <span className="inline-flex rounded-full border border-white/34 bg-[#F5FCFF]/94 px-3 py-1 text-sm font-semibold text-[#1f73a0]">
                           {item.tag}
                         </span>
                         <h3 className={`mt-3 ${HOME_DARK_HEADING}`}>{item.title}</h3>
@@ -645,7 +638,7 @@ export default memo(function HomePage() {
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, delay: index * 0.06, ease: "easeOut" }}
               >
-                <Link to={item.link} className="group relative block overflow-hidden rounded-[24px] border border-[#f1d7ab] shadow-[0_16px_36px_rgba(233,147,45,0.12)]">
+                <Link to={item.link} className="group relative block overflow-hidden rounded-[24px] border border-white/28 shadow-[0_16px_36px_rgba(54,112,147,0.13)]">
                   <motion.img
                     src={item.image}
                     alt={item.title}
@@ -657,7 +650,7 @@ export default memo(function HomePage() {
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,26,36,0.04),rgba(11,26,36,0.14)_30%,rgba(11,26,36,0.82)_100%)] transition duration-300 group-hover:bg-[linear-gradient(180deg,rgba(11,26,36,0.08),rgba(11,26,36,0.22)_26%,rgba(11,26,36,0.9)_100%)]" />
                   <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4">
                     <div>
-                      <span className="inline-flex rounded-full border border-[#f6dfb4] bg-white/90 px-2.5 py-1 text-sm font-semibold text-[#d08a32]">
+                      <span className="inline-flex rounded-full border border-white/34 bg-[#F5FCFF]/94 px-2.5 py-1 text-sm font-semibold text-[#1f73a0]">
                         {item.tag}
                       </span>
                       <h3 className={`mt-2 ${HOME_DARK_HEADING}`}>{item.title}</h3>
