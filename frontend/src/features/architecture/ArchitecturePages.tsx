@@ -771,10 +771,12 @@ function ArchitectureHubPage({
   title,
   subtitle,
   cards,
+  extraSection,
 }: {
   title: string;
   subtitle: string;
   cards: NavCard[];
+  extraSection?: ReactNode;
 }) {
   usePageMeta(title, subtitle);
 
@@ -800,7 +802,135 @@ function ArchitectureHubPage({
           ))}
         </div>
       </PageSectionShell>
+
+      {extraSection ? <PageSectionShell className="pt-4">{extraSection}</PageSectionShell> : null}
     </div>
+  );
+}
+
+const SEVA_INITIATIVE_ITEMS = [
+  {
+    title: "Gau Seva",
+    image: "https://res.cloudinary.com/der8zinu8/image/upload/v1772910777/gau_pdm92i.jpg",
+    href: ROUTES.seva.gau,
+  },
+  {
+    title: "Jal Seva",
+    image: "/images/jal1.png",
+    href: ROUTES.seva.jal,
+  },
+  {
+    title: "Ann Seva",
+    image: "/images/annseva.png",
+    href: ROUTES.seva.ann,
+  },
+  {
+    title: "Chikitsa Seva",
+    image: "/images/chikitsa.png",
+    href: ROUTES.seva.medicine,
+  },
+  {
+    title: "Education Support",
+    image: "/images/education.png",
+    href: ROUTES.seva.education,
+  },
+  {
+    title: "Scholarship Program",
+    image: "https://res.cloudinary.com/der8zinu8/image/upload/v1772699279/scholorship_ki7aes.png",
+    href: ROUTES.seva.scholarship,
+  },
+  {
+    title: "Kanyadaan Seva",
+    image: "/images/kanyadan.png",
+    href: ROUTES.seva.kanyadaan,
+  },
+  {
+    title: "Vyasanmukti Abhiyan",
+    image: "/images/vyasanmukti.png",
+    href: ROUTES.seva.vyasanmukti,
+  },
+  {
+    title: "Disaster Relief",
+    image: "https://res.cloudinary.com/der8zinu8/image/upload/v1772911110/disaster-relief_lg6qcp.webp",
+    href: ROUTES.seva.disasterRelief,
+  },
+] as const;
+
+function SevaInitiativesSection() {
+  return (
+    <section className="relative overflow-hidden rounded-[2rem] border border-[#e7d4b7] bg-[radial-gradient(circle_at_top_left,rgba(249,242,169,0.28),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(82,156,176,0.14),transparent_28%),linear-gradient(135deg,#fff9f0_0%,#fffefb_42%,#f7fbff_100%)] px-5 py-10 shadow-[0_24px_60px_rgba(18,55,83,0.10)] md:px-8 md:py-12">
+      <div aria-hidden="true" className="pointer-events-none absolute -left-14 top-10 h-36 w-36 rounded-full bg-[#f4ce5a]/20 blur-3xl" />
+      <div aria-hidden="true" className="pointer-events-none absolute bottom-6 right-4 h-40 w-40 rounded-full bg-[#529cb0]/14 blur-3xl" />
+
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.35 }}
+        transition={{ duration: 0.65, ease: "easeOut" }}
+        className="relative mx-auto max-w-3xl text-center"
+      >
+        <p className="text-sm font-semibold uppercase tracking-[0.34em] text-[#d38a1f]">Seva Initiatives</p>
+        <h2 className="mt-4 text-3xl font-black tracking-tight text-[#123753] md:text-5xl">Seva Initiatives</h2>
+        <p className="mt-4 text-base leading-7 text-[#5c6f7f] md:text-lg">Serving Humanity Through Selfless Actions</p>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.35 }}
+        transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+        className="relative mt-5 flex items-center justify-end gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#9c6f3f]"
+      >
+        <span>Scroll to explore</span>
+        <span aria-hidden="true">→</span>
+      </motion.div>
+
+      <div className="relative mt-8 overflow-hidden">
+        <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {SEVA_INITIATIVE_ITEMS.map((item, index) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.55, delay: index * 0.07, ease: "easeOut" }}
+              className="min-w-[18.5rem] max-w-[18.5rem] snap-start md:min-w-[19.5rem] md:max-w-[19.5rem] xl:min-w-[20rem] xl:max-w-[20rem]"
+            >
+              <Link to={item.href} className="group block">
+                <motion.article
+                  whileHover={{ y: -8 }}
+                  transition={{ type: "spring", stiffness: 220, damping: 18 }}
+                  className="relative h-[23rem] overflow-hidden rounded-[1.6rem] shadow-[0_18px_44px_rgba(18,55,83,0.12)]"
+                >
+                  <motion.img
+                    src={item.image}
+                    alt={item.title}
+                    loading="lazy"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.45, ease: "easeOut" }}
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,32,49,0.04),rgba(10,32,49,0.18)_38%,rgba(8,23,37,0.82)_100%)] transition duration-300 group-hover:bg-[linear-gradient(180deg,rgba(10,32,49,0.08),rgba(10,32,49,0.24)_34%,rgba(8,23,37,0.9)_100%)]" />
+                  <div className="absolute inset-x-0 bottom-0 p-5">
+                    <motion.div
+                      whileHover={{ y: -2 }}
+                      transition={{ duration: 0.3 }}
+                      className="flex items-end justify-between gap-4"
+                    >
+                      <h3 className="max-w-[12rem] text-2xl font-black leading-tight text-white">{item.title}</h3>
+                      <span className="inline-flex items-center gap-1 text-sm font-semibold text-white/90">
+                        Explore
+                        <span aria-hidden="true">→</span>
+                      </span>
+                    </motion.div>
+                  </div>
+                </motion.article>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -1121,24 +1251,304 @@ export const SevaHubPage = memo(function SevaHubPage() {
         { title: "Disaster Relief", desc: "Rapid response support during emergencies.", href: ROUTES.seva.disasterRelief },
         { title: "Volunteer Programs", desc: "Seva teams and volunteer coordination models.", href: ROUTES.seva.volunteerPrograms },
       ]}
+      extraSection={<SevaInitiativesSection />}
     />
   );
 });
 
 export const EventsKathaHubPage = memo(function EventsKathaHubPage() {
+  const [activeFilter, setActiveFilter] = useState<"All" | "Katha" | "Festivals" | "Youth" | "Spiritual">("All");
+
+  const eventItems = useMemo(
+    () => [
+      {
+        title: "Bhagwat Katha Mahotsav",
+        description: "Large-scale katha assemblies and devotional discourse.",
+        href: ROUTES.eventsKatha.bhagwatKatha,
+        image: "/images/kathapravachan.png",
+        badge: "Upcoming",
+        date: "May 2026",
+        category: "Katha" as const,
+      },
+      {
+        title: "Spiritual Events",
+        description: "Satsang sabhas, path, and spiritual gatherings.",
+        href: ROUTES.eventsKatha.spiritualEvents,
+        image: "/images/spiritual1.png",
+        badge: "Live",
+        date: "Every Week",
+        category: "Spiritual" as const,
+      },
+      {
+        title: "Festivals & Celebrations",
+        description: "Traditional utsavs and seasonal observances.",
+        href: ROUTES.eventsKatha.festivals,
+        image: "https://res.cloudinary.com/der8zinu8/image/upload/v1772913533/festival_axzy0v.jpg",
+        badge: "Seasonal",
+        date: "All Year",
+        category: "Festivals" as const,
+      },
+      {
+        title: "Guru Purnima",
+        description: "Guru bhakti and spiritual gratitude programs.",
+        href: ROUTES.eventsKatha.guruPurnima,
+        image: "https://res.cloudinary.com/der8zinu8/image/upload/v1772913532/gurupurnima_gthuvv.jpg",
+        badge: "Sacred",
+        date: "Annual",
+        category: "Festivals" as const,
+      },
+      {
+        title: "Annakut Mahotsav",
+        description: "Devotional offering and community celebration.",
+        href: ROUTES.eventsKatha.annakut,
+        image: "/images/annseva.png",
+        badge: "Popular",
+        date: "Festival Day",
+        category: "Festivals" as const,
+      },
+      {
+        title: "Youth Programs",
+        description: "Youth-focused camps, classes, and leadership sessions.",
+        href: ROUTES.eventsKatha.youthPrograms,
+        image: "https://res.cloudinary.com/der8zinu8/image/upload/v1772913533/youth_xj81l3.jpg",
+        badge: "Youth",
+        date: "Monthly",
+        category: "Youth" as const,
+      },
+    ],
+    [],
+  );
+
+  const visibleItems =
+    activeFilter === "All" ? eventItems : eventItems.filter((item) => item.category === activeFilter);
+  const featuredItem = visibleItems[0] ?? eventItems[0];
+  const spotlightItems = visibleItems.slice(1, 3);
+  const supportingItems = visibleItems.slice(3);
+
+  usePageMeta(
+    "Events & Katha",
+    "Bhagwat Katha and devotional events calendar with youth and festival engagement.",
+  );
+
   return (
-    <ArchitectureHubPage
-      title="Events & Katha"
-      subtitle="Bhagwat Katha and devotional events calendar with youth and festival engagement."
-      cards={[
-        { title: "Bhagwat Katha Mahotsav", desc: "Large-scale katha assemblies and devotional discourse.", href: ROUTES.eventsKatha.bhagwatKatha },
-        { title: "Spiritual Events", desc: "Satsang sabhas, path, and spiritual gatherings.", href: ROUTES.eventsKatha.spiritualEvents },
-        { title: "Festivals & Celebrations", desc: "Traditional utsavs and seasonal observances.", href: ROUTES.eventsKatha.festivals },
-        { title: "Guru Purnima", desc: "Guru bhakti and spiritual gratitude programs.", href: ROUTES.eventsKatha.guruPurnima },
-        { title: "Annakut Mahotsav", desc: "Devotional offering and community celebration.", href: ROUTES.eventsKatha.annakut },
-        { title: "Youth Programs", desc: "Youth-focused camps, classes, and leadership sessions.", href: ROUTES.eventsKatha.youthPrograms },
-      ]}
-    />
+    <div className="min-h-screen overflow-hidden bg-[linear-gradient(180deg,#FFF9F1_0%,#FFFDF8_42%,#F6EAD4_100%)] text-[#51463C]">
+      <section className="relative w-full overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "linear-gradient(180deg, rgba(4, 18, 30, 0.34), rgba(4, 18, 30, 0.78)), url('/images/kathapravachan.png')",
+          }}
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(228,180,94,0.14),transparent_24%)]" />
+        <div aria-hidden="true" className="absolute left-[6%] top-24 h-28 w-28 rounded-full bg-[#E4B45E]/20 blur-3xl" />
+        <div aria-hidden="true" className="absolute right-[10%] top-36 h-32 w-32 rounded-full bg-[#529CB0]/14 blur-3xl" />
+
+        <div className="relative flex min-h-[420px] w-full items-end px-4 py-16 sm:px-6 md:min-h-[540px] md:px-10 md:py-24 lg:px-16 lg:py-32 xl:px-24">
+          <motion.div
+            initial={{ opacity: 0, y: 36 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="max-w-4xl"
+          >
+            <p className={`${ABOUT_SECTION_LABEL_CLASS} text-[#F9F2A9] md:text-base`}>Spiritual Calendar</p>
+            <motion.h1
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.08, ease: "easeOut" }}
+              className="mt-3 text-4xl font-black leading-tight text-white md:text-6xl"
+            >
+              Events & Katha
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.16, ease: "easeOut" }}
+              className="mt-4 max-w-3xl text-base leading-7 text-white/90 md:text-lg"
+            >
+              Bhagwat Katha and devotional events calendar with youth and festival engagement.
+            </motion.p>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="relative z-10 -mt-8 w-full px-4 pb-12 sm:px-6 md:px-10 md:pb-20 lg:-mt-10 lg:px-16 lg:pb-24 xl:px-24">
+        <div className="rounded-[28px] border border-[#E7D3B5] bg-[#FFFDF8]/95 p-3 shadow-[0_20px_55px_rgba(29,79,99,0.08)] backdrop-blur-xl sm:p-4">
+          <div className="flex flex-wrap gap-2">
+            {(["All", "Katha", "Festivals", "Youth", "Spiritual"] as const).map((filter) => {
+              const active = filter === activeFilter;
+              return (
+                <button
+                  key={filter}
+                  type="button"
+                  onClick={() => setActiveFilter(filter)}
+                  className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                    active
+                      ? "bg-[#E4B45E] text-[#33210F] shadow-[0_12px_28px_rgba(228,180,94,0.28)] hover:bg-[#D08A32]"
+                      : "border border-[#D8C3A2] bg-[#FFF9F1] text-[#51463C] hover:border-[#E4B45E] hover:bg-[#FFFDF8]"
+                  }`}
+                >
+                  {filter}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full px-4 pb-12 sm:px-6 md:px-10 md:pb-20 lg:px-16 lg:pb-24 xl:px-24">
+        <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1.25fr_0.75fr]">
+          <motion.div
+            initial={{ opacity: 0, y: 32, scale: 0.98 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+          >
+            <Link to={featuredItem.href} className="group block">
+              <motion.article
+                whileHover={{ y: -8, rotateX: 1.5, rotateY: -1.5 }}
+                transition={{ type: "spring", stiffness: 200, damping: 18 }}
+                className="relative h-[26rem] overflow-hidden rounded-[28px] border border-[#D8C3A2] bg-[#FFFDF8] shadow-[0_22px_60px_rgba(29,79,99,0.12)] md:h-[34rem]"
+              >
+                <motion.img
+                  src={featuredItem.image}
+                  alt={featuredItem.title}
+                  loading="lazy"
+                  whileHover={{ scale: 1.06 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(29,79,99,0.08),rgba(29,79,99,0.16)_38%,rgba(20,48,64,0.84)_100%)] transition duration-500 group-hover:bg-[linear-gradient(180deg,rgba(29,79,99,0.12),rgba(29,79,99,0.24)_32%,rgba(20,48,64,0.92)_100%)]" />
+                <div className="absolute left-6 top-6 flex flex-wrap gap-3">
+                  <span className="rounded-full border border-[#E7D3B5] bg-[#E4B45E]/90 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-[#33210F]">
+                    {featuredItem.badge}
+                  </span>
+                  <span className="rounded-full border border-[#E7D3B5] bg-[#FFFDF8]/88 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-[#51463C]">
+                    {featuredItem.date}
+                  </span>
+                </div>
+                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
+                  <div>
+                    <h2 className="text-2xl font-black text-white md:text-4xl">{featuredItem.title}</h2>
+                    <p className="mt-3 max-w-2xl text-sm leading-7 text-white/88 md:text-base">{featuredItem.description}</p>
+                  </div>
+                  <motion.span whileHover={{ x: 4 }} className="text-sm font-semibold text-white/92">
+                    Open Section →
+                  </motion.span>
+                </div>
+              </motion.article>
+            </Link>
+          </motion.div>
+
+          <div className="grid gap-6">
+            {spotlightItems.map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.55, delay: index * 0.08, ease: "easeOut" }}
+              >
+                <Link to={item.href} className="group block">
+                  <motion.article
+                    whileHover={{ y: -8, rotateX: 1.2, rotateY: 1.2 }}
+                    transition={{ type: "spring", stiffness: 220, damping: 18 }}
+                    className="relative h-[16rem] overflow-hidden rounded-[26px] border border-[#D8C3A2] bg-[#FFFDF8] shadow-[0_18px_46px_rgba(29,79,99,0.1)]"
+                  >
+                    <motion.img
+                      src={item.image}
+                      alt={item.title}
+                      loading="lazy"
+                      whileHover={{ scale: 1.06 }}
+                      transition={{ duration: 0.45, ease: "easeOut" }}
+                      className="h-full w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(29,79,99,0.08),rgba(29,79,99,0.18)_32%,rgba(20,48,64,0.84)_100%)] transition duration-500 group-hover:bg-[linear-gradient(180deg,rgba(29,79,99,0.12),rgba(29,79,99,0.26)_26%,rgba(20,48,64,0.92)_100%)]" />
+                    <div className="absolute left-5 top-5 flex flex-wrap gap-2">
+                      <span className="rounded-full border border-[#E7D3B5] bg-[#E4B45E]/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#33210F]">
+                        {item.badge}
+                      </span>
+                      <span className="rounded-full border border-[#E7D3B5] bg-[#FFFDF8]/88 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#51463C]">
+                        {item.date}
+                      </span>
+                    </div>
+                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5">
+                      <div>
+                        <h3 className="text-[14px] font-black text-white md:text-[20px]">{item.title}</h3>
+                        <p className="mt-2 text-sm leading-6 text-white/88">{item.description}</p>
+                      </div>
+                      <motion.span whileHover={{ x: 4 }} className="text-sm font-semibold text-white/92">
+                        Open →
+                      </motion.span>
+                    </div>
+                  </motion.article>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {supportingItems.map((item, index) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 24, scale: 0.98 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.5, delay: index * 0.06, ease: "easeOut" }}
+            >
+              <Link to={item.href} className="group block">
+                <motion.article
+                  whileHover={{ y: -8, rotateX: 1, rotateY: -1 }}
+                  transition={{ type: "spring", stiffness: 220, damping: 18 }}
+                  className="relative h-[18rem] overflow-hidden rounded-[24px] border border-[#D8C3A2] bg-[#FFFDF8] shadow-[0_16px_40px_rgba(29,79,99,0.1)]"
+                >
+                  <motion.img
+                    src={item.image}
+                    alt={item.title}
+                    loading="lazy"
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(29,79,99,0.06),rgba(29,79,99,0.16)_30%,rgba(20,48,64,0.84)_100%)] transition duration-500 group-hover:bg-[linear-gradient(180deg,rgba(29,79,99,0.12),rgba(29,79,99,0.26)_24%,rgba(20,48,64,0.92)_100%)]" />
+                  <div className="absolute left-4 top-4 flex gap-2">
+                    <span className="rounded-full border border-[#E7D3B5] bg-[#E4B45E]/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#33210F]">
+                      {item.badge}
+                    </span>
+                  </div>
+                  <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4">
+                    <div>
+                      <h3 className="text-[14px] font-black text-white md:text-[20px]">{item.title}</h3>
+                      <p className="mt-2 text-sm leading-6 text-white/88">{item.description}</p>
+                    </div>
+                    <motion.span whileHover={{ x: 4 }} className="text-sm font-semibold text-white/92">
+                      →
+                    </motion.span>
+                  </div>
+                </motion.article>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 22 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.65, delay: 0.12, ease: "easeOut" }}
+          className="mt-14 text-center"
+        >
+          <p className="text-base leading-7 text-[#5E5247] md:text-lg">Join Our Spiritual Gatherings</p>
+          <Link
+            to={ROUTES.eventsKatha.festivals}
+            className="mt-6 inline-flex items-center justify-center rounded-full bg-[#E4B45E] px-8 py-3 text-sm font-semibold text-[#33210F] shadow-[0_16px_32px_rgba(228,180,94,0.26)] transition duration-300 hover:scale-[1.04] hover:bg-[#D08A32] hover:shadow-[0_20px_38px_rgba(208,138,50,0.28)]"
+          >
+            View Full Calendar →
+          </Link>
+        </motion.div>
+      </section>
+    </div>
   );
 });
 

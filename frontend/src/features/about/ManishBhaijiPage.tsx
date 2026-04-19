@@ -260,13 +260,13 @@ export default memo(function ManishBhaijiPage() {
               <div className="space-y-3">
                 {objectives.map((obj) => (
                   <div key={obj} className="flex items-start gap-3 bg-white rounded-xl border border-[#f1dcc0] px-4 py-3">
-                    <span className="text-[#ff6a00] font-bold mt-0.5 shrink-0">âœ¦</span>
+                    <span className="text-[#ff6a00] font-bold mt-0.5 shrink-0"></span>
                     <span className={FOUNDER_BODY}>{obj}</span>
                   </div>
                 ))}
               </div>
               <Link to={ROUTES.about.index} className="inline-block mt-6 bg-white border border-[#d2deea] text-[#0d4e85] font-semibold px-6 py-3 rounded-xl hover:bg-[#f2f6fa] transition-colors">
-                {t("founderPage.learnFoundation")} â†’
+                {t("founderPage.learnFoundation")}
               </Link>
             </div>
           </div>
@@ -303,7 +303,6 @@ export default memo(function ManishBhaijiPage() {
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white rounded-2xl border border-[#f1dcc0] p-6 md:p-8">
-              <div className="text-3xl mb-3">ðŸŒ±</div>
               <p className={`${FOUNDER_LABEL} mb-2`}>{t("founderPage.youthEyebrow")}</p>
               <h2 className={`${FOUNDER_HEADING} mb-4 leading-tight`}>{t("founderPage.youthHeading")}</h2>
               <div className={`space-y-3 ${FOUNDER_BODY}`}>
@@ -313,7 +312,6 @@ export default memo(function ManishBhaijiPage() {
               </div>
             </div>
             <div className="bg-white rounded-2xl border border-[#f1dcc0] p-6 md:p-8">
-              <div className="text-3xl mb-3">ðŸ›ï¸</div>
               <p className={`${FOUNDER_LABEL} mb-2`}>{t("founderPage.culturalEyebrow")}</p>
               <h2 className={`${FOUNDER_HEADING} mb-4 leading-tight`}>{t("founderPage.culturalHeading")}</h2>
               <div className={`space-y-3 ${FOUNDER_BODY}`}>
@@ -423,3 +421,4 @@ export default memo(function ManishBhaijiPage() {
     </div>
   );
 });
+
