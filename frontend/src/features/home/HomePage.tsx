@@ -283,9 +283,9 @@ export default memo(function HomePage() {
     <div
       className="min-h-screen"
       style={{
-        backgroundColor: "#eaf4f1",
+        backgroundColor: "#eaf4fb",
         backgroundImage:
-          "radial-gradient(circle at top left, rgba(47,127,115,0.35) 0%, rgba(47,127,115,0) 42%), radial-gradient(circle at top right, rgba(19,126,181,0.28) 0%, rgba(19,126,181,0) 40%), radial-gradient(circle at bottom left, rgba(252,182,48,0.22) 0%, rgba(252,182,48,0) 44%), radial-gradient(circle at bottom right, rgba(148,197,88,0.22) 0%, rgba(148,197,88,0) 46%), linear-gradient(135deg, #f7fcfa 0%, #edf8f2 45%, #fff7e6 100%)",
+          "radial-gradient(circle at top left, rgba(89,166,215,0.24) 0%, rgba(89,166,215,0) 42%), radial-gradient(circle at top right, rgba(133,196,234,0.26) 0%, rgba(133,196,234,0) 40%), radial-gradient(circle at bottom left, rgba(207,232,250,0.46) 0%, rgba(207,232,250,0) 44%), radial-gradient(circle at bottom right, rgba(185,223,245,0.34) 0%, rgba(185,223,245,0) 46%), linear-gradient(135deg, #f7fbff 0%, #edf7ff 46%, #e5f3ff 100%)",
       }}
     >
       <section className="w-full px-4 pt-0 sm:px-6 md:px-10 lg:px-[50px]">
@@ -298,44 +298,48 @@ export default memo(function HomePage() {
       </section>
 
       <section className="w-full px-4 py-16 sm:px-6 md:px-10 md:py-24 lg:px-[50px] lg:py-28">
-        <div className="w-full rounded-[30px] border border-[#d8e5ea] bg-white/90 px-6 py-10 text-center shadow-[0_16px_34px_rgba(0,0,0,0.10)] backdrop-blur-sm sm:px-10 md:px-16 md:py-12 lg:px-20 xl:px-28">
-          <p className={`mb-3 ${HOME_SECTION_LABEL}`}>{t("home.aboutEyebrow")}</p>
-          <h2 className={`mx-auto mb-4 max-w-4xl ${HOME_SECTION_HEADING}`}>{t("home.aboutTitle")}</h2>
-          <p className={`mx-auto mb-7 max-w-4xl ${HOME_BODY}`}>{t("home.aboutText")}</p>
-          <Link to={ROUTES.about.index} className={PRIMARY_BUTTON}>
-            {t("home.readMore")}
-          </Link>
-        </div>
-      </section>
-
-      <section className="w-full px-4 py-6 sm:px-6 md:px-10 md:py-10 lg:px-[50px] lg:py-12">
-        <div className="w-full rounded-[30px] border border-[#d8e5ea] bg-white/90 px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.10)] backdrop-blur-sm sm:px-10 md:px-16 lg:px-20 xl:px-28">
-          <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-[220px_1fr] md:gap-8">
-            <div className="mx-auto w-full max-w-[220px]">
-              <div className="rounded-2xl border border-[#e0e8f0] bg-[#f6f8fb] p-2 shadow-sm">
-                <img
-                  src="/images/manish2.PNG"
-                  alt={t("home.founderTitle")}
-                  className="h-[260px] w-full rounded-xl object-cover"
-                  loading="lazy"
-                />
+        <div className="w-full rounded-[30px] border border-[#cde2f1] bg-white/88 px-6 py-10 shadow-[0_16px_34px_rgba(71,125,170,0.12)] backdrop-blur-sm sm:px-10 md:px-12 md:py-12 lg:px-14 xl:px-16">
+          <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+            <div className="rounded-[24px] border border-[#d7e7f3] bg-[#f8fcff] p-8 shadow-[0_12px_28px_rgba(71,125,170,0.08)]">
+              <p className={`mb-3 ${HOME_SECTION_LABEL}`}>Welcome To</p>
+              <h2 className={`mb-4 max-w-4xl ${HOME_SECTION_HEADING}`}>{t("home.aboutTitle")}</h2>
+              <p className={`max-w-3xl ${HOME_BODY}`}>{t("home.aboutText")}</p>
+              <div className="mt-7">
+                <Link to={ROUTES.about.index} className={PRIMARY_BUTTON}>
+                  {t("home.readMore")}
+                </Link>
               </div>
             </div>
 
-            <div>
-              <p className={`mb-2 ${HOME_SECTION_LABEL}`}>{t("home.founderEyebrow")}</p>
-              <h2 className={`mb-3 ${HOME_SECTION_HEADING}`}>{t("home.founderTitle")}</h2>
-              <p className={HOME_BODY}>{t("home.founderQuote")}</p>
-              <div className="mt-5 flex flex-wrap gap-3">
-                <Link to={ROUTES.about.founder} className={PRIMARY_BUTTON}>
-                  {t("home.viewFounderProfile")}
-                </Link>
-                <Link to="/events" className={PRIMARY_BUTTON}>
-                  Upcoming Pravachans
-                </Link>
-                <Link to="/get-involved/invite-maharaj-ji" className={PRIMARY_BUTTON}>
-                  Invite Maharaj Ji
-                </Link>
+            <div className="rounded-[24px] border border-[#d7e7f3] bg-[#f8fcff] p-8 shadow-[0_12px_28px_rgba(71,125,170,0.08)]">
+              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-[220px_1fr] md:gap-8">
+                <div className="mx-auto w-full max-w-[220px]">
+                  <div className="rounded-2xl border border-[#e0e8f0] bg-[#f6f8fb] p-2 shadow-sm">
+                    <img
+                      src="/images/manish2.PNG"
+                      alt={t("home.founderTitle")}
+                      className="h-[260px] w-full rounded-xl object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <p className={`mb-2 ${HOME_SECTION_LABEL}`}>{t("home.founderEyebrow")}</p>
+                  <h2 className={`mb-3 ${HOME_SECTION_HEADING}`}>{t("home.founderTitle")}</h2>
+                  <p className={HOME_BODY}>{t("home.founderQuote")}</p>
+                  <div className="mt-5 flex flex-wrap gap-3">
+                    <Link to={ROUTES.about.founder} className={PRIMARY_BUTTON}>
+                      {t("home.viewFounderProfile")}
+                    </Link>
+                    <Link to="/events" className={PRIMARY_BUTTON}>
+                      Upcoming Pravachans
+                    </Link>
+                    <Link to="/get-involved/invite-maharaj-ji" className={PRIMARY_BUTTON}>
+                      Invite Maharaj Ji
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -345,10 +349,10 @@ export default memo(function HomePage() {
       <section className="relative w-full overflow-hidden px-4 py-16 sm:px-6 md:px-10 md:py-24 lg:px-[50px] lg:py-32">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(244,206,90,0.20),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(82,156,176,0.16),transparent_32%),linear-gradient(135deg,#fefcf6_0%,#f5fbff_46%,#fff7eb_100%)]"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(142,204,242,0.34),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(82,156,176,0.18),transparent_32%),linear-gradient(135deg,#f4faff_0%,#eaf6ff_46%,#eff9ff_100%)]"
         />
-        <div aria-hidden="true" className="absolute left-[-5rem] top-12 h-40 w-40 rounded-full bg-[#f4ce5a]/20 blur-3xl" />
-        <div aria-hidden="true" className="absolute bottom-8 right-[-4rem] h-48 w-48 rounded-full bg-[#529cb0]/16 blur-3xl" />
+        <div aria-hidden="true" className="absolute left-[-5rem] top-12 h-40 w-40 rounded-full bg-[#b9def4]/36 blur-3xl" />
+        <div aria-hidden="true" className="absolute bottom-8 right-[-4rem] h-48 w-48 rounded-full bg-[#8bc9ea]/24 blur-3xl" />
 
         <div className="relative w-full">
           <div className="rounded-[40px] border border-[#f1d7ab] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.88),rgba(255,246,228,0.92)),linear-gradient(135deg,#fffaf0_0%,#fff2d3_100%)] px-6 py-12 shadow-[0_28px_80px_rgba(233,147,45,0.12)] sm:px-10 lg:px-14 lg:py-16">
@@ -413,7 +417,7 @@ export default memo(function HomePage() {
       <section className="relative w-full overflow-hidden px-4 py-16 sm:px-6 md:px-10 md:py-24 lg:px-[50px] lg:py-32">
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(244,206,90,0.18),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(221,124,55,0.10),transparent_26%),linear-gradient(135deg,#fffbf4_0%,#fff6e6_38%,#fffdf8_100%)]"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(173,220,248,0.30),transparent_30%),radial-gradient(circle_at_bottom_right,rgba(120,185,228,0.16),transparent_26%),linear-gradient(135deg,#f4faff_0%,#e8f5ff_38%,#f7fbff_100%)]"
         />
         <motion.div
           aria-hidden="true"
@@ -421,7 +425,7 @@ export default memo(function HomePage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="absolute left-[-4rem] top-12 h-40 w-40 rounded-full bg-[#f4ce5a]/20 blur-3xl"
+          className="absolute left-[-4rem] top-12 h-40 w-40 rounded-full bg-[#b9def4]/34 blur-3xl"
         />
         <motion.div
           aria-hidden="true"
@@ -429,7 +433,7 @@ export default memo(function HomePage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-          className="absolute bottom-10 right-[-3rem] h-52 w-52 rounded-full bg-[#d86f33]/14 blur-3xl"
+          className="absolute bottom-10 right-[-3rem] h-52 w-52 rounded-full bg-[#8bc9ea]/22 blur-3xl"
         />
 
         <div className="relative w-full">
@@ -504,10 +508,10 @@ export default memo(function HomePage() {
       </section>
 
       <section className="relative w-full overflow-hidden px-4 py-16 sm:px-6 md:px-10 md:py-24 lg:px-[50px] lg:py-32">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,206,90,0.18),transparent_26%),linear-gradient(135deg,#fffbf4_0%,#fff6e6_42%,#fffdf8_100%)]" />
-        <div aria-hidden="true" className="absolute left-[-4rem] top-16 h-52 w-52 rounded-full bg-[#f4ce5a]/18 blur-3xl" />
-        <div aria-hidden="true" className="absolute right-[-4rem] top-28 h-48 w-48 rounded-full bg-[#529cb0]/12 blur-3xl" />
-        <div aria-hidden="true" className="absolute bottom-8 left-1/3 h-44 w-44 rounded-full bg-[#e9932d]/10 blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(173,220,248,0.28),transparent_26%),linear-gradient(135deg,#f4faff_0%,#eaf6ff_42%,#f6fbff_100%)]" />
+        <div aria-hidden="true" className="absolute left-[-4rem] top-16 h-52 w-52 rounded-full bg-[#b9def4]/28 blur-3xl" />
+        <div aria-hidden="true" className="absolute right-[-4rem] top-28 h-48 w-48 rounded-full bg-[#8bc9ea]/18 blur-3xl" />
+        <div aria-hidden="true" className="absolute bottom-8 left-1/3 h-44 w-44 rounded-full bg-[#d9effd]/30 blur-3xl" />
 
         <div className="relative">
           <motion.div
@@ -551,10 +555,10 @@ export default memo(function HomePage() {
       </section>
 
       <section className="relative w-full overflow-hidden px-4 py-16 sm:px-6 md:px-10 md:py-24 lg:px-[50px] lg:py-32">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(244,206,90,0.16),transparent_24%),linear-gradient(135deg,#fefcf6_0%,#f5fbff_44%,#fff7eb_100%)]" />
-        <div aria-hidden="true" className="absolute left-[-4rem] top-16 h-52 w-52 rounded-full bg-[#f4ce5a]/16 blur-3xl" />
-        <div aria-hidden="true" className="absolute right-[-3rem] top-10 h-44 w-44 rounded-full bg-[#529cb0]/12 blur-3xl" />
-        <div aria-hidden="true" className="absolute bottom-8 left-1/3 h-40 w-40 rounded-full bg-[#e9932d]/10 blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(173,220,248,0.24),transparent_24%),linear-gradient(135deg,#f4faff_0%,#e8f5ff_44%,#f7fbff_100%)]" />
+        <div aria-hidden="true" className="absolute left-[-4rem] top-16 h-52 w-52 rounded-full bg-[#b9def4]/26 blur-3xl" />
+        <div aria-hidden="true" className="absolute right-[-3rem] top-10 h-44 w-44 rounded-full bg-[#8bc9ea]/16 blur-3xl" />
+        <div aria-hidden="true" className="absolute bottom-8 left-1/3 h-40 w-40 rounded-full bg-[#d9effd]/28 blur-3xl" />
 
         <div className="relative">
           <motion.div
