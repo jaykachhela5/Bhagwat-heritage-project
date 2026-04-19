@@ -114,7 +114,6 @@ export default memo(function HomePage() {
     ],
     [t],
   );
-
   const missionItems = useMemo(
     () => [
       {
