@@ -285,6 +285,7 @@ export default memo(function HomePage() {
             heightClass="h-[calc(58vh+40px)] min-h-[360px] max-h-[800px] sm:h-[calc(62vh+40px)] md:h-[calc(68vh+40px)] lg:h-[calc(72vh+40px)]"
           />
         </section>
+        
         <section className="px-4 py-16">
           <div className="mx-auto max-w-[70rem] rounded-[30px] border border-[#d8e5ea] bg-white/90 px-6 py-10 text-center shadow-[0_16px_34px_rgba(0,0,0,0.10)] backdrop-blur-sm sm:px-[56px] md:px-[96px] lg:px-[120px]">
             <p className={`mb-3 ${HOME_SECTION_LABEL}`}>
