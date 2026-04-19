@@ -27,21 +27,22 @@ type ObjectiveSignal = {
   note: string;
 };
 
-const SECTION_LABEL = `${ABOUT_SECTION_LABEL_CLASS} text-[var(--campaign-accent)]`;
-const SECTION_HEADING = `${ABOUT_SECTION_HEADING_CLASS} text-white`;
-const SECTION_BODY = `mt-4 ${ABOUT_BODY_CLASS} text-[var(--campaign-text)]`;
-const CARD_LABEL = `${ABOUT_SECTION_LABEL_CLASS} text-[var(--campaign-accent)]`;
-const CARD_TITLE = `${ABOUT_CARD_TITLE_CLASS} text-white`;
-const CARD_BODY = `mt-4 ${ABOUT_BODY_CLASS} text-[var(--campaign-text)]`;
+const SECTION_LABEL = `${ABOUT_SECTION_LABEL_CLASS} text-[#C46D1A]`;
+const SECTION_HEADING = `${ABOUT_SECTION_HEADING_CLASS} text-[#1D4F63]`;
+const SECTION_BODY = `mt-4 ${ABOUT_BODY_CLASS} text-[#5E5247]`;
+const CARD_LABEL = `${ABOUT_SECTION_LABEL_CLASS} text-[#C46D1A]`;
+const CARD_TITLE = `${ABOUT_CARD_TITLE_CLASS} text-[#27657A]`;
+const CARD_BODY = `mt-4 ${ABOUT_BODY_CLASS} text-[#51463C]`;
 const SECTION_SHELL =
-  "rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,var(--campaign-bg)_0%,var(--campaign-surface)_100%)] p-6 shadow-[0_14px_30px_rgba(0,0,0,0.2)] md:p-8";
+  "rounded-[30px] border border-[#E7D3B5] bg-[linear-gradient(180deg,rgba(255,245,225,0.92)_0%,rgba(255,252,247,0.98)_48%,rgba(245,232,204,0.95)_100%)] p-6 shadow-[0_22px_52px_rgba(101,71,35,0.09)] md:p-8";
 const DARK_SECTION_SHELL =
-  "rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,#102d3e_0%,#0c2634_100%)] p-6 shadow-[0_14px_30px_rgba(0,0,0,0.2)] md:p-8";
-const CARD_SHELL = "rounded-[24px] border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm";
+  "rounded-[30px] border border-[#D8E4E5] bg-[linear-gradient(180deg,rgba(230,241,240,0.85)_0%,rgba(255,252,247,0.98)_56%,rgba(250,241,225,0.9)_100%)] p-6 shadow-[0_22px_52px_rgba(29,79,99,0.08)] md:p-8";
+const CARD_SHELL =
+  "rounded-[24px] border border-[#D8C3A2] bg-[linear-gradient(180deg,rgba(255,252,245,0.98)_0%,rgba(255,247,233,0.98)_100%)] p-5 shadow-[0_18px_38px_rgba(101,71,35,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-[#D08A32] hover:shadow-[0_22px_42px_rgba(196,109,26,0.14)]";
 const BUTTON_CLASS =
-  "inline-flex items-center justify-center rounded-[18px] bg-[var(--campaign-accent)] px-5 py-3 text-[15px] font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]";
+  "inline-flex items-center justify-center rounded-xl bg-[#F0AE57] px-5 py-3 text-[15px] font-semibold text-[#FFFDF8] shadow-[0_14px_28px_rgba(233,147,45,0.20)] transition-all hover:-translate-y-0.5 hover:bg-[#E9932D]";
 const GHOST_BUTTON =
-  "inline-flex items-center justify-center rounded-[18px] border border-white/14 bg-white/8 px-5 py-3 text-[15px] font-bold text-white transition-colors hover:bg-white/14";
+  "inline-flex items-center justify-center rounded-xl border border-[#D8C3A2] bg-[rgba(255,255,255,0.72)] px-5 py-3 text-[15px] font-semibold text-[#1D4F63] transition-all hover:-translate-y-0.5 hover:bg-[#F6EAD4]";
 
 const OBJECTIVE_POINTS: ObjectivePoint[] = [
   {
@@ -49,42 +50,42 @@ const OBJECTIVE_POINTS: ObjectivePoint[] = [
     description:
       "Advance Bhagwat Katha, satsang, and scripture-centered explanation so devotion is understood, practiced, and shared with clarity.",
     href: ROUTES.eventsKatha.bhagwatKatha,
-    accent: "from-[var(--campaign-accent)]/28 via-[var(--campaign-accent)]/10 to-transparent",
+    accent: "from-[#E4B45E]/30 via-[#E4B45E]/10 to-transparent",
   },
   {
     title: "Develop spiritual learning platforms",
     description:
       "Build study pathways, digital access, and learning spaces that help seekers, families, and youth engage with spiritual knowledge regularly.",
     href: ROUTES.knowledge.index,
-    accent: "from-[#7fd0e7]/26 via-[#4db7d4]/10 to-transparent",
+    accent: "from-[#D8E4E5]/38 via-[#A9CAD1]/14 to-transparent",
   },
   {
     title: "Strengthen family and youth spiritual formation",
     description:
       "Guide children, youth, and families through Bal Sanskar, mentorship, and regular devotional practice that supports character and continuity.",
     href: ROUTES.knowledge.children,
-    accent: "from-[#d7a7ff]/24 via-[#8b5cf6]/10 to-transparent",
+    accent: "from-[#F6EAD4]/42 via-[#E7D3B5]/16 to-transparent",
   },
   {
     title: "Support education and cultural awareness",
     description:
       "Encourage value-based education and preserve cultural understanding through heritage, language, festivals, and dharmic learning.",
     href: ROUTES.mission.cultural,
-    accent: "from-[#9fd8ea]/24 via-[#7fd0e7]/10 to-transparent",
+    accent: "from-[#D8E4E5]/34 via-[#F6EAD4]/12 to-transparent",
   },
   {
     title: "Promote social welfare and humanitarian initiatives",
     description:
       "Extend the trust's mission through seva, care, outreach, and practical support for communities in need.",
     href: ROUTES.about.activities,
-    accent: "from-[#9bd36b]/24 via-[#8fc65b]/10 to-transparent",
+    accent: "from-[#F6EAD4]/36 via-[#E4B45E]/12 to-transparent",
   },
   {
     title: "Establish sacred centers of devotion and learning",
     description:
       "Create and strengthen spaces where worship, study, satsang, and spiritual discipline can grow together.",
     href: ROUTES.mandirTeerth.bhagwatDham,
-    accent: "from-[#e9b26a]/24 via-[#c94c33]/10 to-transparent",
+    accent: "from-[#E4B45E]/30 via-[#C46D1A]/12 to-transparent",
   },
 ];
 
@@ -139,16 +140,16 @@ export default memo(function ObjectivesPage() {
   );
 
   return (
-    <div className="min-h-screen overflow-hidden bg-[#071b28] pb-16 text-white">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[620px] bg-[radial-gradient(circle_at_top,rgba(245,158,11,0.16),transparent_44%)]" />
-      <div className="pointer-events-none absolute right-0 top-[180px] h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.12),transparent_62%)] blur-3xl" />
+    <div className="min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_right,_rgba(228,180,94,0.22)_0%,_rgba(228,180,94,0)_30%),radial-gradient(circle_at_left_center,_rgba(39,101,122,0.12)_0%,_rgba(39,101,122,0)_28%),linear-gradient(180deg,_#FFF9F1_0%,_#FFFDF8_44%,_#F6EAD4_100%)] pb-16 text-[#1D4F63]">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[620px] bg-[radial-gradient(circle_at_top,rgba(245,158,11,0.18),transparent_44%)]" />
+      <div className="pointer-events-none absolute right-0 top-[180px] h-[360px] w-[360px] rounded-full bg-[radial-gradient(circle,rgba(39,101,122,0.12),transparent_62%)] blur-3xl" />
 
       <section className="mx-auto max-w-6xl px-4 pt-8 md:pt-10">
         <div
-          className="relative overflow-hidden rounded-[34px] border border-white/10 shadow-[0_24px_60px_rgba(0,0,0,0.34)]"
+          className="relative overflow-hidden rounded-[34px] border border-[#D8C3A2] shadow-[0_24px_60px_rgba(101,71,35,0.18)]"
           style={{
             backgroundImage:
-              "linear-gradient(180deg, rgba(7,27,40,0.08) 0%, rgba(7,27,40,0.26) 38%, rgba(7,27,40,0.88) 100%), url('https://res.cloudinary.com/der8zinu8/image/upload/v1774439060/objectives_bj9uay.jpg')",
+              "linear-gradient(180deg, rgba(11,34,48,0.08) 0%, rgba(11,34,48,0.34) 42%, rgba(11,34,48,0.92) 100%), url('https://res.cloudinary.com/der8zinu8/image/upload/v1774439060/objectives_bj9uay.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -164,20 +165,14 @@ export default memo(function ObjectivesPage() {
               <h1 className="mb-[10px] text-4xl font-bold leading-tight text-white md:text-5xl">
                 Objectives
               </h1>
-              <p className="mx-auto max-w-3xl text-[18px] font-semibold leading-7 text-[var(--campaign-text)] md:text-[24px]">
+              <p className="mx-auto max-w-3xl text-[18px] font-semibold leading-7 text-white/90 md:text-[24px]">
                 Promoting learning, seva, and sacred values
               </p>
               <div className="mt-6 flex flex-wrap justify-center gap-3">
-                <Link
-                  to={ROUTES.donate}
-                  className="inline-flex items-center justify-center rounded-[18px] bg-[var(--campaign-accent)] px-6 py-3 text-[15px] font-bold text-white shadow-[0_12px_24px_rgba(239,154,30,0.24)] transition-colors hover:bg-[var(--campaign-accent-hover)]"
-                >
+                <Link to={ROUTES.donate} className={BUTTON_CLASS}>
                   Donate
                 </Link>
-                <Link
-                  to={ROUTES.involved.sponsor}
-                  className="inline-flex items-center justify-center rounded-[18px] border border-white/20 bg-white/10 px-6 py-3 text-[15px] font-bold text-white transition-colors hover:bg-white/16"
-                >
+                <Link to={ROUTES.involved.sponsor} className={GHOST_BUTTON}>
                   Sponsor
                 </Link>
               </div>
@@ -208,7 +203,7 @@ export default memo(function ObjectivesPage() {
             {OBJECTIVE_POINTS.map((item) => (
               <article
                 key={item.title}
-                className="group relative flex h-full overflow-hidden rounded-[28px] border border-white/10 bg-[var(--campaign-surface)] shadow-[0_12px_26px_rgba(0,0,0,0.16)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_34px_rgba(0,0,0,0.22)]"
+                className="group relative flex h-full overflow-hidden rounded-[28px] border border-[#D8C3A2] bg-[linear-gradient(180deg,rgba(255,252,245,0.98)_0%,rgba(255,247,233,0.98)_100%)] shadow-[0_18px_38px_rgba(101,71,35,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-[#D08A32] hover:shadow-[0_22px_42px_rgba(196,109,26,0.14)]"
               >
                 <div className={`absolute inset-0 bg-[linear-gradient(180deg,var(--tw-gradient-stops))] ${item.accent}`} />
                 <div className="relative flex h-full flex-1 flex-col p-6">
@@ -249,8 +244,8 @@ export default memo(function ObjectivesPage() {
                 "Seva should remain practical, compassionate, and disciplined.",
                 "Sacred centers should become spaces of devotion and learning.",
               ].map((item) => (
-                <div key={item} className="flex items-start gap-3 rounded-[22px] border border-white/10 bg-white/[0.04] px-4 py-3">
-                  <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#f7dc8a]" />
+                <div key={item} className="flex items-start gap-3 rounded-[22px] border border-[#D8C3A2] bg-[rgba(255,255,255,0.72)] px-4 py-3">
+                  <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#E4B45E]" />
                   <span className={SECTION_BODY}>{item}</span>
                 </div>
               ))}
@@ -269,12 +264,12 @@ export default memo(function ObjectivesPage() {
           <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
             {OBJECTIVE_STREAMS.map((item) => (
               <div key={item.title} className={CARD_SHELL}>
-                <h3 className="text-[22px] font-black text-white md:text-[24px]">{item.title}</h3>
+                <h3 className="text-[22px] font-black text-[#27657A] md:text-[24px]">{item.title}</h3>
                 <p className={CARD_BODY}>{item.description}</p>
                 <div className="mt-6 space-y-3">
                   {item.points.map((point) => (
-                    <div key={point} className="flex items-start gap-3 rounded-[20px] border border-white/10 bg-white/[0.04] px-4 py-3">
-                      <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[var(--campaign-accent)]" />
+                    <div key={point} className="flex items-start gap-3 rounded-[20px] border border-[#D8C3A2] bg-[rgba(255,255,255,0.72)] px-4 py-3">
+                      <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#E4B45E]" />
                       <span className={CARD_BODY}>{point}</span>
                     </div>
                   ))}
@@ -286,12 +281,12 @@ export default memo(function ObjectivesPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 pb-10">
-        <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(135deg,var(--color-secondary)_0%,#c98d1f_52%,var(--campaign-accent)_100%)] p-6 text-white shadow-[0_18px_40px_rgba(0,0,0,0.16)] md:p-8">
+        <div className="rounded-[30px] border border-[#E7D3B5] bg-[linear-gradient(180deg,rgba(255,245,225,0.92)_0%,rgba(255,252,247,0.98)_48%,rgba(245,232,204,0.95)_100%)] p-6 text-[#1D4F63] shadow-[0_22px_52px_rgba(101,71,35,0.09)] md:p-8">
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
             <div>
-              <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-white/75">Support the Objectives</p>
-              <h2 className="mt-2 text-[14px] font-black md:text-[20px]">Help the Trust Carry These Objectives Forward</h2>
-              <p className={`mt-4 max-w-2xl ${SECTION_BODY} text-white/88`}>
+              <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[#C46D1A]">Support the Objectives</p>
+              <h2 className="mt-2 text-[14px] font-black text-[#1D4F63] md:text-[20px]">Help the Trust Carry These Objectives Forward</h2>
+              <p className={`mt-4 max-w-2xl ${SECTION_BODY}`}>
                 Participate through seva, support educational and cultural efforts, and help strengthen sacred, service-led, Bhagwat-rooted initiatives.
               </p>
             </div>
@@ -300,10 +295,7 @@ export default memo(function ObjectivesPage() {
               <Link to={ROUTES.contact} className={GHOST_BUTTON}>
                 Contact the Trust
               </Link>
-              <Link
-                to={ROUTES.donate}
-                className="inline-flex items-center justify-center rounded-[18px] bg-white px-5 py-3 text-[15px] font-bold text-[var(--color-secondary)] transition-colors hover:bg-[#fffaf2]"
-              >
+              <Link to={ROUTES.donate} className={BUTTON_CLASS}>
                 Support the Mission
               </Link>
             </div>

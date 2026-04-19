@@ -57,15 +57,15 @@ const SECTION_SHELL_GOLD =
 const SECTION_SHELL_BLUE =
   "rounded-[30px] border border-[#D8E4E5] bg-[linear-gradient(180deg,rgba(230,241,240,0.85)_0%,rgba(255,252,247,0.98)_56%,rgba(250,241,225,0.9)_100%)] shadow-[0_22px_52px_rgba(29,79,99,0.08)]";
 const PRIMARY_BUTTON =
-  "inline-flex items-center justify-center rounded-xl bg-[#F9F2A9] px-6 py-3 font-semibold text-[#33210F] shadow-[0_14px_28px_rgba(244,206,90,0.22)] transition-all hover:-translate-y-0.5 hover:bg-[#F4CE5A]";
+  "inline-flex items-center justify-center rounded-xl bg-[#F0AE57] px-6 py-3 font-semibold text-[#FFFDF8] shadow-[0_14px_28px_rgba(233,147,45,0.20)] transition-all hover:-translate-y-0.5 hover:bg-[#E9932D]";
 const SECONDARY_BUTTON =
-  "inline-flex items-center justify-center rounded-xl bg-[#E4B45E] px-6 py-3 font-semibold text-[#33210F] shadow-[0_14px_28px_rgba(212,150,63,0.22)] transition-all hover:-translate-y-0.5 hover:bg-[#D08A32]";
+  "inline-flex items-center justify-center rounded-xl bg-[#F0AE57] px-6 py-3 font-semibold text-[#FFFDF8] shadow-[0_14px_28px_rgba(233,147,45,0.20)] transition-all hover:-translate-y-0.5 hover:bg-[#E9932D]";
 const TERTIARY_BUTTON =
-  "inline-flex items-center justify-center rounded-xl bg-[#A9CAD1] px-6 py-3 font-semibold text-[#1D4F63] shadow-[0_14px_28px_rgba(169,202,209,0.24)] transition-all hover:-translate-y-0.5 hover:bg-[#8fb9c2]";
+  "inline-flex items-center justify-center rounded-xl bg-[#F0AE57] px-6 py-3 font-semibold text-[#FFFDF8] shadow-[0_14px_28px_rgba(233,147,45,0.20)] transition-all hover:-translate-y-0.5 hover:bg-[#E9932D]";
 const LIGHT_GOLD_BUTTON =
-  "inline-flex items-center justify-center rounded-lg bg-[#F9F2A9] px-4 py-2 text-sm font-semibold text-[#33210F] shadow-[0_10px_20px_rgba(244,206,90,0.18)] transition-all hover:-translate-y-0.5 hover:bg-[#F4CE5A]";
+  "inline-flex items-center justify-center rounded-lg bg-[#F0AE57] px-4 py-2 text-sm font-semibold text-[#FFFDF8] shadow-[0_10px_20px_rgba(233,147,45,0.18)] transition-all hover:-translate-y-0.5 hover:bg-[#E9932D]";
 const NAVY_BUTTON =
-  "inline-flex items-center justify-center rounded-xl bg-[#A9CAD1] px-6 py-3 font-semibold text-[#1D4F63] shadow-[0_14px_28px_rgba(169,202,209,0.24)] transition-all hover:-translate-y-0.5 hover:bg-[#8fb9c2]";
+  "inline-flex items-center justify-center rounded-xl bg-[#F0AE57] px-6 py-3 font-semibold text-[#FFFDF8] shadow-[0_14px_28px_rgba(233,147,45,0.20)] transition-all hover:-translate-y-0.5 hover:bg-[#E9932D]";
 
 const divider = (
   <div className="max-w-6xl mx-auto px-4 py-2">
