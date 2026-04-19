@@ -83,4 +83,42 @@
     color: var(--color-heading);
     @apply text-3xl font-bold text-center mb-8;
   }
+
+  .footer {
+    background: linear-gradient(135deg, #1f73a0, #4b2c91);
+    color: #ffffff;
+    padding: 60px 40px;
+  }
+
+  .footer h3 {
+    color: #f4ce5a;
+    margin-bottom: 15px;
+  }
+
+  .footer p {
+    color: #d6eef2;
+    line-height: 1.6;
+  }
+
+  .footer a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+
+  .footer a:hover {
+    color: #f4ce5a;
+  }
+
+  .footer .btn {
+    background: #e9932d;
+    color: #ffffff;
+    padding: 10px 18px;
+    border-radius: 6px;
+  }
+
+  .footer .divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 30px;
+  }
 }
