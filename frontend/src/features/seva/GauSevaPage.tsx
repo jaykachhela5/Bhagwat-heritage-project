@@ -1,6 +1,5 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
-import { HeroSection } from "../../components/ui/HeroSection";
 import { ROUTES } from "../../app/routes/routes";
 import { usePageMeta } from "../../hooks/usePageMeta";
 
@@ -170,47 +169,52 @@ export default memo(function GauSevaPage() {
 
   return (
     <div className="min-h-screen bg-[var(--campaign-deep)]">
-      <HeroSection
-        title="Gau Seva"
-        subtitle="Kamdhenu Ashram"
-        subtitleClassName="whitespace-nowrap text-[18px] font-semibold text-white sm:text-[24px] md:text-[34px]"
-        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
-        backgroundImage={heroCowImage}
-        boxed
-        heightClass="h-[360px] md:h-[520px]"
-        overlayClass="bg-black/55"
-      >
-        <div className="mt-6 flex flex-wrap justify-center gap-3">
-          {heroButtons.slice(0, 2).map((button) => (
-            <Link
-              key={button.label}
-              to={button.to}
-              className={`inline-flex items-center rounded-lg px-6 py-3 font-semibold transition-colors ${button.className}`}
-            >
-              {button.label}
-            </Link>
-          ))}
-        </div>
-        <div className="mt-3 flex justify-center">
-          <Link
-            to={heroButtons[2].to}
-            className={`inline-flex items-center rounded-lg px-6 py-3 font-semibold transition-colors ${heroButtons[2].className}`}
-          >
-            {heroButtons[2].label}
-          </Link>
-        </div>
-      </HeroSection>
-
-      <section className="relative z-20 mt-[10px] pb-6">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
-            {topStats.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
-                <p className="text-[20px] font-black uppercase tracking-wide text-[var(--campaign-accent)] md:text-[24px]">* {item.title}</p>
-                <p className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.label}</p>
-                <p className="mt-1 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.note}</p>
+      <section className="mt-[10px] pb-8">
+        <div
+          className="relative h-[360px] w-full overflow-hidden bg-cover bg-center md:h-[520px]"
+          style={{ backgroundImage: `url('${heroCowImage}')` }}
+        >
+          <div className="absolute inset-0 bg-black/55" />
+          <div className="relative z-10 flex h-full flex-col justify-end px-4 py-16 text-center md:px-8 [&>h1]:mb-[10px] [&>p]:mb-[10px]">
+            <h1 className="mb-4 text-4xl font-bold leading-tight !text-[#F9F2A9] md:text-5xl">Gau Seva</h1>
+            <p className="mb-8 whitespace-nowrap text-[18px] font-semibold !text-[#F9F2A9] sm:text-[24px] md:text-[34px]">
+              Kamdhenu Ashram
+            </p>
+            <div className="hero-actions mt-6 flex flex-wrap items-center justify-center gap-4">
+              <div className="mt-6 flex flex-wrap justify-center gap-3">
+                {heroButtons.slice(0, 2).map((button) => (
+                  <Link
+                    key={button.label}
+                    to={button.to}
+                    className={`inline-flex items-center rounded-lg px-6 py-3 font-semibold transition-colors ${button.className}`}
+                  >
+                    {button.label}
+                  </Link>
+                ))}
               </div>
-            ))}
+              <div className="mt-3 flex justify-center">
+                <Link
+                  to={heroButtons[2].to}
+                  className={`inline-flex items-center rounded-lg px-6 py-3 font-semibold transition-colors ${heroButtons[2].className}`}
+                >
+                  {heroButtons[2].label}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative z-20 mt-[10px]">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+              {topStats.map((item) => (
+                <div key={item.title} className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
+                  <p className="text-[20px] font-black uppercase tracking-wide text-[var(--campaign-accent)] md:text-[24px]">* {item.title}</p>
+                  <p className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.label}</p>
+                  <p className="mt-1 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.note}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

@@ -4,8 +4,12 @@ import { ROUTES } from "../../app/routes/routes";
 import { HeroSection } from "../../components/ui/HeroSection";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { EducationServicesSection } from "./EducationServicesSection";
+import { SevaHeroBanner } from "./SevaHeroBanner";
 import {
   SEVA_BODY_TEXT_CLASS,
+  SEVA_HERO_CONTENT_CLASS,
+  SEVA_HERO_OUTLINE_BUTTON_CLASS,
+  SEVA_HERO_PRIMARY_BUTTON_CLASS,
   SEVA_CARD_TITLE_CLASS,
   SEVA_HERO_SUBTITLE_CLASS,
   SEVA_HIGHLIGHT_TITLE_CLASS,
@@ -52,25 +56,18 @@ export default memo(function EducationPage() {
 
   return (
     <div className="min-h-screen bg-[var(--campaign-deep)]">
-      <HeroSection
-        title="Education Seva"
+      <SevaHeroBanner
+        title="Education Support"
         subtitle="Lighting lives through learning."
-        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
-        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772699843/pathshala_eza0sp.png"
-        boxed
-        heightClass="h-[360px] md:h-[520px]"
-        overlayClass="bg-black/55"
       >
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link to={ROUTES.donate} className="inline-flex items-center rounded-lg bg-[var(--campaign-accent)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]">
-            Support Education
-          </Link>
-          <Link to={ROUTES.involved.volunteer} className="inline-flex items-center rounded-lg bg-[var(--campaign-bg)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]">
-            Become Mentor
-          </Link>
-        </div>
-      </HeroSection>
+        <Link to={ROUTES.donate} className={SEVA_HERO_PRIMARY_BUTTON_CLASS}>
+          Support Education
+        </Link>
+        <Link to={ROUTES.involved.volunteer} className={SEVA_HERO_OUTLINE_BUTTON_CLASS}>
+          Become Mentor
+        </Link>
+      </SevaHeroBanner>
 
       <section className="relative z-20 mt-[10px] pb-6">
         <div className="mx-auto max-w-7xl px-4">

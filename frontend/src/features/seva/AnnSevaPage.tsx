@@ -2,9 +2,7 @@ import { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
 import { usePageMeta } from "../../hooks/usePageMeta";
-import { HeroSection } from "../../components/ui/HeroSection";
 import { JalSevaDonationHub } from "./JalSevaDonationHub";
-import { SEVA_HERO_SUBTITLE_CLASS } from "./sevaTypography";
 import {
   ANNADAAN_PROGRAMS,
   ANN_FAQS,
@@ -19,29 +17,6 @@ import {
   type SevaReachItem,
   type SevaVisualKey,
 } from "./jalSevaContent";
-
-const OCCASION_OPTIONS = [
-  {
-    id: "birthday-annadaan",
-    title: "Occasion Based Meal Offering",
-    label: "Birthday Offering",
-    description: "Celebrate a birthday by offering meals with gratitude and compassion.",
-  },
-  {
-    id: "punyatithi-annadaan",
-    title: "Sacred Memory Meal Offering",
-    label: "Memorial Offering",
-    description: "Offer food support in loving memory and spiritual remembrance.",
-  },
-  {
-    id: "anniversary-annadaan",
-    title: "Anniversary Meal Offering",
-    label: "Anniversary Offering",
-    description: "Mark a wedding anniversary through meaningful meal support for others.",
-  },
-] as const;
-
-type OccasionOptionId = (typeof OCCASION_OPTIONS)[number]["id"];
 
 function MealIcon({ className = "h-7 w-7" }: { className?: string }) {
   return (
@@ -249,7 +224,6 @@ function FaqCard({
 export default memo(function AnnSevaPage() {
   const navigate = useNavigate();
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
-  const [selectedOccasion, setSelectedOccasion] = useState<OccasionOptionId>(OCCASION_OPTIONS[0].id);
 
   usePageMeta(
     "Ann Seva",
@@ -257,36 +231,41 @@ export default memo(function AnnSevaPage() {
   );
 
   return (
-    <div className="bg-[var(--campaign-deep)] px-4 pb-24 pt-6 md:px-6 md:pb-28 md:pt-8">
+    <div className="bg-[var(--campaign-deep)] pb-24 md:pb-28">
       <style>{`@keyframes sevaFadeInUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}`}</style>
 
-      <HeroSection
-        title="Ann Seva"
-        subtitle="Ek Thali Bhojan, Ek Jeevan Ka Sahara"
-        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
-        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
-        backgroundImage="/images/annseva.png"
-        boxed
-        heightClass="h-[360px] md:h-[520px]"
-        overlayClass="bg-black/55"
-      >
-        <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <button
-            type="button"
-            onClick={() => navigate(ROUTES.donate)}
-            className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[var(--campaign-accent)] px-7 py-4 text-base font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
-          >
-            <span>Donate Now</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => navigate(ROUTES.involved.index)}
-            className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[var(--campaign-bg)] px-7 py-4 text-base font-bold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
-          >
-            <span>Join Seva</span>
-          </button>
+      <section className="mt-[10px] pb-8">
+        <div
+          className="relative h-[360px] w-full overflow-hidden bg-cover bg-center md:h-[520px]"
+          style={{ backgroundImage: "url('/images/annseva.png')" }}
+        >
+          <div className="absolute inset-0 bg-black/55" />
+          <div className="relative z-10 flex h-full flex-col justify-end px-4 py-16 text-center md:px-8 [&>h1]:mb-[10px] [&>p]:mb-[10px]">
+            <h1 className="mb-4 text-4xl font-bold leading-tight !text-[#F9F2A9] md:text-5xl">Ann Seva</h1>
+            <p className="mb-8 whitespace-nowrap text-[18px] font-semibold !text-[#F9F2A9] sm:text-[24px] md:text-[34px]">
+              Ek Thali Bhojan, Ek Jeevan Ka Sahara
+            </p>
+            <div className="hero-actions mt-6 flex flex-wrap items-center justify-center gap-4">
+              <div className="mt-6 flex flex-wrap justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => navigate(ROUTES.donate)}
+                  className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[#f3a11f] px-7 py-4 text-base font-bold text-white shadow-[0_14px_28px_rgba(243,161,31,0.28)] transition-colors hover:bg-[#ffaf31]"
+                >
+                  <span>Donate Now</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => navigate(ROUTES.involved.index)}
+                  className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[#0f7994] px-7 py-4 text-base font-bold text-white shadow-[0_14px_28px_rgba(15,121,148,0.28)] transition-colors hover:bg-[#1492b1]"
+                >
+                  <span>Join Seva</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-      </HeroSection>
+      </section>
 
       <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] px-6 py-10 text-center shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8">
         <div className="mx-auto max-w-4xl">
@@ -330,72 +309,6 @@ export default memo(function AnnSevaPage() {
           {ANNADAAN_PROGRAMS.map((program) => (
             <ProgramCard key={program.title} program={program} onDonate={() => navigate(ROUTES.donate)} />
           ))}
-        </div>
-      </section>
-
-      <section className="mx-auto mt-8 max-w-[1180px] rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] px-6 py-10 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:px-8 md:py-8">
-        <div className="text-center">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Occasion-Based Meal Offering</p>
-          <h2 className="mt-2 text-[14px] font-black text-white md:text-[20px]">Select the meal offering you want</h2>
-        </div>
-
-        <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3">
-          {OCCASION_OPTIONS.map((option) => {
-            const isSelected = selectedOccasion === option.id;
-
-            return (
-              <button
-                key={option.id}
-                type="button"
-                onClick={() => setSelectedOccasion(option.id)}
-                className={`rounded-[28px] border p-6 text-left transition-all duration-300 ${
-                  isSelected
-                    ? "border-[var(--campaign-accent)] bg-[var(--campaign-surface)] shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
-                    : "border-white/10 bg-[var(--campaign-surface)] shadow-sm hover:-translate-y-1 hover:shadow-[0_18px_30px_rgba(0,0,0,0.26)]"
-                }`}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]">
-                    <MealIcon />
-                  </div>
-                  <span className={`rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] ${
-                    isSelected ? "bg-[var(--campaign-accent)] text-white" : "bg-[var(--campaign-accent)]/15 text-[var(--campaign-accent)]"
-                  }`}>
-                    {isSelected ? "Selected" : "Select"}
-                  </span>
-                </div>
-                <h3 className="mt-4 text-2xl font-black text-white">{option.title}</h3>
-                <p className="mt-2 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">{option.label}</p>
-                <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{option.description}</p>
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="mt-8 rounded-[24px] border border-white/10 bg-[var(--campaign-surface)] px-6 py-6 shadow-sm">
-          <p className="text-[24px] font-semibold uppercase tracking-[0.18em] text-[var(--campaign-accent)]">Selected Service</p>
-          <p className="mt-2 text-[14px] font-black text-white md:text-[20px]">
-            {OCCASION_OPTIONS.find((option) => option.id === selectedOccasion)?.title}
-          </p>
-          <p className="mt-3 max-w-3xl text-base leading-7 text-[var(--campaign-text)] md:text-lg">
-            This meal offering selection can be used for your family offering, devotional remembrance, or occasion-based support.
-          </p>
-          <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-            <button
-              type="button"
-              onClick={() => navigate(ROUTES.donate)}
-              className="inline-flex items-center justify-center rounded-xl bg-[var(--campaign-accent)] px-6 py-4 font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
-            >
-              Donate for Selected Occasion
-            </button>
-            <button
-              type="button"
-              onClick={() => navigate(ROUTES.contact)}
-              className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-[var(--campaign-bg)] px-6 py-4 font-bold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
-            >
-              Contact for Ann Seva
-            </button>
-          </div>
         </div>
       </section>
 
