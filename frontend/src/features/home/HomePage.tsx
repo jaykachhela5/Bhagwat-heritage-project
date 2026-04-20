@@ -451,17 +451,6 @@ export default memo(function HomePage() {
         <div className="w-full rounded-[30px] border border-[#cde2f1] bg-white/88 px-6 py-10 shadow-[0_16px_34px_rgba(71,125,170,0.12)] backdrop-blur-sm sm:px-10 md:px-12 md:py-12 lg:px-14 xl:px-16">
           <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
             <div className="rounded-[24px] border border-[#d7e7f3] bg-[#f8fcff] p-8 shadow-[0_12px_28px_rgba(71,125,170,0.08)]">
-              <p className={`mb-3 ${HOME_SECTION_LABEL}`}>Welcome To</p>
-              <h2 className={`mb-4 max-w-4xl ${HOME_SECTION_HEADING}`}>{t("home.aboutTitle")}</h2>
-              <p className={`max-w-3xl ${HOME_BODY}`}>{t("home.aboutText")}</p>
-              <div className="mt-7">
-                <Link to={ROUTES.about.index} className={PRIMARY_BUTTON}>
-                  {t("home.readMore")}
-                </Link>
-              </div>
-            </div>
-
-            <div className="rounded-[24px] border border-[#d7e7f3] bg-[#f8fcff] p-8 shadow-[0_12px_28px_rgba(71,125,170,0.08)]">
               <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-[220px_1fr] md:gap-8">
                 <div className="mx-auto w-full max-w-[220px]">
                   <div className="rounded-2xl border border-[#e0e8f0] bg-[#f6f8fb] p-2 shadow-sm">
@@ -490,6 +479,17 @@ export default memo(function HomePage() {
                     </Link>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <div className="rounded-[24px] border border-[#d7e7f3] bg-[#f8fcff] p-8 shadow-[0_12px_28px_rgba(71,125,170,0.08)]">
+              <p className={`mb-3 ${HOME_SECTION_LABEL}`}>Welcome To</p>
+              <h2 className={`mb-4 max-w-4xl ${HOME_SECTION_HEADING}`}>{t("home.aboutTitle")}</h2>
+              <p className={`max-w-3xl ${HOME_BODY}`}>{t("home.aboutText")}</p>
+              <div className="mt-7">
+                <Link to={ROUTES.about.index} className={PRIMARY_BUTTON}>
+                  {t("home.readMore")}
+                </Link>
               </div>
             </div>
           </div>
