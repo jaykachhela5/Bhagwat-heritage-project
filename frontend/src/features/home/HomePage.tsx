@@ -190,6 +190,7 @@ export default memo(function HomePage() {
           "Spreading the teachings of Shrimad Bhagavat through Katha, Satsang, and spiritual guidance.",
         image: "https://res.cloudinary.com/der8zinu8/image/upload/v1771829450/sanskriti_3_bhvx6q.png",
         buttonLabel: "Explore Spiritual Mission",
+        link: ROUTES.mission.spiritual,
         cardClassName: SPIRITUAL_MISSION_CARD,
         glowClassName: SPIRITUAL_MISSION_GLOW,
         iconWrapClassName: SPIRITUAL_ICON_WRAP,
@@ -203,6 +204,7 @@ export default memo(function HomePage() {
           "Serving society through Annadaan, Gau Seva, disaster relief, and humanitarian initiatives.",
         image: "https://res.cloudinary.com/der8zinu8/image/upload/v1776586564/sa2_v3ugrc.png",
         buttonLabel: "Explore Social Service",
+        link: ROUTES.mission.social,
         cardClassName: SOCIAL_MISSION_CARD,
         glowClassName: SOCIAL_MISSION_GLOW,
         iconWrapClassName: SOCIAL_ICON_WRAP,
@@ -216,6 +218,7 @@ export default memo(function HomePage() {
           "Preserving Indian traditions, values, and spiritual heritage for future generations.",
         image: "https://res.cloudinary.com/der8zinu8/image/upload/v1776586564/sa1_fug3jm.png",
         buttonLabel: "Explore Cultural Heritage",
+        link: ROUTES.mission.cultural,
         cardClassName: CULTURAL_MISSION_CARD,
         glowClassName: CULTURAL_MISSION_GLOW,
         iconWrapClassName: CULTURAL_ICON_WRAP,
@@ -540,7 +543,8 @@ export default memo(function HomePage() {
 
                       <h3 className={`${HOME_LIGHT_HEADING} ${item.titleClassName}`}>{item.title}</h3>
                       <p className={`${HOME_LIGHT_BODY} ${item.bodyClassName} mt-4 min-h-[96px]`}>{item.description}</p>
-                      <div
+                      <Link
+                        to={item.link}
                         className={`${MISSION_BAR_BUTTON} ${item.buttonClassName}`}
                         style={
                           item.title === "Social Service"
@@ -551,7 +555,7 @@ export default memo(function HomePage() {
                         }
                       >
                         {item.buttonLabel}
-                      </div>
+                      </Link>
                     </div>
                   </motion.div>
                 );
