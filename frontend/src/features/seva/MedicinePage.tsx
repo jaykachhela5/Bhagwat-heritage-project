@@ -3,7 +3,15 @@ import { Link } from "react-router-dom";
 import { HeroSection } from "../../components/ui/HeroSection";
 import { ROUTES } from "../../app/routes/routes";
 import { usePageMeta } from "../../hooks/usePageMeta";
-import { SEVA_BODY_TEXT_CLASS, SEVA_CARD_TITLE_CLASS, SEVA_HERO_SUBTITLE_CLASS } from "./sevaTypography";
+import { SevaHeroBanner } from "./SevaHeroBanner";
+import {
+  SEVA_BODY_TEXT_CLASS,
+  SEVA_CARD_TITLE_CLASS,
+  SEVA_HERO_CONTENT_CLASS,
+  SEVA_HERO_OUTLINE_BUTTON_CLASS,
+  SEVA_HERO_PRIMARY_BUTTON_CLASS,
+  SEVA_HERO_SUBTITLE_CLASS,
+} from "./sevaTypography";
 
 const HERO_IMAGE = "https://res.cloudinary.com/der8zinu8/image/upload/v1771583760/chikitsa_q2seq1.png";
 
@@ -179,31 +187,24 @@ export default memo(function MedicinePage() {
 
   return (
     <div className="min-h-screen bg-[var(--campaign-deep)]">
-      <HeroSection
+      <SevaHeroBanner
         title="Chikitsa Seva"
         subtitle="Service is the greatest form of healing."
-        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
-        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage={HERO_IMAGE}
-        boxed
-        heightClass="h-[360px] md:h-[520px]"
-        overlayClass="bg-black/55"
       >
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            to={ROUTES.donate}
-            className="inline-flex items-center rounded-lg bg-[var(--campaign-accent)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
-          >
-            Donate Medicines
-          </Link>
-          <Link
-            to={ROUTES.involved.volunteer}
-            className="inline-flex items-center rounded-lg bg-[var(--campaign-bg)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
-          >
-            Join Medical Support
-          </Link>
-        </div>
-      </HeroSection>
+        <Link
+          to={ROUTES.donate}
+          className={SEVA_HERO_PRIMARY_BUTTON_CLASS}
+        >
+          Donate Medicines
+        </Link>
+        <Link
+          to={ROUTES.involved.volunteer}
+          className={SEVA_HERO_OUTLINE_BUTTON_CLASS}
+        >
+          Join Medical Support
+        </Link>
+      </SevaHeroBanner>
 
       <section className="relative z-20 mt-[10px] pb-6">
         <div className="max-w-7xl mx-auto px-4">

@@ -4,9 +4,13 @@ import { ROUTES } from "../../app/routes/routes";
 import { HeroSection } from "../../components/ui/HeroSection";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { KanyadaanServicesSection } from "./KanyadaanServicesSection";
+import { SevaHeroBanner } from "./SevaHeroBanner";
 import {
   SEVA_BODY_TEXT_CLASS,
   SEVA_CARD_TITLE_CLASS,
+  SEVA_HERO_CONTENT_CLASS,
+  SEVA_HERO_OUTLINE_BUTTON_CLASS,
+  SEVA_HERO_PRIMARY_BUTTON_CLASS,
   SEVA_HERO_SUBTITLE_CLASS,
   SEVA_HIGHLIGHT_TITLE_CLASS,
   SEVA_SECTION_HEADING_CLASS,
@@ -29,32 +33,24 @@ export default memo(function KanyaPage() {
   
   return (
     <div className="min-h-screen bg-[var(--campaign-deep)]">
-      <HeroSection
+      <SevaHeroBanner
         title="Kanyadaan Seva"
         subtitle="Respect daughters, uplift society"
-        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
-        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="/images/kanyadan.png"
-        boxed
-        heightClass="h-[360px] md:h-[520px]"
-        backgroundPositionClass="bg-center"
-        overlayClass="bg-black/55"
       >
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            to={ROUTES.donate}
-            className="rounded-lg bg-[var(--campaign-accent)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
-          >
-            Sponsor Kanyadaan
-          </Link>
-          <Link
-            to={ROUTES.involved.volunteer}
-            className="rounded-lg bg-[var(--campaign-bg)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
-          >
-            Become Volunteer
-          </Link>
-        </div>
-      </HeroSection>
+        <Link
+          to={ROUTES.donate}
+          className={SEVA_HERO_PRIMARY_BUTTON_CLASS}
+        >
+          Sponsor Kanyadaan
+        </Link>
+        <Link
+          to={ROUTES.involved.volunteer}
+          className={SEVA_HERO_OUTLINE_BUTTON_CLASS}
+        >
+          Become Volunteer
+        </Link>
+      </SevaHeroBanner>
 
       <section className="relative z-20 mt-[10px] pb-6">
         <div className="mx-auto max-w-7xl px-4">

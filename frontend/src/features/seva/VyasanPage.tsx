@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
 import { HeroSection } from "../../components/ui/HeroSection";
 import { usePageMeta } from "../../hooks/usePageMeta";
+import { SevaHeroBanner } from "./SevaHeroBanner";
 import {
   SEVA_BODY_TEXT_CLASS,
   SEVA_CARD_TITLE_CLASS,
+  SEVA_HERO_CONTENT_CLASS,
+  SEVA_HERO_OUTLINE_BUTTON_CLASS,
+  SEVA_HERO_PRIMARY_BUTTON_CLASS,
   SEVA_HERO_SUBTITLE_CLASS,
   SEVA_HIGHLIGHT_TITLE_CLASS,
   SEVA_SECTION_HEADING_CLASS,
@@ -147,44 +151,36 @@ export default memo(function VyasanPage() {
   const [activeLearnMore, setActiveLearnMore] = useState<string | null>(null);
 
   usePageMeta(
-    "Vyasanmukti Seva",
+    "Vyasanmukti Abhiyan",
     "Bhagwat Heritage Service Foundation Trust Vyasanmukti Seva page focused on recovery care, counseling, rehabilitation support, awareness outreach, and sponsored treatment support.",
   );
 
   return (
     <div className="min-h-screen bg-[var(--campaign-deep)]">
-      <HeroSection
-        title="Vyasanmukti Seva"
+      <SevaHeroBanner
+        title="Vyasanmukti Abhiyan"
         subtitle="Break addiction, rebuild life."
-        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
-        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="/images/vyasanmukti.png"
-        boxed
-        heightClass="h-[360px] md:h-[520px]"
-        backgroundPositionClass="bg-center"
-        overlayClass="bg-black/55"
       >
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            to={ROUTES.donate}
-            className="rounded-lg bg-[var(--campaign-accent)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
-          >
-            Donate for Recovery
-          </Link>
-          <Link
-            to={ROUTES.involved.sponsor}
-            className="rounded-lg bg-[var(--campaign-bg)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
-          >
-            Sponsor Treatment
-          </Link>
-          <Link
-            to={ROUTES.involved.sponsor}
-            className="rounded-lg bg-[var(--campaign-deep)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-deep-hover)]"
-          >
-            Sponsor Awareness Camp
-          </Link>
-        </div>
-      </HeroSection>
+        <Link
+          to={ROUTES.donate}
+          className={SEVA_HERO_PRIMARY_BUTTON_CLASS}
+        >
+          Donate for Recovery
+        </Link>
+        <Link
+          to={ROUTES.involved.sponsor}
+          className={SEVA_HERO_PRIMARY_BUTTON_CLASS}
+        >
+          Sponsor Treatment
+        </Link>
+        <Link
+          to={ROUTES.involved.sponsor}
+          className={SEVA_HERO_OUTLINE_BUTTON_CLASS}
+        >
+          Sponsor Awareness Camp
+        </Link>
+      </SevaHeroBanner>
 
       <section className="relative z-20 mt-[10px] pb-6">
         <div className="mx-auto max-w-7xl px-4">

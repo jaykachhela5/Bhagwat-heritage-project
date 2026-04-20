@@ -3,9 +3,13 @@ import { Link } from "react-router-dom";
 import { HeroSection } from "../../components/ui/HeroSection";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { ROUTES } from "../../app/routes/routes";
+import { SevaHeroBanner } from "./SevaHeroBanner";
 import {
   SEVA_BODY_TEXT_CLASS,
   SEVA_CARD_TITLE_CLASS,
+  SEVA_HERO_CONTENT_CLASS,
+  SEVA_HERO_OUTLINE_BUTTON_CLASS,
+  SEVA_HERO_PRIMARY_BUTTON_CLASS,
   SEVA_HERO_SUBTITLE_CLASS,
   SEVA_HIGHLIGHT_TITLE_CLASS,
   SEVA_SECTION_HEADING_CLASS,
@@ -170,44 +174,36 @@ export default memo(function ScholarshipPage() {
   const activePathway = SUPPORT_PATHWAYS[activePathwayIndex];
 
   usePageMeta(
-    "Scholarship Seva",
+    "Scholarship Program",
     "Scholarship aid, student mentoring, merit and need-based support, and educational continuity for deserving learners.",
   );
 
   return (
     <div className="min-h-screen bg-[var(--campaign-deep)]">
-      <HeroSection
-        title="Scholarship Seva"
+      <SevaHeroBanner
+        title="Scholarship Program"
         subtitle="Supporting dreams, shaping futures."
-        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
-        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772699279/scholorship_ki7aes.png"
-        boxed
-        heightClass="h-[360px] md:h-[520px]"
-        backgroundPositionClass="bg-center"
-        overlayClass="bg-black/55"
       >
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            to={ROUTES.donate}
-            className="inline-flex items-center rounded-lg bg-[var(--campaign-accent)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
-          >
-            Sponsor a Student
-          </Link>
-          <Link
-            to={ROUTES.involved.volunteer}
-            className="inline-flex items-center rounded-lg bg-[var(--campaign-bg)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
-          >
-            Become Mentor
-          </Link>
-          <Link
-            to={ROUTES.contact}
-            className="inline-flex items-center rounded-lg bg-[var(--campaign-deep)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--campaign-deep-hover)]"
-          >
-            Contact for Support
-          </Link>
-        </div>
-      </HeroSection>
+        <Link
+          to={ROUTES.donate}
+          className={SEVA_HERO_PRIMARY_BUTTON_CLASS}
+        >
+          Sponsor a Student
+        </Link>
+        <Link
+          to={ROUTES.involved.volunteer}
+          className={SEVA_HERO_PRIMARY_BUTTON_CLASS}
+        >
+          Become Mentor
+        </Link>
+        <Link
+          to={ROUTES.contact}
+          className={SEVA_HERO_OUTLINE_BUTTON_CLASS}
+        >
+          Contact for Support
+        </Link>
+      </SevaHeroBanner>
 
       <section className="relative z-20 mt-[10px] pb-6">
         <div className="mx-auto max-w-7xl px-4">

@@ -7,6 +7,7 @@ import { HeroSection } from "../../components/ui/HeroSection";
 import { Card } from "../../components/ui/Card";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { ROUTES } from "../../app/routes/routes";
+import { SevaHeroBanner } from "../seva/SevaHeroBanner";
 import {
   ABOUT_BODY_CLASS,
   ABOUT_CARD_TITLE_CLASS,
@@ -630,13 +631,6 @@ const DISASTER_FEATURES = [
     title: "Recovery and Follow-up",
     desc: "Beyond emergency aid, the trust supports families with follow-up relief, care, and rehabilitation assistance.",
   },
-];
-
-const DISASTER_IMPACT_STATS = [
-  { value: "12,000+", label: "Relief Kits Delivered" },
-  { value: "80+", label: "Emergency Camps Supported" },
-  { value: "35,000+", label: "Beneficiaries Reached" },
-  { value: "365", label: "Days of Readiness" },
 ];
 
 const DISASTER_PROCESS = [
@@ -2861,31 +2855,24 @@ export const SevaDisasterReliefPage = memo(function SevaDisasterReliefPage() {
 
   return (
     <div className="min-h-screen bg-[var(--campaign-deep)]">
-      <HeroSection
-        title="Disaster Relief Seva"
+      <SevaHeroBanner
+        title="Disaster Relief"
         subtitle="Relief with care, support with heart"
-        subtitleClassName="text-[18px] font-semibold leading-tight text-white sm:text-[24px] md:text-[34px]"
-        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
         backgroundImage="https://res.cloudinary.com/der8zinu8/image/upload/v1772911110/disaster-relief_lg6qcp.webp"
-        boxed
-        heightClass="h-[360px] md:h-[520px]"
-        overlayClass="bg-black/55"
       >
-        <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <Link
-            to={ROUTES.donate}
-            className="inline-flex items-center rounded-lg bg-[#f3a11f] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(243,161,31,0.28)] transition-colors hover:bg-[#ffaf31]"
-          >
-            Donate for Relief
-          </Link>
-          <Link
-            to={ROUTES.involved.volunteer}
-            className="inline-flex items-center rounded-lg bg-[#0f7994] px-6 py-3 font-semibold text-white shadow-[0_14px_28px_rgba(15,121,148,0.28)] transition-colors hover:bg-[#1492b1]"
-          >
-            Join Relief Team
-          </Link>
-        </div>
-      </HeroSection>
+        <Link
+          to={ROUTES.donate}
+          className="inline-flex min-w-[190px] items-center justify-center rounded-full bg-[#F4CE5A] px-7 py-4 text-base font-bold text-white shadow-[0_14px_28px_rgba(243,161,31,0.28)] transition-colors hover:bg-[#E9932D]"
+        >
+          Donate for Relief
+        </Link>
+        <Link
+          to={ROUTES.involved.volunteer}
+          className="inline-flex min-w-[190px] items-center justify-center rounded-full border border-white/35 bg-white/8 px-7 py-4 text-base font-bold text-white shadow-[0_12px_26px_rgba(6,22,33,0.22)] transition-colors hover:bg-white/14"
+        >
+          Join Relief Team
+        </Link>
+      </SevaHeroBanner>
 
       <section className="max-w-7xl mx-auto px-4 py-10">
         <div className="rounded-[30px] border border-white/10 bg-[var(--campaign-bg)] p-6 shadow-[0_16px_34px_rgba(0,0,0,0.22)] md:p-8">
@@ -2908,19 +2895,6 @@ export const SevaDisasterReliefPage = memo(function SevaDisasterReliefPage() {
               >
                 <h3 className="text-[24px] font-black text-white">{item.title}</h3>
                 <p className="mt-3 text-base leading-7 text-[var(--campaign-text)] md:text-lg">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="relative z-20 mt-[10px] pb-6">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
-            {DISASTER_IMPACT_STATS.map((item) => (
-              <div key={item.label} className="rounded-2xl border border-white/10 bg-[var(--campaign-bg)] p-4 shadow-[0_12px_24px_rgba(0,0,0,0.20)]">
-                <p className="text-[20px] font-black uppercase tracking-wide text-[var(--campaign-accent)] md:text-[24px]">* {item.label}</p>
-                <p className="mt-1 text-[14px] font-black text-white md:text-[20px]">{item.value}</p>
               </div>
             ))}
           </div>

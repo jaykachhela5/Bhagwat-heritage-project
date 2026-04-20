@@ -2,9 +2,12 @@ import { memo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../app/routes/routes";
 import { usePageMeta } from "../../hooks/usePageMeta";
-import { HeroSection } from "../../components/ui/HeroSection";
 import { JalSevaDonationHub } from "./JalSevaDonationHub";
-import { SEVA_BODY_TEXT_CLASS, SEVA_HERO_SUBTITLE_CLASS, SEVA_SECTION_HEADING_CLASS, SEVA_SECTION_LABEL_CLASS } from "./sevaTypography";
+import {
+  SEVA_BODY_TEXT_CLASS,
+  SEVA_SECTION_HEADING_CLASS,
+  SEVA_SECTION_LABEL_CLASS,
+} from "./sevaTypography";
 import {
   JAL_FAQS,
   JAL_FLOW_STEPS,
@@ -235,36 +238,41 @@ export default memo(function JalSevaPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[var(--campaign-deep)] px-4 pb-24 pt-6 md:px-6 md:pb-28 md:pt-8">
+    <div className="min-h-screen bg-[var(--campaign-deep)] pb-24 md:pb-28">
       <style>{`@keyframes sevaFadeInUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}`}</style>
 
-      <HeroSection
-        title="Jal Seva"
-        subtitle="Har Pyaase Tak Karuna Ka Sandesh"
-        subtitleClassName={SEVA_HERO_SUBTITLE_CLASS}
-        contentClassName="flex h-full flex-col justify-end pb-[22px] md:pb-[30px] [&>h1]:mb-[10px] [&>p]:mb-[10px]"
-        backgroundImage="/images/jal1.png"
-        boxed
-        heightClass="h-[360px] md:h-[520px]"
-        overlayClass="bg-black/55"
-      >
-        <div className="mt-6 flex flex-wrap justify-center gap-3">
-          <button
-            type="button"
-            onClick={() => navigate(ROUTES.donate)}
-            className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[var(--campaign-accent)] px-7 py-4 text-base font-bold text-white transition-colors hover:bg-[var(--campaign-accent-hover)]"
-          >
-            <span>Donate Now</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => navigate(ROUTES.involved.index)}
-            className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[var(--campaign-bg)] px-7 py-4 text-base font-bold text-white transition-colors hover:bg-[var(--campaign-mid-hover)]"
-          >
-            <span>Join Seva</span>
-          </button>
+      <section className="mt-[10px] pb-8">
+        <div
+          className="relative h-[360px] w-full overflow-hidden bg-cover bg-center md:h-[520px]"
+          style={{ backgroundImage: "url('/images/jal1.png')" }}
+        >
+          <div className="absolute inset-0 bg-black/55" />
+          <div className="relative z-10 flex h-full flex-col justify-end px-4 py-16 text-center md:px-8 [&>h1]:mb-[10px] [&>p]:mb-[10px]">
+            <h1 className="mb-4 text-4xl font-bold leading-tight !text-[#F9F2A9] md:text-5xl">Jal Seva</h1>
+            <p className="mb-8 whitespace-nowrap text-[18px] font-semibold !text-[#F9F2A9] sm:text-[24px] md:text-[34px]">
+              Har Pyaase Tak Karuna Ka Sandesh
+            </p>
+            <div className="hero-actions mt-6 flex flex-wrap items-center justify-center gap-4">
+              <div className="mt-6 flex flex-wrap justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => navigate(ROUTES.donate)}
+                  className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[#f3a11f] px-7 py-4 text-base font-bold text-white shadow-[0_14px_28px_rgba(243,161,31,0.28)] transition-colors hover:bg-[#ffaf31]"
+                >
+                  <span>Donate Now</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => navigate(ROUTES.involved.index)}
+                  className="inline-flex min-w-[190px] items-center justify-center rounded-lg bg-[#0f7994] px-7 py-4 text-base font-bold text-white shadow-[0_14px_28px_rgba(15,121,148,0.28)] transition-colors hover:bg-[#1492b1]"
+                >
+                  <span>Join Seva</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-      </HeroSection>
+      </section>
 
       <section className={`${JAL_SECTION_SHELL} text-center`}>
         <div className="mx-auto max-w-4xl">
